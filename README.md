@@ -17,6 +17,8 @@ submission to Blender upstream repository. There are still many hurdles to jump
 over before this project is ready for that. Until that moment main development
 of both parts is conducted in this repository.
 
+*Note 4* No OSL support effort has been made, as for the RhinoCycles plugin the focus is on CUDA support.
+
 Cycles and dependencies
 =======================
 
@@ -69,6 +71,15 @@ ccycles (C API)
 csycles (C# wrapper around CCycles)
 csycles_tester (C# tester program, reimplementation of Cycles
                 standalone)
+
+Building
+========
+
+1) Clone repository
+2) Get boost_1_55_1.7z and extract in such location that it lives 4 folders up from cycles.snl
+3) Open cycles.sln
+4) Build solution for csycles_tester
+5) run csycles_tester with an XML test file from Cycles stand-alone
 
 License for CCycles and CSycles
 ===============================
