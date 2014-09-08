@@ -1,3 +1,22 @@
+C[CS]?ycles : CCycles and CSycles for Cycles
+============================================
+
+C[CS]?ycles aims to provide a C API around Cycles. Building on CCycles also a
+C# wrapper is available.
+
+*Note 1* current work relies on Boost 1.55.1 being in a specific location, and the
+stage/ folder with libraries. A prebuilt version with properly named libs and
+paths can be downloaded at: https://dl.dropboxusercontent.com/u/1769373/boost_1_55_0.7z
+
+*Note 2* This is currently targeted at Windows platform only, but patches to
+improve cross-platform compiling and executing are likely candidates for
+acceptance
+
+*Note 3* The grand plan is to improve CCycles and CSycles and prepare for
+submission to Blender upstream repository. There are still many hurdles to jump
+over before this project is ready for that. Until that moment main development
+of both parts is conducted in this repository.
+
 Cycles and dependencies
 =======================
 
@@ -21,12 +40,6 @@ The Cycles source code is in the following folders:
 The 'doc' folder holds all license texts of Cycles and for the parts that are
 directly used in Cycles.
 
-C-API and C# wrapper code
-=========================
-
-ccycles (C API)
-csycles (C# wrapper around CCycles)
-
 OpenImageIO tools
 =================
 
@@ -48,6 +61,12 @@ cuew
 ====
 
 cuew is the CUDA execution wrangler library
+
+C-API and C# wrapper code
+=========================
+
+ccycles (C API)
+csycles (C# wrapper around CCycles)
 
 License for CCycles and CSycles
 ===============================
