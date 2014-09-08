@@ -1,0 +1,151 @@
+LIBRARY
+EXPORTS
+  cycles_initialise
+  cycles_shutdown
+  cycles_set_logger
+  cycles_new_client
+  cycles_release_client
+	cycles_log_to_stdout
+
+  cycles_number_devices
+  cycles_number_cuda_devices
+  cycles_device_description
+  cycles_device_id
+  cycles_device_num
+  cycles_device_advanced_shading
+  cycles_device_display_device
+  cycles_device_pack_images
+  cycles_device_type
+
+  cycles_scene_params_create
+  cycles_scene_params_set_bvh_type
+  cycles_scene_params_set_bvh_cache
+  cycles_scene_params_set_bvh_spatial_split
+  cycles_scene_params_set_qbvh
+  cycles_scene_params_set_shadingsystem
+  cycles_scene_params_set_persistent_data
+
+  cycles_scene_create
+  cycles_scene_set_background_shader
+  cycles_scene_set_background_ao_factor
+  cycles_scene_set_background_ao_distance
+  cycles_scene_set_background_visibility
+  
+  cycles_scene_add_mesh
+  cycles_scene_add_object
+  cycles_mesh_set_verts
+  cycles_mesh_set_tris
+  cycles_mesh_add_triangle
+
+  cycles_scene_object_set_matrix
+
+  cycles_integrator_set_max_bounce
+  cycles_integrator_set_min_bounce
+  cycles_integrator_set_no_caustics
+  cycles_integrator_set_transparent_shadows
+  cycles_integrator_set_diffuse_samples
+  cycles_integrator_set_glossy_samples
+  cycles_integrator_set_transmission_samples
+  cycles_integrator_set_ao_samples
+  cycles_integrator_set_mesh_light_samples
+  cycles_integrator_set_subsurface_samples
+  cycles_integrator_set_volume_samples
+  cycles_integrator_set_max_diffuse_bounce
+  cycles_integrator_set_max_glossy_bounce
+  cycles_integrator_set_max_transmission_bounce
+  cycles_integrator_set_max_volume_bounce
+  cycles_integrator_set_transparent_min_bounce
+  cycles_integrator_set_transparent_max_bounce
+  cycles_integrator_set_aa_samples
+  cycles_integrator_set_filter_glossy
+  cycles_integrator_set_method
+
+  cycles_create_shader
+  cycles_scene_add_shader
+  cycles_scene_set_default_surface_shader
+  cycles_scene_get_default_surface_shader
+  cycles_scene_shader_id
+  cycles_add_shader_node
+  cycles_shadernode_set_attribute_int
+  cycles_shadernode_set_attribute_float
+  cycles_shadernode_set_attribute_vec
+  cycles_shadernode_set_attribute_string
+  cycles_shadernode_set_enum
+  cycles_shadernode_set_member_bool
+  cycles_shadernode_set_member_float
+  cycles_shadernode_set_member_int
+  cycles_shadernode_set_member_vec
+  cycles_shader_connect_nodes
+  cycles_shader_set_name
+  cycles_shader_set_use_mis
+  cycles_shader_set_use_transparent_shadow
+  cycles_shader_set_heterogeneous_volume
+
+  cycles_camera_set_size
+  cycles_camera_get_width
+  cycles_camera_get_height
+  cycles_camera_set_type
+  cycles_camera_set_panorama_type
+  cycles_camera_set_matrix
+  cycles_camera_compute_auto_viewplane
+  cycles_camera_update
+  cycles_camera_set_fov
+  cycles_camera_set_sensor_width
+  cycles_camera_set_sensor_height
+  cycles_camera_set_nearclip
+  cycles_camera_set_farclip
+  cycles_camera_set_aperturesize
+  cycles_camera_set_focaldistance
+  cycles_camera_set_shuttertime
+  cycles_camera_set_fisheye_fov
+  cycles_camera_set_fisheye_lens
+
+  cycles_session_create
+  cycles_session_reset
+  cycles_session_set_update_callback
+  cycles_session_set_update_tile_callback
+  cycles_session_set_write_tile_callback
+  cycles_session_cancel
+  cycles_session_start
+  cycles_session_wait
+
+  cycles_session_copy_buffer
+  cycles_session_get_buffer_info
+
+  cycles_tilemanager_get_sample_info
+
+  cycles_progress_get_tile
+  cycles_progress_get_sample
+  cycles_progress_get_status
+  cycles_progress_get_substatus
+  cycles_progress_get_progress
+
+  cycles_session_params_create
+  cycles_session_params_set_device
+  cycles_session_params_set_background
+  cycles_session_params_set_progressive_refine
+  cycles_session_params_set_output_path
+  cycles_session_params_set_progressive
+  cycles_session_params_set_experimental
+  cycles_session_params_set_samples
+  cycles_session_params_set_tile_size
+  cycles_session_params_set_tile_order
+  cycles_session_params_set_start_resolution
+  cycles_session_params_set_threads
+  cycles_session_params_set_display_buffer_linear
+  cycles_session_params_set_cancel_timeout
+  cycles_session_params_set_reset_timeout
+  cycles_session_params_set_text_timeout
+  cycles_session_params_set_shadingsystem
+
+  cycles_create_light
+  cycles_light_set_type
+  cycles_light_set_spot_angle
+  cycles_light_set_spot_smooth
+  cycles_light_set_sizeu
+  cycles_light_set_sizev
+  cycles_light_set_axisu
+  cycles_light_set_axisv
+  cycles_light_set_size
+  cycles_light_set_dir
+  cycles_light_set_co

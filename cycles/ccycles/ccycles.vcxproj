@@ -1,0 +1,229 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{060A4659-C327-4867-AAD8-E80C94DD1427}</ProjectGuid>
+    <RootNamespace>c_api</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName)</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName)</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(Platform)\$(Configuration)\</OutDir>
+    <TargetName>$(ProjectName)</TargetName>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(Platform)\$(Configuration)\</OutDir>
+    <TargetName>$(ProjectName)</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\..\..\..\boost_1_55_0;$(ProjectDir)..\..\OpenImageIO\include;$(ProjectDir)..\..\pthreads;$(ProjectDir)..\bvh;$(ProjectDir)..\device;$(ProjectDir)..\kernel;$(ProjectDir)..\render;$(ProjectDir)..\subd;$(ProjectDir)..\util</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>DEBUG;CCL_CAPI_DLL;GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;BOOST_ALL_NO_LIB;CCL_NAMESPACE_BEGIN=namespace ccl {;CCL_NAMESPACE_END=};%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\..\..\..\..\..\boost_1_55_0\stage\lib;$(ProjectDir)..\..\OpenImageIO\$(Platform)\$(Configuration)\;$(ProjectDir)..\..\pthreads\$(Platform)\$(Configuration)\;$(ProjectDir)..\..\glew\$(Platform)\$(Configuration)\;$(ProjectDir)..\bvh\$(Platform)\$(Configuration)\;$(ProjectDir)..\device\$(Platform)\$(Configuration)\;$(ProjectDir)..\kernel\$(Platform)\$(Configuration)\;$(ProjectDir)..\render\$(Platform)\$(Configuration)\;$(ProjectDir)..\subd\$(Platform)\$(Configuration)\;$(ProjectDir)..\util\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libboost_serialization-vc120-mt-gd-1_55.lib;libboost_filesystem-vc120-mt-gd-1_55.lib;libboost_chrono-vc120-mt-gd-1_55.lib;libboost_date_time-vc120-mt-gd-1_55.lib;libboost_locale-vc120-mt-gd-1_55.lib;libboost_regex-vc120-mt-gd-1_55.lib;libboost_system-vc120-mt-gd-1_55.lib;libboost_thread-vc120-mt-gd-1_55.lib;glew.lib;pthreads.lib;OpenImageIO.lib;opengl32.lib;cycles_device.lib;cycles_util.lib;cycles_kernel.lib;cycles_bvh.lib;cycles_subd.lib;cycles_render.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ShowProgress>LinkVerbose</ShowProgress>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <NoEntryPoint>false</NoEntryPoint>
+      <ModuleDefinitionFile>cycles_api.def</ModuleDefinitionFile>
+    </Link>
+    <PostBuildEvent>
+      <Command>Copy "$(TargetPath)" "$(ProjectDir)..\..\..\..\..\..\bin\$(Configuration)\Plug-ins"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>
+      </SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\..\..\..\boost_1_55_0;$(ProjectDir)..\..\OpenImageIO\include;$(ProjectDir)..\..\pthreads;$(ProjectDir)..\bvh;$(ProjectDir)..\device;$(ProjectDir)..\kernel;$(ProjectDir)..\render;$(ProjectDir)..\subd;$(ProjectDir)..\util</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>DEBUG;CCL_CAPI_DLL;GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;CCL_NAMESPACE_BEGIN=namespace ccl {;CCL_NAMESPACE_END=};%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\..\..\..\..\..\boost_1_55_0\stage$(Configuration)\lib;$(ProjectDir)..\..\OpenImageIO\$(Platform)\$(Configuration)\;$(ProjectDir)..\..\pthreads\$(Platform)\$(Configuration)\;$(ProjectDir)..\..\glew\$(Platform)\$(Configuration)\;$(ProjectDir)..\bvh\$(Platform)\$(Configuration)\;$(ProjectDir)..\device\$(Platform)\$(Configuration)\;$(ProjectDir)..\kernel\$(Platform)\$(Configuration)\;$(ProjectDir)..\render\$(Platform)\$(Configuration)\;$(ProjectDir)..\subd\$(Platform)\$(Configuration)\;$(ProjectDir)..\util\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libboost_serialization-vc120-mt-gd-1_55.lib;libboost_filesystem-vc120-mt-gd-1_55.lib;libboost_chrono-vc120-mt-gd-1_55.lib;libboost_date_time-vc120-mt-gd-1_55.lib;libboost_locale-vc120-mt-gd-1_55.lib;libboost_regex-vc120-mt-gd-1_55.lib;libboost_system-vc120-mt-gd-1_55.lib;libboost_thread-vc120-mt-gd-1_55.lib;glew.lib;pthreads.lib;OpenImageIO.lib;opengl32.lib;cycles_device.lib;cycles_util.lib;cycles_kernel.lib;cycles_kernel_avx.lib;cycles_kernel_avx2.lib;cycles_kernel_sse2.lib;cycles_kernel_sse3.lib;cycles_kernel_sse41.lib;cycles_bvh.lib;cycles_subd.lib;cycles_render.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ShowProgress>
+      </ShowProgress>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <NoEntryPoint>false</NoEntryPoint>
+      <ModuleDefinitionFile>cycles_api.def</ModuleDefinitionFile>
+    </Link>
+    <PostBuildEvent>
+      <Command>Copy "$(TargetPath)" "$(ProjectDir)..\..\..\..\..\..\bin\$(Configuration)\Plug-ins"
+
+MkDir "$(ProjectDir)..\..\..\..\..\..\bin\$(Configuration)\Plug-ins\RhinoCycles\lib"
+
+Copy "$(ProjectDir)..\lib\*.cubin" "$(ProjectDir)..\..\..\..\..\..\bin\$(Configuration)\Plug-ins\RhinoCycles\lib"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\..\..\..\boost_1_55_0;$(ProjectDir)..\..\OpenImageIO\include;$(ProjectDir)..\..\pthreads;$(ProjectDir)..\bvh;$(ProjectDir)..\device;$(ProjectDir)..\kernel;$(ProjectDir)..\render;$(ProjectDir)..\subd;$(ProjectDir)..\util</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>CCL_CAPI_DLL;GLEW_STATIC;BOOST_ALL_NO_LIB;CCL_NAMESPACE_BEGIN=namespace ccl {;CCL_NAMESPACE_END=};%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\..\..\..\..\..\boost_1_55_0\stage\lib;$(ProjectDir)..\..\OpenImageIO\$(Platform)\$(Configuration)\;$(ProjectDir)..\..\pthreads\$(Platform)\$(Configuration)\;$(ProjectDir)..\..\glew\$(Platform)\$(Configuration)\;$(ProjectDir)..\bvh\$(Platform)\$(Configuration)\;$(ProjectDir)..\device\$(Platform)\$(Configuration)\;$(ProjectDir)..\kernel\$(Platform)\$(Configuration)\;$(ProjectDir)..\render\$(Platform)\$(Configuration)\;$(ProjectDir)..\subd\$(Platform)\$(Configuration)\;$(ProjectDir)..\util\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libboost_serialization-vc120-mt-1_55.lib;libboost_filesystem-vc120-mt-1_55.lib;libboost_chrono-vc120-mt-1_55.lib;libboost_date_time-vc120-mt-1_55.lib;libboost_locale-vc120-mt-1_55.lib;libboost_regex-vc120-mt-1_55.lib;libboost_system-vc120-mt-1_55.lib;libboost_thread-vc120-mt-1_55.lib;glew.lib;pthreads.lib;OpenImageIO.lib;opengl32.lib;cycles_device.lib;cycles_util.lib;cycles_kernel.lib;cycles_bvh.lib;cycles_subd.lib;cycles_render.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ShowProgress>LinkVerbose</ShowProgress>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <NoEntryPoint>false</NoEntryPoint>
+      <ModuleDefinitionFile>cycles_api.def</ModuleDefinitionFile>
+    </Link>
+    <PostBuildEvent>
+      <Command>Copy "$(TargetPath)" "$(ProjectDir)..\..\..\..\..\..\bin\$(Configuration)\Plug-ins"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>
+      </SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\..\..\..\boost_1_55_0;$(ProjectDir)..\..\OpenImageIO\include;$(ProjectDir)..\..\pthreads;$(ProjectDir)..\bvh;$(ProjectDir)..\device;$(ProjectDir)..\kernel;$(ProjectDir)..\render;$(ProjectDir)..\subd;$(ProjectDir)..\util</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>CCL_CAPI_DLL;GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;CCL_NAMESPACE_BEGIN=namespace ccl {;CCL_NAMESPACE_END=};%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <CompileAsManaged>false</CompileAsManaged>
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\..\..\..\..\..\boost_1_55_0\stage$(Configuration)\lib;$(ProjectDir)..\..\OpenImageIO\$(Platform)\$(Configuration)\;$(ProjectDir)..\..\pthreads\$(Platform)\$(Configuration)\;$(ProjectDir)..\..\glew\$(Platform)\$(Configuration)\;$(ProjectDir)..\bvh\$(Platform)\$(Configuration)\;$(ProjectDir)..\device\$(Platform)\$(Configuration)\;$(ProjectDir)..\kernel\$(Platform)\$(Configuration)\;$(ProjectDir)..\render\$(Platform)\$(Configuration)\;$(ProjectDir)..\subd\$(Platform)\$(Configuration)\;$(ProjectDir)..\util\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libboost_serialization-vc120-mt-1_55.lib;libboost_filesystem-vc120-mt-1_55.lib;libboost_chrono-vc120-mt-1_55.lib;libboost_date_time-vc120-mt-1_55.lib;libboost_locale-vc120-mt-1_55.lib;libboost_regex-vc120-mt-1_55.lib;libboost_system-vc120-mt-1_55.lib;libboost_thread-vc120-mt-1_55.lib;glew.lib;pthreads.lib;OpenImageIO.lib;opengl32.lib;cycles_device.lib;cycles_util.lib;cycles_kernel.lib;cycles_kernel_avx.lib;cycles_kernel_avx2.lib;cycles_kernel_sse2.lib;cycles_kernel_sse3.lib;cycles_kernel_sse41.lib;cycles_bvh.lib;cycles_subd.lib;cycles_render.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ShowProgress />
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <NoEntryPoint>false</NoEntryPoint>
+      <ModuleDefinitionFile>cycles_api.def</ModuleDefinitionFile>
+    </Link>
+    <PostBuildEvent>
+      <Command>Copy "$(TargetPath)" "$(ProjectDir)..\..\..\..\..\..\bin\$(Configuration)\Plug-ins"
+
+MkDir "$(ProjectDir)..\..\..\..\..\..\bin\$(Configuration)\Plug-ins\RhinoCycles\lib"
+
+Copy "$(ProjectDir)..\lib\*.cubin" "$(ProjectDir)..\..\..\..\..\..\bin\$(Configuration)\Plug-ins\RhinoCycles\lib"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="ccycles.h" />
+    <ClInclude Include="internal_types.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cycles_api.def" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="background.cpp" />
+    <ClCompile Include="camera.cpp" />
+    <ClCompile Include="ccycles.cpp" />
+    <ClCompile Include="device.cpp" />
+    <ClCompile Include="integrator.cpp" />
+    <ClCompile Include="light.cpp" />
+    <ClCompile Include="mesh.cpp" />
+    <ClCompile Include="object.cpp" />
+    <ClCompile Include="scene.cpp" />
+    <ClCompile Include="scene_parameters.cpp" />
+    <ClCompile Include="session.cpp" />
+    <ClCompile Include="session_parameters.cpp" />
+    <ClCompile Include="shader.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="license.txt" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

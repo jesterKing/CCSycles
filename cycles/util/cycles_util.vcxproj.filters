@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{03FF7226-AC3F-4755-96FE-722F24D996E9}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{D5BAF5C2-9388-4144-8EA9-F55270A20B8D}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{6C924697-856E-4983-B909-3D19BCFE3E2E}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="util_cache.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="util_dynlib.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="util_md5.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="util_path.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="util_string.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="util_system.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="util_task.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="util_time.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="util_transform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="util_simd.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="util_algorithm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util_args.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util_boundbox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util_cache.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util_debug.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util_dynlib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util_foreach.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util_function.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util_half.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util_hash.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util_image.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util_list.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util_map.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util_math.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util_md5.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util_opengl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util_optimization.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util_param.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util_path.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util_progress.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util_set.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util_simd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util_stats.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util_string.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util_system.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util_task.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util_thread.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util_time.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util_transform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util_types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util_vector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util_view.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util_xml.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util_sseb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util_ssef.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util_ssei.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

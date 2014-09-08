@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Headers">
+      <UniqueIdentifier>{08fa9140-46c9-4619-9eeb-d374cce98ad7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source">
+      <UniqueIdentifier>{f068f17e-b35f-4cfb-b026-0e6d77a52ebe}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\paramlist.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\typedesc.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ustring.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sysutil.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\strutil.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\OpenImageIO\dassert.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OpenImageIO\export.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OpenImageIO\osdep.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OpenImageIO\paramlist.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OpenImageIO\string_ref.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OpenImageIO\strutil.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OpenImageIO\sysutil.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OpenImageIO\thread.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OpenImageIO\tinyformat.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OpenImageIO\typedesc.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OpenImageIO\ustring.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OpenImageIO\version.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
