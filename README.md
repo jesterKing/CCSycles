@@ -19,6 +19,8 @@ of both parts is conducted in this repository.
 
 *Note 4* No OSL support effort has been made, as for the RhinoCycles plugin the focus is on CUDA support.
 
+*Note 5* The C[CS]?ycles main developer is Nathan Letwory. You can contact him at nathan@mcneel.com or find him as jesterKing in IRC channel #blendercoders of the Freenode network.
+
 Cycles and dependencies
 =======================
 
