@@ -67,6 +67,8 @@ C-API and C# wrapper code
 
 ccycles (C API)
 csycles (C# wrapper around CCycles)
+csycles_tester (C# tester program, reimplementation of Cycles
+                standalone)
 
 License for CCycles and CSycles
 ===============================
