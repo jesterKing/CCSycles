@@ -25,6 +25,17 @@ of both parts is conducted in this repository.
 
 *Note 7* CUDA precompiled kernels are found in a 'special' location. This needs to be made configurable as well.
 
+ROADMAP / TODO
+==============
+
+See Notes above, most are TODO items that need to be tackled in a useful way before C[CS]?ycles is ready for upstream. In addition:
+
+* Add the rest of shader and texture nodes
+* Documentation
+* Documentation
+* Improve csycles_tester to do complete XML support
+* JSON support
+
 Cycles and dependencies
 =======================
 
