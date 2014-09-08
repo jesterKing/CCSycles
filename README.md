@@ -77,11 +77,11 @@ csycles_tester (C# tester program, reimplementation of Cycles
 Building
 ========
 
-1) Clone repository
-2) Get boost_1_55_1.7z and extract in such location that it lives 4 folders up from cycles.snl
-3) Open cycles.sln
-4) Build solution for csycles_tester
-5) run csycles_tester with an XML test file from Cycles stand-alone
+1. Clone repository
+2. Get boost_1_55_1.7z and extract in such location that it lives 4 folders up from cycles.snl
+3. Open cycles.sln
+4. Build solution for csycles_tester
+5. run csycles_tester with an XML test file from Cycles stand-alone
 
 License for CCycles and CSycles
 ===============================
