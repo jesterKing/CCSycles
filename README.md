@@ -21,6 +21,10 @@ of both parts is conducted in this repository.
 
 *Note 5* The C[CS]?ycles main developer is Nathan Letwory. You can contact him at nathan@mcneel.com or find him as jesterKing in IRC channel #blendercoders of the Freenode network.
 
+*Note 6* Currently no image texture loading support. This is on the roadmap to be configurable, possibly even runtime. Main reason is that the current target Rhinoceros already has enough image loading code that we want to reuse.
+
+*Note 7* CUDA precompiled kernels are found in a 'special' location. This needs to be made configurable as well.
+
 Cycles and dependencies
 =======================
 
