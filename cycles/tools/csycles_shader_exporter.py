@@ -215,7 +215,7 @@ def initialise_node(node):
             node.outputs[0].default_value
         )
     if node.type == 'MATH':
-        initcode = initcode + "{0}.Operation = {1};\n".format(
+        initcode = initcode + "{0}.Operation = MathNode.Operations.{1};\n".format(
             varname,
             node.operation.lower().capitalize()
         )
@@ -239,8 +239,19 @@ def generate_node_code(nodes):
 
     return code
 
+def generate_new_material_shader(shadername):
+    return "var {0} = new Shader(Client, Shader.ShaderType.Material);\n\n{0}.Name = \"{0}\";\n{0}.UseMis = false;\n{0}.UseTransparentShadow = true;\n{0}.HeterogeneousVolume = false;\n\n".format(shadername)
+
 def add_nodes_to_shader(shadername, nodes):
-    pass
+    addcode = ""
+    for ntup in nodes:
+        n = ntup[0]
+        
+        if 'OUTPUT' in n.type: continue
+    
+        addcode = addcode + "{0}.Add({1});\n".format(shadername, n.label if n.label else n.name)
+    
+    return addcode
 
 def generate_linking_code(links):
     pass
@@ -273,15 +284,18 @@ def main():
         linklist = list(alllinks)
         linklist.sort()
 
-        
+        # creat new shader
+        shadercode = generate_new_material_shader(shadername)
         # create node setup code        
         nodesetup = generate_node_code(nodelist)
         # add our nodes to shader
-        nodeadd = add_nodes_to_shader(shadername, nodes)
+        nodeadd = add_nodes_to_shader(shadername, nodelist)
         # link our nodes in CSycles
         linksetup = generate_linking_code(linklist)
         
+        print(shadercode)
         print(nodesetup)
+        print(nodeadd)
         print(linksetup)
         
 main()
