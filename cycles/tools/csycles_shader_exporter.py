@@ -48,6 +48,11 @@ socketmapping = {
 }
 
 class Link():
+    """
+    Class to denote a link between two nodes and sockets. We need this
+    because we very likely need to simplify the graph by dropping unnecessary
+    nodes like REROUTE and relinking nodes and sockets instead.
+    """
     def __init__(self, fromnode, fromsock, tonode, tosock):
         self.fromnode = fromnode
         self.fromsock = fromsock
@@ -152,7 +157,14 @@ def add_nodes(nodeset, nt, parentn=None):
             else:
                 #print("add_nodes: Adding", n.label if n.label else n.name, n.type)
                 nodeset.add((n, nt, parentn))
+
+                
 def get_socket_name(socket, socketlist, is_input, node):
+    """
+    Determine name for a socket. The names given through BPy differ from
+    what is at the lowest level. This level is also what C[CS]?ycles uses,
+    so some mapping is necessary.
+    """
     if is_input:
         if node.type == 'MATH':
             i = 0
@@ -197,10 +209,7 @@ def add_inputs(varname, inputs):
     for inp in inputs:
         if inp.type == 'SHADER': continue
     
-        inpname = inp.name
-        if inpname == "Value": # special case, for Math node we see Value1 and Value2, but we get only Value
-            inpname = inpname + str(valnamecount)
-            valnamecount = valnamecount + 1
+        inpname = get_socket_name(inp, inputs, True, inp.node)
         inputinits = inputinits + "{0}.ins.{1}.Value = {2};\n".format(
             varname, inpname, get_val_string(inp)
         )
@@ -252,7 +261,7 @@ def generate_node_code(nodes):
         if 'OUTPUT' in n.type: continue
            
         nodeconstruct = "var {0} = new {1}();\n".format(
-            n.label if n.label else n.name, nodemapping[n.type])
+            get_node_name(n), nodemapping[n.type])
         nodeinitialise = initialise_node(n)
         
         code = code + nodeconstruct + nodeinitialise + "\n"
@@ -269,7 +278,7 @@ def add_nodes_to_shader(shadername, nodes):
         
         if 'OUTPUT' in n.type: continue
     
-        addcode = addcode + "{0}.Add({1});\n".format(shadername, n.label if n.label else n.name)
+        addcode = addcode + "{0}.Add({1});\n".format(shadername, get_node_name(n))
     
     return addcode
 
@@ -286,16 +295,19 @@ def generate_linking_code(links):
         tosockname = get_socket_name(tosock, tonode.inputs, True, tonode)
         
         linkcode = linkcode + "{0}.outs.{1}.Connect({2}.ins.{3});\n".format(
-            fromnode.label if fromnode.label else fromnode.name,
+            get_node_name(fromnode),
             fromsockname,
-            tonode.label if tonode.label else tonode.name,
+            get_node_name(tonode),
             tosockname
         )
     
     return linkcode        
 
-def get_node_name(ntup):
-    return ntup[0].label if ntup[0].label else ntup[0].name
+def get_node_name(node):
+    return node.label if node.label else node.name
+
+def get_node_name_from_tuple(ntup):
+    return get_node_name(ntup[0])
 
 def main():            
     for ob in C.selected_objects:
@@ -318,7 +330,7 @@ def main():
 
         # make nice, sorted lists
         nodelist = list(allnodes)
-        nodelist.sort(key=get_node_name)
+        nodelist.sort(key=get_node_name_from_tuple)
         linklist = list(alllinks)
         linklist.sort()
 
