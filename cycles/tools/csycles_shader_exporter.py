@@ -152,6 +152,26 @@ def add_nodes(nodeset, nt, parentn=None):
             else:
                 #print("add_nodes: Adding", n.label if n.label else n.name, n.type)
                 nodeset.add((n, nt, parentn))
+def get_socket_name(socket, socketlist, is_input, node):
+    if is_input:
+        if node.type == 'MATH':
+            i = 0
+            for sck in socketlist.items():
+                i+=1
+                if sck[1]==socket:
+                    name = socket.name
+                    return name + str(i)
+        if socket.name == "Shader":
+            i = 0
+            for sck in socketlist.items():
+                if sck[1].name == "Shader": i+=1
+                if sck[1]==socket:
+                    return "Closure" + str(i)
+    else:
+        if 'BSDF' in node.type:
+            if socket.name == "Shader":
+                return "BSDF"
+    return socket.name
 
 def get_val_string(input):
     """
@@ -254,7 +274,25 @@ def add_nodes_to_shader(shadername, nodes):
     return addcode
 
 def generate_linking_code(links):
-    pass
+    # from -> to: "transparency_color.outs.Color.Connect(eff_trans_col.ins.Color2);"    
+    linkcode = ""
+    for link in links:
+        fromnode = link.fromnode
+        fromsock = link.fromsock
+        tonode = link.tonode
+        tosock = link.tosock
+        
+        fromsockname = get_socket_name(fromsock, fromnode.outputs, False, fromnode)
+        tosockname = get_socket_name(tosock, tonode.inputs, True, tonode)
+        
+        linkcode = linkcode + "{0}.outs.{1}.Connect({2}.ins.{3});\n".format(
+            fromnode.label if fromnode.label else fromnode.name,
+            fromsockname,
+            tonode.label if tonode.label else tonode.name,
+            tosockname
+        )
+    
+    return linkcode        
 
 def get_node_name(ntup):
     return ntup[0].label if ntup[0].label else ntup[0].name
