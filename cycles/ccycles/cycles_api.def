@@ -75,6 +75,8 @@ EXPORTS
   cycles_shadernode_set_member_float
   cycles_shadernode_set_member_int
   cycles_shadernode_set_member_vec
+  cycles_shadernode_set_member_float_img
+  cycles_shadernode_set_member_byte_img
   cycles_shader_connect_nodes
   cycles_shader_set_name
   cycles_shader_set_use_mis

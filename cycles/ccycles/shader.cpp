@@ -20,6 +20,8 @@ extern std::vector<CCScene> scenes;
 
 std::vector<CCShader*> shaders;
 
+std::vector<ccl::ImageManager::Image*> images;
+
 void _cleanup_shaders()
 {
 	for (auto sh : shaders) {
@@ -30,6 +32,19 @@ void _cleanup_shaders()
 		delete sh;
 	}
 	shaders.clear();
+}
+
+void _cleanup_images()
+{
+	for (auto img : images) {
+		if (img == nullptr) continue;
+
+		delete [] img->builtin_data;
+		img->builtin_data = nullptr;
+
+		delete img;
+	}
+	images.clear();
 }
 
 /* Create a new shader.
@@ -347,6 +362,63 @@ void cycles_shadernode_set_enum(unsigned int client_id, unsigned int shader_id, 
 			break;
 		}
 		++psh;
+	}
+}
+
+void cycles_shadernode_set_member_float_img(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, shadernode_type shn_type, const char* member_name, const char* img_name, float* img, unsigned int width, unsigned int height)
+{
+	auto& sh = shaders[shader_id];
+	auto psh = sh->graph->nodes.begin();
+	auto mname = string(member_name);
+	while (psh != sh->graph->nodes.end())
+	{
+		if ((*psh)->id == shnode_id) {
+			switch (shn_type) {
+				case shadernode_type::IMAGE_TEXTURE:
+					{
+						auto nimg = new ccl::ImageManager::Image();
+						auto imgdata = new float[width*height * 4];
+						memcpy(imgdata, img, sizeof(float)*width*height * 4);
+						nimg->builtin_data = imgdata;
+						nimg->filename = string(img_name);
+						images.push_back(nimg);
+						auto imtex = dynamic_cast<ccl::ImageTextureNode*>(*psh);
+						imtex->builtin_data = nimg;
+						imtex->is_float = true;
+						imtex->is_linear = true;
+						imtex->interpolation = ccl::InterpolationType::INTERPOLATION_LINEAR;
+					}	
+					break;
+			}
+		}
+	}
+}
+void cycles_shadernode_set_member_byte_img(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, shadernode_type shn_type, const char* member_name, const char* img_name, unsigned char* img, unsigned int width, unsigned int height)
+{
+	auto& sh = shaders[shader_id];
+	auto psh = sh->graph->nodes.begin();
+	auto mname = string(member_name);
+	while (psh != sh->graph->nodes.end())
+	{
+		if ((*psh)->id == shnode_id) {
+			switch (shn_type) {
+				case shadernode_type::IMAGE_TEXTURE:
+					{
+						auto nimg = new ccl::ImageManager::Image();
+						auto imgdata = new ccl::uchar[width*height * 4];
+						memcpy(imgdata, img, sizeof(unsigned char)*width*height * 4);
+						nimg->builtin_data = imgdata;
+						nimg->filename = string(img_name);
+						images.push_back(nimg);
+						auto imtex = dynamic_cast<ccl::ImageTextureNode*>(*psh);
+						imtex->builtin_data = nimg;
+						imtex->is_float = false;
+						imtex->is_linear = true;
+						imtex->interpolation = ccl::InterpolationType::INTERPOLATION_LINEAR;
+					}	
+					break;
+			}
+		}
 	}
 }
 

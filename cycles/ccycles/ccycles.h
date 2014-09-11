@@ -380,6 +380,9 @@ CCL_CAPI void __cdecl cycles_shadernode_set_member_float(unsigned int client_id,
 CCL_CAPI void __cdecl cycles_shadernode_set_member_int(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, shadernode_type shn_type, const char* member_name, int value);
 CCL_CAPI void __cdecl cycles_shadernode_set_member_vec(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, shadernode_type shn_type, const char* member_name, float x, float y, float z);
 
+CCL_CAPI void __cdecl cycles_shadernode_set_member_float_img(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, shadernode_type shn_type, const char* member_name, const char* img_name, float* img, unsigned int width, unsigned int height);
+CCL_CAPI void __cdecl cycles_shadernode_set_member_byte_img(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, shadernode_type shn_type, const char* member_name, const char* img_name, unsigned char* img, unsigned int width, unsigned int height);
+
 CCL_CAPI void __cdecl cycles_shader_set_name(unsigned int client_id, unsigned int shader_id, const char* name);
 CCL_CAPI void __cdecl cycles_shader_set_use_mis(unsigned int client_id, unsigned int shader_id, unsigned int use_mis);
 CCL_CAPI void __cdecl cycles_shader_set_use_transparent_shadow(unsigned int client_id, unsigned int shader_id, unsigned int use_transparent_shadow);
