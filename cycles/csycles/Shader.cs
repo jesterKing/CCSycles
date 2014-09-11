@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 **/
 
+using System;
 using System.Collections.Generic;
 using ccl.ShaderNodes;
 using ccl.ShaderNodes.Sockets;
@@ -136,9 +137,22 @@ namespace ccl
 					CSycles.shadernode_set_member_vec(Client.Id, Id, node.Id, node.Type, "value", val.x, val.y, val.z);
 					break;
 				case ShaderNodeType.ImageTexture:
-					CSycles.shadernode_set_member_float(Client.Id, Id, node.Id, node.Type, "projection_blend", ((ImageTextureNode)node).ProjectionBlend);
-					CSycles.shadernode_set_member_bool(Client.Id, Id, node.Id, node.Type, "is_linear", ((ImageTextureNode)node).IsLinear);
-					CSycles.shadernode_set_member_bool(Client.Id, Id, node.Id, node.Type, "is_float", ((ImageTextureNode)node).IsFloat);
+					var imgtexnode = (ImageTextureNode) node;
+					CSycles.shadernode_set_member_float(Client.Id, Id, node.Id, node.Type, "projection_blend", imgtexnode.ProjectionBlend);
+					CSycles.shadernode_set_member_bool(Client.Id, Id, node.Id, node.Type, "is_linear", imgtexnode.IsLinear);
+					CSycles.shadernode_set_member_bool(Client.Id, Id, node.Id, node.Type, "is_float", imgtexnode.IsFloat);
+					if (imgtexnode.FloatImage != null)
+					{
+						var flimg = imgtexnode.FloatImage;
+						CSycles.shadernode_set_member_float_img(Client.Id, Id, node.Id, node.Type, "builtin-data",
+							String.Format("{0}-{0}-{0}f", Client.Id, Id, node.Id), ref flimg, imgtexnode.Width, imgtexnode.Height);
+					}
+					else if (imgtexnode.ByteImage != null)
+					{
+						var bimg = imgtexnode.ByteImage;
+						CSycles.shadernode_set_member_byte_img(Client.Id, Id, node.Id, node.Type, "builtin-data",
+							String.Format("{0}-{0}-{0}f", Client.Id, Id, node.Id), ref bimg, imgtexnode.Width, imgtexnode.Height);
+					}
 					break;
 				case ShaderNodeType.BrickTexture:
 					CSycles.shadernode_set_member_float(Client.Id, Id, node.Id, node.Type, "offset", ((BrickTexture)node).Offset);

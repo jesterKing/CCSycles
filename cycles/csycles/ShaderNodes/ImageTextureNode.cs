@@ -70,5 +70,13 @@ namespace ccl.ShaderNodes
 		public bool IsFloat { get; set; }
 		public bool UseAlpha { get; set; }
 		public string Filename { get; set; } /* \todo figure out how to do image loading without using OIIO */
+
+		public float[] FloatImage { set; get; }
+
+		public byte[] ByteImage { set; get; }
+
+		/* two helpers for image resolution */
+		public uint Width { get; set; }
+		public uint Height { get; set; }
 	}
 }
