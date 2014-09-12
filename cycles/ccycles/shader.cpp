@@ -391,6 +391,7 @@ void cycles_shadernode_set_member_float_img(unsigned int client_id, unsigned int
 					break;
 			}
 		}
+		++psh;
 	}
 }
 void cycles_shadernode_set_member_byte_img(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, shadernode_type shn_type, const char* member_name, const char* img_name, unsigned char* img, unsigned int width, unsigned int height)
@@ -419,6 +420,7 @@ void cycles_shadernode_set_member_byte_img(unsigned int client_id, unsigned int 
 					break;
 			}
 		}
+		++psh;
 	}
 }
 
