@@ -445,17 +445,6 @@ void cycles_shadernode_set_member_bool(unsigned int client_id, unsigned int shad
 						mnode->use_clamp = value;
 					}
 					break;
-				case shadernode_type::IMAGE_TEXTURE:
-					{
-						auto imtexnode = dynamic_cast<ccl::ImageTextureNode*>(*psh);
-						if (mname == "is_linear") {
-							imtexnode->is_linear = value;
-						}
-						else if (mname == "if_float") {
-							imtexnode->is_float = value;
-						}
-					}
-					break;
 			}
 		}
 	++psh;
