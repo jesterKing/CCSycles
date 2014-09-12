@@ -98,11 +98,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
-  </PropertyGroup>
-  <PropertyGroup>
-    <PreBuildEvent>copy /Y  "$(ProjectDir)..\ccycles\x64\$(ConfigurationName)\ccycles.dll" "$(TargetDir)"
+    <PostBuildEvent>copy /Y  "$(ProjectDir)..\ccycles\x64\$(ConfigurationName)\ccycles.dll" "$(TargetDir)"
+copy /Y  "$(ProjectDir)..\ccycles\x64\$(ConfigurationName)\ccycles.pdb" "$(TargetDir)"
 copy /Y  "$(ProjectDir)..\..\OpenImageIO\x64\$(ConfigurationName)\OpenImageIO.dll" "$(TargetDir)"
 copy /Y  "$(ProjectDir)..\..\pthreads\x64\$(ConfigurationName)\pthreads.dll" "$(TargetDir)"
 copy /Y "$(ProjectDir)..\..\..\..\..\..\bin\$(ConfigurationName)\boost_*" "$(TargetDir)"
@@ -110,7 +107,11 @@ copy /Y "$(ProjectDir)..\..\..\..\..\..\bin\$(ConfigurationName)\boost_*" "$(Tar
 
 MkDir "$(TargetDir)\Plug-ins\RhinoCycles\lib"
 
-Copy "$(ProjectDir)..\lib\*.cubin" "$(TargetDir)\Plug-ins\RhinoCycles\lib"</PreBuildEvent>
+Copy "$(ProjectDir)..\lib\*.cubin" "$(TargetDir)\Plug-ins\RhinoCycles\lib"</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
