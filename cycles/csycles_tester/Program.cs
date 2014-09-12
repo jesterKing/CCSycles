@@ -94,14 +94,11 @@ namespace csycles_tester
 				Console.WriteLine("Missing parameter: csycles_tester file.xml");
 				return;
 			}
-			else
+			var s = args[0];
+			if (File.Exists(s))
 			{
-				var s = args[0];
-				if (File.Exists(s))
-				{
-					file = Path.GetFullPath(s);
-					System.Console.WriteLine("We get file path: {0}", file);
-				}
+				file = Path.GetFullPath(s);
+				Console.WriteLine("We get file path: {0}", file);
 			}
 
 			const uint samples = 5;
