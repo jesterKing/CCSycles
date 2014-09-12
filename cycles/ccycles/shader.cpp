@@ -389,8 +389,6 @@ void cycles_shadernode_set_member_float_img(unsigned int client_id, unsigned int
 						images.push_back(nimg);
 						auto imtex = dynamic_cast<ccl::ImageTextureNode*>(*psh);
 						imtex->builtin_data = nimg;
-						imtex->is_float = true;
-						imtex->is_linear = true;
 						imtex->interpolation = ccl::InterpolationType::INTERPOLATION_LINEAR;
 					}	
 					break;
@@ -423,8 +421,6 @@ void cycles_shadernode_set_member_byte_img(unsigned int client_id, unsigned int 
 						images.push_back(nimg);
 						auto imtex = dynamic_cast<ccl::ImageTextureNode*>(*psh);
 						imtex->builtin_data = nimg;
-						imtex->is_float = false;
-						imtex->is_linear = true;
 						imtex->interpolation = ccl::InterpolationType::INTERPOLATION_LINEAR;
 					}
 					break;
