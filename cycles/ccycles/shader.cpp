@@ -390,6 +390,7 @@ void cycles_shadernode_set_member_float_img(unsigned int client_id, unsigned int
 						auto imtex = dynamic_cast<ccl::ImageTextureNode*>(*psh);
 						imtex->builtin_data = nimg;
 						imtex->interpolation = ccl::InterpolationType::INTERPOLATION_LINEAR;
+						imtex->filename = nimg->filename;
 					}	
 					break;
 			}
@@ -422,6 +423,7 @@ void cycles_shadernode_set_member_byte_img(unsigned int client_id, unsigned int 
 						auto imtex = dynamic_cast<ccl::ImageTextureNode*>(*psh);
 						imtex->builtin_data = nimg;
 						imtex->interpolation = ccl::InterpolationType::INTERPOLATION_LINEAR;
+						imtex->filename = nimg->filename;
 					}
 					break;
 			}
