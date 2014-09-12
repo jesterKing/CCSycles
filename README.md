@@ -4,7 +4,7 @@ C[CS]?ycles : CCycles and CSycles for Cycles
 C[CS]?ycles aims to provide a C API around Cycles. Building on CCycles also a
 C# wrapper is available.
 
-*Note 1* current work relies on Boost 1.55.1 being in a specific location, and the
+*Note 1* current work relies on Boost 1.55.0 being in a specific location, and the
 stage/ folder with libraries. A prebuilt version with properly named libs and
 paths can be downloaded at: https://dl.dropboxusercontent.com/u/1769373/boost_1_55_0.7z
 
@@ -93,7 +93,7 @@ Building
 ========
 
 1. Clone repository
-2. Get boost_1_55_1.7z and extract in such location that it lives 4 folders up from cycles.snl
+2. Get boost_1_55_0.7z and extract in such location that it lives 4 folders up from cycles.snl
 3. Open cycles.sln
 4. Build solution for csycles_tester
 5. run csycles_tester with an XML test file from Cycles stand-alone
