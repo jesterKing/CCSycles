@@ -472,6 +472,8 @@ namespace csycles_tester
 									}
 								}
 								imgtex.ByteImage = bmpdata;
+								imgtex.Width = (uint)bmp.Width;
+								imgtex.Height = (uint)bmp.Height;
 							}
 						}
 						nodes.Add(nodename, imgtex);
