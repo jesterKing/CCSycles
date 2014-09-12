@@ -158,9 +158,16 @@ protected:
 };
 
 
-struct CCScene {
+class CCScene {
+public:
 	/* Hold the Cycles scene. */
 	ccl::Scene* scene;
+
+	/* Note: depth>1 if volumetric texture (i.e smoke volume data) */
+
+	void builtin_image_info(const string& builtin_name, void* builtin_data, bool& is_float, int& width, int& height, int& depth, int& channels);
+	bool builtin_image_pixels(const string& builtin_name, void* builtin_data, unsigned char* pixels);
+	bool builtin_image_float_pixels(const string& builtin_name, void* builtin_data, float* pixels);
 };
 
 struct CCShader {

@@ -22,6 +22,34 @@ extern std::vector<ccl::DeviceInfo> devices;
 extern std::vector<ccl::SceneParams> scene_params;
 std::vector<CCScene> scenes;
 
+/* implement CCScene methods*/
+
+void CCScene::builtin_image_info(const string& builtin_name, void* builtin_data, bool& is_float, int& width, int& height, int& depth, int& channels)
+{
+	auto img = static_cast<ccl::ImageManager::Image*>(builtin_data);
+	width = img->width;
+	height = img->height;
+	depth = img->depth;
+	channels = img->channels;
+	is_float = img->is_float;
+}
+
+bool CCScene::builtin_image_pixels(const string& builtin_name, void* builtin_data, unsigned char* pixels)
+{
+	auto img = static_cast<ccl::ImageManager::Image*>(builtin_data);
+	memcpy(pixels, img->builtin_data, img->width*img->height*img->channels*sizeof(unsigned char));
+	return false;
+}
+
+bool CCScene::builtin_image_float_pixels(const string& builtin_name, void* builtin_data, float* pixels)
+{
+	auto img = static_cast<ccl::ImageManager::Image*>(builtin_data);
+	memcpy(pixels, img->builtin_data, img->width*img->height*img->channels*sizeof(float));
+	return false;
+}
+
+/* *** */
+
 void _cleanup_scenes()
 {
 	// clear out scene params vector
@@ -57,6 +85,10 @@ unsigned int cycles_scene_create(unsigned int client_id, unsigned int scene_para
 
 	if (found_di && found_params) {
 		scene.scene = new ccl::Scene(params, di);
+
+		scene.scene->image_manager->builtin_image_info_cb = function_bind(&CCScene::builtin_image_info, scene, _1, _2, _3, _4, _5, _6, _7);
+		scene.scene->image_manager->builtin_image_pixels_cb = function_bind(&CCScene::builtin_image_pixels, scene, _1, _2, _3);
+		scene.scene->image_manager->builtin_image_float_pixels_cb = function_bind(&CCScene::builtin_image_float_pixels, scene, _1, _2, _3);
 
 		scenes.push_back(scene);
 

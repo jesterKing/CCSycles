@@ -346,12 +346,14 @@ void ImageManager::tag_reload_image(const string& filename, void *builtin_data, 
 
 bool ImageManager::file_load_image(Image *img, device_vector<uchar4>& tex_img)
 {
-#ifndef NO_OIIO_LOADING
 	if(img->filename == "")
 		return false;
 
-	ImageInput *in = NULL;
 	int width, height, depth, components;
+	bool cmyk = false;
+
+#ifndef NO_OIIO_LOADING
+	ImageInput *in = NULL;
 
 	if(!img->builtin_data) {
 		/* load image from file through OIIO */
@@ -394,11 +396,19 @@ bool ImageManager::file_load_image(Image *img, device_vector<uchar4>& tex_img)
 
 		return false;
 	}
+#else
+		/* load image using builtin images callbacks */
+		if(!builtin_image_info_cb || !builtin_image_pixels_cb)
+			return false;
+
+		bool is_float;
+		builtin_image_info_cb(img->filename, img->builtin_data, is_float, width, height, depth, components);
+#endif
 
 	/* read RGBA pixels */
 	uchar *pixels = (uchar*)tex_img.resize(width, height, depth);
-	bool cmyk = false;
 
+#ifndef NO_OIIO_LOADING
 	if(in) {
 		if(depth <= 1) {
 			int scanlinesize = width*components*sizeof(uchar);
@@ -421,6 +431,9 @@ bool ImageManager::file_load_image(Image *img, device_vector<uchar4>& tex_img)
 	else {
 		builtin_image_pixels_cb(img->filename, img->builtin_data, pixels);
 	}
+#else
+	builtin_image_pixels_cb(img->filename, img->builtin_data, pixels);
+#endif
 
 	if(cmyk) {
 		/* CMYK */
@@ -466,9 +479,6 @@ bool ImageManager::file_load_image(Image *img, device_vector<uchar4>& tex_img)
 	}
 
 	return true;
-#else
-	return false;
-#endif
 }
 
 bool ImageManager::file_load_float_image(Image *img, device_vector<float4>& tex_img)
