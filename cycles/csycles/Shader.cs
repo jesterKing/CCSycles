@@ -139,8 +139,6 @@ namespace ccl
 				case ShaderNodeType.ImageTexture:
 					var imgtexnode = (ImageTextureNode) node;
 					CSycles.shadernode_set_member_float(Client.Id, Id, node.Id, node.Type, "projection_blend", imgtexnode.ProjectionBlend);
-					CSycles.shadernode_set_member_bool(Client.Id, Id, node.Id, node.Type, "is_linear", imgtexnode.IsLinear);
-					CSycles.shadernode_set_member_bool(Client.Id, Id, node.Id, node.Type, "is_float", imgtexnode.IsFloat);
 					if (imgtexnode.FloatImage != null)
 					{
 						var flimg = imgtexnode.FloatImage;
