@@ -450,6 +450,33 @@ namespace csycles_tester
 						nodes.Add(nodename, texcoord);
 						shader.AddNode(texcoord);
 						break;
+					case "image_texture":
+						var imgtex = new ImageTextureNode();
+						var imgsrc = node.GetAttribute("src");
+						if (!string.IsNullOrEmpty(imgsrc))
+						{
+							using (var bmp = new Bitmap(imgsrc))
+							{
+								var l = bmp.Width*bmp.Height*4;
+								var bmpdata = new byte[l];
+								for (var x = 0; x < bmp.Width; x++)
+								{
+									for (var y = 0; y < bmp.Height; y++)
+									{
+										var pos = y*bmp.Width*4 + x*4;
+										var pixel = bmp.GetPixel(x, y);
+										bmpdata[pos] = pixel.R;
+										bmpdata[pos + 1] = pixel.G;
+										bmpdata[pos + 2] = pixel.B;
+										bmpdata[pos + 3] = pixel.A;
+									}
+								}
+								imgtex.ByteImage = bmpdata;
+							}
+						}
+						nodes.Add(nodename, imgtex);
+						shader.AddNode(imgtex);
+						break;
 					case "diffuse_bsdf":
 						var diffbsdf = new DiffuseBsdfNode();
 						get_float4(diffbsdf.ins.Color, node.GetAttribute("color"));
