@@ -365,7 +365,7 @@ void cycles_shadernode_set_enum(unsigned int client_id, unsigned int shader_id, 
 	}
 }
 
-void cycles_shadernode_set_member_float_img(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, shadernode_type shn_type, const char* member_name, const char* img_name, float* img, unsigned int width, unsigned int height)
+void cycles_shadernode_set_member_float_img(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, shadernode_type shn_type, const char* member_name, const char* img_name, float* img, unsigned int width, unsigned int height, unsigned int depth, unsigned int channels)
 {
 	auto& sh = shaders[shader_id];
 	auto psh = sh->graph->nodes.begin();
@@ -377,10 +377,15 @@ void cycles_shadernode_set_member_float_img(unsigned int client_id, unsigned int
 				case shadernode_type::IMAGE_TEXTURE:
 					{
 						auto nimg = new ccl::ImageManager::Image();
-						auto imgdata = new float[width*height * 4];
-						memcpy(imgdata, img, sizeof(float)*width*height * 4);
+						auto imgdata = new float[width*height*channels];
+						memcpy(imgdata, img, sizeof(float)*width*height*channels);
 						nimg->builtin_data = imgdata;
 						nimg->filename = string(img_name);
+						nimg->width = (int)width;
+						nimg->height = (int)height;
+						nimg->depth = (int)depth;
+						nimg->channels = (int)channels;
+						nimg->is_float = true;
 						images.push_back(nimg);
 						auto imtex = dynamic_cast<ccl::ImageTextureNode*>(*psh);
 						imtex->builtin_data = nimg;
@@ -394,7 +399,7 @@ void cycles_shadernode_set_member_float_img(unsigned int client_id, unsigned int
 		++psh;
 	}
 }
-void cycles_shadernode_set_member_byte_img(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, shadernode_type shn_type, const char* member_name, const char* img_name, unsigned char* img, unsigned int width, unsigned int height)
+void cycles_shadernode_set_member_byte_img(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, shadernode_type shn_type, const char* member_name, const char* img_name, unsigned char* img, unsigned int width, unsigned int height, unsigned int depth, unsigned int channels)
 {
 	auto& sh = shaders[shader_id];
 	auto psh = sh->graph->nodes.begin();
@@ -406,17 +411,22 @@ void cycles_shadernode_set_member_byte_img(unsigned int client_id, unsigned int 
 				case shadernode_type::IMAGE_TEXTURE:
 					{
 						auto nimg = new ccl::ImageManager::Image();
-						auto imgdata = new ccl::uchar[width*height * 4];
-						memcpy(imgdata, img, sizeof(unsigned char)*width*height * 4);
+						auto imgdata = new ccl::uchar[width*height*channels];
+						memcpy(imgdata, img, sizeof(unsigned char)*width*height*channels);
 						nimg->builtin_data = imgdata;
 						nimg->filename = string(img_name);
+						nimg->width = (int)width;
+						nimg->height = (int)height;
+						nimg->depth = (int)depth;
+						nimg->channels = (int)channels;
+						nimg->is_float = false;
 						images.push_back(nimg);
 						auto imtex = dynamic_cast<ccl::ImageTextureNode*>(*psh);
 						imtex->builtin_data = nimg;
 						imtex->is_float = false;
 						imtex->is_linear = true;
 						imtex->interpolation = ccl::InterpolationType::INTERPOLATION_LINEAR;
-					}	
+					}
 					break;
 			}
 		}

@@ -672,30 +672,30 @@ namespace ccl
 
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_shadernode_set_member_float_img", CharSet = CharSet.Ansi,
 			CallingConvention = CallingConvention.Cdecl)]
-		private unsafe static extern void cycles_shadernode_set_member_float_img(uint clientId, uint shaderId, uint shadernodeId, uint shnType, string name, string  imgName, float* img, uint width, uint height);
+		private unsafe static extern void cycles_shadernode_set_member_float_img(uint clientId, uint shaderId, uint shadernodeId, uint shnType, string name, string  imgName, float* img, uint width, uint height, uint depth, uint channels);
 		public static void shadernode_set_member_float_img(uint clientId, uint shaderId, uint shadernodeId, ShaderNodeType shnType,
-			[MarshalAs(UnmanagedType.LPStr)] string name, [MarshalAs(UnmanagedType.LPStr)] string imgName, ref float[] img, uint width, uint height)
+			[MarshalAs(UnmanagedType.LPStr)] string name, [MarshalAs(UnmanagedType.LPStr)] string imgName, ref float[] img, uint width, uint height, uint depth, uint channels)
 		{
 			unsafe
 			{
 				fixed (float* pimg = img)
 				{
-					cycles_shadernode_set_member_float_img(clientId, shaderId, shadernodeId, (uint)shnType, name, imgName, pimg, width, height);
+					cycles_shadernode_set_member_float_img(clientId, shaderId, shadernodeId, (uint)shnType, name, imgName, pimg, width, height, depth, channels);
 				}
 			}
 		}
 
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_shadernode_set_member_byte_img", CharSet = CharSet.Ansi,
 			CallingConvention = CallingConvention.Cdecl)]
-		private unsafe static extern void cycles_shadernode_set_member_byte_img(uint clientId, uint shaderId, uint shadernodeId, uint shnType, string name, string  imgName, byte* img, uint width, uint height);
+		private unsafe static extern void cycles_shadernode_set_member_byte_img(uint clientId, uint shaderId, uint shadernodeId, uint shnType, string name, string  imgName, byte* img, uint width, uint height, uint depth, uint channels);
 		public static void shadernode_set_member_byte_img(uint clientId, uint shaderId, uint shadernodeId, ShaderNodeType shnType,
-			[MarshalAs(UnmanagedType.LPStr)] string name, [MarshalAs(UnmanagedType.LPStr)] string imgName, ref byte[] img, uint width, uint height)
+			[MarshalAs(UnmanagedType.LPStr)] string name, [MarshalAs(UnmanagedType.LPStr)] string imgName, ref byte[] img, uint width, uint height, uint depth, uint channels)
 		{
 			unsafe
 			{
 				fixed (byte* pimg = img)
 				{
-					cycles_shadernode_set_member_byte_img(clientId, shaderId, shadernodeId, (uint)shnType, name, imgName, pimg, width, height);
+					cycles_shadernode_set_member_byte_img(clientId, shaderId, shadernodeId, (uint)shnType, name, imgName, pimg, width, height, depth, channels);
 				}
 			}
 		}
