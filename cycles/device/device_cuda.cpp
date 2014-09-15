@@ -63,7 +63,7 @@ public:
 
 	static bool have_precompiled_kernels()
 	{
-		string cubins_path = path_get("lib");
+		string cubins_path = path_get(libpath);
 		return path_exists(cubins_path);
 	}
 
@@ -206,9 +206,9 @@ public:
 		/* attempt to use kernel provided with blender */
 		string cubin;
 		if(experimental)
-			cubin = path_get(string_printf("lib/kernel_experimental_sm_%d%d.cubin", major, minor));
+			cubin = path_get(string_printf("%s/kernel_experimental_sm_%d%d.cubin", libpath.c_str(), major, minor));
 		else
-			cubin = path_get(string_printf("lib/kernel_sm_%d%d.cubin", major, minor));
+			cubin = path_get(string_printf("%s/kernel_sm_%d%d.cubin", libpath.c_str(), major, minor));
 		if(path_exists(cubin))
 			return cubin;
 
