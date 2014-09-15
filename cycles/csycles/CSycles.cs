@@ -29,8 +29,22 @@ namespace ccl
 	public class CSycles
 	{
 #region misc
+
+		private static bool ccycles_loaded = false;
+
 		[DllImport("kernel32", SetLastError = true, CharSet = CharSet.Unicode)]
 		private static extern IntPtr LoadLibrary(string filename);
+
+		private static void LoadCCycles()
+		{
+			if (!ccycles_loaded)
+			{
+				var path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) ?? "";
+				var ccycles_dll = System.IO.Path.Combine(path, "ccycles.dll");
+				LoadLibrary(ccycles_dll);
+				ccycles_loaded = true;
+			}
+		}
 
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_initialise", CallingConvention = CallingConvention.Cdecl)]
 		private static extern void cycles_initialise();
@@ -46,9 +60,7 @@ namespace ccl
 		/// <returns></returns>
 		public static void initialise()
 		{
-			var path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) ?? "";
-			var ccycles_dll = System.IO.Path.Combine(path, "ccycles.dll");
-			LoadLibrary(ccycles_dll);
+			LoadCCycles();
 			cycles_initialise();
 		}
 
@@ -58,12 +70,13 @@ namespace ccl
 		/// Note: to have any effect needs to be called before <c>initialise</c>.
 		/// </summary>
 		/// <param name="kernel_path"></param>
-		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_set_kernel_path",
+		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_set_kernel_path", CharSet = CharSet.Ansi,
 			CallingConvention = CallingConvention.Cdecl)]
 		private static extern void cycles_set_kernel_path(string kernel_path);
 
 		public static void set_kernel_path([MarshalAsAttribute(UnmanagedType.LPStr)] string kernel_path)
 		{
+			LoadCCycles();
 			cycles_set_kernel_path(kernel_path);
 		}
 
