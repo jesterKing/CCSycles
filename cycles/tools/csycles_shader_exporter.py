@@ -113,9 +113,11 @@ def get_socket_name(socket, socketlist, is_input, node):
                 if sck[1]==socket:
                     return "Closure" + str(i)
     else:
-        if 'BSDF' in node.type:
-            if socket.name == "Shader":
+        if socket.name == "Shader":
+            if 'BSDF' in node.type:
                 return "BSDF"
+            else:
+                return "Closure"
     return socket.name
 
 def get_val_string(input):
