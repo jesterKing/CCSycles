@@ -39,6 +39,9 @@ namespace ccl
 		/// 
 		/// This will ensure ccycles.dll is loaded. The initialisation will also prepare
 		/// the devices list for use with Cycles.
+		/// 
+		/// Note: call <c>set_kernel_path</c> before initialising CSycles, otherwise default
+		/// kernel path "lib" will be used.
 		/// </summary>
 		/// <returns></returns>
 		public static void initialise()
@@ -47,6 +50,21 @@ namespace ccl
 			var ccycles_dll = System.IO.Path.Combine(path, "ccycles.dll");
 			LoadLibrary(ccycles_dll);
 			cycles_initialise();
+		}
+
+		/// <summary>
+		/// Set the path location to look for CUDA kernels.
+		/// 
+		/// Note: to have any effect needs to be called before <c>initialise</c>.
+		/// </summary>
+		/// <param name="kernel_path"></param>
+		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_set_kernel_path",
+			CallingConvention = CallingConvention.Cdecl)]
+		private static extern void cycles_set_kernel_path(string kernel_path);
+
+		public static void set_kernel_path([MarshalAsAttribute(UnmanagedType.LPStr)] string kernel_path)
+		{
+			cycles_set_kernel_path(kernel_path);
 		}
 
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_shutdown", CallingConvention = CallingConvention.Cdecl)]

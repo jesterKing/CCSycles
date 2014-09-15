@@ -43,6 +43,11 @@ void _cleanup_loggers()
 	loggers.clear();
 }
 
+void cycles_set_kernel_path(const char* kernel_path)
+{
+	ccl::Device::set_kernel_path(string(kernel_path));
+}
+
 void cycles_initialise()
 {
 	if (!initialised) {

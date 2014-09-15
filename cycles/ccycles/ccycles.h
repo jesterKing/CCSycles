@@ -106,6 +106,12 @@ typedef void(__cdecl *RENDER_TILE_CB)(unsigned int session_id, unsigned int x, u
 CCL_CAPI void __cdecl cycles_initialise();
 
 /**
+ * Set the path to look for CUDA kernels in.
+ * \ingroup ccycles
+ */
+CCL_CAPI void __cdecl cycles_set_kernel_path(const char* kernel_path);
+
+/**
  * Clean up everything, we're done.
  * \ingroup ccycles
  * \todo Add session specific cleanup, so we don't accidently delete sessions that are in progress.

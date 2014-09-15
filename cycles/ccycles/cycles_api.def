@@ -1,5 +1,6 @@
 LIBRARY
 EXPORTS
+  cycles_set_kernel_path
   cycles_initialise
   cycles_shutdown
   cycles_set_logger
