@@ -343,6 +343,7 @@ def code_finalise(shadername, links):
             get_node_name(fromnode),
             fromsockname
         )
+    finalisecode = finalisecode + "\n\t{0}.FinalizeGraph();\n".format(shadername)
     finalisecode = finalisecode + "\n\treturn {0};".format(shadername)
     return finalisecode
 
