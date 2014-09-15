@@ -22,6 +22,7 @@ namespace ccl.ShaderNodes
 	{
 		public Float4Socket Color { get; set; }
 		public FloatSocket Roughness { get; set; }
+		public Float4Socket Normal { get; set; }
 
 		public DiffuseBsdfInputs(ShaderNode parentNode)
 		{
@@ -29,6 +30,8 @@ namespace ccl.ShaderNodes
 			AddSocket(Color);
 			Roughness = new FloatSocket(parentNode, "Roughness");
 			AddSocket(Roughness);
+			Normal = new Float4Socket(parentNode, "Normal");
+			AddSocket(Normal);
 		}
 	}
 
