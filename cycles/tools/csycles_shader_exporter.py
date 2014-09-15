@@ -319,7 +319,7 @@ def code_nodes_to_shader(shadername, nodes):
         
         if 'OUTPUT' in n.type: continue
     
-        addcode = addcode + "\t{0}.Add({1});\n".format(shadername, get_node_name(n))
+        addcode = addcode + "\t{0}.AddNode({1});\n".format(shadername, get_node_name(n))
     
     return addcode
 
