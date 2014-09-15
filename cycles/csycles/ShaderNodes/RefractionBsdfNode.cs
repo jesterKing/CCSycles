@@ -23,6 +23,7 @@ namespace ccl.ShaderNodes
 		public FloatSocket IOR { get; set; }
 		public FloatSocket Roughness { get; set; }
 		public Float4Socket Color { get; set; }
+		public Float4Socket Normal { get; set; }
 
 		public RefractionBsdfInputs(ShaderNode parentNode)
 		{
@@ -32,6 +33,8 @@ namespace ccl.ShaderNodes
 			AddSocket(Roughness);
 			IOR = new FloatSocket(parentNode, "IOR");
 			AddSocket(IOR);
+			Normal = new Float4Socket(parentNode, "Normal");
+			AddSocket(Normal);
 		}
 	}
 
