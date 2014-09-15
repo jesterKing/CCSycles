@@ -112,6 +112,8 @@ namespace csycles_tester
 
 			CSycles.set_logger(client.Id, g_logger_callback);
 
+			CSycles.set_kernel_path("Plug-ins/RhinoCycles/lib");
+
 			CSycles.initialise();
 			var num_devices = Device.Count;
 			var dev = Device.FirstCuda;
