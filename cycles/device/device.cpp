@@ -34,6 +34,10 @@
 
 CCL_NAMESPACE_BEGIN
 
+/* Kernel location path */
+
+string libpath = "lib";
+
 /* Device */
 
 void Device::pixels_alloc(device_memory& mem)

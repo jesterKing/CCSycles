@@ -69,6 +69,10 @@ public:
 	}
 };
 
+/* kernel location */
+
+extern string libpath;
+
 /* Device */
 
 struct DeviceDrawParams {
@@ -78,12 +82,10 @@ struct DeviceDrawParams {
 
 class Device {
 protected:
-	Device(DeviceInfo& info_, Stats &stats_, bool background) : background(background), info(info_), stats(stats_) { libpath = "lib"; }
+	Device(DeviceInfo& info_, Stats &stats_, bool background) : background(background), info(info_), stats(stats_) {}
 
 	bool background;
 	string error_msg;
-
-	static string libpath;
 
 public:
 	virtual ~Device() {}
@@ -150,10 +152,6 @@ public:
 	static string string_from_type(DeviceType type);
 	static vector<DeviceType>& available_types();
 	static vector<DeviceInfo>& available_devices();
-
-	static void set_kernel_path(const string kernel_path) {
-		libpath = kernel_path;
-	}
 };
 
 CCL_NAMESPACE_END
