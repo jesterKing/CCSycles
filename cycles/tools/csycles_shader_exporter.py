@@ -16,6 +16,8 @@ import bpy
 from bpy import data as D
 from bpy import context as C
 
+import functools
+
 # contain all nodes for a material
 allnodes = set()
 # contain all links for a material
@@ -275,9 +277,13 @@ def code_init_node(node):
             node.outputs[0].default_value
         )
     if node.type == 'MATH':
+        opval = functools.reduce(
+            lambda x, y: x+'_'+y,
+            map(str.capitalize, node.operation.lower().split('_'))
+        )
         initcode = initcode + "\t{0}.Operation = MathNode.Operations.{1};\n".format(
             varname,
-            node.operation.lower().capitalize()
+            opval
         )
     return initcode
 
