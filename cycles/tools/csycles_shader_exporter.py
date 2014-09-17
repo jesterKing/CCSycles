@@ -337,7 +337,7 @@ def code_finalise(shadername, links):
         fromsockname = get_socket_name(fromsock, fromnode.inputs, False, fromnode)
         tosockname = get_socket_name(tosock, tonode.inputs, True, tonode)
         
-        finalisecode = finalisecode + "\t{0}.Output.ins.{1}.Connect({2}.outs.{3});\n".format(
+        finalisecode = finalisecode + "\t{2}.outs.{3}.Connect({0}.Output.ins.{1});\n".format(
             shadername,
             tosockname,
             get_node_name(fromnode),
