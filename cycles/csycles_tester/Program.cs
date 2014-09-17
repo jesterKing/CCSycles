@@ -117,9 +117,8 @@ namespace csycles_tester
 			Client = client;
 			CSycles.set_logger(client.Id, g_logger_callback);
 
-			var num_devices = Device.Count;
 			var dev = Device.FirstCuda;
-			Console.WriteLine("We have {0} device{1}", num_devices, num_devices != 1 ? "s" : "");
+			Console.WriteLine("Using device {0}", dev.Name);
 
 			var scene_params = new SceneParameters(client, ShadingSystem.SVM, BvhType.Dynamic, false, false, false, false);
 			var scene = new Scene(client, scene_params, dev);
