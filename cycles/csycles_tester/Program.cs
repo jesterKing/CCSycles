@@ -95,11 +95,17 @@ namespace csycles_tester
 				return;
 			}
 			var s = args[0];
-			if (File.Exists(s))
+			if (!File.Exists(s))
 			{
-				file = Path.GetFullPath(s);
-				Console.WriteLine("We get file path: {0}", file);
+				Console.WriteLine("File {0} doesn't exist.", s);
+				return;
 			}
+
+			file = Path.GetFullPath(s);
+			Console.WriteLine("We get file path: {0}", file);
+
+			CSycles.set_kernel_path("Plug-ins/RhinoCycles/lib");
+			CSycles.initialise();
 
 			const uint samples = 5;
 			g_update_callback = StatusUpdateCallback;
@@ -109,12 +115,8 @@ namespace csycles_tester
 
 			var client = new Client();
 			Client = client;
-
 			CSycles.set_logger(client.Id, g_logger_callback);
 
-			CSycles.set_kernel_path("Plug-ins/RhinoCycles/lib");
-
-			CSycles.initialise();
 			var num_devices = Device.Count;
 			var dev = Device.FirstCuda;
 			Console.WriteLine("We have {0} device{1}", num_devices, num_devices != 1 ? "s" : "");
