@@ -62,6 +62,8 @@ namespace ccl
 			Background = new Background(this);
 			Camera = new Camera(this);
 			Integrator = new Integrator(this);
+
+			client.Scene = this;
 		}
 
 		/// <summary>
