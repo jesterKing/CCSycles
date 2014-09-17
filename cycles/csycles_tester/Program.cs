@@ -123,9 +123,6 @@ namespace csycles_tester
 			var scene_params = new SceneParameters(client, ShadingSystem.SVM, BvhType.Dynamic, false, false, false, false);
 			var scene = new Scene(client, scene_params, dev);
 
-			client.Scene = scene;
-
-
 #region background shader
 			var background_shader = new Shader(client, Shader.ShaderType.World)
 			{
