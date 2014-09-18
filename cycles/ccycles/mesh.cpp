@@ -102,3 +102,25 @@ void cycles_mesh_add_triangle(unsigned int client_id, unsigned int scene_id, uns
 		me->add_triangle((int)v0, (int)v1, (int)v2, shader_id, smooth == 1);
 	SCENE_FIND_END()
 }
+
+void cycles_mesh_set_uvs(unsigned int client_id, unsigned int scene_id, unsigned int mesh_id, float *uvs, unsigned int uvcount)
+{
+	SCENE_FIND(scene_id)
+		auto me = sce->meshes[mesh_id];
+
+	if (me->need_attribute(sce, ccl::ATTR_STD_UV)) {
+		auto attr = me->attributes.add(ccl::ATTR_STD_UV, ccl::ustring("uvmap"));
+		auto fdata = attr->data_float3();
+
+		ccl::float3 f3;
+
+		for (auto i = 0; i < (int)uvcount * 3; i += 3) {
+			f3.x = uvs[i];
+			f3.y = uvs[i + 1];
+			f3.z = uvs[i + 2];
+			fdata[0] = f3;
+			++fdata;
+		}
+	}
+	SCENE_FIND_END()
+}
