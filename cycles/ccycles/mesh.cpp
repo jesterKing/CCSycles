@@ -114,10 +114,10 @@ void cycles_mesh_set_uvs(unsigned int client_id, unsigned int scene_id, unsigned
 
 		ccl::float3 f3;
 
-		for (auto i = 0; i < (int)uvcount * 3; i += 3) {
+		for (auto i = 0; i < (int)uvcount * 2; i += 2) {
 			f3.x = uvs[i];
 			f3.y = uvs[i + 1];
-			f3.z = uvs[i + 2];
+			f3.z = 0.0f;
 			fdata[0] = f3;
 			++fdata;
 		}
