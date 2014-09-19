@@ -259,7 +259,7 @@ def code_init_node(node):
     """
     Set node variables and sockets to their proper values
     """
-    varname = node.label if node.label else node.name
+    varname = get_node_name(node)
     initcode = ""
     initcode = add_inputs(varname, node.inputs)
 
