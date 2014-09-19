@@ -29,12 +29,13 @@ namespace csycles_tester
 
 		static public Shader create_some_setup_shader()
 		{
-			var some_setup = new Shader(Client, Shader.ShaderType.Material);
-
-			some_setup.Name = "some_setup";
-			some_setup.UseMis = false;
-			some_setup.UseTransparentShadow = true;
-			some_setup.HeterogeneousVolume = false;
+			var some_setup = new Shader(Client, Shader.ShaderType.Material)
+			{
+				Name = "some_setup",
+				UseMis = false,
+				UseTransparentShadow = true,
+				HeterogeneousVolume = false
+			};
 
 
 			var brick_texture = new BrickTexture();
@@ -200,26 +201,6 @@ namespace csycles_tester
 			#region diffuse shader
 
 			var diffuse_shader = create_some_setup_shader();
-			/*new Shader(client, Shader.ShaderType.Material)
-			{
-				Name = "Tester diffuse bsdf",
-				UseMis = true,
-				UseTransparentShadow = true,
-				HeterogeneousVolume = false
-			};
-			var col_node = new ColorNode { Value = new float4(0.0f, 0.5f, 0.05f) };
-			var diff_bsdf = new DiffuseBsdfNode();
-			diff_bsdf.ins.Color.Value = new float4(0.0f, 0.0f, 1.0f);
-
-			diffuse_shader.AddNode(col_node);
-			diffuse_shader.AddNode(diff_bsdf);
-
-			col_node.outs.Color.Connect(diff_bsdf.ins.Color);
-			//diffuse_shader.LastSocket(diff_bsdf.outs.BSDF);
-
-			diff_bsdf.outs.BSDF.Connect(diffuse_shader.Output.ins.Surface);
-
-			diffuse_shader.FinalizeGraph();*/
 			scene.AddShader(diffuse_shader);
 			scene.DefaultSurface = diffuse_shader;
 			#endregion
@@ -240,75 +221,23 @@ namespace csycles_tester
 			light_shader.FinalizeGraph();
 			scene.AddShader(light_shader);
 			#endregion
-			/*
-
-
-
-			scene.AddShader(diffuse_shader);
-			scene.AddShader(light_shader);
-
-			scene.DefaultSurface = diffuse_shader;
-
-			Console.WriteLine("Default shader is: {0}", scene.DefaultSurface);
-			*/
-
-			// update integrator settings
-			/*Console.WriteLine("Update integrator settings");
-			scene.Integrator.MaxBounce = 10;
-			scene.Integrator.MinBounce = 10;
-
-			scene.Integrator.NoCaustics = true;
-			scene.Integrator.TransparentShadows = true;
-
-			scene.Integrator.DiffuseSamples= 2;
-			scene.Integrator.GlossySamples = 4;
-			scene.Integrator.TransmissionSamples = 4;
-			scene.Integrator.AoSamples = 1;
-			scene.Integrator.MeshLightSamples = 1;
-			scene.Integrator.SubsurfaceSamples = 1;
-			scene.Integrator.VolumeSamples = 1;
-
-			scene.Integrator.MaxDiffuseBounce = 2;
-			scene.Integrator.MaxGlossyBounce = 4;
-			scene.Integrator.MaxTransmissionBounce = 8;
-			scene.Integrator.MaxVolumeBounce = 1;
-
-			scene.Integrator.AaSamples = 0;
-
-			scene.Integrator.TransparentMinBounce  = 8;
-			scene.Integrator.TransparentMaxBounce = 8;
-
-			scene.Integrator.FilterGlossy = 0.0f;
-
-			scene.Integrator.IntegratorMethod = IntegratorMethod.Path;*/
-
-			/*var l = new Light(client, scene, light_shader);
-			l.Type = LightType.Point;
-			l.SpotAngle = 1.0f;
-			l.SpotSmooth = 0.5f;
-			l.Location = new float4(2.0f, 10.0f, 10.0f);
-			l.Direction = new float4(-0.3f, -1.0f, 0.0f);
-			l.Size = 0.1f;*/
 
 			var xml = new XmlReader(client, file);
 			xml.Parse();
 			var width = (uint)scene.Camera.Size.Width;
 			var height = (uint)scene.Camera.Size.Height;
 
-			var session_params = new SessionParameters(client, dev);
-			//session_params.output_path = "test.png";
-			//session_params.output_path = "";
-			session_params.Experimental = false;
-			session_params.Samples = (int)samples;
-			session_params.TileSize = new Size(64, 64);
-			session_params.StartResolution = 64;
-			session_params.Threads = 0;
-			//session_params.TileOrder = TileOrder.RightToLeft;
-			session_params.ShadingSystem = ShadingSystem.SVM;
-			//session_params.DisplayBufferLinear = false;
-			session_params.Background = true;
-			session_params.ProgressiveRefine = false;
-			//session_params.Progressive = true;
+			var session_params = new SessionParameters(client, dev)
+			{
+				Experimental = false,
+				Samples = (int) samples,
+				TileSize = new Size(64, 64),
+				StartResolution = 64,
+				Threads = 0,
+				ShadingSystem = ShadingSystem.SVM,
+				Background = true,
+				ProgressiveRefine = false
+			};
 			Session = new Session(client, session_params, scene);
 			Session.Reset(width, height, samples);
 
