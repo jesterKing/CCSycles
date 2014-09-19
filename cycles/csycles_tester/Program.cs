@@ -27,6 +27,58 @@ namespace csycles_tester
 		static Session Session { get; set; }
 		static Client Client { get; set; }
 
+		static public Shader create_some_setup_shader()
+		{
+			var some_setup = new Shader(Client, Shader.ShaderType.Material);
+
+			some_setup.Name = "some_setup";
+			some_setup.UseMis = false;
+			some_setup.UseTransparentShadow = true;
+			some_setup.HeterogeneousVolume = false;
+
+
+			var brick_texture = new BrickTexture();
+			brick_texture.ins.Vector.Value = new float4(0.000f, 0.000f, 0.000f);
+			brick_texture.ins.Color1.Value = new float4(0.800f, 0.800f, 0.800f);
+			brick_texture.ins.Color2.Value = new float4(0.200f, 0.200f, 0.200f);
+			brick_texture.ins.Mortar.Value = new float4(0.000f, 0.000f, 0.000f);
+			brick_texture.ins.Scale.Value = 1.000f;
+			brick_texture.ins.MortarSize.Value = 0.020f;
+			brick_texture.ins.Bias.Value = 0.000f;
+			brick_texture.ins.BrickWidth.Value = 0.500f;
+			brick_texture.ins.RowHeight.Value = 0.250f;
+
+			var checker_texture = new CheckerTexture();
+			checker_texture.ins.Vector.Value = new float4(0.000f, 0.000f, 0.000f);
+			checker_texture.ins.Color1.Value = new float4(0.000f, 0.004f, 0.800f);
+			checker_texture.ins.Color2.Value = new float4(0.200f, 0.000f, 0.007f);
+			checker_texture.ins.Scale.Value = 5.000f;
+
+			var diffuse_bsdf = new DiffuseBsdfNode();
+			diffuse_bsdf.ins.Color.Value = new float4(0.800f, 0.800f, 0.800f);
+			diffuse_bsdf.ins.Roughness.Value = 0.000f;
+			diffuse_bsdf.ins.Normal.Value = new float4(0.000f, 0.000f, 0.000f);
+
+			var texture_coordinate = new TextureCoordinateNode();
+
+
+			some_setup.AddNode(brick_texture);
+			some_setup.AddNode(checker_texture);
+			some_setup.AddNode(diffuse_bsdf);
+			some_setup.AddNode(texture_coordinate);
+
+			brick_texture.outs.Color.Connect(diffuse_bsdf.ins.Color);
+			checker_texture.outs.Color.Connect(brick_texture.ins.Mortar);
+			texture_coordinate.outs.Normal.Connect(checker_texture.ins.Vector);
+			texture_coordinate.outs.UV.Connect(brick_texture.ins.Vector);
+
+			diffuse_bsdf.outs.BSDF.Connect(some_setup.Output.ins.Surface);
+
+			some_setup.FinalizeGraph();
+
+			return some_setup;
+		}
+
 		static public void StatusUpdateCallback(uint sessionId)
 		{
 			float progress;
@@ -123,7 +175,7 @@ namespace csycles_tester
 			var scene_params = new SceneParameters(client, ShadingSystem.SVM, BvhType.Dynamic, false, false, false, false);
 			var scene = new Scene(client, scene_params, dev);
 
-#region background shader
+			#region background shader
 			var background_shader = new Shader(client, Shader.ShaderType.World)
 			{
 				Name = "Background shader"
@@ -144,10 +196,11 @@ namespace csycles_tester
 			scene.Background.AoDistance = 0.0f;
 			scene.Background.AoFactor = 0.0f;
 			scene.Background.Visibility = PathRay.PATH_RAY_ALL_VISIBILITY;
-#endregion
-#region diffuse shader
+			#endregion
+			#region diffuse shader
 
-			var diffuse_shader = new Shader(client, Shader.ShaderType.Material)
+			var diffuse_shader = create_some_setup_shader();
+			/*new Shader(client, Shader.ShaderType.Material)
 			{
 				Name = "Tester diffuse bsdf",
 				UseMis = true,
@@ -166,12 +219,12 @@ namespace csycles_tester
 
 			diff_bsdf.outs.BSDF.Connect(diffuse_shader.Output.ins.Surface);
 
-			diffuse_shader.FinalizeGraph();
+			diffuse_shader.FinalizeGraph();*/
 			scene.AddShader(diffuse_shader);
 			scene.DefaultSurface = diffuse_shader;
-#endregion
+			#endregion
 
-#region point light shader
+			#region point light shader
 
 			var light_shader = new Shader(client, Shader.ShaderType.Material)
 			{
@@ -186,7 +239,7 @@ namespace csycles_tester
 			emission_node.outs.Emission.Connect(light_shader.Output.ins.Surface);
 			light_shader.FinalizeGraph();
 			scene.AddShader(light_shader);
-#endregion
+			#endregion
 			/*
 
 
@@ -239,8 +292,8 @@ namespace csycles_tester
 
 			var xml = new XmlReader(client, file);
 			xml.Parse();
-			var width = (uint) scene.Camera.Size.Width;
-			var height = (uint) scene.Camera.Size.Height;
+			var width = (uint)scene.Camera.Size.Width;
+			var height = (uint)scene.Camera.Size.Height;
 
 			var session_params = new SessionParameters(client, dev);
 			//session_params.output_path = "test.png";
@@ -279,11 +332,11 @@ namespace csycles_tester
 			{
 				for (var y = 0; y < height; y++)
 				{
-					var i = y*(int)width*4 + x*4;
-					var r = ColorClamp((int)(pixels[i]*255.0f));
-					var g = ColorClamp((int)(pixels[i+1]*255.0f));
-					var b = ColorClamp((int)(pixels[i+2]*255.0f));
-					var a = ColorClamp((int)(pixels[i+3]*255.0f));
+					var i = y * (int)width * 4 + x * 4;
+					var r = ColorClamp((int)(pixels[i] * 255.0f));
+					var g = ColorClamp((int)(pixels[i + 1] * 255.0f));
+					var b = ColorClamp((int)(pixels[i + 2] * 255.0f));
+					var a = ColorClamp((int)(pixels[i + 3] * 255.0f));
 					bmp.SetPixel(x, y, Color.FromArgb(a, r, g, b));
 				}
 			}
