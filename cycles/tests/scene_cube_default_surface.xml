@@ -1,0 +1,11 @@
+<!-- Camera -->
+<camera width="800" height="500" />
+
+<transform translate="0 2 -6" scale="1 1 1" rotate="20 1 0 0">
+	<camera type="perspective" />
+</transform>
+
+<!-- Cube Object -->
+<state interpolation="smooth">
+	<include src="./objects/uv_cube.xml" />
+</state>
