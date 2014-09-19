@@ -26,21 +26,35 @@ alllinks = set()
 # Node type to CSycle class name
 # TODO: add all nodes
 nodemapping = {
+
+# shader nodes
     'ADD_SHADER' : 'AddClosureNode',
     'MIX_SHADER' : 'MixClosureNode',
     
-    'MIX_RGB' : 'MixNode',
-
-    'MATH' : 'MathNode',
-    'VALUE' : 'ValueNode',
-    'RGB' : 'ColorNode',
-    'FRESNEL' : 'FresnelNode',
-        
     'EMISSION' : 'EmissionNode',
 
     'BSDF_DIFFUSE' : 'DiffuseBsdfNode',
     'BSDF_GLOSSY' : 'GlossyBsdfNode',
     'BSDF_REFRACTION' : 'RefractionBsdfNode',
+
+# texture nodes
+
+    'TEX_IMAGE' : 'ImageTextureNode',
+    'TEX_BRICK' : 'BrickTexture',
+    'TEX_CHECKER' : 'CheckerTexture',
+        
+# color nodes
+    'MIX_RGB' : 'MixNode',
+
+# conversion nodes
+    'MATH' : 'MathNode',
+
+# input nodes
+    'VALUE' : 'ValueNode',
+    'RGB' : 'ColorNode',
+    'FRESNEL' : 'FresnelNode',
+    'TEX_COORD' : 'TextureCoordinateNode',
+
 }
 
 # Socket type to CSycles class name mapping
