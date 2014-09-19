@@ -142,6 +142,7 @@ namespace csycles_tester
 					transform = transform*ccl.Transform.Transpose(t);
 				}
 			}
+
 			var trans = node.GetAttribute("translate");
 			if (!string.IsNullOrEmpty(trans))
 			{

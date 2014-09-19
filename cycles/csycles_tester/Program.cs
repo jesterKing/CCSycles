@@ -187,7 +187,6 @@ namespace csycles_tester
 			bgnode.ins.Strength.Value = 1.0f;
 
 			background_shader.AddNode(bgnode);
-			//background_shader.LastSocket(bgnode.outs.Background);
 			bgnode.outs.Background.Connect(background_shader.Output.ins.Surface);
 			background_shader.FinalizeGraph();
 
