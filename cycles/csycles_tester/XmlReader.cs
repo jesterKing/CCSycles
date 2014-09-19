@@ -143,16 +143,6 @@ namespace csycles_tester
 				}
 			}
 
-			var trans = node.GetAttribute("translate");
-			if (!string.IsNullOrEmpty(trans))
-			{
-				var components = parse_floats(trans);
-				if(components.Length==3)
-				{
-					transform = transform*ccl.Transform.Translate(components[0], components[1], components[2]);
-				}
-			}
-
 			var rotate = node.GetAttribute("rotate");
 			if (!string.IsNullOrEmpty(rotate))
 			{
@@ -162,6 +152,16 @@ namespace csycles_tester
 					var a = DegToRad(components[0]);
 					var axis = new float4(components[1], components[2], components[3]);
 					transform = transform*ccl.Transform.Rotate(a, axis);
+				}
+			}
+
+			var trans = node.GetAttribute("translate");
+			if (!string.IsNullOrEmpty(trans))
+			{
+				var components = parse_floats(trans);
+				if(components.Length==3)
+				{
+					transform = transform*ccl.Transform.Translate(components[0], components[1], components[2]);
 				}
 			}
 
