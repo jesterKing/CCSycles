@@ -1,7 +1,7 @@
 <!-- Camera -->
 <camera width="800" height="500" />
 
-<transform translate="0 2 -6" scale="1 1 1" rotate="20 1 0 0">
+<transform translate="0 0 -5" scale="1 1 1" rotate="75 0 1 1">
 	<camera type="perspective" />
 </transform>
 
