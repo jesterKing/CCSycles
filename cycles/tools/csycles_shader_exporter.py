@@ -98,6 +98,7 @@ def get_socket_name(socket, socketlist, is_input, node):
     what is at the lowest level. This level is also what C[CS]?ycles uses,
     so some mapping is necessary.
     """
+    sockname = socket.name
     if is_input:
         if node.type == 'MATH':
             i = 0
@@ -105,20 +106,23 @@ def get_socket_name(socket, socketlist, is_input, node):
                 i+=1
                 if sck[1]==socket:
                     name = socket.name
-                    return name + str(i)
+                    sockname = name + str(i)
+                    break
         if socket.name == "Shader":
             i = 0
             for sck in socketlist.items():
                 if sck[1].name == "Shader": i+=1
                 if sck[1]==socket:
-                    return "Closure" + str(i)
+                    sockname = "Closure" + str(i)
+                    break
     else:
         if socket.name == "Shader":
             if 'BSDF' in node.type:
-                return "BSDF"
+                sockname = "BSDF"
             else:
-                return "Closure"
-    return socket.name
+                sockname = "Closure"
+    sockname = sockname.replace(" ", "")
+    return sockname
 
 def get_val_string(input):
     """
