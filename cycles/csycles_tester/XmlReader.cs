@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 **/
 
+using System.Linq;
 using ccl;
 using ccl.ShaderNodes;
 using ccl.ShaderNodes.Sockets;
@@ -260,10 +261,12 @@ namespace csycles_tester
 			node.Read();
 
 			var P = node.GetAttribute("P");
+			var UV = node.GetAttribute("UV");
 			var nverts = node.GetAttribute("nverts");
 			var verts = node.GetAttribute("verts");
 			Console.WriteLine("{0}", node);
 
+			var uvfloats = parse_floats(UV);
 			var pfloats = parse_floats(P);
 			var nvertsints = parse_ints(nverts);
 			var vertsints = parse_ints(verts);
@@ -272,9 +275,15 @@ namespace csycles_tester
 			CSycles.object_set_matrix(Client.Id, state.Scene.Id, ob, state.Transform);
 			var me = CSycles.scene_add_mesh(Client.Id, state.Scene.Id, ob, state.Scene.ShaderSceneId(state.Shader));
 
-			CSycles.mesh_set_verts(Client.Id, state.Scene.Id, me, ref pfloats, (uint)(pfloats.Length/3));
+			CSycles.mesh_set_verts(Client.Id, state.Scene.Id, me, ref pfloats, (uint) (pfloats.Length/3));
 
 			var index_offset = 0;
+			/* count triangles */
+			var fc = nvertsints.Aggregate(0, (total, next) =>
+																		next == 4 ? total + 2 : total + 1);
+
+			var uvs = new float[fc*3*2];
+			var uvoffs = 0;
 			foreach (var t in nvertsints)
 			{
 				for (var j = 0; j < t - 2; j++)
@@ -283,11 +292,22 @@ namespace csycles_tester
 					var v1 = vertsints[index_offset + j + 1];
 					var v2 = vertsints[index_offset + j + 2];
 
+					uvs[uvoffs] = uvfloats[index_offset*2];
+					uvs[uvoffs + 1] = uvfloats[index_offset*2 + 1];
+					uvs[uvoffs + 2] = uvfloats[(index_offset + j + 1)*2];
+					uvs[uvoffs + 3] = uvfloats[(index_offset + j + 1)*2 + 1];
+					uvs[uvoffs + 4] = uvfloats[(index_offset + j + 2)*2];
+					uvs[uvoffs + 5] = uvfloats[(index_offset + j + 2)*2 + 1];
+
+					uvoffs += 6;
+
 					CSycles.mesh_add_triangle(Client.Id, state.Scene.Id, me, (uint)v0, (uint)v1, (uint)v2, state.Scene.ShaderSceneId(state.Shader), state.Smooth);
 				}
 
 				index_offset += t;
 			}
+
+			CSycles.mesh_set_uvs(Client.Id, state.Scene.Id, me, ref uvs, (uint)(uvs.Length / 2));
 		}
 
 		private void ReadScene(ref XmlReadState state, System.Xml.XmlReader node)
