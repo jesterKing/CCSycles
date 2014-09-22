@@ -372,6 +372,8 @@ namespace csycles_tester
 				var nodename = node.GetAttribute("name");
 				if (string.IsNullOrEmpty(nodename) && node.Name != "connect") continue;
 
+				if (string.IsNullOrEmpty(nodename)) nodename = "";
+
 				switch (node.Name)
 				{
 					case "background":
