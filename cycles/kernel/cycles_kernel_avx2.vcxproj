@@ -134,10 +134,11 @@
       <CompileAs>CompileAsCpp</CompileAs>
       <DisableSpecificWarnings>4018;4065;4127;4181;4200;4244;4267;4305;4800</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>4013;4431</TreatSpecificWarningsAsErrors>
-      <AdditionalOptions>/w34062 /J /Gs-  /arch:SSE /arch:SSE2 /arch:AVX /arch:AVX2 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/w34062 /J /Gs- /arch:AVX /arch:AVX2 %(AdditionalOptions)</AdditionalOptions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <FunctionLevelLinking>false</FunctionLevelLinking>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -162,7 +163,7 @@
       <CompileAs>CompileAsCpp</CompileAs>
       <DisableSpecificWarnings>4018;4065;4127;4181;4200;4244;4267;4305;4800</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>4013;4431</TreatSpecificWarningsAsErrors>
-      <AdditionalOptions>/w34062 /J /Gs-  /arch:SSE /arch:SSE2 /arch:AVx /arch:AVX2 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/w34062 /J /Gs- /arch:AVx /arch:AVX2 %(AdditionalOptions)</AdditionalOptions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <BufferSecurityCheck>false</BufferSecurityCheck>
     </ClCompile>
@@ -207,7 +208,7 @@
       <CompileAs>CompileAsCpp</CompileAs>
       <DisableSpecificWarnings>4018;4065;4127;4181;4200;4244;4267;4305;4800</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>4013;4431</TreatSpecificWarningsAsErrors>
-      <AdditionalOptions>/w34062 /J /Gs-  /arch:SSE /arch:SSE2 /arch:AVX /arch:AVX2 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/w34062 /J /Gs- /arch:AVX /arch:AVX2 %(AdditionalOptions)</AdditionalOptions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <BufferSecurityCheck>false</BufferSecurityCheck>
     </ClCompile>
