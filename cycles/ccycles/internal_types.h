@@ -108,6 +108,17 @@ private:
  */
 extern Logger logger;
 
+struct CCImage {
+		string filename;
+		void *builtin_data;
+
+		int width;
+		int height;
+		int depth;
+		int channels;
+		bool is_float;
+};
+
 class CCSession {
 public:
 	unsigned int id = 0;

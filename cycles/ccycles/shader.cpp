@@ -20,7 +20,7 @@ extern std::vector<CCScene> scenes;
 
 std::vector<CCShader*> shaders;
 
-std::vector<ccl::ImageManager::Image*> images;
+std::vector<CCImage*> images;
 
 void _cleanup_shaders()
 {
@@ -376,7 +376,7 @@ void cycles_shadernode_set_member_float_img(unsigned int client_id, unsigned int
 			switch (shn_type) {
 				case shadernode_type::IMAGE_TEXTURE:
 					{
-						auto nimg = new ccl::ImageManager::Image();
+						auto nimg = new CCImage();
 						auto imgdata = new float[width*height*channels];
 						memcpy(imgdata, img, sizeof(float)*width*height*channels);
 						nimg->builtin_data = imgdata;
@@ -409,7 +409,7 @@ void cycles_shadernode_set_member_byte_img(unsigned int client_id, unsigned int 
 			switch (shn_type) {
 				case shadernode_type::IMAGE_TEXTURE:
 					{
-						auto nimg = new ccl::ImageManager::Image();
+						auto nimg = new CCImage();
 						auto imgdata = new ccl::uchar[width*height*channels];
 						memcpy(imgdata, img, sizeof(unsigned char)*width*height*channels);
 						nimg->builtin_data = imgdata;

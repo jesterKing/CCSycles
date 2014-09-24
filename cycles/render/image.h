@@ -87,13 +87,6 @@ public:
 		float frame;
 		InterpolationType interpolation;
 
-		/* addition for CSycles, so it can be used as intermediate img saving struct */
-		int width;
-		int height;
-		int depth;
-		int channels;
-		bool is_float;
-
 		int users;
 	};
 
