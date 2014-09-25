@@ -83,6 +83,7 @@ namespace ccl
 		WaveTexture,
 		TextureCoordinate,
 		Bump,
+		RgbToBw,
 	}
 
 	public enum BvhType : uint

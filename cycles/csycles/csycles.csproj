@@ -50,6 +50,7 @@
     <Compile Include="Device.cs" />
     <Compile Include="enums.cs" />
     <Compile Include="float4.cs" />
+    <Compile Include="ShaderNodes\RgbToBwNode.cs" />
     <Compile Include="ShaderNodes\CheckerTexture.cs" />
     <Compile Include="ShaderNodes\GlassBsdfNode.cs" />
     <Compile Include="ShaderNodes\EnvironmentTextureNode.cs" />

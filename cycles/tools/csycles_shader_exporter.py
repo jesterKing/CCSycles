@@ -48,6 +48,8 @@ nodemapping = {
 
 # conversion nodes
     'MATH' : 'MathNode',
+    'RGBTOBW' : 'RgbToBwNode',
+
 # vector nodes
     'BUMP' : 'BumpNode',
 

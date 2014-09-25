@@ -361,6 +361,7 @@ enum class shadernode_type : unsigned int {
 	WAVE_TEXTURE,
 	TEXTURE_COORDINATE,
 	BUMP,
+	RGBTOBW,
 };
 
 CCL_CAPI unsigned int __cdecl cycles_create_shader(unsigned int client_id);
