@@ -121,6 +121,18 @@ namespace ccl
 				case ShaderNodeType.WaveTexture:
 					CSycles.shadernode_set_enum(Client.Id, Id, node.Id, node.Type, ((WaveTexture)node).WaveType);
 					break;
+				case ShaderNodeType.EnvironmentTexture:
+					var envnode = node as EnvironmentTextureNode;
+					if (envnode != null)
+					{
+						var projection = envnode.Projection == TextureNode.EnvironmentProjection.Equirectangular
+							? "Equirectangular"
+							: "Mirror Ball";
+						var colspace = envnode.ColorSpace == TextureNode.TextureColorSpace.Color ? "Color" : "None";
+						CSycles.shadernode_set_enum(Client.Id, Id, node.Id, node.Type, projection);
+						CSycles.shadernode_set_enum(Client.Id, Id, node.Id, node.Type, colspace);
+					}
+					break;
 			}
 
 			/* set direct member variables */
@@ -150,6 +162,21 @@ namespace ccl
 						var bimg = imgtexnode.ByteImage;
 						CSycles.shadernode_set_member_byte_img(Client.Id, Id, node.Id, node.Type, "builtin-data",
 							String.Format("{0}-{0}-{0}f", Client.Id, Id, node.Id), ref bimg, imgtexnode.Width, imgtexnode.Height, 1, 4);
+					}
+					break;
+				case ShaderNodeType.EnvironmentTexture:
+					var envtexnode = (EnvironmentTextureNode) node;
+					if (envtexnode.FloatImage != null)
+					{
+						var flenv = envtexnode.FloatImage;
+						CSycles.shadernode_set_member_float_img(Client.Id, Id, node.Id, node.Type, "builtin-data",
+							String.Format("{0}-{0}-{0}f", Client.Id, Id, node.Id), ref flenv, envtexnode.Width, envtexnode.Height, 1, 4);
+					}
+					else if (envtexnode.ByteImage != null)
+					{
+						var benv = envtexnode.ByteImage;
+						CSycles.shadernode_set_member_byte_img(Client.Id, Id, node.Id, node.Type, "builtin-data",
+							String.Format("{0}-{0}-{0}f", Client.Id, Id, node.Id), ref benv, envtexnode.Width, envtexnode.Height, 1, 4);
 					}
 					break;
 				case ShaderNodeType.BrickTexture:

@@ -33,6 +33,12 @@ namespace ccl.ShaderNodes
 			Box
 		}
 
+		public enum EnvironmentProjection
+		{
+			Equirectangular,
+			MirrorBall
+		}
+
 		internal TextureNode(ShaderNodeType type) :
 			base(type) { }
 	}

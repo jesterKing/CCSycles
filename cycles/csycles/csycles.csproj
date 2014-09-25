@@ -52,6 +52,7 @@
     <Compile Include="float4.cs" />
     <Compile Include="ShaderNodes\CheckerTexture.cs" />
     <Compile Include="ShaderNodes\GlassBsdfNode.cs" />
+    <Compile Include="ShaderNodes\EnvironmentTextureNode.cs" />
     <Compile Include="ShaderNodes\NoiseTexture.cs" />
     <Compile Include="ShaderNodes\OutputNode.cs" />
     <Compile Include="ShaderNodes\SkyTexture.cs" />

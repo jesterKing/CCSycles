@@ -353,6 +353,7 @@ enum class shadernode_type : unsigned int {
 	SEPARATE_XYZ,
 	MATH,
 	IMAGE_TEXTURE,
+	ENVIRONMENT_TEXTURE,
 	BRICK_TEXTURE,
 	SKY_TEXTURE,
 	CHECKER_TEXTURE,

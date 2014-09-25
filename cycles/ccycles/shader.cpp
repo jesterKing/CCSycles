@@ -206,6 +206,9 @@ unsigned int cycles_add_shader_node(unsigned int client_id, unsigned int shader_
 		case shadernode_type::IMAGE_TEXTURE:
 			node = new ccl::ImageTextureNode();
 			break;
+		case shadernode_type::ENVIRONMENT_TEXTURE:
+			node = new ccl::EnvironmentTextureNode();
+			break;
 		case shadernode_type::BRICK_TEXTURE:
 			node = new ccl::BrickTextureNode();
 			break;
@@ -356,6 +359,17 @@ void cycles_shadernode_set_enum(unsigned int client_id, unsigned int shader_id, 
 					{
 						auto node = dynamic_cast<ccl::SkyTextureNode*>(*psh);
 						_set_enum_val(client_id, &node->type, ccl::SkyTextureNode::type_enum, val);
+					}
+					break;
+				case shadernode_type::ENVIRONMENT_TEXTURE:
+					{
+						auto node = dynamic_cast<ccl::EnvironmentTextureNode*>(*psh);
+						if (val == "Color" || val == "None") {
+							_set_enum_val(client_id, &node->color_space, ccl::EnvironmentTextureNode::color_space_enum, val);
+						}
+						if (val == "Equirectangular" || val == "Mirror Ball") {
+							_set_enum_val(client_id, &node->projection, ccl::EnvironmentTextureNode::projection_enum, val);
+						}
 					}
 					break;
 			}

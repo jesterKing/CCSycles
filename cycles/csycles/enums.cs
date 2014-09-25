@@ -75,6 +75,7 @@ namespace ccl
 		SeparateXyz,
 		Math,
 		ImageTexture,
+		EnvironmentTexture,
 		BrickTexture,
 		SkyTexture,
 		CheckerTexture,
