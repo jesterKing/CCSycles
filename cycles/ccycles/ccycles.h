@@ -359,7 +359,8 @@ enum class shadernode_type : unsigned int {
 	CHECKER_TEXTURE,
 	NOISE_TEXTURE,
 	WAVE_TEXTURE,
-	TEXTURE_COORDINATE
+	TEXTURE_COORDINATE,
+	BUMP,
 };
 
 CCL_CAPI unsigned int __cdecl cycles_create_shader(unsigned int client_id);

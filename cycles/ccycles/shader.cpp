@@ -227,6 +227,9 @@ unsigned int cycles_add_shader_node(unsigned int client_id, unsigned int shader_
 		case shadernode_type::TEXTURE_COORDINATE:
 			node = new ccl::TextureCoordinateNode();
 			break;
+		case shadernode_type::BUMP:
+			node = new ccl::BumpNode();
+			break;
 	}
 
 	if (node) {

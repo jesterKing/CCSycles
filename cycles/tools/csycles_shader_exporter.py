@@ -48,6 +48,8 @@ nodemapping = {
 
 # conversion nodes
     'MATH' : 'MathNode',
+# vector nodes
+    'BUMP' : 'BumpNode',
 
 # input nodes
     'VALUE' : 'ValueNode',

@@ -81,7 +81,8 @@ namespace ccl
 		CheckerTexture,
 		NoiseTexture,
 		WaveTexture,
-		TextureCoordinate
+		TextureCoordinate,
+		Bump,
 	}
 
 	public enum BvhType : uint
