@@ -245,6 +245,10 @@ def find_connections(node_and_tree, depth = 0):
             if l:
                 alllinks.add(l)
 
+def is_connected(node):
+    return ([True for inp in node.inputs if inp.is_linked] +
+            [True for outp in node.outputs if outp.is_linked]).count(True)>0
+            
 def add_nodes(nodeset, nt, parentn=None):
     """
     Add all useful nodes to a set.
@@ -255,7 +259,8 @@ def add_nodes(nodeset, nt, parentn=None):
                 add_nodes(nodeset, n.node_tree, n)
             else:
                 #print("add_nodes: Adding", n.label if n.label else n.name, n.type)
-                nodeset.add((n, nt, parentn))
+                if is_connected(n):
+                    nodeset.add((n, nt, parentn))
 
 def add_inputs(varname, inputs):
     """
