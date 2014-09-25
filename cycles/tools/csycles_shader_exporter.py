@@ -265,6 +265,7 @@ def add_inputs(varname, inputs):
     valnamecount = 1
     for inp in inputs:
         if inp.type == 'SHADER': continue
+        if inp.is_linked: continue
     
         inpname = get_socket_name(inp, inputs, True, inp.node)
         inputinits = inputinits + "\t{0}.ins.{1}.Value = {2};\n".format(
