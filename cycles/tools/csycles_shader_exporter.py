@@ -59,6 +59,7 @@ nodemapping = {
     'RGB' : 'ColorNode',
     'FRESNEL' : 'FresnelNode',
     'TEX_COORD' : 'TextureCoordinateNode',
+    'LIGHT_PATH' : 'LightPathNode',
 
 # output nodes
     'BACKGROUND' : 'BackgroundNode',
