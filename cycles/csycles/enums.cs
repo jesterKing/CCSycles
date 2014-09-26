@@ -84,6 +84,7 @@ namespace ccl
 		TextureCoordinate,
 		Bump,
 		RgbToBw,
+		LightPath,
 	}
 
 	public enum BvhType : uint

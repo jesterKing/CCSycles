@@ -86,6 +86,7 @@
     <Compile Include="ShaderNodes\RefractionBsdfNode.cs" />
     <Compile Include="ShaderNodes\Sockets\IntSocket.cs" />
     <Compile Include="ShaderNodes\Sockets\StringSocket.cs" />
+    <Compile Include="ShaderNodes\LightPathNode.cs" />
     <Compile Include="ShaderNodes\TextureCoordinateNode.cs" />
     <Compile Include="ShaderNodes\TextureNode.cs" />
     <Compile Include="ShaderNodes\ValueNode.cs" />

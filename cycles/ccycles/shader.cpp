@@ -233,6 +233,9 @@ unsigned int cycles_add_shader_node(unsigned int client_id, unsigned int shader_
 		case shadernode_type::RGBTOBW:
 			node = new ccl::ConvertNode(ccl::SHADER_SOCKET_COLOR, ccl::SHADER_SOCKET_FLOAT);
 			break;
+		case shadernode_type::LIGHTPATH:
+			node = new ccl::LightPathNode();
+			break;
 	}
 
 	if (node) {
