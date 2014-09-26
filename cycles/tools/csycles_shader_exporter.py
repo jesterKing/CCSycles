@@ -42,6 +42,7 @@ nodemapping = {
     'TEX_IMAGE' : 'ImageTextureNode',
     'TEX_BRICK' : 'BrickTexture',
     'TEX_CHECKER' : 'CheckerTexture',
+    'TEX_ENVIRONMENT' : 'EnvironmentTextureNode',
         
 # color nodes
     'MIX_RGB' : 'MixNode',
