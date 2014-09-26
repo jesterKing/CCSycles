@@ -59,6 +59,8 @@ nodemapping = {
     'FRESNEL' : 'FresnelNode',
     'TEX_COORD' : 'TextureCoordinateNode',
 
+# output nodes
+    'BACKGROUND' : 'BackgroundNode',
 }
 
 # Socket type to CSycles class name mapping
@@ -335,9 +337,9 @@ def code_instantiate_nodes(nodes):
 
     return code
 
-def code_new_material_shader(shadername):
+def code_new_shader(shadername, shadertype):
     """Start code for a new shader."""
-    return "\tvar {0} = new Shader(Client, Shader.ShaderType.Material);\n\n\t{0}.Name = \"{0}\";\n\t{0}.UseMis = false;\n\t{0}.UseTransparentShadow = true;\n\t{0}.HeterogeneousVolume = false;\n\n".format(shadername)
+    return "\tvar {0} = new Shader(Client, Shader.ShaderType.{1});\n\n\t{0}.Name = \"{0}\";\n\t{0}.UseMis = false;\n\t{0}.UseTransparentShadow = true;\n\t{0}.HeterogeneousVolume = false;\n\n".format(shadername, shadertype)
 
 def code_nodes_to_shader(shadername, nodes):
     """Create the code that adds node instances to the shader."""
@@ -398,17 +400,25 @@ def code_link_nodes(links):
     
     return linkcode        
 
-def main():            
+def main():
+    # do the material shaders
     for ob in C.selected_objects:
+        nt = ob.material_slots[0].material.node_tree
+        shadername = ob.material_slots[0].material.name
+        shadername = cleanup_name(shadername)        
+        create_shader(shadername, nt)
+    # do the world shaders
+    for world in D.worlds:
+        nt = world.node_tree
+        shadername = world.name
+        shadername = cleanup_name(shadername)
+        create_shader(shadername, nt, True)
+
+def create_shader(shadername, nt, is_world=False):
         nodetree_stack = []
         allnodes.clear()
         alllinks.clear()
-        
-        nt = ob.material_slots[0].material.node_tree
-        shadername = ob.material_slots[0].material.name
-        
-        shadername = cleanup_name(shadername)
-        
+                
         ## seed our nodes set
         add_nodes(allnodes, nt)
         
@@ -425,7 +435,9 @@ def main():
         print(linklist)
 
         # creat new shader
-        shadercode = code_new_material_shader(shadername)
+        shadertype = "Background" if is_world else "Material"
+        shadercode = code_new_shader(shadername, shadertype)
+        
         # create node setup code        
         nodesetup = code_instantiate_nodes(nodelist)
         # add our nodes to shader
