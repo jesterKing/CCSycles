@@ -40,7 +40,7 @@ namespace ccl
 		/// <summary>
 		/// Create a new shader for client.
 		/// </summary>
-		/// <param name="clientId">Client ID for C[CS]ycles API.</param>
+		/// <param name="client">Client ID for C[CS]ycles API.</param>
 		/// <param name="type">The type of shader to create</param>
 		public Shader(Client client, ShaderType type)
 		{
@@ -51,7 +51,7 @@ namespace ccl
 			AddNode(Output);
 		}
 
-		readonly List<ShaderNode> nodes = new List<ShaderNode>();
+		readonly List<ShaderNode> m_nodes = new List<ShaderNode>();
 		/// <summary>
 		/// Add a ShaderNode to the shader
 		/// </summary>
@@ -61,13 +61,13 @@ namespace ccl
 			if (node is OutputNode)
 			{
 				node.Id = CSycles.OUTPUT_SHADERNODE_ID;
-				nodes.Add(node);
+				m_nodes.Add(node);
 				return;
 			}
 
 			var nodeid = CSycles.add_shader_node(Client.Id, Id, node.Type);
 			node.Id = nodeid;
-			nodes.Add(node);
+			m_nodes.Add(node);
 
 			/* set node attributes */
 			if (node.inputs != null)
@@ -194,25 +194,12 @@ namespace ccl
 			}
 		}
 
-		SocketBase lastNode { get; set; }
-
-		/// <summary>
-		/// Specify which ShaderNode is the last node for this Shader graph.
-		/// Its output will be connected to the shader closure
-		/// </summary>
-		/// <param name="last">The ShaderNode that is last in the shader graph</param>
-		/// <param name="outp">The output of the ShaderNode to connect to the final output</param>
-		public void LastSocket(SocketBase last)
-		{
-			lastNode = last;
-		}
-
 		/// <summary>
 		/// Push the defined shader graph to Cycles.
 		/// </summary>
 		public void FinalizeGraph()
 		{
-			foreach (var node in nodes)
+			foreach (var node in m_nodes)
 			{
 				if (node.inputs == null) continue;
 
@@ -223,46 +210,30 @@ namespace ccl
 					Connect(from.Parent, from.Name, node, socket.Name);
 				}
 			}
-
-			//ConnectToOutput(lastNode.Parent, lastNode.Name);
 		}
 
 		private void Connect(ShaderNode from, string fromout, ShaderNode to, string toin)
 		{
-			if (nodes.Contains(from) && nodes.Contains(to))
+			if (m_nodes.Contains(from) && m_nodes.Contains(to))
 			{
 				CSycles.shader_connect_nodes(Client.Id, Id, from.Id, fromout, to.Id, toin);
-			}
-		}
-
-		/** TODO: devise way to connect to different output types
-		 * - Surface
-		 * - Volume
-		 * - World
-		 */
-		private void ConnectToOutput(ShaderNode from, string fromout)
-		{
-			if (nodes.Contains(from))
-			{
-
-				CSycles.shader_connect_nodes(Client.Id, Id, from.Id, fromout, CSycles.OUTPUT_SHADERNODE_ID, "Surface");
 			}
 		}
 
 		/// <summary>
 		/// Set the name of the Shader
 		/// </summary>
-		private string _name;
+		private string m_name;
 		public string Name
 		{
 			set
 			{
-				_name = value;
-				CSycles.shader_set_name(Client.Id, Id, _name);
+				m_name = value;
+				CSycles.shader_set_name(Client.Id, Id, m_name);
 			}
 			get
 			{
-				return _name;
+				return m_name;
 			}
 		}
 
