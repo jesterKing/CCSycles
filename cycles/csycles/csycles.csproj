@@ -57,6 +57,7 @@
     <Compile Include="ShaderNodes\BumpNode.cs" />
     <Compile Include="ShaderNodes\NoiseTexture.cs" />
     <Compile Include="ShaderNodes\OutputNode.cs" />
+    <Compile Include="ShaderNodes\ShaderNode.cs" />
     <Compile Include="ShaderNodes\SkyTexture.cs" />
     <Compile Include="ShaderNodes\Sockets\Float4Socket.cs" />
     <Compile Include="ShaderNodes\Sockets\FloatSocket.cs" />
@@ -69,7 +70,6 @@
     <Compile Include="SceneParameters.cs" />
     <Compile Include="Session.cs" />
     <Compile Include="Shader.cs" />
-    <Compile Include="ShaderNode.cs" />
     <Compile Include="ShaderNodes\AddClosureNode.cs" />
     <Compile Include="ShaderNodes\BackgroundNode.cs" />
     <Compile Include="ShaderNodes\BrickTexture.cs" />

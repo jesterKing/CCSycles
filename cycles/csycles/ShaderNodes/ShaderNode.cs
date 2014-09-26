@@ -18,7 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace ccl
+namespace ccl.ShaderNodes
 {
 	public class ShaderNode
 	{
@@ -33,9 +33,7 @@ namespace ccl
 			Type = type;
 		}
 
-		//internal List<string> AvailableOuts = new List<string>();
-
-		Dictionary<PropertyDescriptor, Tuple<ShaderNode, PropertyDescriptor>> output_dictionary = new Dictionary<PropertyDescriptor, Tuple<ShaderNode, PropertyDescriptor>>();
+		readonly Dictionary<PropertyDescriptor, Tuple<ShaderNode, PropertyDescriptor>> m_output_dictionary = new Dictionary<PropertyDescriptor, Tuple<ShaderNode, PropertyDescriptor>>();
 		public void ConnectTo(PropertyDescriptor from, ShaderNode to, PropertyDescriptor toin)
 		{
 			if (to != null)
@@ -46,16 +44,16 @@ namespace ccl
 						toin.Name));
 				}
 
-				if (!output_dictionary.ContainsKey(from))
+				if (!m_output_dictionary.ContainsKey(from))
 				{
-					output_dictionary.Add(from, Tuple.Create(to, toin));
+					m_output_dictionary.Add(from, Tuple.Create(to, toin));
 				}
 			}
 			else
 			{
-				if (outputs.HasSocket(from.Name) && output_dictionary.ContainsKey(from))
+				if (outputs.HasSocket(from.Name) && m_output_dictionary.ContainsKey(from))
 				{
-					output_dictionary.Remove(from);
+					m_output_dictionary.Remove(from);
 				}
 				else
 				{
@@ -66,52 +64,18 @@ namespace ccl
 
 		public bool IsConnected
 		{
-			get { return output_dictionary.Count > 0; }
+			get { return m_output_dictionary.Count > 0; }
 		}
 		
 		public IEnumerable<Tuple<PropertyDescriptor, ShaderNode, PropertyDescriptor>> ConnectedOutputs
 		{
 			get
 			{
-				foreach (var k in output_dictionary.Keys)
+				foreach (var k in m_output_dictionary.Keys)
 				{
-					yield return Tuple.Create(k, output_dictionary[k].Item1, output_dictionary[k].Item2);
+					yield return Tuple.Create(k, m_output_dictionary[k].Item1, m_output_dictionary[k].Item2);
 				}
 			}
 		}
-#if notused
-		/*Dictionary<string, object> inputs = new Dictionary<string,object>();*/
-		public object this[string key]
-		{
-			get {
-				return inputs[key];
-			}
-			set
-			{
-				/*if (!inputs.ContainsKey(key))
-				{
-					inputs.Add(key, value);
-				}
-				else
-				{
-					inputs[key] = value;
-				}
-				 */
-				inputs[key] = value;
-			}
-		}
-
-		public IEnumerable<string> Keys
-		{
-			get
-			{
-				foreach (var k in inputs.Keys)
-				{
-					yield return k;
-				}
-			}
-		}
-		*/
-#endif
 	}
 }
