@@ -416,6 +416,24 @@ void cycles_shadernode_set_member_float_img(unsigned int client_id, unsigned int
 						imtex->filename = nimg->filename;
 					}	
 					break;
+				case shadernode_type::ENVIRONMENT_TEXTURE:
+					{
+						auto nimg = new CCImage();
+						auto imgdata = new float[width*height*channels];
+						memcpy(imgdata, img, sizeof(float)*width*height*channels);
+						nimg->builtin_data = imgdata;
+						nimg->filename = string(img_name);
+						nimg->width = (int)width;
+						nimg->height = (int)height;
+						nimg->depth = (int)depth;
+						nimg->channels = (int)channels;
+						nimg->is_float = true;
+						images.push_back(nimg);
+						auto envtex = dynamic_cast<ccl::EnvironmentTextureNode*>(*psh);
+						envtex->builtin_data = nimg;
+						envtex->filename = nimg->filename;
+					}	
+					break;
 			}
 		}
 		++psh;
