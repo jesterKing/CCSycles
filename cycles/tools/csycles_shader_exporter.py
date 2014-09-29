@@ -319,6 +319,8 @@ def code_init_node(node):
             varname,
             opval
         )
+        if node.use_clamp:
+            initcode = initcode + "\t{0}.UseClamp = True;\n".format(varname)
     return initcode
 
 def code_instantiate_nodes(nodes):
