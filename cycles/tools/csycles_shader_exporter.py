@@ -437,7 +437,7 @@ def create_shader(shadername, nt, is_world=False):
         print(linklist)
 
         # creat new shader
-        shadertype = "Background" if is_world else "Material"
+        shadertype = "World" if is_world else "Material"
         shadercode = code_new_shader(shadername, shadertype)
         
         # create node setup code        
