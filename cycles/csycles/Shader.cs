@@ -238,8 +238,7 @@ namespace ccl
 		}
 
 		/// <summary>
-		/// Set to true if Mis should be used.
-		/// \todo find out what Mis actually means
+		/// Set to true if multiple importance sampling is to be used
 		/// </summary>
 		public bool UseMis
 		{
