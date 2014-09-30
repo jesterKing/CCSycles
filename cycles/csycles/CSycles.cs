@@ -608,6 +608,14 @@ namespace ccl
 			cycles_mesh_add_triangle(clientId, sceneId, meshId, v0, v1, v2, shaderId, (uint)(smooth ? 1 : 0));
 		}
 
+		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_mesh_set_smooth", CallingConvention = CallingConvention.Cdecl)]
+		private static extern void cycles_mesh_set_smooth(uint clientId, uint sceneId, uint meshId, uint smooth);
+
+		public static void mesh_set_smooth(uint clientId, uint sceneId, uint meshId, bool smooth)
+		{
+			cycles_mesh_set_smooth(clientId, sceneId, meshId, (uint)(smooth ? 1 : 0));
+		}
+
 #endregion
 
 #region shaders

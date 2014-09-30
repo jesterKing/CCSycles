@@ -59,6 +59,14 @@ void cycles_mesh_set_shader(unsigned int client_id, unsigned int scene_id, unsig
 	SCENE_FIND_END()
 }
 
+void cycles_mesh_set_smooth(unsigned int client_id, unsigned int scene_id, unsigned int mesh_id, unsigned int smooth)
+{
+	SCENE_FIND(scene_id)
+		auto me = sce->meshes[mesh_id];
+		me->smooth.resize(me->triangles.size(), smooth == 1);
+	SCENE_FIND_END()
+}
+
 void cycles_mesh_set_verts(unsigned int client_id, unsigned int scene_id, unsigned int mesh_id, float *verts, unsigned int vcount)
 {
 	SCENE_FIND(scene_id)
