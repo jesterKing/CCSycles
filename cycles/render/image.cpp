@@ -90,7 +90,6 @@ bool ImageManager::set_animation_frame_update(int frame)
 
 bool ImageManager::is_float_image(const string& filename, void *builtin_data, bool& is_linear)
 {
-#ifndef NO_OIIO_LOADING
 	bool is_float = false;
 	is_linear = false;
 
@@ -105,6 +104,7 @@ bool ImageManager::is_float_image(const string& filename, void *builtin_data, bo
 
 		return is_float;
 	}
+#ifndef NO_OIIO_LOADING
 
 	ImageInput *in = ImageInput::create(filename);
 
@@ -483,10 +483,13 @@ bool ImageManager::file_load_image(Image *img, device_vector<uchar4>& tex_img)
 
 bool ImageManager::file_load_float_image(Image *img, device_vector<float4>& tex_img)
 {
-#ifndef NO_OIIO_LOADING
 	if(img->filename == "")
 		return false;
 
+	int width, height, depth, components;
+	bool cmyk = false;
+
+#ifndef NO_OIIO_LOADING
 	ImageInput *in = NULL;
 	int width, height, depth, components;
 
@@ -515,12 +518,14 @@ bool ImageManager::file_load_float_image(Image *img, device_vector<float4>& tex_
 		components = spec.nchannels;
 	}
 	else {
+#endif
 		/* load image using builtin images callbacks */
 		if(!builtin_image_info_cb || !builtin_image_float_pixels_cb)
 			return false;
 
 		bool is_float;
 		builtin_image_info_cb(img->filename, img->builtin_data, is_float, width, height, depth, components);
+#ifndef NO_OIIO_LOADING
 	}
 
 	if(components < 1 || width == 0 || height == 0) {
@@ -531,9 +536,11 @@ bool ImageManager::file_load_float_image(Image *img, device_vector<float4>& tex_
 		return false;
 	}
 
+#endif
 	/* read RGBA pixels */
 	float *pixels = (float*)tex_img.resize(width, height, depth);
-	bool cmyk = false;
+
+#ifndef NO_OIIO_LOADING
 
 	if(in) {
 		float *readpixels = pixels;
@@ -574,9 +581,11 @@ bool ImageManager::file_load_float_image(Image *img, device_vector<float4>& tex_
 		delete in;
 	}
 	else {
+#endif
 		builtin_image_float_pixels_cb(img->filename, img->builtin_data, pixels);
+#ifndef NO_OIIO_LOADING
 	}
-
+#endif
 	if(cmyk) {
 		/* CMYK */
 		for(int i = width*height*depth-1; i >= 0; i--) {
@@ -621,9 +630,6 @@ bool ImageManager::file_load_float_image(Image *img, device_vector<float4>& tex_
 	}
 
 	return true;
-#else
-	return false;
-#endif
 }
 
 void ImageManager::device_load_image(Device *device, DeviceScene *dscene, int slot, Progress *progress)
