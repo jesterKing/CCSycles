@@ -40,6 +40,14 @@ void cycles_light_set_type(unsigned int client_id, unsigned int scene_id, unsign
 	LIGHT_FIND_END()
 }
 
+void cycles_light_set_use_mis(unsigned int client_id, unsigned int scene_id, unsigned int light_id, unsigned int use_mis)
+{
+	LIGHT_FIND(scene_id, light_id)
+		l->use_mis = use_mis == 1;
+		logger.logit(client_id, "Setting light ", light_id, " of scene ", scene_id, " use_mis to ", use_mis == 1 ? "true" : "false");
+	LIGHT_FIND_END()
+}
+
 void cycles_light_set_spot_angle(unsigned int client_id, unsigned int scene_id, unsigned int light_id, float spot_angle)
 {
 	LIGHT_FIND(scene_id, light_id)

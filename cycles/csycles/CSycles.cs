@@ -1203,6 +1203,13 @@ namespace ccl
 			cycles_light_set_spot_smooth(clientId, sceneId, lightId, spotSmooth);
 		}
 
+		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_light_set_use_mis", CallingConvention = CallingConvention.Cdecl)]
+		private static extern void cycles_light_set_use_mis(uint clientId, uint sceneId, uint lightId, uint useMis);
+		public static void light_set_use_mis(uint clientId, uint sceneId, uint lightId, bool useMis)
+		{
+			cycles_light_set_use_mis(clientId, sceneId, lightId, (uint)(useMis ? 1 : 0));
+		}
+
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_light_set_sizeu", CallingConvention = CallingConvention.Cdecl)]
 		private static extern void cycles_light_set_sizeu(uint clientId, uint sceneId, uint lightId, float sizeu);
 		public static void light_set_sizeu(uint clientId, uint sceneId, uint lightId, float sizeu)

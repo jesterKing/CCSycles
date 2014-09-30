@@ -36,6 +36,14 @@ namespace ccl
 			}
 		}
 
+		public bool UseMis
+		{
+			set
+			{
+				CSycles.light_set_use_mis(Client.Id, Scene.Id, Id, value);
+			}
+		}
+
 		public float Size
 		{
 			set
