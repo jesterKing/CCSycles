@@ -400,8 +400,8 @@ void cycles_shadernode_set_member_float_img(unsigned int client_id, unsigned int
 				case shadernode_type::IMAGE_TEXTURE:
 					{
 						auto nimg = new CCImage();
-						auto imgdata = new float[width*height*channels];
-						memcpy(imgdata, img, sizeof(float)*width*height*channels);
+						auto imgdata = new float[width*height*channels*depth];
+						memcpy(imgdata, img, sizeof(float)*width*height*channels*depth);
 						nimg->builtin_data = imgdata;
 						nimg->filename = string(img_name);
 						nimg->width = (int)width;
@@ -419,8 +419,8 @@ void cycles_shadernode_set_member_float_img(unsigned int client_id, unsigned int
 				case shadernode_type::ENVIRONMENT_TEXTURE:
 					{
 						auto nimg = new CCImage();
-						auto imgdata = new float[width*height*channels];
-						memcpy(imgdata, img, sizeof(float)*width*height*channels);
+						auto imgdata = new float[width*height*channels*depth];
+						memcpy(imgdata, img, sizeof(float)*width*height*channels*depth);
 						nimg->builtin_data = imgdata;
 						nimg->filename = string(img_name);
 						nimg->width = (int)width;
@@ -451,8 +451,8 @@ void cycles_shadernode_set_member_byte_img(unsigned int client_id, unsigned int 
 				case shadernode_type::IMAGE_TEXTURE:
 					{
 						auto nimg = new CCImage();
-						auto imgdata = new ccl::uchar[width*height*channels];
-						memcpy(imgdata, img, sizeof(unsigned char)*width*height*channels);
+						auto imgdata = new ccl::uchar[width*height*channels*depth];
+						memcpy(imgdata, img, sizeof(unsigned char)*width*height*channels*depth);
 						nimg->builtin_data = imgdata;
 						nimg->filename = string(img_name);
 						nimg->width = (int)width;
@@ -470,8 +470,8 @@ void cycles_shadernode_set_member_byte_img(unsigned int client_id, unsigned int 
 				case shadernode_type::ENVIRONMENT_TEXTURE:
 					{
 						auto nimg = new CCImage();
-						auto imgdata = new ccl::uchar[width*height*channels];
-						memcpy(imgdata, img, sizeof(unsigned char)*width*height*channels);
+						auto imgdata = new ccl::uchar[width*height*channels*depth];
+						memcpy(imgdata, img, sizeof(unsigned char)*width*height*channels*depth);
 						nimg->builtin_data = imgdata;
 						nimg->filename = string(img_name);
 						nimg->width = (int)width;
