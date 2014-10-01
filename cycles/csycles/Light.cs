@@ -44,6 +44,22 @@ namespace ccl
 			}
 		}
 
+		public uint Samples
+		{
+			set
+			{
+				CSycles.light_set_samples(Client.Id, Scene.Id, Id, value);
+			}
+		}
+
+		public uint MapResolution
+		{
+			set
+			{
+				CSycles.light_set_map_resolution(Client.Id, Scene.Id, Id, value);
+			}
+		}
+
 		public float Size
 		{
 			set

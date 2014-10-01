@@ -1205,6 +1205,20 @@ namespace ccl
 			cycles_light_set_type(clientId, sceneId, lightId, (uint)type);
 		}
 
+		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_light_set_samples", CallingConvention = CallingConvention.Cdecl)]
+		private static extern void cycles_light_set_samples(uint clientId, uint sceneId, uint lightId, uint samples);
+		public static void light_set_samples(uint clientId, uint sceneId, uint lightId, uint samples)
+		{
+			cycles_light_set_samples(clientId, sceneId, lightId, samples);
+		}
+
+		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_light_set_map_resolution", CallingConvention = CallingConvention.Cdecl)]
+		private static extern void cycles_light_set_map_resolution(uint clientId, uint sceneId, uint lightId, uint map_resolution);
+		public static void light_set_map_resolution(uint clientId, uint sceneId, uint lightId, uint map_resolution)
+		{
+			cycles_light_set_map_resolution(clientId, sceneId, lightId, map_resolution);
+		}
+
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_light_set_spot_angle", CallingConvention = CallingConvention.Cdecl)]
 		private static extern void cycles_light_set_spot_angle(uint clientId, uint sceneId, uint lightId, float spotAngle);
 		public static void light_set_spot_angle(uint clientId, uint sceneId, uint lightId, float spotAngle)

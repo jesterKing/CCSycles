@@ -48,6 +48,22 @@ void cycles_light_set_use_mis(unsigned int client_id, unsigned int scene_id, uns
 	LIGHT_FIND_END()
 }
 
+void cycles_light_set_samples(unsigned int client_id, unsigned int scene_id, unsigned int light_id, unsigned int samples)
+{
+	LIGHT_FIND(scene_id, light_id)
+		l->samples = samples;
+		logger.logit(client_id, "Setting light ", light_id, " of scene ", scene_id, " samples to ", samples);
+	LIGHT_FIND_END()
+}
+
+void cycles_light_set_map_resolution(unsigned int client_id, unsigned int scene_id, unsigned int light_id, unsigned int map_resolution)
+{
+	LIGHT_FIND(scene_id, light_id)
+		l->map_resolution = map_resolution;
+		logger.logit(client_id, "Setting light ", light_id, " of scene ", scene_id, " map_resolution to ", map_resolution);
+	LIGHT_FIND_END()
+}
+
 void cycles_light_set_spot_angle(unsigned int client_id, unsigned int scene_id, unsigned int light_id, float spot_angle)
 {
 	LIGHT_FIND(scene_id, light_id)
