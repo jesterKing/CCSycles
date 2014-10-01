@@ -31,7 +31,7 @@ unsigned int cycles_create_light(unsigned int client_id, unsigned int scene_id, 
 	return UINT_MAX;
 }
 
-/* type = 0: point, 1: sun, 3: area, 5: spot. */
+/* type = 0: point, 1: sun, 2: background, 3: area, 4: spot, 5: triangle. */
 void cycles_light_set_type(unsigned int client_id, unsigned int scene_id, unsigned int light_id, unsigned int type)
 {
 	LIGHT_FIND(scene_id, light_id)

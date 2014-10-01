@@ -119,9 +119,11 @@ namespace ccl
 	public enum LightType : uint
 	{
 		Point = 0,
-		Sun = 1,
-		Area = 3,
-		Spot = 5
+		Sun, /* also Hemi */
+		Background,
+		Area,
+		Spot,
+		Triangle,
 	}
 
 	public enum InterpolationType : int {
