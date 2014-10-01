@@ -340,6 +340,14 @@ namespace ccl
 			cycles_scene_set_background_shader(clientId, sceneId, shaderId);
 		}
 
+		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_scene_get_background_shader",
+			CallingConvention = CallingConvention.Cdecl)]
+		private static extern uint cycles_scene_get_background_shader(uint clientId, uint sceneId);
+		public static uint scene_get_background_shader(uint clientId, uint sceneId)
+		{
+			return cycles_scene_get_background_shader(clientId, sceneId);
+		}
+
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_scene_set_default_surface_shader",
 			CallingConvention = CallingConvention.Cdecl)]
 		private static extern void cycles_scene_set_default_surface_shader(uint clientId, uint sceneId, uint shaderId);

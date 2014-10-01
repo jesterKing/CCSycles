@@ -30,6 +30,12 @@ namespace ccl
 			{
 				CSycles.scene_set_background_shader(Scene.Client.Id, Scene.Id, Scene.ShaderSceneId(value));
 			}
+			get
+			{
+				var shid = CSycles.scene_get_background_shader(Scene.Client.Id, Scene.Id);
+
+				return Scene.ShaderFromSceneId(shid);
+			}
 		}
 
 		public float AoDistance

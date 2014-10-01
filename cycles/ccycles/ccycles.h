@@ -307,6 +307,7 @@ CCL_CAPI void __cdecl cycles_session_params_set_shadingsystem(unsigned int clien
 /* Create a new scene for specified device. */
 CCL_CAPI unsigned int __cdecl cycles_scene_create(unsigned int client_id, unsigned int scene_params_id, unsigned int device_id);
 CCL_CAPI void __cdecl cycles_scene_set_background_shader(unsigned int client_id, unsigned int scene_id, unsigned int shader_id);
+CCL_CAPI unsigned int __cdecl cycles_scene_get_background_shader(unsigned int client_id, unsigned int scene_id);
 CCL_CAPI void __cdecl cycles_scene_set_background_ao_factor(unsigned int client_id, unsigned int scene_id, float ao_factor);
 CCL_CAPI void __cdecl cycles_scene_set_background_ao_distance(unsigned int client_id, unsigned int scene_id, float ao_distance);
 CCL_CAPI void __cdecl cycles_scene_set_background_visibility(unsigned int client_id, unsigned int scene_id, int path_ray_flag);

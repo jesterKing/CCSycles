@@ -34,6 +34,14 @@ void cycles_scene_set_background_shader(unsigned int client_id, unsigned int sce
 	SCENE_FIND_END()
 }
 
+unsigned int cycles_scene_get_background_shader(unsigned int client_id, unsigned int scene_id)
+{
+	SCENE_FIND(scene_id)
+		return sce->default_background;
+	SCENE_FIND_END()
+	return UINT_MAX;
+}
+
 void cycles_scene_set_background_ao_factor(unsigned int client_id, unsigned int scene_id, float ao_factor)
 {
 	SCENE_FIND(scene_id)
