@@ -403,8 +403,21 @@ CCL_CAPI void __cdecl cycles_shader_set_heterogeneous_volume(unsigned int client
 CCL_CAPI void __cdecl cycles_shader_connect_nodes(unsigned int client_id, unsigned int shader_id, unsigned int from_id, const std::string from, unsigned int to_id, const std::string to);
 
 /***** LIGHTS ****/
+
+/**
+ * Different light types available for Cycles
+ */
+enum class light_type: unsigned int {
+	Point = 0,
+	Sun, /* = distant, also Hemi */
+	Background,
+	Area,
+	Spot,
+	Triangle,
+};
+
 CCL_CAPI unsigned int __cdecl cycles_create_light(unsigned int client_id, unsigned int scene_id, unsigned int light_shader_id);
-CCL_CAPI void __cdecl cycles_light_set_type(unsigned int client_id, unsigned int scene_id, unsigned int light_id, unsigned int type);
+CCL_CAPI void __cdecl cycles_light_set_type(unsigned int client_id, unsigned int scene_id, unsigned int light_id, light_type type);
 CCL_CAPI void __cdecl cycles_light_set_spot_angle(unsigned int client_id, unsigned int scene_id, unsigned int light_id, float spot_angle);
 CCL_CAPI void __cdecl cycles_light_set_spot_smooth(unsigned int client_id, unsigned int scene_id, unsigned int light_id, float spot_smooth);
 CCL_CAPI void __cdecl cycles_light_set_use_mis(unsigned int client_id, unsigned int scene_id, unsigned int light_id, unsigned int use_mis);

@@ -32,11 +32,11 @@ unsigned int cycles_create_light(unsigned int client_id, unsigned int scene_id, 
 }
 
 /* type = 0: point, 1: sun, 2: background, 3: area, 4: spot, 5: triangle. */
-void cycles_light_set_type(unsigned int client_id, unsigned int scene_id, unsigned int light_id, unsigned int type)
+void cycles_light_set_type(unsigned int client_id, unsigned int scene_id, unsigned int light_id, light_type type)
 {
 	LIGHT_FIND(scene_id, light_id)
 		l->type = (ccl::LightType)type;
-		logger.logit(client_id, "Setting light ", light_id, " of scene ", scene_id, " type to ", type);
+		logger.logit(client_id, "Setting light ", light_id, " of scene ", scene_id, " type to ", (unsigned int)type);
 	LIGHT_FIND_END()
 }
 
