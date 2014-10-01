@@ -92,6 +92,19 @@ namespace ccl
 			return shaders[shader];
 		}
 
+		public Shader ShaderFromSceneId(uint shaderId)
+		{
+			foreach (var kvp in shaders)
+			{
+				if (kvp.Value == shaderId)
+				{
+					return kvp.Key;
+				}
+			}
+
+			return null;
+		}
+
 		public Shader ShaderWithName(string name)
 		{
 			return (from kvp in shaders where kvp.Key.Name.Equals(name) select kvp.Key).FirstOrDefault();
