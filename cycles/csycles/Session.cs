@@ -29,6 +29,10 @@ namespace ccl
 	public class Session
 	{
 		/// <summary>
+		/// True if the session has already been destroyed.
+		/// </summary>
+		private bool Destroyed { get; set; }
+		/// <summary>
 		/// Get the Scene used for this Session
 		/// </summary>
 		public Scene Scene { get; private set; }
@@ -64,6 +68,7 @@ namespace ccl
 		{
 			set
 			{
+				if (Destroyed) return;
 				updateCallback = value;
 				CSycles.session_set_update_callback(Client.Id, Id, value);
 			}
@@ -78,6 +83,7 @@ namespace ccl
 		{
 			set
 			{
+				if (Destroyed) return;
 				updateTileCallback = value;
 				CSycles.session_set_update_tile_callback(Client.Id, Id, value);
 			}
@@ -91,6 +97,7 @@ namespace ccl
 		{
 			set
 			{
+				if (Destroyed) return;
 				writeTileCallback = value;
 				CSycles.session_set_write_tile_callback(Client.Id, Id, value);
 			}
@@ -101,6 +108,7 @@ namespace ccl
 		/// </summary>
 		public void Start()
 		{
+			if (Destroyed) return;
 			CSycles.session_start(Client.Id, Id);
 		}
 
@@ -109,6 +117,7 @@ namespace ccl
 		/// </summary>
 		public void Wait()
 		{
+			if (Destroyed) return;
 			CSycles.session_wait(Client.Id, Id);
 		}
 
@@ -118,7 +127,18 @@ namespace ccl
 		/// <param name="cancelMessage"></param>
 		public void Cancel(string cancelMessage)
 		{
+			if (Destroyed) return;
 			CSycles.session_cancel(Client.Id, Id, cancelMessage);
+		}
+
+		/// <summary>
+		/// Destroy the session and all related.
+		/// </summary>
+		public void Destroy()
+		{
+			if (Destroyed) return;
+			CSycles.session_destroy(Client.Id, Id);
+			Destroyed = true;
 		}
 
 		/// <summary>
@@ -129,6 +149,7 @@ namespace ccl
 		/// <returns></returns>
 		public float[] CopyBuffer()
 		{
+			if (Destroyed) return null;
 			uint bufStride = 0;
 			uint bufSize = 0;
 
@@ -144,6 +165,12 @@ namespace ccl
 		/// <param name="bufferStride">Contains the stride to use in the buffer</param>
 		public void BufferInfo(out uint bufferSize, out uint bufferStride) 
 		{
+			if (Destroyed)
+			{
+				bufferSize = 0;
+				bufferStride = 0;
+				return;
+			}
 			CSycles.session_get_buffer_info(Client.Id, Id, out bufferSize, out bufferStride);
 		}
 
@@ -155,6 +182,7 @@ namespace ccl
 		/// <param name="samples">The amount of samples to reset with</param>
 		public void Reset(uint width, uint height, uint samples)
 		{
+			if (Destroyed) return;
 			CSycles.session_reset(Client.Id, Id, width, height, samples);
 		}
 	}

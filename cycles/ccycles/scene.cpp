@@ -85,6 +85,7 @@ unsigned int cycles_scene_create(unsigned int client_id, unsigned int scene_para
 
 	if (found_di && found_params) {
 		scene.scene = new ccl::Scene(params, di);
+		scene.params_id = scene_params_id;
 
 		scene.scene->image_manager->builtin_image_info_cb = function_bind(&CCScene::builtin_image_info, scene, _1, _2, _3, _4, _5, _6, _7);
 		scene.scene->image_manager->builtin_image_pixels_cb = function_bind(&CCScene::builtin_image_pixels, scene, _1, _2, _3);

@@ -160,6 +160,14 @@ public:
 		return se;
 	}
 
+	~CCSession() {
+		delete[] pixels;
+		delete session;
+		_status_cb = nullptr;
+		_update_cb = nullptr;
+		_write_cb = nullptr;
+	}
+
 protected:
 	/* Protected constructor, use CCSession::create to create a new CCSession. */
 	CCSession(float* pixels_, unsigned int buffer_size_, unsigned int buffer_stride_)
@@ -168,11 +176,12 @@ protected:
 	{  }
 };
 
-
 class CCScene {
 public:
 	/* Hold the Cycles scene. */
 	ccl::Scene* scene;
+
+	unsigned int params_id;
 
 	/* Note: depth>1 if volumetric texture (i.e smoke volume data) */
 

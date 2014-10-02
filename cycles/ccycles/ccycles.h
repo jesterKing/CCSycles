@@ -273,6 +273,7 @@ CCL_CAPI void __cdecl cycles_session_set_write_tile_callback(unsigned int client
 CCL_CAPI void __cdecl cycles_session_cancel(unsigned int client_id, unsigned int session_id, const char *cancel_message);
 CCL_CAPI void __cdecl cycles_session_start(unsigned int client_id, unsigned int session_id);
 CCL_CAPI void __cdecl cycles_session_wait(unsigned int client_id, unsigned int session_id);
+CCL_CAPI void __cdecl cycles_session_destroy(unsigned int client_id, unsigned int session_id);
 
 CCL_CAPI void __cdecl cycles_session_copy_buffer(unsigned int client_id, unsigned int session_id, float* pixel_buffer);
 CCL_CAPI void __cdecl cycles_session_get_buffer_info(unsigned int client_id, unsigned int session_id, unsigned int* buffer_size, unsigned int* buffer_stride);

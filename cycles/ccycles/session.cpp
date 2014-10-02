@@ -140,6 +140,7 @@ void _cleanup_sessions()
 	for (auto se : sessions) {
 		delete [] se->pixels;
 		delete se->session;
+		delete se;
 	}
 
 	sessions.clear();
@@ -173,6 +174,25 @@ unsigned int cycles_session_create(unsigned int client_id, unsigned int session_
 	logger.logit(client_id, "Created session ", session->id, " for scene ", scene_id, " with session_params ", session_params_id);
 
 	return session->id;
+}
+
+void cycles_session_destroy(unsigned int client_id, unsigned int session_id)
+{
+	SESSION_FIND(session_id)
+
+	auto ccses = sessions[session_id];
+
+	for (auto csc : scenes) {
+		if (csc.scene == session->scene) {
+			csc.scene = nullptr; /* don't delete here, since session deconstructor takes care of it. */
+		}
+	}
+
+	delete ccses;
+
+	sessions[session_id] = nullptr;
+
+	SESSION_FIND_END()
 }
 
 void cycles_session_reset(unsigned int client_id, unsigned int session_id, unsigned int width, unsigned int height, unsigned int samples)

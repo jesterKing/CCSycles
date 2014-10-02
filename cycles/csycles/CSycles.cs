@@ -955,6 +955,13 @@ namespace ccl
 			return cycles_session_create(clientId, sessionParamsId, sceneId);
 		}
 
+		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_session_destroy", CallingConvention = CallingConvention.Cdecl)]
+		private static extern uint cycles_session_destroy(uint clientId, uint sceneId);
+		public static uint session_destroy(uint clientId, uint sceneId)
+		{
+			return cycles_session_destroy(clientId, sceneId);
+		}
+
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_session_copy_buffer", CallingConvention = CallingConvention.Cdecl)]
 		private static extern void cycles_session_copy_buffer(uint clientId, uint sessionId, [In, Out] IntPtr buffer);
 		public static float[] session_copy_buffer(uint clientId, uint sessionId, uint bufferSize)

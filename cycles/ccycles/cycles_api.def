@@ -107,6 +107,7 @@ EXPORTS
   cycles_camera_set_fisheye_lens
 
   cycles_session_create
+  cycles_session_destroy
   cycles_session_reset
   cycles_session_set_update_callback
   cycles_session_set_update_tile_callback
