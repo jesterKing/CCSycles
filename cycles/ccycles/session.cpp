@@ -59,36 +59,10 @@ void copy_pixels_to_ccsession(ccl::RenderTile &tile, unsigned int sid) {
 	auto scewidth = params.full_width;
 	auto sceheight = params.full_height;
 
-#if 0 /* this is used only for testing if get_pass_rect doesn't work properly. */
-	float* pixels = new float[params.width*params.height * 4];
-	float* tmp = pixels;
-
-	float* in = (float*)buffers->buffer.data_pointer;
-	int pass_stride = 4;
-	float scale = 1.0f;
-	float scale_exposure = scale * 1.0f; // se->session->scene->film->exposure
-
-	int size = params.width*params.height;
-
-	for (int i = 0; i < size; i++, in += pass_stride, pixels += pass_stride) {
-		ccl::float4 f = ccl::make_float4(in[0], in[1], in[2], in[3]);
-
-		pixels[0] = f.x*scale_exposure;
-		pixels[1] = f.y*scale_exposure;
-		pixels[2] = f.z*scale_exposure;
-
-		/* clamp since alpha might be > 1.0 due to russian roulette */
-		pixels[3] = ccl::clamp(f.w*scale, 0.0f, 1.0f);
-	}
-
-	// set pixels back to first element
-	pixels = tmp;
-#else
 	/* Copy the tile buffer to pixels. */
 	if (!buffers->get_pass_rect(ccl::PassType::PASS_COMBINED, 1.0f, tile.sample, stride, &pixels[0])) {
 		return;
 	}
-#endif
 	
 	/* Copy pixels to final image buffer. */
 	auto firstpass = true;
@@ -104,12 +78,6 @@ void copy_pixels_to_ccsession(ccl::RenderTile &tile, unsigned int sid) {
 			se->pixels[fullimgidx + 1] = pixels[tileidx + 1];
 			se->pixels[fullimgidx + 2] = pixels[tileidx + 2];
 			se->pixels[fullimgidx + 3] = pixels[tileidx + 3];
-#if 0 // to test we set every pixel to red
-			se->pixels[fullimgidx + 0] = 1.0f;
-			se->pixels[fullimgidx + 1] = 0.0f;
-			se->pixels[fullimgidx + 2] = 0.0f;
-			se->pixels[fullimgidx + 3] = 1.0f;
-#endif
 		}
 	}
 }
