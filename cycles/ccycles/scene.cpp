@@ -84,18 +84,36 @@ unsigned int cycles_scene_create(unsigned int client_id, unsigned int scene_para
 	}
 
 	if (found_di && found_params) {
-		scene.scene = new ccl::Scene(params, di);
-		scene.params_id = scene_params_id;
+		int cscid = -1;
+		if (scenes.size() > 0) {
+			int hid = 0;
 
-		scene.scene->image_manager->builtin_image_info_cb = function_bind(&CCScene::builtin_image_info, scene, _1, _2, _3, _4, _5, _6, _7);
-		scene.scene->image_manager->builtin_image_pixels_cb = function_bind(&CCScene::builtin_image_pixels, scene, _1, _2, _3);
-		scene.scene->image_manager->builtin_image_float_pixels_cb = function_bind(&CCScene::builtin_image_float_pixels, scene, _1, _2, _3);
+			auto scend = scenes.end();
+			auto scit = scenes.begin();
 
-		scenes.push_back(scene);
+			while (scit != scend) {
+				if ((*scit).scene == nullptr) {
+					cscid = hid;
+					break;
+				}
+				++hid;
+				++scit;
+			}
 
-		logger.logit(client_id, "Created scene ", scenes.size() - 1, " with scene_params ", scene_params_id, " and device ", di.id);
+		} 
+		if (cscid == -1) {
+			scenes.push_back(scene);
+			cscid = (unsigned int)(scenes.size() - 1);
+		}
 
-		return (unsigned int)(scenes.size() - 1);
+		scenes[cscid].scene = new ccl::Scene(params, di);
+		scenes[cscid].params_id = scene_params_id;
+		scenes[cscid].scene->image_manager->builtin_image_info_cb = function_bind(&CCScene::builtin_image_info, scenes[cscid], _1, _2, _3, _4, _5, _6, _7);
+		scenes[cscid].scene->image_manager->builtin_image_pixels_cb = function_bind(&CCScene::builtin_image_pixels, scenes[cscid], _1, _2, _3);
+		scenes[cscid].scene->image_manager->builtin_image_float_pixels_cb = function_bind(&CCScene::builtin_image_float_pixels, scenes[cscid], _1, _2, _3);
+
+		logger.logit(client_id, "Created scene ", cscid, " with scene_params ", scene_params_id, " and device ", di.id);
+		return cscid;
 	}
 	else {
 		return UINT_MAX;
