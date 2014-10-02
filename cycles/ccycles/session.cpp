@@ -127,17 +127,41 @@ unsigned int cycles_session_create(unsigned int client_id, unsigned int session_
 	}
 
 	auto& sce = scenes[scene_id];
+
+	auto csesid = -1;
+	auto hid = 0;
+
 	auto session = CCSession::create((unsigned int)(sce.scene->camera->width*sce.scene->camera->height), 4);
 	// TODO: pass ccl::Session into CCSession::create
 	session->session = new ccl::Session(params);
 	session->session->scene = sce.scene;
-	sessions.push_back(session);
 
-	status_cbs.push_back(nullptr);
-	update_cbs.push_back(nullptr);
-	write_cbs.push_back(nullptr);
+	auto csessit = sessions.begin();
+	auto csessend = sessions.end();
+	while (csessit != csessend) {
+		if ((*csessit) == nullptr) {
+			csesid = hid;
+		}
+		++hid;
+		++csessit;
+	}
 
-	session->id = (unsigned int)(sessions.size() - 1);
+	if (csesid == -1) {
+		sessions.push_back(session);
+		csesid = (unsigned int)(sessions.size() - 1);
+		status_cbs.push_back(nullptr);
+		update_cbs.push_back(nullptr);
+		write_cbs.push_back(nullptr);
+	}
+	else {
+		sessions[csesid] = session;
+		status_cbs[csesid] = nullptr;
+		update_cbs[csesid] = nullptr;
+		write_cbs[csesid] = nullptr;
+	}
+
+
+	session->id = csesid;
 
 	logger.logit(client_id, "Created session ", session->id, " for scene ", scene_id, " with session_params ", session_params_id);
 
