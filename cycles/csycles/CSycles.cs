@@ -37,13 +37,12 @@ namespace ccl
 
 		private static void LoadCCycles()
 		{
-			if (!ccycles_loaded)
-			{
-				var path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) ?? "";
-				var ccycles_dll = System.IO.Path.Combine(path, "ccycles.dll");
-				LoadLibrary(ccycles_dll);
-				ccycles_loaded = true;
-			}
+			if (ccycles_loaded) return;
+
+			var path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) ?? "";
+			var ccycles_dll = System.IO.Path.Combine(path, "ccycles.dll");
+			LoadLibrary(ccycles_dll);
+			ccycles_loaded = true;
 		}
 
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_initialise", CallingConvention = CallingConvention.Cdecl)]
