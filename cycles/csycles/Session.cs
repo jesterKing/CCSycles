@@ -141,6 +141,12 @@ namespace ccl
 			Destroyed = true;
 		}
 
+		public void Draw()
+		{
+			if (Destroyed) return;
+			CSycles.session_draw(Client.Id, Id);
+		}
+
 		/// <summary>
 		/// Copy the ccycles API level session buffer through CSycles into this Session.
 		/// 

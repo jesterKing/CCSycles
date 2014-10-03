@@ -271,6 +271,18 @@ void cycles_session_copy_buffer(unsigned int client_id, unsigned int session_id,
 	SESSION_FIND_END()
 }
 
+void cycles_session_draw(unsigned int client_id, unsigned int session_id)
+{
+	static ccl::DeviceDrawParams draw_params = ccl::DeviceDrawParams();
+
+	SESSION_FIND(session_id)
+		ccl::BufferParams session_buf_params;
+		session_buf_params.width = session_buf_params.full_width = session->scene->camera->width;
+		session_buf_params.height = session_buf_params.full_height = session->scene->camera->height;
+		session->draw(session_buf_params, draw_params);
+	SESSION_FIND_END()
+}
+
 int cycles_progress_get_sample(unsigned int session_id)
 {
 	SESSION_FIND(session_id)

@@ -1026,6 +1026,13 @@ namespace ccl
 		{
 			cycles_session_cancel(clientId, sessionId, cancelMessage);
 		}
+
+		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_session_draw", CallingConvention = CallingConvention.Cdecl)]
+		private static extern void cycles_session_draw(uint clientId, uint sessionId);
+		public static void session_draw(uint clientId, uint sessionId)
+		{
+			cycles_session_draw(clientId, sessionId);
+		}
 #endregion
 
 #region session parameters
