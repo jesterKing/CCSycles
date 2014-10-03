@@ -130,7 +130,19 @@ CCL_CAPI void __cdecl cycles_set_logger(unsigned int client_id, LOGGER_FUNC_CB l
  * Note that this is global to the logger.
  */
 CCL_CAPI void __cdecl cycles_log_to_stdout(int tostdout);
+
+/**
+ * Create a new client.
+ *
+ * This is mainly used for determining what logger functions belong to which client and session.
+ *
+ * Note that a client needs to be released with cycles_release_client when no longer necessary.
+ */
 CCL_CAPI unsigned int __cdecl cycles_new_client();
+
+/**
+ * Release a client from usage.
+ */
 CCL_CAPI void __cdecl cycles_release_client(unsigned int client_id);
 
 /**
@@ -176,11 +188,20 @@ CCL_CAPI unsigned int __cdecl cycles_device_type(int i);
 CCL_CAPI unsigned int __cdecl cycles_scene_params_create(unsigned int client_id, unsigned int shadingsystem, unsigned int bvh_type, unsigned int use_bvh_cache, unsigned int use_bvh_spatial_split, unsigned int use_qbvh, unsigned int persistent_data);
 
 /* Set scene parameters*/
+
+/** Set scene parameter: BVH type. */
 CCL_CAPI void __cdecl cycles_scene_params_set_bvh_type(unsigned int client_id, unsigned int scene_params_id, unsigned int type);
+/** Set scene parameter: use BVH cache. */
 CCL_CAPI void __cdecl cycles_scene_params_set_bvh_cache(unsigned int client_id, unsigned int scene_params_id, unsigned int use);
+/** Set scene parameter: use BVH spatial split. */
 CCL_CAPI void __cdecl cycles_scene_params_set_bvh_spatial_split(unsigned int client_id, unsigned int scene_params_id, unsigned int use);
+/** Set scene parameter: use qBVH. */
 CCL_CAPI void __cdecl cycles_scene_params_set_qbvh(unsigned int client_id, unsigned int scene_params_id, unsigned int use);
+/** Set scene parameter: Shading system (SVM / OSL).
+ * Note that currently SVM is only supported for RhinoCycles. No effort yet has been taken to enable OSL.
+ */
 CCL_CAPI void __cdecl cycles_scene_params_set_shadingsystem(unsigned int client_id, unsigned int scene_params_id, unsigned int system);
+/** Set scene parameter: use persistent data. */
 CCL_CAPI void __cdecl cycles_scene_params_set_persistent_data(unsigned int client_id, unsigned int scene_params_id, unsigned int use);
 
 /**
@@ -204,78 +225,126 @@ CCL_CAPI void __cdecl cycles_scene_object_set_matrix(unsigned int client_id, uns
 	float m, float n, float o, float p
 	);
 
+/** Set the maximum bounces for integrator. */
 CCL_CAPI void __cdecl cycles_integrator_set_max_bounce(unsigned int client_id, unsigned int scene_id, int max_bounce);
+/** Set the minimum bounces for integrator. */
 CCL_CAPI void __cdecl cycles_integrator_set_min_bounce(unsigned int client_id, unsigned int scene_id, int min_bounce);
+/** Set to true if caustics should be skipped. */
 CCL_CAPI void __cdecl cycles_integrator_set_no_caustics(unsigned int client_id, unsigned int scene_id, bool no_caustics);
+/** Set to true if transparent shadows should be rendered. */
 CCL_CAPI void __cdecl cycles_integrator_set_transparent_shadows(unsigned int client_id, unsigned int scene_id, bool transparent_shadows);
+/** Set the amount of diffuse samples. */
 CCL_CAPI void __cdecl cycles_integrator_set_diffuse_samples(unsigned int client_id, unsigned int scene_id, int diffuse_samples);
+/** Set the amount of glossy samples. */
 CCL_CAPI void __cdecl cycles_integrator_set_glossy_samples(unsigned int client_id, unsigned int scene_id, int glossy_samples);
+/** Set the amount of transmission samples. */
 CCL_CAPI void __cdecl cycles_integrator_set_transmission_samples(unsigned int client_id, unsigned int scene_id, int transmission_samples);
+/** Set the amount of AO samples. */
 CCL_CAPI void __cdecl cycles_integrator_set_ao_samples(unsigned int client_id, unsigned int scene_id, int ao_samples);
+/** Set the amount of mesh light samples. */
 CCL_CAPI void __cdecl cycles_integrator_set_mesh_light_samples(unsigned int client_id, unsigned int scene_id, int mesh_light_samples);
+/** Set the amount of SSS samples. */
 CCL_CAPI void __cdecl cycles_integrator_set_subsurface_samples(unsigned int client_id, unsigned int scene_id, int subsurface_samples);
+/** Set the amount of volume samples. */
 CCL_CAPI void __cdecl cycles_integrator_set_volume_samples(unsigned int client_id, unsigned int scene_id, int volume_samples);
+/** Set the maximum amount of diffuse bounces. */
 CCL_CAPI void __cdecl cycles_integrator_set_max_diffuse_bounce(unsigned int client_id, unsigned int scene_id, int max_diffuse_bounce);
+/** Set the maximum amount of glossy bounces. */
 CCL_CAPI void __cdecl cycles_integrator_set_max_glossy_bounce(unsigned int client_id, unsigned int scene_id, int max_glossy_bounce);
+/** Set the maximum amount of transmission bounces. */
 CCL_CAPI void __cdecl cycles_integrator_set_max_transmission_bounce(unsigned int client_id, unsigned int scene_id, int max_transmission_bounce);
+/** Set the maximum amount of volume bounces. */
 CCL_CAPI void __cdecl cycles_integrator_set_max_volume_bounce(unsigned int client_id, unsigned int scene_id, int max_volume_bounce);
+/** Set the minimum amount of transparency bounces. */
 CCL_CAPI void __cdecl cycles_integrator_set_transparent_min_bounce(unsigned int client_id, unsigned int scene_id, int transparent_min_bounce);
+/** Set the maximum amount of transparency bounces. */
 CCL_CAPI void __cdecl cycles_integrator_set_transparent_max_bounce(unsigned int client_id, unsigned int scene_id, int transparent_max_bounce);
+/** Set the amount of AA samples. */
 CCL_CAPI void __cdecl cycles_integrator_set_aa_samples(unsigned int client_id, unsigned int scene_id, int aa_samples);
+/** Set the glossiness filter. */
 CCL_CAPI void __cdecl cycles_integrator_set_filter_glossy(unsigned int client_id, unsigned int scene_id, float filter_glossy);
+/** Set integrator method to use (path, branched path).*/
 CCL_CAPI void __cdecl cycles_integrator_set_method(unsigned int client_id, unsigned int scene_id, int method);
 
+/** Different camera types. */
 enum class camera_type : unsigned int {
 	PERSPECTIVE = 0,
 	ORTHOGRAPHIC,
 	PANORAMA
 };
 
+/** Different panorama types of camera. */
 enum class panorama_type : unsigned int {
 	EQUIRECTANGLUAR = 0,
 	FISHEYE_EQUIDISTANT,
 	FISHEYE_EQUISOLID
 };
 
+/** Set the size/resolution of the camera. This equals to pixel resolution. */
 CCL_CAPI void __cdecl cycles_camera_set_size(unsigned int client_id, unsigned int scene_id, unsigned int width, unsigned int height);
+/** Get the camera width. */
 CCL_CAPI unsigned int __cdecl cycles_camera_get_width(unsigned int client_id, unsigned int scene_id);
+/** Get the camera height. */
 CCL_CAPI unsigned int __cdecl cycles_camera_get_height(unsigned int client_id, unsigned int scene_id);
+/** Set the camera type. */
 CCL_CAPI void __cdecl cycles_camera_set_type(unsigned int client_id, unsigned int scene_id, camera_type type);
+/** Set the camera panorama type. */
 CCL_CAPI void __cdecl cycles_camera_set_panorama_type(unsigned int client_id, unsigned int scene_id, panorama_type type);
+/** Set the transformation matrix for the camera. */
 CCL_CAPI void __cdecl cycles_camera_set_matrix(unsigned int client_id, unsigned int scene_id,
 	float a, float b, float c, float d,
 	float e, float f, float g, float h,
 	float i, float j, float k, float l,
 	float m, float n, float o, float p
 	);
+/** Compute the auto viewplane for scene camera. */
 CCL_CAPI void __cdecl cycles_camera_compute_auto_viewplane(unsigned int client_id, unsigned int scene_id);
+/** Update camera. Should be called after changing settings on a scene camera. */
 CCL_CAPI void __cdecl cycles_camera_update(unsigned int client_id, unsigned int scene_id);
+/** Set the Field of View for scene camera. */
 CCL_CAPI void __cdecl cycles_camera_set_fov(unsigned int client_id, unsigned int scene_id, float fov);
+/** Set the sensor width for scene camera. */
 CCL_CAPI void __cdecl cycles_camera_set_sensor_width(unsigned int client_id, unsigned int scene_id, float sensor_width);
+/** Set the sensor height for scene camera. */
 CCL_CAPI void __cdecl cycles_camera_set_sensor_height(unsigned int client_id, unsigned int scene_id, float sensor_height);
+/** Set the near clip for scene camera. */
 CCL_CAPI void __cdecl cycles_camera_set_nearclip(unsigned int client_id, unsigned int scene_id, float nearclip);
+/** Set the far clip for scene camera. */
 CCL_CAPI void __cdecl cycles_camera_set_farclip(unsigned int client_id, unsigned int scene_id, float farclip);
+/** Set the aperture size for scene camera. */
 CCL_CAPI void __cdecl cycles_camera_set_aperturesize(unsigned int client_id, unsigned int scene_id, float aperturesize);
+/** Set the focal distance for scene camera. */
 CCL_CAPI void __cdecl cycles_camera_set_focaldistance(unsigned int client_id, unsigned int scene_id, float focaldistance);
+/** Set the shutter time for scene camera. Used mainly with motion blur aspect of rendering process. */
 CCL_CAPI void __cdecl cycles_camera_set_shuttertime(unsigned int client_id, unsigned int scene_id, float shuttertime);
+/** Set the field of view for fisheye camera. */
 CCL_CAPI void __cdecl cycles_camera_set_fisheye_fov(unsigned int client_id, unsigned int scene_id, float fisheye_fov);
+/** Set the lens for fisheye camera. */
 CCL_CAPI void __cdecl cycles_camera_set_fisheye_lens(unsigned int client_id, unsigned int scene_id, float fisheye_lens);
 
-/* Create a new session for scene id. */
+/** Create a new session for scene id. */
 CCL_CAPI unsigned int __cdecl cycles_session_create(unsigned int client_id, unsigned int session_params_id, unsigned int scene_id);
 
+/** Reset session. */
 CCL_CAPI void __cdecl cycles_session_reset(unsigned int client_id, unsigned int session_id, unsigned int width, unsigned int height, unsigned int samples);
 
+/** Set the status update callback for session. */
 CCL_CAPI void __cdecl cycles_session_set_update_callback(unsigned int client_id, unsigned int session_id, void(*update)(unsigned int));
+/** Set the render tile update callback for session. */
 CCL_CAPI void __cdecl cycles_session_set_update_tile_callback(unsigned int client_id, unsigned int session_id, RENDER_TILE_CB update_tile_cb);
+/** Set the render tile write callback for session. */
 CCL_CAPI void __cdecl cycles_session_set_write_tile_callback(unsigned int client_id, unsigned int session_id, RENDER_TILE_CB write_tile_cb);
-
+/** Cancel session with cancel_message for log. */
 CCL_CAPI void __cdecl cycles_session_cancel(unsigned int client_id, unsigned int session_id, const char *cancel_message);
+/** Start given session render process. */
 CCL_CAPI void __cdecl cycles_session_start(unsigned int client_id, unsigned int session_id);
+/** Wait for session render process to finish or cancel. */
 CCL_CAPI void __cdecl cycles_session_wait(unsigned int client_id, unsigned int session_id);
+/** Clear resources for session. */
 CCL_CAPI void __cdecl cycles_session_destroy(unsigned int client_id, unsigned int session_id);
-
+/** Copy pixel data of session. */
 CCL_CAPI void __cdecl cycles_session_copy_buffer(unsigned int client_id, unsigned int session_id, float* pixel_buffer);
+/** Get pixel data buffer information of session. */
 CCL_CAPI void __cdecl cycles_session_get_buffer_info(unsigned int client_id, unsigned int session_id, unsigned int* buffer_size, unsigned int* buffer_stride);
 
 /* session progress access. */
