@@ -30,19 +30,19 @@ namespace ccl
 	{
 #region misc
 
-		private static bool ccycles_loaded = false;
+		private static bool g_ccycles_loaded;
 
 		[DllImport("kernel32", SetLastError = true, CharSet = CharSet.Unicode)]
 		private static extern IntPtr LoadLibrary(string filename);
 
 		private static void LoadCCycles()
 		{
-			if (ccycles_loaded) return;
+			if (g_ccycles_loaded) return;
 
 			var path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) ?? "";
 			var ccycles_dll = System.IO.Path.Combine(path, "ccycles.dll");
 			LoadLibrary(ccycles_dll);
-			ccycles_loaded = true;
+			g_ccycles_loaded = true;
 		}
 
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_initialise", CallingConvention = CallingConvention.Cdecl)]
@@ -68,15 +68,15 @@ namespace ccl
 		/// 
 		/// Note: to have any effect needs to be called before <c>initialise</c>.
 		/// </summary>
-		/// <param name="kernel_path"></param>
+		/// <param name="kernelPath"></param>
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_set_kernel_path", CharSet = CharSet.Ansi,
 			CallingConvention = CallingConvention.Cdecl)]
-		private static extern void cycles_set_kernel_path(string kernel_path);
+		private static extern void cycles_set_kernel_path(string kernelPath);
 
-		public static void set_kernel_path([MarshalAsAttribute(UnmanagedType.LPStr)] string kernel_path)
+		public static void set_kernel_path([MarshalAsAttribute(UnmanagedType.LPStr)] string kernelPath)
 		{
 			LoadCCycles();
-			cycles_set_kernel_path(kernel_path);
+			cycles_set_kernel_path(kernelPath);
 		}
 
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_shutdown", CallingConvention = CallingConvention.Cdecl)]
@@ -106,7 +106,6 @@ namespace ccl
 		/// </summary>
 		/// <param name="clientId">ID of client</param>
 		/// <param name="loggerCb">The logger callback function.</param>
-		/// <param name="toStdOut">True if logged information should be printed to std::out as well.</param>
 		public static void set_logger(uint clientId, LoggerCallback loggerCb)
 		{
 			var intptr_delegate = Marshal.GetFunctionPointerForDelegate(loggerCb);
@@ -163,7 +162,7 @@ namespace ccl
 		/// <returns>number of available CUDA devices.</returns>
 		public static uint number_cuda_devices()
 		{
-			return cycles_number_devices();
+			return cycles_number_cuda_devices();
 		}
 
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_device_description", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
@@ -283,7 +282,7 @@ namespace ccl
 		private static extern void cycles_scene_params_set_bvh_spatial_split(uint clientId, uint sceneParamsId, uint split);
 		public static void scene_params_set_bvh_spatial_split(uint clientId, uint sceneParamsId, bool split)
 		{
-			cycles_scene_params_set_bvh_cache(clientId, sceneParamsId, (uint)(split?1:0));
+			cycles_scene_params_set_bvh_spatial_split(clientId, sceneParamsId, (uint)(split?1:0));
 		}
   
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_scene_params_set_qbvh", CallingConvention = CallingConvention.Cdecl)]
@@ -301,7 +300,7 @@ namespace ccl
 		}
   
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_scene_params_set_persistent_data", CallingConvention = CallingConvention.Cdecl)]
-		private static extern void cycles_scene_params_set_persistent_data(uint clientId, uint sceneParamsId, uint persistent_data);
+		private static extern void cycles_scene_params_set_persistent_data(uint clientId, uint sceneParamsId, uint persistentData);
 		public static void scene_params_set_persistent_data(uint clientId, uint sceneParamsId, bool persistent)
 		{
 			cycles_scene_params_set_persistent_data(clientId, sceneParamsId, (uint)(persistent?1:0));
@@ -876,17 +875,17 @@ namespace ccl
 		}
 
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_camera_set_sensor_width", CallingConvention = CallingConvention.Cdecl)]
-		private static extern void cycles_camera_set_sensor_width(uint clientId, uint sceneId, float sensor_width);
-		public static void camera_set_sensor_width(uint clientId, uint sceneId, float sensor_width)
+		private static extern void cycles_camera_set_sensor_width(uint clientId, uint sceneId, float sensorWidth);
+		public static void camera_set_sensor_width(uint clientId, uint sceneId, float sensorWidth)
 		{
-			cycles_camera_set_sensor_width(clientId, sceneId, sensor_width);
+			cycles_camera_set_sensor_width(clientId, sceneId, sensorWidth);
 		}
 
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_camera_set_sensor_height", CallingConvention = CallingConvention.Cdecl)]
-		private static extern void cycles_camera_set_sensor_height(uint clientId, uint sceneId, float sensor_height);
-		public static void camera_set_sensor_height(uint clientId, uint sceneId, float sensor_height)
+		private static extern void cycles_camera_set_sensor_height(uint clientId, uint sceneId, float sensorHeight);
+		public static void camera_set_sensor_height(uint clientId, uint sceneId, float sensorHeight)
 		{
-			cycles_camera_set_sensor_height(clientId, sceneId, sensor_height);
+			cycles_camera_set_sensor_height(clientId, sceneId, sensorHeight);
 		}
 
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_camera_set_nearclip", CallingConvention = CallingConvention.Cdecl)]
@@ -925,17 +924,17 @@ namespace ccl
 		}
 
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_camera_set_fisheye_fov", CallingConvention = CallingConvention.Cdecl)]
-		private static extern void cycles_camera_set_fisheye_fov(uint clientId, uint sceneId, float fisheye_fov);
-		public static void camera_set_fisheye_fov(uint clientId, uint sceneId, float fisheye_fov)
+		private static extern void cycles_camera_set_fisheye_fov(uint clientId, uint sceneId, float fisheyeFov);
+		public static void camera_set_fisheye_fov(uint clientId, uint sceneId, float fisheyeFov)
 		{
-			cycles_camera_set_fisheye_fov(clientId, sceneId, fisheye_fov);
+			cycles_camera_set_fisheye_fov(clientId, sceneId, fisheyeFov);
 		}
 
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_camera_set_fisheye_lens", CallingConvention = CallingConvention.Cdecl)]
-		private static extern void cycles_camera_set_fisheye_lens(uint clientId, uint sceneId, float fisheye_lens);
-		public static void camera_set_fisheye_lens(uint clientId, uint sceneId, float fisheye_lens)
+		private static extern void cycles_camera_set_fisheye_lens(uint clientId, uint sceneId, float fisheyeLens);
+		public static void camera_set_fisheye_lens(uint clientId, uint sceneId, float fisheyeLens)
 		{
-			cycles_camera_set_fisheye_lens(clientId, sceneId, fisheye_lens);
+			cycles_camera_set_fisheye_lens(clientId, sceneId, fisheyeLens);
 		}
 #endregion
 
@@ -1226,10 +1225,10 @@ namespace ccl
 		}
 
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_light_set_map_resolution", CallingConvention = CallingConvention.Cdecl)]
-		private static extern void cycles_light_set_map_resolution(uint clientId, uint sceneId, uint lightId, uint map_resolution);
-		public static void light_set_map_resolution(uint clientId, uint sceneId, uint lightId, uint map_resolution)
+		private static extern void cycles_light_set_map_resolution(uint clientId, uint sceneId, uint lightId, uint mapResolution);
+		public static void light_set_map_resolution(uint clientId, uint sceneId, uint lightId, uint mapResolution)
 		{
-			cycles_light_set_map_resolution(clientId, sceneId, lightId, map_resolution);
+			cycles_light_set_map_resolution(clientId, sceneId, lightId, mapResolution);
 		}
 
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_light_set_spot_angle", CallingConvention = CallingConvention.Cdecl)]
