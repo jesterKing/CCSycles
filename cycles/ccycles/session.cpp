@@ -262,6 +262,16 @@ void cycles_session_get_buffer_info(unsigned int client_id, unsigned int session
 	SESSION_FIND_END()
 }
 
+float* __cdecl cycles_session_get_buffer(unsigned int client_id, unsigned int session_id)
+{
+	SESSION_FIND(session_id);
+		auto se = sessions[session_id];
+		return se->pixels;
+	SESSION_FIND_END();
+
+	return nullptr;
+}
+
 void cycles_session_copy_buffer(unsigned int client_id, unsigned int session_id, float* pixel_buffer)
 {
 	SESSION_FIND(session_id)

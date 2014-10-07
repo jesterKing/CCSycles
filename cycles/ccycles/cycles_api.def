@@ -117,6 +117,7 @@ EXPORTS
   cycles_session_wait
   cycles_session_draw
 
+  cycles_session_get_buffer
   cycles_session_copy_buffer
   cycles_session_get_buffer_info
 

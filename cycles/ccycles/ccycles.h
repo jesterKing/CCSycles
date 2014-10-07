@@ -347,6 +347,9 @@ CCL_CAPI void __cdecl cycles_session_copy_buffer(unsigned int client_id, unsigne
 /** Get pixel data buffer information of session. */
 CCL_CAPI void __cdecl cycles_session_get_buffer_info(unsigned int client_id, unsigned int session_id, unsigned int* buffer_size, unsigned int* buffer_stride);
 CCL_CAPI void __cdecl cycles_session_draw(unsigned int client_id, unsigned int session_id);
+/** Get pixel data buffer pointer. */
+CCL_CAPI float* __cdecl cycles_session_get_buffer(unsigned int client_id, unsigned int session_id);
+
 
 /* session progress access. */
 CCL_CAPI int __cdecl cycles_progress_get_sample(unsigned int client_id, unsigned int session_id);

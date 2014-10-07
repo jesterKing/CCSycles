@@ -973,6 +973,13 @@ namespace ccl
 			return to_return;
 		}
 
+		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_session_get_buffer", CallingConvention = CallingConvention.Cdecl)]
+		private static extern IntPtr cycles_session_get_buffer(uint clientId, uint sessionId);
+		public static IntPtr session_get_buffer(uint clientId, uint sessionId)
+		{
+			return cycles_session_get_buffer(clientId, sessionId);
+		}
+
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_session_get_buffer_info", CallingConvention = CallingConvention.Cdecl)]
 		private static extern void cycles_session_get_buffer_info(uint clientId, uint sessionId, [Out] out uint bufferSize, [Out] out uint bufferStride);
 		public static void session_get_buffer_info(uint clientId, uint sessionId, out uint bufferSize, out uint bufferStride)
