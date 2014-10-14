@@ -60,12 +60,17 @@ namespace ccl
 		/// True if this is a CUDA device
 		/// </summary>
 		public bool IsCuda { get { return Type == DeviceType.CUDA;  } }
+
 		/// <summary>
 		/// Get the default device (CPU)
 		/// </summary>
 		/// <returns>The default device</returns>
-		static public Device Default() {
-			return Device.GetDevice(0);
+		static public Device Default
+		{
+			get
+			{
+				return Device.GetDevice(0);
+			}
 		}
 
 		/// <summary>
@@ -120,7 +125,7 @@ namespace ccl
 				{
 					return dev;
 				}
-				return Default();
+				return Default;
 			}
 		}
 
