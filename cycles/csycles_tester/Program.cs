@@ -157,7 +157,7 @@ namespace csycles_tester
 			file = Path.GetFullPath(s);
 			Console.WriteLine("We get file path: {0}", file);
 
-			CSycles.set_kernel_path("Plug-ins/RhinoCycles/lib");
+			CSycles.set_kernel_path("lib");
 			CSycles.initialise();
 
 			const uint samples = 5;

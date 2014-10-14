@@ -105,9 +105,9 @@ copy /Y  "$(ProjectDir)..\..\pthreads\x64\$(ConfigurationName)\pthreads.dll" "$(
 copy /Y "$(ProjectDir)..\..\..\..\..\..\bin\$(ConfigurationName)\boost_*" "$(TargetDir)"
 
 
-MkDir "$(TargetDir)Plug-ins\RhinoCycles\lib"
+MkDir "$(TargetDir)lib"
 
-Copy "$(ProjectDir)..\lib\*.cubin" "$(TargetDir)\Plug-ins\RhinoCycles\lib"
+Copy "$(ProjectDir)..\lib\*.cubin" "$(TargetDir)lib"
 
 MkDir "$(TargetDir)objects"
 
