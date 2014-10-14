@@ -267,7 +267,13 @@ namespace csycles_tester
 			var verts = node.GetAttribute("verts");
 			Console.WriteLine("{0}", node);
 
-			var uvfloats = parse_floats(UV);
+			var has_uv = !string.IsNullOrEmpty(UV);
+
+			float[] uvfloats = null;
+			if (has_uv)
+			{
+				uvfloats = parse_floats(UV);
+			}
 			var pfloats = parse_floats(P);
 			var nvertsints = parse_ints(nverts);
 			var vertsints = parse_ints(verts);
@@ -283,7 +289,8 @@ namespace csycles_tester
 			var fc = nvertsints.Aggregate(0, (total, next) =>
 																		next == 4 ? total + 2 : total + 1);
 
-			var uvs = new float[fc*3*2];
+			float[] uvs = null;
+			if(has_uv) uvs = new float[fc*3*2];
 			var uvoffs = 0;
 			foreach (var t in nvertsints)
 			{
@@ -293,14 +300,17 @@ namespace csycles_tester
 					var v1 = vertsints[index_offset + j + 1];
 					var v2 = vertsints[index_offset + j + 2];
 
-					uvs[uvoffs] = uvfloats[index_offset*2];
-					uvs[uvoffs + 1] = uvfloats[index_offset*2 + 1];
-					uvs[uvoffs + 2] = uvfloats[(index_offset + j + 1)*2];
-					uvs[uvoffs + 3] = uvfloats[(index_offset + j + 1)*2 + 1];
-					uvs[uvoffs + 4] = uvfloats[(index_offset + j + 2)*2];
-					uvs[uvoffs + 5] = uvfloats[(index_offset + j + 2)*2 + 1];
+					if (has_uv)
+					{
+						uvs[uvoffs] = uvfloats[index_offset*2];
+						uvs[uvoffs + 1] = uvfloats[index_offset*2 + 1];
+						uvs[uvoffs + 2] = uvfloats[(index_offset + j + 1)*2];
+						uvs[uvoffs + 3] = uvfloats[(index_offset + j + 1)*2 + 1];
+						uvs[uvoffs + 4] = uvfloats[(index_offset + j + 2)*2];
+						uvs[uvoffs + 5] = uvfloats[(index_offset + j + 2)*2 + 1];
 
-					uvoffs += 6;
+						uvoffs += 6;
+					}
 
 					CSycles.mesh_add_triangle(Client.Id, state.Scene.Id, me, (uint)v0, (uint)v1, (uint)v2, state.Scene.ShaderSceneId(state.Shader), state.Smooth);
 				}
@@ -308,7 +318,10 @@ namespace csycles_tester
 				index_offset += t;
 			}
 
-			CSycles.mesh_set_uvs(Client.Id, state.Scene.Id, me, ref uvs, (uint)(uvs.Length / 2));
+			if (has_uv)
+			{
+				CSycles.mesh_set_uvs(Client.Id, state.Scene.Id, me, ref uvs, (uint) (uvs.Length/2));
+			}
 		}
 
 		private void ReadScene(ref XmlReadState state, System.Xml.XmlReader node)
