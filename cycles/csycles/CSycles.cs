@@ -909,6 +909,27 @@ namespace ccl
 			cycles_camera_set_aperturesize(clientId, sceneId, aperturesize);
 		}
 
+		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_camera_set_aperture_ratio", CallingConvention = CallingConvention.Cdecl)]
+		private static extern void cycles_camera_set_aperture_ratio(uint clientId, uint sceneId, float apertureRatio);
+		public static void camera_set_aperture_ratio(uint clientId, uint sceneId, float apertureRatio)
+		{
+			cycles_camera_set_aperture_ratio(clientId, sceneId, apertureRatio);
+		}
+
+		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_camera_set_blades", CallingConvention = CallingConvention.Cdecl)]
+		private static extern void cycles_camera_set_blades(uint clientId, uint sceneId, uint blades);
+		public static void camera_set_blades(uint clientId, uint sceneId, uint blades)
+		{
+			cycles_camera_set_blades(clientId, sceneId, blades);
+		}
+
+		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_camera_set_bladesrotation", CallingConvention = CallingConvention.Cdecl)]
+		private static extern void cycles_camera_set_bladesrotation(uint clientId, uint sceneId, float bladesrotation);
+		public static void camera_set_bladesrotation(uint clientId, uint sceneId, float bladesrotation)
+		{
+			cycles_camera_set_bladesrotation(clientId, sceneId, bladesrotation);
+		}
+
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_camera_set_shuttertime", CallingConvention = CallingConvention.Cdecl)]
 		private static extern void cycles_camera_set_shuttertime(uint clientId, uint sceneId, float shuttertime);
 		public static void camera_set_shuttertime(uint clientId, uint sceneId, float shuttertime)
