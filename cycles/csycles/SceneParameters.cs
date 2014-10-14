@@ -35,6 +35,7 @@ namespace ccl
 		/// <summary>
 		/// Create scene parameters object with given parameters
 		/// </summary>
+		/// <param name="client">Reference to the client</param>
 		/// <param name="shadingSystem">ShadingSystem to use</param>
 		/// <param name="bvhType">BvhType to use (dynamic or static)</param>
 		/// <param name="bvhCache">True if BVH should be cached</param>
