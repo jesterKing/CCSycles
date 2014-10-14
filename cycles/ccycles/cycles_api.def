@@ -101,6 +101,9 @@ EXPORTS
   cycles_camera_set_nearclip
   cycles_camera_set_farclip
   cycles_camera_set_aperturesize
+  cycles_camera_set_aperture_ratio
+  cycles_camera_set_blades
+  cycles_camera_set_bladesrotation
   cycles_camera_set_focaldistance
   cycles_camera_set_shuttertime
   cycles_camera_set_fisheye_fov

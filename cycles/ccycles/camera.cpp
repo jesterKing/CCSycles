@@ -145,6 +145,30 @@ void cycles_camera_set_aperturesize(unsigned int client_id, unsigned int scene_i
 	SCENE_FIND_END()
 }
 
+void cycles_camera_set_aperture_ratio(unsigned int client_id, unsigned int scene_id, float aperture_ratio)
+{
+	SCENE_FIND(scene_id)
+		logger.logit(client_id, "Setting camera aperture_ratio to ", aperture_ratio);
+		sce->camera->aperture_ratio = aperture_ratio;
+	SCENE_FIND_END()
+}
+
+void cycles_camera_set_blades(unsigned int client_id, unsigned int scene_id, unsigned int blades)
+{
+	SCENE_FIND(scene_id)
+		logger.logit(client_id, "Setting camera blades to ", blades);
+		sce->camera->blades = blades;
+	SCENE_FIND_END()
+}
+
+void cycles_camera_set_bladesrotation(unsigned int client_id, unsigned int scene_id, float bladesrotation)
+{
+	SCENE_FIND(scene_id)
+		logger.logit(client_id, "Setting camera bladesrotation to ", bladesrotation);
+		sce->camera->bladesrotation = bladesrotation;
+	SCENE_FIND_END()
+}
+
 void cycles_camera_set_focaldistance(unsigned int client_id, unsigned int scene_id, float focaldistance)
 {
 	SCENE_FIND(scene_id)

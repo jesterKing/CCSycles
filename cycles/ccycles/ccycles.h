@@ -313,6 +313,12 @@ CCL_CAPI void __cdecl cycles_camera_set_nearclip(unsigned int client_id, unsigne
 CCL_CAPI void __cdecl cycles_camera_set_farclip(unsigned int client_id, unsigned int scene_id, float farclip);
 /** Set the aperture size for scene camera. */
 CCL_CAPI void __cdecl cycles_camera_set_aperturesize(unsigned int client_id, unsigned int scene_id, float aperturesize);
+/** Set the aperture ratio for anamorphic lens bokeh. */
+CCL_CAPI void __cdecl cycles_camera_set_aperture_ratio(unsigned int client_id, unsigned int scene_id, float aperture_ratio);
+/** Set camera blades count. */
+CCL_CAPI void __cdecl cycles_camera_set_blades(unsigned int client_id, unsigned int scene_id, unsigned int blades);
+/** Set camera blade rotation. */
+CCL_CAPI void __cdecl cycles_camera_set_bladesrotation(unsigned int client_id, unsigned int scene_id, float bladesrotation);
 /** Set the focal distance for scene camera. */
 CCL_CAPI void __cdecl cycles_camera_set_focaldistance(unsigned int client_id, unsigned int scene_id, float focaldistance);
 /** Set the shutter time for scene camera. Used mainly with motion blur aspect of rendering process. */
