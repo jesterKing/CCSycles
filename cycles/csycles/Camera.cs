@@ -110,6 +110,30 @@ namespace ccl
 			}
 		}
 
+		public float ApertureRatio
+		{
+			set
+			{
+				CSycles.camera_set_aperture_ratio(Scene.Client.Id, Scene.Id, value);
+			}
+		}
+
+		public uint Blades
+		{
+			set
+			{
+				CSycles.camera_set_blades(Scene.Client.Id, Scene.Id, value);
+			}
+		}
+
+		public float BladesRotation
+		{
+			set
+			{
+				CSycles.camera_set_bladesrotation(Scene.Client.Id, Scene.Id, value);
+			}
+		}
+
 		public float FocalDistance
 		{
 			set
