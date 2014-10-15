@@ -158,3 +158,82 @@ void cycles_integrator_set_method(unsigned int client_id, unsigned int scene_id,
 		sce->integrator->method = (ccl::Integrator::Method)method;
 	SCENE_FIND_END()
 }
+
+void cycles_integrator_set_sample_all_lights_direct(unsigned int client_id, unsigned int scene_id, bool sample_all_lights_direct)
+{
+	SCENE_FIND(scene_id)
+		sce->integrator->sample_all_lights_direct = sample_all_lights_direct;
+	SCENE_FIND_END()
+}
+
+void cycles_integrator_set_sample_all_lights_indirect(unsigned int client_id, unsigned int scene_id, bool sample_all_lights_indirect)
+{
+	SCENE_FIND(scene_id)
+		sce->integrator->sample_all_lights_indirect = sample_all_lights_indirect;
+	SCENE_FIND_END()
+}
+
+void cycles_integrator_set_volume_homogeneous_sampling(unsigned int client_id, unsigned int scene_id, int volume_homogeneous_sampling)
+{
+	SCENE_FIND(scene_id)
+		sce->integrator->volume_homogeneous_sampling = volume_homogeneous_sampling;
+	SCENE_FIND_END()
+}
+
+void cycles_integrator_set_volume_step_size(unsigned int client_id, unsigned int scene_id, float volume_step_size)
+{
+	SCENE_FIND(scene_id)
+		sce->integrator->volume_step_size = volume_step_size;
+	SCENE_FIND_END()
+}
+
+void cycles_integrator_set_volume_max_steps(unsigned int client_id, unsigned int scene_id, int volume_max_steps)
+{
+	SCENE_FIND(scene_id)
+		sce->integrator->volume_max_steps = volume_max_steps;
+	SCENE_FIND_END()
+}
+
+/* \todo update Cycles code to allow for caustics form separation
+void cycles_integrator_set_caustics_relective(unsigned int client_id, unsigned int scene_id, int caustics_relective)
+{
+	SCENE_FIND(scene_id)
+		sce->integrator->caustics_relective = caustics_relective;
+	SCENE_FIND_END()
+}
+
+void cycles_integrator_set_caustics_refractive(unsigned int client_id, unsigned int scene_id, int caustics_refractive)
+{
+	SCENE_FIND(scene_id)
+		sce->integrator->caustics_refractive = caustics_refractive;
+	SCENE_FIND_END()
+}
+*/
+
+void cycles_integrator_set_seed(unsigned int client_id, unsigned int scene_id, int seed)
+{
+	SCENE_FIND(scene_id)
+		sce->integrator->seed = seed;
+	SCENE_FIND_END()
+}
+
+void cycles_integrator_set_sampling_pattern(unsigned int client_id, unsigned int scene_id, sampling_pattern pattern)
+{
+	SCENE_FIND(scene_id)
+		sce->integrator->sampling_pattern = (ccl::SamplingPattern)pattern;
+	SCENE_FIND_END()
+}
+
+void cycles_integrator_set_sample_clamp_direct(unsigned int client_id, unsigned int scene_id, float sample_clamp_direct)
+{
+	SCENE_FIND(scene_id)
+		sce->integrator->sample_clamp_direct = sample_clamp_direct;
+	SCENE_FIND_END()
+}
+
+void cycles_integrator_set_sample_clamp_indirect(unsigned int client_id, unsigned int scene_id, float sample_clamp_indirect)
+{
+	SCENE_FIND(scene_id)
+		sce->integrator->sample_clamp_indirect = sample_clamp_indirect;
+	SCENE_FIND_END()
+}

@@ -63,6 +63,14 @@ EXPORTS
   cycles_integrator_set_aa_samples
   cycles_integrator_set_filter_glossy
   cycles_integrator_set_method
+  cycles_integrator_set_sample_all_lights_direct
+  cycles_integrator_set_sample_all_lights_indirect
+  cycles_integrator_set_volume_homogeneous_sampling
+  cycles_integrator_set_volume_step_size
+  cycles_integrator_set_volume_max_steps
+  cycles_integrator_set_seed
+  cycles_integrator_set_sample_clamp_direct
+  cycles_integrator_set_sample_clamp_indirect
 
   cycles_create_shader
   cycles_scene_add_shader

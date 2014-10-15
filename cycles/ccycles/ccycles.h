@@ -265,6 +265,26 @@ CCL_CAPI void __cdecl cycles_integrator_set_aa_samples(unsigned int client_id, u
 CCL_CAPI void __cdecl cycles_integrator_set_filter_glossy(unsigned int client_id, unsigned int scene_id, float filter_glossy);
 /** Set integrator method to use (path, branched path).*/
 CCL_CAPI void __cdecl cycles_integrator_set_method(unsigned int client_id, unsigned int scene_id, int method);
+/** Set to true if all lights should be directly sampled. */
+CCL_CAPI void __cdecl cycles_integrator_set_sample_all_lights_direct(unsigned int client_id, unsigned int scene_id, bool sample_all_lights_direct);
+/** Set to true if all lights should be indirectly sampled. */
+CCL_CAPI void __cdecl cycles_integrator_set_sample_all_lights_indirect(unsigned int client_id, unsigned int scene_id, bool sample_all_lights_indirect);
+CCL_CAPI void __cdecl cycles_integrator_set_volume_homogeneous_sampling(unsigned int client_id, unsigned int scene_id, int volume_homogeneous_sampling);
+CCL_CAPI void __cdecl cycles_integrator_set_volume_step_size(unsigned int client_id, unsigned int scene_id, float volume_step_size);
+CCL_CAPI void __cdecl cycles_integrator_set_volume_max_steps(unsigned int client_id, unsigned int scene_id, int volume_max_steps);
+/* \todo update Cycles code to allow for caustics form separation
+void cycles_integrator_set_caustics_relective(unsigned int client_id, unsigned int scene_id, int caustics_relective)
+void cycles_integrator_set_caustics_refractive(unsigned int client_id, unsigned int scene_id, int caustics_refractive)
+*/
+CCL_CAPI void __cdecl cycles_integrator_set_seed(unsigned int client_id, unsigned int scene_id, int seed);
+
+enum class sampling_pattern : unsigned int {
+	SOBOL = 0,
+	CMJ
+};
+CCL_CAPI void __cdecl cycles_integrator_set_sampling_pattern(unsigned int client_id, unsigned int scene_id, sampling_pattern pattern);
+CCL_CAPI void __cdecl cycles_integrator_set_sample_clamp_direct(unsigned int client_id, unsigned int scene_id, float sample_clamp_direct);
+CCL_CAPI void __cdecl cycles_integrator_set_sample_clamp_indirect(unsigned int client_id, unsigned int scene_id, float sample_clamp_indirect);
 
 /** Different camera types. */
 enum class camera_type : unsigned int {
