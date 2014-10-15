@@ -173,7 +173,7 @@ namespace csycles_tester
 			var dev = Device.FirstCuda;
 			Console.WriteLine("Using device {0}", dev.Name);
 
-			var scene_params = new SceneParameters(client, ShadingSystem.SVM, BvhType.Dynamic, false, false, false, false);
+			var scene_params = new SceneParameters(client, ShadingSystem.SVM, BvhType.Static, false, false, false, false);
 			var scene = new Scene(client, scene_params, dev);
 
 			#region background shader
