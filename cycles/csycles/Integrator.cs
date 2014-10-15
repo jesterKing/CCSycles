@@ -187,5 +187,77 @@ namespace ccl
 				CSycles.integrator_set_method(Scene.Client.Id, Scene.Id, value);
 			}
 		}
+
+		public bool SampleAllLightsDirect
+		{
+			set
+			{
+				CSycles.integrator_set_sample_all_lights_direct(Scene.Client.Id, Scene.Id, value);
+			}
+		}
+
+		public bool SampleAllLightsIndirect
+		{
+			set
+			{
+				CSycles.integrator_set_sample_all_lights_indirect(Scene.Client.Id, Scene.Id, value);
+			}
+		}
+
+		public int VolumeHomogeneousSampling
+		{
+			set
+			{
+				CSycles.integrator_set_volume_homogeneous_sampling(Scene.Client.Id, Scene.Id, value);
+			}
+		}
+
+		public float VolumeStepSize
+		{
+			set
+			{
+				CSycles.integrator_set_volume_step_size(Scene.Client.Id, Scene.Id, value);
+			}
+		}
+
+		public int VolumeMaxSteps
+		{
+			set
+			{
+				CSycles.integrator_set_volume_max_steps(Scene.Client.Id, Scene.Id, value);
+			}
+		}
+
+		public int Seed
+		{
+			set
+			{
+				CSycles.integrator_set_seed(Scene.Client.Id, Scene.Id, value);
+			}
+		}
+
+		public float SampleClampDirect
+		{
+			set
+			{
+				CSycles.integrator_set_sample_clamp_direct(Scene.Client.Id, Scene.Id, value);
+			}
+		}
+
+		public float SampleClampIndirect
+		{
+			set
+			{
+				CSycles.integrator_set_sample_clamp_indirect(Scene.Client.Id, Scene.Id, value);
+			}
+		}
+
+		public SamplingPattern SamplingPattern
+		{
+			set
+			{
+				CSycles.integrator_set_sampling_pattern(Scene.Client.Id, Scene.Id, value);
+			}
+		}
 	}
 }

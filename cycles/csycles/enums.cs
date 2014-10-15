@@ -40,6 +40,12 @@ namespace ccl
 		Path
 	}
 
+	public enum SamplingPattern : uint
+	{
+		Sobol = 0,
+		CMJ
+	}
+
 // NOTE: keep in sync with available Cycles nodes
 	public enum ShaderNodeType: uint
 	{

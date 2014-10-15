@@ -515,7 +515,6 @@ namespace ccl
 			cycles_integrator_set_aa_samples(clientId, sceneId, value);
 		}
 
-
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_integrator_set_no_caustics", CallingConvention = CallingConvention.Cdecl)]
 		private static extern void cycles_integrator_set_no_caustics(uint clientId, uint sceneId, bool value);
 		public static void integrator_set_no_caustics(uint clientId, uint sceneId, bool value)
@@ -544,6 +543,68 @@ namespace ccl
 			cycles_integrator_set_method(clientId, sceneId, (int)value);
 		}
 
+		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_integrator_set_sample_all_lights_direct", CallingConvention = CallingConvention.Cdecl)]
+		private static extern void cycles_integrator_set_sample_all_lights_direct(uint clientId, uint sceneId, bool value);
+		public static void integrator_set_sample_all_lights_direct(uint clientId, uint sceneId, bool value)
+		{
+			cycles_integrator_set_sample_all_lights_direct(clientId, sceneId, value);
+		}
+
+		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_integrator_set_sample_all_lights_indirect", CallingConvention = CallingConvention.Cdecl)]
+		private static extern void cycles_integrator_set_sample_all_lights_indirect(uint clientId, uint sceneId, bool value);
+		public static void integrator_set_sample_all_lights_indirect(uint clientId, uint sceneId, bool value)
+		{
+			cycles_integrator_set_sample_all_lights_indirect(clientId, sceneId, value);
+		}
+
+		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_integrator_set_volume_homogeneous_sampling", CallingConvention = CallingConvention.Cdecl)]
+		private static extern void cycles_integrator_set_volume_homogeneous_sampling(uint clientId, uint sceneId, int value);
+		public static void integrator_set_volume_homogeneous_sampling(uint clientId, uint sceneId, int value)
+		{
+			cycles_integrator_set_volume_homogeneous_sampling(clientId, sceneId, value);
+		}
+
+		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_integrator_set_volume_step_size", CallingConvention = CallingConvention.Cdecl)]
+		private static extern void cycles_integrator_set_volume_step_size(uint clientId, uint sceneId, float value);
+		public static void integrator_set_volume_step_size(uint clientId, uint sceneId, float value)
+		{
+			cycles_integrator_set_volume_step_size(clientId, sceneId, value);
+		}
+
+		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_integrator_set_volume_max_steps", CallingConvention = CallingConvention.Cdecl)]
+		private static extern void cycles_integrator_set_volume_max_steps(uint clientId, uint sceneId, int value);
+		public static void integrator_set_volume_max_steps(uint clientId, uint sceneId, int value)
+		{
+			cycles_integrator_set_volume_max_steps(clientId, sceneId, value);
+		}
+
+		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_integrator_set_seed", CallingConvention = CallingConvention.Cdecl)]
+		private static extern void cycles_integrator_set_seed(uint clientId, uint sceneId, int value);
+		public static void integrator_set_seed(uint clientId, uint sceneId, int value)
+		{
+			cycles_integrator_set_seed(clientId, sceneId, value);
+		}
+
+		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_integrator_set_sampling_pattern", CallingConvention = CallingConvention.Cdecl)]
+		private static extern void cycles_integrator_set_sampling_pattern(uint clientId, uint sceneId, uint value);
+		public static void integrator_set_sampling_pattern(uint clientId, uint sceneId, SamplingPattern value)
+		{
+			cycles_integrator_set_sampling_pattern(clientId, sceneId, (uint)value);
+		}
+
+		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_integrator_set_sample_clamp_direct", CallingConvention = CallingConvention.Cdecl)]
+		private static extern void cycles_integrator_set_sample_clamp_direct(uint clientId, uint sceneId, float value);
+		public static void integrator_set_sample_clamp_direct(uint clientId, uint sceneId, float value)
+		{
+			cycles_integrator_set_sample_clamp_direct(clientId, sceneId, value);
+		}
+
+		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_integrator_set_sample_clamp_indirect", CallingConvention = CallingConvention.Cdecl)]
+		private static extern void cycles_integrator_set_sample_clamp_indirect(uint clientId, uint sceneId, float value);
+		public static void integrator_set_sample_clamp_indirect(uint clientId, uint sceneId, float value)
+		{
+			cycles_integrator_set_sample_clamp_indirect(clientId, sceneId, value);
+		}
 
 #endregion
 
