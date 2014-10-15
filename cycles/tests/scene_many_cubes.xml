@@ -21,12 +21,6 @@
 	<camera type="perspective" />
 </transform>
 
-<!-- transform translate="0 0 27" scale="1 1 1" rotate="180 0 0 1">
-	<transform rotate="180 1 0 0">
-		<camera type="perspective" />
-	</transform>
-</transform -->
-
 <!-- ground plane -->
 <transform translate="0 0 0" scale="1000 1000 0">
 	<state interpolation="smooth" shader="cube">
