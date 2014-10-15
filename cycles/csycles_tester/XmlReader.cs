@@ -179,6 +179,7 @@ namespace csycles_tester
 			if (read_string(ref stringvar, node.GetAttribute("sampling_pattern")))
 				state.Scene.Integrator.SamplingPattern = stringvar.Equals("sobol") ? SamplingPattern.Sobol : SamplingPattern.CMJ;
 
+			state.Scene.Integrator.TagForUpdate();
 		}
 
 		/// <summary>
