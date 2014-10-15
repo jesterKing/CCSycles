@@ -123,6 +123,7 @@ namespace csycles_tester
 
 		private void ReadIntegrator(ref XmlReadState state, System.Xml.XmlReader node)
 		{
+			node.Read();
 			/* \todo AA sample stuff */
 			var boolvar = false;
 			var intvar = 0;
