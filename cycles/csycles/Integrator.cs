@@ -27,6 +27,11 @@ namespace ccl
 			Scene = scene;
 		}
 
+		public void TagForUpdate()
+		{
+			CSycles.integrator_tag_update(Scene.Client.Id, Scene.Id);
+		}
+
 		public int MaxBounce
 		{
 			set

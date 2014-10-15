@@ -402,6 +402,13 @@ namespace ccl
 #endregion
 
 #region integrator
+		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_integrator_tag_update", CallingConvention = CallingConvention.Cdecl)]
+		private static extern void cycles_integrator_tag_update(uint clientId, uint sceneId);
+		public static void integrator_tag_update(uint clientId, uint sceneId)
+		{
+			cycles_integrator_tag_update(clientId, sceneId);
+		}
+		
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_integrator_set_max_bounce", CallingConvention = CallingConvention.Cdecl)]
 		private static extern void cycles_integrator_set_max_bounce(uint clientId, uint sceneId, int value);
 		public static void integrator_set_max_bounce(uint clientId, uint sceneId, int value)
