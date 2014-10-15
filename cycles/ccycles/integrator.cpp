@@ -18,6 +18,13 @@ limitations under the License.
 
 extern std::vector<CCScene> scenes;
 
+void cycles_integrater_tag_update(unsigned int client_id, unsigned int scene_id)
+{
+	SCENE_FIND(scene_id)
+		sce->integrator->tag_update(sce);
+	SCENE_FIND_END()
+}
+
 // Integrator settings
 void cycles_integrator_set_max_bounce(unsigned int client_id, unsigned int scene_id, int max_bounce)
 {

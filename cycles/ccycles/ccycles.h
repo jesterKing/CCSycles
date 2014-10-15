@@ -225,6 +225,8 @@ CCL_CAPI void __cdecl cycles_scene_object_set_matrix(unsigned int client_id, uns
 	float m, float n, float o, float p
 	);
 
+/** Tag integrator for update. */
+CCL_CAPI void __cdecl cycles_integrater_tag_update(unsigned int client_id, unsigned int scene_id);
 /** Set the maximum bounces for integrator. */
 CCL_CAPI void __cdecl cycles_integrator_set_max_bounce(unsigned int client_id, unsigned int scene_id, int max_bounce);
 /** Set the minimum bounces for integrator. */
