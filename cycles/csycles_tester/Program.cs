@@ -160,7 +160,7 @@ namespace csycles_tester
 			CSycles.set_kernel_path("lib");
 			CSycles.initialise();
 
-			const uint samples = 5;
+			const uint samples = 50;
 			g_update_callback = StatusUpdateCallback;
 			g_update_render_tile_callback = UpdateRenderTileCallback;
 			g_write_render_tile_callback = WriteRenderTileCallback;
