@@ -133,21 +133,17 @@ namespace csycles_tester
 			read_bool(ref boolvar, node.GetAttribute("branched"));
 			state.Scene.Integrator.IntegratorMethod = boolvar ? IntegratorMethod.BranchedPath : IntegratorMethod.Path;
 
-			if (boolvar)
-			{
-				if (read_int(ref intvar, node.GetAttribute("diffuse_samples"))) state.Scene.Integrator.DiffuseSamples = intvar;
-				if (read_int(ref intvar, node.GetAttribute("glossy_samples"))) state.Scene.Integrator.GlossySamples = intvar;
-				if (read_int(ref intvar, node.GetAttribute("transmission_samples"))) state.Scene.Integrator.TransmissionSamples = intvar;
-				if (read_int(ref intvar, node.GetAttribute("ao_samples"))) state.Scene.Integrator.AoSamples = intvar;
-				if (read_int(ref intvar, node.GetAttribute("mesh_light_samples"))) state.Scene.Integrator.MeshLightSamples = intvar;
-				if (read_int(ref intvar, node.GetAttribute("subsurface_samples"))) state.Scene.Integrator.SubsurfaceSamples = intvar;
-				if (read_int(ref intvar, node.GetAttribute("volume_samples"))) state.Scene.Integrator.VolumeSamples = intvar;
-
-				if (read_bool(ref boolvar, node.GetAttribute("sample_all_lights_direct")))
-					state.Scene.Integrator.SampleAllLightsDirect = boolvar;
-				if (read_bool(ref boolvar, node.GetAttribute("sample_all_lights_indirect")))
-					state.Scene.Integrator.SampleAllLightsIndirect = boolvar;
-			}
+			if (read_bool(ref boolvar, node.GetAttribute("sample_all_lights_direct")))
+				state.Scene.Integrator.SampleAllLightsDirect = boolvar;
+			if (read_bool(ref boolvar, node.GetAttribute("sample_all_lights_indirect")))
+				state.Scene.Integrator.SampleAllLightsIndirect = boolvar;
+			if (read_int(ref intvar, node.GetAttribute("diffuse_samples"))) state.Scene.Integrator.DiffuseSamples = intvar;
+			if (read_int(ref intvar, node.GetAttribute("glossy_samples"))) state.Scene.Integrator.GlossySamples = intvar;
+			if (read_int(ref intvar, node.GetAttribute("transmission_samples"))) state.Scene.Integrator.TransmissionSamples = intvar;
+			if (read_int(ref intvar, node.GetAttribute("ao_samples"))) state.Scene.Integrator.AoSamples = intvar;
+			if (read_int(ref intvar, node.GetAttribute("mesh_light_samples"))) state.Scene.Integrator.MeshLightSamples = intvar;
+			if (read_int(ref intvar, node.GetAttribute("subsurface_samples"))) state.Scene.Integrator.SubsurfaceSamples = intvar;
+			if (read_int(ref intvar, node.GetAttribute("volume_samples"))) state.Scene.Integrator.VolumeSamples = intvar;
 
 			if (read_int(ref intvar, node.GetAttribute("min_bounce"))) state.Scene.Integrator.MinBounce = intvar;
 			if (read_int(ref intvar, node.GetAttribute("max_bounce"))) state.Scene.Integrator.MaxBounce = intvar;
