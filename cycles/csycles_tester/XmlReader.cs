@@ -166,6 +166,7 @@ namespace csycles_tester
 			if (read_bool(ref boolvar, node.GetAttribute("caustics_reflective"))) state.Scene.Integrator.DoCausticsReflective = boolvar;
 			if (read_bool(ref boolvar, node.GetAttribute("caustics_refractive"))) state.Scene.Integrator.DoCausticsRefractive = boolvar;
 			 */
+			if (read_bool(ref boolvar, node.GetAttribute("no_caustics"))) state.Scene.Integrator.NoCaustics = boolvar;
 			if (read_float(ref floatvar, node.GetAttribute("filter_glossy"))) state.Scene.Integrator.FilterGlossy = floatvar;
 
 			if (read_int(ref intvar, node.GetAttribute("seed"))) state.Scene.Integrator.Seed = intvar;
