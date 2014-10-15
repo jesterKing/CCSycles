@@ -125,8 +125,7 @@ namespace csycles_tester
 		/// 
 		/// If all are available then they are read and applied to transform according formula:
 		/// 
-		/// transform = transform * transpose(matrix)
-		/// transform = ((transform * translate) * rotate) * scale
+		/// transform = ((matrix * translate) * rotate) * scale
 		/// </summary>
 		/// <param name="node"></param>
 		/// <param name="transform"></param>
@@ -139,7 +138,7 @@ namespace csycles_tester
 				if(matrix.Length==16)
 				{
 					var t = new Transform(matrix);
-					transform = transform*ccl.Transform.Transpose(t);
+					transform = t;
 				}
 			}
 
