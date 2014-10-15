@@ -15,6 +15,7 @@ limitations under the License.
 **/
 
 using System.Linq;
+using System.Runtime.InteropServices;
 using ccl;
 using ccl.ShaderNodes;
 using ccl.ShaderNodes.Sockets;
@@ -120,6 +121,65 @@ namespace csycles_tester
 
 		}
 
+		private void ReadIntegrator(ref XmlReadState state, System.Xml.XmlReader node)
+		{
+			/* \todo AA sample stuff */
+			var boolvar = false;
+			var intvar = 0;
+			var floatvar = 0.0f;
+			var stringvar = "";
+
+			read_bool(ref boolvar, node.GetAttribute("branched"));
+			state.Scene.Integrator.IntegratorMethod = boolvar ? IntegratorMethod.BranchedPath : IntegratorMethod.Path;
+
+			if (boolvar)
+			{
+				if (read_int(ref intvar, node.GetAttribute("diffuse_samples"))) state.Scene.Integrator.DiffuseSamples = intvar;
+				if (read_int(ref intvar, node.GetAttribute("glossy_samples"))) state.Scene.Integrator.GlossySamples = intvar;
+				if (read_int(ref intvar, node.GetAttribute("transmission_samples"))) state.Scene.Integrator.TransmissionSamples = intvar;
+				if (read_int(ref intvar, node.GetAttribute("ao_samples"))) state.Scene.Integrator.AoSamples = intvar;
+				if (read_int(ref intvar, node.GetAttribute("mesh_light_samples"))) state.Scene.Integrator.MeshLightSamples = intvar;
+				if (read_int(ref intvar, node.GetAttribute("subsurface_samples"))) state.Scene.Integrator.SubsurfaceSamples = intvar;
+				if (read_int(ref intvar, node.GetAttribute("volume_samples"))) state.Scene.Integrator.VolumeSamples = intvar;
+
+				if (read_bool(ref boolvar, node.GetAttribute("sample_all_lights_direct")))
+					state.Scene.Integrator.SampleAllLightsDirect = boolvar;
+				if (read_bool(ref boolvar, node.GetAttribute("sample_all_lights_indirect")))
+					state.Scene.Integrator.SampleAllLightsIndirect = boolvar;
+			}
+
+			if (read_int(ref intvar, node.GetAttribute("min_bounce"))) state.Scene.Integrator.MinBounce = intvar;
+			if (read_int(ref intvar, node.GetAttribute("max_bounce"))) state.Scene.Integrator.MaxBounce = intvar;
+
+			if (read_int(ref intvar, node.GetAttribute("max_diffuse_bounce"))) state.Scene.Integrator.MaxDiffuseBounce = intvar;
+			if (read_int(ref intvar, node.GetAttribute("max_glossy_bounce"))) state.Scene.Integrator.MaxGlossyBounce = intvar;
+			if (read_int(ref intvar, node.GetAttribute("max_transmission_bounce"))) state.Scene.Integrator.MaxTransmissionBounce = intvar;
+			if (read_int(ref intvar, node.GetAttribute("max_volume_bounce"))) state.Scene.Integrator.MaxVolumeBounce = intvar;
+
+			if (read_int(ref intvar, node.GetAttribute("transparent_min_bounce"))) state.Scene.Integrator.TransparentMinBounce = intvar;
+			if (read_int(ref intvar, node.GetAttribute("transparent_max_bounce"))) state.Scene.Integrator.TransparentMaxBounce = intvar;
+			if (read_bool(ref boolvar, node.GetAttribute("transparent_shadows"))) state.Scene.Integrator.TransparentShadows = boolvar;
+
+			if (read_int(ref intvar, node.GetAttribute("volume_homogeneous_sampling"))) state.Scene.Integrator.VolumeHomogeneousSampling = intvar;
+			if (read_float(ref floatvar, node.GetAttribute("volume_step_size"))) state.Scene.Integrator.VolumeStepSize = floatvar;
+			if (read_int(ref intvar, node.GetAttribute("volume_max_steps"))) state.Scene.Integrator.VolumeMaxSteps = intvar;
+
+			/* \todo wrap caustics form separation
+			 * 
+			if (read_bool(ref boolvar, node.GetAttribute("caustics_reflective"))) state.Scene.Integrator.DoCausticsReflective = boolvar;
+			if (read_bool(ref boolvar, node.GetAttribute("caustics_refractive"))) state.Scene.Integrator.DoCausticsRefractive = boolvar;
+			 */
+			if (read_float(ref floatvar, node.GetAttribute("filter_glossy"))) state.Scene.Integrator.FilterGlossy = floatvar;
+
+			if (read_int(ref intvar, node.GetAttribute("seed"))) state.Scene.Integrator.Seed = intvar;
+			if (read_float(ref floatvar, node.GetAttribute("sample_clamp_direct"))) state.Scene.Integrator.SampleClampDirect = floatvar;
+			if (read_float(ref floatvar, node.GetAttribute("sample_clamp_indirect"))) state.Scene.Integrator.SampleClampIndirect = floatvar;
+
+			if (read_string(ref stringvar, node.GetAttribute("sampling_pattern")))
+				state.Scene.Integrator.SamplingPattern = stringvar.Equals("sobol") ? SamplingPattern.Sobol : SamplingPattern.CMJ;
+
+		}
+
 		/// <summary>
 		/// Read a transform from XML.
 		/// 
@@ -211,6 +271,42 @@ namespace csycles_tester
 			}
 
 			return realfloats;
+		}
+
+		private bool read_bool(ref bool val, string booleanstring)
+		{
+			if (string.IsNullOrEmpty(booleanstring))
+			{
+				val = false;
+				return false;
+			}
+
+			val = bool.Parse(booleanstring);
+			return true;
+		}
+
+		private bool read_int(ref int val, string intstring)
+		{
+			if (string.IsNullOrEmpty(intstring)) return false;
+
+			val = int.Parse(intstring);
+			return true;
+		}
+
+		private bool read_string(ref string val, string stringstring)
+		{
+			if (string.IsNullOrEmpty(stringstring)) return false;
+
+			val = stringstring;
+			return true;
+		}
+
+		private bool read_float(ref float val, string floatstring)
+		{
+			if (string.IsNullOrEmpty(floatstring)) return false;
+
+			val = float.Parse(floatstring);
+			return true;
 		}
 
 		private void get_float(FloatSocket socket, string nr)
@@ -353,6 +449,9 @@ namespace csycles_tester
 						node.Read(); /* advance one forward */
 						ReadScene(ref state_substate, node.ReadSubtree());
 						break;
+					case "integrator":
+						ReadIntegrator(ref state, node.ReadSubtree());
+						break;
 					case "shader":
 						var shader_substate = new XmlReadState(state);
 						ReadShader(ref shader_substate, node.ReadSubtree());
@@ -361,7 +460,7 @@ namespace csycles_tester
 						ReadMesh(ref state, node.ReadSubtree());
 						break;
 					case "include":
-						string src = node.GetAttribute("src");
+						var src = node.GetAttribute("src");
 						if (!string.IsNullOrEmpty(src))
 						{
 							ReadInclude(ref state, src);
@@ -404,14 +503,18 @@ namespace csycles_tester
 						break;
 					case "brick_texture":
 						var bricktex = new BrickTexture();
-						var offset = node.GetAttribute("offset");
-						var offset_frequency = node.GetAttribute("offset_frequency");
-						var squash = node.GetAttribute("squash");
-						var squash_frequency = node.GetAttribute("squash_offset");
-						if(!string.IsNullOrEmpty(offset)) bricktex.Offset = float.Parse(offset);
-						if(!string.IsNullOrEmpty(offset_frequency)) bricktex.OffsetFrequency = int.Parse(offset_frequency);
-						if(!string.IsNullOrEmpty(squash)) bricktex.Squash = float.Parse(squash);
-						if(!string.IsNullOrEmpty(squash_frequency)) bricktex.SquashFrequency = int.Parse(squash_frequency);
+						var offset = 0.0f;
+						var offset_frequency = 0;
+						var squash = 0.0f;
+						var squash_frequency = 0;
+						if (read_float(ref offset, node.GetAttribute("offset")))
+							bricktex.Offset = offset;
+						if (read_int(ref offset_frequency, node.GetAttribute("offset_frequency")))
+							bricktex.OffsetFrequency = offset_frequency;
+						if (read_float(ref squash, node.GetAttribute("squash")))
+							bricktex.Squash = squash;
+						if (read_int(ref squash_frequency, node.GetAttribute("squash_frequency")))
+							bricktex.SquashFrequency = squash_frequency;
 
 						get_float4(bricktex.ins.Color1, node.GetAttribute("color1"));
 						get_float4(bricktex.ins.Color2, node.GetAttribute("color2"));
