@@ -12,16 +12,20 @@
 
 <!-- Camera -->
 <camera width="1280" height="960" type="perspective" />
-<camera aperturesize="0.0" fov="49.134" />
+<camera aperturesize="0.0" fov="0.661" />
 <camera nearclip="0.1" farclip="100.0" />
-<camera focaldistance="35.0" />
-<camera sensorwidth="32.0" sensorheight="32.0" />
+<camera focaldistance="0.0" />
+<camera sensorwidth="32.0" sensorheight="18.0" />
 
-<transform translate="0 0 27" scale="1 1 1" rotate="180 0 0 1">
+<transform matrix="1.0 0.0 0.0 0.0 0.0 -1.0 0.0 0.0 0.0 0.0 -1.0 27.0 0.0 0.0 0.0 1.0">
+	<camera type="perspective" />
+</transform>
+
+<!-- transform translate="0 0 27" scale="1 1 1" rotate="180 0 0 1">
 	<transform rotate="180 1 0 0">
 		<camera type="perspective" />
 	</transform>
-</transform>
+</transform -->
 
 <!-- ground plane -->
 <transform translate="0 0 0" scale="1000 1000 0">
