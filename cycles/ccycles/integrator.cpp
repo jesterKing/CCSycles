@@ -18,7 +18,7 @@ limitations under the License.
 
 extern std::vector<CCScene> scenes;
 
-void cycles_integrater_tag_update(unsigned int client_id, unsigned int scene_id)
+void cycles_integrator_tag_update(unsigned int client_id, unsigned int scene_id)
 {
 	SCENE_FIND(scene_id)
 		sce->integrator->tag_update(sce);

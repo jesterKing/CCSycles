@@ -43,7 +43,7 @@ EXPORTS
 
   cycles_scene_object_set_matrix
 
-  cycles_integrater_tag_update
+  cycles_integrator_tag_update
   cycles_integrator_set_max_bounce
   cycles_integrator_set_min_bounce
   cycles_integrator_set_no_caustics
