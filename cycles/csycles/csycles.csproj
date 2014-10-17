@@ -50,7 +50,16 @@
     <Compile Include="Background.cs" />
     <Compile Include="Camera.cs" />
     <Compile Include="Client.cs" />
+    <Compile Include="CSycles.Camera.cs" />
     <Compile Include="CSycles.cs" />
+    <Compile Include="CSycles.Device.cs" />
+    <Compile Include="CSycles.Integrator.cs" />
+    <Compile Include="CSycles.Light.cs" />
+    <Compile Include="CSycles.Mesh.cs" />
+    <Compile Include="CSycles.Object.cs" />
+    <Compile Include="CSycles.Scene.cs" />
+    <Compile Include="CSycles.Session.cs" />
+    <Compile Include="CSycles.Shader.cs" />
     <Compile Include="Device.cs" />
     <Compile Include="enums.cs" />
     <Compile Include="float4.cs" />
