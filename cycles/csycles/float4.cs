@@ -51,7 +51,7 @@ namespace ccl
 
 		public static float4 operator /(float4 a, float b)
 		{
-			float inv = 1.0f/b;
+			var inv = 1.0f/b;
 			return new float4(a.x*inv, a.y*inv, a.z*inv, a.w*inv);
 		}
 
