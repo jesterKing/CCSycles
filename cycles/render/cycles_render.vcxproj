@@ -50,7 +50,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\..\..\..\boost_1_55_0;$(ProjectDir)..\..\pthreads;$(ProjectDir)..\..\glew\include;$(ProjectDir)..\..\OpenImageIO\include;$(ProjectDir)..\device;$(ProjectDir)..\util;$(ProjectDir)..\kernel;$(ProjectDir)..\kernel\osl;$(ProjectDir)..\kernel\svm;$(ProjectDir)..\bvh</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\bindeps\boost_1_55_0;$(ProjectDir)..\pthreads;$(ProjectDir)..\glew\include;$(ProjectDir)..\OpenImageIO\include;$(ProjectDir)..\cycles\device;$(ProjectDir)..\cycles\util;$(ProjectDir)..\cycles\kernel;$(ProjectDir)..\cycles\kernel\osl;$(ProjectDir)..\cycles\kernel\svm;$(ProjectDir)..\cycles\bvh</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;CCL_NAMESPACE_BEGIN=namespace ccl {;CCL_NAMESPACE_END=};WITH_OPENCL;WITH_CUDA;WITH_MULTI;DEBUG;_DEBUG;NO_OIIO_LOADING</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <FloatingPointModel>Fast</FloatingPointModel>
@@ -67,7 +67,7 @@
     </Link>
     <Lib>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
-      <AdditionalLibraryDirectories>$(ProjectDir)..\..\..\..\..\..\boost_1_55_0\stage$(Configuration)\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\bindeps\boost_1_55_0\stage$(Configuration)\lib</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -76,7 +76,7 @@
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>false</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\..\..\..\boost_1_55_0;$(ProjectDir)..\..\pthreads;$(ProjectDir)..\..\glew\include;$(ProjectDir)..\..\OpenImageIO\include;$(ProjectDir)..\device;$(ProjectDir)..\util;$(ProjectDir)..\kernel;$(ProjectDir)..\kernel\osl;$(ProjectDir)..\kernel\svm;$(ProjectDir)..\bvh</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\bindeps\boost_1_55_0;$(ProjectDir)..\pthreads;$(ProjectDir)..\glew\include;$(ProjectDir)..\OpenImageIO\include;$(ProjectDir)..\cycles\device;$(ProjectDir)..\cycles\util;$(ProjectDir)..\cycles\kernel;$(ProjectDir)..\cycles\kernel\osl;$(ProjectDir)..\cycles\kernel\svm;$(ProjectDir)..\cycles\bvh</AdditionalIncludeDirectories>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <WholeProgramOptimization>false</WholeProgramOptimization>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;CCL_NAMESPACE_BEGIN=namespace ccl {;CCL_NAMESPACE_END=};WITH_OPENCL;WITH_CUDA;WITH_MULTI;NDEBUG;NO_OIIO_LOADING</PreprocessorDefinitions>
@@ -95,7 +95,7 @@
     </Link>
     <Lib>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
-      <AdditionalLibraryDirectories>$(ProjectDir)..\..\..\..\..\..\boost_1_55_0\stage$(Configuration)\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\bindeps\boost_1_55_0\stage$(Configuration)\lib</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
