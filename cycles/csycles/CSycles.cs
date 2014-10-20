@@ -34,6 +34,9 @@ namespace ccl
 		[DllImport("kernel32", SetLastError = true, CharSet = CharSet.Unicode)]
 		private static extern IntPtr LoadLibrary(string filename);
 
+		/// <summary>
+		/// Load the ccycles DLL.
+		/// </summary>
 		private static void LoadCCycles()
 		{
 			if (g_ccycles_loaded) return;
