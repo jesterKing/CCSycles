@@ -4,11 +4,9 @@ C[CS]?ycles : CCycles and CSycles for Cycles
 C[CS]?ycles aims to provide a C API around Cycles. Building on CCycles also a
 C# wrapper is available.
 
-*Note 1* current work relies on Boost 1.55.0 being in a specific location, and the
-stage/ folder with libraries. A prebuilt version with properly named libs and
-paths can be downloaded at: https://dl.dropboxusercontent.com/u/1769373/boost_1_55_0.7z . A build tutorial can be found here: https://www.youtube.com/watch?v=ENyjG7h5Dxw
+*Note 1* Use the bindeps branch to be able to compile. Get the compressed archive at: https://dl.dropboxusercontent.com/u/1769373/bindeps.7z . This needs to be extracted so the contained bindeps folder is placed next to the solution file. The bindeps archive contains pre-compiled libraries for Boost and OpenEXR half.
 
-*Note 2* This is currently targeted at Windows platform only, but patches to
+*Note 2* This is currently targeted at Windows 64bit platform only, but patches to
 improve cross-platform compiling and executing are likely candidates for
 acceptance
 
@@ -20,8 +18,6 @@ of both parts is conducted in this repository.
 *Note 4* No OSL support effort has been made, as for the RhinoCycles plugin the focus is on CUDA support.
 
 *Note 5* The C[CS]?ycles main developer is Nathan Letwory. You can contact him at nathan@mcneel.com or find him as jesterKing in IRC channel #blendercoders of the Freenode network.
-
-*Note 6* CUDA precompiled kernels are found in a 'special' location. This needs to be made configurable as well.
 
 ROADMAP / TODO
 ==============
