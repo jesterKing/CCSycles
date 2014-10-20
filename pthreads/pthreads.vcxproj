@@ -57,7 +57,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>Copy "$(TargetPath)" "$(ProjectDir)..\..\..\..\..\bin\$(Configuration)"</Command>
+      <Command>Copy "$(TargetPath)" "$(ProjectDir)..\cycles\csycles_tester\bin\$(Configuration)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -77,7 +77,7 @@
       <ShowProgress />
     </Link>
     <PostBuildEvent>
-      <Command>Copy "$(TargetPath)" "$(ProjectDir)..\..\..\..\..\bin\$(Configuration)"</Command>
+      <Command>Copy "$(TargetPath)" "$(ProjectDir)..\cycles\csycles_tester\bin\$(Configuration)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
