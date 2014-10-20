@@ -125,7 +125,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\..\..\..\boost_1_55_0;$(ProjectDir)..\..\glew\include;$(ProjectDir)..\..\OpenImageIO\include;$(ProjectDir)..\..\pthreads</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\bindeps\boost_1_55_0;$(ProjectDir)..\..\glew\include;$(ProjectDir)..\..\OpenImageIO\include;$(ProjectDir)..\..\pthreads</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;CCL_NAMESPACE_BEGIN=namespace ccl {;CCL_NAMESPACE_END=};WITH_OPENCL;WITH_CUDA;WITH_MULTI;DEBUG;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <FloatingPointModel>Fast</FloatingPointModel>
@@ -151,7 +151,7 @@
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>false</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\..\..\..\boost_1_55_0;$(ProjectDir)..\..\glew\include;$(ProjectDir)..\..\OpenImageIO\include;$(ProjectDir)..\..\pthreads</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\bindeps\boost_1_55_0;$(ProjectDir)..\..\glew\include;$(ProjectDir)..\..\OpenImageIO\include;$(ProjectDir)..\..\pthreads</AdditionalIncludeDirectories>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
       <WholeProgramOptimization>false</WholeProgramOptimization>
       <PreprocessorDefinitions>NDEBUG;_CRT_SECURE_NO_WARNINGS;WITH_BOOL_COMPAT;WIN32;_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_DEPRECATE;_CONSOLE;_LIB;__SSE__;__MMX__;__SSE2__;__LITTLE_ENDIAN__;OPJ_STATIC;WITH_KERNEL_SSE2;WITH_KERNEL_SSE3;WITH_KERNEL_SSE41;WITH_KERNEL_AVX2;WITH_KERNEL_AVX;BOOST_ALL_NO_LIB;USE_TBB=0;CCL_NAMESPACE_BEGIN=namespace ccl {;CCL_NAMESPACE_END=};WITH_OPENCL;WITH_CUDA;WITH_MULTI;NOMINMAX;%(PreprocessorDefinitions);PTW32_STATIC_LIB</PreprocessorDefinitions>
@@ -196,7 +196,7 @@
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>false</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\..\..\..\boost_1_55_0;$(ProjectDir)..\..\glew\include;$(ProjectDir)..\..\OpenImageIO\include;$(ProjectDir)..\..\pthreads</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\bindeps\boost_1_55_0;$(ProjectDir)..\..\glew\include;$(ProjectDir)..\..\OpenImageIO\include;$(ProjectDir)..\..\pthreads</AdditionalIncludeDirectories>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <WholeProgramOptimization>false</WholeProgramOptimization>
       <PreprocessorDefinitions>_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;CCL_NAMESPACE_BEGIN=namespace ccl {;CCL_NAMESPACE_END=};WITH_OPENCL;WITH_CUDA;WITH_MULTI;NDEBUG;NOMINMAXs;PTW32_STATIC_LIBs</PreprocessorDefinitions>

@@ -111,7 +111,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>
       </SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\..\..\..\boost_1_55_0;$(ProjectDir)..\..\OpenImageIO\include;$(ProjectDir)..\..\pthreads;$(ProjectDir)..\bvh;$(ProjectDir)..\device;$(ProjectDir)..\kernel;$(ProjectDir)..\render;$(ProjectDir)..\subd;$(ProjectDir)..\util</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\bindeps\boost_1_55_0;$(ProjectDir)..\..\OpenImageIO\include;$(ProjectDir)..\..\pthreads;$(ProjectDir)..\bvh;$(ProjectDir)..\device;$(ProjectDir)..\kernel;$(ProjectDir)..\render;$(ProjectDir)..\subd;$(ProjectDir)..\util</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>DEBUG;CCL_CAPI_DLL;GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;CCL_NAMESPACE_BEGIN=namespace ccl {;CCL_NAMESPACE_END=};%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BufferSecurityCheck>false</BufferSecurityCheck>
@@ -170,7 +170,7 @@ Copy "$(ProjectDir)..\lib\*.cubin" "$(ProjectDir)..\..\..\..\..\..\bin\$(Configu
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>
       </SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\..\..\..\boost_1_55_0;$(ProjectDir)..\..\OpenImageIO\include;$(ProjectDir)..\..\pthreads;$(ProjectDir)..\bvh;$(ProjectDir)..\device;$(ProjectDir)..\kernel;$(ProjectDir)..\render;$(ProjectDir)..\subd;$(ProjectDir)..\util</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\bindeps\boost_1_55_0;$(ProjectDir)..\..\OpenImageIO\include;$(ProjectDir)..\..\pthreads;$(ProjectDir)..\bvh;$(ProjectDir)..\device;$(ProjectDir)..\kernel;$(ProjectDir)..\render;$(ProjectDir)..\subd;$(ProjectDir)..\util</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>CCL_CAPI_DLL;GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;CCL_NAMESPACE_BEGIN=namespace ccl {;CCL_NAMESPACE_END=};%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <FloatingPointModel>Fast</FloatingPointModel>
