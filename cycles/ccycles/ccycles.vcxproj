@@ -121,7 +121,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)..\..\..\..\..\..\boost_1_55_0\stage$(Configuration)\lib;$(ProjectDir)..\..\OpenImageIO\$(Platform)\$(Configuration)\;$(ProjectDir)..\..\pthreads\$(Platform)\$(Configuration)\;$(ProjectDir)..\..\glew\$(Platform)\$(Configuration)\;$(ProjectDir)..\bvh\$(Platform)\$(Configuration)\;$(ProjectDir)..\device\$(Platform)\$(Configuration)\;$(ProjectDir)..\kernel\$(Platform)\$(Configuration)\;$(ProjectDir)..\render\$(Platform)\$(Configuration)\;$(ProjectDir)..\subd\$(Platform)\$(Configuration)\;$(ProjectDir)..\util\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\..\bindeps\boost_1_55_0\$(Configuration)\lib;$(ProjectDir)..\..\OpenImageIO\$(Platform)\$(Configuration)\;$(ProjectDir)..\..\pthreads\$(Platform)\$(Configuration)\;$(ProjectDir)..\..\glew\$(Platform)\$(Configuration)\;$(ProjectDir)..\bvh\$(Platform)\$(Configuration)\;$(ProjectDir)..\device\$(Platform)\$(Configuration)\;$(ProjectDir)..\kernel\$(Platform)\$(Configuration)\;$(ProjectDir)..\render\$(Platform)\$(Configuration)\;$(ProjectDir)..\subd\$(Platform)\$(Configuration)\;$(ProjectDir)..\util\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>libboost_serialization-vc120-mt-gd-1_55.lib;libboost_filesystem-vc120-mt-gd-1_55.lib;libboost_chrono-vc120-mt-gd-1_55.lib;libboost_date_time-vc120-mt-gd-1_55.lib;libboost_locale-vc120-mt-gd-1_55.lib;libboost_regex-vc120-mt-gd-1_55.lib;libboost_system-vc120-mt-gd-1_55.lib;libboost_thread-vc120-mt-gd-1_55.lib;glew.lib;pthreads.lib;OpenImageIO.lib;opengl32.lib;cycles_device.lib;cycles_util.lib;cycles_kernel.lib;cycles_kernel_avx.lib;cycles_kernel_avx2.lib;cycles_kernel_sse2.lib;cycles_kernel_sse3.lib;cycles_kernel_sse41.lib;cycles_bvh.lib;cycles_subd.lib;cycles_render.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ShowProgress>
       </ShowProgress>
@@ -130,11 +130,11 @@
       <ModuleDefinitionFile>cycles_api.def</ModuleDefinitionFile>
     </Link>
     <PostBuildEvent>
-      <Command>Copy "$(TargetPath)" "$(ProjectDir)..\..\..\..\..\..\bin\$(Configuration)\Plug-ins"
+      <Command>Copy "$(TargetPath)" "$(ProjectDir)..\csycles_tester\bin\$(Configuration)"
 
-MkDir "$(ProjectDir)..\..\..\..\..\..\bin\$(Configuration)\Plug-ins\RhinoCycles\lib"
+MkDir "$(ProjectDir)..\csycles_tester\bin\$(Configuration)\lib"
 
-Copy "$(ProjectDir)..\lib\*.cubin" "$(ProjectDir)..\..\..\..\..\..\bin\$(Configuration)\Plug-ins\RhinoCycles\lib"</Command>
+Copy "$(ProjectDir)..\lib\*.cubin" "$(ProjectDir)..\csycles_tester\bin\$(Configuration)\lib"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -183,7 +183,7 @@ Copy "$(ProjectDir)..\lib\*.cubin" "$(ProjectDir)..\..\..\..\..\..\bin\$(Configu
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(ProjectDir)..\..\..\..\..\..\boost_1_55_0\stage$(Configuration)\lib;$(ProjectDir)..\..\OpenImageIO\$(Platform)\$(Configuration)\;$(ProjectDir)..\..\pthreads\$(Platform)\$(Configuration)\;$(ProjectDir)..\..\glew\$(Platform)\$(Configuration)\;$(ProjectDir)..\bvh\$(Platform)\$(Configuration)\;$(ProjectDir)..\device\$(Platform)\$(Configuration)\;$(ProjectDir)..\kernel\$(Platform)\$(Configuration)\;$(ProjectDir)..\render\$(Platform)\$(Configuration)\;$(ProjectDir)..\subd\$(Platform)\$(Configuration)\;$(ProjectDir)..\util\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\..\bindeps\boost_1_55_0\$(Configuration)\lib;$(ProjectDir)..\..\OpenImageIO\$(Platform)\$(Configuration)\;$(ProjectDir)..\..\pthreads\$(Platform)\$(Configuration)\;$(ProjectDir)..\..\glew\$(Platform)\$(Configuration)\;$(ProjectDir)..\bvh\$(Platform)\$(Configuration)\;$(ProjectDir)..\device\$(Platform)\$(Configuration)\;$(ProjectDir)..\kernel\$(Platform)\$(Configuration)\;$(ProjectDir)..\render\$(Platform)\$(Configuration)\;$(ProjectDir)..\subd\$(Platform)\$(Configuration)\;$(ProjectDir)..\util\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>libboost_serialization-vc120-mt-1_55.lib;libboost_filesystem-vc120-mt-1_55.lib;libboost_chrono-vc120-mt-1_55.lib;libboost_date_time-vc120-mt-1_55.lib;libboost_locale-vc120-mt-1_55.lib;libboost_regex-vc120-mt-1_55.lib;libboost_system-vc120-mt-1_55.lib;libboost_thread-vc120-mt-1_55.lib;glew.lib;pthreads.lib;OpenImageIO.lib;opengl32.lib;cycles_device.lib;cycles_util.lib;cycles_kernel.lib;cycles_kernel_avx.lib;cycles_kernel_avx2.lib;cycles_kernel_sse2.lib;cycles_kernel_sse3.lib;cycles_kernel_sse41.lib;cycles_bvh.lib;cycles_subd.lib;cycles_render.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ShowProgress />
       <RandomizedBaseAddress>true</RandomizedBaseAddress>
@@ -191,11 +191,11 @@ Copy "$(ProjectDir)..\lib\*.cubin" "$(ProjectDir)..\..\..\..\..\..\bin\$(Configu
       <ModuleDefinitionFile>cycles_api.def</ModuleDefinitionFile>
     </Link>
     <PostBuildEvent>
-      <Command>Copy "$(TargetPath)" "$(ProjectDir)..\..\..\..\..\..\bin\$(Configuration)\Plug-ins"
+      <Command>Copy "$(TargetPath)" "$(ProjectDir)..\csycles_tester\bin\$(Configuration)"
 
-MkDir "$(ProjectDir)..\..\..\..\..\..\bin\$(Configuration)\Plug-ins\RhinoCycles\lib"
+MkDir "$(ProjectDir)..\csycles_tester\bin\$(Configuration)\lib"
 
-Copy "$(ProjectDir)..\lib\*.cubin" "$(ProjectDir)..\..\..\..\..\..\bin\$(Configuration)\Plug-ins\RhinoCycles\lib"</Command>
+Copy "$(ProjectDir)..\lib\*.cubin" "$(ProjectDir)..\csycles_tester\bin\$(Configuration)\lib"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

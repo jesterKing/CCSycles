@@ -114,7 +114,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>Copy /Y "$(TargetPath)" "$(ProjectDir)..\..\..\..\..\..\$(OutDir)Plug-ins"</PostBuildEvent>
+    <PostBuildEvent>Copy /Y "$(TargetPath)" "$(ProjectDir)..\csycles_tester\bin\$(ConfigurationName)"</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>

@@ -147,7 +147,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(ProjectDir)include\OpenImageIO;$(ProjectDir)..\..\..\..\..\boost_1_55_0;$(ProjectDir)..\..\OpenEXR\Half</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include\OpenImageIO;$(ProjectDir)..\bindeps\boost_1_55_0;$(ProjectDir)..\bindeps\OpenEXR\Half</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>OpenImageIO_EXPORTS</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <FloatingPointModel>Fast</FloatingPointModel>
@@ -159,14 +159,14 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)..\..\..\..\..\boost_1_55_0\stage$(Configuration)\lib;$(ProjectDir)..\..\OpenEXR\Half\$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\bindeps\boost_1_55_0\$(Configuration)\lib;$(ProjectDir)..\bindeps\OpenEXR\Half\$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
       <AdditionalDependencies>Half_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Lib>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
     </Lib>
     <PostBuildEvent>
-      <Command>Copy "$(TargetPath)" "$(ProjectDir)..\..\..\..\..\bin\$(Configuration)"</Command>
+      <Command>Copy "$(TargetPath)" "$(ProjectDir)..\cycles\csycles_tester\bin\$(Configuration)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='PseudoDebug|x64'">
@@ -175,7 +175,7 @@
       <Optimization>Disabled</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>false</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>$(ProjectDir)include\OpenImageIO;$(ProjectDir)..\..\..\..\..\boost_1_55_0;$(ProjectDir)..\..\OpenEXR\Half</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include\OpenImageIO;$(ProjectDir)..\bindeps\boost_1_55_0;$(ProjectDir)..\bindeps\OpenEXR\Half</AdditionalIncludeDirectories>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <WholeProgramOptimization>false</WholeProgramOptimization>
       <PreprocessorDefinitions>OpenImageIO_EXPORTS</PreprocessorDefinitions>
@@ -190,13 +190,13 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(ProjectDir)..\..\..\..\..\boost_1_55_0\stage$(Configuration)\lib;$(ProjectDir)..\..\OpenEXR\Half\$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\bindeps\boost_1_55_0\$(Configuration)\lib;$(ProjectDir)..\bindeps\OpenEXR\Half\$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
     <Lib>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
     </Lib>
     <PostBuildEvent>
-      <Command>Copy "$(TargetPath)" "$(ProjectDir)..\..\..\..\..\bin\$(Configuration)"</Command>
+      <Command>Copy "$(TargetPath)" "$(ProjectDir)..\cycles\csycles_tester\bin\$(Configuration)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -224,7 +224,7 @@
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>false</FunctionLevelLinking>
       <IntrinsicFunctions>false</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>$(ProjectDir)include\OpenImageIO;$(ProjectDir)..\..\..\..\..\boost_1_55_0;$(ProjectDir)..\..\OpenEXR\Half</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include\OpenImageIO;$(ProjectDir)..\bindeps\boost_1_55_0;$(ProjectDir)..\bindeps\OpenEXR\Half</AdditionalIncludeDirectories>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <WholeProgramOptimization>false</WholeProgramOptimization>
       <PreprocessorDefinitions>OpenImageIO_EXPORTS</PreprocessorDefinitions>
@@ -239,7 +239,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(ProjectDir)..\..\..\..\..\boost_1_55_0\stage$(Configuration)\lib;$(ProjectDir)..\..\OpenEXR\Half\$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\bindeps\boost_1_55_0\$(Configuration)\lib;$(ProjectDir)..\bindeps\OpenEXR\Half\$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
       <AdditionalDependencies>Half.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ShowProgress />
     </Link>
@@ -247,7 +247,7 @@
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
     </Lib>
     <PostBuildEvent>
-      <Command>Copy "$(TargetPath)" "$(ProjectDir)..\..\..\..\..\bin\$(Configuration)"</Command>
+      <Command>Copy "$(TargetPath)" "$(ProjectDir)..\cycles\csycles_tester\bin\$(Configuration)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='PseudoDebug|Win32'">
