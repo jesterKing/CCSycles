@@ -14,8 +14,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 **/
 
+using System.Configuration;
+using System.Globalization;
 using System.Linq;
-using System.Runtime.InteropServices;
 using ccl;
 using ccl.ShaderNodes;
 using ccl.ShaderNodes.Sockets;
@@ -30,10 +31,12 @@ namespace csycles_tester
 	{
 		private Client Client { get; set; }
 		private string Path { get; set; }
+		private NumberFormatInfo NumberFormatInfo { get; set; }
 		public XmlReader(Client client, string path)
 		{
 			Client = client;
 			Path = path;
+			NumberFormatInfo = NumberFormatInfo.InvariantInfo;
 		}
 
 		public static float DegToRad(float ang)
@@ -79,25 +82,25 @@ namespace csycles_tester
 				}
 			}
 
-			if (!string.IsNullOrEmpty(fov)) Client.Scene.Camera.Fov = float.Parse(fov);
+			if (!string.IsNullOrEmpty(fov)) Client.Scene.Camera.Fov = float.Parse(fov, NumberFormatInfo);
 
-			if (!string.IsNullOrEmpty(nearclip)) Client.Scene.Camera.NearClip = float.Parse(nearclip);
+			if (!string.IsNullOrEmpty(nearclip)) Client.Scene.Camera.NearClip = float.Parse(nearclip, NumberFormatInfo);
 
-			if (!string.IsNullOrEmpty(farclip)) Client.Scene.Camera.FarClip = float.Parse(farclip);
+			if (!string.IsNullOrEmpty(farclip)) Client.Scene.Camera.FarClip = float.Parse(farclip, NumberFormatInfo);
 
-			if (!string.IsNullOrEmpty(aperturesize)) Client.Scene.Camera.ApertureSize = float.Parse(aperturesize);
+			if (!string.IsNullOrEmpty(aperturesize)) Client.Scene.Camera.ApertureSize = float.Parse(aperturesize, NumberFormatInfo);
 
-			if (!string.IsNullOrEmpty(focaldistance)) Client.Scene.Camera.FocalDistance = float.Parse(focaldistance);
+			if (!string.IsNullOrEmpty(focaldistance)) Client.Scene.Camera.FocalDistance = float.Parse(focaldistance, NumberFormatInfo);
 
-			if (!string.IsNullOrEmpty(shuttertime)) Client.Scene.Camera.ShutterTime = float.Parse(shuttertime);
+			if (!string.IsNullOrEmpty(shuttertime)) Client.Scene.Camera.ShutterTime = float.Parse(shuttertime, NumberFormatInfo);
 
-			if (!string.IsNullOrEmpty(fisheye_fov)) Client.Scene.Camera.FishEyeFov = float.Parse(fisheye_fov);
+			if (!string.IsNullOrEmpty(fisheye_fov)) Client.Scene.Camera.FishEyeFov = float.Parse(fisheye_fov, NumberFormatInfo);
 
-			if (!string.IsNullOrEmpty(fisheye_lens)) Client.Scene.Camera.FishEyeLens = float.Parse(fisheye_lens);
+			if (!string.IsNullOrEmpty(fisheye_lens)) Client.Scene.Camera.FishEyeLens = float.Parse(fisheye_lens, NumberFormatInfo);
 
-			if (!string.IsNullOrEmpty(sensorwidth)) Client.Scene.Camera.SensorWidth = float.Parse(sensorwidth);
+			if (!string.IsNullOrEmpty(sensorwidth)) Client.Scene.Camera.SensorWidth = float.Parse(sensorwidth, NumberFormatInfo);
 
-			if (!string.IsNullOrEmpty(sensorheight)) Client.Scene.Camera.SensorHeight = float.Parse(sensorheight);
+			if (!string.IsNullOrEmpty(sensorheight)) Client.Scene.Camera.SensorHeight = float.Parse(sensorheight, NumberFormatInfo);
 
 			Client.Scene.Camera.Matrix = state.Transform;
 			Client.Scene.Camera.ComputeAutoViewPlane();
@@ -248,7 +251,7 @@ namespace csycles_tester
 				state.Shader = state.Scene.ShaderWithName(shader);
 			}
 
-			if (!string.IsNullOrEmpty(dicing_rate)) state.DicingRate = float.Parse(dicing_rate);
+			if (!string.IsNullOrEmpty(dicing_rate)) state.DicingRate = float.Parse(dicing_rate, NumberFormatInfo);
 			if (!string.IsNullOrEmpty(interpolation)) state.Smooth = interpolation.Equals("smooth", StringComparison.OrdinalIgnoreCase);
 
 			if (!string.IsNullOrEmpty(displacement_method))
@@ -266,7 +269,7 @@ namespace csycles_tester
 			var realfloats = new float[fs.Length];
 			for (var i = 0; i < fs.Length; i++)
 			{
-				realfloats[i] = float.Parse(fs[i]);
+				realfloats[i] = float.Parse(fs[i], NumberFormatInfo);
 			}
 
 			return realfloats;
@@ -304,7 +307,7 @@ namespace csycles_tester
 		{
 			if (string.IsNullOrEmpty(floatstring)) return false;
 
-			val = float.Parse(floatstring);
+			val = float.Parse(floatstring, NumberFormatInfo);
 			return true;
 		}
 
@@ -312,7 +315,7 @@ namespace csycles_tester
 		{
 			if (string.IsNullOrEmpty(nr)) return;
 
-			socket.Value = float.Parse(nr);
+			socket.Value = float.Parse(nr, NumberFormatInfo);
 		}
 
 		private void get_float4(Float4Socket socket, string floats)
@@ -550,11 +553,11 @@ namespace csycles_tester
 						}
 						if (!string.IsNullOrEmpty(turbidity))
 						{
-							skynode.Turbidity = float.Parse(turbidity);
+							skynode.Turbidity = float.Parse(turbidity, NumberFormatInfo);
 						}
 						if (!string.IsNullOrEmpty(ground_albedo))
 						{
-							skynode.GroundAlbedo = float.Parse(ground_albedo);
+							skynode.GroundAlbedo = float.Parse(ground_albedo, NumberFormatInfo);
 						}
 						if(!string.IsNullOrEmpty(sky_type))
 						{
