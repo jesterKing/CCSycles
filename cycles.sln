@@ -27,6 +27,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "csycles_tester", "cycles\csycles_tester\csycles_tester.csproj", "{1DE94C02-6766-4F89-B5ED-D0FE562DCE8B}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cycles_device", "cycles\device\cycles_device.vcxproj", "{F10377EA-7257-485D-9F55-13AA4E00FCC5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{92EB6D16-E6F5-47B7-928F-6BE64BA1B944} = {92EB6D16-E6F5-47B7-928F-6BE64BA1B944}
+		{B8C1A4CB-6207-49F7-BA7D-D8B5AF75F965} = {B8C1A4CB-6207-49F7-BA7D-D8B5AF75F965}
+		{1298F8E0-803D-4C1E-8D33-404138EAFE35} = {1298F8E0-803D-4C1E-8D33-404138EAFE35}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cycles_kernel", "cycles\kernel\cycles_kernel.vcxproj", "{B8EDEAF5-32EB-4222-8219-A02E4980E887}"
 EndProject
