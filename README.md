@@ -6,7 +6,7 @@ C# wrapper is available.
 
 *Note 1* current work relies on Boost 1.55.0 being in a specific location, and the
 stage/ folder with libraries. A prebuilt version with properly named libs and
-paths can be downloaded at: https://dl.dropboxusercontent.com/u/1769373/boost_1_55_0.7z
+paths can be downloaded at: https://dl.dropboxusercontent.com/u/1769373/boost_1_55_0.7z . A build tutorial can be found here: https://www.youtube.com/watch?v=ENyjG7h5Dxw
 
 *Note 2* This is currently targeted at Windows platform only, but patches to
 improve cross-platform compiling and executing are likely candidates for
