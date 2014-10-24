@@ -31,6 +31,19 @@ namespace ccl
 			}
 		}
 
+		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_mesh_set_vertex_normals", CallingConvention = CallingConvention.Cdecl)]
+		private unsafe static extern void cycles_mesh_set_vertex_normals(uint clientId, uint sceneId, uint meshId, float* vertex_normals, uint vncount);
+		public static void mesh_set_vertex_normals(uint clientId, uint sceneId, uint meshId, ref float[] vertex_normals, uint vncount)
+		{
+			unsafe
+			{
+				fixed (float* pvertex_normals = vertex_normals)
+				{
+					cycles_mesh_set_vertex_normals(clientId, sceneId, meshId, pvertex_normals, vncount);
+				}
+			}
+		}
+
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_mesh_set_tris", CallingConvention = CallingConvention.Cdecl)]
 		private unsafe static extern void cycles_mesh_set_tris(uint clientId, uint sceneId, uint meshId, int* faces, uint fcount, uint shaderId);
 		public static void mesh_set_tris(uint clientId, uint sceneId, uint meshId, ref int[] tris, uint fcount, uint shaderId)
