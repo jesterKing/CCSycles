@@ -240,6 +240,7 @@ struct CCShader {
 	auto l = sce->lights[light_id]; \
 
 #define LIGHT_FIND_END() \
+	l->tag_update(sce); \
 	SCENE_FIND_END()
 
 /* Set a var of shader to val of type. */
