@@ -131,3 +131,22 @@ void cycles_mesh_set_uvs(unsigned int client_id, unsigned int scene_id, unsigned
 	}
 	SCENE_FIND_END()
 }
+
+void cycles_mesh_set_vertex_normals(unsigned int client_id, unsigned int scene_id, unsigned int mesh_id, float *vnormals, unsigned int vnormalcount)
+{
+	SCENE_FIND(scene_id)
+		auto me = sce->meshes[mesh_id];
+
+		auto attr = me->attributes.add(ccl::ATTR_STD_VERTEX_NORMAL);
+		auto fdata = attr->data_float3();
+
+		ccl::float3 f3;
+
+		for (auto i = 0, j = 0; i < (int)vnormalcount * 3; i += 3, j++) {
+			f3.x = vnormals[i];
+			f3.y = vnormals[i + 1];
+			f3.z = vnormals[i + 2];
+			fdata[j] = f3;
+		}
+	SCENE_FIND_END()
+}
