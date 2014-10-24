@@ -55,6 +55,11 @@ namespace ccl
 			return new float4(a.x*inv, a.y*inv, a.z*inv, a.w*inv);
 		}
 
+		public static float4 operator *(float4 a, float4 b)
+		{
+			return new float4(a.x*b.x, a.y*b.y, a.z*b.z, a.w*b.w);
+		}
+
 		public static float4 operator /(float a, float4 b)
 		{
 			return new float4(a/b.x, a/b.y, a/b.z, a/b.w);
