@@ -39,6 +39,7 @@ EXPORTS
   cycles_mesh_set_tris
   cycles_mesh_add_triangle
   cycles_mesh_set_uvs
+  cycles_mesh_set_vertex_normals
   cycles_mesh_set_smooth
 
   cycles_scene_object_set_matrix
