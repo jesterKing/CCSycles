@@ -40,6 +40,14 @@ void cycles_light_set_type(unsigned int client_id, unsigned int scene_id, unsign
 	LIGHT_FIND_END()
 }
 
+void cycles_light_set_cast_shadow(unsigned int client_id, unsigned int scene_id, unsigned int light_id, unsigned int cast_shadow)
+{
+	LIGHT_FIND(scene_id, light_id)
+		l->cast_shadow = cast_shadow == 1;
+		logger.logit(client_id, "Setting light ", light_id, " of scene ", scene_id, " cast_shadow to ", cast_shadow == 1 ? "true" : "false");
+	LIGHT_FIND_END()
+}
+
 void cycles_light_set_use_mis(unsigned int client_id, unsigned int scene_id, unsigned int light_id, unsigned int use_mis)
 {
 	LIGHT_FIND(scene_id, light_id)
