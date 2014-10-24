@@ -44,6 +44,14 @@ namespace ccl
 			}
 		}
 
+		public bool CastShadow
+		{
+			set
+			{
+				CSycles.light_set_cast_shadow(Client.Id, Scene.Id, Id, value);
+			}
+		}
+
 		public uint Samples
 		{
 			set
