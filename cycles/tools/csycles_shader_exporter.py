@@ -415,9 +415,10 @@ def main():
     # do the world shaders
     for world in D.worlds:
         nt = world.node_tree
-        shadername = world.name
-        shadername = cleanup_name(shadername)
-        create_shader(shadername, nt, True)
+        if nt:
+            shadername = world.name
+            shadername = cleanup_name(shadername)
+            create_shader(shadername, nt, True)
 
 def create_shader(shadername, nt, is_world=False):
         nodetree_stack = []
