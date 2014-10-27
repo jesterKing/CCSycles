@@ -16,6 +16,9 @@ limitations under the License.
 
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
+using System.Xml;
 using ccl.ShaderNodes;
 using ccl.ShaderNodes.Sockets;
 
@@ -265,5 +268,31 @@ namespace ccl
 				CSycles.shader_set_heterogeneous_volume(Client.Id, Id, value);
 			}
 		}
+
+		/// <summary>
+		/// Create node graph in the given shader from the passed XML
+		/// </summary>
+		/// <param name="shader"></param>
+		/// <param name="shaderXml"></param>
+		/// <returns></returns>
+		public static Shader ShaderFromXml(ref Shader shader, string shaderXml)
+		{
+			var xmlmem = Encoding.UTF8.GetBytes(shaderXml);
+			using (var xmlstream = new MemoryStream(xmlmem))
+			{
+				var settings = new XmlReaderSettings
+				{
+					ConformanceLevel = ConformanceLevel.Fragment,
+					IgnoreComments = true,
+					IgnoreProcessingInstructions = true,
+					IgnoreWhitespace = true
+				};
+				var reader = XmlReader.Create(xmlstream, settings);
+				Utilities.Instance.ReadNodeGraph(ref shader, reader);
+			}
+
+			return shader;
+		}
+
 	}
 }
