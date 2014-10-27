@@ -110,6 +110,7 @@
     <Compile Include="SocketCollection.cs" />
     <Compile Include="Transform.cs" />
     <Compile Include="SessionParameters.cs" />
+    <Compile Include="Utilities.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="license.txt" />
