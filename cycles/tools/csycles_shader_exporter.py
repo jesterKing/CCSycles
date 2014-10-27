@@ -46,6 +46,7 @@ nodemapping = {
         
 # color nodes
     'MIX_RGB' : 'MixNode',
+    'GAMMA' : 'GammaNode',
 
 # conversion nodes
     'MATH' : 'MathNode',
