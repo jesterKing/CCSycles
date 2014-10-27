@@ -93,7 +93,7 @@ namespace ccl
 		LightPath,
 		LightFalloff,
 		LayerWeight,
-		LightFalloff
+		VoronoiTexture,
 	}
 
 	public enum BvhType : uint

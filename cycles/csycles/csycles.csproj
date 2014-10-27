@@ -75,6 +75,7 @@
     <Compile Include="ShaderNodes\NoiseTexture.cs" />
     <Compile Include="ShaderNodes\OutputNode.cs" />
     <Compile Include="ShaderNodes\ShaderNode.cs" />
+    <Compile Include="ShaderNodes\VoronoiTexture.cs" />
     <Compile Include="ShaderNodes\SkyTexture.cs" />
     <Compile Include="ShaderNodes\Sockets\Float4Socket.cs" />
     <Compile Include="ShaderNodes\Sockets\FloatSocket.cs" />

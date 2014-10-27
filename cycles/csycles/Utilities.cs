@@ -147,6 +147,18 @@ namespace ccl
 						nodes.Add(nodename, gamma);
 						shader.AddNode(gamma);
 						break;
+					case "voronoi_texture":
+						var voronoi = new VoronoiTexture();
+						get_float4(voronoi.ins.Vector, node.GetAttribute("vector"));
+						get_float(voronoi.ins.Scale, node.GetAttribute("scale"));
+						var coloring = node.GetAttribute("coloring");
+						if (!string.IsNullOrEmpty(coloring))
+						{
+							voronoi.Coloring = coloring;
+						}
+						nodes.Add(nodename, voronoi);
+						shader.AddNode(voronoi);
+						break;
 					case "checker_texture":
 						var checkernode = new CheckerTexture();
 						get_float4(checkernode.ins.Color1, node.GetAttribute("Color1"));

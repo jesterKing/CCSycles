@@ -43,6 +43,7 @@ nodemapping = {
     'TEX_BRICK' : 'BrickTexture',
     'TEX_CHECKER' : 'CheckerTexture',
     'TEX_ENVIRONMENT' : 'EnvironmentTextureNode',
+    'TEX_VORONOI' : 'VoronoiTexture',
         
 # color nodes
     'MIX_RGB' : 'MixNode',
