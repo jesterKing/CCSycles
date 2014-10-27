@@ -91,6 +91,7 @@ namespace ccl
 		Bump,
 		RgbToBw,
 		LightPath,
+		LightFalloff
 	}
 
 	public enum BvhType : uint
