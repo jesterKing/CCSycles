@@ -61,6 +61,7 @@ nodemapping = {
     'FRESNEL' : 'FresnelNode',
     'TEX_COORD' : 'TextureCoordinateNode',
     'LIGHT_PATH' : 'LightPathNode',
+    'LAYER_WEIGHT' : 'LayerWeightNode',
 
 # output nodes
     'BACKGROUND' : 'BackgroundNode',

@@ -239,6 +239,9 @@ unsigned int cycles_add_shader_node(unsigned int client_id, unsigned int shader_
 		case shadernode_type::LIGHTFALLOFF:
 			node = new ccl::LightFalloffNode();
 			break;
+		case shadernode_type::LAYERWEIGHT:
+			node = new ccl::LayerWeightNode();
+			break;
 	}
 
 	if (node) {

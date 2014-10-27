@@ -91,6 +91,8 @@ namespace ccl
 		Bump,
 		RgbToBw,
 		LightPath,
+		LightFalloff,
+		LayerWeight,
 		LightFalloff
 	}
 
