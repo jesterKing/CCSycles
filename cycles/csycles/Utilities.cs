@@ -303,6 +303,13 @@ namespace ccl
 						nodes.Add(nodename, glossybsdf);
 						shader.AddNode(glossybsdf);
 						break;
+					case "layer_weight":
+						var layer_weight = new LayerWeightNode();
+						get_float(layer_weight.ins.Blend, node.GetAttribute("blend"));
+						get_float4(layer_weight.ins.Normal, node.GetAttribute("normal"));
+						nodes.Add(nodename, layer_weight);
+						shader.AddNode(layer_weight);
+						break;
 					case "connect":
 						var fromstring = node.GetAttribute("from");
 						var tostring = node.GetAttribute("to");
