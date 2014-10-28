@@ -84,9 +84,7 @@ void cycles_mesh_set_verts(unsigned int client_id, unsigned int scene_id, unsign
 	SCENE_FIND_END()
 }
 
-// TODO: add to API: set smooth
-
-void cycles_mesh_set_tris(unsigned int client_id, unsigned int scene_id, unsigned int mesh_id, int *faces, unsigned int fcount, unsigned int shader_id)
+void cycles_mesh_set_tris(unsigned int client_id, unsigned int scene_id, unsigned int mesh_id, int *faces, unsigned int fcount, unsigned int shader_id, unsigned int smooth)
 {
 	SCENE_FIND(scene_id)
 		auto me = sce->meshes[mesh_id];
@@ -95,7 +93,7 @@ void cycles_mesh_set_tris(unsigned int client_id, unsigned int scene_id, unsigne
 
 		for (auto i = 0; i < (int)fcount*3; i += 3) {
 			logger.logit(client_id, "f: ", faces[i], ",", faces[i + 1], ",", faces[i + 2]);
-			me->add_triangle(faces[i], faces[i + 1], faces[i + 2], shader_id, false);
+			me->add_triangle(faces[i], faces[i + 1], faces[i + 2], shader_id, smooth == 1);
 		}
 		
 		// TODO: APIfy next call, right now keep here to be closer to PoC plugin
