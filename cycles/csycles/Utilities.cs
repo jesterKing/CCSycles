@@ -322,6 +322,25 @@ namespace ccl
 						nodes.Add(nodename, layer_weight);
 						shader.AddNode(layer_weight);
 						break;
+					case "fresnel":
+						var fresnel = new FresnelNode();
+						get_float(fresnel.ins.IOR, node.GetAttribute("ior"));
+						get_float4(fresnel.ins.Normal, node.GetAttribute("normal"));
+						nodes.Add(nodename, fresnel);
+						shader.AddNode(fresnel);
+						break;
+					case "mixrgb":
+						var mixrgb = new MixNode();
+						get_float4(mixrgb.ins.Color1, node.GetAttribute("color1"));
+						get_float4(mixrgb.ins.Color2, node.GetAttribute("color2"));
+						nodes.Add(nodename, mixrgb);
+						shader.AddNode(mixrgb);
+						break;
+					case "mixclosure":
+						var mixclosure = new MixClosureNode();
+						nodes.Add(nodename, mixclosure);
+						shader.AddNode(mixclosure);
+						break;
 					case "connect":
 						var fromstring = node.GetAttribute("from");
 						var tostring = node.GetAttribute("to");
