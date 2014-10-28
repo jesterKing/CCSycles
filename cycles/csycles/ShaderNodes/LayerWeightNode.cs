@@ -40,7 +40,9 @@ namespace ccl.ShaderNodes
 		public LayerWeightOutputs(ShaderNode parentNode)
 		{
 			Fresnel = new FloatSocket(parentNode, "Fresnel");
+			AddSocket(Fresnel);
 			Facing = new FloatSocket(parentNode, "Facing");
+			AddSocket(Facing);
 		}
 	}
 
