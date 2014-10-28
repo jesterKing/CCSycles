@@ -50,13 +50,6 @@ namespace ccl
 
 		public SocketBase Socket(string name)
 		{
-			/*var p = TypeDescriptor.GetProperties(this);
-
-			for (var i = 0; i < p.Count; i++)
-			{
-				if (p[i].Name.ToLowerInvariant().Equals(name.ToLowerInvariant())) return p[i];
-			}*/
-
 			foreach (var socket in Sockets)
 			{
 				if (socket.Name.ToLowerInvariant().Equals(name.ToLowerInvariant())) return socket;
