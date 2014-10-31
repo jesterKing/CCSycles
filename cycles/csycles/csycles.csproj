@@ -64,6 +64,7 @@
     <Compile Include="Device.cs" />
     <Compile Include="enums.cs" />
     <Compile Include="float4.cs" />
+    <Compile Include="ShaderNodes\TransparentBsdfNode.cs" />
     <Compile Include="ShaderNodes\LayerWeightNode.cs" />
     <Compile Include="ShaderNodes\GammaNode.cs" />
     <Compile Include="ShaderNodes\LightFalloffNode.cs" />
