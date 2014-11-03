@@ -245,6 +245,9 @@ unsigned int cycles_add_shader_node(unsigned int client_id, unsigned int shader_
 		case shadernode_type::LAYERWEIGHT:
 			node = new ccl::LayerWeightNode();
 			break;
+		case shadernode_type::HSV_SEPARATE:
+			node = new ccl::SeparateHSVNode();
+			break;
 	}
 
 	if (node) {
