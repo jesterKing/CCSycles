@@ -95,6 +95,7 @@ namespace ccl
 		LayerWeight,
 		VoronoiTexture,
 		SeparateHsv,
+		SeparateRgb,
 	}
 
 	public enum BvhType : uint
