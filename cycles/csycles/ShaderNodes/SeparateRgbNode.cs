@@ -24,7 +24,7 @@ namespace ccl.ShaderNodes
 
 		public SeparateRgbInputs(ShaderNode parentNode)
 		{
-			Color = new Float4Socket(parentNode, "Color");
+			Color = new Float4Socket(parentNode, "Image");
 			AddSocket(Color);
 		}
 	}
@@ -37,11 +37,11 @@ namespace ccl.ShaderNodes
 
 		public SeparateRgbOutputs(ShaderNode parentNode)
 		{
-			R = new FloatSocket(parentNode, "Val");
+			R = new FloatSocket(parentNode, "R");
 			AddSocket(R);
-			G = new FloatSocket(parentNode, "Val");
+			G = new FloatSocket(parentNode, "G");
 			AddSocket(G);
-			B = new FloatSocket(parentNode, "Val");
+			B = new FloatSocket(parentNode, "B");
 			AddSocket(B);
 		}
 	}
