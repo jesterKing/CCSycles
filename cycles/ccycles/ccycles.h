@@ -471,6 +471,7 @@ enum class shadernode_type : unsigned int {
 	LIGHTFALLOFF,
 	LAYERWEIGHT,
 	VORONOI_TEXTURE,
+	HSV_SEPARATE,
 };
 
 CCL_CAPI unsigned int __cdecl cycles_create_shader(unsigned int client_id);
