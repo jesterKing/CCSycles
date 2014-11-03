@@ -31,18 +31,18 @@ namespace ccl.ShaderNodes
 
 	public class SeparateHsvOutputs : Outputs
 	{
-		public FloatSocket R { get; set; }
-		public FloatSocket G { get; set; }
-		public FloatSocket B { get; set; }
+		public FloatSocket H { get; set; }
+		public FloatSocket S { get; set; }
+		public FloatSocket V { get; set; }
 
 		public SeparateHsvOutputs(ShaderNode parentNode)
 		{
-			R = new FloatSocket(parentNode, "Val");
-			AddSocket(R);
-			G = new FloatSocket(parentNode, "Val");
-			AddSocket(G);
-			B = new FloatSocket(parentNode, "Val");
-			AddSocket(B);
+			H = new FloatSocket(parentNode, "H");
+			AddSocket(H);
+			S = new FloatSocket(parentNode, "S");
+			AddSocket(S);
+			V = new FloatSocket(parentNode, "V");
+			AddSocket(V);
 		}
 	}
 
