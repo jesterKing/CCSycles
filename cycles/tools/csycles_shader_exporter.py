@@ -52,6 +52,7 @@ nodemapping = {
 # conversion nodes
     'MATH' : 'MathNode',
     'RGBTOBW' : 'RgbToBwNode',
+    'SEPRGB' : 'SeparateRgbNode',
     'SEPHSV' : 'SeparateHsvNode',
 
 # vector nodes
