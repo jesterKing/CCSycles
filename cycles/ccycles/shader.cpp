@@ -248,6 +248,9 @@ unsigned int cycles_add_shader_node(unsigned int client_id, unsigned int shader_
 		case shadernode_type::HSV_SEPARATE:
 			node = new ccl::SeparateHSVNode();
 			break;
+		case shadernode_type::RGB_SEPARATE:
+			node = new ccl::SeparateRGBNode();
+			break;
 	}
 
 	if (node) {
