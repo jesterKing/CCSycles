@@ -403,8 +403,6 @@ void cycles_shadernode_set_enum(unsigned int client_id, unsigned int shader_id, 
 	}
 }
 
-template<typename T> CCImage* get_ccimage(string imgname, T img, unsigned int width, unsigned int height, unsigned int depth, unsigned int channels, bool is_float);
-
 CCImage* find_existing_ccimage(string imgname)
 {
 	auto is_float = true;
@@ -418,32 +416,14 @@ CCImage* find_existing_ccimage(string imgname)
 	return existing_image;
 }
 
-CCImage* get_ccimage(string imgname, float* img, unsigned int width, unsigned int height, unsigned int depth, unsigned int channels, bool is_float)
+template <class T>
+CCImage* get_ccimage(string imgname, T* img, unsigned int width, unsigned int height, unsigned int depth, unsigned int channels, bool is_float)
 {
 	auto existing_image = find_existing_ccimage(imgname);
 	auto nimg = existing_image ? existing_image : new CCImage();
 	if (!existing_image) {
-		auto imgdata = new float[width*height*channels*depth];
-		memcpy(imgdata, img, sizeof(float)*width*height*channels*depth);
-		nimg->builtin_data = imgdata;
-		nimg->filename = imgname;
-		nimg->width = (int)width;
-		nimg->height = (int)height;
-		nimg->depth = (int)depth;
-		nimg->channels = (int)channels;
-		nimg->is_float = is_float;
-		images.push_back(nimg);
-	}
-	return nimg;
-}
-
-CCImage* get_ccimage(string imgname, unsigned char* img, unsigned int width, unsigned int height, unsigned int depth, unsigned int channels, bool is_float)
-{
-	auto existing_image = find_existing_ccimage(imgname);
-	auto nimg = existing_image ? existing_image : new CCImage();
-	if (!existing_image) {
-		auto imgdata = new ccl::uchar[width*height*channels*depth];
-		memcpy(imgdata, img, sizeof(unsigned char)*width*height*channels*depth);
+		auto imgdata = new T[width*height*channels*depth];
+		memcpy(imgdata, img, sizeof(T)*width*height*channels*depth);
 		nimg->builtin_data = imgdata;
 		nimg->filename = imgname;
 		nimg->width = (int)width;
@@ -468,7 +448,7 @@ void cycles_shadernode_set_member_float_img(unsigned int client_id, unsigned int
 			switch (shn_type) {
 				case shadernode_type::IMAGE_TEXTURE:
 					{
-						auto nimg = get_ccimage(imname, img, width, height, depth, channels, true);
+						auto nimg = get_ccimage<float>(imname, img, width, height, depth, channels, true);
 						auto imtex = dynamic_cast<ccl::ImageTextureNode*>(*psh);
 						imtex->builtin_data = nimg;
 						imtex->interpolation = ccl::InterpolationType::INTERPOLATION_LINEAR;
@@ -477,7 +457,7 @@ void cycles_shadernode_set_member_float_img(unsigned int client_id, unsigned int
 					break;
 				case shadernode_type::ENVIRONMENT_TEXTURE:
 					{
-						auto nimg = get_ccimage(imname, img, width, height, depth, channels, true);
+						auto nimg = get_ccimage<float>(imname, img, width, height, depth, channels, true);
 						auto envtex = dynamic_cast<ccl::EnvironmentTextureNode*>(*psh);
 						envtex->builtin_data = nimg;
 						envtex->filename = nimg->filename;
@@ -501,7 +481,7 @@ void cycles_shadernode_set_member_byte_img(unsigned int client_id, unsigned int 
 			switch (shn_type) {
 				case shadernode_type::IMAGE_TEXTURE:
 					{
-						auto nimg = get_ccimage(imname, img, width, height, depth, channels, false);
+						auto nimg = get_ccimage<unsigned char>(imname, img, width, height, depth, channels, false);
 						auto imtex = dynamic_cast<ccl::ImageTextureNode*>(*psh);
 						imtex->builtin_data = nimg;
 						imtex->interpolation = ccl::InterpolationType::INTERPOLATION_LINEAR;
@@ -510,7 +490,7 @@ void cycles_shadernode_set_member_byte_img(unsigned int client_id, unsigned int 
 					break;
 				case shadernode_type::ENVIRONMENT_TEXTURE:
 					{
-						auto nimg = get_ccimage(imname, img, width, height, depth, channels, false);
+						auto nimg = get_ccimage<unsigned char>(imname, img, width, height, depth, channels, false);
 						auto envtex = dynamic_cast<ccl::EnvironmentTextureNode*>(*psh);
 						envtex->builtin_data = nimg;
 						envtex->filename = nimg->filename;
