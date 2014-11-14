@@ -2363,6 +2363,8 @@ namespace HologramPrinter
             
             Scene = scene;
 
+            CSycles.shutdown();
+
             //CSycles.shutdown();
 
             /*
