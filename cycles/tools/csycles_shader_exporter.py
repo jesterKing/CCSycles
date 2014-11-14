@@ -249,7 +249,7 @@ def find_node_tuple(needle):
         if n[0] == needle:
             return n
     
-    raise LookupError()
+    raise LookupError(needle + ": Node not found")
 
 def find_link_to_input_socket_on_group(socket, group, depth=0):
     """
@@ -556,7 +556,6 @@ def main():
             create_shader(shadername, nt, True)
 
 def create_shader(shadername, nt, is_world=False):
-        nodetree_stack = []
         allnodes.clear()
         alllinks.clear()
                 
