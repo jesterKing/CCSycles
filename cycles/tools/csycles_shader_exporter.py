@@ -122,6 +122,17 @@ def cleanup_name(name):
     """
     name = name.replace(" ", "_")
     name = name.replace(".", "_")
+    name = name.replace(",", "_")
+    name = name.replace("+", "_")
+    name = name.replace("^", "_")
+    name = name.replace(":", "_")
+    name = name.replace("-", "_")
+    name = name.replace("(", "_")
+    name = name.replace(")", "_")
+    name = name.replace("[", "_")
+    name = name.replace("]", "_")
+    name = name.replace("%", "_")
+    name = name.replace("=", "_")
     return name.lower()
 
 def get_socket_name(socket, socketlist, is_input, node):
