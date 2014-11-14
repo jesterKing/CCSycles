@@ -245,6 +245,7 @@ def find_output_node(nodetree):
     return None
 
 def find_node_tuple(needle):
+    global allnodes
     for n in allnodes:
         if n[0] == needle:
             return n
@@ -537,8 +538,118 @@ def code_link_nodes(links):
             tosockname
         )
     
-    return linkcode        
+    return linkcode
 
+def rooted_node(node):
+    """
+    Return True if node can be traced to output node.
+    """
+    global alllinks
+
+    if skip_node(node): return True
+    if 'OUTPUT_' in node.type: return True
+
+    for l in alllinks:
+        if node == l.from_node:
+            return rooted_node(l.to_node)
+    return False
+
+def prune_nodes():
+    """
+    Prune dead branches
+    """
+    global allnodes
+    
+    print("prune_nodes: ", len(allnodes))
+
+    deadset = set([n for n in allnodes if not rooted_node(n[0])])
+    
+    print("prune_nodes: ", len(deadset))
+    allnodes -= deadset
+    print("prone_nodes: ", len(allnodes))
+    
+    return deadset
+
+def prune_links(deadnodes):
+    """
+    Clean up links that point to nodes that have been pruned.
+    """
+    global allnodes, alllinks
+    
+    deadset = set()
+    
+    print("prune_links:", len(alllinks))
+    for link in alllinks:
+        for dntuple in deadnodes:
+            dn = dntuple[0]
+            if dn in (link.from_node, link.to_node):
+                deadset.add(link)
+    
+    print("prune_links:", len(deadset))
+    alllinks -= deadset
+
+def create_shader(shadername, nt, is_world=False):
+    global allnodes, alllinks
+    allnodes.clear()
+    alllinks.clear()
+            
+    ## seed our nodes set
+    add_nodes(allnodes, nt)
+    
+    ## seed our links set
+    for n in allnodes:
+        if skip_node(n[0]): continue
+        #if n[0].type not in ('GROUP', 'GROUP_INPUT', 'GROUP_OUTPUT'):
+        #print("create_shader: Finding connections for", n[0])
+        find_connections(n)
+
+    # clean up our lists. Not all nodes are connected. We don't
+    # want to export such nodes.
+    deadnodes = prune_nodes()
+    prune_links(deadnodes)
+    
+    # make nice, sorted lists
+    nodelist = list(allnodes)
+    nodelist.sort(key=get_node_name_from_tuple)
+    linklist = list(alllinks)
+    linklist.sort()
+    
+    print(linklist)
+    
+    # creat new shader
+    shadertype = "World" if is_world else "Material"
+    shadercode = code_new_shader(shadername, shadertype)
+    
+    # create node setup code        
+    nodesetup = code_instantiate_nodes(nodelist)
+    # add our nodes to shader
+    nodeadd = code_nodes_to_shader(shadername, nodelist)
+    # link our nodes in CSycles
+    linksetup = code_link_nodes(linklist)
+    # finalise everything
+    finalisecode = code_finalise(shadername, linklist)
+    
+    csycles_shader_creation = "public Shader create_{0}_shader()\n{{\n{1}\n{2}\n{3}\n{4}\n{5}\n}}".format(
+        shadername,
+        shadercode,
+        nodesetup,
+        nodeadd,
+        linksetup,
+        finalisecode
+    )
+    
+    exportfile = None
+    exportfilename = "{0}.cs".format(shadername)
+    for t in D.texts:
+        if t.name == exportfilename:
+            exportfile = t
+    
+    if not exportfile:
+        exportfile = D.texts.new(exportfilename)
+    
+    exportfile.clear()
+    exportfile.write(csycles_shader_creation)
+    
 def main():
     print("\n"*10)
     # do the material shaders
@@ -554,63 +665,4 @@ def main():
             shadername = world.name
             shadername = cleanup_name(shadername)
             create_shader(shadername, nt, True)
-
-def create_shader(shadername, nt, is_world=False):
-        allnodes.clear()
-        alllinks.clear()
-                
-        ## seed our nodes set
-        add_nodes(allnodes, nt)
-        
-        #return
-        
-        ## seed our links set
-        for n in allnodes:
-            if skip_node(n[0]): continue
-            #if n[0].type not in ('GROUP', 'GROUP_INPUT', 'GROUP_OUTPUT'):
-            #print("create_shader: Finding connections for", n[0])
-            find_connections(n)
-    
-        # make nice, sorted lists
-        nodelist = list(allnodes)
-        nodelist.sort(key=get_node_name_from_tuple)
-        linklist = list(alllinks)
-        linklist.sort()
-        
-        print(linklist)
-
-        # creat new shader
-        shadertype = "World" if is_world else "Material"
-        shadercode = code_new_shader(shadername, shadertype)
-        
-        # create node setup code        
-        nodesetup = code_instantiate_nodes(nodelist)
-        # add our nodes to shader
-        nodeadd = code_nodes_to_shader(shadername, nodelist)
-        # link our nodes in CSycles
-        linksetup = code_link_nodes(linklist)
-        # finalise everything
-        finalisecode = code_finalise(shadername, linklist)
-        
-        csycles_shader_creation = "public Shader create_{0}_shader()\n{{\n{1}\n{2}\n{3}\n{4}\n{5}\n}}".format(
-            shadername,
-            shadercode,
-            nodesetup,
-            nodeadd,
-            linksetup,
-            finalisecode
-        )
-        
-        exportfile = None
-        exportfilename = "{0}.cs".format(shadername)
-        for t in D.texts:
-            if t.name == exportfilename:
-                exportfile = t
-        
-        if not exportfile:
-            exportfile = D.texts.new(exportfilename)
-        
-        exportfile.clear()
-        exportfile.write(csycles_shader_creation)
-
 main()
