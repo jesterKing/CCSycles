@@ -85,16 +85,21 @@ class Link():
     nodes like REROUTE and relinking nodes and sockets instead.
     """
     def __init__(self, fromnode, fromsock, tonode, tosock):
-        self.fromnode = fromnode
-        self.fromsock = fromsock
-        self.tonode = tonode
-        self.tosock = tosock
+        self.from_node = fromnode
+        self.from_socket = fromsock
+        self.to_node = tonode
+        self.to_socket = tosock
     
     def __str__(self):
-        fromnode = self.fromnode.label if self.fromnode.label else self.fromnode.name
-        tonode = self.tonode.label if self.tonode.label else self.tonode.name
-        return '['+ fromnode + ']>' + self.fromsock.name + ' -> ' + \
-                self.tosock.name + '('+self.tosock.type+')<[' + tonode + ']'
+        if self.from_node:
+            fromnode = self.from_node.label if self.from_node.label else self.from_node.name
+            tonode = self.to_node.label if self.to_node.label else self.to_node.name
+            return '['+ fromnode + ']>' + self.from_socket.name + ' -> ' + \
+                    self.to_socket.name + '('+self.to_socket.type+')<[' + tonode + ']'
+        else:
+            tonode = self.to_node.label if self.to_node.label else self.to_node.name
+            return 'VALUE [' + str(self.from_socket) + '] -> ' + \
+                    self.to_socket.name + '('+self.to_socket.type+')<[' + tonode + ']'
     
     def __repr__(self):
         return self.__str__()
@@ -214,7 +219,15 @@ def find_actual_from_link(link, nt_and_parent, depth=0):
                 #print(s,"find_actual_from_link >")
                 #[print(s,l) for l in inp.links]
                 #print(s,"find_actual_from_link <")
-                l = find_actual_from_link(inp.links[0], nt_and_parent, depth+1) # got a match, lets use that!
+                
+                if inp.is_linked:
+                    l = find_actual_from_link(inp.links[0], nt_and_parent, depth+1) # got a match, lets use that!
+                else:
+                    print(s, "find_actual_from_link: no attached node, should use socket value")
+                    print(s, "find_actual_from_link: ",dir(inp))
+                    print(s, "find_actual_from_link: ", inp.type, inp.default_value)
+                    l = Link(None, inp.default_value, None, None)
+                    
 
     return l
 
@@ -315,17 +328,51 @@ def add_inputs(varname, inputs):
     Iterate over given inputs and create input socket value setters
     """
     inputinits = ""
-    valnamecount = 1
+    #valnamecount = 1
     for inp in inputs:
         if inp.type == 'SHADER': continue
         if inp.is_linked: continue
     
         inpname = get_socket_name(inp, inputs, True, inp.node)
-        inputinits = inputinits + "\t{0}.ins.{1}.Value = {2};\n".format(
+        inputinits += "\t{0}.ins.{1}.Value = {2};\n".format(
             varname, inpname, get_val_string(inp)
         )
     
     return inputinits
+
+def add_inputs_special_links(varname, links):
+    """
+    Iterate over links that have from_node None. from_socket will have
+    the value to set to the input socket of to_node
+    """
+    inputinits = ""
+    for link in links:
+        valstring = ""
+        value = link.from_socket
+        socketlist = link.to_node.inputs
+        inpname = get_socket_name(link.to_socket, socketlist, True, link.to_node)
+        #print("add_inputs_special_links: ", inpname, link)
+        #print("add_inputs_special_links: ", type(value), value)
+        if 'bpy_prop_array' in str(type(value)):
+            valstring = "new float4({0: .3f}f, {1: .3f}f, {2: .3f}f)".format(
+                value[0],
+                value[1],
+                value[2]
+            )
+        elif type(value) is float:
+            valstring = "{0: .3f}f".format(value)
+            
+        inputinits += "\t{0}.ins.{1}.Value = {2};\n".format(
+            varname, inpname, valstring
+        )
+    return inputinits
+
+def find_value_links_for_to_node(node):
+    """
+    Find links from alllinks that are Value links. These links
+    have from_node None.
+    """
+    return [l for l in alllinks if l.to_node == node and l.from_node == None]
 
 def code_init_node(node):
     """
@@ -334,23 +381,29 @@ def code_init_node(node):
     varname = get_node_name(node)
     initcode = ""
     initcode = add_inputs(varname, node.inputs)
+        
+    # find link with from_node None and from_socket not None and to_node is node
+    # to get values to set directly to inputs
+    vals = find_value_links_for_to_node(node)
+    if vals:
+        initcode += add_inputs_special_links(varname, vals)
 
     # now that inputs have been set, make sure we handle the
     # extra cases, like 'direct member' values as Color and Distribution, Value
     if node.type in ('BSDF_GLOSSY', 'BSDF_REFRACTION'):
-        initcode = initcode + "\t{0}.Distribution = \"{1}\";\n".format(
+        initcode += "\t{0}.Distribution = \"{1}\";\n".format(
             varname,
             node.distribution.lower().capitalize()
         )
     if node.type == 'RGB':
-        initcode = initcode + "\t{0}.Value = new float4({1:.3f}f, {2:.3f}f, {3:.3f}f);\n".format(
+        initcode += "\t{0}.Value = new float4({1:.3f}f, {2:.3f}f, {3:.3f}f);\n".format(
             varname,
             node.color[0],
             node.color[1],
             node.color[2]
         )
     if node.type == 'VALUE':
-        initcode = initcode + "\t{0}.Value = {1:.3f}f;\n".format(
+        initcode += "\t{0}.Value = {1:.3f}f;\n".format(
             varname,
             node.outputs[0].default_value
         )
@@ -359,15 +412,17 @@ def code_init_node(node):
             lambda x, y: x+'_'+y,
             map(str.capitalize, node.operation.lower().split('_'))
         )
-        initcode = initcode + "\t{0}.Operation = MathNode.Operations.{1};\n".format(
+        initcode += "\t{0}.Operation = MathNode.Operations.{1};\n".format(
             varname,
             opval
         )
         if node.use_clamp:
-            initcode = initcode + "\t{0}.UseClamp = true;\n".format(varname)
+            initcode += "\t{0}.UseClamp = true;\n".format(varname)
+
     return initcode
 
 def skip_node(node):
+    #if node is None: return True
     if 'OUTPUT' in node.type: return True
 
     if node.type in ('GROUP_INPUT', 'GROUP_OUTPUT', 'GROUP'): return True
@@ -413,10 +468,10 @@ def code_finalise(shadername, links):
     """Find the links that go into the final output node."""
     finalisecode = ""
     for link in links:
-        fromnode = link.fromnode
-        fromsock = link.fromsock
-        tonode = link.tonode
-        tosock = link.tosock
+        fromnode = link.from_node
+        fromsock = link.from_socket
+        tonode = link.to_node
+        tosock = link.to_socket
         
         if not 'OUTPUT' in tonode.type: continue
     
@@ -437,11 +492,12 @@ def code_link_nodes(links):
     """Add code to link nodes to each other."""
     linkcode = ""
     for link in links:
-        fromnode = link.fromnode
-        fromsock = link.fromsock
-        tonode = link.tonode
-        tosock = link.tosock
+        fromnode = link.from_node
+        fromsock = link.from_socket
+        tonode = link.to_node
+        tosock = link.to_socket
         
+        if not fromnode: continue
         if skip_node(tonode): continue
         
         fromsockname = get_socket_name(fromsock, fromnode.outputs, False, fromnode)
