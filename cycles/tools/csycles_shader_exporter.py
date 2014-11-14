@@ -183,6 +183,9 @@ def find_actual_from_link(link, nt_and_parent, depth=0):
     
     nt = nt_and_parent[0]
     parentn = nt_and_parent[1]
+    ntname = nt_and_parent[2]
+    
+    #print(s,"find_actual_from_link:", ntname, link.from_socket.name)
 
     l = link
 
@@ -203,10 +206,14 @@ def find_actual_from_link(link, nt_and_parent, depth=0):
             if inps.type=='CUSTOM':
                 continue
             if inps.links[0].to_socket.name==link.from_socket.name:
-                l = find_actual_from_link(inps.links[0], (nt, ngroup.node_tree), depth+1)
+                l = find_actual_from_link(inps.links[0], (nt, ngroup.node_tree, ntname), depth+1)
     elif link.from_node.type == 'GROUP_INPUT':
         for inp in parentn.inputs:
             if inp.name == link.from_socket.name:
+                #print(s,"find_actual_from_link: @", parentn, inp.name)
+                #print(s,"find_actual_from_link >")
+                #[print(s,l) for l in inp.links]
+                #print(s,"find_actual_from_link <")
                 l = find_actual_from_link(inp.links[0], nt_and_parent, depth+1) # got a match, lets use that!
 
     return l
@@ -222,6 +229,21 @@ def find_output_node(nodetree):
                     return n
     return None
 
+def find_node_tuple(needle):
+    for n in allnodes:
+        if n[0] == needle:
+            return n
+    
+    raise LookupError()
+
+def find_link_to_input_socket_on_group(socket, group, depth=0):
+    s = depth*"\t"
+    for inp in group.inputs:
+        #print(s, "find_link_to_input_socket_on_group:", inp, socket, inp.name==socket.name)
+        if inp.name == socket.name:
+            #print(s,"find_link_to_input_socket_on_group: -->", inp.links[0], inp.name)
+            return inp.links[0]
+
 def find_connections(node_and_tree, depth = 0):
     """
     Iterate over nodes and find the links needed. This process
@@ -231,7 +253,10 @@ def find_connections(node_and_tree, depth = 0):
     node = node_and_tree[0]
     nt = node_and_tree[1]
     parentn = node_and_tree[2]
+    parentnname = node_and_tree[3]
+    s = depth*"\t"
     for input in node.inputs:
+        #print(s, "find_connections: checking", input)
         if input.is_linked:
             #shorthand to link
             lnk = input.links[0]
@@ -245,13 +270,24 @@ def find_connections(node_and_tree, depth = 0):
             l = None
             # we need to minimize if any of REROUTE, GROUP_OUTPUT, GROUP_INPUT
             # or GROUP. Find the node and socket we actually need to link from
-            if fromnode.type in ('REROUTE', 'GROUP_OUTPUT', 'GROUP_INPUT', 'GROUP'):
-                fromlnk = find_actual_from_link(input.links[0], (nt, parentn), depth)
+            if fromnode.type in ('GROUP_INPUT', 'GROUP_OUTPUT'):
+                ntup = find_node_tuple(node)
+                linktogroup = find_link_to_input_socket_on_group(fromsocket, ntup[2], depth)
+                gtup = find_node_tuple(ntup[2])
+                #print(s,"find_connections: \"", ntup[2], ntup[2].label, "=", gtup)
+                fromlnk = find_actual_from_link(linktogroup, (gtup[1], gtup[2], gtup[3]), depth+1)
+                #print(s, "find_connections: !! ",fromlnk.from_node, fromlnk.from_socket, tonode, tosocket)
+                l = Link(fromlnk.from_node, fromlnk.from_socket, tonode, tosocket)
+                #print(s,"find_connections: X> ", l)
+                #raise Exception("yah")
+            elif fromnode.type in ('REROUTE', 'GROUP'):
+                fromlnk = find_actual_from_link(input.links[0], (nt, parentn, parentnname), depth)
                 l = Link(fromlnk.from_node, fromlnk.from_socket, tonode, tosocket)
             else: # nothing special, we have the node and socket we need                
                 l = Link(fromnode, fromsocket, tonode, tosocket)
 
             if l:
+                print(s, "find_connections: Adding new link", l)
                 alllinks.add(l)
 
 def is_connected(node):
@@ -263,13 +299,16 @@ def add_nodes(nodeset, nt, parentn=None):
     Add all useful nodes to a set.
     """
     for n in nt.nodes:
-        if not n.type in ('FRAME','REROUTE', 'GROUP_INPUT', 'GROUP_OUTPUT'):
+        #print("---",type(nt), nt.name)
+        if not n.type in ('FRAME','REROUTE'): #, 'GROUP_INPUT', 'GROUP_OUTPUT'):
             if n.type == 'GROUP':
+                #print("Found a group", nt, parentn, n, get_node_name(n))
+                nodeset.add((n, nt, parentn, parentn.name if parentn else "-"))
                 add_nodes(nodeset, n.node_tree, n)
             else:
-                #print("add_nodes: Adding", n.label if n.label else n.name, n.type)
+                print("add_nodes: Adding", get_node_name(n), n.type, nt, get_node_name(nt) if type(nt)!=bpy.types.ShaderNodeTree else "")
                 if is_connected(n):
-                    nodeset.add((n, nt, parentn))
+                    nodeset.add((n, nt, parentn, parentn.name if parentn else "-"))
 
 def add_inputs(varname, inputs):
     """
@@ -328,6 +367,14 @@ def code_init_node(node):
             initcode = initcode + "\t{0}.UseClamp = true;\n".format(varname)
     return initcode
 
+def skip_node(node):
+    if 'OUTPUT' in node.type: return True
+
+    if node.type in ('GROUP_INPUT', 'GROUP_OUTPUT', 'GROUP'): return True
+
+    return False
+    
+
 def code_instantiate_nodes(nodes):
     """
     Construct CSycles nodes for each Blender cycles node,
@@ -336,7 +383,7 @@ def code_instantiate_nodes(nodes):
     code = ""
     for ntup in nodes:
         n = ntup[0]
-        if 'OUTPUT' in n.type: continue
+        if skip_node(n): continue
            
         nodeconstruct = "\tvar {0} = new {1}();\n".format(
             get_node_name(n), nodemapping[n.type])
@@ -356,7 +403,7 @@ def code_nodes_to_shader(shadername, nodes):
     for ntup in nodes:
         n = ntup[0]
         
-        if 'OUTPUT' in n.type: continue
+        if skip_node(n): continue
     
         addcode = addcode + "\t{0}.AddNode({1});\n".format(shadername, get_node_name(n))
     
@@ -395,7 +442,7 @@ def code_link_nodes(links):
         tonode = link.tonode
         tosock = link.tosock
         
-        if 'OUTPUT' in tonode.type: continue
+        if skip_node(tonode): continue
         
         fromsockname = get_socket_name(fromsock, fromnode.outputs, False, fromnode)
         tosockname = get_socket_name(tosock, tonode.inputs, True, tonode)
@@ -410,6 +457,7 @@ def code_link_nodes(links):
     return linkcode        
 
 def main():
+    print("\n"*10)
     # do the material shaders
     for ob in C.selected_objects:
         nt = ob.material_slots[0].material.node_tree
@@ -432,10 +480,15 @@ def create_shader(shadername, nt, is_world=False):
         ## seed our nodes set
         add_nodes(allnodes, nt)
         
+        #return
+        
         ## seed our links set
         for n in allnodes:
+            if skip_node(n[0]): continue
+            #if n[0].type not in ('GROUP', 'GROUP_INPUT', 'GROUP_OUTPUT'):
+            #print("create_shader: Finding connections for", n[0])
             find_connections(n)
-
+    
         # make nice, sorted lists
         nodelist = list(allnodes)
         nodelist.sort(key=get_node_name_from_tuple)
