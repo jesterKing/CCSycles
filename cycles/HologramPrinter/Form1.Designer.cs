@@ -229,8 +229,9 @@ namespace HologramPrinter
             this.txtProgress.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtProgress.ForeColor = System.Drawing.SystemColors.Highlight;
             this.txtProgress.Location = new System.Drawing.Point(53, 376);
+            this.txtProgress.Multiline = true;
             this.txtProgress.Name = "txtProgress";
-            this.txtProgress.Size = new System.Drawing.Size(394, 13);
+            this.txtProgress.Size = new System.Drawing.Size(394, 20);
             this.txtProgress.TabIndex = 21;
             // 
             // Form1

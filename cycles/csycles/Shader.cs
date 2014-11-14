@@ -141,6 +141,10 @@ namespace ccl
 			/* set direct member variables */
 			switch (node.Type)
 			{
+                case ShaderNodeType.Mapping:
+                    CSycles.shadernode_set_member_bool(Client.Id, Id, node.Id, node.Type, "use_min", ((MappingNode)node).UseMin);
+                    CSycles.shadernode_set_member_bool(Client.Id, Id, node.Id, node.Type, "use_max", ((MappingNode)node).UseMax);
+                    break;
 				case ShaderNodeType.Math:
 					CSycles.shadernode_set_member_bool(Client.Id, Id, node.Id, node.Type, "use_clamp", ((MathNode)node).UseClamp);
 					break;
