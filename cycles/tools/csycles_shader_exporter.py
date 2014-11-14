@@ -451,9 +451,6 @@ def code_init_node(node):
     return initcode
 
 def skip_node(node):
-    #if node is None: return True
-    if 'OUTPUT' in node.type: return True
-
     if node.type in ('GROUP_INPUT', 'GROUP_OUTPUT', 'GROUP'): return True
 
     return False
@@ -468,6 +465,7 @@ def code_instantiate_nodes(nodes):
     for ntup in nodes:
         n = ntup[0]
         if skip_node(n): continue
+        if 'OUTPUT_' in n.type: continue
            
         nodeconstruct = "\tvar {0} = new {1}();\n".format(
             get_node_name(n), nodemapping[n.type])
@@ -502,7 +500,7 @@ def code_finalise(shadername, links):
         tonode = link.to_node
         tosock = link.to_socket
         
-        if not 'OUTPUT' in tonode.type: continue
+        if not 'OUTPUT_' in tonode.type: continue
     
         fromsockname = get_socket_name(fromsock, fromnode.inputs, False, fromnode)
         tosockname = get_socket_name(tosock, tonode.inputs, True, tonode)
