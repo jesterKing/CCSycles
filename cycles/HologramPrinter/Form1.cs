@@ -28,7 +28,8 @@ namespace HologramPrinter
             }
             else
             {
-                this.txtProgress.Text = text;
+                string sent = this.txtProgress.Text;
+                this.txtProgress.Text = text + "\r\n" + sent;
             }
         }
 
@@ -111,28 +112,17 @@ namespace HologramPrinter
 
         private void btnRender_Click(object sender, EventArgs e)
         {
+            Engine.Initiate();
             backgroundWorker1.RunWorkerAsync();
             btnRender.Enabled = false;
-            btnCancel.Visible = true;            
+            btnCancel.Visible = true;
+    
         }
         
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker worker = sender as BackgroundWorker;
-
-            if (worker.CancellationPending == true)
-            {
-                e.Cancel = true;
-            }
-            else
-            {
-                Engine.CompileMaterial();
-            }
-
-            System.Threading.Thread.Sleep(15000);
-
-            /*
-            Engine.Initiate();
+                        
 
             for (int i = 1; i <= 100; i++)
             {
@@ -145,12 +135,11 @@ namespace HologramPrinter
                 {
                     // Perform a time consuming operation and report progress.
                     //System.Threading.Thread.Sleep(500);
-                    Engine.Render(i);
-                    
+                    Engine.Render(i);                    
                     worker.ReportProgress(i);
                 }
             }
-             * */
+            
         }
 
         // This event handler updates the progress. 
@@ -206,6 +195,11 @@ namespace HologramPrinter
         public string getOutputFolderName()
         {
             return txtSelectedOutputDirectory.Text;
+        }
+
+        private void btnCompile_Click(object sender, EventArgs e)
+        {
+            Engine.CompileMaterial();
         }
     }
 }

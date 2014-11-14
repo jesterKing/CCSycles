@@ -13,6 +13,9 @@ using System.CodeDom.Compiler;
 using System.Reflection;
 using System.Text;
 
+
+//using System.Runtime.InteropServices;
+
 namespace HologramPrinter
 {
     public interface IUI
@@ -25,6 +28,11 @@ namespace HologramPrinter
 
     public class Engine
     {
+        /*
+        [DllImport("Kernel32.dll")]
+        static extern Boolean AllocConsole();
+
+         * */
         #region meshdata
         static float[] vert_floats =
             {
@@ -2030,17 +2038,21 @@ namespace HologramPrinter
             else
             {
                 Assembly assembly = results.CompiledAssembly;
-                Type program = assembly.GetType("HologramPrinter.Test");
-                MethodInfo main = program.GetMethod("Main");
+                MethodInfo mi = assembly.EntryPoint;
+                //Type program = assembly.GetType("HologramPrinter.Test");
+                //MethodInfo main = program.GetMethod("Main");
+                object o = assembly.CreateInstance(mi.Name);
+                mi.Invoke(o, null);
 
                 //Successful Compile
                 SetMessage("Success!");
                 //If we clicked run then launch our EXE
                 //Process.Start(Output);
-                main.Invoke(null, null);
+                //main.Invoke(null, null);
             }
         }
 
+        /*
         static public Shader read_shader_from_file(string filename)
         {
             var xml = new XmlReader(Client, filename);
@@ -2093,6 +2105,7 @@ namespace HologramPrinter
 
             return some_setup;
         }
+         * */
 
         static public void StatusUpdateCallback(uint sessionId)
         {
@@ -2160,26 +2173,43 @@ namespace HologramPrinter
 
         public static void Initiate()
         {
+            /*
+            if (!AllocConsole())
+                MessageBox.Show("Failed");
+            */
+
+            SetMessage("Reading input...");
+
             string materialFile = _iui.getMaterialFileName();//Path.GetFullPath(_iui.getMaterialFileName());
             string sceneFile = _iui.getSceneFileName();//Path.GetFullPath(_iui.getSceneFileName());
 
-            //CSycles.set_kernel_path("lib");
-            //CSycles.initialise();
+            CSycles.set_kernel_path("lib");
+            CSycles.initialise();
+
+            SetMessage("Initialising callbacks...");
 
             g_update_callback = StatusUpdateCallback;
             g_update_render_tile_callback = UpdateRenderTileCallback;
             g_write_render_tile_callback = WriteRenderTileCallback;
             g_logger_callback = LoggerCallback;
 
+            SetMessage("Initialising client...");
+
             var client = new Client();
             Client = client;
             CSycles.set_logger(client.Id, g_logger_callback);
 
+
+            SetMessage("Available devices-> Device 0: " + Device.GetDevice(0).Name + ", Device 1: " + Device.GetDevice(1).Name + ", Device 2: " + Device.GetDevice(2).Name + ", Cuda available: " + Device.CudaAvailable() + ", Cuda device: " + Device.FirstCuda.Name);
+
+
+            SetMessage("Selecting devices...");
             var dev = Device.FirstCuda;
             Device = dev;
-            _iui.SetText("Using device " + dev.Name);
-                        
-            _iui.SetText("Creating default scene...");
+
+            SetMessage("Using device " + dev.Name);
+
+            SetMessage("Creating default scene...");
 
             #region Create default scene
 
@@ -2187,8 +2217,8 @@ namespace HologramPrinter
             var scene = new Scene(client, scene_params, dev);
 
             if (string.IsNullOrEmpty(materialFile))
-            {               
-                _iui.SetText("Setup Camera...");
+            {
+                SetMessage("Setup Camera...");
                 /* move the scene camera a bit, so we can see our render result. */
                 var t = Transform.Identity();
                 float angle = 90.0f;
@@ -2211,7 +2241,7 @@ namespace HologramPrinter
 
             #endregion
 
-            _iui.SetText("Creating default shader...");
+            SetMessage("Creating default shader...");
 
             #region default shader
 
@@ -2236,13 +2266,15 @@ namespace HologramPrinter
             }
             else
             {
+                /*
                 var diffuse_shader = read_shader_from_file(materialFile);
                 scene.AddShader(diffuse_shader);
                 scene.DefaultSurface = diffuse_shader;
+                 * */
             }
             #endregion
 
-            _iui.SetText("Creating background shader...");
+            SetMessage("Creating background shader...");
 
             #region background shader
             var background = new Shader(Client, Shader.ShaderType.World)
@@ -2271,7 +2303,7 @@ namespace HologramPrinter
             /* get scene-specific default shader ID */
             var default_shader = scene.ShaderSceneId(scene.DefaultSurface);
 
-            _iui.SetText("Set integrator settings...");
+            SetMessage("Set integrator settings...");
             /* Set integrator settings */
             scene.Integrator.IntegratorMethod = IntegratorMethod.Path;
             scene.Integrator.MaxBounce = 1;
@@ -2283,7 +2315,7 @@ namespace HologramPrinter
             scene.Integrator.SamplingPattern = SamplingPattern.Sobol;
             scene.Integrator.FilterGlossy = 0.0f;
 
-            _iui.SetText("Add geometry to scene...");
+            SetMessage("Add geometry to scene...");
             /* Add a bit of geometry and move camera around so we can see what we're rendering.
              * First off we need an object, we put it at the origo
              */
@@ -2401,10 +2433,12 @@ namespace HologramPrinter
             CSycles.set_kernel_path("lib");
             CSycles.initialise();
 
+            /*
             g_update_callback = StatusUpdateCallback;
             g_update_render_tile_callback = UpdateRenderTileCallback;
             g_write_render_tile_callback = WriteRenderTileCallback;
             g_logger_callback = LoggerCallback;
+             * */
 
             string outFolder = _iui.getOutputFolderName();//Path.GetFullPath(_iui.getOutputFolderName());
             
@@ -2416,7 +2450,7 @@ namespace HologramPrinter
                 Samples = (int)samples,
                 TileSize = new Size(64, 64),
                 StartResolution = 64,
-                Threads = 16,
+                Threads = 1,
                 ShadingSystem = ShadingSystem.SVM,
                 Background = true,
                 ProgressiveRefine = false
