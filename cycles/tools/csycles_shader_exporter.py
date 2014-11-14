@@ -190,44 +190,46 @@ def find_actual_from_link(link, nt_and_parent, depth=0):
     parentn = nt_and_parent[1]
     ntname = nt_and_parent[2]
     
-    #print(s,"find_actual_from_link:", ntname, link.from_socket.name)
+    #print(s,"find_actual_from_link:", ntname, link.from_socket.name if link and link.from_socket else "no fromsocket")
 
     l = link
-
-    # REROUTE node, just check it's input
-    if link.from_node.type =='REROUTE':
-        l = find_actual_from_link(link.from_node.inputs[0].links[0], nt_and_parent, depth+1)
     
-    # GROUP node, find its GROUP_OUTPUT and find corresponding sockets
-    # (names shall be equal)
-    elif link.from_node.type == 'GROUP':
-        ngroup = link.from_node
-        outn = find_output_node_of_group(ngroup.node_tree)
+    if not link: raise Exception("no link!")
+    
+    if link.from_node:
 
-        #now find matching sockets (group output socket vs outpnode input socket
-        for inps in outn.inputs:
+        # REROUTE node, just check it's input
+        if link.from_node.type =='REROUTE':
+            l = find_actual_from_link(link.from_node.inputs[0].links[0], nt_and_parent, depth+1)
+        
+        # GROUP node, find its GROUP_OUTPUT and find corresponding sockets
+        # (names shall be equal)
+        elif link.from_node.type == 'GROUP':
+            ngroup = link.from_node
+            outn = find_output_node_of_group(ngroup.node_tree)
 
-            # CUSTOM is a point where new sockets can be created in blender interface
-            if inps.type=='CUSTOM':
-                continue
-            if inps.links[0].to_socket.name==link.from_socket.name:
-                l = find_actual_from_link(inps.links[0], (nt, ngroup.node_tree, ntname), depth+1)
-    elif link.from_node.type == 'GROUP_INPUT':
-        for inp in parentn.inputs:
-            if inp.name == link.from_socket.name:
-                #print(s,"find_actual_from_link: @", parentn, inp.name)
-                #print(s,"find_actual_from_link >")
-                #[print(s,l) for l in inp.links]
-                #print(s,"find_actual_from_link <")
-                
-                if inp.is_linked:
-                    l = find_actual_from_link(inp.links[0], nt_and_parent, depth+1) # got a match, lets use that!
-                else:
-                    print(s, "find_actual_from_link: no attached node, should use socket value")
-                    print(s, "find_actual_from_link: ",dir(inp))
-                    print(s, "find_actual_from_link: ", inp.type, inp.default_value)
-                    l = Link(None, inp.default_value, None, None)
+            #now find matching sockets (group output socket vs outpnode input socket
+            for inps in outn.inputs:
+
+                # CUSTOM is a point where new sockets can be created in blender interface
+                if inps.type=='CUSTOM':
+                    continue
+                if inps.links[0].to_socket.name==link.from_socket.name:
+                    l = find_actual_from_link(inps.links[0], (nt, ngroup.node_tree, ntname), depth+1)
+        elif link.from_node.type == 'GROUP_INPUT':
+            for inp in parentn.inputs:
+                if inp.name == link.from_socket.name:
+                    #print(s,"find_actual_from_link: @", parentn, inp.name)
+                    #print(s,"find_actual_from_link >")
+                    #[print(s,l) for l in inp.links]
+                    #print(s,"find_actual_from_link <")
                     
+                    if inp.is_linked:
+                        l = find_actual_from_link(inp.links[0], nt_and_parent, depth+1) # got a match, lets use that!
+                    else:
+                        print(s, "find_actual_from_link: no attached node, should use socket value")
+                        print(s, "find_actual_from_link: ", inp.type, inp.default_value)
+                        l = Link(None, inp.default_value, None, None)
 
     return l
 
@@ -250,12 +252,32 @@ def find_node_tuple(needle):
     raise LookupError()
 
 def find_link_to_input_socket_on_group(socket, group, depth=0):
+    """
+    Find link on group input nodes corresponding with socket that is
+    linked.
+    
+    None otherwise.
+    """
     s = depth*"\t"
     for inp in group.inputs:
         #print(s, "find_link_to_input_socket_on_group:", inp, socket, inp.name==socket.name)
-        if inp.name == socket.name:
+        if inp.name == socket.name and inp.is_linked:
             #print(s,"find_link_to_input_socket_on_group: -->", inp.links[0], inp.name)
             return inp.links[0]
+    
+    return None
+
+def find_value_input_socket_on_group(socket, group, depth=0):
+    """
+    Find the value for the input socket on the group
+    """
+    s = depth*"\t"
+    for inp in group.inputs:
+        if inp.name == socket.name:
+            return inp.default_value
+    
+    return None
+
 
 def find_connections(node_and_tree, depth = 0):
     """
@@ -269,7 +291,7 @@ def find_connections(node_and_tree, depth = 0):
     parentnname = node_and_tree[3]
     s = depth*"\t"
     for input in node.inputs:
-        #print(s, "find_connections: checking", input)
+        print(s, "find_connections: checking", input)
         if input.is_linked:
             #shorthand to link
             lnk = input.links[0]
@@ -286,13 +308,20 @@ def find_connections(node_and_tree, depth = 0):
             if fromnode.type in ('GROUP_INPUT', 'GROUP_OUTPUT'):
                 ntup = find_node_tuple(node)
                 linktogroup = find_link_to_input_socket_on_group(fromsocket, ntup[2], depth)
-                gtup = find_node_tuple(ntup[2])
-                #print(s,"find_connections: \"", ntup[2], ntup[2].label, "=", gtup)
-                fromlnk = find_actual_from_link(linktogroup, (gtup[1], gtup[2], gtup[3]), depth+1)
-                #print(s, "find_connections: !! ",fromlnk.from_node, fromlnk.from_socket, tonode, tosocket)
-                l = Link(fromlnk.from_node, fromlnk.from_socket, tonode, tosocket)
-                #print(s,"find_connections: X> ", l)
-                #raise Exception("yah")
+                if linktogroup:
+                    gtup = find_node_tuple(ntup[2])
+                    print(s,"find_connections: \"", ntup[2], ntup[2].label, "=", gtup, linktogroup)
+                    fromlnk = find_actual_from_link(linktogroup, (gtup[1], gtup[2], gtup[3]), depth+1)
+                    if fromlnk:
+                        print(s, "find_connections: !! ",fromlnk.from_node, fromlnk.from_socket, tonode, tosocket)
+                        l = Link(fromlnk.from_node, fromlnk.from_socket, tonode, tosocket)
+                        #print(s,"find_connections: X> ", l)
+                else:
+                    # we have input group but it's not linked to, so get
+                    # value of socket and create special link
+                    print(s, "find_connections: => ", input.node)
+                    inpval = find_value_input_socket_on_group(fromsocket, ntup[2], depth)
+                    l = Link(None, inpval, tonode, tosocket)
             elif fromnode.type in ('REROUTE', 'GROUP'):
                 fromlnk = find_actual_from_link(input.links[0], (nt, parentn, parentnname), depth)
                 l = Link(fromlnk.from_node, fromlnk.from_socket, tonode, tosocket)
