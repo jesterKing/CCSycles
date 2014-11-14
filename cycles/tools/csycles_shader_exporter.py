@@ -538,6 +538,7 @@ def code_link_nodes(links):
         
         if not fromnode: continue
         if skip_node(tonode): continue
+        if skip_node(fromnode): continue
         
         fromsockname = get_socket_name(fromsock, fromnode.outputs, False, fromnode)
         tosockname = get_socket_name(tosock, tonode.inputs, True, tonode)
