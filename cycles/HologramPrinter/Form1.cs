@@ -112,17 +112,16 @@ namespace HologramPrinter
 
         private void btnRender_Click(object sender, EventArgs e)
         {
-            Engine.Initiate();
             backgroundWorker1.RunWorkerAsync();
             btnRender.Enabled = false;
-            btnCancel.Visible = true;
-    
+            btnCancel.Visible = true;    
         }
         
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker worker = sender as BackgroundWorker;
-                        
+
+            Engine.Initiate();
 
             for (int i = 1; i <= 100; i++)
             {
