@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ccycles", "cycles\ccycles\ccycles.vcxproj", "{060A4659-C327-4867-AAD8-E80C94DD1427}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ccycles", "ccycles\ccycles.vcxproj", "{060A4659-C327-4867-AAD8-E80C94DD1427}"
 	ProjectSection(ProjectDependencies) = postProject
 		{1D140D1B-FC62-4EC7-8517-E6F7A1009EDC} = {1D140D1B-FC62-4EC7-8517-E6F7A1009EDC}
 		{21E36630-F24B-44D0-BF8B-76B20EB8E92B} = {21E36630-F24B-44D0-BF8B-76B20EB8E92B}
@@ -19,12 +19,12 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ccycles", "cycles\ccycles\c
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cycles_bvh", "cycles\bvh\cycles_bvh.vcxproj", "{D4BB57D0-8C57-4EFD-89C8-C3381818EFA7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "csycles", "cycles\csycles\csycles.csproj", "{36396655-E087-4C00-990B-CE44F08E4FB2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "csycles", "csycles\csycles.csproj", "{36396655-E087-4C00-990B-CE44F08E4FB2}"
 	ProjectSection(ProjectDependencies) = postProject
 		{060A4659-C327-4867-AAD8-E80C94DD1427} = {060A4659-C327-4867-AAD8-E80C94DD1427}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "csycles_tester", "cycles\csycles_tester\csycles_tester.csproj", "{1DE94C02-6766-4F89-B5ED-D0FE562DCE8B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "csycles_tester", "csycles_tester\csycles_tester.csproj", "{1DE94C02-6766-4F89-B5ED-D0FE562DCE8B}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cycles_device", "cycles\device\cycles_device.vcxproj", "{F10377EA-7257-485D-9F55-13AA4E00FCC5}"
 	ProjectSection(ProjectDependencies) = postProject

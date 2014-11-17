@@ -123,7 +123,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>Copy /Y "$(TargetPath)" "$(ProjectDir)..\..\..\..\..\..\$(OutDir)Plug-ins"</PostBuildEvent>
+    <PostBuildEvent>Copy /Y "$(TargetPath)" "$(ProjectDir)..\..\..\..\..\$(OutDir)Plug-ins"</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>
