@@ -581,7 +581,8 @@ ccl_device_noinline VolumeIntegrateResult kernel_volume_integrate(KernelGlobals 
  * through a volume. This can then latter be used for decoupled sampling as in:
  * "Importance Sampling Techniques for Path Tracing in Participating Media"
  *
- * On the GPU this is only supported for homogeneous volumes (1 step), due to
+ * On the GPU this is only supported (but currently not enabled)
+ * for homogeneous volumes (1 step), due to
  * no support for malloc/free and too much stack usage with a fix size array. */
 
 typedef struct VolumeStep {
@@ -595,6 +596,7 @@ typedef struct VolumeStep {
 } VolumeStep;
 
 typedef struct VolumeSegment {
+	VolumeStep stack_step;      /* stack storage for homogeneous step, to avoid malloc */
 	VolumeStep *steps;			/* recorded steps */
 	int numsteps;				/* number of steps */
 	int closure_flag;			/* accumulated closure flags from all steps */
@@ -627,11 +629,13 @@ ccl_device void kernel_volume_decoupled_record(KernelGlobals *kg, PathState *sta
 
 		/* compute exact steps in advance for malloc */
 		max_steps = max((int)ceilf(ray->t/step_size), 1);
+		segment->steps = (VolumeStep*)malloc(sizeof(VolumeStep)*max_steps);
 	}
 	else {
 		max_steps = 1;
 		step_size = ray->t;
 		random_jitter_offset = 0.0f;
+		segment->steps = &segment->stack_step;
 	}
 	
 	/* init accumulation variables */
@@ -640,10 +644,8 @@ ccl_device void kernel_volume_decoupled_record(KernelGlobals *kg, PathState *sta
 	float3 cdf_distance = make_float3(0.0f, 0.0f, 0.0f);
 	float t = 0.0f;
 
-	segment->closure_flag = 0;
 	segment->numsteps = 0;
-
-	segment->steps = (VolumeStep*)malloc(sizeof(VolumeStep)*max_steps);
+	segment->closure_flag = 0;
 
 	VolumeStep *step = segment->steps;
 
@@ -729,16 +731,13 @@ ccl_device void kernel_volume_decoupled_record(KernelGlobals *kg, PathState *sta
 
 ccl_device void kernel_volume_decoupled_free(KernelGlobals *kg, VolumeSegment *segment)
 {
-	free(segment->steps);
+	if(segment->steps != &segment->stack_step)
+		free(segment->steps);
 }
 
 /* scattering for homogeneous and heterogeneous volumes, using decoupled ray
- * marching. unlike the non-decoupled functions, these do not do probalistic
- * scattering, they always scatter if there is any non-zero scattering
- * coefficient.
+ * marching. this function does not do emission or modify throughput. 
  *
- * these also do not do emission or modify throughput. 
- * 
  * function is expected to return VOLUME_PATH_SCATTERED when probalistic_scatter is false */
 ccl_device VolumeIntegrateResult kernel_volume_decoupled_scatter(
 	KernelGlobals *kg, PathState *state, Ray *ray, ShaderData *sd,
@@ -954,16 +953,85 @@ ccl_device bool kernel_volume_use_decoupled(KernelGlobals *kg, bool heterogeneou
  * This is an array of object/shared ID's that the current segment of the path
  * is inside of. */
 
-ccl_device void kernel_volume_stack_init(KernelGlobals *kg, VolumeStack *stack)
+ccl_device void kernel_volume_stack_init(KernelGlobals *kg,
+                                         Ray *ray,
+                                         VolumeStack *stack)
 {
-	/* todo: this assumes camera is always in air, need to detect when it isn't */
-	if(kernel_data.background.volume_shader == SHADER_NONE) {
-		stack[0].shader = SHADER_NONE;
+	/* NULL ray happens in the baker, does it need proper initialization of
+	 * camera in volume?
+	 */
+	if(!kernel_data.cam.is_inside_volume || ray == NULL) {
+		/* Camera is guaranteed to be in the air, only take background volume
+		 * into account in this case.
+		 */
+		if(kernel_data.background.volume_shader != SHADER_NONE) {
+			stack[0].shader = kernel_data.background.volume_shader;
+			stack[0].object = PRIM_NONE;
+			stack[1].shader = SHADER_NONE;
+		}
+		else {
+			stack[0].shader = SHADER_NONE;
+		}
+		return;
 	}
-	else {
+
+	Ray volume_ray = *ray;
+	volume_ray.t = FLT_MAX;
+
+	int stack_index = 0, enclosed_index = 0;
+	int enclosed_volumes[VOLUME_STACK_SIZE];
+
+	while(stack_index < VOLUME_STACK_SIZE - 1 &&
+	      enclosed_index < VOLUME_STACK_SIZE - 1)
+	{
+		Intersection isect;
+		if(!scene_intersect_volume(kg, &volume_ray, &isect)) {
+			break;
+		}
+
+		ShaderData sd;
+		shader_setup_from_ray(kg, &sd, &isect, &volume_ray, 0, 0);
+		if(sd.flag & SD_BACKFACING) {
+			/* If ray exited the volume and never entered to that volume
+			 * it means that camera is inside such a volume.
+			 */
+			bool is_enclosed = false;
+			for(int i = 0; i < enclosed_index; ++i) {
+				if(enclosed_volumes[i] == sd.object) {
+					is_enclosed = true;
+					break;
+				}
+			}
+			if(is_enclosed == false) {
+				stack[stack_index].object = sd.object;
+				stack[stack_index].shader = sd.shader;
+				++stack_index;
+			}
+		}
+		else {
+			/* If ray from camera enters the volume, this volume shouldn't
+			 * be added to the stack on exit.
+			 */
+			enclosed_volumes[enclosed_index++] = sd.object;
+		}
+
+		/* Move ray forward. */
+		volume_ray.P = ray_offset(sd.P, -sd.Ng);
+	}
+	/* stack_index of 0 means quick checks outside of the kernel gave false
+	 * positive, nothing to worry about, just we've wasted quite a few of
+	 * ticks just to come into conclusion that camera is in the air.
+	 *
+	 * In this case we're doing the same above -- check whether background has
+	 * volume.
+	 */
+	if(stack_index == 0 && kernel_data.background.volume_shader == SHADER_NONE) {
 		stack[0].shader = kernel_data.background.volume_shader;
 		stack[0].object = PRIM_NONE;
 		stack[1].shader = SHADER_NONE;
+	}
+	else {
+		stack[stack_index].shader = SHADER_NONE;
 	}
 }
 
@@ -1013,4 +1081,3 @@ ccl_device void kernel_volume_stack_enter_exit(KernelGlobals *kg, ShaderData *sd
 }
 
 CCL_NAMESPACE_END
-

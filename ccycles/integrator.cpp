@@ -43,7 +43,8 @@ void cycles_integrator_set_min_bounce(unsigned int client_id, unsigned int scene
 void cycles_integrator_set_no_caustics(unsigned int client_id, unsigned int scene_id, bool no_caustics)
 {
 	SCENE_FIND(scene_id)
-		sce->integrator->no_caustics = no_caustics;
+		sce->integrator->caustics_reflective = !no_caustics;
+		sce->integrator->caustics_refractive = !no_caustics;
 	SCENE_FIND_END()
 }
 

@@ -45,6 +45,9 @@
     <ClCompile Include="util_simd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="util_logging.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="util_algorithm.h">
@@ -153,6 +156,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="util_ssei.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util_logging.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

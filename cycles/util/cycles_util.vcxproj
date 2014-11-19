@@ -101,6 +101,7 @@
   <ItemGroup>
     <ClCompile Include="util_cache.cpp" />
     <ClCompile Include="util_dynlib.cpp" />
+    <ClCompile Include="util_logging.cpp" />
     <ClCompile Include="util_md5.cpp" />
     <ClCompile Include="util_path.cpp" />
     <ClCompile Include="util_simd.cpp" />
@@ -123,6 +124,7 @@
     <ClInclude Include="util_hash.h" />
     <ClInclude Include="util_image.h" />
     <ClInclude Include="util_list.h" />
+    <ClInclude Include="util_logging.h" />
     <ClInclude Include="util_map.h" />
     <ClInclude Include="util_math.h" />
     <ClInclude Include="util_md5.h" />

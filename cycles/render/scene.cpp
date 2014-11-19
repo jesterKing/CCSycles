@@ -165,13 +165,18 @@ void Scene::device_update(Device *device_, Progress& progress)
 
 	if(progress.get_cancel()) return;
 
-	progress.set_status("Updating Camera");
-	camera->device_update(device, &dscene, this);
+	progress.set_status("Updating Objects");
+	object_manager->device_update(device, &dscene, this, progress);
 
 	if(progress.get_cancel()) return;
 
-	progress.set_status("Updating Objects");
-	object_manager->device_update(device, &dscene, this, progress);
+	progress.set_status("Updating Meshes");
+	mesh_manager->device_update(device, &dscene, this, progress);
+
+	if(progress.get_cancel()) return;
+
+	progress.set_status("Updating Objects Flags");
+	object_manager->device_update_flags(device, &dscene, this, progress);
 
 	if(progress.get_cancel()) return;
 
@@ -185,8 +190,9 @@ void Scene::device_update(Device *device_, Progress& progress)
 
 	if(progress.get_cancel()) return;
 
-	progress.set_status("Updating Meshes");
-	mesh_manager->device_update(device, &dscene, this, progress);
+	/* TODO(sergey): Make sure camera is not needed above. */
+	progress.set_status("Updating Camera");
+	camera->device_update(device, &dscene, this);
 
 	if(progress.get_cancel()) return;
 
@@ -271,7 +277,8 @@ bool Scene::need_reset()
 		|| shader_manager->need_update
 		|| particle_system_manager->need_update
 		|| curve_system_manager->need_update
-		|| bake_manager->need_update);
+		|| bake_manager->need_update
+		|| film->need_update);
 }
 
 void Scene::reset()

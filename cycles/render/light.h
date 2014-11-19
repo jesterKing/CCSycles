@@ -54,9 +54,11 @@ public:
 	bool use_diffuse;
 	bool use_glossy;
 	bool use_transmission;
+	bool use_scatter;
 
 	int shader;
 	int samples;
+	int max_bounces;
 
 	void tag_update(Scene *scene);
 };

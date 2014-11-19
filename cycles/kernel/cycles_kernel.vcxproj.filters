@@ -134,12 +134,6 @@
     <ClInclude Include="closure\bsdf_util.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="closure\bsdf_ward.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="closure\bsdf_westin.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="closure\bsdf_hair.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -239,9 +233,6 @@
     <ClInclude Include="svm\svm_ramp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="svm\svm_sepcomb_rgb.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="svm\svm_sepcomb_hsv.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -321,6 +312,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="svm\svm_sepcomb_vector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="geom\geom_bvh_volume.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="kernel_debug.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="svm\svm_math_util.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

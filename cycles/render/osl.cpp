@@ -30,6 +30,7 @@
 #include "osl_shader.h"
 
 #include "util_foreach.h"
+#include "util_logging.h"
 #include "util_md5.h"
 #include "util_path.h"
 #include "util_progress.h"
@@ -194,6 +195,8 @@ void OSLShaderManager::shading_system_init()
 		ss_shared->attribute("searchpath:shader", path_get("shader"));
 		//ss_shared->attribute("greedyjit", 1);
 
+		VLOG(1) << "Using shader search path: " << path_get("shader");
+
 		/* our own ray types */
 		static const char *raytypes[] = {
 			"camera",			/* PATH_RAY_CAMERA */
@@ -248,10 +251,6 @@ void OSLShaderManager::shading_system_free()
 
 bool OSLShaderManager::osl_compile(const string& inputfile, const string& outputfile)
 {
-#if OSL_LIBRARY_VERSION_CODE < 10500
-	typedef string string_view;
-#endif
-
 	vector<string_view> options;
 	string stdosl_path;
 	string shader_path = path_get("shader");
@@ -748,11 +747,7 @@ OSL::ShadingAttribStateRef OSLCompiler::compile_type(Shader *shader, ShaderGraph
 
 	current_type = type;
 
-#if OSL_LIBRARY_VERSION_CODE >= 10501
 	OSL::ShadingAttribStateRef group = ss->ShaderGroupBegin(shader->name.c_str());
-#else
-	ss->ShaderGroupBegin(shader->name.c_str());
-#endif
 
 	ShaderNode *output = graph->output();
 	set<ShaderNode*> dependencies;
@@ -780,13 +775,7 @@ OSL::ShadingAttribStateRef OSLCompiler::compile_type(Shader *shader, ShaderGraph
 
 	ss->ShaderGroupEnd();
 
-#if OSL_LIBRARY_VERSION_CODE >= 10501
 	return group;
-#else
-	OSL::ShadingAttribStateRef group = ss->state();
-	ss->clear_state();
-	return group;
-#endif
 }
 
 void OSLCompiler::compile(OSLGlobals *og, Shader *shader)
