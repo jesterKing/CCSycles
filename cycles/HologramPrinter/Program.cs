@@ -8,10 +8,17 @@ using ccl.ShaderNodes;
 using System.Drawing;
 using System.IO;
 
-using Microsoft.CSharp;
+//using Microsoft.CSharp;
+//using System.CodeDom.Compiler;
+//using System.Reflection;
+//using System.Text;
+
+using System.IO;
+using System.Globalization;
 using System.CodeDom.Compiler;
-using System.Reflection;
 using System.Text;
+using System.Reflection;
+using Microsoft.CSharp;
 
 
 //using System.Runtime.InteropServices;
@@ -55,6 +62,8 @@ namespace HologramPrinter
         static Client Client { get; set; }
         static Device Device { get; set; }
         static Scene Scene { get; set; }
+
+        public static bool Initialised { get; set; }
         
         static IUI _iui;
         public static IUI Iui
@@ -2107,6 +2116,259 @@ namespace HologramPrinter
         }
          * */
 
+        public static bool CompileMaterial(String sourceName)
+        {
+            FileInfo sourceFile = new FileInfo(sourceName);
+            CodeDomProvider provider = null;
+            bool compileOk = false;
+
+            SetMessage("Compiling material: " + sourceName);
+
+            // Select the code provider based on the input file extension.
+            if (sourceFile.Extension.ToUpper(CultureInfo.InvariantCulture) == ".CS")
+            {
+                provider = CodeDomProvider.CreateProvider("CSharp");
+            }
+            else 
+            {
+                Console.WriteLine("Source file must have a .cs or .vb extension");
+            }
+
+            if (provider != null)
+            {
+
+                // Format the executable file name.
+                // Build the output assembly path using the current directory
+                // and <source>_cs.exe or <source>_vb.exe.
+
+                String exeName = String.Format(@"{0}\{1}.exe", 
+                    System.Environment.CurrentDirectory, 
+                    sourceFile.Name.Replace(".", "_"));
+
+                CompilerParameters cp = new CompilerParameters();
+
+                // Generate an executable instead of 
+                // a class library.
+                cp.GenerateExecutable = false;
+
+                // Specify the assembly file name to generate.
+                cp.OutputAssembly = exeName;
+
+                // Save the assembly as a physical file.
+                cp.GenerateInMemory = true;
+
+                // Set whether to treat all warnings as errors.
+                cp.TreatWarningsAsErrors = false;
+
+                // Add the reference of csycles to the to-be-compiled material
+                cp.ReferencedAssemblies.Add("csycles.dll");
+
+                // Invoke compilation of the source file.
+                CompilerResults cr = provider.CompileAssemblyFromFile(cp, sourceName);
+
+                if(cr.Errors.Count > 0)
+                {
+                    // Display compilation errors.
+                    SetMessage("Errors building " + sourceName + "into " + cr.PathToAssembly);
+                    //Console.WriteLine("Errors building {0} into {1}", sourceName, cr.PathToAssembly);
+                    foreach(CompilerError ce in cr.Errors)
+                    {
+                        SetMessage("Error: " + ce.ToString());
+                        //Console.WriteLine("  {0}", ce.ToString());
+                        //Console.WriteLine();
+                    }
+                }
+                else
+                {
+                    SetMessage("Source " + sourceName + "built into " + cr.PathToAssembly + " succesfully.");
+                    // Display a successful compilation message.
+                    //Console.WriteLine("Source {0} built into {1} successfully.", sourceName, cr.PathToAssembly);
+
+                    
+                    var cls = cr.CompiledAssembly.GetType("HologramPrinter.Dynamic_Shader");
+                    /*
+                    var method = cls.GetMethod("CreateDynamicShader", BindingFlags.Static | BindingFlags.Public);   
+                    var returned_value = method.Invoke(null, null);
+                    returned_value = Activator.CreateInstance(Type.GetType("ccl.Shader"));
+                    */
+
+                    Object[] parameters;
+                    parameters = new Object[4];
+                    parameters[0] = Client;
+                    parameters[1] = Device;
+                    parameters[2] = Scene;
+                    parameters[3] = Shader.ShaderType.World;
+
+                    MethodInfo methodInformation = cls.GetMethod("Show");
+                    //object assemblyInstance = cr.CompiledAssembly.CreateInstance("Test Shader", false);
+                    var returned_value = methodInformation.Invoke(null , parameters);
+                    SetMessage("Set background shader");
+                    /*
+                    returned_value = Activator.CreateInstance(Type.GetType("ccl.Shader"));
+                    
+                    if(returned_value is Shader)
+                    {
+                        SetMessage("Set background shader");
+                        Shader dynamic_shader = returned_value as Shader;
+                        Scene.AddShader(dynamic_shader);
+                        Scene.Background.Shader = dynamic_shader; 
+                    }
+                    else
+                    {
+                        SetMessage("Unable to set background shader");
+                    }
+                     * */
+
+                    /*
+                    try
+                    {
+                        Shader dynamic_shader = (Shader)Convert.ChangeType(returned_value, typeof(Shader));
+                        Scene.AddShader(dynamic_shader);
+                        Scene.Background.Shader = dynamic_shader;
+                    }
+                    catch (InvalidCastException)
+                    {
+                        Console.WriteLine("Cannot convert an object to a Shader");
+                    }
+                     * */
+
+                    /*
+                    //Shader dynamic_shader = (Shader)returned_value;
+                    Scene.Background.AoDistance = 0.0f;
+                    Scene.Background.AoFactor = 0.0f;
+                    Scene.Background.Visibility = PathRay.PATH_RAY_ALL_VISIBILITY;
+                    */
+
+                    //String ClassName = "ccl.Shader";
+                    //Shader dynamic_shader = (Shader)Activator.CreateInstance(cr.CompiledAssembly, ClassName))
+
+                    /*
+                    Shader dynamic_shader = new Shader(Client, Shader.ShaderType.World)
+                    {
+                        Name = "Dynamic shader"
+                    };
+                    */
+
+                    /*
+                    Type t = typeof(Shader);
+                    int val;
+
+                    // Get constructor info. 
+                    ConstructorInfo[] ci = t.GetConstructors();
+
+                    Console.WriteLine("Available constructors: ");
+                    foreach (ConstructorInfo c in ci)
+                    {
+                        // Display return type and name. 
+                        SetMessage("   " + t.Name + "(");
+
+                        // Display parameters. 
+                        ParameterInfo[] pi = c.GetParameters();
+
+                        for (int i = 0; i < pi.Length; i++)
+                        {
+                            Console.Write(pi[i].ParameterType.Name +
+                                          " " + pi[i].Name);
+                            if (i + 1 < pi.Length) Console.Write(", ");
+                        }
+
+                        SetMessage(")");
+                    }
+                    SetMessage("");
+
+                    // Find matching constructor. 
+                    int x;
+
+                    for (x = 0; x < ci.Length; x++)
+                    {
+                        ParameterInfo[] pi = ci[x].GetParameters();
+                        if (pi.Length == 2) break;
+                    }
+
+                    if (x == ci.Length)
+                    {
+                        SetMessage("No matching constructor found.");
+                    }
+                    else
+                        SetMessage("Two-parameter constructor found.\n");
+
+                    // Construct the object.   
+                    object[] consargs = new object[2];
+                    consargs[0] = Client;
+                    consargs[1] = Shader.ShaderType.World;
+                    object reflectOb = ci[x].Invoke(consargs);
+
+                    SetMessage("\nInvoking methods on reflectOb.");
+                    SetMessage("");
+                    MethodInfo[] mi = t.GetMethods();
+
+                    foreach (MethodInfo m in mi)
+                    {
+                         if (m.Name.CompareTo("set") == 0)
+                         {
+
+                         }
+                    }
+                     * */
+
+                    /*
+                    // Invoke each method. 
+                    foreach (MethodInfo m in mi)
+                    {
+                        // Get the parameters 
+                        ParameterInfo[] pi = m.GetParameters();
+
+                        if (m.Name.CompareTo("set") == 0 &&
+                           pi[0].ParameterType == typeof(int))
+                        {
+                            // This is set(int, int). 
+                            object[] args = new object[2];
+                            args[0] = 9;
+                            args[1] = 18;
+                            m.Invoke(reflectOb, args);
+                        }
+                        else if (m.Name.CompareTo("set") == 0 &&
+                                pi[0].ParameterType == typeof(double))
+                        {
+                            // This is set(double, double). 
+                            object[] args = new object[2];
+                            args[0] = 1.12;
+                            args[1] = 23.4;
+                            m.Invoke(reflectOb, args);
+                        }
+                        else if (m.Name.CompareTo("sum") == 0)
+                        {
+                            val = (int)m.Invoke(reflectOb, null);
+                            SetMessage("sum is " + val);
+                        }
+                        else if (m.Name.CompareTo("isBetween") == 0)
+                        {
+                            object[] args = new object[1];
+                            args[0] = 14;
+                            if ((bool)m.Invoke(reflectOb, args))
+                                SetMessage("14 is between x and y");
+                        }
+                        else if (m.Name.CompareTo("show") == 0)
+                        {
+                            m.Invoke(reflectOb, null);
+                        }
+                    } 
+                    */
+                }
+
+                // Return the results of the compilation.
+                if (cr.Errors.Count > 0)
+                {
+                    compileOk = false;
+                }
+                else 
+                {
+                    compileOk = true;
+                }
+            }
+            return compileOk;
+        }
+
         static public void StatusUpdateCallback(uint sessionId)
         {
             float progress;
@@ -2213,26 +2475,29 @@ namespace HologramPrinter
 
             #region Create default scene
 
-            var scene_params = new SceneParameters(client, ShadingSystem.SVM, BvhType.Static, false, false, false, false);
+            var scene_params = new SceneParameters(client, ShadingSystem.SVM, BvhType.Static, true, false, false, false);
             var scene = new Scene(client, scene_params, dev);
+
+            SetMessage("Setup Camera...");
+            /* move the scene camera a bit, so we can see our render result. */
+            var t = Transform.Identity();
+            float angle = 90.0f;
+            t = t * Transform.Rotate(angle * (float)Math.PI / 180.0f, new float4(0.0f, 1.0f, 0.0f));
+            t = t * Transform.Translate(0.0f, 0.0f, 4.0f);
+
+            scene.Camera.Matrix = t;
+            /* set also the camera size = render resolution in pixels. Also do some extra settings. */
+            scene.Camera.Size = new Size((int)width, (int)height);
+            scene.Camera.Type = CameraType.Perspective;
+            scene.Camera.ApertureSize = 0.0f;
+            scene.Camera.Fov = 0.661f;
+            //scene.Camera.FocalDistance = 0.0f;
+            scene.Camera.SensorWidth = 32.0f;
+            scene.Camera.SensorHeight = 18.0f;
 
             if (string.IsNullOrEmpty(materialFile))
             {
-                SetMessage("Setup Camera...");
-                /* move the scene camera a bit, so we can see our render result. */
-                var t = Transform.Identity();
-                float angle = 90.0f;
-                t = t * Transform.Rotate(angle * (float)Math.PI / 180.0f, new float4(0.0f, 1.0f, 1.0f));
-                t = t * Transform.Translate(0.0f, 0.0f, 4.0f);
-                scene.Camera.Matrix = t;
-                /* set also the camera size = render resolution in pixels. Also do some extra settings. */
-                scene.Camera.Size = new Size((int)width, (int)height);
-                scene.Camera.Type = CameraType.Orthographic;
-                scene.Camera.ApertureSize = 0.0f;
-                scene.Camera.Fov = 0.661f;
-                scene.Camera.FocalDistance = 0.0f;
-                scene.Camera.SensorWidth = 32.0f;
-                scene.Camera.SensorHeight = 18.0f;
+                
             }
             else
             {
@@ -2245,24 +2510,28 @@ namespace HologramPrinter
 
             #region default shader
 
+            /* Create a simple surface shader and make it the default surface shader */
+            var background = new Shader(Client, Shader.ShaderType.World)
+            {
+                Name = "SmallCSycles material"
+            };
+
+            var bgnode = new BackgroundNode();
+            bgnode.ins.Color.Value = new float4(1.0f, 0.64f, 0.0f); //255-165-0
+            //bgnode.ins.Strength.Value = 2.0f;
+
+            background.AddNode(bgnode);
+            bgnode.outs.Background.Connect(background.Output.ins.Surface);
+
+            background.FinalizeGraph();
+
+            scene.AddShader(background);
+            scene.Background.Shader = background;
+            scene.Background.Visibility = PathRay.PATH_RAY_ALL_VISIBILITY;
+            
             if (string.IsNullOrEmpty(materialFile))
             {
-                /* Create a simple surface shader and make it the default surface shader */
-                var surface = new Shader(Client, Shader.ShaderType.Material)
-                {
-                    Name = "SmallCSycles material"
-                };
-
-                var diffbsdf = new DiffuseBsdfNode();
-                diffbsdf.ins.Color.Value = new float4(0.8f, 0.4f, 0.2f);
-                diffbsdf.ins.Roughness.Value = 0.0f;
-                surface.AddNode(diffbsdf);
-
-                diffbsdf.outs.BSDF.Connect(surface.Output.ins.Surface);
-                surface.FinalizeGraph();
-
-                scene.AddShader(surface);
-                scene.DefaultSurface = surface;
+                
             }
             else
             {
@@ -2277,6 +2546,7 @@ namespace HologramPrinter
             SetMessage("Creating background shader...");
 
             #region background shader
+            /*
             var background = new Shader(Client, Shader.ShaderType.World)
             {
                 Name = "SmallCSycles world",
@@ -2286,8 +2556,8 @@ namespace HologramPrinter
             };
 
             var bgnode = new BackgroundNode();
-            bgnode.ins.Color.Value = new float4(0.5f, 0.5f, 0.5f);
-            bgnode.ins.Strength.Value = 2.0f;
+            bgnode.ins.Color.Value = new float4(0.2f, 0.4f, 0.8f);
+            //bgnode.ins.Strength.Value = 2.0f;
 
             background.AddNode(bgnode);
             bgnode.outs.Background.Connect(background.Output.ins.Surface);
@@ -2297,6 +2567,58 @@ namespace HologramPrinter
             scene.AddShader(background);
             scene.Background.Shader = background;
             scene.Background.Visibility = PathRay.PATH_RAY_ALL_VISIBILITY;
+
+             * */
+
+            var some_setup = new Shader(Client, Shader.ShaderType.Material)
+            {
+                Name = "some_setup"
+            };
+
+
+            var brick_texture = new BrickTexture();
+            brick_texture.ins.Vector.Value = new float4(0.000f, 0.000f, 0.000f);
+            brick_texture.ins.Color1.Value = new float4(0.800f, 0.800f, 0.800f);
+            brick_texture.ins.Color2.Value = new float4(0.200f, 0.200f, 0.200f);
+            brick_texture.ins.Mortar.Value = new float4(0.000f, 0.000f, 0.000f);
+            brick_texture.ins.Scale.Value = 1.000f;
+            brick_texture.ins.MortarSize.Value = 0.020f;
+            brick_texture.ins.Bias.Value = 0.000f;
+            brick_texture.ins.BrickWidth.Value = 0.500f;
+            brick_texture.ins.RowHeight.Value = 0.250f;
+
+            var checker_texture = new CheckerTexture();
+            checker_texture.ins.Vector.Value = new float4(0.000f, 0.000f, 0.000f);
+            checker_texture.ins.Color1.Value = new float4(0.000f, 0.004f, 0.800f);
+            checker_texture.ins.Color2.Value = new float4(0.200f, 0.000f, 0.007f);
+            checker_texture.ins.Scale.Value = 5.000f;
+
+            var diffuse_bsdf = new DiffuseBsdfNode();
+            diffuse_bsdf.ins.Color.Value = new float4(0.800f, 0.800f, 0.800f);
+            diffuse_bsdf.ins.Roughness.Value = 0.000f;
+            diffuse_bsdf.ins.Normal.Value = new float4(0.000f, 0.000f, 0.000f);
+
+            var texture_coordinate = new TextureCoordinateNode();
+
+
+            some_setup.AddNode(brick_texture);
+            some_setup.AddNode(checker_texture);
+            some_setup.AddNode(diffuse_bsdf);
+            some_setup.AddNode(texture_coordinate);
+
+            brick_texture.outs.Color.Connect(diffuse_bsdf.ins.Color);
+            checker_texture.outs.Color.Connect(brick_texture.ins.Mortar);
+            texture_coordinate.outs.Normal.Connect(checker_texture.ins.Vector);
+            texture_coordinate.outs.UV.Connect(brick_texture.ins.Vector);
+
+            diffuse_bsdf.outs.BSDF.Connect(some_setup.Output.ins.Surface);
+
+            some_setup.FinalizeGraph();
+
+            scene.AddShader(some_setup);
+            scene.DefaultSurface = some_setup;
+            //scene.Background.Visibility = PathRay.PATH_RAY_ALL_VISIBILITY;
+
 
             #endregion
 
@@ -2323,8 +2645,9 @@ namespace HologramPrinter
             CSycles.object_set_matrix(Client.Id, scene.Id, ob, Transform.Identity());
             /* Now we can create a mesh, attached to the object */
             var mesh = CSycles.scene_add_mesh(Client.Id, scene.Id, ob, default_shader);
-
+            
             /* populate mesh with geometry */
+            
             CSycles.mesh_set_verts(Client.Id, scene.Id, mesh, ref vert_floats, (uint)(vert_floats.Length / 3));
             var index_offset = 0;
             foreach (var face in nverts)
@@ -2340,7 +2663,7 @@ namespace HologramPrinter
 
                 index_offset += face;
             }
-
+            
 
 
             #region point light shader
@@ -2364,6 +2687,8 @@ namespace HologramPrinter
             Scene = scene;
 
             CSycles.shutdown();
+
+            Initialised = true;
 
             //CSycles.shutdown();
 
@@ -2463,8 +2788,8 @@ namespace HologramPrinter
             Session.UpdateCallback = g_update_callback;
             Session.UpdateTileCallback = g_update_render_tile_callback;
             Session.WriteTileCallback = g_write_render_tile_callback;
-
-
+            
+            
             _iui.SetText("Rendering tile " + tile + ": " + CSycles.progress_get_status(Client.Id, Session.Id));
 
             //_iui.SetText("Devices: " + Device.GetDevice(2).Name);

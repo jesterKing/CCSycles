@@ -121,24 +121,23 @@ namespace HologramPrinter
         {
             BackgroundWorker worker = sender as BackgroundWorker;
 
-            Engine.Initiate();
-
-            for (int i = 1; i <= 100; i++)
+            if (!Engine.Initialised)
             {
-                if (worker.CancellationPending == true)
-                {
-                    e.Cancel = true;
-                    break;
-                }
-                else
-                {
-                    // Perform a time consuming operation and report progress.
-                    //System.Threading.Thread.Sleep(500);
-                    Engine.Render(i);                    
-                    worker.ReportProgress(i);
-                }
+                Engine.Initiate();
             }
-            
+
+            if (worker.CancellationPending == true)
+            {
+                e.Cancel = true;
+                //break;
+            }
+            else
+            {
+                // Perform a time consuming operation and report progress.
+                //System.Threading.Thread.Sleep(500);
+                Engine.Render(0);
+                worker.ReportProgress(0);
+            }            
         }
 
         // This event handler updates the progress. 
@@ -198,7 +197,13 @@ namespace HologramPrinter
 
         private void btnCompile_Click(object sender, EventArgs e)
         {
-            Engine.CompileMaterial();
+            //Engine.CompileMaterial();
+            if (!Engine.Initialised)
+            {
+                Engine.Initiate();
+            }
+
+            Engine.CompileMaterial(txtSelectedMaterial.Text);
         }
     }
 }
