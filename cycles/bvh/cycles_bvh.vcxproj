@@ -50,7 +50,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\bindeps\boost_1_55_0;$(ProjectDir)..\pthreads;$(ProjectDir)..\OpenImageIO\include;$(ProjectDir)..\cycles\render;$(ProjectDir)..\cycles\kernel;$(ProjectDir)..\cycles\util;$(ProjectDir)..\cycles\device;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\bindeps\boost_1_55_0;$(ProjectDir)..\..\pthreads;$(ProjectDir)..\..\OpenImageIO\include;$(ProjectDir)..\render;$(ProjectDir)..\kernel;$(ProjectDir)..\util;$(ProjectDir)..\device;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>DEBUG;_DEBUG;_CRT_SECURE_NO_WARNINGS;CCL_NAMESPACE_BEGIN=namespace ccl {;CCL_NAMESPACE_END=};WITH_OPENCL;WITH_CUDA;WITH_MULTI;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <FloatingPointModel>Fast</FloatingPointModel>
@@ -76,7 +76,7 @@
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>false</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\bindeps\boost_1_55_0;$(ProjectDir)..\pthreads;$(ProjectDir)..\OpenImageIO\include;$(ProjectDir)..\cycles\render;$(ProjectDir)..\cycles\kernel;$(ProjectDir)..\cycles\util;$(ProjectDir)..\cycles\device;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\bindeps\boost_1_55_0;$(ProjectDir)..\..\pthreads;$(ProjectDir)..\..\OpenImageIO\include;$(ProjectDir)..\render;$(ProjectDir)..\kernel;$(ProjectDir)..\util;$(ProjectDir)..\device;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <WholeProgramOptimization>false</WholeProgramOptimization>
       <PreprocessorDefinitions>NDEBUG;_CRT_SECURE_NO_WARNINGS;CCL_NAMESPACE_BEGIN=namespace ccl {;CCL_NAMESPACE_END=};WITH_OPENCL;WITH_CUDA;WITH_MULTI;%(PreprocessorDefinitions)</PreprocessorDefinitions>

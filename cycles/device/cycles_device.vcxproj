@@ -66,7 +66,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\bindeps\boost_1_55_0;$(ProjectDir)..\glew\include;$(ProjectDir)..\pthreads;$(ProjectDir)..\OpenImageIO\include;$(ProjectDir)..\cycles\render;$(ProjectDir)..\cycles\kernel;$(ProjectDir)..\cycles\kernel\osl;$(ProjectDir)..\cycles\kernel\svm;$(ProjectDir)..\cycles\util;$(ProjectDir)..\cycles\device;$(ProjectDir)..\clew\include;$(ProjectDir)..\cuew\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\bindeps\boost_1_55_0;$(ProjectDir)..\..\clew\include;$(ProjectDir)..\..\cuew\include;$(ProjectDir)..\..\glew\include;$(ProjectDir)..\..\pthreads;$(ProjectDir)..\..\OpenImageIO\include;$(ProjectDir)..\render;$(ProjectDir)..\kernel;$(ProjectDir)..\kernel\osl;$(ProjectDir)..\kernel\svm;$(ProjectDir)..\util;$(ProjectDir)..\device;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;CCL_NAMESPACE_BEGIN=namespace ccl {;CCL_NAMESPACE_END=};WITH_OPENCL;WITH_CUDA;WITH_MULTI;DEBUG;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <FloatingPointModel>Fast</FloatingPointModel>
@@ -83,7 +83,7 @@
     </Link>
     <Lib>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
-      <AdditionalLibraryDirectories>$(ProjectDir)..\bindeps\boost_1_55_0\stage$(Configuration)\lib;$(ProjectDir)..\cuew\x64\$(Configuration)\;$(ProjectDir)..\clew\x64\$(Configuration)\</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\..\bindeps\boost_1_55_0\stage$(Configuration)\lib;$(ProjectDir)..\..\cuew\x64\$(Configuration)\;$(ProjectDir)..\..\clew\x64\$(Configuration)\</AdditionalLibraryDirectories>
       <AdditionalDependencies>cuew.lib;clew.lib</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
@@ -93,7 +93,7 @@
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>false</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\bindeps\boost_1_55_0;$(ProjectDir)..\glew\include;$(ProjectDir)..\pthreads;$(ProjectDir)..\OpenImageIO\include;$(ProjectDir)..\cycles\render;$(ProjectDir)..\cycles\kernel;$(ProjectDir)..\cycles\kernel\osl;$(ProjectDir)..\cycles\kernel\svm;$(ProjectDir)..\cycles\util;$(ProjectDir)..\cycles\device;$(ProjectDir)..\clew\include;$(ProjectDir)..\cuew\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\bindeps\boost_1_55_0;$(ProjectDir)..\..\clew\include;$(ProjectDir)..\..\cuew\include;$(ProjectDir)..\..\glew\include;$(ProjectDir)..\..\pthreads;$(ProjectDir)..\..\OpenImageIO\include;$(ProjectDir)..\render;$(ProjectDir)..\kernel;$(ProjectDir)..\kernel\osl;$(ProjectDir)..\kernel\svm;$(ProjectDir)..\util;$(ProjectDir)..\device;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <WholeProgramOptimization>false</WholeProgramOptimization>
       <PreprocessorDefinitions>GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;CCL_NAMESPACE_BEGIN=namespace ccl {;CCL_NAMESPACE_END=};WITH_OPENCL;WITH_CUDA;WITH_MULTI;NDEBUG;_NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -112,7 +112,7 @@
     </Link>
     <Lib>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
-      <AdditionalLibraryDirectories>$(ProjectDir)..\bindeps\boost_1_55_0\stage$(Configuration)\lib;$(ProjectDir)..\cuew\x64\$(Configuration)\;$(ProjectDir)..\clew\x64\$(Configuration)\</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\..\bindeps\boost_1_55_0\stage$(Configuration)\lib;$(ProjectDir)..\..\cuew\x64\$(Configuration)\;$(ProjectDir)..\..\clew\x64\$(Configuration)\</AdditionalLibraryDirectories>
       <AdditionalDependencies>cuew.lib;clew.lib</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
