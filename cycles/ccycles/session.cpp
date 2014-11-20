@@ -136,6 +136,9 @@ unsigned int cycles_session_create(unsigned int client_id, unsigned int session_
 	session->session = new ccl::Session(params);
 	session->session->scene = sce.scene;
 
+	session->session->update_render_tile_cb = function_bind<void>(&CCSession::update_render_tile, session, _1);
+	session->session->write_render_tile_cb = function_bind<void>(&CCSession::write_render_tile, session, _1);
+
 	auto csessit = sessions.begin();
 	auto csessend = sessions.end();
 	while (csessit != csessend) {
@@ -213,7 +216,6 @@ void cycles_session_set_update_tile_callback(unsigned int client_id, unsigned in
 	SESSION_FIND(session_id)
 		auto se = sessions[session_id];
 		update_cbs[session_id] = update_tile_cb;
-		session->update_render_tile_cb = function_bind<void>(&CCSession::update_render_tile, se, _1);
 		logger.logit(client_id, "Set render tile update callback for session ", session_id);
 	SESSION_FIND_END()
 }
@@ -223,7 +225,6 @@ void cycles_session_set_write_tile_callback(unsigned int client_id, unsigned int
 	SESSION_FIND(session_id)
 		auto se = sessions[session_id];
 		write_cbs[session_id] = write_tile_cb;
-		session->write_render_tile_cb = function_bind<void>(&CCSession::write_render_tile, se, _1);
 		logger.logit(client_id, "Set render tile write callback for session ", session_id);
 	SESSION_FIND_END()
 }

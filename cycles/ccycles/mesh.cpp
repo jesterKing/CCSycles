@@ -84,9 +84,7 @@ void cycles_mesh_set_verts(unsigned int client_id, unsigned int scene_id, unsign
 	SCENE_FIND_END()
 }
 
-// TODO: add to API: set smooth
-
-void cycles_mesh_set_tris(unsigned int client_id, unsigned int scene_id, unsigned int mesh_id, int *faces, unsigned int fcount, unsigned int shader_id)
+void cycles_mesh_set_tris(unsigned int client_id, unsigned int scene_id, unsigned int mesh_id, int *faces, unsigned int fcount, unsigned int shader_id, unsigned int smooth)
 {
 	SCENE_FIND(scene_id)
 		auto me = sce->meshes[mesh_id];
@@ -95,7 +93,7 @@ void cycles_mesh_set_tris(unsigned int client_id, unsigned int scene_id, unsigne
 
 		for (auto i = 0; i < (int)fcount*3; i += 3) {
 			logger.logit(client_id, "f: ", faces[i], ",", faces[i + 1], ",", faces[i + 2]);
-			me->add_triangle(faces[i], faces[i + 1], faces[i + 2], shader_id, false);
+			me->add_triangle(faces[i], faces[i + 1], faces[i + 2], shader_id, smooth == 1);
 		}
 		
 		// TODO: APIfy next call, right now keep here to be closer to PoC plugin
@@ -129,5 +127,24 @@ void cycles_mesh_set_uvs(unsigned int client_id, unsigned int scene_id, unsigned
 			fdata[j] = f3;
 		}
 	}
+	SCENE_FIND_END()
+}
+
+void cycles_mesh_set_vertex_normals(unsigned int client_id, unsigned int scene_id, unsigned int mesh_id, float *vnormals, unsigned int vnormalcount)
+{
+	SCENE_FIND(scene_id)
+		auto me = sce->meshes[mesh_id];
+
+		auto attr = me->attributes.add(ccl::ATTR_STD_VERTEX_NORMAL);
+		auto fdata = attr->data_float3();
+
+		ccl::float3 f3;
+
+		for (auto i = 0, j = 0; i < (int)vnormalcount * 3; i += 3, j++) {
+			f3.x = vnormals[i];
+			f3.y = vnormals[i + 1];
+			f3.z = vnormals[i + 2];
+			fdata[j] = f3;
+		}
 	SCENE_FIND_END()
 }

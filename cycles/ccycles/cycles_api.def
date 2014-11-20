@@ -39,6 +39,7 @@ EXPORTS
   cycles_mesh_set_tris
   cycles_mesh_add_triangle
   cycles_mesh_set_uvs
+  cycles_mesh_set_vertex_normals
   cycles_mesh_set_smooth
 
   cycles_scene_object_set_matrix
@@ -167,6 +168,7 @@ EXPORTS
   cycles_light_set_samples
   cycles_light_set_map_resolution
   cycles_light_set_use_mis
+  cycles_light_set_cast_shadow
   cycles_light_set_sizeu
   cycles_light_set_sizev
   cycles_light_set_axisu

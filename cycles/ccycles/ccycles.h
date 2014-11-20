@@ -416,9 +416,10 @@ CCL_CAPI void __cdecl cycles_scene_set_background_visibility(unsigned int client
 
 /* Mesh geometry API */
 CCL_CAPI void __cdecl cycles_mesh_set_verts(unsigned int client_id, unsigned int scene_id, unsigned int mesh_id, float *verts, unsigned int vcount);
-CCL_CAPI void __cdecl cycles_mesh_set_tris(unsigned int client_id, unsigned int scene_id, unsigned int mesh_id, int *faces, unsigned int fcount, unsigned int shader_id);
+CCL_CAPI void __cdecl cycles_mesh_set_tris(unsigned int client_id, unsigned int scene_id, unsigned int mesh_id, int *faces, unsigned int fcount, unsigned int shader_id, unsigned int smooth);
 CCL_CAPI void __cdecl cycles_mesh_add_triangle(unsigned int client_id, unsigned int scene_id, unsigned int mesh_id, unsigned int v0, unsigned int v1, unsigned int v2, unsigned int shader_id, unsigned int smooth);
 CCL_CAPI void __cdecl cycles_mesh_set_uvs(unsigned int client_id, unsigned int scene_id, unsigned int mesh_id, float *uvs, unsigned int uvcount);
+CCL_CAPI void __cdecl cycles_mesh_set_vertex_normals(unsigned int client_id, unsigned int scene_id, unsigned int mesh_id, float *vnormals, unsigned int vnormalcount);
 CCL_CAPI void __cdecl cycles_mesh_set_smooth(unsigned int client_id, unsigned int scene_id, unsigned int mesh_id, unsigned int smooth);
 
 /* Shader API */
@@ -467,6 +468,11 @@ enum class shadernode_type : unsigned int {
 	BUMP,
 	RGBTOBW,
 	LIGHTPATH,
+	LIGHTFALLOFF,
+	LAYERWEIGHT,
+	VORONOI_TEXTURE,
+	HSV_SEPARATE,
+	RGB_SEPARATE,
 };
 
 CCL_CAPI unsigned int __cdecl cycles_create_shader(unsigned int client_id);
@@ -523,6 +529,7 @@ CCL_CAPI unsigned int __cdecl cycles_create_light(unsigned int client_id, unsign
 CCL_CAPI void __cdecl cycles_light_set_type(unsigned int client_id, unsigned int scene_id, unsigned int light_id, light_type type);
 CCL_CAPI void __cdecl cycles_light_set_spot_angle(unsigned int client_id, unsigned int scene_id, unsigned int light_id, float spot_angle);
 CCL_CAPI void __cdecl cycles_light_set_spot_smooth(unsigned int client_id, unsigned int scene_id, unsigned int light_id, float spot_smooth);
+CCL_CAPI void __cdecl cycles_light_set_cast_shadow(unsigned int client_id, unsigned int scene_id, unsigned int light_id, unsigned int cast_shadow);
 CCL_CAPI void __cdecl cycles_light_set_use_mis(unsigned int client_id, unsigned int scene_id, unsigned int light_id, unsigned int use_mis);
 CCL_CAPI void __cdecl cycles_light_set_samples(unsigned int client_id, unsigned int scene_id, unsigned int light_id, unsigned int samples);
 CCL_CAPI void __cdecl cycles_light_set_map_resolution(unsigned int client_id, unsigned int scene_id, unsigned int light_id, unsigned int map_resolution);

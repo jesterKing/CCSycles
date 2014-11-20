@@ -4,7 +4,7 @@ C[CS]?ycles : CCycles and CSycles for Cycles
 C[CS]?ycles aims to provide a C API around Cycles. Building on CCycles also a
 C# wrapper is available.
 
-*Note 1* Use the bindeps branch to be able to compile. Get the compressed archive at: https://dl.dropboxusercontent.com/u/1769373/bindeps.7z . This needs to be extracted so the contained bindeps folder is placed next to the solution file. The bindeps archive contains pre-compiled libraries for Boost and OpenEXR half.
+*Note 1* Use the bindeps branch to be able to compile. Get the compressed archive at: https://dl.dropboxusercontent.com/u/1769373/bindeps.7z . This needs to be extracted so the contained bindeps folder is placed next to the solution file. The bindeps archive contains pre-compiled libraries for Boost and OpenEXR half. A build tutorial can be found here: https://www.youtube.com/watch?v=ENyjG7h5Dxw
 
 *Note 2* This is currently targeted at Windows 64bit platform only, but patches to
 improve cross-platform compiling and executing are likely candidates for

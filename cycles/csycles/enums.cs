@@ -91,6 +91,13 @@ namespace ccl
 		Bump,
 		RgbToBw,
 		LightPath,
+		LightFalloff,
+		LayerWeight,
+		VoronoiTexture,
+		SeparateHsv,
+		SeparateRgb,
+        Mapping,
+        CombineRgb
 	}
 
 	public enum BvhType : uint

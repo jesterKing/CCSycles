@@ -16,6 +16,9 @@ limitations under the License.
 
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
+using System.Xml;
 using ccl.ShaderNodes;
 using ccl.ShaderNodes.Sockets;
 
@@ -138,6 +141,10 @@ namespace ccl
 			/* set direct member variables */
 			switch (node.Type)
 			{
+                case ShaderNodeType.Mapping:
+                    CSycles.shadernode_set_member_bool(Client.Id, Id, node.Id, node.Type, "use_min", ((MappingNode)node).UseMin);
+                    CSycles.shadernode_set_member_bool(Client.Id, Id, node.Id, node.Type, "use_max", ((MappingNode)node).UseMax);
+                    break;
 				case ShaderNodeType.Math:
 					CSycles.shadernode_set_member_bool(Client.Id, Id, node.Id, node.Type, "use_clamp", ((MathNode)node).UseClamp);
 					break;
@@ -154,14 +161,12 @@ namespace ccl
 					if (imgtexnode.FloatImage != null)
 					{
 						var flimg = imgtexnode.FloatImage;
-						CSycles.shadernode_set_member_float_img(Client.Id, Id, node.Id, node.Type, "builtin-data",
-							String.Format("{0}-{0}-{0}f", Client.Id, Id, node.Id), ref flimg, imgtexnode.Width, imgtexnode.Height, 1, 4);
+						CSycles.shadernode_set_member_float_img(Client.Id, Id, node.Id, node.Type, "builtin-data", imgtexnode.Filename ?? String.Format("{0}-{0}-{0}", Client.Id, Id, node.Id), ref flimg, imgtexnode.Width, imgtexnode.Height, 1, 4);
 					}
 					else if (imgtexnode.ByteImage != null)
 					{
 						var bimg = imgtexnode.ByteImage;
-						CSycles.shadernode_set_member_byte_img(Client.Id, Id, node.Id, node.Type, "builtin-data",
-							String.Format("{0}-{0}-{0}f", Client.Id, Id, node.Id), ref bimg, imgtexnode.Width, imgtexnode.Height, 1, 4);
+						CSycles.shadernode_set_member_byte_img(Client.Id, Id, node.Id, node.Type, "builtin-data", imgtexnode.Filename ?? String.Format("{0}-{0}-{0}", Client.Id, Id, node.Id), ref bimg, imgtexnode.Width, imgtexnode.Height, 1, 4);
 					}
 					break;
 				case ShaderNodeType.EnvironmentTexture:
@@ -169,14 +174,12 @@ namespace ccl
 					if (envtexnode.FloatImage != null)
 					{
 						var flenv = envtexnode.FloatImage;
-						CSycles.shadernode_set_member_float_img(Client.Id, Id, node.Id, node.Type, "builtin-data",
-							String.Format("{0}-{0}-{0}f", Client.Id, Id, node.Id), ref flenv, envtexnode.Width, envtexnode.Height, 1, 4);
+						CSycles.shadernode_set_member_float_img(Client.Id, Id, node.Id, node.Type, "builtin-data", envtexnode.Filename ?? String.Format("{0}-{0}-{0}", Client.Id, Id, node.Id), ref flenv, envtexnode.Width, envtexnode.Height, 1, 4);
 					}
 					else if (envtexnode.ByteImage != null)
 					{
 						var benv = envtexnode.ByteImage;
-						CSycles.shadernode_set_member_byte_img(Client.Id, Id, node.Id, node.Type, "builtin-data",
-							String.Format("{0}-{0}-{0}f", Client.Id, Id, node.Id), ref benv, envtexnode.Width, envtexnode.Height, 1, 4);
+						CSycles.shadernode_set_member_byte_img(Client.Id, Id, node.Id, node.Type, "builtin-data", envtexnode.Filename ?? String.Format("{0}-{0}-{0}", Client.Id, Id, node.Id), ref benv, envtexnode.Width, envtexnode.Height, 1, 4);
 					}
 					break;
 				case ShaderNodeType.BrickTexture:
@@ -269,5 +272,31 @@ namespace ccl
 				CSycles.shader_set_heterogeneous_volume(Client.Id, Id, value);
 			}
 		}
+
+		/// <summary>
+		/// Create node graph in the given shader from the passed XML
+		/// </summary>
+		/// <param name="shader"></param>
+		/// <param name="shaderXml"></param>
+		/// <returns></returns>
+		public static Shader ShaderFromXml(ref Shader shader, string shaderXml)
+		{
+			var xmlmem = Encoding.UTF8.GetBytes(shaderXml);
+			using (var xmlstream = new MemoryStream(xmlmem))
+			{
+				var settings = new XmlReaderSettings
+				{
+					ConformanceLevel = ConformanceLevel.Fragment,
+					IgnoreComments = true,
+					IgnoreProcessingInstructions = true,
+					IgnoreWhitespace = true
+				};
+				var reader = XmlReader.Create(xmlstream, settings);
+				Utilities.Instance.ReadNodeGraph(ref shader, reader);
+			}
+
+			return shader;
+		}
+
 	}
 }

@@ -20,7 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x64</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -32,7 +32,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <PlatformTarget>x64</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
@@ -64,6 +64,17 @@
     <Compile Include="Device.cs" />
     <Compile Include="enums.cs" />
     <Compile Include="float4.cs" />
+    <Compile Include="ShaderNodes\CombineRGBNode.cs" />
+    <Compile Include="ShaderNodes\CombineXYZNode.cs" />
+    <Compile Include="ShaderNodes\MappingNode.cs" />
+    <Compile Include="ShaderNodes\SeparateRgbNode.cs" />
+    <Compile Include="ShaderNodes\SeparateHsvNode.cs" />
+    <Compile Include="ShaderNodes\SeparateXYZNode.cs" />
+    <Compile Include="ShaderNodes\SeperateRGBNode.cs" />
+    <Compile Include="ShaderNodes\TransparentBsdfNode.cs" />
+    <Compile Include="ShaderNodes\LayerWeightNode.cs" />
+    <Compile Include="ShaderNodes\GammaNode.cs" />
+    <Compile Include="ShaderNodes\LightFalloffNode.cs" />
     <Compile Include="ShaderNodes\RgbToBwNode.cs" />
     <Compile Include="ShaderNodes\CheckerTexture.cs" />
     <Compile Include="ShaderNodes\GlassBsdfNode.cs" />
@@ -72,6 +83,7 @@
     <Compile Include="ShaderNodes\NoiseTexture.cs" />
     <Compile Include="ShaderNodes\OutputNode.cs" />
     <Compile Include="ShaderNodes\ShaderNode.cs" />
+    <Compile Include="ShaderNodes\VoronoiTexture.cs" />
     <Compile Include="ShaderNodes\SkyTexture.cs" />
     <Compile Include="ShaderNodes\Sockets\Float4Socket.cs" />
     <Compile Include="ShaderNodes\Sockets\FloatSocket.cs" />
@@ -109,6 +121,7 @@
     <Compile Include="SocketCollection.cs" />
     <Compile Include="Transform.cs" />
     <Compile Include="SessionParameters.cs" />
+    <Compile Include="Utilities.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="license.txt" />

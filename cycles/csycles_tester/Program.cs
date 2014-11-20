@@ -205,7 +205,7 @@ namespace csycles_tester
 			#endregion
 
 			#region point light shader
-
+            /*
 			var light_shader = new Shader(client, Shader.ShaderType.Material)
 			{
 				Name = "Tester light shader"
@@ -219,6 +219,7 @@ namespace csycles_tester
 			emission_node.outs.Emission.Connect(light_shader.Output.ins.Surface);
 			light_shader.FinalizeGraph();
 			scene.AddShader(light_shader);
+             * */
 			#endregion
 
 			var xml = new XmlReader(client, file);

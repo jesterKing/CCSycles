@@ -8,3 +8,5 @@ RhinoCycles/
 *blend1
 *blend2
 bindeps/
+*.sln
+HologramPrinter/
