@@ -333,6 +333,7 @@ namespace ccl
 						var mixrgb = new MixNode();
 						get_float4(mixrgb.ins.Color1, node.GetAttribute("color1"));
 						get_float4(mixrgb.ins.Color2, node.GetAttribute("color2"));
+						get_float(mixrgb.ins.Fac, node.GetAttribute("fac"));
 						nodes.Add(nodename, mixrgb);
 						shader.AddNode(mixrgb);
 						break;
