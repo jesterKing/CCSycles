@@ -288,6 +288,13 @@ namespace ccl
 						nodes.Add(nodename, diffbsdf);
 						shader.AddNode(diffbsdf);
 						break;
+					case "emission_bsdf":
+						var emisbsdf = new EmissionNode();
+						get_float4(emisbsdf.ins.Color, node.GetAttribute("color"));
+						get_float(emisbsdf.ins.Strength, node.GetAttribute("strength"));
+						nodes.Add(nodename, emisbsdf);
+						shader.AddNode(emisbsdf);
+						break;
 					case "glass_bsdf":
 						var glassbsdf = new GlassBsdfNode();
 						get_float4(glassbsdf.ins.Color, node.GetAttribute("color"));
