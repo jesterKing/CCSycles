@@ -339,6 +339,7 @@ namespace ccl
 						break;
 					case "mixclosure":
 						var mixclosure = new MixClosureNode();
+						get_float(mixclosure.ins.Fac, node.GetAttribute("fac"));
 						nodes.Add(nodename, mixclosure);
 						shader.AddNode(mixclosure);
 						break;
