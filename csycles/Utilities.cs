@@ -372,6 +372,11 @@ namespace ccl
 						nodes.Add(nodename, mixclosure);
 						shader.AddNode(mixclosure);
 						break;
+					case "addclosure":
+						var add = new AddClosureNode();
+						nodes.Add(nodename, add);
+						shader.AddNode(add);
+						break;
 					case "connect":
 						var fromstring = node.GetAttribute("from");
 						var tostring = node.GetAttribute("to");
