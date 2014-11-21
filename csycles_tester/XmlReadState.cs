@@ -27,15 +27,16 @@ namespace csycles_tester
 		public Shader Shader { get; set; }
 		public string BasePath { get; set; }
 		public float DicingRate { get; set; }
+		public bool Silent { get; set; }
 		// public DisplacementMethod DisplacementMethod {get; set; }
 
 		public XmlReadState()
-			: this(null, null, false, null, "", 0.0f)
+			: this(null, null, false, null, "", 0.0f, false)
 		{
 			
 		}
 
-		public XmlReadState(Scene scene, Transform transform, bool smooth, Shader shader, string basePath, float dicingRate)
+		public XmlReadState(Scene scene, Transform transform, bool smooth, Shader shader, string basePath, float dicingRate, bool silent)
 		{
 			Scene = scene;
 			Transform = transform;
@@ -43,10 +44,11 @@ namespace csycles_tester
 			Shader = shader;
 			BasePath = basePath;
 			DicingRate = dicingRate;
+			Silent = silent;
 		}
 
 		public XmlReadState(XmlReadState old)
-			:this(old.Scene, new Transform(old.Transform), old.Smooth, old.Shader, old.BasePath, old.DicingRate)
+			:this(old.Scene, new Transform(old.Transform), old.Smooth, old.Shader, old.BasePath, old.DicingRate, old.Silent)
 		{
 		}
 

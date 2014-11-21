@@ -142,17 +142,20 @@ namespace csycles_tester
 		static void Main(string[] args)
 		{
 			var file = "";
-			if (args.Length != 1)
+			if (args.Length < 1 || args.Length > 2)
 			{
-				Console.WriteLine("Missing parameter: csycles_tester file.xml");
+				Console.WriteLine("Wrong count parameter: csycles_tester [--quiet] file.xml");
 				return;
 			}
-			var s = args[0];
+			
+			var s = args[args.Length-1];
 			if (!File.Exists(s))
 			{
 				Console.WriteLine("File {0} doesn't exist.", s);
 				return;
 			}
+
+			var silent = args.Length == 2 && "--quiet".Equals(args[0]);
 
 			file = Path.GetFullPath(s);
 			Console.WriteLine("We get file path: {0}", file);
@@ -168,7 +171,10 @@ namespace csycles_tester
 
 			var client = new Client();
 			Client = client;
-			CSycles.set_logger(client.Id, g_logger_callback);
+			if (!silent)
+			{
+				CSycles.set_logger(client.Id, g_logger_callback);
+			}
 
 			var dev = Device.FirstCuda;
 			Console.WriteLine("Using device {0}", dev.Name);
@@ -222,7 +228,7 @@ namespace csycles_tester
 			#endregion
 
 			var xml = new XmlReader(client, file);
-			xml.Parse();
+			xml.Parse(silent);
 			var width = (uint)scene.Camera.Size.Width;
 			var height = (uint)scene.Camera.Size.Height;
 
@@ -240,12 +246,12 @@ namespace csycles_tester
 			Session = new Session(client, session_params, scene);
 			Session.Reset(width, height, samples);
 
-			Session.UpdateCallback = g_update_callback;
-			Session.UpdateTileCallback = g_update_render_tile_callback;
-			Session.WriteTileCallback = g_write_render_tile_callback;
-
-
-			Console.WriteLine("^^: {0}", CSycles.progress_get_status(client.Id, Session.Id));
+			if (!silent)
+			{
+				Session.UpdateCallback = g_update_callback;
+				Session.UpdateTileCallback = g_update_render_tile_callback;
+				Session.WriteTileCallback = g_write_render_tile_callback;
+			}
 
 			Session.Start();
 			Session.Wait();

@@ -107,7 +107,7 @@ namespace csycles_tester
 		private void ReadBackground(ref XmlReadState state, System.Xml.XmlReader node)
 		{
 			node.Read();
-			Console.WriteLine("Background shader");
+			if(!state.Silent) Console.WriteLine("Background shader");
 
 			var shader = new Shader(Client, Shader.ShaderType.World) {Name = Guid.NewGuid().ToString()};
 
@@ -262,7 +262,7 @@ namespace csycles_tester
 			var UV = node.GetAttribute("UV");
 			var nverts = node.GetAttribute("nverts");
 			var verts = node.GetAttribute("verts");
-			Console.WriteLine("{0}", node);
+			if(!state.Silent) Console.WriteLine("{0}", node);
 
 			var has_uv = !string.IsNullOrEmpty(UV);
 
@@ -328,7 +328,7 @@ namespace csycles_tester
 			{
 				if (!node.IsStartElement()) continue;
 
-				Console.WriteLine("XML node: {0}", node.Name);
+				if(!state.Silent) Console.WriteLine("XML node: {0}", node.Name);
 				switch (node.Name)
 				{
 					case "camera":
@@ -380,7 +380,7 @@ namespace csycles_tester
 		{
 			node.Read();
 			var name = node.GetAttribute("name");
-			Console.WriteLine("Shader: {0}", node.GetAttribute("name"));
+			if(!state.Silent) Console.WriteLine("Shader: {0}", node.GetAttribute("name"));
 			if (string.IsNullOrEmpty(name)) return;
 
 			var shader = new Shader(Client, Shader.ShaderType.Material) {Name = name};
@@ -409,7 +409,7 @@ namespace csycles_tester
 		/// Main access point for the XML reader. Reads
 		/// the Scene description as given in Path
 		/// </summary>
-		public void Parse()
+		public void Parse(bool silent)
 		{
 			var state = new XmlReadState
 			{
@@ -418,7 +418,8 @@ namespace csycles_tester
 				Shader = Client.Scene.DefaultSurface,
 				DicingRate = 0.1f,
 				Smooth = false,
-				Transform = ccl.Transform.Identity()
+				Transform = ccl.Transform.Identity(),
+				Silent = silent
 			};
 
 			ReadInclude(ref state, System.IO.Path.GetFileName(Path));
