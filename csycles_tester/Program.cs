@@ -195,7 +195,7 @@ namespace csycles_tester
 			scene.Background.Shader = background_shader;
 			scene.Background.AoDistance = 0.0f;
 			scene.Background.AoFactor = 0.0f;
-			scene.Background.Visibility = PathRay.PATH_RAY_ALL_VISIBILITY;
+			scene.Background.Visibility = PathRay.AllVisibility;
 			#endregion
 			#region diffuse shader
 
