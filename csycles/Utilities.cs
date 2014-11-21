@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using ccl.ShaderNodes;
@@ -335,6 +336,27 @@ namespace ccl
 						get_float4(fresnel.ins.Normal, node.GetAttribute("normal"));
 						nodes.Add(nodename, fresnel);
 						shader.AddNode(fresnel);
+						break;
+					case "math":
+						var math = new MathNode();
+						get_float(math.ins.Value1, node.GetAttribute("value1"));
+						get_float(math.ins.Value2, node.GetAttribute("value2"));
+						var operation = node.GetAttribute("type");
+						if (!string.IsNullOrEmpty(operation))
+						{
+							operation = operation.ToLowerInvariant();
+							try
+							{
+								MathNode.Operations op = (MathNode.Operations)Enum.Parse(typeof(MathNode.Operations), operation, true);
+								math.Operation = op;
+							}
+							catch (ArgumentException)
+							{
+								math.Operation = MathNode.Operations.Add;
+							}
+						}
+						nodes.Add(nodename, math);
+						shader.AddNode(math);
 						break;
 					case "mixrgb":
 						var mixrgb = new MixNode();
