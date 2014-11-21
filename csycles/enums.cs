@@ -148,31 +148,31 @@ namespace ccl
 	[FlagsAttribute]
 	public enum PathRay : int
 	{
-		PATH_RAY_CAMERA = 1,
-		PATH_RAY_REFLECT = 2,
-		PATH_RAY_TRANSMIT = 4,
-		PATH_RAY_DIFFUSE = 8,
-		PATH_RAY_GLOSSY = 16,
-		PATH_RAY_SINGULAR = 32,
-		PATH_RAY_TRANSPARENT = 64,
+		Camera = 1,
+		Reflect = 2,
+		Transmit = 4,
+		Diffuse = 8,
+		Glossy = 16,
+		Singular = 32,
+		Transparent = 64,
 
-		PATH_RAY_SHADOW_OPAQUE = 128,
-		PATH_RAY_SHADOW_TRANSPARENT = 256,
-		PATH_RAY_SHADOW = (PATH_RAY_SHADOW_OPAQUE | PATH_RAY_SHADOW_TRANSPARENT),
+		ShadowOpaque = 128,
+		ShadowTransparent = 256,
+		Shadow = (ShadowOpaque | ShadowTransparent),
 
-		PATH_RAY_CURVE = 512, /* visibility flag to define curve segments*/
+		Curve = 512, /* visibility flag to define curve segments*/
+		VolumeScatter = 1024,
 
 		/* note that these can use maximum 12 bits, the other are for layers */
-		PATH_RAY_ALL_VISIBILITY = (1 | 2 | 4 | 8 | 16 | 32 | 64 | 128 | 256 | 512),
+		AllVisibility = (Camera | Reflect | Transmit | Diffuse | Glossy | Singular | Transparent | Shadow | Curve | VolumeScatter ),
 
-		PATH_RAY_MIS_SKIP = 1024,
-		PATH_RAY_DIFFUSE_ANCESTOR = 2048,
-		PATH_RAY_GLOSSY_ANCESTOR = 4096,
-		PATH_RAY_BSSRDF_ANCESTOR = 8192,
-		PATH_RAY_SINGLE_PASS_DONE = 16384,
-		PATH_RAY_VOLUME_SCATTER = 32768,
+		MisSkip = 2048,
+		DiffuseAncestor = 4096,
+		GlossyAncestor = 8192,
+		BssrdfAncestor = 16384,
+		SinglePassDone = 32768,
 
 		/* we need layer member flags to be the 20 upper bits */
-		PATH_RAY_LAYER_SHIFT = (32 - 20)
+		LayerShift = (32 - 20)
 	}
 }
