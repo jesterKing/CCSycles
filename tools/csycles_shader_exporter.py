@@ -466,6 +466,13 @@ def code_init_node(node):
         )
         if node.use_clamp:
             initcode += "\t{0}.UseClamp = true;\n".format(varname)
+    if node.type == 'TEX_IMAGE':
+        filepath = node.image.filepath_from_user()
+        initcode += "\t{0}.Filename = \"{1}\";\n".format(
+            varname,
+            filepath
+        )
+        initcode += "\tusing (var bmp = new Bitmap("+varname+".Filename))\n\t{\n\t\tvar l = bmp.Width*bmp.Height*4;\n\t\tvar bmpdata = new byte[l];\n\t\tfor (var x = 0; x < bmp.Width; x++)\n\t\t{\n\t\t\tfor (var y = 0; y < bmp.Height; y++)\n\t\t\t{\n\t\t\t\tvar pos = y*bmp.Width*4 + x*4;\n\t\t\t\tvar pixel = bmp.GetPixel(x, y);\n\t\t\t\tbmpdata[pos] = pixel.R;\n\t\t\t\tbmpdata[pos + 1] = pixel.G;\n\t\t\t\tbmpdata[pos + 2] = pixel.B;\n\t\t\t\tbmpdata[pos + 3] = pixel.A;\n\t\t\t}\n\t\t}\n\t\timgtex.ByteImage = bmpdata;\n\t\timgtex.Width = (uint)bmp.Width;\n\t\timgtex.Height = (uint)bmp.Height;\n\t}\n"
 
     return initcode
 
@@ -496,11 +503,7 @@ def code_instantiate_nodes(nodes):
 
 def code_new_shader(shadername, shadertype):
     """Start code for a new shader."""
-<<<<<<< HEAD
-    return "\tvar {0} = new Shader(Client, Shader.ShaderType.{1});\n\n\t{0}.Name = \"{0}\";\n\t{0}.UseMis = false;\n\t{0}.UseTransparentShadow = true;\n\t{0}.HeterogeneousVolume = false;\n\n".format(shadername, shadertype)
-=======
     return "\t\t\tvar {0} = new Shader(cl, st);\n\n\t\t\t{0}.Name = \"{0}\";\n\t\t\t{0}.UseMis = false;\n\t\t\t{0}.UseTransparentShadow = true;\n\t\t\t{0}.HeterogeneousVolume = false;\n\n".format(shadername, shadertype)
->>>>>>> 19ca484... Added nodes in API
 
 def code_nodes_to_shader(shadername, nodes):
     """Create the code that adds node instances to the shader."""
@@ -652,10 +655,6 @@ def create_shader(shadername, nt, is_world=False):
     # finalise everything
     finalisecode = code_finalise(shadername, linklist)
     
-<<<<<<< HEAD
-    csycles_shader_creation = "public Shader create_{0}_shader()\n{{\n{1}\n{2}\n{3}\n{4}\n{5}\n}}".format(
-        shadername,
-=======
     t_importcode = "using System;\nusing System.Collections.Generic;\nusing System.Text;\nusing System.Threading.Tasks;\nusing System.Runtime.InteropServices;\nusing ccl;\nusing ccl.ShaderNodes;\n"
     
     t_namespace = "namespace HologramPrinter\n{\n"
@@ -685,12 +684,12 @@ def create_shader(shadername, nt, is_world=False):
         t_properties,
         t_method_def,
         t_region_start,
->>>>>>> 19ca484... Added nodes in API
         shadercode,
         nodesetup,
         nodeadd,
         linksetup,
-        finalisecode
+        finalisecode,
+        t_region_end
     )
     
     exportfile = None
