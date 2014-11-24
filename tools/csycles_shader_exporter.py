@@ -29,13 +29,15 @@ nodemapping = {
 
 # shader nodes
     'ADD_SHADER' : 'AddClosureNode',
-    'MIX_SHADER' : 'MixClosureNode',
-    
+    'MIX_SHADER' : 'MixClosureNode',    
     'EMISSION' : 'EmissionNode',
-
     'BSDF_DIFFUSE' : 'DiffuseBsdfNode',
     'BSDF_GLOSSY' : 'GlossyBsdfNode',
     'BSDF_REFRACTION' : 'RefractionBsdfNode',
+    
+    'SEPXYZ' : 'SeparateXYZNode',
+    'COMBXYZ' : 'CombineXYZNode',
+    'MAPPING' : 'MappingNode',    
 
 # texture nodes
 
@@ -44,10 +46,15 @@ nodemapping = {
     'TEX_CHECKER' : 'CheckerTexture',
     'TEX_ENVIRONMENT' : 'EnvironmentTextureNode',
     'TEX_VORONOI' : 'VoronoiTexture',
+    
+    'TEX_NOISE' : 'NoiseTexture',
         
 # color nodes
     'MIX_RGB' : 'MixNode',
     'GAMMA' : 'GammaNode',
+        
+    'SEPRGB' : 'SeparateRGBNode',
+    'COMBRGB' : 'CombineRGBNode',
 
 # conversion nodes
     'MATH' : 'MathNode',
@@ -489,7 +496,11 @@ def code_instantiate_nodes(nodes):
 
 def code_new_shader(shadername, shadertype):
     """Start code for a new shader."""
+<<<<<<< HEAD
     return "\tvar {0} = new Shader(Client, Shader.ShaderType.{1});\n\n\t{0}.Name = \"{0}\";\n\t{0}.UseMis = false;\n\t{0}.UseTransparentShadow = true;\n\t{0}.HeterogeneousVolume = false;\n\n".format(shadername, shadertype)
+=======
+    return "\t\t\tvar {0} = new Shader(cl, st);\n\n\t\t\t{0}.Name = \"{0}\";\n\t\t\t{0}.UseMis = false;\n\t\t\t{0}.UseTransparentShadow = true;\n\t\t\t{0}.HeterogeneousVolume = false;\n\n".format(shadername, shadertype)
+>>>>>>> 19ca484... Added nodes in API
 
 def code_nodes_to_shader(shadername, nodes):
     """Create the code that adds node instances to the shader."""
@@ -617,8 +628,8 @@ def create_shader(shadername, nt, is_world=False):
 
     # clean up our lists. Not all nodes are connected. We don't
     # want to export such nodes.
-    deadnodes = prune_nodes()
-    prune_links(deadnodes)
+    #deadnodes = prune_nodes()
+    #prune_links(deadnodes)
     
     # make nice, sorted lists
     nodelist = list(allnodes)
@@ -641,8 +652,40 @@ def create_shader(shadername, nt, is_world=False):
     # finalise everything
     finalisecode = code_finalise(shadername, linklist)
     
+<<<<<<< HEAD
     csycles_shader_creation = "public Shader create_{0}_shader()\n{{\n{1}\n{2}\n{3}\n{4}\n{5}\n}}".format(
         shadername,
+=======
+    t_importcode = "using System;\nusing System.Collections.Generic;\nusing System.Text;\nusing System.Threading.Tasks;\nusing System.Runtime.InteropServices;\nusing ccl;\nusing ccl.ShaderNodes;\n"
+    
+    t_namespace = "namespace HologramPrinter\n{\n"
+    
+    t_classname = "\tpublic static class Dynamic_Shader\n\t{\n"
+    
+    t_properties_client = "public static Client Client\n\t\t{\n\t\t\tset\n\t\t\t{\n\t\t\t\tclient = Client;\n\t\t\t}\n\t\t\tget\n\t\t\t{\n\t\t\t\treturn client;\n\t\t\t}\n\t\t}\n"
+    t_properties_device = "public static Device Device\n\t\t{\n\t\t\tset\n\t\t\t{\n\t\t\t\tdevice = Device;\n\t\t\t}\n\t\t\tget\n\t\t\t{\n\t\t\t\treturn device;\n\t\t\t}\n\t\t}\n"
+    t_properties_scene = "public static Scene Scene\n\t\t{\n\t\t\tset\n\t\t\t{\n\t\t\t\tscene = Scene;\n\t\t\t}\n\t\t\tget\n\t\t\t{\n\t\t\t\treturn scene;\n\t\t\t}\n\t\t}\n"
+    
+    t_properties = "\t\tprivate static Client client;\n\t\tprivate static Device device;\n\t\tprivate static Scene scene;\n\n\t\t{0}\n\t\t{1}\n\t\t{2}\n".format(
+        t_properties_client,
+        t_properties_device,
+        t_properties_scene
+    )
+    
+    t_method_def = "\t\tpublic static Shader Show(Client cl, Device dv, Scene sc, Shader.ShaderType st)\n\t\t{\n\t\t\tClient = cl;\n\t\t\tDevice = dv;\n\t\t\tScene = sc;"
+    
+    t_region_start = "\t\t\t#region {0}".format(shadername)
+    
+    t_region_end = "\t\t\t#endregion\n\t\t}\n\t}\n}"
+    
+    csycles_shader_creation = "{0}\n{1}{2}{3}{4}\n{5}\n{6}\n{7}\n{8}\n{9}\n{10}\n{11}\n".format(
+        t_importcode,
+        t_namespace,                                                                                      
+        t_classname,
+        t_properties,
+        t_method_def,
+        t_region_start,
+>>>>>>> 19ca484... Added nodes in API
         shadercode,
         nodesetup,
         nodeadd,
