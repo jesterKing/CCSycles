@@ -111,7 +111,7 @@ def get_node_name(node):
     """
     Return a cleaned up node name, usable as variable
     """
-    return cleanup_name(node.label if node.label else node.name)
+    return cleanup_name(node.name if node.name else node.label)
 
 def get_node_name_from_tuple(ntup):
     return get_node_name(ntup[0])
@@ -375,7 +375,7 @@ def add_inputs(varname, inputs):
         if inp.is_linked: continue
     
         inpname = get_socket_name(inp, inputs, True, inp.node)
-        inputinits += "\t{0}.ins.{1}.Value = {2};\n".format(
+        inputinits += "\t\t\t{0}.ins.{1}.Value = {2};\n".format(
             varname, inpname, get_val_string(inp)
         )
     
@@ -403,7 +403,7 @@ def add_inputs_special_links(varname, links):
         elif type(value) is float:
             valstring = "{0: .3f}f".format(value)
             
-        inputinits += "\t{0}.ins.{1}.Value = {2};\n".format(
+        inputinits += "{0}.ins.{1}.Value = {2};\n".format(
             varname, inpname, valstring
         )
     return inputinits
@@ -432,19 +432,19 @@ def code_init_node(node):
     # now that inputs have been set, make sure we handle the
     # extra cases, like 'direct member' values as Color and Distribution, Value
     if node.type in ('BSDF_GLOSSY', 'BSDF_REFRACTION'):
-        initcode += "\t{0}.Distribution = \"{1}\";\n".format(
+        initcode += "\t\t\t{0}.Distribution = \"{1}\";\n".format(
             varname,
             node.distribution.lower().capitalize()
         )
     if node.type == 'RGB':
-        initcode += "\t{0}.Value = new float4({1:.3f}f, {2:.3f}f, {3:.3f}f);\n".format(
+        initcode += "\t\t\t{0}.Value = new float4({1:.3f}f, {2:.3f}f, {3:.3f}f);\n".format(
             varname,
             node.color[0],
             node.color[1],
             node.color[2]
         )
     if node.type == 'VALUE':
-        initcode += "\t{0}.Value = {1:.3f}f;\n".format(
+        initcode += "\t\t\t{0}.Value = {1:.3f}f;\n".format(
             varname,
             node.outputs[0].default_value
         )
@@ -453,12 +453,12 @@ def code_init_node(node):
             lambda x, y: x+'_'+y,
             map(str.capitalize, node.operation.lower().split('_'))
         )
-        initcode += "\t{0}.Operation = MathNode.Operations.{1};\n".format(
+        initcode += "\t\t\t{0}.Operation = MathNode.Operations.{1};\n".format(
             varname,
             opval
         )
         if node.use_clamp:
-            initcode += "\t{0}.UseClamp = true;\n".format(varname)
+            initcode += "\t\t\t{0}.UseClamp = true;\n".format(varname)
 
     return initcode
 
@@ -479,7 +479,7 @@ def code_instantiate_nodes(nodes):
         if skip_node(n): continue
         if 'OUTPUT_' in n.type: continue
            
-        nodeconstruct = "\tvar {0} = new {1}();\n".format(
+        nodeconstruct = "\t\t\tvar {0} = new {1}();\n".format(
             get_node_name(n), nodemapping[n.type])
         nodeinitialise = code_init_node(n)
         
@@ -489,7 +489,7 @@ def code_instantiate_nodes(nodes):
 
 def code_new_shader(shadername, shadertype):
     """Start code for a new shader."""
-    return "\tvar {0} = new Shader(Client, Shader.ShaderType.{1});\n\n\t{0}.Name = \"{0}\";\n\t{0}.UseMis = false;\n\t{0}.UseTransparentShadow = true;\n\t{0}.HeterogeneousVolume = false;\n\n".format(shadername, shadertype)
+    return "\t\t\tvar {0} = new Shader(Client, Shader.ShaderType.{1});\n\n\t\t\t{0}.Name = \"{0}\";\n\t\t\t{0}.UseMis = false;\n\t\t\t{0}.UseTransparentShadow = true;\n\t\t\t{0}.HeterogeneousVolume = false;\n\n".format(shadername, shadertype)
 
 def code_nodes_to_shader(shadername, nodes):
     """Create the code that adds node instances to the shader."""
@@ -499,7 +499,7 @@ def code_nodes_to_shader(shadername, nodes):
         
         if skip_node(n): continue
     
-        addcode = addcode + "\t{0}.AddNode({1});\n".format(shadername, get_node_name(n))
+        addcode = addcode + "\t\t\t{0}.AddNode({1});\n".format(shadername, get_node_name(n))
     
     return addcode
 
@@ -517,14 +517,14 @@ def code_finalise(shadername, links):
         fromsockname = get_socket_name(fromsock, fromnode.inputs, False, fromnode)
         tosockname = get_socket_name(tosock, tonode.inputs, True, tonode)
         
-        finalisecode = finalisecode + "\t{2}.outs.{3}.Connect({0}.Output.ins.{1});\n".format(
+        finalisecode = finalisecode + "\t\t\t{2}.outs.{3}.Connect({0}.Output.ins.{1});\n".format(
             shadername,
             tosockname,
             get_node_name(fromnode),
             fromsockname
         )
-    finalisecode = finalisecode + "\n\t{0}.FinalizeGraph();\n".format(shadername)
-    finalisecode = finalisecode + "\n\treturn {0};".format(shadername)
+    finalisecode = finalisecode + "\n\t\t\t{0}.FinalizeGraph();\n".format(shadername)
+    finalisecode = finalisecode + "\n\t\t\treturn {0};".format(shadername)
     return finalisecode
 
 def code_link_nodes(links):
@@ -543,7 +543,7 @@ def code_link_nodes(links):
         fromsockname = get_socket_name(fromsock, fromnode.outputs, False, fromnode)
         tosockname = get_socket_name(tosock, tonode.inputs, True, tonode)
         
-        linkcode = linkcode + "\t{0}.outs.{1}.Connect({2}.ins.{3});\n".format(
+        linkcode = linkcode + "\t\t\t{0}.outs.{1}.Connect({2}.ins.{3});\n".format(
             get_node_name(fromnode),
             fromsockname,
             get_node_name(tonode),
@@ -628,7 +628,7 @@ def create_shader(shadername, nt, is_world=False):
     
     print(linklist)
     
-    # creat new shader
+    # create new shader
     shadertype = "World" if is_world else "Material"
     shadercode = code_new_shader(shadername, shadertype)
     
@@ -641,13 +641,41 @@ def create_shader(shadername, nt, is_world=False):
     # finalise everything
     finalisecode = code_finalise(shadername, linklist)
     
-    csycles_shader_creation = "public Shader create_{0}_shader()\n{{\n{1}\n{2}\n{3}\n{4}\n{5}\n}}".format(
-        shadername,
+    t_importcode = "using System;\nusing System.Collections.Generic;\nusing System.Text;\nusing System.Threading.Tasks;\nusing System.Runtime.InteropServices;\nusing ccl;\nusing ccl.ShaderNodes;\n"
+    
+    t_namespace = "namespace HologramPrinter\n{\n"
+    
+    t_classname = "\tpublic static class Dynamic_Shader\n\t{\n"
+    
+    t_properties_client = "public static Client Client\n\t\t{\n\t\t\tset\n\t\t\t{\n\t\t\t\tclient = Client;\n\t\t\t}\n\t\t\tget\n\t\t\t{\n\t\t\t\treturn client;\n\t\t\t}\n\t\t}\n"
+    t_properties_device = "public static Device Device\n\t\t{\n\t\t\tset\n\t\t\t{\n\t\t\t\tdevice = Device;\n\t\t\t}\n\t\t\tget\n\t\t\t{\n\t\t\t\treturn device;\n\t\t\t}\n\t\t}\n"
+    t_properties_scene = "public static Scene Scene\n\t\t{\n\t\t\tset\n\t\t\t{\n\t\t\t\tscene = Scene;\n\t\t\t}\n\t\t\tget\n\t\t\t{\n\t\t\t\treturn scene;\n\t\t\t}\n\t\t}\n"
+    
+    t_properties = "\t\tprivate static Client client;\n\t\tprivate static Device device;\n\t\tprivate static Scene scene;\n\t\t{0}\t\t{1}\t\t{2}\n".format(
+        t_properties_client,
+        t_properties_device,
+        t_properties_scene
+    )
+    
+    t_method_def = "\t\tpublic static Shader Show(Client cl, Device dv, Scene sc, Shader.ShaderType st)\n\t\t{\n\t\t\tClient = cl;\n\t\t\tDevice = dv;\n\t\t\tScene = sc;"
+    
+    t_region_start = "\t\t\t#region {0}".format(shadername)
+    
+    t_region_end = "\t\t\t#endregion\n\t\t}\n\t}\n}"
+    
+    csycles_shader_creation = "{0}\n{1}{2}{3}\n{4}\n{5}\n{6}\n{7}\n{8}\n{9}\n{10}\n{11}\n".format(
+        t_importcode,
+        t_namespace,                                                                                      
+        t_classname,
+        t_properties,
+        t_method_def,
+        t_region_start,
         shadercode,
         nodesetup,
         nodeadd,
         linksetup,
-        finalisecode
+        finalisecode,
+        t_region_end
     )
     
     exportfile = None
