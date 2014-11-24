@@ -2149,7 +2149,7 @@ namespace HologramPrinter
                     MethodInfo methodInformation = cls.GetMethod("Show");
                     //object assemblyInstance = cr.CompiledAssembly.CreateInstance("Test Shader", false);
                     var returned_value = methodInformation.Invoke(null , parameters);
-                    SetMessage("Set background shader");
+                    SetMessage("Background shader loaded from material file");
                     /*
                     returned_value = Activator.CreateInstance(Type.GetType("ccl.Shader"));
                     
