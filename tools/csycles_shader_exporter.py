@@ -35,8 +35,8 @@ nodemapping = {
     'BSDF_GLOSSY' : 'GlossyBsdfNode',
     'BSDF_REFRACTION' : 'RefractionBsdfNode',
     
-    'SEPXYZ' : 'SeparateXYZNode',
-    'COMBXYZ' : 'CombineXYZNode',
+    'SEPXYZ' : 'SeparateXyzNode',
+    'COMBXYZ' : 'CombineXyzNode',
     'MAPPING' : 'MappingNode',    
 
 # texture nodes
@@ -53,8 +53,8 @@ nodemapping = {
     'MIX_RGB' : 'MixNode',
     'GAMMA' : 'GammaNode',
         
-    'SEPRGB' : 'SeparateRGBNode',
-    'COMBRGB' : 'CombineRGBNode',
+    'SEPRGB' : 'SeparateRgbNode',
+    'COMBRGB' : 'CombineRgbNode',
 
 # conversion nodes
     'MATH' : 'MathNode',
@@ -467,12 +467,12 @@ def code_init_node(node):
         if node.use_clamp:
             initcode += "\t{0}.UseClamp = true;\n".format(varname)
     if node.type == 'TEX_IMAGE':
-        filepath = node.image.filepath_from_user()
+        filepath = node.image.filepath_from_user().replace('\\', '\\\\')
         initcode += "\t{0}.Filename = \"{1}\";\n".format(
             varname,
             filepath
         )
-        initcode += "\tusing (var bmp = new Bitmap("+varname+".Filename))\n\t{\n\t\tvar l = bmp.Width*bmp.Height*4;\n\t\tvar bmpdata = new byte[l];\n\t\tfor (var x = 0; x < bmp.Width; x++)\n\t\t{\n\t\t\tfor (var y = 0; y < bmp.Height; y++)\n\t\t\t{\n\t\t\t\tvar pos = y*bmp.Width*4 + x*4;\n\t\t\t\tvar pixel = bmp.GetPixel(x, y);\n\t\t\t\tbmpdata[pos] = pixel.R;\n\t\t\t\tbmpdata[pos + 1] = pixel.G;\n\t\t\t\tbmpdata[pos + 2] = pixel.B;\n\t\t\t\tbmpdata[pos + 3] = pixel.A;\n\t\t\t}\n\t\t}\n\t\timgtex.ByteImage = bmpdata;\n\t\timgtex.Width = (uint)bmp.Width;\n\t\timgtex.Height = (uint)bmp.Height;\n\t}\n"
+        initcode += "\tusing (var bmp = new Bitmap("+varname+".Filename))\n\t{\n\t\tvar l = bmp.Width*bmp.Height*4;\n\t\tvar bmpdata = new byte[l];\n\t\tfor (var x = 0; x < bmp.Width; x++)\n\t\t{\n\t\t\tfor (var y = 0; y < bmp.Height; y++)\n\t\t\t{\n\t\t\t\tvar pos = y*bmp.Width*4 + x*4;\n\t\t\t\tvar pixel = bmp.GetPixel(x, y);\n\t\t\t\tbmpdata[pos] = pixel.R;\n\t\t\t\tbmpdata[pos + 1] = pixel.G;\n\t\t\t\tbmpdata[pos + 2] = pixel.B;\n\t\t\t\tbmpdata[pos + 3] = pixel.A;\n\t\t\t}\n\t\t}\n\t\t"+varname+".ByteImage = bmpdata;\n\t\t"+varname+".Width = (uint)bmp.Width;\n\t\t"+varname+".Height = (uint)bmp.Height;\n\t}\n"
 
     return initcode
 
@@ -655,7 +655,7 @@ def create_shader(shadername, nt, is_world=False):
     # finalise everything
     finalisecode = code_finalise(shadername, linklist)
     
-    t_importcode = "using System;\nusing System.Collections.Generic;\nusing System.Text;\nusing System.Threading.Tasks;\nusing System.Runtime.InteropServices;\nusing ccl;\nusing ccl.ShaderNodes;\n"
+    t_importcode = "using System;\nusing System.Drawing;\nusing System.Collections.Generic;\nusing System.Text;\nusing System.Threading.Tasks;\nusing System.Runtime.InteropServices;\nusing ccl;\nusing ccl.ShaderNodes;\n"
     
     t_namespace = "namespace HologramPrinter\n{\n"
     
