@@ -57,10 +57,16 @@ namespace ccl
 
 		public void get_float4(float4 f4, string floats)
 		{
+			if (string.IsNullOrEmpty(floats)) return;
+
 			var vec = parse_floats(floats);
+			if (vec.Length < 3 || vec.Length > 4) return;
+
 			f4.x = vec[0];
 			f4.y = vec[1];
 			f4.z = vec[2];
+			if (vec.Length == 4)
+				f4.w = vec[3];
 			return;
 		}
 
