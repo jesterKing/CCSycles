@@ -55,10 +55,13 @@ namespace ccl
 			socket.Value = float.Parse(nr, NumberFormatInfo);
 		}
 
-		public float4 get_float4(string floats)
+		public void get_float4(float4 f4, string floats)
 		{
 			var vec = parse_floats(floats);
-			return new float4(vec[0], vec[1], vec[2]);
+			f4.x = vec[0];
+			f4.y = vec[1];
+			f4.z = vec[2];
+			return;
 		}
 
 		public bool read_float(ref float val, string floatstring)
@@ -213,7 +216,7 @@ namespace ccl
 
 						if (!string.IsNullOrEmpty(sun_direction))
 						{
-							skynode.SunDirection = get_float4(sun_direction);
+							get_float4(skynode.SunDirection, sun_direction);
 						}
 						if (!string.IsNullOrEmpty(turbidity))
 						{
