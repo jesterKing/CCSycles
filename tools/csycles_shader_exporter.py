@@ -466,14 +466,76 @@ def code_init_node(node):
         )
         if node.use_clamp:
             initcode += "\t{0}.UseClamp = true;\n".format(varname)
-    if node.type == 'TEX_IMAGE':
-        filepath = node.image.filepath_from_user().replace('\\', '\\\\')
-        initcode += "\t{0}.Filename = \"{1}\";\n".format(
+    if node.type == 'MAPPING':
+        if node.vector_type =='TEXTURE':
+            initcode += "\t{0}.vector_type = MappingNode.vector_types.TEXTURE;\n".format(varname)
+        elif node.vector_type =='POINT':
+            initcode += "\t{0}.vector_type = MappingNode.vector_types.POINT;\n".format(varname)
+        elif node.vector_type =='VECTOR':
+            initcode += "\t{0}.vector_type = MappingNode.vector_types.VECTOR;\n".format(varname)
+        elif node.vector_type =='NORMAL':
+            initcode += "\t{0}.vector_type = MappingNode.vector_types.NORMAL;\n".format(varname)
+            
+        initcode += "\t{0}.Translation = new float4({1:.3f}f, {2:.3f}f, {3:.3f}f);\n".format(
             varname,
-            filepath
+            node.translation[0],
+            node.translation[1],
+            node.translation[2]
         )
+        initcode += "\t{0}.Rotation = new float4({1:.3f}f, {2:.3f}f, {3:.3f}f);\n".format(
+            varname,
+            node.rotation[0],
+            node.rotation[1],
+            node.rotation[2]
+        )
+        initcode += "\t{0}.Scale = new float4({1:.3f}f, {2:.3f}f, {3:.3f}f);\n".format(
+            varname,
+            node.scale[0],
+            node.scale[1],
+            node.scale[2]
+        )
+        if node.use_min:            
+            initcode += "\t{0}.UseMin = true;\n".format(varname)
+            initcode += "\t{0}.Min = new float4({1:.3f}f, {2:.3f}f, {3:.3f}f);\n".format(
+            varname,
+            node.min[0],
+            node.min[1],
+            node.min[2]
+            )
+        if node.use_max:            
+            initcode += "\t{0}.UseMax = true;\n".format(varname)
+            initcode += "\t{0}.Max = new float4({1:.3f}f, {2:.3f}f, {3:.3f}f);\n".format(
+            varname,
+            node.max[0],
+            node.max[1],
+            node.max[2]
+            )
+    if node.type == 'TEX_IMAGE':            
+        if node.color_space =='NONE':
+            initcode += "\t{0}.ColorSpace = TextureNode.TextureColorSpace.None;\n".format(varname)
+        else:
+            initcode += "\t{0}.ColorSpace = TextureNode.TextureColorSpace.Color;\n".format(varname)
+            
+        if node.projection =='BOX':
+            initcode += "\t{0}.Projection = TextureNode.TextureProjection.Box;\n".format(varname)
+            initcode += "\t{0}.ProjectionBlend.Value = {1:.3f}f;\n".format(varname, node.projection_blend)            
+        else:
+            initcode += "\t{0}.Projection = TextureNode.TextureProjection.Flat;\n".format(varname)
+        
+        if node.interpolation =='Closest':
+            initcode += "\t{0}.Interpolation = InterpolationType.Closest;\n".format(varname)
+        elif node.interpolation =='Linear':
+            initcode += "\t{0}.Interpolation = InterpolationType.Linear;\n".format(varname)
+        elif node.interpolation =='Cubic':
+            initcode += "\t{0}.Interpolation = InterpolationType.Cubic;\n".format(varname)
+        elif node.interpolation =='Smart':
+            initcode += "\t{0}.Interpolation = InterpolationType.Smart;\n".format(varname)
+            
+        filepath = node.image.filepath_from_user().replace('\\', '\\\\')
+        initcode += "\t{0}.Filename = \"{1}\";\n".format(varname, filepath)
         initcode += "\tusing (var bmp = new Bitmap("+varname+".Filename))\n\t{\n\t\tvar l = bmp.Width*bmp.Height*4;\n\t\tvar bmpdata = new byte[l];\n\t\tfor (var x = 0; x < bmp.Width; x++)\n\t\t{\n\t\t\tfor (var y = 0; y < bmp.Height; y++)\n\t\t\t{\n\t\t\t\tvar pos = y*bmp.Width*4 + x*4;\n\t\t\t\tvar pixel = bmp.GetPixel(x, y);\n\t\t\t\tbmpdata[pos] = pixel.R;\n\t\t\t\tbmpdata[pos + 1] = pixel.G;\n\t\t\t\tbmpdata[pos + 2] = pixel.B;\n\t\t\t\tbmpdata[pos + 3] = pixel.A;\n\t\t\t}\n\t\t}\n\t\t"+varname+".ByteImage = bmpdata;\n\t\t"+varname+".Width = (uint)bmp.Width;\n\t\t"+varname+".Height = (uint)bmp.Height;\n\t}\n"
-
+        # TODO: ADD source parameter ('SEQUENCE', 'FILE', 'MOVIE', 'GENERATED')
+        
     return initcode
 
 def skip_node(node):

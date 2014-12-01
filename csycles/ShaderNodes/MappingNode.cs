@@ -20,35 +20,42 @@ namespace ccl.ShaderNodes
 {
     public class MappingInputs : Inputs
     {
+        /*
         public Float4Socket Translation { get; set; }
         public Float4Socket Rotation { get; set; }
         public Float4Socket Scale { get; set; }
         public Float4Socket Min { get; set; }
         public Float4Socket Max { get; set; }
+        */
+        public Float4Socket Vector { get; set; }
 
         public MappingInputs(ShaderNode parentNode)
         {
+            /*
             Translation = new Float4Socket(parentNode, "Translation");
             AddSocket(Translation);
             Rotation = new Float4Socket(parentNode, "Rotation");
             AddSocket(Rotation);
-            Rotation = new Float4Socket(parentNode, "Scale");
+            Scale = new Float4Socket(parentNode, "Scale");
             AddSocket(Scale);
-            Rotation = new Float4Socket(parentNode, "Min");
+            Min = new Float4Socket(parentNode, "Min");
             AddSocket(Min);
-            Rotation = new Float4Socket(parentNode, "Max");
+            Max = new Float4Socket(parentNode, "Max");
             AddSocket(Max);
+            */
+            Vector = new Float4Socket(parentNode, "Vector");
+            AddSocket(Vector);
         }
     }
 
     public class MappingOutputs : Outputs
     {
-        public Float4Socket VectorOutput { get; set; }
+        public Float4Socket Vector { get; set; }
 
         public MappingOutputs(ShaderNode parentNode)
         {
-            VectorOutput = new Float4Socket(parentNode, "VectorOutput");
-            AddSocket(VectorOutput);
+            Vector = new Float4Socket(parentNode, "Vector");
+            AddSocket(Vector);
         }
     }
 
@@ -63,6 +70,10 @@ namespace ccl.ShaderNodes
     /// </summary>
     public class MappingNode : ShaderNode
     {
+
+        public MappingInputs ins { get { return (MappingInputs)inputs; } set { inputs = value; } }
+        public MappingOutputs outs { get { return (MappingOutputs)outputs; } set { outputs = value; } }
+
         public enum vector_types
         {
             TEXTURE,
@@ -71,24 +82,37 @@ namespace ccl.ShaderNodes
             NORMAL
         }
 
-        public MappingInputs ins { get { return (MappingInputs)inputs; } set { inputs = value; } }
-        public MappingOutputs outs { get { return (MappingOutputs)outputs; } set { outputs = value; } }
-
         public MappingNode() :
             base(ShaderNodeType.Mapping)
         {
             inputs = new MappingInputs(this);
             outputs = new MappingOutputs(this);
 
-            vector_type = vector_types.POINT;
+            vector_type = vector_types.TEXTURE;
+            /*
             ins.Translation.Value = new float4(0.0f);
             ins.Rotation.Value = new float4(0.0f);
             ins.Scale.Value = new float4(0.0f);
             ins.Min.Value = new float4(0.0f);
             ins.Max.Value = new float4(0.0f);
+            */
+            UseMin = false;
+            UseMax = false;
+            Translation = new float4(0.0f);
+            Rotation = new float4(0.0f);
+            Scale = new float4(0.0f);
+            Min = new float4(0.0f);
+            Max = new float4(0.0f);
         }
 
+        
         public vector_types vector_type { get; set; }
+
+        public float4 Translation { get; set; }
+        public float4 Rotation { get; set; }
+        public float4 Scale { get; set; }
+        public float4 Min { get; set; }
+        public float4 Max { get; set; }
 
         /// <summary>
         /// Set to true [IN] if mapping output in Value should have a minimum value 0.0..1.0
