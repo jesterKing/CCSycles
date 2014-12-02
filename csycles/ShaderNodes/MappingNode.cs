@@ -20,29 +20,10 @@ namespace ccl.ShaderNodes
 {
 	public class MappingInputs : Inputs
 	{
-		/*
-		public Float4Socket Translation { get; set; }
-		public Float4Socket Rotation { get; set; }
-		public Float4Socket Scale { get; set; }
-		public Float4Socket Min { get; set; }
-		public Float4Socket Max { get; set; }
-		*/
 		public Float4Socket Vector { get; set; }
 
 		public MappingInputs(ShaderNode parentNode)
 		{
-			/*
-			Translation = new Float4Socket(parentNode, "Translation");
-			AddSocket(Translation);
-			Rotation = new Float4Socket(parentNode, "Rotation");
-			AddSocket(Rotation);
-			Scale = new Float4Socket(parentNode, "Scale");
-			AddSocket(Scale);
-			Min = new Float4Socket(parentNode, "Min");
-			AddSocket(Min);
-			Max = new Float4Socket(parentNode, "Max");
-			AddSocket(Max);
-			*/
 			Vector = new Float4Socket(parentNode, "Vector");
 			AddSocket(Vector);
 		}
@@ -87,15 +68,7 @@ namespace ccl.ShaderNodes
 		{
 			inputs = new MappingInputs(this);
 			outputs = new MappingOutputs(this);
-
 			vector_type = vector_types.TEXTURE;
-			/*
-			ins.Translation.Value = new float4(0.0f);
-			ins.Rotation.Value = new float4(0.0f);
-			ins.Scale.Value = new float4(0.0f);
-			ins.Min.Value = new float4(0.0f);
-			ins.Max.Value = new float4(0.0f);
-			*/
 			UseMin = false;
 			UseMax = false;
 			Translation = new float4(0.0f);
