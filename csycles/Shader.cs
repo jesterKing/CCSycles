@@ -136,6 +136,14 @@ namespace ccl
 						CSycles.shadernode_set_enum(Client.Id, Id, node.Id, node.Type, colspace);
 					}
 					break;
+				case ShaderNodeType.Mapping:
+					CSycles.shadernode_set_enum(Client.Id, Id, node.Id, node.Type, ((MappingNode)node).vector_type.ToString());
+					break;
+				case ShaderNodeType.ImageTexture:
+					CSycles.shadernode_set_attribute_string(Client.Id, Id, node.Id, "color_space", ((ImageTextureNode)node).ColorSpace.ToString());
+					CSycles.shadernode_set_attribute_string(Client.Id, Id, node.Id, "projection", ((ImageTextureNode)node).ColorSpace.ToString());
+					CSycles.shadernode_set_attribute_string(Client.Id, Id, node.Id, "interpolation", ((ImageTextureNode)node).ColorSpace.ToString());
+					break;
 			}
 
 			/* set direct member variables */
@@ -143,6 +151,20 @@ namespace ccl
 			{
 				case ShaderNodeType.Math:
 					CSycles.shadernode_set_member_bool(Client.Id, Id, node.Id, node.Type, "use_clamp", ((MathNode)node).UseClamp);
+					break;
+				case ShaderNodeType.Mapping:
+					CSycles.shadernode_set_member_bool(Client.Id, Id, node.Id, node.Type, "use_min", ((MappingNode)node).UseMin);
+					CSycles.shadernode_set_member_bool(Client.Id, Id, node.Id, node.Type, "use_max", ((MappingNode)node).UseMax);
+					var tr = ((MappingNode) node).Translation;
+					CSycles.shadernode_set_member_vec(Client.Id, Id, node.Id, node.Type, "translation", tr.x, tr.y, tr.z);
+					var rt = ((MappingNode) node).Rotation;
+					CSycles.shadernode_set_member_vec(Client.Id, Id, node.Id, node.Type, "rotation", rt.x, rt.y, rt.z);
+					var sc = ((MappingNode) node).Scale;
+					CSycles.shadernode_set_member_vec(Client.Id, Id, node.Id, node.Type, "scale", sc.x, sc.y, sc.z);
+					var mi = ((MappingNode) node).Min;
+					CSycles.shadernode_set_member_vec(Client.Id, Id, node.Id, node.Type, "min", mi.x, mi.y, mi.z);
+					var ma = ((MappingNode) node).Max;
+					CSycles.shadernode_set_member_vec(Client.Id, Id, node.Id, node.Type, "max", ma.x, ma.y, ma.z);
 					break;
 				case ShaderNodeType.Value:
 					CSycles.shadernode_set_member_float(Client.Id, Id, node.Id, node.Type, "value", ((ValueNode)node).Value);

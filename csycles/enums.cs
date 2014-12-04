@@ -96,6 +96,10 @@ namespace ccl
 		VoronoiTexture,
 		SeparateHsv,
 		SeparateRgb,
+
+		SeperateXyz,
+		CombineRgb,
+		Mapping
 	}
 
 	public enum BvhType : uint
