@@ -64,8 +64,12 @@
     <Compile Include="Device.cs" />
     <Compile Include="enums.cs" />
     <Compile Include="float4.cs" />
+    <Compile Include="ShaderNodes\CombineRgbNode.cs" />
+    <Compile Include="ShaderNodes\CombineXyzNode.cs" />
+    <Compile Include="ShaderNodes\MappingNode.cs" />
     <Compile Include="ShaderNodes\SeparateRgbNode.cs" />
     <Compile Include="ShaderNodes\SeparateHsvNode.cs" />
+    <Compile Include="ShaderNodes\SeparateXyzNode.cs" />
     <Compile Include="ShaderNodes\TransparentBsdfNode.cs" />
     <Compile Include="ShaderNodes\LayerWeightNode.cs" />
     <Compile Include="ShaderNodes\GammaNode.cs" />
