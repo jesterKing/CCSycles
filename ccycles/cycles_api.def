@@ -139,6 +139,7 @@ EXPORTS
 
   cycles_progress_get_tile
   cycles_progress_get_sample
+  cycles_progress_reset
   cycles_progress_get_status
   cycles_progress_get_substatus
   cycles_progress_get_progress

@@ -109,6 +109,7 @@ namespace ccl
 		public void Start()
 		{
 			if (Destroyed) return;
+			CSycles.progress_reset(Client.Id, Id);
 			CSycles.session_start(Client.Id, Id);
 		}
 

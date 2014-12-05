@@ -229,6 +229,12 @@ namespace ccl
 #endregion
 
 #region progress
+		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_progress_reset", CallingConvention = CallingConvention.Cdecl)]
+		private static extern void cycles_progress_reset(uint clientId, uint sessionId);
+		public static void progress_reset(uint clientId, uint sessionId)
+		{
+			cycles_progress_reset(clientId, sessionId);
+		}
 
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_progress_get_sample", CallingConvention = CallingConvention.Cdecl)]
 		private static extern int cycles_progress_get_sample(uint clientId, uint sessionId);
