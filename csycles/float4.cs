@@ -80,10 +80,14 @@ namespace ccl
 			return a / a.Length();
 		}
 
-		public bool IsZero()
+		public bool IsZero(bool checkW)
 		{
+			if(checkW)
+				return Math.Abs(x) < 0.00001f && Math.Abs(y) < 0.00001f
+					&& Math.Abs(z) < 0.00001f && Math.Abs(w) < 0.00001f;
+
 			return Math.Abs(x) < 0.00001f && Math.Abs(y) < 0.00001f
-			    && Math.Abs(z) < 0.00001f && Math.Abs(w) < 0.00001f;
+				&& Math.Abs(z) < 0.00001f;
 		}
 	}
 

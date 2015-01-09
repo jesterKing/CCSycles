@@ -12,6 +12,13 @@ namespace ccl
 			return cycles_scene_create(clientId, sceneParamsId, deviceid);
 		}
 
+		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_scene_reset", CallingConvention = CallingConvention.Cdecl)]
+		private static extern void cycles_scene_reset(uint clientId, uint sceneId);
+		public static void scene_reset(uint clientId, uint sceneId)
+		{
+			cycles_scene_reset(clientId, sceneId);
+		}
+
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_scene_add_object", CallingConvention = CallingConvention.Cdecl)]
 		private static extern uint cycles_scene_add_object(uint clientId, uint sceneId);
 		public static uint scene_add_object(uint clientId, uint sceneId)

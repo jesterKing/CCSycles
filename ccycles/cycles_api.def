@@ -32,6 +32,7 @@ EXPORTS
   cycles_scene_set_background_ao_factor
   cycles_scene_set_background_ao_distance
   cycles_scene_set_background_visibility
+  cycles_scene_reset
   
   cycles_scene_add_mesh
   cycles_scene_add_object

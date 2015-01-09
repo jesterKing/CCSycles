@@ -416,6 +416,7 @@ CCL_CAPI unsigned int __cdecl cycles_scene_get_background_shader(unsigned int cl
 CCL_CAPI void __cdecl cycles_scene_set_background_ao_factor(unsigned int client_id, unsigned int scene_id, float ao_factor);
 CCL_CAPI void __cdecl cycles_scene_set_background_ao_distance(unsigned int client_id, unsigned int scene_id, float ao_distance);
 CCL_CAPI void __cdecl cycles_scene_set_background_visibility(unsigned int client_id, unsigned int scene_id, int path_ray_flag);
+CCL_CAPI void __cdecl cycles_scene_reset(unsigned int client_id, unsigned int scene_id);
 
 /* Mesh geometry API */
 CCL_CAPI void __cdecl cycles_mesh_set_verts(unsigned int client_id, unsigned int scene_id, unsigned int mesh_id, float *verts, unsigned int vcount);
