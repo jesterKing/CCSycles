@@ -498,6 +498,7 @@ def code_nodes_to_shader(shadername, nodes):
         n = ntup[0]
         
         if skip_node(n): continue
+        if 'OUTPUT_' in n.type: continue
     
         addcode = addcode + "\t{0}.AddNode({1});\n".format(shadername, get_node_name(n))
     
@@ -539,6 +540,7 @@ def code_link_nodes(links):
         if not fromnode: continue
         if skip_node(tonode): continue
         if skip_node(fromnode): continue
+        if 'OUTPUT_' in tonode.type: continue
         
         fromsockname = get_socket_name(fromsock, fromnode.outputs, False, fromnode)
         tosockname = get_socket_name(tosock, tonode.inputs, True, tonode)
