@@ -137,3 +137,10 @@ unsigned int cycles_scene_get_default_surface_shader(unsigned int client_id, uns
 	return UINT_MAX;
 }
 
+void cycles_scene_reset(unsigned int client_id, unsigned int scene_id)
+{
+	SCENE_FIND(scene_id)
+		sce->reset();
+	SCENE_FIND_END()
+}
+

@@ -148,5 +148,13 @@ namespace ccl
 		//public static uint scene_add_object(uint scene_id)
 		//public static uint scene_add_mesh(uint scene_id, uint object_id, uint shader_id)
 		//public static void scene_set_default_surface_shader(uint scene_id, uint shader_id)
+
+		/// <summary>
+		/// Reset the scene, forcing update and device update in Cycles.
+		/// </summary>
+		public void Reset()
+		{
+			CSycles.scene_reset(Client.Id, Id);
+		}
 	}
 }
