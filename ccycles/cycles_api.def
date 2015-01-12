@@ -68,7 +68,6 @@ EXPORTS
   cycles_integrator_set_method
   cycles_integrator_set_sample_all_lights_direct
   cycles_integrator_set_sample_all_lights_indirect
-  cycles_integrator_set_volume_homogeneous_sampling
   cycles_integrator_set_volume_step_size
   cycles_integrator_set_volume_max_steps
   cycles_integrator_set_seed

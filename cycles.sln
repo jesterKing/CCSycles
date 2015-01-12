@@ -16,7 +16,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ccycles", "ccycles\ccycles.
 		{B8EDEAF5-32EB-4222-8219-A02E4980E887} = {B8EDEAF5-32EB-4222-8219-A02E4980E887}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cycles_bvh", "cycles\bvh\cycles_bvh.vcxproj", "{D4BB57D0-8C57-4EFD-89C8-C3381818EFA7}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cycles_bvh", "cycles\src\bvh\cycles_bvh.vcxproj", "{D4BB57D0-8C57-4EFD-89C8-C3381818EFA7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "csycles", "csycles\csycles.csproj", "{36396655-E087-4C00-990B-CE44F08E4FB2}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -25,14 +25,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "csycles", "csycles\csycles.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "csycles_tester", "csycles_tester\csycles_tester.csproj", "{1DE94C02-6766-4F89-B5ED-D0FE562DCE8B}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cycles_device", "cycles\device\cycles_device.vcxproj", "{F10377EA-7257-485D-9F55-13AA4E00FCC5}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cycles_device", "cycles\src\device\cycles_device.vcxproj", "{F10377EA-7257-485D-9F55-13AA4E00FCC5}"
 	ProjectSection(ProjectDependencies) = postProject
 		{92EB6D16-E6F5-47B7-928F-6BE64BA1B944} = {92EB6D16-E6F5-47B7-928F-6BE64BA1B944}
 		{B8C1A4CB-6207-49F7-BA7D-D8B5AF75F965} = {B8C1A4CB-6207-49F7-BA7D-D8B5AF75F965}
 		{1298F8E0-803D-4C1E-8D33-404138EAFE35} = {1298F8E0-803D-4C1E-8D33-404138EAFE35}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cycles_kernel", "cycles\kernel\cycles_kernel.vcxproj", "{B8EDEAF5-32EB-4222-8219-A02E4980E887}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cycles_kernel", "cycles\src\kernel\cycles_kernel.vcxproj", "{B8EDEAF5-32EB-4222-8219-A02E4980E887}"
 	ProjectSection(ProjectDependencies) = postProject
 		{B672311F-1E3A-4DBC-B36B-BF8D40CE22A9} = {B672311F-1E3A-4DBC-B36B-BF8D40CE22A9}
 		{7011363F-3C43-4B4C-A03C-638ACE5AFDF7} = {7011363F-3C43-4B4C-A03C-638ACE5AFDF7}
@@ -41,11 +41,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cycles_kernel", "cycles\ker
 		{F02C208C-9FDF-458B-83D4-35FAB33FEFB9} = {F02C208C-9FDF-458B-83D4-35FAB33FEFB9}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cycles_render", "cycles\render\cycles_render.vcxproj", "{FE779E4B-3450-4897-B8E8-0156F0B9B2E1}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cycles_render", "cycles\src\render\cycles_render.vcxproj", "{FE779E4B-3450-4897-B8E8-0156F0B9B2E1}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cycles_subd", "cycles\subd\cycles_subd.vcxproj", "{21E36630-F24B-44D0-BF8B-76B20EB8E92B}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cycles_subd", "cycles\src\subd\cycles_subd.vcxproj", "{21E36630-F24B-44D0-BF8B-76B20EB8E92B}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cycles_util", "cycles\util\cycles_util.vcxproj", "{3BDF676F-036E-4D43-9977-BF9C2BC0BBD2}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cycles_util", "cycles\src\util\cycles_util.vcxproj", "{3BDF676F-036E-4D43-9977-BF9C2BC0BBD2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cycles", "Cycles", "{D0A2CE60-B545-4997-A032-A3F35B5A4208}"
 EndProject
@@ -70,15 +70,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cycles_kernel_avx", "cycles\kernel\cycles_kernel_avx.vcxproj", "{B672311F-1E3A-4DBC-B36B-BF8D40CE22A9}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cycles_kernel_avx", "cycles\src\kernel\cycles_kernel_avx.vcxproj", "{B672311F-1E3A-4DBC-B36B-BF8D40CE22A9}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cycles_kernel_avx2", "cycles\kernel\cycles_kernel_avx2.vcxproj", "{7011363F-3C43-4B4C-A03C-638ACE5AFDF7}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cycles_kernel_avx2", "cycles\src\kernel\cycles_kernel_avx2.vcxproj", "{7011363F-3C43-4B4C-A03C-638ACE5AFDF7}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cycles_kernel_sse2", "cycles\kernel\cycles_kernel_sse2.vcxproj", "{7802B049-3A92-4338-B217-600D45E17018}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cycles_kernel_sse2", "cycles\src\kernel\cycles_kernel_sse2.vcxproj", "{7802B049-3A92-4338-B217-600D45E17018}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cycles_kernel_sse3", "cycles\kernel\cycles_kernel_sse3.vcxproj", "{80F70079-E375-4A23-BD5C-E9E390DE2456}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cycles_kernel_sse3", "cycles\src\kernel\cycles_kernel_sse3.vcxproj", "{80F70079-E375-4A23-BD5C-E9E390DE2456}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cycles_kernel_sse41", "cycles\kernel\cycles_kernel_sse41.vcxproj", "{F02C208C-9FDF-458B-83D4-35FAB33FEFB9}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cycles_kernel_sse41", "cycles\src\kernel\cycles_kernel_sse41.vcxproj", "{F02C208C-9FDF-458B-83D4-35FAB33FEFB9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

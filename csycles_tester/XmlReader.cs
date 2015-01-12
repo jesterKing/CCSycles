@@ -154,7 +154,6 @@ namespace csycles_tester
 			if (Utilities.Instance.read_int(ref intvar, node.GetAttribute("transparent_max_bounce"))) state.Scene.Integrator.TransparentMaxBounce = intvar;
 			if (Utilities.Instance.read_bool(ref boolvar, node.GetAttribute("transparent_shadows"))) state.Scene.Integrator.TransparentShadows = boolvar;
 
-			if (Utilities.Instance.read_int(ref intvar, node.GetAttribute("volume_homogeneous_sampling"))) state.Scene.Integrator.VolumeHomogeneousSampling = intvar;
 			if (Utilities.Instance.read_float(ref floatvar, node.GetAttribute("volume_step_size"))) state.Scene.Integrator.VolumeStepSize = floatvar;
 			if (Utilities.Instance.read_int(ref intvar, node.GetAttribute("volume_max_steps"))) state.Scene.Integrator.VolumeMaxSteps = intvar;
 
