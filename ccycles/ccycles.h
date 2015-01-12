@@ -273,7 +273,6 @@ CCL_CAPI void __cdecl cycles_integrator_set_method(unsigned int client_id, unsig
 CCL_CAPI void __cdecl cycles_integrator_set_sample_all_lights_direct(unsigned int client_id, unsigned int scene_id, bool sample_all_lights_direct);
 /** Set to true if all lights should be indirectly sampled. */
 CCL_CAPI void __cdecl cycles_integrator_set_sample_all_lights_indirect(unsigned int client_id, unsigned int scene_id, bool sample_all_lights_indirect);
-CCL_CAPI void __cdecl cycles_integrator_set_volume_homogeneous_sampling(unsigned int client_id, unsigned int scene_id, int volume_homogeneous_sampling);
 CCL_CAPI void __cdecl cycles_integrator_set_volume_step_size(unsigned int client_id, unsigned int scene_id, float volume_step_size);
 CCL_CAPI void __cdecl cycles_integrator_set_volume_max_steps(unsigned int client_id, unsigned int scene_id, int volume_max_steps);
 /* \todo update Cycles code to allow for caustics form separation

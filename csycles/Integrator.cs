@@ -209,14 +209,6 @@ namespace ccl
 			}
 		}
 
-		public int VolumeHomogeneousSampling
-		{
-			set
-			{
-				CSycles.integrator_set_volume_homogeneous_sampling(Scene.Client.Id, Scene.Id, value);
-			}
-		}
-
 		public float VolumeStepSize
 		{
 			set

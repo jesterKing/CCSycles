@@ -181,13 +181,6 @@ void cycles_integrator_set_sample_all_lights_indirect(unsigned int client_id, un
 	SCENE_FIND_END()
 }
 
-void cycles_integrator_set_volume_homogeneous_sampling(unsigned int client_id, unsigned int scene_id, int volume_homogeneous_sampling)
-{
-	SCENE_FIND(scene_id)
-		sce->integrator->volume_homogeneous_sampling = volume_homogeneous_sampling;
-	SCENE_FIND_END()
-}
-
 void cycles_integrator_set_volume_step_size(unsigned int client_id, unsigned int scene_id, float volume_step_size)
 {
 	SCENE_FIND(scene_id)

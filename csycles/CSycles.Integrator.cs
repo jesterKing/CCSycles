@@ -167,13 +167,6 @@ namespace ccl
 			cycles_integrator_set_sample_all_lights_indirect(clientId, sceneId, value);
 		}
 
-		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_integrator_set_volume_homogeneous_sampling", CallingConvention = CallingConvention.Cdecl)]
-		private static extern void cycles_integrator_set_volume_homogeneous_sampling(uint clientId, uint sceneId, int value);
-		public static void integrator_set_volume_homogeneous_sampling(uint clientId, uint sceneId, int value)
-		{
-			cycles_integrator_set_volume_homogeneous_sampling(clientId, sceneId, value);
-		}
-
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_integrator_set_volume_step_size", CallingConvention = CallingConvention.Cdecl)]
 		private static extern void cycles_integrator_set_volume_step_size(uint clientId, uint sceneId, float value);
 		public static void integrator_set_volume_step_size(uint clientId, uint sceneId, float value)
