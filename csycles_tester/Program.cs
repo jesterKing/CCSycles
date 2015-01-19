@@ -83,9 +83,9 @@ namespace csycles_tester
 		static public void StatusUpdateCallback(uint sessionId)
 		{
 			float progress;
-			double total_time;
+			double total_time, render_time, tile_time;
 
-			CSycles.progress_get_progress(Client.Id, sessionId, out progress, out total_time);
+			CSycles.progress_get_progress(Client.Id, sessionId, out progress, out total_time, out render_time, out tile_time);
 			var status = CSycles.progress_get_status(Client.Id, sessionId);
 			var substatus = CSycles.progress_get_substatus(Client.Id, sessionId);
 			uint samples;
