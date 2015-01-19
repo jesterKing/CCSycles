@@ -310,10 +310,10 @@ int cycles_progress_get_sample(unsigned int session_id)
 	return INT_MIN;
 }
 
-void cycles_progress_get_tile(unsigned int client_id, unsigned int session_id, int *tile, double *total_time, double* sample_time)
+void cycles_progress_get_tile(unsigned int client_id, unsigned int session_id, int *tile, double *total_time, double* sample_time, double* tile_time)
 {
 	SESSION_FIND(session_id)
-		return session->progress.get_tile(*tile, *total_time, *sample_time);
+		return session->progress.get_tile(*tile, *total_time, *sample_time, *tile_time);
 	SESSION_FIND_END()
 }
 
@@ -326,17 +326,19 @@ void cycles_tilemanager_get_sample_info(unsigned int client_id, unsigned int ses
 }
 
 /* Get cycles render progress. Note that progress will be clamped to 1.0f. */
-void cycles_progress_get_progress(unsigned int client_id, unsigned int session_id, float* progress, double* total_time)
+void cycles_progress_get_progress(unsigned int client_id, unsigned int session_id, float* progress, double* total_time, double* render_time, double* tile_time)
 {
 	SESSION_FIND(session_id)
-		double tile_time, total_time_;
+		double tile_time_, total_time_, render_time_;
 		int tile, sample, samples_per_tile;
 		auto tile_total = session->tile_manager.state.num_tiles;
 
 		*progress = 0.0f;
 
-		session->progress.get_tile(tile, total_time_, tile_time);
+		session->progress.get_tile(tile, total_time_, render_time_, tile_time_);
 		*total_time = total_time_;
+		*render_time = render_time_;
+		*tile_time = tile_time_;
 		sample = session->progress.get_sample();
 		samples_per_tile = session->tile_manager.num_samples;
 
