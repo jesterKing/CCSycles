@@ -67,7 +67,6 @@ namespace ccl
 			f4.z = vec[2];
 			if (vec.Length == 4)
 				f4.w = vec[3];
-			return;
 		}
 
 		public bool read_float(ref float val, string floatstring)
@@ -356,7 +355,7 @@ namespace ccl
 							operation = operation.ToLowerInvariant();
 							try
 							{
-								MathNode.Operations op = (MathNode.Operations)Enum.Parse(typeof(MathNode.Operations), operation, true);
+								var op = (MathNode.Operations)Enum.Parse(typeof(MathNode.Operations), operation, true);
 								math.Operation = op;
 							}
 							catch (ArgumentException)
