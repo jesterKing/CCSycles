@@ -1,7 +1,7 @@
 <!-- Camera -->
 <camera width="800" height="500" />
 
-<transform translate="0 0 -5" scale="1 1 1" rotate="75 0 1 1">
+<transform translate="0 0 -5" scale="1 1 1">
 	<camera type="perspective" />
 </transform>
 
@@ -29,6 +29,8 @@
 </shader>
 
 <!-- Cube Object -->
+<transform rotate="75 1 1 1">
 <state interpolation="smooth" shader="cube">
 	<include src="./objects/uv_cube.xml" />
 </state>
+</transform>
