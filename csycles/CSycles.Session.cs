@@ -244,17 +244,17 @@ namespace ccl
 		}
 
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_progress_get_tile", CallingConvention = CallingConvention.Cdecl)]
-		private static extern void cycles_progress_get_tile(uint clientId, uint sessionId, out int tile, out double totalTime, out double sampleTime);
-		public static void progress_get_tile(uint clientId, uint sessionId, out int tile, out double totalTime, out double sampleTime)
+		private static extern void cycles_progress_get_tile(uint clientId, uint sessionId, out int tile, out double totalTime, out double sampleTime, out double tileTime);
+		public static void progress_get_tile(uint clientId, uint sessionId, out int tile, out double totalTime, out double sampleTime, out double tileTime)
 		{
-			cycles_progress_get_tile(clientId, sessionId, out tile, out totalTime, out sampleTime);
+			cycles_progress_get_tile(clientId, sessionId, out tile, out totalTime, out sampleTime, out tileTime);
 		}
 
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_progress_get_progress", CallingConvention = CallingConvention.Cdecl)]
-		private static extern void cycles_progress_get_progress(uint clientId, uint sessionId, out float progress, out double totalTime);
-		public static void progress_get_progress(uint clientId, uint sessionId, out float progress, out double totalTime)
+		private static extern void cycles_progress_get_progress(uint clientId, uint sessionId, out float progress, out double totalTime, out double renderTime, out double tileTime);
+		public static void progress_get_progress(uint clientId, uint sessionId, out float progress, out double totalTime, out double renderTime, out double tileTime)
 		{
-			cycles_progress_get_progress(clientId, sessionId, out progress, out totalTime);
+			cycles_progress_get_progress(clientId, sessionId, out progress, out totalTime, out renderTime, out tileTime);
 		}
 
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_tilemanager_get_sample_info", CallingConvention = CallingConvention.Cdecl)]
