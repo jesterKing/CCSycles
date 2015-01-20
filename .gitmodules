@@ -1,4 +1,4 @@
 [submodule "cycles"]
 	path = cycles
-	url = git@git.blender.org:cycles.git
+	url = git://git.blender.org/cycles.git
 	branch = ccsycles_master
