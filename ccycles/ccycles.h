@@ -535,6 +535,7 @@ CCL_CAPI void __cdecl cycles_light_set_spot_smooth(unsigned int client_id, unsig
 CCL_CAPI void __cdecl cycles_light_set_cast_shadow(unsigned int client_id, unsigned int scene_id, unsigned int light_id, unsigned int cast_shadow);
 CCL_CAPI void __cdecl cycles_light_set_use_mis(unsigned int client_id, unsigned int scene_id, unsigned int light_id, unsigned int use_mis);
 CCL_CAPI void __cdecl cycles_light_set_samples(unsigned int client_id, unsigned int scene_id, unsigned int light_id, unsigned int samples);
+CCL_CAPI void __cdecl cycles_light_set_max_bounces(unsigned int client_id, unsigned int scene_id, unsigned int light_id, unsigned int max_bounces);
 CCL_CAPI void __cdecl cycles_light_set_map_resolution(unsigned int client_id, unsigned int scene_id, unsigned int light_id, unsigned int map_resolution);
 CCL_CAPI void __cdecl cycles_light_set_sizeu(unsigned int client_id, unsigned int scene_id, unsigned int light_id, float sizeu);
 CCL_CAPI void __cdecl cycles_light_set_sizev(unsigned int client_id, unsigned int scene_id, unsigned int light_id, float sizev);

@@ -27,6 +27,13 @@ namespace ccl
 			cycles_light_set_samples(clientId, sceneId, lightId, samples);
 		}
 
+		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_light_set_max_bounces", CallingConvention = CallingConvention.Cdecl)]
+		private static extern void cycles_light_set_max_bounces(uint clientId, uint sceneId, uint lightId, uint maxBounces);
+		public static void light_set_max_bounces(uint clientId, uint sceneId, uint lightId, uint maxBounces)
+		{
+			cycles_light_set_max_bounces(clientId, sceneId, lightId, maxBounces);
+		}
+
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_light_set_map_resolution", CallingConvention = CallingConvention.Cdecl)]
 		private static extern void cycles_light_set_map_resolution(uint clientId, uint sceneId, uint lightId, uint mapResolution);
 		public static void light_set_map_resolution(uint clientId, uint sceneId, uint lightId, uint mapResolution)

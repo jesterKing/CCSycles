@@ -167,6 +167,7 @@ EXPORTS
   cycles_light_set_spot_angle
   cycles_light_set_spot_smooth
   cycles_light_set_samples
+  cycles_light_set_max_bounces
   cycles_light_set_map_resolution
   cycles_light_set_use_mis
   cycles_light_set_cast_shadow

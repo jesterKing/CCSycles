@@ -60,6 +60,14 @@ namespace ccl
 			}
 		}
 
+		public uint MaxBounces
+		{
+			set
+			{
+				CSycles.light_set_max_bounces(Client.Id, Scene.Id, Id, value);
+			}
+		}
+
 		public uint MapResolution
 		{
 			set

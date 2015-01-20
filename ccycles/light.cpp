@@ -64,6 +64,14 @@ void cycles_light_set_samples(unsigned int client_id, unsigned int scene_id, uns
 	LIGHT_FIND_END()
 }
 
+void cycles_light_set_max_bounces(unsigned int client_id, unsigned int scene_id, unsigned int light_id, unsigned int max_bounces)
+{
+	LIGHT_FIND(scene_id, light_id)
+		l->max_bounces = max_bounces;
+		logger.logit(client_id, "Setting light ", light_id, " of scene ", scene_id, " max_bounces to ", max_bounces);
+	LIGHT_FIND_END()
+}
+
 void cycles_light_set_map_resolution(unsigned int client_id, unsigned int scene_id, unsigned int light_id, unsigned int map_resolution)
 {
 	LIGHT_FIND(scene_id, light_id)
