@@ -59,6 +59,9 @@ void copy_pixels_to_ccsession(ccl::RenderTile &tile, unsigned int sid) {
 	auto scewidth = params.full_width;
 	auto sceheight = params.full_height;
 
+	auto tilex = params.full_x - se->session->tile_manager.params.full_x;
+	auto tiley = params.full_y - se->session->tile_manager.params.full_y;
+
 	/* Copy the tile buffer to pixels. */
 	if (!buffers->get_pass_rect(ccl::PassType::PASS_COMBINED, 1.0f, tile.sample, stride, &pixels[0])) {
 		return;
@@ -71,7 +74,7 @@ void copy_pixels_to_ccsession(ccl::RenderTile &tile, unsigned int sid) {
 			/* from tile pixels coord. */
 			auto tileidx = y * params.width * stride + x * stride;
 			/* to full image pixels coord. */
-			auto fullimgidx = (tile.y + y) * scewidth * stride + (tile.x + x) * stride;
+			auto fullimgidx = (tiley + y) * scewidth * stride + (tilex + x) * stride;
 
 			/* copy the tile pixels from pixels into session final pixel buffer. */
 			se->pixels[fullimgidx + 0] = pixels[tileidx + 0];
@@ -86,8 +89,17 @@ void copy_pixels_to_ccsession(ccl::RenderTile &tile, unsigned int sid) {
 void CCSession::update_render_tile(ccl::RenderTile &tile)
 {
 	copy_pixels_to_ccsession(tile, this->id);
+
+	auto buffers = tile.buffers;
+	auto& params = buffers->params;
+
+	auto se = sessions[this->id];
+
+	auto tilex = params.full_x - se->session->tile_manager.params.full_x;
+	auto tiley = params.full_y - se->session->tile_manager.params.full_y;
+
 	if (update_cbs[this->id] != nullptr) {
-		update_cbs[this->id](this->id, tile.x, tile.y, tile.w, tile.h, 4);
+		update_cbs[this->id](this->id, tilex, tiley, params.width, params.height, 4);
 	}
 }
 
@@ -95,8 +107,16 @@ void CCSession::update_render_tile(ccl::RenderTile &tile)
 void CCSession::write_render_tile(ccl::RenderTile &tile)
 {
 	copy_pixels_to_ccsession(tile, this->id);
+
+	auto buffers = tile.buffers;
+	auto& params = buffers->params;
+
+	auto se = sessions[this->id];
+
+	auto tilex = params.full_x - se->session->tile_manager.params.full_x;
+	auto tiley = params.full_y - se->session->tile_manager.params.full_y;
 	if (write_cbs[this->id] != nullptr) {
-		write_cbs[this->id](this->id, tile.x, tile.y, tile.w, tile.h, 4);
+		write_cbs[this->id](this->id, tilex, tiley, params.width, params.height, 4);
 	}
 }
 
