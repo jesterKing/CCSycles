@@ -214,6 +214,8 @@ void cycles_session_reset(unsigned int client_id, unsigned int session_id, unsig
 {
 	SESSION_FIND(session_id)
 		logger.logit(client_id, "Reset session ", session_id, ". width ", width, " height ", height, " samples ", samples);
+		auto se = sessions[session_id];
+		se->reset(width*height, 4);
 		ccl::BufferParams bufParams;
 		bufParams.width = bufParams.full_width = width;
 		bufParams.height = bufParams.full_height = height;

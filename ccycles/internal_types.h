@@ -160,6 +160,18 @@ public:
 		return se;
 	}
 
+	/* When a session is reset we need to recreate the pixel buffer based on new
+	 * info.
+	 */
+	void reset(unsigned int img_size, unsigned int buffer_stride_) {
+		if (img_size*buffer_stride_ != buffer_size || buffer_stride_ != buffer_stride) {
+			delete[] pixels;
+			pixels = new float[img_size*buffer_stride_];
+			buffer_size = img_size*buffer_stride_;
+			buffer_stride = buffer_stride_;
+		}
+	}
+
 	~CCSession() {
 		delete[] pixels;
 		delete session;
