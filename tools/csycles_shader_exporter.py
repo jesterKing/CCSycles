@@ -36,6 +36,7 @@ nodemapping = {
     'BSDF_DIFFUSE' : 'DiffuseBsdfNode',
     'BSDF_GLOSSY' : 'GlossyBsdfNode',
     'BSDF_REFRACTION' : 'RefractionBsdfNode',
+    'BSDF_TRANSPARENT' : 'TransparentBsdfNode',
 
 # texture nodes
 
