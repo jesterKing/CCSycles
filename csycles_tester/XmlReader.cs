@@ -274,11 +274,12 @@ namespace csycles_tester
 			var nvertsints = Utilities.Instance.parse_ints(nverts);
 			var vertsints = Utilities.Instance.parse_ints(verts);
 
-			var ob = CSycles.scene_add_object(Client.Id, state.Scene.Id);
-			CSycles.object_set_matrix(Client.Id, state.Scene.Id, ob, state.Transform);
-			var me = CSycles.scene_add_mesh(Client.Id, state.Scene.Id, ob, state.Scene.ShaderSceneId(state.Shader));
+			var ob = new ccl.Object(Client) { Transform = state.Transform };
+			var me = new Mesh(Client, state.Shader);
 
-			CSycles.mesh_set_verts(Client.Id, state.Scene.Id, me, ref pfloats, (uint) (pfloats.Length/3));
+			ob.Mesh = me;
+
+			me.SetVerts(ref pfloats);
 
 			var index_offset = 0;
 			/* count triangles */
@@ -308,7 +309,7 @@ namespace csycles_tester
 						uvoffs += 6;
 					}
 
-					CSycles.mesh_add_triangle(Client.Id, state.Scene.Id, me, (uint)v0, (uint)v1, (uint)v2, state.Scene.ShaderSceneId(state.Shader), state.Smooth);
+					me.AddTri((uint)v0, (uint)v1, (uint)v2, state.Shader, state.Smooth);
 				}
 
 				index_offset += t;
@@ -316,7 +317,7 @@ namespace csycles_tester
 
 			if (has_uv)
 			{
-				CSycles.mesh_set_uvs(Client.Id, state.Scene.Id, me, ref uvs, (uint) (uvs.Length/2));
+				me.SetUvs(ref uvs);
 			}
 		}
 
