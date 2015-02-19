@@ -20,6 +20,10 @@ limitations under the License.
 #include <thread>
 #include <mutex>
 
+#pragma warning ( push )
+
+#pragma warning ( disable : 4244 )
+
 #include "background.h"
 #include "camera.h"
 #include "device.h"
@@ -35,6 +39,8 @@ limitations under the License.
 
 #include "util_progress.h"
 #include "util_string.h"
+
+#pragma warning ( pop )
 
 #include "ccycles.h"
 
