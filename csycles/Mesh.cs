@@ -79,5 +79,10 @@ namespace ccl
 		{
 			CSycles.mesh_set_uvs(Client.Id, Client.Scene.Id, Id, ref uvs, (uint) (uvs.Length/2));
 		}
+
+		public void AddTri(uint v0, uint v1, uint v2, Shader shader, bool smooth)
+		{
+			CSycles.mesh_add_triangle(Client.Id, Client.Scene.Id, Id, v0, v1, v2, Client.Scene.ShaderSceneId(shader), smooth);
+		}
 	}
 }
