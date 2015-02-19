@@ -205,10 +205,15 @@ CCL_CAPI void __cdecl cycles_scene_params_set_shadingsystem(unsigned int client_
 CCL_CAPI void __cdecl cycles_scene_params_set_persistent_data(unsigned int client_id, unsigned int scene_params_id, unsigned int use);
 
 /**
+ * Create a new mesh in scene_id, using shader_id
+ * \ingroup ccycles_scene
+ */
+CCL_CAPI unsigned int __cdecl cycles_scene_add_mesh(unsigned int client_id, unsigned int scene_id, unsigned int shader_id);
+/**
  * Create a new mesh for object_id in scene_id, using shader_id
  * \ingroup ccycles_scene
  */
-CCL_CAPI unsigned int __cdecl cycles_scene_add_mesh(unsigned int client_id, unsigned int scene_id, unsigned int object_id, unsigned int shader_id);
+CCL_CAPI unsigned int __cdecl cycles_scene_add_mesh_object(unsigned int client_id, unsigned int scene_id, unsigned int object_id, unsigned int shader_id);
 /**
  * Create a new object for scene_id
  * \ingroup ccycles_scene
@@ -224,6 +229,11 @@ CCL_CAPI void __cdecl cycles_scene_object_set_matrix(unsigned int client_id, uns
 	float i, float j, float k, float l,
 	float m, float n, float o, float p
 	);
+/**
+ * Set object mesh
+ * \ingroup ccycles_object
+ */
+CCL_CAPI void __cdecl cycles_scene_object_set_mesh(unsigned int client_id, unsigned int scene_id, unsigned int object_id, unsigned int mesh_id);
 
 /** Tag integrator for update. */
 CCL_CAPI void __cdecl cycles_integrator_tag_update(unsigned int client_id, unsigned int scene_id);

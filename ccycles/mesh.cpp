@@ -18,7 +18,23 @@ limitations under the License.
 
 extern std::vector<CCScene> scenes;
 
-unsigned int cycles_scene_add_mesh(unsigned int client_id, unsigned int scene_id, unsigned int object_id, unsigned int shader_id)
+unsigned int cycles_scene_add_mesh(unsigned int client_id, unsigned int scene_id, unsigned int shader_id)
+{
+	SCENE_FIND(scene_id)
+		auto mesh = new ccl::Mesh();
+		
+		mesh->used_shaders.push_back(shader_id);
+		sce->meshes.push_back(mesh);
+
+		logger.logit(client_id, "Add mesh ", sce->meshes.size() - 1, " in scene ", scene_id, " using default surface shader ", shader_id);
+
+		return (unsigned int)(sce->meshes.size() - 1);
+	SCENE_FIND_END()
+
+	return UINT_MAX;
+}
+
+unsigned int cycles_scene_add_mesh_object(unsigned int client_id, unsigned int scene_id, unsigned int object_id, unsigned int shader_id)
 {
 	SCENE_FIND(scene_id)
 		auto mesh = new ccl::Mesh();
