@@ -19,6 +19,14 @@ namespace ccl
 				t.z.x, t.z.y, t.z.z, t.z.w,
 				t.w.x, t.w.y, t.w.z, t.w.w);
 		}
-#endregion
+
+		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_scene_object_set_mesh", CallingConvention = CallingConvention.Cdecl)]
+		private static extern void cycles_scene_object_set_mesh(uint clientId, uint sceneId, uint objectId, uint meshId);
+		public static void object_set_mesh(uint clientId, uint sceneId, uint objectId, uint meshId)
+		{
+			cycles_scene_object_set_mesh(clientId, sceneId, objectId, meshId);
+		}
+
+		#endregion
 	}
 }

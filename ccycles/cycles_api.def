@@ -35,6 +35,7 @@ EXPORTS
   cycles_scene_reset
   
   cycles_scene_add_mesh
+  cycles_scene_add_mesh_object
   cycles_scene_add_object
   cycles_mesh_set_verts
   cycles_mesh_set_tris
@@ -44,6 +45,7 @@ EXPORTS
   cycles_mesh_set_smooth
 
   cycles_scene_object_set_matrix
+  cycles_scene_object_set_mesh
 
   cycles_integrator_tag_update
   cycles_integrator_set_max_bounce

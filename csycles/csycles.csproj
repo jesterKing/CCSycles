@@ -64,6 +64,8 @@
     <Compile Include="Device.cs" />
     <Compile Include="enums.cs" />
     <Compile Include="float4.cs" />
+    <Compile Include="Mesh.cs" />
+    <Compile Include="Object.cs" />
     <Compile Include="ShaderNodes\CombineRgbNode.cs" />
     <Compile Include="ShaderNodes\CombineXyzNode.cs" />
     <Compile Include="ShaderNodes\MappingNode.cs" />

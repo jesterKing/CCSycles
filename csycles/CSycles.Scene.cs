@@ -26,11 +26,18 @@ namespace ccl
 			return cycles_scene_add_object(clientId, sceneId);
 		}
 
-		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_scene_add_mesh", CallingConvention = CallingConvention.Cdecl)]
-		private static extern uint cycles_scene_add_mesh(uint clientId, uint sceneId, uint objectId, uint shaderId);
-		public static uint scene_add_mesh(uint clientId, uint sceneId, uint objectId, uint shaderId)
+		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_scene_add_mesh_object", CallingConvention = CallingConvention.Cdecl)]
+		private static extern uint cycles_scene_add_mesh_object(uint clientId, uint sceneId, uint objectId, uint shaderId);
+		public static uint scene_add_mesh_object(uint clientId, uint sceneId, uint objectId, uint shaderId)
 		{
-			return cycles_scene_add_mesh(clientId, sceneId, objectId, shaderId);
+			return cycles_scene_add_mesh_object(clientId, sceneId, objectId, shaderId);
+		}
+
+		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_scene_add_mesh", CallingConvention = CallingConvention.Cdecl)]
+		private static extern uint cycles_scene_add_mesh(uint clientId, uint sceneId, uint shaderId);
+		public static uint scene_add_mesh(uint clientId, uint sceneId, uint shaderId)
+		{
+			return cycles_scene_add_mesh(clientId, sceneId, shaderId);
 		}
 
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_scene_set_background_shader",

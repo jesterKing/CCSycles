@@ -34,6 +34,15 @@ unsigned int cycles_scene_add_object(unsigned int client_id, unsigned int scene_
 	return UINT_MAX;
 }
 
+void cycles_scene_object_set_mesh(unsigned int client_id, unsigned int scene_id, unsigned int object_id, unsigned int mesh_id)
+{
+	SCENE_FIND(scene_id)
+		auto ob = sce->objects[object_id];
+		auto me = sce->meshes[mesh_id];
+		ob->mesh = me;
+	SCENE_FIND_END()
+}
+
 void cycles_scene_object_set_matrix(unsigned int client_id, unsigned int scene_id, unsigned int object_id,
 	float a, float b, float c, float d,
 	float e, float f, float g, float h,
