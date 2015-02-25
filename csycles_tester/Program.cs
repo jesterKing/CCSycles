@@ -277,13 +277,11 @@ namespace csycles_tester
 			}
 			bmp.Save("test.png", ImageFormat.Png);
 
-			Console.WriteLine("Done");
 			Console.WriteLine("Cleaning up :)");
 
 			CSycles.shutdown();
 
-			Console.WriteLine("Bye bye! Press a key to end this program...");
-			Console.ReadKey();
+			Console.WriteLine("Done");
 		}
 	}
 }
