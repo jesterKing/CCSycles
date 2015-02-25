@@ -178,7 +178,7 @@ namespace csycles_tester
 			}
 
 			var dev = Device.FirstCuda;
-			Console.WriteLine("Using device {0}", dev.Name);
+			Console.WriteLine("Using device {0} {1}", dev.Name, dev.Description);
 
 			var scene_params = new SceneParameters(client, ShadingSystem.SVM, BvhType.Static, false, false, false, false);
 			var scene = new Scene(client, scene_params, dev);
