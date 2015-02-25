@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 **/
 
+using System.Drawing.Imaging;
 using ccl;
 using ccl.ShaderNodes;
 using System;
@@ -274,7 +275,7 @@ namespace csycles_tester
 					bmp.SetPixel(x, y, Color.FromArgb(a, r, g, b));
 				}
 			}
-			bmp.Save("test.bmp");
+			bmp.Save("test.png", ImageFormat.Png);
 
 			Console.WriteLine("Done");
 			Console.WriteLine("Cleaning up :)");
