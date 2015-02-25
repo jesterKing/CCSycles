@@ -8,6 +8,7 @@ EXPORTS
   cycles_release_client
 	cycles_log_to_stdout
 
+  cycles_device_capabilities
   cycles_number_devices
   cycles_number_cuda_devices
   cycles_device_description

@@ -28,6 +28,17 @@ namespace ccl
 			return cycles_number_cuda_devices();
 		}
 
+		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_device_capabilities", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+		private static extern IntPtr cycles_device_capabilities();
+		/// <summary>
+		/// Get the device capabilities for all devices Cycles can see.
+		/// </summary>
+		/// <returns>The device capabilities.</returns>
+		public static string device_capabilities()
+		{
+			return Marshal.PtrToStringAnsi(cycles_device_capabilities());
+		}
+
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_device_description", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
 		private static extern IntPtr cycles_device_description(int i);
 		/// <summary>

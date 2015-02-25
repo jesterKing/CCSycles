@@ -157,6 +157,9 @@ CCL_CAPI unsigned int __cdecl cycles_number_cuda_devices();
 /* Query name of a device. */
 CCL_CAPI const char* __cdecl cycles_device_description(int i);
 
+/* Query capabilities of all devices found. */
+CCL_CAPI const char* __cdecl cycles_device_capabilities();
+
 /* Query ID of a device. */
 CCL_CAPI const char* __cdecl cycles_device_id(int i);
 

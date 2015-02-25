@@ -74,6 +74,17 @@ namespace ccl
 		}
 
 		/// <summary>
+		/// Get capabilities of all devices that Cycles can see.
+		/// </summary>
+		static public string Capabilities
+		{
+			get
+			{
+				return CSycles.device_capabilities();
+			}
+		}
+
+		/// <summary>
 		/// Get a device by using GetDevice(int idx). Constructor is private.
 		/// </summary>
 		private Device() { }

@@ -79,3 +79,9 @@ unsigned int cycles_device_type(int i) {
 	else
 		return 0;
 }
+
+
+const char* cycles_device_capabilities() {
+	static string capabilities = ccl::Device::device_capabilities();
+	return capabilities.c_str();
+}

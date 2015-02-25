@@ -177,6 +177,8 @@ namespace csycles_tester
 				CSycles.set_logger(client.Id, g_logger_callback);
 			}
 
+			Console.WriteLine("All device capabilities: {0}", Device.Capabilities);
+
 			var dev = Device.FirstCuda;
 			Console.WriteLine("Using device {0} {1}", dev.Name, dev.Description);
 
