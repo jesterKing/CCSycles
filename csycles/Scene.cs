@@ -63,6 +63,16 @@ namespace ccl
 			Camera = new Camera(this);
 			Integrator = new Integrator(this);
 
+			var surface = Shader.WrapDefaultSurfaceShader(client);
+			var background = Shader.WrapDefaultBackgroundShader(client);
+			var light = Shader.WrapDefaultLightShader(client);
+			var empty = Shader.WrapDefaultEmptyShader(client);
+
+			shaders.Add(surface, surface.Id);
+			shaders.Add(background, background.Id);
+			shaders.Add(light, light.Id);
+			shaders.Add(empty, empty.Id);
+
 			client.Scene = this;
 		}
 

@@ -38,6 +38,8 @@ namespace ccl
 		private Client Client { get; set; }
 		public ShaderType Type { get; set; }
 
+		private bool created_in_cycles { get; set; }
+
 		public OutputNode Output { get; set; }
 
 		/// <summary>
@@ -52,6 +54,69 @@ namespace ccl
 			Id = CSycles.create_shader(Client.Id);
 			Output = new OutputNode();
 			AddNode(Output);
+			created_in_cycles = false;
+		}
+
+		internal Shader(Client client, ShaderType type, uint id)
+		{
+			Client = client;
+			Type = type;
+			Id = id;
+			Output = new OutputNode();
+			AddNode(Output);
+			created_in_cycles = true;
+		}
+
+		/// <summary>
+		/// Static constructor for wrapping default surface shader created by Cycles shader manager.
+		/// </summary>
+		/// <param name="client"></param>
+		/// <returns></returns>
+		static public Shader WrapDefaultSurfaceShader(Client client)
+		{
+			var shader = new Shader(client, ShaderType.Material, 0) {Name = "default_surface"};
+
+			// just add nodes so we have local node presentation, but no need to actually finalise
+			// since it already exists in Cycles.
+			var diffuse_bsdf = new DiffuseBsdfNode();
+			diffuse_bsdf.ins.Color.Value = new float4(0.8f);
+
+			shader.AddNode(diffuse_bsdf);
+
+			diffuse_bsdf.outs.BSDF.Connect(shader.Output.ins.Surface);
+
+			return shader;
+		}
+
+		static public Shader WrapDefaultLightShader(Client client)
+		{
+			var shader = new Shader(client, ShaderType.Material, 1) {Name = "default_light"};
+
+			// just add nodes so we have local node presentation, but no need to actually finalise
+			// since it already exists in Cycles.
+			var emission_node = new EmissionNode();
+			emission_node.ins.Color.Value = new float4(0.8f);
+			emission_node.ins.Strength.Value = 0.0f;
+
+			shader.AddNode(emission_node);
+
+			emission_node.outs.Emission.Connect(shader.Output.ins.Surface);
+
+			return shader;
+		}
+
+		static public Shader WrapDefaultBackgroundShader(Client client)
+		{
+			var shader = new Shader(client, ShaderType.World, 2) {Name = "default_background"};
+
+			return shader;
+		}
+
+		static public Shader WrapDefaultEmptyShader(Client client)
+		{
+			var shader = new Shader(client, ShaderType.Material, 3) {Name = "default_empty"};
+
+			return shader;
 		}
 
 		readonly List<ShaderNode> m_nodes = new List<ShaderNode>();
@@ -64,6 +129,12 @@ namespace ccl
 			if (node is OutputNode)
 			{
 				node.Id = CSycles.OUTPUT_SHADERNODE_ID;
+				m_nodes.Add(node);
+				return;
+			}
+
+			if (created_in_cycles)
+			{
 				m_nodes.Add(node);
 				return;
 			}
@@ -250,7 +321,7 @@ namespace ccl
 			set
 			{
 				m_name = value;
-				CSycles.shader_set_name(Client.Id, Id, m_name);
+				if(!created_in_cycles) CSycles.shader_set_name(Client.Id, Id, m_name);
 			}
 			get
 			{
@@ -265,7 +336,7 @@ namespace ccl
 		{
 			set
 			{
-				CSycles.shader_set_use_mis(Client.Id, Id, value);
+				if(!created_in_cycles) CSycles.shader_set_use_mis(Client.Id, Id, value);
 			}
 		}
 
@@ -276,7 +347,7 @@ namespace ccl
 		{
 			set
 			{
-				CSycles.shader_set_use_transparent_shadow(Client.Id, Id, value);
+				if(!created_in_cycles) CSycles.shader_set_use_transparent_shadow(Client.Id, Id, value);
 			}
 		}
 
@@ -287,7 +358,7 @@ namespace ccl
 		{
 			set
 			{
-				CSycles.shader_set_heterogeneous_volume(Client.Id, Id, value);
+				if(!created_in_cycles) CSycles.shader_set_heterogeneous_volume(Client.Id, Id, value);
 			}
 		}
 
