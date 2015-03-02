@@ -32,6 +32,8 @@ nodemapping = {
     'MIX_SHADER' : 'MixClosureNode',
     
     'EMISSION' : 'EmissionNode',
+    
+    'HOLDOUT' : 'HoldoutNode',
 
     'BSDF_DIFFUSE' : 'DiffuseBsdfNode',
     'BSDF_GLOSSY' : 'GlossyBsdfNode',
@@ -51,10 +53,14 @@ nodemapping = {
     'GAMMA' : 'GammaNode',
 
 # conversion nodes
+    'MAPPING' : 'MappingNode',
     'MATH' : 'MathNode',
     'RGBTOBW' : 'RgbToBwNode',
     'SEPRGB' : 'SeparateRgbNode',
+    'COMBRGB' : 'CombineRgbNode',
     'SEPHSV' : 'SeparateHsvNode',
+    'COMBXYZ' : 'CombineXyzNode',
+    'SEPXYZ' : 'SeparateXyzNode',
 
 # vector nodes
     'BUMP' : 'BumpNode',
