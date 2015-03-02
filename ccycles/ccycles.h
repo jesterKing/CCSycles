@@ -472,8 +472,6 @@ enum class shadernode_type : unsigned int {
 	BLACKBODY,
 	CAMERA,
 	FRESNEL,
-	COMBINE_XYZ,
-	SEPARATE_XYZ,
 	MATH,
 	IMAGE_TEXTURE,
 	ENVIRONMENT_TEXTURE,
@@ -489,9 +487,14 @@ enum class shadernode_type : unsigned int {
 	LIGHTFALLOFF,
 	LAYERWEIGHT,
 	VORONOI_TEXTURE,
+	COMBINE_XYZ,
+	SEPARATE_XYZ,
 	HSV_SEPARATE,
+	HSV_COMBINE,
 	RGB_SEPARATE,
+	RGB_COMBINE,
 	MAPPING,
+	HOLDOUT,
 };
 
 CCL_CAPI unsigned int __cdecl cycles_create_shader(unsigned int client_id);

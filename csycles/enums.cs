@@ -77,8 +77,6 @@ namespace ccl
 		Blackbody,
 		Camera,
 		Fresnel,
-		CombineXyz,
-		SeparateXyz,
 		Math,
 		ImageTexture,
 		EnvironmentTexture,
@@ -94,12 +92,14 @@ namespace ccl
 		LightFalloff,
 		LayerWeight,
 		VoronoiTexture,
+		CombineXyz,
+		SeparateXyz,
 		SeparateHsv,
 		SeparateRgb,
-
-		SeperateXyz,
+		CombineHsv,
 		CombineRgb,
-		Mapping
+		Mapping,
+		Holdout
 	}
 
 	public enum BvhType : uint
