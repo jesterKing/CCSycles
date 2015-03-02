@@ -309,6 +309,8 @@ namespace ccl
 						get_float4(velvetbsdf.ins.Color, node.GetAttribute("color"));
 						get_float(velvetbsdf.ins.Sigma, node.GetAttribute("sigma"));
 						get_float4(velvetbsdf.ins.Normal, node.GetAttribute("normal"));
+						nodes.Add(nodename, velvetbsdf);
+						shader.AddNode(velvetbsdf);
 						break;
 					case "glass_bsdf":
 						var glassbsdf = new GlassBsdfNode();
@@ -375,6 +377,50 @@ namespace ccl
 					case "mapping":
 						var mapping = new MappingNode();
 						get_float4(mapping.ins.Vector, node.GetAttribute("vector"));
+						nodes.Add(nodename, mapping);
+						shader.AddNode(mapping);
+						break;
+					case "combine_rgb":
+						var combine_rgb = new CombineRgbNode();
+						get_float(combine_rgb.ins.R, node.GetAttribute("R"));
+						get_float(combine_rgb.ins.G, node.GetAttribute("G"));
+						get_float(combine_rgb.ins.B, node.GetAttribute("B"));
+						nodes.Add(nodename, combine_rgb);
+						shader.AddNode(combine_rgb);
+						break;
+					case "separate_rgb":
+						var separate_rgb = new SeparateRgbNode();
+						get_float4(separate_rgb.ins.Color, node.GetAttribute("color"));
+						nodes.Add(nodename, separate_rgb);
+						shader.AddNode(separate_rgb);
+						break;
+					case "combine_hsv":
+						var combine_hsv = new CombineHsvNode();
+						get_float(combine_hsv.ins.H, node.GetAttribute("H"));
+						get_float(combine_hsv.ins.S, node.GetAttribute("S"));
+						get_float(combine_hsv.ins.V, node.GetAttribute("V"));
+						nodes.Add(nodename, combine_hsv);
+						shader.AddNode(combine_hsv);
+						break;
+					case "separate_hsv":
+						var separate_hsv = new SeparateHsvNode();
+						get_float4(separate_hsv.ins.Color, node.GetAttribute("color"));
+						nodes.Add(nodename, separate_hsv);
+						shader.AddNode(separate_hsv);
+						break;
+					case "combine_xyz":
+						var combine_xyz = new CombineXyzNode();
+						get_float(combine_xyz.ins.X, node.GetAttribute("X"));
+						get_float(combine_xyz.ins.Y, node.GetAttribute("Y"));
+						get_float(combine_xyz.ins.Z, node.GetAttribute("Z"));
+						nodes.Add(nodename, combine_xyz);
+						shader.AddNode(combine_xyz);
+						break;
+					case "separate_xyz":
+						var separate_xyz = new SeparateXyzNode();
+						get_float4(separate_xyz.ins.Vector, node.GetAttribute("vector"));
+						nodes.Add(nodename, separate_xyz);
+						shader.AddNode(separate_xyz);
 						break;
 					case "mixrgb":
 						var mixrgb = new MixNode();
@@ -394,6 +440,11 @@ namespace ccl
 						var add = new AddClosureNode();
 						nodes.Add(nodename, add);
 						shader.AddNode(add);
+						break;
+					case "holdout":
+						var holdout = new HoldoutNode();
+						nodes.Add(nodename, holdout);
+						shader.AddNode(holdout);
 						break;
 					case "connect":
 						var fromstring = node.GetAttribute("from");

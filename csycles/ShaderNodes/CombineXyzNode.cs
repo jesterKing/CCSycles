@@ -37,12 +37,12 @@ namespace ccl.ShaderNodes
 
 	public class CombineXyzOutputs : Outputs
 	{
-		public Float4Socket VectorOutput { get; set; }
+		public Float4Socket Vector { get; set; }
 
 		public CombineXyzOutputs(ShaderNode parentNode)
 		{
-			VectorOutput = new Float4Socket(parentNode, "VectorOutput");
-			AddSocket(VectorOutput);
+			Vector = new Float4Socket(parentNode, "Vector");
+			AddSocket(Vector);
 		}
 	}
 
