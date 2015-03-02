@@ -44,6 +44,8 @@ EXPORTS
   cycles_mesh_set_uvs
   cycles_mesh_set_vertex_normals
   cycles_mesh_set_smooth
+  cycles_mesh_clear
+  cycles_mesh_tag_rebuild
 
   cycles_scene_object_set_matrix
   cycles_scene_object_set_mesh

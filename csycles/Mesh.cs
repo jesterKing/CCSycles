@@ -44,6 +44,22 @@ namespace ccl
 		}
 
 		/// <summary>
+		/// Clears out any pushed data
+		/// </summary>
+		public void ClearData()
+		{
+			CSycles.mesh_clear(Client.Id, Client.Scene.Id, Id);
+		}
+
+		/// <summary>
+		/// Tag for update and rebuild
+		/// </summary>
+		public void TagRebuild()
+		{
+			CSycles.mesh_tag_rebuild(Client.Id, Client.Scene.Id, Id);
+		}
+
+		/// <summary>
 		/// Set vertex coordinates
 		/// </summary>
 		/// <param name="verts"></param>

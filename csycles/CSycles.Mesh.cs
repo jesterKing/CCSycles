@@ -74,6 +74,22 @@ namespace ccl
 			cycles_mesh_set_smooth(clientId, sceneId, meshId, (uint)(smooth ? 1 : 0));
 		}
 
+		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_mesh_clear", CallingConvention = CallingConvention.Cdecl)]
+		private static extern void cycles_mesh_clear(uint clientId, uint sceneId, uint meshId);
+
+		public static void mesh_clear(uint clientId, uint sceneId, uint meshId)
+		{
+			cycles_mesh_clear(clientId, sceneId, meshId);
+		}
+
+		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_mesh_tag_rebuild", CallingConvention = CallingConvention.Cdecl)]
+		private static extern void cycles_mesh_tag_rebuild(uint clientId, uint sceneId, uint meshId);
+
+		public static void mesh_tag_rebuild(uint clientId, uint sceneId, uint meshId)
+		{
+			cycles_mesh_tag_rebuild(clientId, sceneId, meshId);
+		}
+
 #endregion
 
 	}
