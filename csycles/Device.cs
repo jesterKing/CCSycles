@@ -69,7 +69,7 @@ namespace ccl
 		{
 			get
 			{
-				return Device.GetDevice(0);
+				return GetDevice(0);
 			}
 		}
 
@@ -119,7 +119,7 @@ namespace ccl
 			{
 				for (var i = 0; i < Count; i++)
 				{
-					yield return Device.GetDevice(i);
+					yield return GetDevice(i);
 				}
 			}
 		}
