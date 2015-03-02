@@ -251,6 +251,9 @@ unsigned int cycles_add_shader_node(unsigned int client_id, unsigned int shader_
 		case shadernode_type::RGB_SEPARATE:
 			node = new ccl::SeparateRGBNode();
 			break;
+		case shadernode_type::MAPPING:
+			node = new ccl::MappingNode();
+			break;
 	}
 
 	if (node) {

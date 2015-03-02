@@ -491,6 +491,7 @@ enum class shadernode_type : unsigned int {
 	VORONOI_TEXTURE,
 	HSV_SEPARATE,
 	RGB_SEPARATE,
+	MAPPING,
 };
 
 CCL_CAPI unsigned int __cdecl cycles_create_shader(unsigned int client_id);

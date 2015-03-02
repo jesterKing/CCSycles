@@ -372,6 +372,10 @@ namespace ccl
 						nodes.Add(nodename, math);
 						shader.AddNode(math);
 						break;
+					case "mapping":
+						var mapping = new MappingNode();
+						get_float4(mapping.ins.Vector, node.GetAttribute("vector"));
+						break;
 					case "mixrgb":
 						var mixrgb = new MixNode();
 						get_float4(mixrgb.ins.Color1, node.GetAttribute("color1"));
