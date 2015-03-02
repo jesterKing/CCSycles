@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 **/
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -60,6 +61,15 @@ namespace ccl
 		/// True if this is a CUDA device
 		/// </summary>
 		public bool IsCuda { get { return Type == DeviceType.CUDA;  } }
+
+		/// <summary>
+		/// String representation of this device
+		/// </summary>
+		/// <returns>String representation of this device</returns>
+		public override string ToString()
+		{
+			return String.Format("{0} : {1} ({8}), Id {2} Num {3} Name {4} DisplayDevice {5} AdvancedShading {6} PackImages {7}", base.ToString(), Description, Id, Num, Name, DisplayDevice, AdvancedShading, PackImages, Type);
+		}
 
 		/// <summary>
 		/// Get the default device (CPU)
