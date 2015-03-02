@@ -304,6 +304,12 @@ namespace ccl
 						nodes.Add(nodename, emisbsdf);
 						shader.AddNode(emisbsdf);
 						break;
+					case "velvet_bsdf":
+						var velvetbsdf = new VelvetBsdfNode();
+						get_float4(velvetbsdf.ins.Color, node.GetAttribute("color"));
+						get_float(velvetbsdf.ins.Sigma, node.GetAttribute("sigma"));
+						get_float4(velvetbsdf.ins.Normal, node.GetAttribute("normal"));
+						break;
 					case "glass_bsdf":
 						var glassbsdf = new GlassBsdfNode();
 						get_float4(glassbsdf.ins.Color, node.GetAttribute("color"));

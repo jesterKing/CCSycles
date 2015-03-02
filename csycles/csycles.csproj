@@ -68,6 +68,7 @@
     <Compile Include="Object.cs" />
     <Compile Include="ShaderNodes\CombineRgbNode.cs" />
     <Compile Include="ShaderNodes\CombineXyzNode.cs" />
+    <Compile Include="ShaderNodes\VelvetBsdfNode.cs" />
     <Compile Include="ShaderNodes\MappingNode.cs" />
     <Compile Include="ShaderNodes\SeparateRgbNode.cs" />
     <Compile Include="ShaderNodes\SeparateHsvNode.cs" />
