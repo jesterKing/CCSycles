@@ -495,6 +495,8 @@ enum class shadernode_type : unsigned int {
 	RGB_COMBINE,
 	MAPPING,
 	HOLDOUT,
+	HUE_SAT,
+	BRIGHT_CONTRAST,
 };
 
 CCL_CAPI unsigned int __cdecl cycles_create_shader(unsigned int client_id);

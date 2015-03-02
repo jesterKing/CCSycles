@@ -263,6 +263,9 @@ unsigned int cycles_add_shader_node(unsigned int client_id, unsigned int shader_
 		case shadernode_type::HOLDOUT:
 			node = new ccl::HoldoutNode();
 			break;
+		case shadernode_type::HUE_SAT:
+			node = new ccl::HSVNode();
+			break;
 	}
 
 	if (node) {

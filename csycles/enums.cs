@@ -99,7 +99,9 @@ namespace ccl
 		CombineHsv,
 		CombineRgb,
 		Mapping,
-		Holdout
+		Holdout,
+		HueSaturation,
+		BrightnessContrast
 	}
 
 	public enum BvhType : uint

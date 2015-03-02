@@ -446,6 +446,31 @@ namespace ccl
 						nodes.Add(nodename, holdout);
 						shader.AddNode(holdout);
 						break;
+					case "hue_saturation":
+						var huesat = new HueSaturationNode();
+						get_float(huesat.ins.Hue, node.GetAttribute("hue"));
+						get_float(huesat.ins.Saturation, node.GetAttribute("saturation"));
+						get_float(huesat.ins.Value, node.GetAttribute("value"));
+						get_float(huesat.ins.Fac, node.GetAttribute("fac"));
+						get_float4(huesat.ins.Color, node.GetAttribute("color"));
+						nodes.Add(nodename, huesat);
+						shader.AddNode(huesat);
+						break;
+					case "brightness":
+						var brightness = new BrightnessContrastNode();
+						get_float4(brightness.ins.Color, node.GetAttribute("color"));
+						get_float(brightness.ins.Bright, node.GetAttribute("bright"));
+						get_float(brightness.ins.Contrast, node.GetAttribute("contrast"));
+						nodes.Add(nodename, brightness);
+						shader.AddNode(brightness);
+						break;
+					case "light_falloff":
+						var light_falloff = new LightFalloffNode();
+						get_float(light_falloff.ins.Smooth, node.GetAttribute("smooth"));
+						get_float(light_falloff.ins.Strength, node.GetAttribute("strength"));
+						nodes.Add(nodename, light_falloff);
+						shader.AddNode(light_falloff);
+						break;
 					case "connect":
 						var fromstring = node.GetAttribute("from");
 						var tostring = node.GetAttribute("to");
