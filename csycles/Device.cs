@@ -132,11 +132,10 @@ namespace ccl
 		{
 			get
 			{
-				foreach (var dev in Devices.Where(dev => dev.IsCuda))
-				{
-					return dev;
-				}
-				return Default;
+				var d = (from device in Devices
+					where device.IsCuda || (device.Type == DeviceType.Multi && device.Description.Contains("CUDA"))
+					select device).FirstOrDefault();
+				return d ?? Default;
 			}
 		}
 
