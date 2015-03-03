@@ -63,6 +63,11 @@ namespace ccl
 		public bool IsCuda { get { return Type == DeviceType.CUDA;  } }
 
 		/// <summary>
+		/// True if this is a Multi CUDA device
+		/// </summary>
+		public bool IsMultiCuda { get { return Type == DeviceType.Multi && Name.Contains("CUDA"); } }
+
+		/// <summary>
 		/// String representation of this device
 		/// </summary>
 		/// <returns>String representation of this device</returns>
@@ -143,7 +148,7 @@ namespace ccl
 			get
 			{
 				var d = (from device in Devices
-					where device.IsCuda || (device.Type == DeviceType.Multi && device.Description.Contains("CUDA"))
+					where device.IsCuda || device.IsMultiCuda
 					select device).FirstOrDefault();
 				return d ?? Default;
 			}
