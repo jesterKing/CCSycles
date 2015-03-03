@@ -304,6 +304,14 @@ namespace ccl
 						nodes.Add(nodename, emisbsdf);
 						shader.AddNode(emisbsdf);
 						break;
+					case "velvet_bsdf":
+						var velvetbsdf = new VelvetBsdfNode();
+						get_float4(velvetbsdf.ins.Color, node.GetAttribute("color"));
+						get_float(velvetbsdf.ins.Sigma, node.GetAttribute("sigma"));
+						get_float4(velvetbsdf.ins.Normal, node.GetAttribute("normal"));
+						nodes.Add(nodename, velvetbsdf);
+						shader.AddNode(velvetbsdf);
+						break;
 					case "glass_bsdf":
 						var glassbsdf = new GlassBsdfNode();
 						get_float4(glassbsdf.ins.Color, node.GetAttribute("color"));
@@ -366,6 +374,54 @@ namespace ccl
 						nodes.Add(nodename, math);
 						shader.AddNode(math);
 						break;
+					case "mapping":
+						var mapping = new MappingNode();
+						get_float4(mapping.ins.Vector, node.GetAttribute("vector"));
+						nodes.Add(nodename, mapping);
+						shader.AddNode(mapping);
+						break;
+					case "combine_rgb":
+						var combine_rgb = new CombineRgbNode();
+						get_float(combine_rgb.ins.R, node.GetAttribute("R"));
+						get_float(combine_rgb.ins.G, node.GetAttribute("G"));
+						get_float(combine_rgb.ins.B, node.GetAttribute("B"));
+						nodes.Add(nodename, combine_rgb);
+						shader.AddNode(combine_rgb);
+						break;
+					case "separate_rgb":
+						var separate_rgb = new SeparateRgbNode();
+						get_float4(separate_rgb.ins.Color, node.GetAttribute("color"));
+						nodes.Add(nodename, separate_rgb);
+						shader.AddNode(separate_rgb);
+						break;
+					case "combine_hsv":
+						var combine_hsv = new CombineHsvNode();
+						get_float(combine_hsv.ins.H, node.GetAttribute("H"));
+						get_float(combine_hsv.ins.S, node.GetAttribute("S"));
+						get_float(combine_hsv.ins.V, node.GetAttribute("V"));
+						nodes.Add(nodename, combine_hsv);
+						shader.AddNode(combine_hsv);
+						break;
+					case "separate_hsv":
+						var separate_hsv = new SeparateHsvNode();
+						get_float4(separate_hsv.ins.Color, node.GetAttribute("color"));
+						nodes.Add(nodename, separate_hsv);
+						shader.AddNode(separate_hsv);
+						break;
+					case "combine_xyz":
+						var combine_xyz = new CombineXyzNode();
+						get_float(combine_xyz.ins.X, node.GetAttribute("X"));
+						get_float(combine_xyz.ins.Y, node.GetAttribute("Y"));
+						get_float(combine_xyz.ins.Z, node.GetAttribute("Z"));
+						nodes.Add(nodename, combine_xyz);
+						shader.AddNode(combine_xyz);
+						break;
+					case "separate_xyz":
+						var separate_xyz = new SeparateXyzNode();
+						get_float4(separate_xyz.ins.Vector, node.GetAttribute("vector"));
+						nodes.Add(nodename, separate_xyz);
+						shader.AddNode(separate_xyz);
+						break;
 					case "mixrgb":
 						var mixrgb = new MixNode();
 						get_float4(mixrgb.ins.Color1, node.GetAttribute("color1"));
@@ -384,6 +440,36 @@ namespace ccl
 						var add = new AddClosureNode();
 						nodes.Add(nodename, add);
 						shader.AddNode(add);
+						break;
+					case "holdout":
+						var holdout = new HoldoutNode();
+						nodes.Add(nodename, holdout);
+						shader.AddNode(holdout);
+						break;
+					case "hue_saturation":
+						var huesat = new HueSaturationNode();
+						get_float(huesat.ins.Hue, node.GetAttribute("hue"));
+						get_float(huesat.ins.Saturation, node.GetAttribute("saturation"));
+						get_float(huesat.ins.Value, node.GetAttribute("value"));
+						get_float(huesat.ins.Fac, node.GetAttribute("fac"));
+						get_float4(huesat.ins.Color, node.GetAttribute("color"));
+						nodes.Add(nodename, huesat);
+						shader.AddNode(huesat);
+						break;
+					case "brightness":
+						var brightness = new BrightnessContrastNode();
+						get_float4(brightness.ins.Color, node.GetAttribute("color"));
+						get_float(brightness.ins.Bright, node.GetAttribute("bright"));
+						get_float(brightness.ins.Contrast, node.GetAttribute("contrast"));
+						nodes.Add(nodename, brightness);
+						shader.AddNode(brightness);
+						break;
+					case "light_falloff":
+						var light_falloff = new LightFalloffNode();
+						get_float(light_falloff.ins.Smooth, node.GetAttribute("smooth"));
+						get_float(light_falloff.ins.Strength, node.GetAttribute("strength"));
+						nodes.Add(nodename, light_falloff);
+						shader.AddNode(light_falloff);
 						break;
 					case "connect":
 						var fromstring = node.GetAttribute("from");

@@ -20,12 +20,12 @@ namespace ccl.ShaderNodes
 {
 	public class SeparateXyzInputs : Inputs
 	{
-		public Float4Socket VectorInput { get; set; }
+		public Float4Socket Vector { get; set; }
 
 		public SeparateXyzInputs(ShaderNode parentNode)
 		{
-			VectorInput = new Float4Socket(parentNode, "VectorInput");
-			AddSocket(VectorInput);
+			Vector = new Float4Socket(parentNode, "Vector");
+			AddSocket(Vector);
 		}
 	}
 
@@ -60,7 +60,7 @@ namespace ccl.ShaderNodes
 			inputs = new MappingInputs(this);
 			outputs = new MappingOutputs(this);
 
-			ins.VectorInput.Value = new float4(0.0f);
+			ins.Vector.Value = new float4(0.0f);
 		}
 	}
 }

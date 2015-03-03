@@ -194,12 +194,6 @@ unsigned int cycles_add_shader_node(unsigned int client_id, unsigned int shader_
 		case shadernode_type::FRESNEL:
 			node = new ccl::FresnelNode();
 			break;
-		case shadernode_type::COMBINE_XYZ:
-			node = new ccl::CombineXYZNode();
-			break;
-		case shadernode_type::SEPARATE_XYZ:
-			node = new ccl::SeparateXYZNode();
-			break;
 		case shadernode_type::MATH:
 			node = new ccl::MathNode();
 			break;
@@ -245,11 +239,32 @@ unsigned int cycles_add_shader_node(unsigned int client_id, unsigned int shader_
 		case shadernode_type::LAYERWEIGHT:
 			node = new ccl::LayerWeightNode();
 			break;
+		case shadernode_type::COMBINE_XYZ:
+			node = new ccl::CombineXYZNode();
+			break;
+		case shadernode_type::SEPARATE_XYZ:
+			node = new ccl::SeparateXYZNode();
+			break;
 		case shadernode_type::HSV_SEPARATE:
 			node = new ccl::SeparateHSVNode();
 			break;
+		case shadernode_type::HSV_COMBINE:
+			node = new ccl::CombineHSVNode();
+			break;
 		case shadernode_type::RGB_SEPARATE:
 			node = new ccl::SeparateRGBNode();
+			break;
+		case shadernode_type::RGB_COMBINE:
+			node = new ccl::CombineRGBNode();
+			break;
+		case shadernode_type::MAPPING:
+			node = new ccl::MappingNode();
+			break;
+		case shadernode_type::HOLDOUT:
+			node = new ccl::HoldoutNode();
+			break;
+		case shadernode_type::HUE_SAT:
+			node = new ccl::HSVNode();
 			break;
 	}
 
