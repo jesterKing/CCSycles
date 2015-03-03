@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ccl;
 
 namespace ccsycles_diag
 {
 	class Program
 	{
-		static void Main(string[] args)
+		static void Main()
 		{
 			CSycles.set_kernel_path("lib");
 			CSycles.initialise();
