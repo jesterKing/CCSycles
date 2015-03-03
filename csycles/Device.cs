@@ -73,7 +73,7 @@ namespace ccl
 		/// <returns>String representation of this device</returns>
 		public override string ToString()
 		{
-			return String.Format("{0} : {1} ({8}), Id {2} Num {3} Name {4} DisplayDevice {5} AdvancedShading {6} PackImages {7}", base.ToString(), Description, Id, Num, Name, DisplayDevice, AdvancedShading, PackImages, Type);
+			return String.Format("{0}: {1} ({2}), Id {3} Num {4} Name {5} DisplayDevice {6} AdvancedShading {7} PackImages {8}", base.ToString(), Description, Type, Id, Num, Name, DisplayDevice, AdvancedShading, PackImages);
 		}
 
 		/// <summary>
