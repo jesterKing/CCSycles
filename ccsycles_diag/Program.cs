@@ -18,7 +18,7 @@ namespace ccsycles_diag
 
 			foreach (var dev in devices)
 			{
-				Console.WriteLine("Name: {0}. Id: {1}. Num: {2}. Description: {3}. DisplayDevice: {4}. Advanced Shading {5}", dev.Name, dev.Id, dev.Num, dev.Description, dev.DisplayDevice, dev.AdvancedShading);
+				Console.WriteLine(dev);
 			}
 			
 			Console.WriteLine("FirstCuda gives us: {0}", Device.FirstCuda);
