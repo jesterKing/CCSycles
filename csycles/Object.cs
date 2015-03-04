@@ -35,10 +35,18 @@ namespace ccl
 			Id = CSycles.scene_add_object(Client.Id, Client.Scene.Id);
 		}
 
+		private Mesh m_mesh;
 		public Mesh Mesh
 		{
+			get
+			{
+				if (m_mesh != null) return m_mesh;
+				var mid = CSycles.object_get_mesh(Client.Id, Client.Scene.Id, Id);
+				return new Mesh(Client, mid, null);
+			}
 			set
 			{
+				m_mesh = value;
 				CSycles.object_set_mesh(Client.Id, Client.Scene.Id, Id, value.Id);
 			}
 		}
