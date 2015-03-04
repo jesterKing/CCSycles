@@ -103,11 +103,11 @@ namespace ccl
 		}
 
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_scene_set_background_visibility", CallingConvention = CallingConvention.Cdecl)]
-		private static extern void cycles_scene_set_background_visibility(uint clientId, uint sceneId, int raypathFlag);
+		private static extern void cycles_scene_set_background_visibility(uint clientId, uint sceneId, uint raypathFlag);
 
 		public static void scene_set_background_visibility(uint clientId, uint sceneId, PathRay raypathFlag)
 		{
-			cycles_scene_set_background_visibility(clientId, sceneId, (int)raypathFlag);
+			cycles_scene_set_background_visibility(clientId, sceneId, (uint)raypathFlag);
 		}
 #endregion
 

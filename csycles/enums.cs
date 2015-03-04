@@ -152,8 +152,9 @@ namespace ccl
 	};
 
 	[FlagsAttribute]
-	public enum PathRay : int
+	public enum PathRay : uint
 	{
+		Hidden = 0,
 		Camera = 1,
 		Reflect = 2,
 		Transmit = 4,

@@ -60,7 +60,7 @@ void cycles_scene_set_background_ao_distance(unsigned int client_id, unsigned in
 	SCENE_FIND_END()
 }
 
-void cycles_scene_set_background_visibility(unsigned int client_id, unsigned int scene_id, int path_ray_flag)
+void cycles_scene_set_background_visibility(unsigned int client_id, unsigned int scene_id, unsigned int path_ray_flag)
 {
 	SCENE_FIND(scene_id)
 		sce->background->visibility = (ccl::PathRayFlag)path_ray_flag;
