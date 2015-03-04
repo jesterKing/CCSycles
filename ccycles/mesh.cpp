@@ -63,7 +63,6 @@ void cycles_mesh_set_shader(unsigned int client_id, unsigned int scene_id, unsig
 
 		auto it = me->used_shaders.begin();
 		auto end = me->used_shaders.end();
-		auto found = false;
 
 		while (it != end) {
 			if (*it == shader_id) break;
