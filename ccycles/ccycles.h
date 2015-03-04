@@ -237,6 +237,16 @@ CCL_CAPI void __cdecl cycles_scene_object_set_matrix(unsigned int client_id, uns
  * \ingroup ccycles_object
  */
 CCL_CAPI void __cdecl cycles_scene_object_set_mesh(unsigned int client_id, unsigned int scene_id, unsigned int object_id, unsigned int mesh_id);
+/**
+ * Get mesh id for object
+ * \ingroup ccycles_object
+ */
+CCL_CAPI unsigned int __cdecl cycles_scene_object_get_mesh(unsigned int client_id, unsigned int scene_id, unsigned int object_id);
+/**
+ * Set visibility flag for object
+ * \ingroup ccycles_object
+ */
+CCL_CAPI void __cdecl cycles_scene_object_set_visibility(unsigned int client, unsigned int scene_id, unsigned int object_id, unsigned int visibility);
 
 /** Tag integrator for update. */
 CCL_CAPI void __cdecl cycles_integrator_tag_update(unsigned int client_id, unsigned int scene_id);

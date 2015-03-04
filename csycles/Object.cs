@@ -14,12 +14,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 **/
 
-using System.Dynamic;
-
 namespace ccl
 {
 	public class Object
 	{
+
 		public uint Id { get; private set; }
 		private Client Client { get; set; }
 
@@ -56,6 +55,14 @@ namespace ccl
 			set
 			{
 				CSycles.object_set_matrix(Client.Id, Client.Scene.Id, Id, value);
+			}
+		}
+
+		public PathRay Visibility
+		{
+			set
+			{
+				CSycles.object_set_visibility(Client.Id, Client.Scene.Id, Id, value);
 			}
 		}
 	}

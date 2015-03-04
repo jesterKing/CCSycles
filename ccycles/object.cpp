@@ -28,6 +28,8 @@ unsigned int cycles_scene_add_object(unsigned int client_id, unsigned int scene_
 
 		logger.logit(client_id, "Added object ", sce->objects.size() - 1, " to scene ", scene_id);
 
+		ob->tag_update(sce);
+
 		return (unsigned int)(sce->objects.size() - 1);
 	SCENE_FIND_END()
 
@@ -40,6 +42,33 @@ void cycles_scene_object_set_mesh(unsigned int client_id, unsigned int scene_id,
 		auto ob = sce->objects[object_id];
 		auto me = sce->meshes[mesh_id];
 		ob->mesh = me;
+		ob->tag_update(sce);
+	SCENE_FIND_END()
+}
+
+unsigned int cycles_scene_object_get_mesh(unsigned int client_id, unsigned int scene_id, unsigned int object_id)
+{
+	SCENE_FIND(scene_id)
+		auto ob = sce->objects[object_id];
+		auto cmeshit = sce->meshes.begin();
+		auto cmeshend = sce->meshes.end();
+		unsigned int i = 0;
+		while (cmeshit != cmeshend) {
+			if ((*cmeshit) == ob->mesh) {
+				return i;
+			}
+			++i;
+		}
+	SCENE_FIND_END()
+	return UINT_MAX;
+}
+
+void cycles_scene_object_set_visibility(unsigned int client, unsigned int scene_id, unsigned int object_id, unsigned int visibility)
+{
+	SCENE_FIND(scene_id)
+		auto ob = sce->objects[object_id];
+		ob->visibility = visibility;
+		ob->tag_update(sce);
 	SCENE_FIND_END()
 }
 
@@ -54,5 +83,6 @@ void cycles_scene_object_set_matrix(unsigned int client_id, unsigned int scene_i
 		auto ob = sce->objects[object_id];
 		auto mat = ccl::make_transform(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p);
 		ob->tfm = mat;
+		ob->tag_update(sce);
 	SCENE_FIND_END()
 }
