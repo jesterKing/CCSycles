@@ -42,7 +42,9 @@ namespace ccl.ShaderNodes
 		public LightFalloffInputs(ShaderNode parentNode)
 		{
 			Strength = new FloatSocket(parentNode, "Strength");
+			AddSocket(Strength);
 			Smooth = new FloatSocket(parentNode, "Smooth");
+			AddSocket(Smooth);
 		}
 	}
 
