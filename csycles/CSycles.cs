@@ -114,6 +114,11 @@ namespace ccl
 			cycles_set_logger(clientId, intptr_delegate);
 		}
 
+		public static void remove_logger(uint clientId)
+		{
+			cycles_set_logger(clientId, IntPtr.Zero);
+		}
+
 		[DllImport("ccycles.dll", SetLastError = false, CallingConvention = CallingConvention.Cdecl,
 			EntryPoint = "cycles_log_to_stdout")]
 		private static extern void cycles_log_to_stdout(int stdout);
