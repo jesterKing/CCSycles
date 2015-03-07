@@ -135,6 +135,9 @@ public:
 	 * This wraps _status_cb.
 	 */
 	void status_update(void);
+	/* The test cancel handler for ccl::Session cancellation test
+	 */
+	void test_cancel(void);
 	/* The update render tile handler for ccl::Session rendertile update callback.
 	 * This wraps _update_cb.
 	 */

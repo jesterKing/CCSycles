@@ -131,6 +131,7 @@ EXPORTS
   cycles_session_destroy
   cycles_session_reset
   cycles_session_set_update_callback
+  cycles_session_set_cancel_callback
   cycles_session_set_update_tile_callback
   cycles_session_set_write_tile_callback
   cycles_session_cancel
