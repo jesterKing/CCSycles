@@ -92,6 +92,13 @@ typedef void(__cdecl *LOGGER_FUNC_CB)(const char* msg);
 typedef void(__cdecl *STATUS_UPDATE_CB)(unsigned int session_id);
 
 /**
+ * Test cancel function signature. Used to test for cancel condition
+ * test callback function with CCycles using cycles_session_set_cancel_callback
+ * \ingroup ccycles ccycles_session
+ */
+typedef void(__cdecl *TEST_CANCEL_CB)(unsigned int session_id);
+
+/**
  * Status update function signature. Used to register a status
  * update callback function with CCycles using cycles_session_set_update_callback
  * \ingroup ccycles ccycles_session
@@ -382,6 +389,8 @@ CCL_CAPI void __cdecl cycles_session_reset(unsigned int client_id, unsigned int 
 
 /** Set the status update callback for session. */
 CCL_CAPI void __cdecl cycles_session_set_update_callback(unsigned int client_id, unsigned int session_id, void(*update)(unsigned int));
+/** Set the test cancel callback for session. */
+CCL_CAPI void __cdecl cycles_session_set_cancel_callback(unsigned int client_id, unsigned int session_id, void(*cancel)(unsigned int));
 /** Set the render tile update callback for session. */
 CCL_CAPI void __cdecl cycles_session_set_update_tile_callback(unsigned int client_id, unsigned int session_id, RENDER_TILE_CB update_tile_cb);
 /** Set the render tile write callback for session. */

@@ -64,6 +64,15 @@ namespace ccl
 		}
 
 		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+		public delegate void TestCancelCallback(uint sid);
+		[DllImport("ccycles.dll", SetLastError = false, CallingConvention = CallingConvention.Cdecl, EntryPoint = "cycles_session_set_cancel_callback")]
+		private static extern void cycles_session_set_cancel_callback(uint clientId, uint sessionId, TestCancelCallback cancel);
+		public static void session_set_cancel_callback(uint clientId, uint sessionId, TestCancelCallback cancel)
+		{
+			cycles_session_set_cancel_callback(clientId, sessionId, cancel);
+		}
+
+		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 		public delegate void RenderTileCallback(uint sessionId, uint x, uint y, uint w, uint h, uint depth);
 		[DllImport("ccycles.dll", SetLastError = false, CallingConvention = CallingConvention.Cdecl, EntryPoint = "cycles_session_set_update_tile_callback")]
 		private static extern void cycles_session_set_update_tile_callback(uint clientId, uint sessionId, RenderTileCallback renderTileCb);

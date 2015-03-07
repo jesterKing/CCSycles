@@ -74,6 +74,21 @@ namespace ccl
 			}
 		}
 
+		CSycles.TestCancelCallback testCancelCallback;
+
+		/// <summary>
+		/// Set the CSycles.TestCancelCallback to Cycles to test for session cancel
+		/// </summary>
+		public CSycles.TestCancelCallback TestCancelCallback
+		{
+			set
+			{
+				if (Destroyed) return;
+				testCancelCallback = value;
+				CSycles.session_set_cancel_callback(Client.Id, Id, value);
+			}
+		}
+
 		CSycles.RenderTileCallback updateTileCallback;
 
 		/// <summary>

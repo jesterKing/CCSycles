@@ -23,12 +23,13 @@ extern std::vector<ccl::SessionParams> session_params;
 /* Hold all created sessions. */
 std::vector<CCSession*> sessions;
 
-/* Three vectors to hold registered callback functions.
+/* Four vectors to hold registered callback functions.
  * For each created session a corresponding idx into these
  * vectors will exist, but in the case no callback
  * was registered the value for idx will be nullptr.
  */
 std::vector<STATUS_UPDATE_CB> status_cbs;
+std::vector<TEST_CANCEL_CB> cancel_cbs;
 std::vector<RENDER_TILE_CB> update_cbs;
 std::vector<RENDER_TILE_CB> write_cbs;
 
@@ -36,6 +37,13 @@ std::vector<RENDER_TILE_CB> write_cbs;
 void CCSession::status_update(void) {
 	if (status_cbs[this->id] != nullptr) {
 		status_cbs[this->id](this->id);
+	}
+}
+
+/* Wrap status update callback. */
+void CCSession::test_cancel(void) {
+	if (cancel_cbs[this->id] != nullptr) {
+		cancel_cbs[this->id](this->id);
 	}
 }
 
@@ -135,6 +143,7 @@ void _cleanup_sessions()
 	session_params.clear();
 
 	status_cbs.clear();
+	cancel_cbs.clear();
 	update_cbs.clear();
 	write_cbs.clear();
 }
@@ -173,6 +182,7 @@ unsigned int cycles_session_create(unsigned int client_id, unsigned int session_
 		sessions.push_back(session);
 		csesid = (unsigned int)(sessions.size() - 1);
 		status_cbs.push_back(nullptr);
+		cancel_cbs.push_back(nullptr);
 		update_cbs.push_back(nullptr);
 		write_cbs.push_back(nullptr);
 	}
@@ -230,6 +240,16 @@ void cycles_session_set_update_callback(unsigned int client_id, unsigned int ses
 		status_cbs[session_id] = update;
 		session->progress.set_update_callback(function_bind<void>(&CCSession::status_update, se));
 		logger.logit(client_id, "Set status update callback for session ", session_id);
+	SESSION_FIND_END()
+}
+
+void cycles_session_set_cancel_callback(unsigned int client_id, unsigned int session_id, void(*cancel)(unsigned int sid))
+{
+	SESSION_FIND(session_id)
+		auto se = sessions[session_id];
+		cancel_cbs[session_id] = cancel;
+		session->progress.set_cancel_callback(function_bind<void>(&CCSession::test_cancel, se));
+		logger.logit(client_id, "Set status cancel callback for session ", session_id);
 	SESSION_FIND_END()
 }
 
