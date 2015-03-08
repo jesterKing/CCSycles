@@ -101,5 +101,21 @@ namespace ccl.ShaderNodes
 		{
 			CSycles.shadernode_set_enum(clientId, shaderId, Id, Type, vector_type.ToString());
 		}
+
+		internal override void SetDirectMembers(uint clientId, uint shaderId)
+		{
+			CSycles.shadernode_set_member_bool(clientId, shaderId, Id, Type, "use_min", UseMin);
+			CSycles.shadernode_set_member_bool(clientId, shaderId, Id, Type, "use_max", UseMax);
+			var tr = Translation;
+			CSycles.shadernode_set_member_vec(clientId, shaderId, Id, Type, "translation", tr.x, tr.y, tr.z);
+			var rt = Rotation;
+			CSycles.shadernode_set_member_vec(clientId, shaderId, Id, Type, "rotation", rt.x, rt.y, rt.z);
+			var sc = Scale;
+			CSycles.shadernode_set_member_vec(clientId, shaderId, Id, Type, "scale", sc.x, sc.y, sc.z);
+			var mi = Min;
+			CSycles.shadernode_set_member_vec(clientId, shaderId, Id, Type, "min", mi.x, mi.y, mi.z);
+			var ma = Max;
+			CSycles.shadernode_set_member_vec(clientId, shaderId, Id, Type, "max", ma.x, ma.y, ma.z);
+		}
 	}
 }

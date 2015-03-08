@@ -48,7 +48,24 @@ namespace ccl.ShaderNodes
 			Type = type;
 		}
 
+		/// <summary>
+		/// A node deriving from ShaderNode should override this if
+		/// it has enumerations that need to be committed to Cycles
+		/// </summary>
+		/// <param name="clientId"></param>
+		/// <param name="shaderId"></param>
 		virtual internal void SetEnums(uint clientId, uint shaderId)
+		{
+			// do nothing
+		}
+
+		/// <summary>
+		/// A node deriving from ShaderNode should override this if
+		/// it has direct members that need to be committed to Cycles
+		/// </summary>
+		/// <param name="clientId"></param>
+		/// <param name="shaderId"></param>
+		virtual internal void SetDirectMembers(uint clientId, uint shaderId)
 		{
 			// do nothing
 		}

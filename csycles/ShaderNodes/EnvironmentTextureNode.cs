@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 **/
 
+using System;
 using ccl.ShaderNodes.Sockets;
 
 namespace ccl.ShaderNodes
@@ -80,6 +81,20 @@ namespace ccl.ShaderNodes
 			var colspace = ColorSpace == TextureNode.TextureColorSpace.Color ? "Color" : "None";
 			CSycles.shadernode_set_enum(clientId, shaderId, Id, Type, projection);
 			CSycles.shadernode_set_enum(clientId, shaderId, Id, Type, colspace);
+		}
+
+		internal override void SetDirectMembers(uint clientId, uint shaderId)
+		{
+			if (FloatImage != null)
+			{
+				var flimg = FloatImage;
+				CSycles.shadernode_set_member_float_img(clientId, shaderId, Id, Type, "builtin-data", Filename ?? String.Format("{0}-{0}-{0}", clientId, shaderId, Id), ref flimg, Width, Height, 1, 4);
+			}
+			else if (ByteImage != null)
+			{
+				var bimg = ByteImage;
+				CSycles.shadernode_set_member_byte_img(clientId, shaderId, Id, Type, "builtin-data", Filename ?? String.Format("{0}-{0}-{0}", clientId, shaderId, Id), ref bimg, Width, Height, 1, 4);
+			}
 		}
 	}
 }

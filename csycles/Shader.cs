@@ -205,75 +205,11 @@ namespace ccl
 				}
 			}
 
+			/* set enumerations */
 			node.SetEnums(Client.Id, Id);
 
 			/* set direct member variables */
-			switch (node.Type)
-			{
-				case ShaderNodeType.Math:
-					CSycles.shadernode_set_member_bool(Client.Id, Id, node.Id, node.Type, "use_clamp", ((MathNode)node).UseClamp);
-					break;
-				case ShaderNodeType.Mapping:
-					CSycles.shadernode_set_member_bool(Client.Id, Id, node.Id, node.Type, "use_min", ((MappingNode)node).UseMin);
-					CSycles.shadernode_set_member_bool(Client.Id, Id, node.Id, node.Type, "use_max", ((MappingNode)node).UseMax);
-					var tr = ((MappingNode) node).Translation;
-					CSycles.shadernode_set_member_vec(Client.Id, Id, node.Id, node.Type, "translation", tr.x, tr.y, tr.z);
-					var rt = ((MappingNode) node).Rotation;
-					CSycles.shadernode_set_member_vec(Client.Id, Id, node.Id, node.Type, "rotation", rt.x, rt.y, rt.z);
-					var sc = ((MappingNode) node).Scale;
-					CSycles.shadernode_set_member_vec(Client.Id, Id, node.Id, node.Type, "scale", sc.x, sc.y, sc.z);
-					var mi = ((MappingNode) node).Min;
-					CSycles.shadernode_set_member_vec(Client.Id, Id, node.Id, node.Type, "min", mi.x, mi.y, mi.z);
-					var ma = ((MappingNode) node).Max;
-					CSycles.shadernode_set_member_vec(Client.Id, Id, node.Id, node.Type, "max", ma.x, ma.y, ma.z);
-					break;
-				case ShaderNodeType.Value:
-					CSycles.shadernode_set_member_float(Client.Id, Id, node.Id, node.Type, "value", ((ValueNode)node).Value);
-					break;
-				case ShaderNodeType.Color:
-					var val = ((ColorNode) node).Value;
-					CSycles.shadernode_set_member_vec(Client.Id, Id, node.Id, node.Type, "value", val.x, val.y, val.z);
-					break;
-				case ShaderNodeType.ImageTexture:
-					var imgtexnode = (ImageTextureNode) node;
-					CSycles.shadernode_set_member_float(Client.Id, Id, node.Id, node.Type, "projection_blend", imgtexnode.ProjectionBlend);
-					if (imgtexnode.FloatImage != null)
-					{
-						var flimg = imgtexnode.FloatImage;
-						CSycles.shadernode_set_member_float_img(Client.Id, Id, node.Id, node.Type, "builtin-data", imgtexnode.Filename ?? String.Format("{0}-{0}-{0}", Client.Id, Id, node.Id), ref flimg, imgtexnode.Width, imgtexnode.Height, 1, 4);
-					}
-					else if (imgtexnode.ByteImage != null)
-					{
-						var bimg = imgtexnode.ByteImage;
-						CSycles.shadernode_set_member_byte_img(Client.Id, Id, node.Id, node.Type, "builtin-data", imgtexnode.Filename ?? String.Format("{0}-{0}-{0}", Client.Id, Id, node.Id), ref bimg, imgtexnode.Width, imgtexnode.Height, 1, 4);
-					}
-					break;
-				case ShaderNodeType.EnvironmentTexture:
-					var envtexnode = (EnvironmentTextureNode) node;
-					if (envtexnode.FloatImage != null)
-					{
-						var flenv = envtexnode.FloatImage;
-						CSycles.shadernode_set_member_float_img(Client.Id, Id, node.Id, node.Type, "builtin-data", envtexnode.Filename ?? String.Format("{0}-{0}-{0}", Client.Id, Id, node.Id), ref flenv, envtexnode.Width, envtexnode.Height, 1, 4);
-					}
-					else if (envtexnode.ByteImage != null)
-					{
-						var benv = envtexnode.ByteImage;
-						CSycles.shadernode_set_member_byte_img(Client.Id, Id, node.Id, node.Type, "builtin-data", envtexnode.Filename ?? String.Format("{0}-{0}-{0}", Client.Id, Id, node.Id), ref benv, envtexnode.Width, envtexnode.Height, 1, 4);
-					}
-					break;
-				case ShaderNodeType.BrickTexture:
-					CSycles.shadernode_set_member_float(Client.Id, Id, node.Id, node.Type, "offset", ((BrickTexture)node).Offset);
-					CSycles.shadernode_set_member_int(Client.Id, Id, node.Id, node.Type, "offset_frequency", ((BrickTexture)node).OffsetFrequency);
-					CSycles.shadernode_set_member_float(Client.Id, Id, node.Id, node.Type, "squash", ((BrickTexture)node).Squash);
-					CSycles.shadernode_set_member_int(Client.Id, Id, node.Id, node.Type, "squash_frequency", ((BrickTexture)node).SquashFrequency);
-					break;
-				case ShaderNodeType.SkyTexture:
-					CSycles.shadernode_set_member_float(Client.Id, Id, node.Id, node.Type, "turbidity", ((SkyTexture)node).Turbidity);
-					CSycles.shadernode_set_member_float(Client.Id, Id, node.Id, node.Type, "ground_albedo", ((SkyTexture)node).GroundAlbedo);
-					var sd = ((SkyTexture) node).SunDirection;
-					CSycles.shadernode_set_member_vec(Client.Id, Id, node.Id, node.Type, "sun_direction", sd.x, sd.y, sd.z);
-					break;
-			}
+			node.SetDirectMembers(Client.Id, Id);
 		}
 
 		/// <summary>
