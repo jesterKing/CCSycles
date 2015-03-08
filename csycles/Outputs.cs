@@ -16,6 +16,9 @@ limitations under the License.
 
 namespace ccl
 {
+	/// <summary>
+	/// Helper class for managing output sockets for shader nodes.
+	/// </summary>
 	public class Outputs : SocketCollection
 	{
 	}

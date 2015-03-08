@@ -18,8 +18,14 @@ using System;
 
 namespace ccl
 {
+	/// <summary>
+	/// Transformation matrix.
+	/// </summary>
 	public class Transform
 	{
+		/// <summary>
+		/// Conversion matrix for rhino-cycles camera
+		/// </summary>
 		static readonly public Transform RhinoToCyclesCam = new Transform(
 			1.0f, 0.0f, 0.0f, 0.0f,
 			0.0f, -1.0f, 0.0f, 0.0f,
@@ -27,10 +33,43 @@ namespace ccl
 			0.0f, 0.0f, 0.0f, 1.0f
 		);
 
+		/// <summary>
+		/// X row, elements M00-M03
+		/// </summary>
 		public float4 x;
+		/// <summary>
+		/// Y row, elements M10-M13
+		/// </summary>
 		public float4 y;
+		/// <summary>
+		/// Z row, elements M20-M23
+		/// </summary>
 		public float4 z;
+		/// <summary>
+		/// W row, elements M30-M33
+		/// </summary>
 		public float4 w;
+
+		/// <summary>
+		/// Create a new transform using the given
+		/// floats
+		/// </summary>
+		/// <param name="a">M00</param>
+		/// <param name="b">M01</param>
+		/// <param name="c">M02</param>
+		/// <param name="d">M03</param>
+		/// <param name="e">M10</param>
+		/// <param name="f">M11</param>
+		/// <param name="g">M12</param>
+		/// <param name="h">M13</param>
+		/// <param name="i">M20</param>
+		/// <param name="j">M21</param>
+		/// <param name="k">M22</param>
+		/// <param name="l">M23</param>
+		/// <param name="m">M30</param>
+		/// <param name="n">M31</param>
+		/// <param name="o">M32</param>
+		/// <param name="p">M33</param>
 		public Transform(
 			float a, float b, float c, float d,
 			float e, float f, float g, float h,
@@ -44,6 +83,9 @@ namespace ccl
 			w = new float4(m, n, o, p);
 
 		}
+		/// <summary>
+		/// Create new transform with all cells set to 0.0f
+		/// </summary>
 		public Transform()
 			: this(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f)
 		{
@@ -72,11 +114,21 @@ namespace ccl
 		{
 		}
 
+		/// <summary>
+		/// The identity matrix
+		/// </summary>
+		/// <returns></returns>
 		static public Transform Identity()
 		{
 			return Scale(1.0f, 1.0f, 1.0f);
 		}
 
+		/// <summary>
+		/// Dot product of two matrices
+		/// </summary>
+		/// <param name="a"></param>
+		/// <param name="b"></param>
+		/// <returns></returns>
 		static public Transform operator *(Transform a, Transform b)
 		{
 			var c = Transpose(b);
@@ -89,7 +141,7 @@ namespace ccl
 		}
 
 		/// <summary>
-		/// 
+		/// Rotation matrix for given angle (radians) around the given rotation axis
 		/// </summary>
 		/// <param name="angle">Angle in radians</param>
 		/// <param name="rotation_axis">axis around which the rotation is. w of float4 is unused</param>
@@ -123,6 +175,11 @@ namespace ccl
 
 		}
 
+		/// <summary>
+		/// Give transposed matrix of a
+		/// </summary>
+		/// <param name="a"></param>
+		/// <returns></returns>
 		static public Transform Transpose(Transform a)
 		{
 			var t = new Transform
@@ -136,6 +193,11 @@ namespace ccl
 			return t;
 		}
 
+		/// <summary>
+		/// Give translation matrix for vector t
+		/// </summary>
+		/// <param name="t"></param>
+		/// <returns></returns>
 		static public Transform Translate(float4 t)
 		{
 			return new Transform(
@@ -145,11 +207,25 @@ namespace ccl
 				0, 0, 0, 1);
 		}
 
+		/// <summary>
+		/// Give translation matrix for translation vector (x,y,z)
+		/// </summary>
+		/// <param name="x"></param>
+		/// <param name="y"></param>
+		/// <param name="z"></param>
+		/// <returns></returns>
 		static public Transform Translate(float x, float y, float z)
 		{
 			return Translate(new float4(x, y, z));
 		}
 
+		/// <summary>
+		/// Give scale matrix for scale vector (x,y,z)
+		/// </summary>
+		/// <param name="x"></param>
+		/// <param name="y"></param>
+		/// <param name="z"></param>
+		/// <returns></returns>
 		static public Transform Scale(float x, float y, float z)
 		{
 			return new Transform(
@@ -160,7 +236,11 @@ namespace ccl
 				);
 		}
 
-		new public string ToString()
+		/// <summary>
+		/// Textual representation of the matrix
+		/// </summary>
+		/// <returns></returns>
+		override public string ToString()
 		{
 			return string.Format("[{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11}, {12}, {13}, {14}, {15}]", x.x, x.y, x.z, x.w, y.x, y.y, y.z, y.w, z.x, z.y, z.z, z.w, w.x, w.y, w.z, w.w);
 		}

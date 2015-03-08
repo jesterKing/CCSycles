@@ -45,7 +45,11 @@ namespace ccl
 		/// </summary>
 		public uint Id { get; private set; }
 
+		/// <summary>
+		/// Reference to client used for this session
+		/// </summary>
 		private Client Client { get; set; }
+
 		/// <summary>
 		/// Create a new session using the given SessionParameters and Scene
 		/// </summary>
@@ -59,6 +63,9 @@ namespace ccl
 			Id = CSycles.session_create(Client.Id, sessionParams.Id, scene.Id);
 		}
 
+		/// <summary>
+		/// private reference to the update callback
+		/// </summary>
 		CSycles.UpdateCallback updateCallback;
 
 		/// <summary>
@@ -74,6 +81,9 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Private reference to the test cancel callback
+		/// </summary>
 		CSycles.TestCancelCallback testCancelCallback;
 
 		/// <summary>
@@ -89,6 +99,9 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Private reference to the tile update callback.
+		/// </summary>
 		CSycles.RenderTileCallback updateTileCallback;
 
 		/// <summary>
@@ -104,6 +117,9 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Private reference to the tile write callback
+		/// </summary>
 		CSycles.RenderTileCallback writeTileCallback;
 		/// <summary>
 		/// Set the CSycles.RenderTileCallback to use for render tile writes
@@ -119,7 +135,8 @@ namespace ccl
 		}
 
 		/// <summary>
-		/// Start the rendering session
+		/// Start the rendering session. After this one should Wait() for
+		/// the session to complete.
 		/// </summary>
 		public void Start()
 		{
@@ -157,6 +174,11 @@ namespace ccl
 			Destroyed = true;
 		}
 
+		/// <summary>
+		/// Call the display drawing function.
+		/// 
+		/// NOTE: this is currently not working
+		/// </summary>
 		public void Draw()
 		{
 			if (Destroyed) return;

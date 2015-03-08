@@ -20,13 +20,28 @@ using System.ComponentModel;
 
 namespace ccl.ShaderNodes
 {
+	/// <summary>
+	/// Base class for shader nodes.
+	/// </summary>
 	public class ShaderNode
 	{
+		/// <summary>
+		/// Get the node ID. This is set when created in Cycles.
+		/// </summary>
 		public uint Id { get; internal set; }
+		/// <summary>
+		/// Get the shader node type. Set in the constructor.
+		/// </summary>
 		public ShaderNodeType Type { get; private set; }
 
-		public Inputs inputs { get; set; }
-		public Outputs outputs { get; set; }
+		/// <summary>
+		/// Generic access to input sockets.
+		/// </summary>
+		internal Inputs inputs { get; set; }
+		/// <summary>
+		/// Generic access to output sockets.
+		/// </summary>
+		internal Outputs outputs { get; set; }
 
 		public ShaderNode(ShaderNodeType type)
 		{
