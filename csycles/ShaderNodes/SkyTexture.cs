@@ -71,5 +71,13 @@ namespace ccl.ShaderNodes
 		{
 			CSycles.shadernode_set_enum(clientId, shaderId, Id, Type, SkyType);
 		}
+
+		internal override void SetDirectMembers(uint clientId, uint shaderId)
+		{
+			CSycles.shadernode_set_member_float(clientId, shaderId, Id, Type, "turbidity", Turbidity);
+			CSycles.shadernode_set_member_float(clientId, shaderId, Id, Type, "ground_albedo", GroundAlbedo);
+			var sd = SunDirection;
+			CSycles.shadernode_set_member_vec(clientId, shaderId, Id, Type, "sun_direction", sd.x, sd.y, sd.z);
+		}
 	}
 }

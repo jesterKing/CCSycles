@@ -117,5 +117,10 @@ namespace ccl.ShaderNodes
 		{
 			CSycles.shadernode_set_enum(clientId, shaderId, Id, Type, Operation.ToString().Replace('_', ' '));
 		}
+
+		internal override void SetDirectMembers(uint clientId, uint shaderId)
+		{
+			CSycles.shadernode_set_member_bool(clientId, shaderId, Id, Type, "use_clamp", UseClamp);
+		}
 	}
 }

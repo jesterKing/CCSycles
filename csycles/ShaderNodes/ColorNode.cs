@@ -53,5 +53,11 @@ namespace ccl.ShaderNodes
 		/// Set Color member variable [IN] for ColorNode.
 		/// </summary>
 		public float4 Value { get; set; }
+
+		internal override void SetDirectMembers(uint clientId, uint shaderId)
+		{
+			var val = Value;
+			CSycles.shadernode_set_member_vec(clientId, shaderId, Id, Type, "value", val.x, val.y, val.z);
+		}
 	}
 }

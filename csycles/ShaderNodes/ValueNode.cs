@@ -52,5 +52,10 @@ namespace ccl.ShaderNodes
 		/// Set member variable [IN] for ValueNode.
 		/// </summary>
 		public float Value { get; set; }
+
+		internal override void SetDirectMembers(uint clientId, uint shaderId)
+		{
+			CSycles.shadernode_set_member_float(clientId, shaderId, Id, Type, "value", Value);
+		}
 	}
 }
