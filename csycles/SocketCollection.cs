@@ -35,22 +35,6 @@ namespace ccl
 			m_socketlist.Add(sock);
 		}
 
-		public object this[string key]
-		{
-			get
-			{
-				Type t = this.GetType();
-				PropertyInfo pi = t.GetProperty(key);
-				return pi.GetValue(this, null);
-			}
-			set
-			{
-				Type t = this.GetType();
-				PropertyInfo pi = t.GetProperty(key);
-				pi.SetValue(this, value);
-			}
-		}
-
 		public SocketBase Socket(string name)
 		{
 			foreach (var socket in Sockets)
@@ -89,11 +73,6 @@ namespace ccl
 		public bool HasSocket(string n)
 		{
 			return PropertyNames.Any(pname => pname.ToLowerInvariant().Equals(n.ToLowerInvariant()));
-		}
-
-		public bool HasSockt(SocketBase s)
-		{
-			return m_socketlist.Contains(s);
 		}
 
 		/// <summary>
