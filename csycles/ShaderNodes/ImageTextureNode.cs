@@ -78,5 +78,12 @@ namespace ccl.ShaderNodes
 		/* two helpers for image resolution */
 		public uint Width { get; set; }
 		public uint Height { get; set; }
+
+		internal override void SetEnums(uint clientId, uint shaderId)
+		{
+			CSycles.shadernode_set_attribute_string(clientId, shaderId, Id, "color_space", ColorSpace.ToString());
+			CSycles.shadernode_set_attribute_string(clientId, shaderId, Id, "projection", ColorSpace.ToString());
+			CSycles.shadernode_set_attribute_string(clientId, shaderId, Id, "interpolation", ColorSpace.ToString());
+		}
 	}
 }

@@ -113,5 +113,9 @@ namespace ccl.ShaderNodes
 		/// </summary>
 		public bool UseClamp { get; set; }
 
+		internal override void SetEnums(uint clientId, uint shaderId)
+		{
+			CSycles.shadernode_set_enum(clientId, shaderId, Id, Type, Operation.ToString().Replace('_', ' '));
+		}
 	}
 }
