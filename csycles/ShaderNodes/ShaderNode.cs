@@ -47,5 +47,10 @@ namespace ccl.ShaderNodes
 		{
 			Type = type;
 		}
+
+		virtual internal void SetEnums(uint clientId, uint shaderId)
+		{
+			// do nothing
+		}
 	}
 }

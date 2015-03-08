@@ -66,5 +66,10 @@ namespace ccl.ShaderNodes
 		/// - Hosek / Wilkie
 		/// </summary>
 		public string SkyType { get; set; }
+
+		internal override void SetEnums(uint clientId, uint shaderId)
+		{
+			CSycles.shadernode_set_enum(clientId, shaderId, Id, Type, SkyType);
+		}
 	}
 }

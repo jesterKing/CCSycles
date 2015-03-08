@@ -97,5 +97,9 @@ namespace ccl.ShaderNodes
 		/// </summary>
 		public bool UseMax { get; set; }
 
+		internal override void SetEnums(uint clientId, uint shaderId)
+		{
+			CSycles.shadernode_set_enum(clientId, shaderId, Id, Type, vector_type.ToString());
+		}
 	}
 }

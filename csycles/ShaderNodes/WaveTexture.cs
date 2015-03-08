@@ -78,5 +78,10 @@ namespace ccl.ShaderNodes
 		/// - Rings
 		/// </summary>
 		public string WaveType { get; set; }
+
+		internal override void SetEnums(uint clientId, uint shaderId)
+		{
+			CSycles.shadernode_set_enum(clientId, shaderId, Id, Type, WaveType);
+		}
 	}
 }

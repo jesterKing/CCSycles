@@ -205,51 +205,7 @@ namespace ccl
 				}
 			}
 
-			/* set enums */
-			switch (node.Type)
-			{
-				case ShaderNodeType.Math:
-					CSycles.shadernode_set_enum(Client.Id, Id, node.Id, node.Type, ((MathNode)node).Operation.ToString().Replace('_', ' '));
-					break;
-				case ShaderNodeType.Refraction:
-					CSycles.shadernode_set_enum(Client.Id, Id, node.Id, node.Type, ((RefractionBsdfNode)node).Distribution);
-					break;
-				case ShaderNodeType.Mix:
-					CSycles.shadernode_set_enum(Client.Id, Id, node.Id, node.Type, ((MixNode)node).BlendType);
-					break;
-				case ShaderNodeType.Glossy:
-					CSycles.shadernode_set_enum(Client.Id, Id, node.Id, node.Type, ((GlossyBsdfNode)node).Distribution);
-					break;
-				case ShaderNodeType.Glass:
-					CSycles.shadernode_set_enum(Client.Id, Id, node.Id, node.Type, ((GlassBsdfNode)node).Distribution);
-					break;
-				case ShaderNodeType.SkyTexture:
-					CSycles.shadernode_set_enum(Client.Id, Id, node.Id, node.Type, ((SkyTexture)node).SkyType);
-					break;
-				case ShaderNodeType.WaveTexture:
-					CSycles.shadernode_set_enum(Client.Id, Id, node.Id, node.Type, ((WaveTexture)node).WaveType);
-					break;
-				case ShaderNodeType.EnvironmentTexture:
-					var envnode = node as EnvironmentTextureNode;
-					if (envnode != null)
-					{
-						var projection = envnode.Projection == TextureNode.EnvironmentProjection.Equirectangular
-							? "Equirectangular"
-							: "Mirror Ball";
-						var colspace = envnode.ColorSpace == TextureNode.TextureColorSpace.Color ? "Color" : "None";
-						CSycles.shadernode_set_enum(Client.Id, Id, node.Id, node.Type, projection);
-						CSycles.shadernode_set_enum(Client.Id, Id, node.Id, node.Type, colspace);
-					}
-					break;
-				case ShaderNodeType.Mapping:
-					CSycles.shadernode_set_enum(Client.Id, Id, node.Id, node.Type, ((MappingNode)node).vector_type.ToString());
-					break;
-				case ShaderNodeType.ImageTexture:
-					CSycles.shadernode_set_attribute_string(Client.Id, Id, node.Id, "color_space", ((ImageTextureNode)node).ColorSpace.ToString());
-					CSycles.shadernode_set_attribute_string(Client.Id, Id, node.Id, "projection", ((ImageTextureNode)node).ColorSpace.ToString());
-					CSycles.shadernode_set_attribute_string(Client.Id, Id, node.Id, "interpolation", ((ImageTextureNode)node).ColorSpace.ToString());
-					break;
-			}
+			node.SetEnums(Client.Id, Id);
 
 			/* set direct member variables */
 			switch (node.Type)

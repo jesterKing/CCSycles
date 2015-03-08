@@ -71,5 +71,15 @@ namespace ccl.ShaderNodes
 		/* two helpers for image resolution */
 		public uint Width { get; set; }
 		public uint Height { get; set; }
+
+		internal override void SetEnums(uint clientId, uint shaderId)
+		{
+			var projection = Projection == TextureNode.EnvironmentProjection.Equirectangular
+				? "Equirectangular"
+				: "Mirror Ball";
+			var colspace = ColorSpace == TextureNode.TextureColorSpace.Color ? "Color" : "None";
+			CSycles.shadernode_set_enum(clientId, shaderId, Id, Type, projection);
+			CSycles.shadernode_set_enum(clientId, shaderId, Id, Type, colspace);
+		}
 	}
 }
