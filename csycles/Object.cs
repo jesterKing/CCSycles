@@ -16,10 +16,18 @@ limitations under the License.
 
 namespace ccl
 {
+	/// <summary>
+	/// Representation of a Cycles object.
+	/// </summary>
 	public class Object
 	{
-
+		/// <summary>
+		/// Id of the Cycles object.
+		/// </summary>
 		public uint Id { get; private set; }
+		/// <summary>
+		/// Reference to the client.
+		/// </summary>
 		private Client Client { get; set; }
 
 		/// <summary>
@@ -35,6 +43,9 @@ namespace ccl
 		}
 
 		private Mesh m_mesh;
+		/// <summary>
+		/// Get or set the mesh
+		/// </summary>
 		public Mesh Mesh
 		{
 			get
@@ -50,6 +61,9 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set the object transformation
+		/// </summary>
 		public Transform Transform
 		{
 			set
@@ -58,6 +72,9 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set the visibility of this object to specific rays.
+		/// </summary>
 		public PathRay Visibility
 		{
 			set

@@ -16,11 +16,32 @@ limitations under the License.
 
 namespace ccl
 {
+	/// <summary>
+	/// Cycles light representation.
+	/// </summary>
 	public class Light
 	{
+		/// <summary>
+		/// Id of this light after creation.
+		/// </summary>
 		public uint Id { get; internal set; }
+		/// <summary>
+		/// Reference to scene in which light was created.
+		/// </summary>
 		public Scene Scene { get; internal set; }
+		/// <summary>
+		/// Reference to client for which light was created.
+		/// </summary>
 		public Client Client { get; internal set; }
+		/// <summary>
+		/// Create a new light.
+		/// 
+		/// This constructor creates a Cycles light right away. The Id
+		/// is from Cycles
+		/// </summary>
+		/// <param name="client"></param>
+		/// <param name="scene"></param>
+		/// <param name="lightShader"></param>
 		public Light(Client client, Scene scene, Shader lightShader)
 		{
 			Client = client;
@@ -28,6 +49,9 @@ namespace ccl
 			Id = CSycles.create_light(Client.Id, Scene.Id, scene.ShaderSceneId(lightShader));
 		}
 
+		/// <summary>
+		/// Set type of light.
+		/// </summary>
 		public LightType Type
 		{
 			set
@@ -36,6 +60,9 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set to true to use multiple importance sampling.
+		/// </summary>
 		public bool UseMis
 		{
 			set
@@ -44,6 +71,9 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set to true if this light should cast shadows.
+		/// </summary>
 		public bool CastShadow
 		{
 			set
@@ -52,6 +82,9 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set sample count for light.
+		/// </summary>
 		public uint Samples
 		{
 			set
@@ -60,6 +93,9 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set the maximum amount of bounces this light contributes per ray.
+		/// </summary>
 		public uint MaxBounces
 		{
 			set
@@ -68,6 +104,9 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set the map resolution to be used with multiple importance sampling.
+		/// </summary>
 		public uint MapResolution
 		{
 			set
@@ -76,6 +115,9 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set the soft shadow size (larger generally means fewer fireflies).
+		/// </summary>
 		public float Size
 		{
 			set
@@ -84,6 +126,9 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set the location.
+		/// </summary>
 		public float4 Location
 		{
 			set
@@ -92,6 +137,9 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set the direction.
+		/// </summary>
 		public float4 Direction
 		{
 			set
@@ -100,6 +148,9 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set the U size (rectangular lights)
+		/// </summary>
 		public float SizeU
 		{
 			set
@@ -108,6 +159,9 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set the V size (rectangular lights)
+		/// </summary>
 		public float SizeV
 		{
 			set
@@ -116,6 +170,9 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set the direction of the U axis (rectangular lights)
+		/// </summary>
 		public float4 AxisU
 		{
 			set
@@ -124,6 +181,9 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set the direction of the V axis (rectangular lights)
+		/// </summary>
 		public float4 AxisV
 		{
 			set
@@ -132,6 +192,9 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set the angle for spot light.
+		/// </summary>
 		public float SpotAngle
 		{
 			set
@@ -140,6 +203,9 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set the blend from light to shadow factor for spot light.
+		/// </summary>
 		public float SpotSmooth
 		{
 			set

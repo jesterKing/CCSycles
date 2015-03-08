@@ -16,10 +16,22 @@ limitations under the License.
 
 namespace ccl
 {
+	/// <summary>
+	/// Representation of a Cycles mesh.
+	/// </summary>
 	public class Mesh
 	{
+		/// <summary>
+		/// Id of mesh in scene.
+		/// </summary>
 		public uint Id { get; private set; }
+		/// <summary>
+		/// Reference to client.
+		/// </summary>
 		private Client Client { get; set; }
+		/// <summary>
+		/// Shader used for this mesh.
+		/// </summary>
 		private Shader Shader { get; set; }
 
 		/// <summary>
@@ -35,6 +47,12 @@ namespace ccl
 			Id = CSycles.scene_add_mesh(Client.Id, Client.Scene.Id, Client.Scene.ShaderSceneId(shader));
 		}
 
+		/// <summary>
+		/// Constructor to use when a mesh that already exists in Cycles needs to be represented.
+		/// </summary>
+		/// <param name="client"></param>
+		/// <param name="id"></param>
+		/// <param name="shader"></param>
 		internal Mesh(Client client, uint id, Shader shader)
 		{
 			Client = client;
@@ -96,6 +114,14 @@ namespace ccl
 			CSycles.mesh_set_uvs(Client.Id, Client.Scene.Id, Id, ref uvs, (uint) (uvs.Length/2));
 		}
 
+		/// <summary>
+		/// Add a triangle to the mesh using the given vertex coordinates, shader and smooth flag
+		/// </summary>
+		/// <param name="v0"></param>
+		/// <param name="v1"></param>
+		/// <param name="v2"></param>
+		/// <param name="shader"></param>
+		/// <param name="smooth"></param>
 		public void AddTri(uint v0, uint v1, uint v2, Shader shader, bool smooth)
 		{
 			CSycles.mesh_add_triangle(Client.Id, Client.Scene.Id, Id, v0, v1, v2, Client.Scene.ShaderSceneId(shader), smooth);

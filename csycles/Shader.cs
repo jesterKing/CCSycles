@@ -24,6 +24,9 @@ using ccl.ShaderNodes.Sockets;
 
 namespace ccl
 {
+	/// <summary>
+	/// Representation of a Cycles shader
+	/// </summary>
 	public class Shader
 	{
 		public enum ShaderType
@@ -40,7 +43,10 @@ namespace ccl
 
 		private bool created_in_cycles { get; set; }
 
-		public OutputNode Output { get; set; }
+		/// <summary>
+		/// Get the output node for this shader.
+		/// </summary>
+		public OutputNode Output { get; private set; }
 
 		/// <summary>
 		/// Create a new shader for client.
@@ -57,6 +63,14 @@ namespace ccl
 			created_in_cycles = false;
 		}
 
+		/// <summary>
+		/// Create front for existing shader. Note that
+		/// functionality through this can be limited.
+		/// Generally used only for interal matters
+		/// </summary>
+		/// <param name="client"></param>
+		/// <param name="type"></param>
+		/// <param name="id"></param>
 		internal Shader(Client client, ShaderType type, uint id)
 		{
 			Client = client;
@@ -88,6 +102,11 @@ namespace ccl
 			return shader;
 		}
 
+		/// <summary>
+		/// Static constructor for wrapping default light shader created by Cycles shader manager.
+		/// </summary>
+		/// <param name="client"></param>
+		/// <returns></returns>
 		static public Shader WrapDefaultLightShader(Client client)
 		{
 			var shader = new Shader(client, ShaderType.Material, 1) {Name = "default_light"};
@@ -105,6 +124,11 @@ namespace ccl
 			return shader;
 		}
 
+		/// <summary>
+		/// Static constructor for wrapping default background shader created by Cycles shader manager.
+		/// </summary>
+		/// <param name="client"></param>
+		/// <returns></returns>
 		static public Shader WrapDefaultBackgroundShader(Client client)
 		{
 			var shader = new Shader(client, ShaderType.World, 2) {Name = "default_background"};
@@ -112,6 +136,11 @@ namespace ccl
 			return shader;
 		}
 
+		/// <summary>
+		/// Static constructor for wrapping default empty shader created by Cycles shader manager.
+		/// </summary>
+		/// <param name="client"></param>
+		/// <returns></returns>
 		static public Shader WrapDefaultEmptyShader(Client client)
 		{
 			var shader = new Shader(client, ShaderType.Material, 3) {Name = "default_empty"};
@@ -121,7 +150,12 @@ namespace ccl
 
 		readonly List<ShaderNode> m_nodes = new List<ShaderNode>();
 		/// <summary>
-		/// Add a ShaderNode to the shader
+		/// Add a ShaderNode to the shader. This will create the node in Cycles, set
+		/// any values for sockets and direct members.
+		/// This means that any values set to sockets or shader node direct members after
+		/// AddNode() won't have effect.
+		///
+		/// @todo Move non-socket data setting to node implementation.
 		/// </summary>
 		/// <param name="node">ShaderNode to add</param>
 		public void AddNode(ShaderNode node)
@@ -287,7 +321,8 @@ namespace ccl
 		}
 
 		/// <summary>
-		/// Push the defined shader graph to Cycles.
+		/// Finalizes the graph by connecting all sockets in Cycles as specified
+		/// through code.
 		/// </summary>
 		public void FinalizeGraph()
 		{
@@ -304,6 +339,13 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Make the actual connection between nodes.
+		/// </summary>
+		/// <param name="from"></param>
+		/// <param name="fromout"></param>
+		/// <param name="to"></param>
+		/// <param name="toin"></param>
 		private void Connect(ShaderNode from, string fromout, ShaderNode to, string toin)
 		{
 			if (m_nodes.Contains(from) && m_nodes.Contains(to))
@@ -312,10 +354,10 @@ namespace ccl
 			}
 		}
 
+		private string m_name;
 		/// <summary>
 		/// Set the name of the Shader
 		/// </summary>
-		private string m_name;
 		public string Name
 		{
 			set

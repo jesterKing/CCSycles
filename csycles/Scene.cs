@@ -102,6 +102,11 @@ namespace ccl
 			return shaders[shader];
 		}
 
+		/// <summary>
+		/// Give the Shader that corresponds to the shader ID in this scene.
+		/// </summary>
+		/// <param name="shaderId">shader ID in scene</param>
+		/// <returns>Shader</returns>
 		public Shader ShaderFromSceneId(uint shaderId)
 		{
 			foreach (var kvp in shaders)
@@ -115,6 +120,11 @@ namespace ccl
 			return null;
 		}
 
+		/// <summary>
+		/// Get the first shader with name
+		/// </summary>
+		/// <param name="name">Name of shader to look for</param>
+		/// <returns>Shader or null if no shader with name was found.</returns>
 		public Shader ShaderWithName(string name)
 		{
 			return (from kvp in shaders where kvp.Key.Name.Equals(name) select kvp.Key).FirstOrDefault();

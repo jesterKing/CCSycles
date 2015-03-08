@@ -16,14 +16,31 @@ limitations under the License.
 
 namespace ccl
 {
+	/// <summary>
+	/// The background representation contains a background shader
+	/// and settings to control Ambient Occlusion and path ray visibility
+	/// </summary>
 	public class Background
 	{
+		/// <summary>
+		/// Reference to scene for which this the background is
+		/// </summary>
 		internal Scene Scene { get; set; }
-		public Background(Scene scene)
+
+		/// <summary>
+		/// Create a background representation for scene. Generally this
+		/// is handled by the Scene, therefor this is an internally visible
+		/// constructor
+		/// </summary>
+		/// <param name="scene">Scene for which to create background</param>
+		internal Background(Scene scene)
 		{
 			Scene = scene;
 		}
 
+		/// <summary>
+		/// Get or set the background shader
+		/// </summary>
 		public Shader Shader
 		{
 			set
@@ -38,6 +55,9 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set the Ambient Occlusion distance
+		/// </summary>
 		public float AoDistance
 		{
 			set
@@ -46,6 +66,9 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set the Ambient Occlusion factor
+		/// </summary>
 		public float AoFactor
 		{
 			set
@@ -54,6 +77,9 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set the rays to which the background is responsive
+		/// </summary>
 		public PathRay Visibility
 		{
 			set

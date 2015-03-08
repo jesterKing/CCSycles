@@ -21,17 +21,31 @@ namespace ccl
 	/// </summary>
 	public class Integrator
 	{
+		/// <summary>
+		/// Reference to scene to which these integrator settings belong.
+		/// </summary>
 		internal Scene Scene { get; set; }
-		public Integrator(Scene scene)
+
+		/// <summary>
+		/// Create a new integrator settings representation
+		/// </summary>
+		/// <param name="scene"></param>
+		internal Integrator(Scene scene)
 		{
 			Scene = scene;
 		}
 
+		/// <summary>
+		/// Tag the integrator as changed.
+		/// </summary>
 		public void TagForUpdate()
 		{
 			CSycles.integrator_tag_update(Scene.Client.Id, Scene.Id);
 		}
 
+		/// <summary>
+		/// Set the maximum amount of bounces for a ray.
+		/// </summary>
 		public int MaxBounce
 		{
 			set
@@ -41,6 +55,9 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set the minimum amount of bounces for a ray.
+		/// </summary>
 		public int MinBounce
 		{
 			set
@@ -49,6 +66,9 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set the minimum amount of bounces for a transparency ray.
+		/// </summary>
 		public int TransparentMinBounce
 		{
 			set
@@ -57,6 +77,11 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set the maximum amount of bounces for a transparency ray.
+		/// 
+		/// Used when BranchedPath tracing is set.
+		/// </summary>
 		public int TransparentMaxBounce
 		{
 			set
@@ -65,6 +90,11 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set the maximum amount of bounces for a diffuse ray.
+		/// 
+		/// Used when BranchedPath tracing is set.
+		/// </summary>
 		public int MaxDiffuseBounce
 		{
 			set
@@ -73,6 +103,9 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set the maximum amount of bounces for a glossy ray.
+		/// </summary>
 		public int MaxGlossyBounce
 		{
 			set
@@ -81,6 +114,11 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set the maximimum amount of bounces for transmission rays.
+		/// 
+		/// Used when BranchedPath tracing is set.
+		/// </summary>
 		public int MaxTransmissionBounce
 		{
 			set
@@ -89,6 +127,11 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set the maximum amount of bounces for volume rays.
+		/// 
+		/// Used when BranchedPath tracing is set.
+		/// </summary>
 		public int MaxVolumeBounce
 		{
 			set
@@ -97,6 +140,9 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set to true if no caustics should be used
+		/// </summary>
 		public bool NoCaustics
 		{
 			set
@@ -105,6 +151,9 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set to true if transparent shadows should be traced.
+		/// </summary>
 		public bool TransparentShadows
 		{
 			set
@@ -113,6 +162,11 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set the amount of samples for diffuse rays to take.
+		/// 
+		/// Used when BranchedPath tracing is set.
+		/// </summary>
 		public int DiffuseSamples
 		{
 			set
@@ -121,6 +175,11 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set the amount of samples for glossy rays to take.
+		/// 
+		/// Used when BranchedPath tracing is set.
+		/// </summary>
 		public int GlossySamples
 		{
 			set
@@ -129,6 +188,11 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set the amount of samples for transmission rays to take.
+		/// 
+		/// Used when BranchedPath tracing is set.
+		/// </summary>
 		public int TransmissionSamples
 		{
 			set
@@ -137,6 +201,11 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set the amount of samples for AO rays to take.
+		/// 
+		/// Used when BranchedPath tracing is set.
+		/// </summary>
 		public int AoSamples
 		{
 			set
@@ -145,6 +214,9 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set the sample count for mesh lights
+		/// </summary>
 		public int MeshLightSamples
 		{
 			set
@@ -153,6 +225,9 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set the sample count for subsurface
+		/// </summary>
 		public int SubsurfaceSamples
 		{
 			set
@@ -161,6 +236,9 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set the amount of volume samples
+		/// </summary>
 		public int VolumeSamples
 		{
 			set
@@ -169,6 +247,9 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set the amount of AA samples per ray
+		/// </summary>
 		public int AaSamples
 		{
 			set
@@ -177,6 +258,9 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set the glossy filter size
+		/// </summary>
 		public float FilterGlossy
 		{
 			set
@@ -185,6 +269,9 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set the integration method to use (Path or BranchedPath)
+		/// </summary>
 		public IntegratorMethod IntegratorMethod
 		{
 			set
@@ -193,6 +280,9 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set to true if all direct lights should be sampled.
+		/// </summary>
 		public bool SampleAllLightsDirect
 		{
 			set
@@ -201,6 +291,9 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set to true if all indirect lights should be sampled.
+		/// </summary>
 		public bool SampleAllLightsIndirect
 		{
 			set
@@ -209,6 +302,9 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set the step size for volume tracing
+		/// </summary>
 		public float VolumeStepSize
 		{
 			set
@@ -217,6 +313,9 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set the maximum amount of steps for volume tracing.
+		/// </summary>
 		public int VolumeMaxSteps
 		{
 			set
@@ -225,6 +324,9 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set the seed for sampling
+		/// </summary>
 		public int Seed
 		{
 			set
@@ -233,6 +335,9 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set the clamp value for direct samples.
+		/// </summary>
 		public float SampleClampDirect
 		{
 			set
@@ -241,6 +346,9 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set the clamp value for indirect samples.
+		/// </summary>
 		public float SampleClampIndirect
 		{
 			set
@@ -249,6 +357,9 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set the sampling pattern to use (CMJ or Sobol).
+		/// </summary>
 		public SamplingPattern SamplingPattern
 		{
 			set

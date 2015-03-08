@@ -23,6 +23,9 @@ using ccl.ShaderNodes.Sockets;
 
 namespace ccl
 {
+	/// <summary>
+	/// Base helper class for managing input and output sockets for shader nodes.
+	/// </summary>
 	public class SocketCollection
 	{
 		readonly List<SocketBase> m_socketlist = new List<SocketBase>();
@@ -30,22 +33,6 @@ namespace ccl
 		internal void AddSocket(SocketBase sock)
 		{
 			m_socketlist.Add(sock);
-		}
-
-		public object this[string key]
-		{
-			get
-			{
-				Type t = this.GetType();
-				PropertyInfo pi = t.GetProperty(key);
-				return pi.GetValue(this, null);
-			}
-			set
-			{
-				Type t = this.GetType();
-				PropertyInfo pi = t.GetProperty(key);
-				pi.SetValue(this, value);
-			}
 		}
 
 		public SocketBase Socket(string name)
@@ -88,11 +75,9 @@ namespace ccl
 			return PropertyNames.Any(pname => pname.ToLowerInvariant().Equals(n.ToLowerInvariant()));
 		}
 
-		public bool HasSockt(SocketBase s)
-		{
-			return m_socketlist.Contains(s);
-		}
-
+		/// <summary>
+		/// Get an IEnumerable over sockets.
+		/// </summary>
 		public IEnumerable<SocketBase> Sockets
 		{
 			get

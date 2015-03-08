@@ -20,62 +20,32 @@ using System.ComponentModel;
 
 namespace ccl.ShaderNodes
 {
+	/// <summary>
+	/// Base class for shader nodes.
+	/// </summary>
 	public class ShaderNode
 	{
+		/// <summary>
+		/// Get the node ID. This is set when created in Cycles.
+		/// </summary>
 		public uint Id { get; internal set; }
+		/// <summary>
+		/// Get the shader node type. Set in the constructor.
+		/// </summary>
 		public ShaderNodeType Type { get; private set; }
 
-		public Inputs inputs { get; set; }
-		public Outputs outputs { get; set; }
+		/// <summary>
+		/// Generic access to input sockets.
+		/// </summary>
+		internal Inputs inputs { get; set; }
+		/// <summary>
+		/// Generic access to output sockets.
+		/// </summary>
+		internal Outputs outputs { get; set; }
 
 		public ShaderNode(ShaderNodeType type)
 		{
 			Type = type;
-		}
-
-		readonly Dictionary<PropertyDescriptor, Tuple<ShaderNode, PropertyDescriptor>> m_output_dictionary = new Dictionary<PropertyDescriptor, Tuple<ShaderNode, PropertyDescriptor>>();
-		public void ConnectTo(PropertyDescriptor from, ShaderNode to, PropertyDescriptor toin)
-		{
-			if (to != null)
-			{
-				if (!outputs.HasSocket(from.Name) || !to.inputs.HasSocket(toin.Name))
-				{
-					throw new ArgumentException(String.Format("Output {0} not found. Cannot connect to {1}-{2}", from.Name, to,
-						toin.Name));
-				}
-
-				if (!m_output_dictionary.ContainsKey(from))
-				{
-					m_output_dictionary.Add(from, Tuple.Create(to, toin));
-				}
-			}
-			else
-			{
-				if (outputs.HasSocket(from.Name) && m_output_dictionary.ContainsKey(from))
-				{
-					m_output_dictionary.Remove(from);
-				}
-				else
-				{
-					throw new ArgumentException(String.Format("Output {0} not found, cannot clear.", from.Name));
-				}
-			}
-		}
-
-		public bool IsConnected
-		{
-			get { return m_output_dictionary.Count > 0; }
-		}
-		
-		public IEnumerable<Tuple<PropertyDescriptor, ShaderNode, PropertyDescriptor>> ConnectedOutputs
-		{
-			get
-			{
-				foreach (var k in m_output_dictionary.Keys)
-				{
-					yield return Tuple.Create(k, m_output_dictionary[k].Item1, m_output_dictionary[k].Item2);
-				}
-			}
 		}
 	}
 }

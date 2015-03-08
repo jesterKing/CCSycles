@@ -18,14 +18,29 @@ using System.Drawing;
 
 namespace ccl
 {
+	/// <summary>
+	/// Camera representation in a Cycles scene.
+	/// </summary>
 	public class Camera
 	{
+		/// <summary>
+		/// Reference to the scene in which this camera is contained.
+		/// </summary>
 		internal Scene Scene { get; set; }
-		public Camera(Scene scene)
+
+		/// <summary>
+		/// Create a new camera representation for Scene.
+		/// </summary>
+		/// <param name="scene"></param>
+		internal Camera(Scene scene)
 		{
 			Scene = scene;
 		}
 
+		/// <summary>
+		/// Set the camera size. This corresponds to the final pixel resolution of the
+		/// image to be rendered.
+		/// </summary>
 		public Size Size
 		{
 			set
@@ -38,6 +53,9 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set the transformation matrix.
+		/// </summary>
 		public Transform Matrix
 		{
 			set
@@ -46,6 +64,9 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set camera type.
+		/// </summary>
 		public CameraType Type
 		{
 			set
@@ -54,6 +75,9 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set panorama type.
+		/// </summary>
 		public PanoramaType PanoramaType
 		{
 			set
@@ -62,6 +86,9 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set the Field of View.
+		/// </summary>
 		public float Fov
 		{
 			set
@@ -70,6 +97,9 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set the sensor width.
+		/// </summary>
 		public float SensorWidth
 		{
 			set
@@ -78,6 +108,9 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set the sensor height.
+		/// </summary>
 		public float SensorHeight
 		{
 			set
@@ -86,6 +119,9 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set the near clip.
+		/// </summary>
 		public float NearClip
 		{
 			set
@@ -94,6 +130,9 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set the far clip.
+		/// </summary>
 		public float FarClip
 		{
 			set
@@ -102,6 +141,9 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set the aperture size.
+		/// </summary>
 		public float ApertureSize
 		{
 			set
@@ -110,6 +152,9 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set the aperture ration.
+		/// </summary>
 		public float ApertureRatio
 		{
 			set
@@ -118,6 +163,9 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set the number of blades to use.
+		/// </summary>
 		public uint Blades
 		{
 			set
@@ -126,6 +174,9 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set the blade rotation
+		/// </summary>
 		public float BladesRotation
 		{
 			set
@@ -134,6 +185,9 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set the focal distance (for DoF)
+		/// </summary>
 		public float FocalDistance
 		{
 			set
@@ -142,6 +196,9 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set the shutter time.
+		/// </summary>
 		public float ShutterTime
 		{
 			set
@@ -150,6 +207,9 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set Field of View, in case fish eye projection is used.
+		/// </summary>
 		public float FishEyeFov
 		{
 			set
@@ -158,6 +218,9 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Set lens length, in case fish eye projection is used.
+		/// </summary>
 		public float FishEyeLens
 		{
 			set
@@ -166,11 +229,17 @@ namespace ccl
 			}
 		}
 
+		/// <summary>
+		/// Tag the camera for update.
+		/// </summary>
 		public void Update()
 		{
 			CSycles.camera_update(Scene.Client.Id, Scene.Id);
 		}
 
+		/// <summary>
+		/// Compute auto view plane.
+		/// </summary>
 		public void ComputeAutoViewPlane()
 		{
 			CSycles.camera_compute_auto_viewplane(Scene.Client.Id, Scene.Id);
