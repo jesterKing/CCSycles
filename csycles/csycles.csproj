@@ -128,14 +128,14 @@
     <Compile Include="Transform.cs" />
     <Compile Include="SessionParameters.cs" />
     <Compile Include="Utilities.cs" />
+    <Compile Include="..\..\..\..\..\version.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="license.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PostBuildEvent>Copy /Y "$(TargetPath)" "$(ProjectDir)..\..\..\..\..\$(OutDir)Plug-ins"</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>

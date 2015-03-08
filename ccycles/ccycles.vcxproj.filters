@@ -71,4 +71,9 @@
   <ItemGroup>
     <Text Include="license.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ccycles_version.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
 </Project>

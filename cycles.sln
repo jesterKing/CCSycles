@@ -68,7 +68,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OpenImageIO", "OpenImageIO\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pthreads", "pthreads\pthreads.vcxproj", "{1F63EB7F-7A6E-49FA-AB49-52A5E66DCB8D}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "boost", "..\..\boost_1_55_0\boost.vcxproj", "{1D140D1B-FC62-4EC7-8517-E6F7A1009EDC}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "boost", "..\..\..\..\boost_1_55_0\boost.vcxproj", "{1D140D1B-FC62-4EC7-8517-E6F7A1009EDC}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Half", "..\OpenEXR\Half\Half.vcxproj", "{E3C9A670-A7FD-41DD-8643-2716549513EA}"
 EndProject
@@ -245,7 +245,6 @@ Global
 		{E3C9A670-A7FD-41DD-8643-2716549513EA}.Release|x64.Build.0 = Release|x64
 		{92EB6D16-E6F5-47B7-928F-6BE64BA1B944}.Debug|Any CPU.ActiveCfg = Debug|x64
 		{92EB6D16-E6F5-47B7-928F-6BE64BA1B944}.Debug|Mixed Platforms.ActiveCfg = Debug|x64
-		{92EB6D16-E6F5-47B7-928F-6BE64BA1B944}.Debug|Mixed Platforms.Build.0 = Debug|x64
 		{92EB6D16-E6F5-47B7-928F-6BE64BA1B944}.Debug|x64.ActiveCfg = Debug|x64
 		{92EB6D16-E6F5-47B7-928F-6BE64BA1B944}.Debug|x64.Build.0 = Debug|x64
 		{92EB6D16-E6F5-47B7-928F-6BE64BA1B944}.Release|Any CPU.ActiveCfg = Release|x64
