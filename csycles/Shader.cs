@@ -302,7 +302,7 @@ namespace ccl
 		/// <param name="shader"></param>
 		/// <param name="shaderXml"></param>
 		/// <returns></returns>
-		public static Shader ShaderFromXml(ref Shader shader, string shaderXml)
+		public static void ShaderFromXml(ref Shader shader, string shaderXml)
 		{
 			var xmlmem = Encoding.UTF8.GetBytes(shaderXml);
 			using (var xmlstream = new MemoryStream(xmlmem))
@@ -317,8 +317,6 @@ namespace ccl
 				var reader = XmlReader.Create(xmlstream, settings);
 				Utilities.Instance.ReadNodeGraph(ref shader, reader);
 			}
-
-			return shader;
 		}
 
 	}
