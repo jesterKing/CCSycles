@@ -100,11 +100,12 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy /Y  "$(ProjectDir)..\ccycles\x64\$(ConfigurationName)\ccycles.dll" "$(TargetDir)"
-copy /Y  "$(ProjectDir)..\ccycles\x64\$(ConfigurationName)\ccycles.pdb" "$(TargetDir)"
-copy /Y  "$(ProjectDir)..\OpenImageIO\x64\$(ConfigurationName)\OpenImageIO.dll" "$(TargetDir)"
-copy /Y  "$(ProjectDir)..\pthreads\x64\$(ConfigurationName)\pthreads.dll" "$(TargetDir)"
-copy /Y "$(ProjectDir)..\bindeps\boost_1_55_0\$(ConfigurationName)\lib\boost_*" "$(TargetDir)"
+    <PostBuildEvent>copy /Y "$(ProjectDir)..\csycles\bin\$(ConfigurationName)\csycles.*" "$(TargetDir)"
+copy /Y "$(ProjectDir)..\ccycles\x64\$(ConfigurationName)\ccycles.dll" "$(TargetDir)"
+copy /Y "$(ProjectDir)..\ccycles\x64\$(ConfigurationName)\ccycles.pdb" "$(TargetDir)"
+copy /Y "$(ProjectDir)..\OpenImageIO\x64\$(ConfigurationName)\OpenImageIO.dll" "$(TargetDir)"
+copy /Y "$(ProjectDir)..\pthreads\x64\$(ConfigurationName)\pthreads.dll" "$(TargetDir)"
+copy /Y "$(ProjectDir)..\..\..\..\..\bin\$(ConfigurationName)\boost_*" "$(TargetDir)"
 
 MkDir "$(TargetDir)lib"
 
