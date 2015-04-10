@@ -88,6 +88,18 @@ void cycles_camera_compute_auto_viewplane(unsigned int client_id, unsigned int s
 	SCENE_FIND_END()
 }
 
+void cycles_camera_set_viewplane(unsigned int client_id, unsigned int scene_id, float left, float right, float top, float bottom)
+{
+	SCENE_FIND(scene_id)
+		logger.logit(client_id, "Set viewplane for scene ", scene_id, " to ", left, ":", right, ":", top, ":", bottom); 
+		sce->camera->viewplane.left = left;
+		sce->camera->viewplane.right = right;
+		sce->camera->viewplane.top = top;
+		sce->camera->viewplane.bottom = bottom;
+	SCENE_FIND_END()
+
+}
+
 void cycles_camera_update(unsigned int client_id, unsigned int scene_id)
 {
 	SCENE_FIND(scene_id)

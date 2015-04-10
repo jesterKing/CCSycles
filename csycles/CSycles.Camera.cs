@@ -62,6 +62,13 @@ namespace ccl
 			cycles_camera_compute_auto_viewplane(clientId, sceneId);
 		}
 
+		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_camera_set_viewplane", CallingConvention = CallingConvention.Cdecl)]
+		private static extern void cycles_camera_set_viewplane(uint clientId, uint sceneId, float left, float right, float top, float bottom);
+		public static void camera_set_viewplane(uint clientId, uint sceneId, float left, float right, float top, float bottom)
+		{
+			cycles_camera_set_viewplane(clientId, sceneId, left, right, top, bottom);
+		}
+
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_camera_update", CallingConvention = CallingConvention.Cdecl)]
 		private static extern void cycles_camera_update(uint clientId, uint sceneId);
 		public static void camera_update(uint clientId, uint sceneId)

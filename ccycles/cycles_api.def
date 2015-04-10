@@ -112,6 +112,7 @@ EXPORTS
   cycles_camera_set_panorama_type
   cycles_camera_set_matrix
   cycles_camera_compute_auto_viewplane
+  cycles_camera_set_viewplane
   cycles_camera_update
   cycles_camera_set_fov
   cycles_camera_set_sensor_width

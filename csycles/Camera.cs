@@ -244,5 +244,17 @@ namespace ccl
 		{
 			CSycles.camera_compute_auto_viewplane(Scene.Client.Id, Scene.Id);
 		}
+
+		/// <summary>
+		/// Set view plane
+		/// </summary>
+		/// <param name="left"></param>
+		/// <param name="right"></param>
+		/// <param name="top"></param>
+		/// <param name="bottom"></param>
+		public void SetViewPlane(float left, float right, float top, float bottom)
+		{
+			CSycles.camera_set_viewplane(Scene.Client.Id, Scene.Id, left, right, top, bottom);
+		}
 	}
 }

@@ -352,6 +352,8 @@ CCL_CAPI void __cdecl cycles_camera_set_matrix(unsigned int client_id, unsigned 
 	);
 /** Compute the auto viewplane for scene camera. */
 CCL_CAPI void __cdecl cycles_camera_compute_auto_viewplane(unsigned int client_id, unsigned int scene_id);
+/** Set viewplane for scene camera. */
+CCL_CAPI void __cdecl cycles_camera_set_viewplane(unsigned int client_id, unsigned int scene_id, float left, float right, float top, float bottom);
 /** Update camera. Should be called after changing settings on a scene camera. */
 CCL_CAPI void __cdecl cycles_camera_update(unsigned int client_id, unsigned int scene_id);
 /** Set the Field of View for scene camera. */
