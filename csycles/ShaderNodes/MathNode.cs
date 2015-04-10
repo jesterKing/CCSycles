@@ -18,12 +18,25 @@ using ccl.ShaderNodes.Sockets;
 
 namespace ccl.ShaderNodes
 {
+	/// <summary>
+	/// MathNode input sockets
+	/// </summary>
 	public class MathInputs : Inputs
 	{
+		/// <summary>
+		/// MathNode Value1 input socket
+		/// </summary>
 		public FloatSocket Value1 { get; set; }
+		/// <summary>
+		/// MathNode Value2 input socket
+		/// </summary>
 		public FloatSocket Value2 { get; set; }
 
-		public MathInputs(ShaderNode parentNode)
+		/// <summary>
+		/// Create MathNode input sockets
+		/// </summary>
+		/// <param name="parentNode"></param>
+		internal MathInputs(ShaderNode parentNode)
 		{
 			Value1 = new FloatSocket(parentNode, "Value1");
 			AddSocket(Value1);
@@ -32,11 +45,21 @@ namespace ccl.ShaderNodes
 		}
 	}
 
+	/// <summary>
+	/// MathNode output sockets
+	/// </summary>
 	public class MathOutputs : Outputs
 	{
+		/// <summary>
+		/// The resulting value of the MathNode operation
+		/// </summary>
 		public FloatSocket Value { get; set; }
 
-		public MathOutputs(ShaderNode parentNode)
+		/// <summary>
+		/// Create MathNode output sockets
+		/// </summary>
+		/// <param name="parentNode"></param>
+		internal MathOutputs(ShaderNode parentNode)
 		{
 			Value = new FloatSocket(parentNode, "Value");
 			AddSocket(Value);
@@ -45,58 +68,114 @@ namespace ccl.ShaderNodes
 
 	/// <summary>
 	/// Add a Math node, setting output Value with any of the following <c>Operation</c>s using Value1 and Value2
-	/// - Add. Value = Value1 + Value2
-	/// - Subtract Value = Value1 - Value2
-	/// - Multiply Value = Value1 * Value2
-	/// - Divide Value = Value1 / Value2
-	/// - Sine Value = sin(Value1)
-	/// - Cosine Value = cos(Value1)
-	/// - Tangent Value = tan(Value1)
-	/// - Arcsine Value = asin(Value1)
-	/// - Arccosine Value = acos(Value1)
-	/// - Arctangent Value = atan(Value1)
-	/// - Power Value = Value1 ** Value2
-	/// - Logarithm Value = log(Value1) / log(Value2) (0.0 if either 0.0)
-	/// - Minimum Value = min(Value1, Value2)
-	/// - Maximum Value = max(Value1, Value2)
-	/// - Round Value = floor(Value1 + 0.5)
-	/// - Less Than Value = Value1 &lt; Value2
-	/// - Greater Than Value = Value1 &gt; Value2
-	/// - Modulo Value = module(Value1, Value2)
-	/// - Absolute = abs(Value1)
 	///
-	/// \todo figure out how to do CLAMP
+	/// Note that some operations use only Value1
 	/// </summary>
 	public class MathNode : ShaderNode
 	{
+		/// <summary>
+		/// Math operations the MathNode can do.
+		/// </summary>
 		public enum Operations
 		{
+			/// <summary>
+			/// Value = Value1 + Value2
+			/// </summary>
 			Add,
+			/// <summary>
+			/// Value = Value1 - Value2
+			/// </summary>
 			Subtract,
+			/// <summary>
+			/// Value = Value1 * Value2
+			/// </summary>
 			Multiply,
+			/// <summary>
+			/// Value = Value1 / Value2
+			/// </summary>
 			Divide,
+			/// <summary>
+			/// Value = sin(Value1). Value2 ignored
+			/// </summary>
 			Sine,
+			/// <summary>
+			/// Value = cos(Value1). Value2 ignored
+			/// </summary>
 			Cosine,
+			/// <summary>
+			/// Value = tan(Value1). Value2 ignored
+			/// </summary>
 			Tangent,
+			/// <summary>
+			/// Value = asin(Value1). Value2 ignored
+			/// </summary>
 			Arcsine,
+			/// <summary>
+			/// Value = acos(Value1). Value2 ignored
+			/// </summary>
 			Arccosine,
+			/// <summary>
+			/// Value = atan(Value1). Value2 ignored
+			/// </summary>
 			Arctangent,
+			/// <summary>
+			/// Value = Value1 ** Value2
+			/// </summary>
 			Power,
+			/// <summary>
+			/// Value = log(Value1) / log(Value2). 0.0f if either input is 0.0f
+			/// </summary>
 			Logarithm,
+			/// <summary>
+			/// Value = min(Value1, Value2)
+			/// </summary>
 			Minimum,
+			/// <summary>
+			/// Value = max(Value1, Value2)
+			/// </summary>
 			Maximum,
+			/// <summary>
+			/// Value = floor(Value1 + 0.5). Value2 ignored
+			/// </summary>
 			Round,
+			/// <summary>
+			/// Value = Value1 &lt; Value2
+			/// </summary>
 			Less_Than,
+			/// <summary>
+			/// Value = Value1 &gt; Value2
+			/// </summary>
 			Greater_Than,
+			/// <summary>
+			/// Value = mod(Value1, Value2)
+			/// </summary>
 			Modulo,
+			/// <summary>
+			/// Value = abs(Value1). Value2 ignored
+			/// </summary>
 			Absolute
 		}
 
+		/// <summary>
+		/// MathNode input sockets
+		/// </summary>
 		public MathInputs ins { get { return (MathInputs)inputs; } set { inputs = value; } }
+		/// <summary>
+		/// MathNode output sockets
+		/// </summary>
 		public MathOutputs outs { get { return (MathOutputs)outputs; } set { outputs = value; } }
 
+		/// <summary>
+		/// Math node operates on float inputs (note, some operations use only Value1)
+		/// </summary>
 		public MathNode() :
-			base(ShaderNodeType.Math)
+			this("a mathnode")
+		{
+			
+		}
+
+		public MathNode(string name) :
+			base(ShaderNodeType.Math, name)
 		{
 			inputs = new MathInputs(this);
 			outputs = new MathOutputs(this);
@@ -106,6 +185,9 @@ namespace ccl.ShaderNodes
 			ins.Value2.Value = 0.0f;
 		}
 
+		/// <summary>
+		/// The operation this node does on Value1 and Value2
+		/// </summary>
 		public Operations Operation { get; set; }
 
 		/// <summary>

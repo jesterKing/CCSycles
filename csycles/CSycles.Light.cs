@@ -118,6 +118,13 @@ namespace ccl
 			cycles_light_set_co(clientId, sceneId, lightId, cox, coy, coz);
 		}
 
+		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_light_tag_update", CallingConvention = CallingConvention.Cdecl)]
+		private static extern void cycles_light_tag_update(uint clientId, uint sceneId, uint lightId);
+		public static void light_tag_update(uint clientId, uint sceneId, uint lightId)
+		{
+			cycles_light_tag_update(clientId, sceneId, lightId);
+		}
+
 #endregion
 	}
 }

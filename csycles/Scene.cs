@@ -25,7 +25,7 @@ namespace ccl
 	public class Scene
 	{
 		/// <summary>
-		/// Get the ID of the created Scene
+		/// Get the ID of the created Scene as given by CCycles
 		/// </summary>
 		public uint Id { get; private set; }
 
@@ -52,7 +52,7 @@ namespace ccl
 		/// <summary>
 		/// Create a new scene with the given SceneParameters and Device
 		/// </summary>
-		/// <param name="clientId">The client ID from C[CS]ycles API</param>
+		/// <param name="client">The client from C[CS]ycles API</param>
 		/// <param name="sceneParams">The SceneParameters to create scene with</param>
 		/// <param name="device">The Device to create scene for</param>
 		public Scene(Client client, SceneParameters sceneParams, Device device)
@@ -63,23 +63,28 @@ namespace ccl
 			Camera = new Camera(this);
 			Integrator = new Integrator(this);
 
+			/* add simple wrappers for shadermanager created default shaders */
 			var surface = Shader.WrapDefaultSurfaceShader(client);
-			var background = Shader.WrapDefaultBackgroundShader(client);
 			var light = Shader.WrapDefaultLightShader(client);
+			var background = Shader.WrapDefaultBackgroundShader(client);
 			var empty = Shader.WrapDefaultEmptyShader(client);
 
-			shaders.Add(surface, surface.Id);
-			shaders.Add(background, background.Id);
-			shaders.Add(light, light.Id);
-			shaders.Add(empty, empty.Id);
+			/* register the wrapped shaders with scene */
+			m_shader_in_scene_ids.Add(surface, surface.Id);
+			m_shader_in_scene_ids.Add(background, background.Id);
+			m_shader_in_scene_ids.Add(light, light.Id);
+			m_shader_in_scene_ids.Add(empty, empty.Id);
 
+			DefaultSurface = surface;
+
+			// set ourself to client as reference
 			client.Scene = this;
 		}
 
 		/// <summary>
-		/// A mapping of shaders and their scene specific IDs.
+		/// A mapping of <c>Shader</c>s and their scene specific IDs.
 		/// </summary>
-		private Dictionary<Shader, uint> shaders = new Dictionary<Shader, uint>();
+		private readonly Dictionary<Shader, uint> m_shader_in_scene_ids = new Dictionary<Shader, uint>();
 		/// <summary>
 		/// Add a Shader to Scene, assigning it a scene specific ID.
 		/// </summary>
@@ -88,7 +93,7 @@ namespace ccl
 		public uint AddShader(Shader shader)
 		{
 			var shader_in_scene_id = CSycles.scene_add_shader(Client.Id, Id, shader.Id);
-			shaders.Add(shader, shader_in_scene_id);
+			m_shader_in_scene_ids.Add(shader, shader_in_scene_id);
 			return shader_in_scene_id;
 		}
 
@@ -97,9 +102,9 @@ namespace ccl
 		/// </summary>
 		/// <param name="shader">Shader to query for</param>
 		/// <returns>Scene-specific Id</returns>
-		public uint ShaderSceneId(Shader shader)
+		public uint GetShaderSceneId(Shader shader)
 		{
-			return shaders[shader];
+			return m_shader_in_scene_ids[shader];
 		}
 
 		/// <summary>
@@ -109,7 +114,7 @@ namespace ccl
 		/// <returns>Shader</returns>
 		public Shader ShaderFromSceneId(uint shaderId)
 		{
-			foreach (var kvp in shaders)
+			foreach (var kvp in m_shader_in_scene_ids)
 			{
 				if (kvp.Value == shaderId)
 				{
@@ -127,19 +132,17 @@ namespace ccl
 		/// <returns>Shader or null if no shader with name was found.</returns>
 		public Shader ShaderWithName(string name)
 		{
-			return (from kvp in shaders where kvp.Key.Name.Equals(name) select kvp.Key).FirstOrDefault();
+			return (from kvp in m_shader_in_scene_ids where kvp.Key.Name.Equals(name) select kvp.Key).FirstOrDefault();
 		}
 
 		/// <summary>
 		/// Get a shader based on Scene-specific ID.
-		/// 
-		/// \todo devise a way to wrap Cycles' default shaders (surface, light, background).
 		/// </summary>
 		/// <param name="id"></param>
 		/// <returns></returns>
 		private Shader GetShader(uint id)
 		{
-			foreach (var kvp in shaders)
+			foreach (var kvp in m_shader_in_scene_ids)
 			{
 				if (kvp.Value == id)
 				{
@@ -161,7 +164,7 @@ namespace ccl
 			}
 			set
 			{
-				CSycles.scene_set_default_surface_shader(Client.Id, Id, ShaderSceneId(value));
+				CSycles.scene_set_default_surface_shader(Client.Id, Id, GetShaderSceneId(value));
 			}
 		}
 		//public static uint scene_create(uint scene_params_id, uint deviceid)

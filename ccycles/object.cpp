@@ -46,6 +46,14 @@ void cycles_scene_object_set_mesh(unsigned int client_id, unsigned int scene_id,
 	SCENE_FIND_END()
 }
 
+void cycles_object_tag_update(unsigned int client_id, unsigned int scene_id, unsigned int object_id)
+{
+	SCENE_FIND(scene_id)
+		auto ob = sce->objects[object_id];
+		ob->tag_update(sce);
+	SCENE_FIND_END()
+}
+
 unsigned int cycles_scene_object_get_mesh(unsigned int client_id, unsigned int scene_id, unsigned int object_id)
 {
 	SCENE_FIND(scene_id)

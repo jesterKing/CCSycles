@@ -45,7 +45,7 @@ namespace ccl
 		{
 			set
 			{
-				CSycles.scene_set_background_shader(Scene.Client.Id, Scene.Id, Scene.ShaderSceneId(value));
+				CSycles.scene_set_background_shader(Scene.Client.Id, Scene.Id, Scene.GetShaderSceneId(value));
 			}
 			get
 			{

@@ -53,9 +53,6 @@ unsigned int cycles_scene_add_mesh_object(unsigned int client_id, unsigned int s
 	return UINT_MAX;
 }
 
-/*
- * TODO: ponder if this should be in public API as well.
- */
 void cycles_mesh_set_shader(unsigned int client_id, unsigned int scene_id, unsigned int mesh_id, unsigned int shader_id)
 {
 	SCENE_FIND(scene_id)
@@ -69,7 +66,13 @@ void cycles_mesh_set_shader(unsigned int client_id, unsigned int scene_id, unsig
 			++it;
 		}
 
+		for (auto i = 0; i < me->shader.size(); i++) {
+			me->shader[i] = shader_id;
+		}
+
 		if (it == end) me->used_shaders.push_back(shader_id);
+
+		sce->shaders[shader_id]->tag_update(sce);
 
 	SCENE_FIND_END()
 }
@@ -121,7 +124,7 @@ void cycles_mesh_set_tris(unsigned int client_id, unsigned int scene_id, unsigne
 	SCENE_FIND(scene_id)
 		auto me = sce->meshes[mesh_id];
 
-		cycles_mesh_set_shader(client_id, scene_id, mesh_id, shader_id);
+		//cycles_mesh_set_shader(client_id, scene_id, mesh_id, shader_id);
 
 		for (auto i = 0; i < (int)fcount*3; i += 3) {
 			logger.logit(client_id, "f: ", faces[i], ",", faces[i + 1], ",", faces[i + 2]);
@@ -147,7 +150,6 @@ void cycles_mesh_set_uvs(unsigned int client_id, unsigned int scene_id, unsigned
 	SCENE_FIND(scene_id)
 		auto me = sce->meshes[mesh_id];
 
-	if (me->need_attribute(sce, ccl::ATTR_STD_UV)) {
 		auto attr = me->attributes.add(ccl::ATTR_STD_UV, ccl::ustring("uvmap"));
 		auto fdata = attr->data_float3();
 
@@ -159,8 +161,7 @@ void cycles_mesh_set_uvs(unsigned int client_id, unsigned int scene_id, unsigned
 			f3.z = 0.0f;
 			fdata[j] = f3;
 		}
-	}
-	me->geometry_synced = true;
+		me->geometry_synced = true;
 	SCENE_FIND_END()
 }
 

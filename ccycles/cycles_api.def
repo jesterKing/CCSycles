@@ -46,11 +46,13 @@ EXPORTS
   cycles_mesh_set_smooth
   cycles_mesh_clear
   cycles_mesh_tag_rebuild
+  cycles_mesh_set_shader
 
   cycles_scene_object_set_matrix
   cycles_scene_object_set_mesh
   cycles_scene_object_get_mesh
   cycles_scene_object_set_visibility
+  cycles_object_tag_update
 
   cycles_integrator_tag_update
   cycles_integrator_set_max_bounce
@@ -80,10 +82,11 @@ EXPORTS
   cycles_integrator_set_seed
   cycles_integrator_set_sample_clamp_direct
   cycles_integrator_set_sample_clamp_indirect
-	cycles_integrator_set_sampling_pattern
+  cycles_integrator_set_sampling_pattern
 
   cycles_create_shader
   cycles_scene_add_shader
+  cycles_scene_tag_shader
   cycles_scene_set_default_surface_shader
   cycles_scene_get_default_surface_shader
   cycles_scene_shader_id
@@ -92,11 +95,16 @@ EXPORTS
   cycles_shadernode_set_attribute_float
   cycles_shadernode_set_attribute_vec
   cycles_shadernode_set_attribute_string
+  cycles_shadernode_texmapping_set_transformation
+  cycles_shadernode_texmapping_set_mapping
+  cycles_shadernode_texmapping_set_projection
+  cycles_shadernode_texmapping_set_type
   cycles_shadernode_set_enum
   cycles_shadernode_set_member_bool
   cycles_shadernode_set_member_float
   cycles_shadernode_set_member_int
   cycles_shadernode_set_member_vec
+  cycles_shadernode_set_member_vec4_at_index
   cycles_shadernode_set_member_float_img
   cycles_shadernode_set_member_byte_img
   cycles_shader_connect_nodes
@@ -104,6 +112,7 @@ EXPORTS
   cycles_shader_set_use_mis
   cycles_shader_set_use_transparent_shadow
   cycles_shader_set_heterogeneous_volume
+  cycles_shader_new_graph
 
   cycles_camera_set_size
   cycles_camera_get_width
@@ -112,6 +121,7 @@ EXPORTS
   cycles_camera_set_panorama_type
   cycles_camera_set_matrix
   cycles_camera_compute_auto_viewplane
+  cycles_camera_set_viewplane
   cycles_camera_update
   cycles_camera_set_fov
   cycles_camera_set_sensor_width
@@ -186,3 +196,4 @@ EXPORTS
   cycles_light_set_size
   cycles_light_set_dir
   cycles_light_set_co
+  cycles_light_tag_update

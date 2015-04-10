@@ -18,6 +18,13 @@ using System;
 
 namespace ccl
 {
+	/// <summary>
+	/// Device types that Cycles can support.
+	/// 
+	/// Note that currently focus is on CPU and CUDA
+	/// and CUDA MULTI support, but others can be
+	/// added when needed and possible
+	/// </summary>
 	public enum DeviceType : uint
 	{
 		None,
@@ -28,25 +35,44 @@ namespace ccl
 		Multi
 	}
 
+	/// <summary>
+	/// Shading systems available in Cycles.
+	/// 
+	/// Note that currently only SVM is supported
+	/// in C[CS]?ycles
+	/// </summary>
 	public enum ShadingSystem : uint
 	{
 		OSL,
 		SVM
 	}
 
+	/// <summary>
+	/// Integration method used for ray casting.
+	/// </summary>
 	public enum IntegratorMethod : int
 	{
+		/// <summary>
+		/// On each hit rays get split up for all possible equivalents
+		/// </summary>
 		BranchedPath = 0,
 		Path
 	}
 
+	/// <summary>
+	/// Sampling patterns available in
+	/// Cycles.
+	/// </summary>
 	public enum SamplingPattern : uint
 	{
 		Sobol = 0,
 		CMJ
 	}
 
-// NOTE: keep in sync with available Cycles nodes
+	/// <summary>
+	/// Available Cycles shader nodes.
+	/// @note keep in sync with available Cycles nodes
+	/// </summary>
 	public enum ShaderNodeType: uint
 	{
 		Background = 0,
@@ -101,7 +127,9 @@ namespace ccl
 		Mapping,
 		Holdout,
 		HueSaturation,
-		BrightnessContrast
+		BrightnessContrast,
+		GradientTexture,
+		ColorRamp,
 	}
 
 	public enum BvhType : uint

@@ -19,23 +19,38 @@ using ccl.ShaderNodes.Sockets;
 
 namespace ccl.ShaderNodes
 {
+	/// <summary>
+	/// EnvironmentTextureNode input sockets
+	/// </summary>
 	public class EnvironmentTextureInputs : Inputs
 	{
+		/// <summary>
+		/// EnvironmentTextureNode vector input 
+		/// </summary>
 		public Float4Socket Vector { get; set; }
 
-		public EnvironmentTextureInputs(ShaderNode parentNode)
+		internal EnvironmentTextureInputs(ShaderNode parentNode)
 		{
 			Vector = new Float4Socket(parentNode, "Vector");
 			AddSocket(Vector);
 		}
 	}
 
+	/// <summary>
+	/// EnvironmentTextureNode output sockets
+	/// </summary>
 	public class EnvironmentTextureOutputs : Outputs
 	{
+		/// <summary>
+		/// EnvironmentTextureNode color output
+		/// </summary>
 		public Float4Socket Color { get; set; }
+		/// <summary>
+		/// EnvironmentTextureNode alpha output
+		/// </summary>
 		public FloatSocket Alpha { get; set; }
 
-		public EnvironmentTextureOutputs(ShaderNode parentNode)
+		internal EnvironmentTextureOutputs(ShaderNode parentNode)
 		{
 			Color = new Float4Socket(parentNode, "Color");
 			AddSocket(Color);
@@ -44,12 +59,23 @@ namespace ccl.ShaderNodes
 		}
 	}
 
+	/// <summary>
+	/// EnvironmentTextureNode
+	/// </summary>
 	public class EnvironmentTextureNode : TextureNode
 	{
-
+		/// <summary>
+		/// EnvironmentTextureNode input sockets
+		/// </summary>
 		public EnvironmentTextureInputs ins { get { return (EnvironmentTextureInputs)inputs; } set { inputs = value; } }
+		/// <summary>
+		/// EnvironmentTextureNode output sockets
+		/// </summary>
 		public EnvironmentTextureOutputs outs { get { return (EnvironmentTextureOutputs)outputs; } set { outputs = value; } }
 
+		/// <summary>
+		/// Create an EnvironmentTextureNode
+		/// </summary>
 		public EnvironmentTextureNode() :
 			base(ShaderNodeType.EnvironmentTexture)
 		{
@@ -61,24 +87,44 @@ namespace ccl.ShaderNodes
 			Projection = EnvironmentProjection.Equirectangular;
 		}
 
+		/// <summary>
+		/// Color space to operate in
+		/// </summary>
 		public TextureColorSpace ColorSpace { get; set; }
+		/// <summary>
+		/// Get or set environment projection
+		/// </summary>
 		public EnvironmentProjection Projection { get; set; }
+		/// <summary>
+		/// Get or set image name
+		/// </summary>
 		public string Filename { get; set; }
 
+		/// <summary>
+		/// Get or set the float data for image. Use for HDR images
+		/// </summary>
 		public float[] FloatImage { set; get; }
-
+		
+		/// <summary>
+		/// Get or set the byte data for image
+		/// </summary>
 		public byte[] ByteImage { set; get; }
 
-		/* two helpers for image resolution */
+		/// <summary>
+		/// Get or set image resolution width
+		/// </summary>
 		public uint Width { get; set; }
+		/// <summary>
+		/// Get or set image resolution height
+		/// </summary>
 		public uint Height { get; set; }
 
 		internal override void SetEnums(uint clientId, uint shaderId)
 		{
-			var projection = Projection == TextureNode.EnvironmentProjection.Equirectangular
+			var projection = Projection == EnvironmentProjection.Equirectangular
 				? "Equirectangular"
 				: "Mirror Ball";
-			var colspace = ColorSpace == TextureNode.TextureColorSpace.Color ? "Color" : "None";
+			var colspace = ColorSpace == TextureColorSpace.Color ? "Color" : "None";
 			CSycles.shadernode_set_enum(clientId, shaderId, Id, Type, projection);
 			CSycles.shadernode_set_enum(clientId, shaderId, Id, Type, colspace);
 		}

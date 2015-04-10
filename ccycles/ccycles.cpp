@@ -21,6 +21,12 @@ limitations under the License.
 extern void _cleanup_scenes();
 extern void _cleanup_sessions();
 extern void _cleanup_shaders();
+extern void _init_shaders();
+
+std::ostream& operator<<(std::ostream& out, shadernode_type const &snt) {
+	out << (int)snt;
+	return out;
+}
 
 /* Hold the device information found on the system after initialisation. */
 std::vector<ccl::DeviceInfo> devices;
@@ -52,6 +58,7 @@ void cycles_initialise()
 {
 	if (!initialised) {
 		devices = ccl::Device::available_devices();
+		_init_shaders();
 	}
 }
 

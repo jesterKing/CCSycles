@@ -74,6 +74,14 @@ namespace ccl
 			cycles_mesh_set_smooth(clientId, sceneId, meshId, (uint)(smooth ? 1 : 0));
 		}
 
+		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_mesh_set_shader", CallingConvention = CallingConvention.Cdecl)]
+		private static extern void cycles_mesh_set_shader(uint clientId, uint sceneId, uint meshId, uint shader);
+
+		public static void mesh_set_shader(uint clientId, uint sceneId, uint meshId, uint shaderId)
+		{
+			cycles_mesh_set_shader(clientId, sceneId, meshId, shaderId);
+		}
+
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_mesh_clear", CallingConvention = CallingConvention.Cdecl)]
 		private static extern void cycles_mesh_clear(uint clientId, uint sceneId, uint meshId);
 

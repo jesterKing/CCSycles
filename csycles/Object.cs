@@ -62,6 +62,14 @@ namespace ccl
 		}
 
 		/// <summary>
+		/// Tag object for update.
+		/// </summary>
+		public void TagUpdate()
+		{
+			CSycles.object_tag_update(Client.Id, Client.Scene.Id, Id);
+		}
+
+		/// <summary>
 		/// Set the object transformation
 		/// </summary>
 		public Transform Transform
