@@ -16,17 +16,32 @@ limitations under the License.
 
 namespace ccl
 {
+	/// <summary>
+	/// A client is a main point of entry for C[CS]?ycles API user
+	/// </summary>
 	public class Client
 	{
+		/// <summary>
+		/// Id for this client
+		/// </summary>
 		public uint Id { get; private set; }
 
+		/// <summary>
+		/// Scene reference of this client
+		/// </summary>
 		public Scene Scene { get; set; }
 
+		/// <summary>
+		/// Create a new client
+		/// </summary>
 		public Client()
 		{
 			Id = CSycles.new_client();
 		}
 
+		/// <summary>
+		/// Destroy a client.
+		/// </summary>
 		~Client()
 		{
 			CSycles.release_client(Id);
