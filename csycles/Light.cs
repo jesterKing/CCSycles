@@ -52,6 +52,14 @@ namespace ccl
 		}
 
 		/// <summary>
+		/// Tag light for update on device
+		/// </summary>
+		public void TagUpdate()
+		{
+			CSycles.light_tag_update(Client.Id, Scene.Id, Id);
+		}
+
+		/// <summary>
 		/// Set type of light.
 		/// </summary>
 		public LightType Type

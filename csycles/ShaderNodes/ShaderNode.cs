@@ -15,8 +15,7 @@ limitations under the License.
 **/
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+using ccl.ShaderNodes.Sockets;
 
 namespace ccl.ShaderNodes
 {
@@ -25,6 +24,10 @@ namespace ccl.ShaderNodes
 	/// </summary>
 	public class ShaderNode
 	{
+		/// <summary>
+		/// Set a name for this node
+		/// </summary>
+		public string Name { get; private set; }
 		/// <summary>
 		/// Get the node ID. This is set when created in Cycles.
 		/// </summary>
@@ -43,9 +46,23 @@ namespace ccl.ShaderNodes
 		/// </summary>
 		internal Outputs outputs { get; set; }
 
-		public ShaderNode(ShaderNodeType type)
+		/// <summary>
+		/// Create node of type ShaderNodeType type
+		/// </summary>
+		/// <param name="type"></param>
+		internal ShaderNode(ShaderNodeType type) : this(type, String.Empty)
+		{
+		}
+
+		/// <summary>
+		/// Create node of type ShaderNodeType and with given name
+		/// </summary>
+		/// <param name="type"></param>
+		/// <param name="name"></param>
+		internal ShaderNode(ShaderNodeType type, string name)
 		{
 			Type = type;
+			Name = name;
 		}
 
 		/// <summary>
@@ -69,5 +86,38 @@ namespace ccl.ShaderNodes
 		{
 			// do nothing
 		}
+
+		internal void SetSockets(uint clientId, uint shaderId)
+		{
+			/* set node attributes */
+			if (inputs != null)
+			{
+				foreach (var socket in inputs.Sockets)
+				{
+					var float_socket = socket as FloatSocket;
+					if (float_socket != null)
+					{
+						CSycles.shadernode_set_attribute_float(clientId, shaderId, Id, float_socket.Name, float_socket.Value);
+					}
+					var int_socket = socket as IntSocket;
+					if (int_socket != null)
+					{
+						CSycles.shadernode_set_attribute_int(clientId, shaderId, Id, int_socket.Name, int_socket.Value);
+					}
+					var string_socket = socket as StringSocket;
+					if (string_socket != null)
+					{
+						CSycles.shadernode_set_attribute_string(clientId, shaderId, Id, socket.Name, string_socket.Value);
+					}
+					var float4_socket = socket as Float4Socket;
+					if (float4_socket != null)
+					{
+						CSycles.shadernode_set_attribute_vec(clientId, shaderId, Id, float4_socket.Name, float4_socket.Value);
+					}
+				}
+			}
+		}
+
+
 	}
 }

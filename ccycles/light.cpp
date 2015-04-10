@@ -151,3 +151,10 @@ void cycles_light_set_co(unsigned int client_id, unsigned int scene_id, unsigned
 		logger.logit(client_id, "Setting light ", light_id, " of scene ", scene_id, " co to ", cox, ",", coy, ",", coz);
 	LIGHT_FIND_END()
 }
+
+void cycles_light_tag_update(unsigned int client_id, unsigned int scene_id, unsigned int light_id)
+{
+	LIGHT_FIND(scene_id, light_id)
+		l->tag_update(sce);
+	LIGHT_FIND_END()
+}

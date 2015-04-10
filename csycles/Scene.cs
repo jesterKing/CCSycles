@@ -25,7 +25,7 @@ namespace ccl
 	public class Scene
 	{
 		/// <summary>
-		/// Get the ID of the created Scene
+		/// Get the ID of the created Scene as given by CCycles
 		/// </summary>
 		public uint Id { get; private set; }
 
@@ -52,7 +52,7 @@ namespace ccl
 		/// <summary>
 		/// Create a new scene with the given SceneParameters and Device
 		/// </summary>
-		/// <param name="clientId">The client ID from C[CS]ycles API</param>
+		/// <param name="client">The client from C[CS]ycles API</param>
 		/// <param name="sceneParams">The SceneParameters to create scene with</param>
 		/// <param name="device">The Device to create scene for</param>
 		public Scene(Client client, SceneParameters sceneParams, Device device)
@@ -77,6 +77,7 @@ namespace ccl
 
 			DefaultSurface = surface;
 
+			// set ourself to client as reference
 			client.Scene = this;
 		}
 

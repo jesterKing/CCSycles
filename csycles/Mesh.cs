@@ -70,6 +70,17 @@ namespace ccl
 		}
 
 		/// <summary>
+		/// Use given <c>shader</c> as new shader.
+		/// </summary>
+		/// <param name="shader"></param>
+		public void ReplaceShader(Shader shader)
+		{
+			Shader = shader;
+			CSycles.mesh_set_shader(Client.Id, Client.Scene.Id, Id, Client.Scene.GetShaderSceneId(Shader));
+			TagRebuild();
+		}
+
+		/// <summary>
 		/// Tag for update and rebuild
 		/// </summary>
 		public void TagRebuild()

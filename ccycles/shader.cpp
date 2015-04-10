@@ -82,6 +82,14 @@ unsigned int cycles_scene_add_shader(unsigned int client_id, unsigned int scene_
 	return (unsigned int)(-1);
 }
 
+void cycles_scene_tag_shader(unsigned int client_id, unsigned int scene_id, unsigned int shader_id)
+{
+	SCENE_FIND(scene_id)
+		auto sh = shaders[shader_id];
+		sh->shader->tag_update(sce);
+	SCENE_FIND_END()
+}
+
 /* Get Cycles shader ID in specific scene. */
 unsigned int cycles_scene_shader_id(unsigned int client_id, unsigned int scene_id, unsigned int shader_id)
 {
@@ -92,6 +100,14 @@ unsigned int cycles_scene_shader_id(unsigned int client_id, unsigned int scene_i
 
 	return (unsigned int)(-1);
 }
+
+void cycles_shader_new_graph(unsigned int client_id, unsigned int shader_id)
+{
+		auto sh = shaders[shader_id];
+		sh->graph = new ccl::ShaderGraph();
+		sh->shader->set_graph(sh->graph);
+}
+
 
 void cycles_shader_set_name(unsigned int client_id, unsigned int shader_id, const char* name)
 {
@@ -274,6 +290,12 @@ unsigned int cycles_add_shader_node(unsigned int client_id, unsigned int shader_
 		case shadernode_type::HUE_SAT:
 			node = new ccl::HSVNode();
 			break;
+		case shadernode_type::GRADIENT_TEXTURE:
+			node = new ccl::GradientTextureNode();
+			break;
+		case shadernode_type::COLOR_RAMP:
+			node = new ccl::RGBRampNode();
+			break;
 	}
 
 	if (node) {
@@ -305,11 +327,7 @@ struct attrunion {
 void shadernode_set_attribute(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, const char* attribute_name, attrunion v)
 {
 	auto attr = string(attribute_name);
-	auto& sh = shaders[shader_id];
-	auto psh = sh->graph->nodes.begin();
-	while (psh != sh->graph->nodes.end())
-	{
-		if ((*psh)->id == shnode_id) {
+	SHADERNODE_FIND(shader_id, shnode_id)
 			for (auto* inp : (*psh)->inputs) {
 				auto inpname = string(inp->name);
 				if (ccl::string_iequals(inpname, attribute_name)) {
@@ -337,9 +355,7 @@ void shadernode_set_attribute(unsigned int client_id, unsigned int shader_id, un
 				}
 			}
 			break;
-		}
-		++psh;
-	}
+	SHADERNODE_FIND_END()
 }
 
 void _set_enum_val(unsigned int client_id, OpenImageIO::v1_3::ustring* str, ccl::ShaderEnum& enm, const OpenImageIO::v1_3::ustring val)
@@ -352,6 +368,93 @@ void _set_enum_val(unsigned int client_id, OpenImageIO::v1_3::ustring* str, ccl:
 	}
 }
 
+void _set_texture_mapping_transformation(ccl::TextureMapping& mapping, int transform_type, float x, float y, float z)
+{
+	switch (transform_type) {
+		case 0:
+			mapping.translation.x = x;
+			mapping.translation.y = y;
+			mapping.translation.z = z;
+			break;
+		case 1:
+			mapping.rotation.x = x;
+			mapping.rotation.y = y;
+			mapping.rotation.z = z;
+			break;
+		case 2:
+			mapping.scale.x = x;
+			mapping.scale.y = y;
+			mapping.scale.z = z;
+			break;
+	}
+}
+
+void cycles_shadernode_texmapping_set_transformation(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, shadernode_type shn_type, int transform_type, float x, float y, float z)
+{
+	SHADERNODE_FIND(shader_id, shnode_id)
+		string tp = "UNKNOWN";
+		switch (transform_type) {
+			case 0:
+				tp = "TRANSLATION";
+				break;
+			case 1:
+				tp = "ROTATION";
+				break;
+			case 2:
+				tp = "SCALE";
+				break;
+		}
+		logger.logit(client_id, "Setting texture map transformation (", tp, ") to ", x, ",", y, ",", z, " for shadernode type ", shn_type);
+			switch (shn_type) {
+				case shadernode_type::MAPPING:
+					auto node = dynamic_cast<ccl::MappingNode*>(*psh);
+					_set_texture_mapping_transformation(node->tex_mapping, transform_type, x, y, z);
+					break;
+			}
+	SHADERNODE_FIND_END()
+}
+
+void cycles_shadernode_texmapping_set_mapping(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, shadernode_type shn_type, ccl::TextureMapping::Mapping x, ccl::TextureMapping::Mapping y, ccl::TextureMapping::Mapping z)
+{
+	SHADERNODE_FIND(shader_id, shnode_id)
+		logger.logit(client_id, "Setting texture map mapping to ", x, ",", y, ",", z, " for shadernode type ", shn_type);
+			switch (shn_type) {
+				case shadernode_type::MAPPING:
+					auto node = dynamic_cast<ccl::MappingNode*>(*psh);
+					node->tex_mapping.x_mapping = x;
+					node->tex_mapping.y_mapping = y;
+					node->tex_mapping.z_mapping = z;
+					break;
+			}
+	SHADERNODE_FIND_END()
+}
+
+void cycles_shadernode_texmapping_set_projection(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, shadernode_type shn_type, ccl::TextureMapping::Projection tm_projection)
+{
+	SHADERNODE_FIND(shader_id, shnode_id)
+		logger.logit(client_id, "Setting texture map projection type to ", tm_projection, " for shadernode type ", shn_type);
+			switch (shn_type) {
+				case shadernode_type::MAPPING:
+					auto node = dynamic_cast<ccl::MappingNode*>(*psh);
+					node->tex_mapping.projection= tm_projection;
+					break;
+			}
+	SHADERNODE_FIND_END()
+}
+
+void cycles_shadernode_texmapping_set_type(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, shadernode_type shn_type, ccl::TextureMapping::Type tm_type)
+{
+	SHADERNODE_FIND(shader_id, shnode_id)
+		logger.logit(client_id, "Setting texture map type to ", tm_type, " for shadernode type ", shn_type);
+			switch (shn_type) {
+				case shadernode_type::MAPPING:
+					auto node = dynamic_cast<ccl::MappingNode*>(*psh);
+					node->tex_mapping.type = tm_type;
+					break;
+			}
+	SHADERNODE_FIND_END()
+}
+
 /* TODO: add all enum possibilities.
  * Note that this particular API function won't deal yet very well with
  * nodes that have multiple enums.
@@ -360,11 +463,7 @@ void cycles_shadernode_set_enum(unsigned int client_id, unsigned int shader_id, 
 {
 	auto val = OpenImageIO::v1_3::ustring(value);
 
-	auto& sh = shaders[shader_id];
-	auto psh = sh->graph->nodes.begin();
-	while (psh != sh->graph->nodes.end())
-	{
-		if ((*psh)->id == shnode_id) {
+	SHADERNODE_FIND(shader_id, shnode_id)
 			switch (shn_type) {
 				case shadernode_type::MATH:
 					{
@@ -419,11 +518,13 @@ void cycles_shadernode_set_enum(unsigned int client_id, unsigned int shader_id, 
 						}
 					}
 					break;
+				case shadernode_type::GRADIENT_TEXTURE:
+					auto node = dynamic_cast<ccl::GradientTextureNode*>(*psh);
+					_set_enum_val(client_id, &node->type, ccl::GradientTextureNode::type_enum, val);
+					break;
 			}
 			break;
-		}
-		++psh;
-	}
+	SHADERNODE_FIND_END()
 }
 
 CCImage* find_existing_ccimage(string imgname)
@@ -461,13 +562,10 @@ CCImage* get_ccimage(string imgname, T* img, unsigned int width, unsigned int he
 
 void cycles_shadernode_set_member_float_img(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, shadernode_type shn_type, const char* member_name, const char* img_name, float* img, unsigned int width, unsigned int height, unsigned int depth, unsigned int channels)
 {
-	auto& sh = shaders[shader_id];
-	auto psh = sh->graph->nodes.begin();
 	auto mname = string(member_name);
 	auto imname = string(img_name);
-	while (psh != sh->graph->nodes.end())
-	{
-		if ((*psh)->id == shnode_id) {
+
+	SHADERNODE_FIND(shader_id, shnode_id)
 			switch (shn_type) {
 				case shadernode_type::IMAGE_TEXTURE:
 					{
@@ -487,20 +585,14 @@ void cycles_shadernode_set_member_float_img(unsigned int client_id, unsigned int
 					}	
 					break;
 			}
-		}
-		++psh;
-	}
+	SHADERNODE_FIND_END()
 }
 
 void cycles_shadernode_set_member_byte_img(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, shadernode_type shn_type, const char* member_name, const char* img_name, unsigned char* img, unsigned int width, unsigned int height, unsigned int depth, unsigned int channels)
 {
-	auto& sh = shaders[shader_id];
-	auto psh = sh->graph->nodes.begin();
 	auto mname = string(member_name);
 	auto imname = string(img_name);
-	while (psh != sh->graph->nodes.end())
-	{
-		if ((*psh)->id == shnode_id) {
+	SHADERNODE_FIND(shader_id, shnode_id)
 			switch (shn_type) {
 				case shadernode_type::IMAGE_TEXTURE:
 					{
@@ -520,19 +612,14 @@ void cycles_shadernode_set_member_byte_img(unsigned int client_id, unsigned int 
 					}
 					break;
 			}
-		}
-		++psh;
-	}
+	SHADERNODE_FIND_END()
 }
 
 void cycles_shadernode_set_member_bool(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, shadernode_type shn_type, const char* member_name, bool value)
 {
-	auto& sh = shaders[shader_id];
-	auto psh = sh->graph->nodes.begin();
 	auto mname = string(member_name);
-	while (psh != sh->graph->nodes.end())
-	{
-		if ((*psh)->id == shnode_id) {
+
+	SHADERNODE_FIND(shader_id, shnode_id)
 			switch (shn_type) {
 				case shadernode_type::MATH:
 					{
@@ -540,21 +627,31 @@ void cycles_shadernode_set_member_bool(unsigned int client_id, unsigned int shad
 						mnode->use_clamp = value;
 					}
 					break;
+				case shadernode_type::MAPPING:
+					{
+						ccl::MappingNode* mapping = dynamic_cast<ccl::MappingNode*>(*psh);
+						if (mname == "useminmax") {
+							mapping->tex_mapping.use_minmax = value;
+						}
+					}
+					break;
+				case shadernode_type::COLOR_RAMP:
+					{
+						ccl::RGBRampNode* colorramp = dynamic_cast<ccl::RGBRampNode*>(*psh);
+						if (mname == "interpolate")
+						{
+							colorramp->interpolate = value;
+						}
+					}
+					break;
 			}
-		}
-	++psh;
-	}
-
+	SHADERNODE_FIND_END()
 }
 
 void cycles_shadernode_set_member_int(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, shadernode_type shn_type, const char* member_name, int value)
 {
-	auto& sh = shaders[shader_id];
-	auto psh = sh->graph->nodes.begin();
 	auto mname = string(member_name);
-	while (psh != sh->graph->nodes.end())
-	{
-		if ((*psh)->id == shnode_id) {
+	SHADERNODE_FIND(shader_id, shnode_id)
 			switch (shn_type) {
 				case shadernode_type::BRICK_TEXTURE:
 					{
@@ -566,20 +663,15 @@ void cycles_shadernode_set_member_int(unsigned int client_id, unsigned int shade
 					}
 					break;
 			}
-		}
-		++psh;
-	}
+	SHADERNODE_FIND_END()
 }
 
 
 void cycles_shadernode_set_member_float(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, shadernode_type shn_type, const char* member_name, float value)
 {
-	auto& sh = shaders[shader_id];
-	auto psh = sh->graph->nodes.begin();
 	auto mname = string(member_name);
-	while (psh != sh->graph->nodes.end())
-	{
-		if ((*psh)->id == shnode_id) {
+
+	SHADERNODE_FIND(shader_id, shnode_id)
 			switch (shn_type) {
 				case shadernode_type::VALUE:
 					{
@@ -614,18 +706,33 @@ void cycles_shadernode_set_member_float(unsigned int client_id, unsigned int sha
 					}
 					break;
 			}
+	SHADERNODE_FIND_END()
+}
+
+void cycles_shadernode_set_member_vec4_at_index(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, shadernode_type shn_type, const char* member_name, float x, float y, float z, float w, int index)
+{
+	auto mname = string(member_name);
+
+	SHADERNODE_FIND(shader_id, shnode_id)
+		switch (shn_type) {
+			case shadernode_type::COLOR_RAMP:
+				{
+					ccl::RGBRampNode* colorramp = dynamic_cast<ccl::RGBRampNode*>(*psh);
+					colorramp->ramp[index].x = x;
+					colorramp->ramp[index].y = y;
+					colorramp->ramp[index].z = z;
+					colorramp->ramp[index].w = w;
+				}
+				break;
 		}
-		++psh;
-	}
+	SHADERNODE_FIND_END()
 }
 
 void cycles_shadernode_set_member_vec(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, shadernode_type shn_type, const char* member_name, float x, float y, float z)
 {
-	auto& sh = shaders[shader_id];
-	auto psh = sh->graph->nodes.begin();
-	while (psh != sh->graph->nodes.end())
-	{
-		if ((*psh)->id == shnode_id) {
+	auto mname = string(member_name);
+
+	SHADERNODE_FIND(shader_id, shnode_id)
 			switch (shn_type) {
 			case shadernode_type::COLOR:
 					{
@@ -643,10 +750,23 @@ void cycles_shadernode_set_member_vec(unsigned int client_id, unsigned int shade
 						sunnode->sun_direction.z = z;
 					}
 					break;
+			case shadernode_type::MAPPING:
+				{
+					ccl::MappingNode* mapping = dynamic_cast<ccl::MappingNode*>(*psh);
+					if (mname == "min") {
+						mapping->tex_mapping.min.x = x;
+						mapping->tex_mapping.min.y = y;
+						mapping->tex_mapping.min.z = z;
+					}
+					else if (mname == "max") {
+						mapping->tex_mapping.max.x = x;
+						mapping->tex_mapping.max.y = y;
+						mapping->tex_mapping.max.z = z;
+					}
+				}
+				break;
 			}
-		}
-		++psh;
-	}
+	SHADERNODE_FIND_END()
 }
 
 /*

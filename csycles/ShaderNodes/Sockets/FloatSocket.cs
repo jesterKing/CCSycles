@@ -16,9 +16,23 @@ limitations under the License.
 
 namespace ccl.ShaderNodes.Sockets
 {
+	/// <summary>
+	/// FloatSocket is used to communicate a single float value between
+	/// nodes.
+	/// </summary>
 	public class FloatSocket : SocketBase
 	{
+		/// <summary>
+		/// Get or set the value for the float socket
+		/// </summary>
 		public float Value { get; set; }
+		/// <summary>
+		/// Create a new FloatSocket.
+		/// 
+		/// The name of the socket has to correspond to the names in Cycles.
+		/// </summary>
+		/// <param name="parentNode">The ShaderNode for which the socket is created</param>
+		/// <param name="name">Name of the socket</param>
 		public FloatSocket(ShaderNode parentNode, string name)
 			: base(parentNode, name)
 		{

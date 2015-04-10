@@ -209,6 +209,12 @@ namespace ccl
 						nodes.Add(nodename, noisenode);
 						shader.AddNode(noisenode);
 						break;
+					case "gradient_texture":
+						var gradientnode = new GradientTextureNode();
+						get_float4(gradientnode.ins.Vector, node.GetAttribute("vector"));
+						nodes.Add(nodename, gradientnode);
+						shader.AddNode(gradientnode);
+						break;
 					case "sky_texture":
 						var skynode = new SkyTexture();
 
@@ -377,6 +383,29 @@ namespace ccl
 					case "mapping":
 						var mapping = new MappingNode();
 						get_float4(mapping.ins.Vector, node.GetAttribute("vector"));
+						var mapping_type = node.GetAttribute("mapping_type");
+						if (!string.IsNullOrEmpty(mapping_type))
+						{
+							try
+							{
+								var mt = (MappingNode.MappingType) Enum.Parse(typeof (MappingNode.MappingType), mapping_type, true);
+								mapping.Mapping = mt;
+							}
+							catch (ArgumentException)
+							{
+								mapping.Mapping = MappingNode.MappingType.Texture;
+							}
+						}
+						var f4 = new float4(0.0f);
+						get_float4(f4, node.GetAttribute("rotation"));
+						mapping.Rotation = f4;
+						f4 = new float4(0.0f);
+						get_float4(f4, node.GetAttribute("translation"));
+						mapping.Translation = f4;
+						f4 = new float4(0.0f);
+						get_float4(f4, node.GetAttribute("scale"));
+						mapping.Scale = f4;
+
 						nodes.Add(nodename, mapping);
 						shader.AddNode(mapping);
 						break;

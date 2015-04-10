@@ -18,22 +18,17 @@ using ccl.ShaderNodes.Sockets;
 
 namespace ccl.ShaderNodes
 {
+	/// <summary>
+	/// MappingNode input sockets
+	/// </summary>
 	public class MappingInputs : Inputs
 	{
+		/// <summary>
+		/// MappingNode input vector that should be transformed
+		/// </summary>
 		public Float4Socket Vector { get; set; }
 
-		public MappingInputs(ShaderNode parentNode)
-		{
-			Vector = new Float4Socket(parentNode, "Vector");
-			AddSocket(Vector);
-		}
-	}
-
-	public class MappingOutputs : Outputs
-	{
-		public Float4Socket Vector { get; set; }
-
-		public MappingOutputs(ShaderNode parentNode)
+		internal MappingInputs(ShaderNode parentNode)
 		{
 			Vector = new Float4Socket(parentNode, "Vector");
 			AddSocket(Vector);
@@ -41,34 +36,77 @@ namespace ccl.ShaderNodes
 	}
 
 	/// <summary>
-	/// Add a Mapping node, setting output Value with any of the following <c>vector types</c>s:
+	/// MappingNode output sockets
+	/// </summary>
+	public class MappingOutputs : Outputs
+	{
+		/// <summary>
+		/// MappingNode output vector
+		/// </summary>
+		public Float4Socket Vector { get; set; }
+
+		internal MappingOutputs(ShaderNode parentNode)
+		{
+			Vector = new Float4Socket(parentNode, "Vector");
+			AddSocket(Vector);
+		}
+	}
+
+	/// <summary>
+	/// Mapping node to transform an input vector utilising one of the four
+	/// types
 	/// - Texture: Transform a texture by inverse mapping the texture coordinate
 	/// - Point: Transform a point
 	/// - Vector: Transform a direction vector
 	/// - Normal: Transform a normal vector with unit length
-	///
-	/// \todo figure out how to do UseMIN and UseMAX
 	/// </summary>
 	public class MappingNode : ShaderNode
 	{
-
+		/// <summary>
+		/// MappingNode input sockets
+		/// </summary>
 		public MappingInputs ins { get { return (MappingInputs)inputs; } set { inputs = value; } }
+		/// <summary>
+		/// MappingNode output sockets
+		/// </summary>
 		public MappingOutputs outs { get { return (MappingOutputs)outputs; } set { outputs = value; } }
 
-		public enum vector_types
+		/// <summary>
+		/// Mapping type to transform according
+		/// </summary>
+		public enum MappingType : uint
 		{
-			TEXTURE,
-			POINT,
-			VECTOR,
-			NORMAL
+			/// <summary>
+			/// Transform as point
+			/// </summary>
+			Point = 0,
+			/// <summary>
+			/// Transform texture space
+			/// </summary>
+			Texture,
+			/// <summary>
+			/// Transform vector
+			/// </summary>
+			Vector,
+			/// <summary>
+			/// Transform normal
+			/// </summary>
+			Normal
 		}
 
-		public MappingNode() :
-			base(ShaderNodeType.Mapping)
+		/// <summary>
+		/// Create new MappingNode
+		/// </summary>
+		public MappingNode() : this("a mapping node")
+		{
+		}
+
+		public MappingNode(string name) :
+			base(ShaderNodeType.Mapping, name)
 		{
 			inputs = new MappingInputs(this);
 			outputs = new MappingOutputs(this);
-			vector_type = vector_types.TEXTURE;
+			Mapping = MappingType.Texture;
 			UseMin = false;
 			UseMax = false;
 			Translation = new float4(0.0f);
@@ -79,43 +117,61 @@ namespace ccl.ShaderNodes
 		}
 
 		
-		public vector_types vector_type { get; set; }
+		/// <summary>
+		/// Get or set the mapping type to use
+		/// </summary>
+		public MappingType Mapping { get; set; }
 
+		/// <summary>
+		/// Translate input vector with this
+		/// </summary>
 		public float4 Translation { get; set; }
+		/// <summary>
+		/// Rotate input vector with this
+		/// </summary>
 		public float4 Rotation { get; set; }
+		/// <summary>
+		/// Scale input vector with this
+		/// </summary>
 		public float4 Scale { get; set; }
+		/// <summary>
+		/// If set, use this as minimum values for resulting vector
+		/// </summary>
 		public float4 Min { get; set; }
+		/// <summary>
+		/// If set, use this as maximum values for resulting vector
+		/// </summary>
 		public float4 Max { get; set; }
 
 		/// <summary>
-		/// Set to true [IN] if mapping output in Value should have a minimum value 0.0..1.0
+		/// Set to true [IN] if mapping output in Value should be floored to Min
 		/// </summary>
 		public bool UseMin { get; set; }
 
 		/// <summary>
-		/// Set to true [IN] if mapping output in Value should have a maximum value 0.0..1.0
+		/// Set to true [IN] if mapping output in Value should be ceiled to Max
 		/// </summary>
 		public bool UseMax { get; set; }
 
-		internal override void SetEnums(uint clientId, uint shaderId)
-		{
-			CSycles.shadernode_set_enum(clientId, shaderId, Id, Type, vector_type.ToString());
-		}
-
 		internal override void SetDirectMembers(uint clientId, uint shaderId)
 		{
-			CSycles.shadernode_set_member_bool(clientId, shaderId, Id, Type, "use_min", UseMin);
-			CSycles.shadernode_set_member_bool(clientId, shaderId, Id, Type, "use_max", UseMax);
+			CSycles.shadernode_set_member_bool(clientId, shaderId, Id, ShaderNodeType.Mapping, "useminmax", UseMin || UseMax);
+			if (UseMin)
+			{
+				CSycles.shadernode_set_member_vec(clientId, shaderId, Id, ShaderNodeType.Mapping, "min", Min.x, Min.y, Min.z);
+			}
+			if (UseMax)
+			{
+				CSycles.shadernode_set_member_vec(clientId, shaderId, Id, ShaderNodeType.Mapping, "max", Max.x, Max.y, Max.z);
+			}
 			var tr = Translation;
-			CSycles.shadernode_set_member_vec(clientId, shaderId, Id, Type, "translation", tr.x, tr.y, tr.z);
+			CSycles.shadernode_texmapping_set_transformation(clientId, shaderId, Id, ShaderNodeType.Mapping, 0, tr.x, tr.y, tr.z);
 			var rt = Rotation;
-			CSycles.shadernode_set_member_vec(clientId, shaderId, Id, Type, "rotation", rt.x, rt.y, rt.z);
+			CSycles.shadernode_texmapping_set_transformation(clientId, shaderId, Id, ShaderNodeType.Mapping, 1, rt.x, rt.y, rt.z);
 			var sc = Scale;
-			CSycles.shadernode_set_member_vec(clientId, shaderId, Id, Type, "scale", sc.x, sc.y, sc.z);
-			var mi = Min;
-			CSycles.shadernode_set_member_vec(clientId, shaderId, Id, Type, "min", mi.x, mi.y, mi.z);
-			var ma = Max;
-			CSycles.shadernode_set_member_vec(clientId, shaderId, Id, Type, "max", ma.x, ma.y, ma.z);
+			CSycles.shadernode_texmapping_set_transformation(clientId, shaderId, Id, ShaderNodeType.Mapping, 2, sc.x, sc.y, sc.z);
+
+			CSycles.shadernode_texmapping_set_type(clientId, shaderId, Id, ShaderNodeType.Mapping, (uint)Mapping);
 		}
 	}
 }

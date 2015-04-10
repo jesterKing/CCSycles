@@ -44,6 +44,18 @@ namespace ccl
 		/// <param name="old">float4 to copy</param>
 		public float4(float4 old) : this(old.x, old.y, old.z, old.w) { }
 
+		/// <summary>
+		/// Copy values from given source float4
+		/// </summary>
+		/// <param name="source">float4 to copy from</param>
+		public void Copy(float4 source)
+		{
+			x = source.x;
+			y = source.y;
+			z = source.z;
+			w = source.w;
+		}
+
 		public static float4 operator /(float4 a, float4 b)
 		{
 			return new float4(a.x/b.x, a.y/b.y, a.z/b.z, a.w/b.w);
@@ -55,14 +67,29 @@ namespace ccl
 			return new float4(a.x*inv, a.y*inv, a.z*inv, a.w*inv);
 		}
 
+		public static float4 operator /(float a, float4 b)
+		{
+			return new float4(a/b.x, a/b.y, a/b.z, a/b.w);
+		}
+
 		public static float4 operator *(float4 a, float4 b)
 		{
 			return new float4(a.x*b.x, a.y*b.y, a.z*b.z, a.w*b.w);
 		}
 
-		public static float4 operator /(float a, float4 b)
+		public static float4 operator *(float4 a, float b)
 		{
-			return new float4(a/b.x, a/b.y, a/b.z, a/b.w);
+			return new float4(a.x*b, a.y*b, a.z*b, a.w*b);
+		}
+
+		public static float4 operator *(float a, float4 b)
+		{
+			return new float4(b.x*a, b.y*a, b.z*a, b.w*a);
+		}
+
+		public static float4 operator +(float4 a, float4 b)
+		{
+			return new float4(a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w);
 		}
 
 		public float Length()

@@ -30,11 +30,20 @@ namespace ccl
 	{
 		readonly List<SocketBase> m_socketlist = new List<SocketBase>();
 
+		/// <summary>
+		/// Add socket so it can actually be linked to and from.
+		/// </summary>
+		/// <param name="sock"></param>
 		internal void AddSocket(SocketBase sock)
 		{
 			m_socketlist.Add(sock);
 		}
 
+		/// <summary>
+		/// Get socket based on name.
+		/// </summary>
+		/// <param name="name"></param>
+		/// <returns></returns>
 		public SocketBase Socket(string name)
 		{
 			foreach (var socket in Sockets)

@@ -61,7 +61,9 @@ namespace ccl.ShaderNodes
 		public TextureCoordinateOutputs outs { get { return (TextureCoordinateOutputs)outputs; } set { outputs = value; } }
 
 		public TextureCoordinateNode()
-			: base(ShaderNodeType.TextureCoordinate)
+			: this("a texcoord") { }
+		public TextureCoordinateNode(string name)
+			: base(ShaderNodeType.TextureCoordinate, name)
 		{
 			ins = null;
 			outs = new TextureCoordinateOutputs(this);

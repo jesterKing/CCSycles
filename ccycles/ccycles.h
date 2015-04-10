@@ -254,6 +254,11 @@ CCL_CAPI unsigned int __cdecl cycles_scene_object_get_mesh(unsigned int client_i
  * \ingroup ccycles_object
  */
 CCL_CAPI void __cdecl cycles_scene_object_set_visibility(unsigned int client, unsigned int scene_id, unsigned int object_id, unsigned int visibility);
+/**
+ * Tag object for update
+ * \ingroup ccycles_object
+ */
+CCL_CAPI void __cdecl cycles_object_tag_update(unsigned int client_id, unsigned int scene_id, unsigned int object_id);
 
 /** Tag integrator for update. */
 CCL_CAPI void __cdecl cycles_integrator_tag_update(unsigned int client_id, unsigned int scene_id);
@@ -460,6 +465,7 @@ CCL_CAPI void __cdecl cycles_mesh_set_vertex_normals(unsigned int client_id, uns
 CCL_CAPI void __cdecl cycles_mesh_set_smooth(unsigned int client_id, unsigned int scene_id, unsigned int mesh_id, unsigned int smooth);
 CCL_CAPI void __cdecl cycles_mesh_clear(unsigned int client_id, unsigned int scene_id, unsigned int mesh_id);
 CCL_CAPI void __cdecl cycles_mesh_tag_rebuild(unsigned int client_id, unsigned int scene_id, unsigned int mesh_id);
+CCL_CAPI void __cdecl cycles_mesh_set_shader(unsigned int client_id, unsigned int scene_id, unsigned int mesh_id, unsigned int shader_id);
 
 /* Shader API */
 
@@ -518,9 +524,12 @@ enum class shadernode_type : unsigned int {
 	HOLDOUT,
 	HUE_SAT,
 	BRIGHT_CONTRAST,
+	GRADIENT_TEXTURE,
+	COLOR_RAMP,
 };
 
 CCL_CAPI unsigned int __cdecl cycles_create_shader(unsigned int client_id);
+CCL_CAPI void __cdecl cycles_scene_tag_shader(unsigned int client_id, unsigned int scene_id, unsigned int shader_id);
 CCL_CAPI unsigned int __cdecl cycles_scene_add_shader(unsigned int client_id, unsigned int scene_id, unsigned int shader_id);
 /** Set shader_id as default surface shader for scene_id.
  * Note that shader_id is the ID for the shader specific to this scene.
@@ -540,11 +549,16 @@ CCL_CAPI void __cdecl cycles_shadernode_set_attribute_float(unsigned int client_
 CCL_CAPI void __cdecl cycles_shadernode_set_attribute_vec(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, const char* attribute_name, float x, float y, float z);
 CCL_CAPI void __cdecl cycles_shadernode_set_attribute_string(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, const char* attribute_name, const char* value);
 CCL_CAPI void __cdecl cycles_shadernode_set_enum(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, shadernode_type shn_type, const char* value);
+CCL_CAPI void __cdecl cycles_shadernode_texmapping_set_transformation(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, shadernode_type shn_type, int transform_type, float x, float y, float z);
+CCL_CAPI void __cdecl cycles_shadernode_texmapping_set_mapping(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, shadernode_type shn_type, ccl::TextureMapping::Mapping x, ccl::TextureMapping::Mapping y, ccl::TextureMapping::Mapping z);
+CCL_CAPI void __cdecl cycles_shadernode_texmapping_set_projection(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, shadernode_type shn_type, ccl::TextureMapping::Projection tm_projection);
+CCL_CAPI void __cdecl cycles_shadernode_texmapping_set_type(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, shadernode_type shn_type, ccl::TextureMapping::Type tm_type);
 
 CCL_CAPI void __cdecl cycles_shadernode_set_member_bool(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, shadernode_type shn_type, const char* member_name, bool value);
 CCL_CAPI void __cdecl cycles_shadernode_set_member_float(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, shadernode_type shn_type, const char* member_name, float value);
 CCL_CAPI void __cdecl cycles_shadernode_set_member_int(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, shadernode_type shn_type, const char* member_name, int value);
 CCL_CAPI void __cdecl cycles_shadernode_set_member_vec(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, shadernode_type shn_type, const char* member_name, float x, float y, float z);
+CCL_CAPI void __cdecl cycles_shadernode_set_member_vec4_at_index(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, shadernode_type shn_type, const char* member_name, float x, float y, float z, float w, int index);
 
 CCL_CAPI void __cdecl cycles_shadernode_set_member_float_img(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, shadernode_type shn_type, const char* member_name, const char* img_name, float* img, unsigned int width, unsigned int height, unsigned int depth, unsigned int channels);
 CCL_CAPI void __cdecl cycles_shadernode_set_member_byte_img(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, shadernode_type shn_type, const char* member_name, const char* img_name, unsigned char* img, unsigned int width, unsigned int height, unsigned int depth, unsigned int channels);
@@ -553,6 +567,7 @@ CCL_CAPI void __cdecl cycles_shader_set_name(unsigned int client_id, unsigned in
 CCL_CAPI void __cdecl cycles_shader_set_use_mis(unsigned int client_id, unsigned int shader_id, unsigned int use_mis);
 CCL_CAPI void __cdecl cycles_shader_set_use_transparent_shadow(unsigned int client_id, unsigned int shader_id, unsigned int use_transparent_shadow);
 CCL_CAPI void __cdecl cycles_shader_set_heterogeneous_volume(unsigned int client_id, unsigned int shader_id, unsigned int heterogeneous_volume);
+CCL_CAPI void __cdecl cycles_shader_new_graph(unsigned int client_id, unsigned int shader_id);
 
 CCL_CAPI void __cdecl cycles_shader_connect_nodes(unsigned int client_id, unsigned int shader_id, unsigned int from_id, const std::string from, unsigned int to_id, const std::string to);
 
@@ -586,6 +601,7 @@ CCL_CAPI void __cdecl cycles_light_set_axisv(unsigned int client_id, unsigned in
 CCL_CAPI void __cdecl cycles_light_set_size(unsigned int client_id, unsigned int scene_id, unsigned int light_id, float size);
 CCL_CAPI void __cdecl cycles_light_set_dir(unsigned int client_id, unsigned int scene_id, unsigned int light_id, float dirx, float diry, float dirz);
 CCL_CAPI void __cdecl cycles_light_set_co(unsigned int client_id, unsigned int scene_id, unsigned int light_id, float cox, float coy, float coz);
+CCL_CAPI void __cdecl cycles_light_tag_update(unsigned int client_id, unsigned int scene_id, unsigned int light_id);
 
 #ifdef __clplusplus
 }

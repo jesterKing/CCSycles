@@ -14,16 +14,26 @@ See the License for the specific language governing permissions and
 limitations under the License.
 **/
 
+using System;
 using ccl.ShaderNodes.Sockets;
 
 namespace ccl.ShaderNodes
 {
+	/// <summary>
+	/// Input sockets for BackgroundNode
+	/// </summary>
 	public class BackgroundInputs : Inputs
 	{
+		/// <summary>
+		/// BackgroundNode Color input socket
+		/// </summary>
 		public Float4Socket Color { get; set; }
+		/// <summary>
+		/// BackgroundNode Strength input socket. Default value 1.0f
+		/// </summary>
 		public FloatSocket Strength { get; set; }
 
-		public BackgroundInputs(ShaderNode parentNode)
+		internal BackgroundInputs(ShaderNode parentNode)
 		{
 			Color = new Float4Socket(parentNode, "Color");
 			AddSocket(Color);
@@ -32,27 +42,51 @@ namespace ccl.ShaderNodes
 		}
 	}
 
+	/// <summary>
+	/// Output socket for BackgroundNode
+	/// </summary>
 	public class BackgroundOutputs : Outputs
 	{
+		/// <summary>
+		/// BackgroundNode output socket, can go on closure sockets.
+		/// </summary>
 		public ClosureSocket Background { get; set; }
 
-		public BackgroundOutputs(ShaderNode parentNode)
+		internal BackgroundOutputs(ShaderNode parentNode)
 		{
 			Background = new ClosureSocket(parentNode, "Background");
 			AddSocket(Background);
 		}
 	}
+
+	/// <summary>
+	/// Background shader node. Used in world/background shaders
+	/// </summary>
 	public class BackgroundNode : ShaderNode
 	{
+		/// <summary>
+		/// Input sockets for background node
+		/// </summary>
 		public BackgroundInputs ins { get { return (BackgroundInputs)inputs; } set { inputs = value; } }
+		/// <summary>
+		/// Output sockets for background node
+		/// </summary>
 		public BackgroundOutputs outs { get { return (BackgroundOutputs)outputs; } set { outputs = value; }}
 		/// <summary>
-		/// Create a new Add closure.
+		/// Create a new background/world shader node
 		/// </summary>
 		public BackgroundNode() :
-			base(ShaderNodeType.Background)
+			this("a background")
 		{
-			/*AvailableOuts.Add("Background");*/
+		}
+
+		/// <summary>
+		/// Create a new background/world shader node with given name
+		/// </summary>
+		/// <param name="name">Name for shader node</param>
+		public BackgroundNode(string name) :
+			base(ShaderNodeType.Background, name)
+		{
 			inputs = new BackgroundInputs(this);
 			outputs = new BackgroundOutputs(this);
 			ins.Color.Value = new float4();

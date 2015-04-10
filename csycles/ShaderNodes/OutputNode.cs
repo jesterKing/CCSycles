@@ -18,13 +18,22 @@ using ccl.ShaderNodes.Sockets;
 
 namespace ccl.ShaderNodes
 {
+	/// <summary>
+	/// OutputNode input sockets
+	/// </summary>
 	public class OutputInputs : Inputs
 	{
+		/// <summary>
+		/// Surface shading socket. Plug Background here for world shaders
+		/// </summary>
 		public ClosureSocket Surface { get; set; }
 		public ClosureSocket Volume { get; set; }
+		/// <summary>
+		/// Only useful for material output nodes
+		/// </summary>
 		public FloatSocket Displacement { get; set; }
 
-		public OutputInputs(ShaderNode parentNode)
+		internal OutputInputs(ShaderNode parentNode)
 		{
 			Surface = new ClosureSocket(parentNode, "Surface");
 			AddSocket(Surface);
@@ -37,19 +46,22 @@ namespace ccl.ShaderNodes
 
 	public class OutputOutputs : Outputs
 	{
-		public OutputOutputs(ShaderNode parentNode)
+		internal OutputOutputs(ShaderNode parentNode)
 		{
 			
 		}
 	}
 
+	/// <summary>
+	/// The final output shader node for shaders.
+	/// </summary>
 	public class OutputNode : ShaderNode
 	{
 		public OutputInputs ins { get { return (OutputInputs) inputs; } set { inputs = value; } }
 		public OutputOutputs outs { get { return (OutputOutputs) outputs; } set { outputs = value; } }
 
 		public OutputNode() :
-			base(ShaderNodeType.AddClosure)
+			base(ShaderNodeType.Output)
 		{
 			ins = new OutputInputs(this);
 			outs = new OutputOutputs(this);

@@ -14,6 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 **/
 
+using System;
+
 namespace ccl.ShaderNodes.Sockets
 {
 	public class SocketBase
@@ -34,5 +36,13 @@ namespace ccl.ShaderNodes.Sockets
 		}
 
 		internal SocketBase ConnectionFrom { get; set; }
+
+		/// <summary>
+		/// Get string containing node name, type and socket name
+		/// </summary>
+		public string Path
+		{
+			get { return String.Format("{0}({1}):{2}", Parent.Name, Parent.Type, Name); }
+		}
 	}
 }

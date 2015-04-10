@@ -35,7 +35,7 @@ namespace ccl
 			World
 		}
 		/// <summary>
-		/// Get the ID for this shader
+		/// Get the ID for this shader. This ID is given by CCycles
 		/// </summary>
 		public uint Id { get; private set; }
 		private Client Client { get; set; }
@@ -79,6 +79,27 @@ namespace ccl
 			Output = new OutputNode();
 			AddNode(Output);
 			created_in_cycles = true;
+		}
+
+		/// <summary>
+		/// Clear the shader graph for this node, so it can be repopulated.
+		/// </summary>
+		public void Recreate()
+		{
+			CSycles.shader_new_graph(Client.Id, Id);
+
+			m_nodes.Clear();
+
+			Output = new OutputNode();
+			AddNode(Output);
+		}
+
+		/// <summary>
+		/// Tag shader for device update
+		/// </summary>
+		public void Tag()
+		{
+			CSycles.scene_tag_shader(Client.Id, Client.Scene.Id, Id);
 		}
 
 		/// <summary>
@@ -152,10 +173,6 @@ namespace ccl
 		/// <summary>
 		/// Add a ShaderNode to the shader. This will create the node in Cycles, set
 		/// any values for sockets and direct members.
-		/// This means that any values set to sockets or shader node direct members after
-		/// AddNode() won't have effect.
-		///
-		/// @todo Move non-socket data setting to node implementation.
 		/// </summary>
 		/// <param name="node">ShaderNode to add</param>
 		public void AddNode(ShaderNode node)
@@ -176,56 +193,35 @@ namespace ccl
 			var nodeid = CSycles.add_shader_node(Client.Id, Id, node.Type);
 			node.Id = nodeid;
 			m_nodes.Add(node);
-
-			/* set node attributes */
-			if (node.inputs != null)
-			{
-				foreach (var socket in node.inputs.Sockets)
-				{
-					var float_socket = socket as FloatSocket;
-					if (float_socket != null)
-					{
-						CSycles.shadernode_set_attribute_float(Client.Id, Id, node.Id, float_socket.Name, float_socket.Value);
-					}
-					var int_socket = socket as IntSocket;
-					if (int_socket != null)
-					{
-						CSycles.shadernode_set_attribute_int(Client.Id, Id, node.Id, int_socket.Name, int_socket.Value);
-					}
-					var string_socket = socket as StringSocket;
-					if (string_socket != null)
-					{
-						CSycles.shadernode_set_attribute_string(Client.Id, Id, node.Id, socket.Name, string_socket.Value);
-					}
-					var float4_socket = socket as Float4Socket;
-					if (float4_socket != null)
-					{
-						CSycles.shadernode_set_attribute_vec(Client.Id, Id, node.Id, float4_socket.Name, float4_socket.Value);
-					}
-				}
-			}
-
-			/* set enumerations */
-			node.SetEnums(Client.Id, Id);
-
-			/* set direct member variables */
-			node.SetDirectMembers(Client.Id, Id);
 		}
 
 		/// <summary>
 		/// Finalizes the graph by connecting all sockets in Cycles as specified
 		/// through code.
+		///
+		/// This step also commits any values set to input sockets, enumerations
+		/// and direct member variables.
 		/// </summary>
 		public void FinalizeGraph()
 		{
+			System.Diagnostics.Debug.WriteLine(String.Format("Finalizing {0}", Name));
 			foreach (var node in m_nodes)
 			{
+				/* set enumerations */
+				node.SetEnums(Client.Id, Id);
+
+				/* set direct member variables */
+				node.SetDirectMembers(Client.Id, Id);
+
 				if (node.inputs == null) continue;
 
-				foreach(var socket in node.inputs.Sockets)
+				node.SetSockets(Client.Id, Id);
+
+				foreach (var socket in node.inputs.Sockets)
 				{
 					var from = socket.ConnectionFrom;
 					if (from == null) continue;
+					System.Diagnostics.Debug.WriteLine("Shader {0}: Connecting {1} to {2}", Name, from.Path, socket.Path);
 					Connect(from.Parent, from.Name, node, socket.Name);
 				}
 			}

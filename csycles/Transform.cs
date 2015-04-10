@@ -193,6 +193,23 @@ namespace ccl
 			return t;
 		}
 
+		public void SetTranslate(float4 t)
+		{
+			x.w = t.x;
+			y.w = t.y;
+			z.w = t.z;
+		}
+
+		public void SetTranslate(float x, float y, float z)
+		{
+			SetTranslate(new float4(x, y, z));
+		}
+
+		public void SetTranslate(double x, double y, double z)
+		{
+			SetTranslate(new float4((float)x, (float)y, (float)z));
+		}
+
 		/// <summary>
 		/// Give translation matrix for vector t
 		/// </summary>

@@ -47,6 +47,8 @@ limitations under the License.
 //extern LOGGER_FUNC_CB logger_func;
 extern std::vector<LOGGER_FUNC_CB> loggers;
 
+extern std::ostream& operator<<(std::ostream& out, shadernode_type const &snt);
+
 /* Simple class to help with debug logging. */
 class Logger {
 public:
@@ -240,21 +242,21 @@ struct CCShader {
 	if (0 <= params_id && params_id < param_type.size()) { \
 		param_type[params_id].##varname = varname == 1; \
 		logger.logit(client_id, "Set " #param_type " " #varname " to ", varname); \
-		}
+	}
 
 /* Set parameter varname of param_type. */
 #define PARAM(param_type, params_id, varname) \
 	if (0 <= params_id && params_id < param_type.size()) { \
 		param_type[params_id].##varname = varname; \
 		logger.logit(client_id, "Set " #param_type " " #varname " to ", varname); \
-		}
+	}
 
 /* Set parameter varname of param_type, casting to typecast*/
 #define PARAM_CAST(param_type, params_id, typecast, varname) \
 	if (0 <= params_id && params_id < param_type.size()) { \
 		param_type[params_id].##varname = static_cast<typecast>(varname); \
 		logger.logit(client_id, "Set " #param_type " " #varname " to ", varname, " casting to " #typecast); \
-		}
+	}
 
 #define LIGHT_FIND(scene_id, light_id) \
 	SCENE_FIND(scene_id) \
@@ -269,3 +271,16 @@ struct CCShader {
 	auto sh = shaders[shid]; \
 	sh->shader->##var = (type)(val); \
 	logger.logit(client_id, "Set " #var " of shader ", shid, " to ", val, " casting to " #type);
+
+#define SHADERNODE_FIND(shader_id, shnode_id) \
+	auto& sh = shaders[shader_id]; \
+	auto psh = sh->graph->nodes.begin(); \
+	while (psh != sh->graph->nodes.end()) \
+	{ \
+		if ((*psh)->id == shnode_id) {
+
+#define SHADERNODE_FIND_END() \
+			break; \
+		} \
+		++psh; \
+	}
