@@ -88,7 +88,7 @@ namespace ccl
 		/// <returns></returns>
 		static public Shader WrapDefaultSurfaceShader(Client client)
 		{
-			var shader = new Shader(client, ShaderType.Material, 0) {Name = "default_surface"};
+			var shader = new Shader(client, ShaderType.Material, CSycles.DEFAULT_SURFACE_SHADER) {Name = "default_surface"};
 
 			// just add nodes so we have local node presentation, but no need to actually finalise
 			// since it already exists in Cycles.
@@ -109,7 +109,7 @@ namespace ccl
 		/// <returns></returns>
 		static public Shader WrapDefaultLightShader(Client client)
 		{
-			var shader = new Shader(client, ShaderType.Material, 1) {Name = "default_light"};
+			var shader = new Shader(client, ShaderType.Material, CSycles.DEFAULT_LIGHT_SHADER) {Name = "default_light"};
 
 			// just add nodes so we have local node presentation, but no need to actually finalise
 			// since it already exists in Cycles.
@@ -131,7 +131,7 @@ namespace ccl
 		/// <returns></returns>
 		static public Shader WrapDefaultBackgroundShader(Client client)
 		{
-			var shader = new Shader(client, ShaderType.World, 2) {Name = "default_background"};
+			var shader = new Shader(client, ShaderType.World, CSycles.DEFAULT_BACKGROUND_SHADER) {Name = "default_background"};
 
 			return shader;
 		}
@@ -143,7 +143,7 @@ namespace ccl
 		/// <returns></returns>
 		static public Shader WrapDefaultEmptyShader(Client client)
 		{
-			var shader = new Shader(client, ShaderType.Material, 3) {Name = "default_empty"};
+			var shader = new Shader(client, ShaderType.Material, CSycles.DEFAULT_EMPTY_SHADER) {Name = "default_empty"};
 
 			return shader;
 		}

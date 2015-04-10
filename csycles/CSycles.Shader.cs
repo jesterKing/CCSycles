@@ -31,6 +31,12 @@ namespace ccl
 		/// </summary>
 		public const uint OUTPUT_SHADERNODE_ID = 0;
 
+		public const uint DEFAULT_SURFACE_SHADER = 0;
+		public const uint DEFAULT_LIGHT_SHADER = 1;
+		public const uint DEFAULT_BACKGROUND_SHADER = 2;
+		public const uint DEFAULT_EMPTY_SHADER = 3;
+
+
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_add_shader_node", CallingConvention = CallingConvention.Cdecl)]
 		private static extern uint cycles_add_shader_node(uint clientId, uint shaderId, uint shnType);
 		public static uint add_shader_node(uint clientId, uint shaderId, ShaderNodeType shnType)

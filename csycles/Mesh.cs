@@ -44,7 +44,7 @@ namespace ccl
 			Client = client;
 			Shader = shader;
 
-			Id = CSycles.scene_add_mesh(Client.Id, Client.Scene.Id, Client.Scene.ShaderSceneId(shader));
+			Id = CSycles.scene_add_mesh(Client.Id, Client.Scene.Id, Client.Scene.GetShaderSceneId(shader));
 		}
 
 		/// <summary>
@@ -93,7 +93,7 @@ namespace ccl
 		/// <param name="smooth"></param>
 		public void SetVertTris(ref int[] faces, bool smooth)
 		{
-			CSycles.mesh_set_tris(Client.Id, Client.Scene.Id, Id, ref faces, (uint) (faces.Length/3), Client.Scene.ShaderSceneId(Shader), smooth);
+			CSycles.mesh_set_tris(Client.Id, Client.Scene.Id, Id, ref faces, (uint) (faces.Length/3), Client.Scene.GetShaderSceneId(Shader), smooth);
 		}
 
 		/// <summary>
@@ -124,7 +124,7 @@ namespace ccl
 		/// <param name="smooth"></param>
 		public void AddTri(uint v0, uint v1, uint v2, Shader shader, bool smooth)
 		{
-			CSycles.mesh_add_triangle(Client.Id, Client.Scene.Id, Id, v0, v1, v2, Client.Scene.ShaderSceneId(shader), smooth);
+			CSycles.mesh_add_triangle(Client.Id, Client.Scene.Id, Id, v0, v1, v2, Client.Scene.GetShaderSceneId(shader), smooth);
 		}
 	}
 }

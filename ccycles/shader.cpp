@@ -22,6 +22,14 @@ std::vector<CCShader*> shaders;
 
 std::vector<CCImage*> images;
 
+void _init_shaders()
+{
+	cycles_create_shader(0); // default surface
+	cycles_create_shader(0); // default light
+	cycles_create_shader(0); // default background
+	cycles_create_shader(0); // default empty
+}
+
 void _cleanup_shaders()
 {
 	for (auto sh : shaders) {
@@ -64,8 +72,8 @@ unsigned int cycles_scene_add_shader(unsigned int client_id, unsigned int scene_
 {
 	SCENE_FIND(scene_id)
 		auto sh = shaders[shader_id];
-		sh->shader->tag_update(sce);
 		sce->shaders.push_back(sh->shader);
+		sh->shader->tag_update(sce);
 		auto shid = (unsigned int)(sce->shaders.size() - 1);
 		sh->scene_mapping.insert({ scene_id, shid });
 		return shid;

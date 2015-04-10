@@ -33,6 +33,7 @@ namespace ccl
 		/// Reference to client for which light was created.
 		/// </summary>
 		public Client Client { get; internal set; }
+		public Shader Shader { get; internal set; }
 		/// <summary>
 		/// Create a new light.
 		/// 
@@ -46,7 +47,8 @@ namespace ccl
 		{
 			Client = client;
 			Scene = scene;
-			Id = CSycles.create_light(Client.Id, Scene.Id, scene.ShaderSceneId(lightShader));
+			Shader = lightShader;
+			Id = CSycles.create_light(Client.Id, Scene.Id, scene.GetShaderSceneId(lightShader));
 		}
 
 		/// <summary>

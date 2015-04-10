@@ -21,6 +21,7 @@ limitations under the License.
 extern void _cleanup_scenes();
 extern void _cleanup_sessions();
 extern void _cleanup_shaders();
+extern void _init_shaders();
 
 /* Hold the device information found on the system after initialisation. */
 std::vector<ccl::DeviceInfo> devices;
@@ -52,6 +53,7 @@ void cycles_initialise()
 {
 	if (!initialised) {
 		devices = ccl::Device::available_devices();
+		_init_shaders();
 	}
 }
 
