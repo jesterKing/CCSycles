@@ -41,5 +41,8 @@ namespace ccl.ShaderNodes
 
 		internal TextureNode(ShaderNodeType type) :
 			base(type) { }
+
+		internal TextureNode(ShaderNodeType type, string name) :
+			base(type, name) { }
 	}
 }
