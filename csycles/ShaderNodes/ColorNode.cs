@@ -18,31 +18,61 @@ using ccl.ShaderNodes.Sockets;
 
 namespace ccl.ShaderNodes
 {
+	/// <summary>
+	/// ColorNode output sockets
+	/// </summary>
 	public class ColorOutputs : Outputs
 	{
+		/// <summary>
+		/// ColorNode output color. Note only RGB is used
+		/// </summary>
 		public Float4Socket Color { get; set; }
 
-		public ColorOutputs(ShaderNode parentNode)
+		internal ColorOutputs(ShaderNode parentNode)
 		{
 			Color = new Float4Socket(parentNode, "Color");
 			AddSocket(Color);
 		}
 	}
 
+	/// <summary>
+	/// ColorNode input sockets. Empty, used for completeness
+	/// </summary>
 	public class ColorInputs : Inputs
 	{
-		public ColorInputs(ShaderNode parentNode)
+		internal ColorInputs(ShaderNode parentNode)
 		{
 			
 		}
 	}
 
+	/// <summary>
+	/// ColorNode is a RGB input node.
+	/// </summary>
 	public class ColorNode : ShaderNode
 	{
-		public ColorInputs ins { get { return (ColorInputs)inputs; } set { inputs = value; } }
-		public ColorOutputs outs { get { return (ColorOutputs)outputs; } set { outputs = value; }}
-		public ColorNode() :
-			base(ShaderNodeType.Color)
+		/// <summary>
+		/// ColorNode input sockets
+		/// </summary>
+		public ColorInputs ins { get { return (ColorInputs)inputs; } }
+		/// <summary>
+		/// ColorNode output sockets
+		/// </summary>
+		public ColorOutputs outs { get { return (ColorOutputs)outputs; } }
+
+		/// <summary>
+		/// Create a ColorNode
+		/// </summary>
+		public ColorNode() : this("a rgb input")
+		{
+		}
+
+		/// <summary>
+		/// Create a ColorNode with name
+		/// </summary>
+		/// <param name="name"></param>
+		public ColorNode(string name) :
+			base(ShaderNodeType.Color, name)
 		{
 			inputs = null;
 			outputs = new ColorOutputs(this);
@@ -50,7 +80,7 @@ namespace ccl.ShaderNodes
 		}
 
 		/// <summary>
-		/// Set Color member variable [IN] for ColorNode.
+		/// Set Color member variable [IN] for ColorNode. Only RGB is used
 		/// </summary>
 		public float4 Value { get; set; }
 
