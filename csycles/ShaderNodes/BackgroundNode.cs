@@ -14,7 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 **/
 
-using System;
 using ccl.ShaderNodes.Sockets;
 
 namespace ccl.ShaderNodes
@@ -67,11 +66,11 @@ namespace ccl.ShaderNodes
 		/// <summary>
 		/// Input sockets for background node
 		/// </summary>
-		public BackgroundInputs ins { get { return (BackgroundInputs)inputs; } set { inputs = value; } }
+		public BackgroundInputs ins { get { return (BackgroundInputs)inputs; } }
 		/// <summary>
 		/// Output sockets for background node
 		/// </summary>
-		public BackgroundOutputs outs { get { return (BackgroundOutputs)outputs; } set { outputs = value; }}
+		public BackgroundOutputs outs { get { return (BackgroundOutputs)outputs; } }
 		/// <summary>
 		/// Create a new background/world shader node
 		/// </summary>
