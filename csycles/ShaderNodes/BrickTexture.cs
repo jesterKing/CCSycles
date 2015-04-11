@@ -18,25 +18,55 @@ using ccl.ShaderNodes.Sockets;
 
 namespace ccl.ShaderNodes
 {
+	/// <summary>
+	/// BrickTexture node input sockets
+	/// </summary>
 	public class BrickInputs : Inputs
 	{
+		/// <summary>
+		/// BrickTexture first brick color to vary with (see Bias)
+		/// </summary>
 		public Float4Socket Color1 { get; set; }
+		/// <summary>
+		/// BrickTexture second brick color to vary with
+		/// </summary>
 		public Float4Socket Color2 { get; set; }
+		/// <summary>
+		/// BrickTexture  mortar color
+		/// </summary>
 		public Float4Socket Mortar { get; set; }
-
+		/// <summary>
+		/// BrickTexture texture coordinate to sample at. 
+		/// </summary>
 		public Float4Socket Vector { get; set; }
 
+		/// <summary>
+		/// BrickTexture overall texture scale. Larger values mean smaller bricks
+		/// </summary>
 		public FloatSocket Scale { get; set; }
 
+		/// <summary>
+		/// BrickTexture thickness of mortar size
+		/// </summary>
 		public FloatSocket MortarSize { get; set; }
 
+		/// <summary>
+		/// BrickTexture color variance. -1.0f means Color1, 1.0f means Color2. Values in between will
+		/// mix the colors
+		/// </summary>
 		public FloatSocket Bias { get; set; }
 
+		/// <summary>
+		/// BrickTexture brick width
+		/// </summary>
 		public FloatSocket BrickWidth { get; set; }
 
+		/// <summary>
+		/// BrickTexture row (brick) height
+		/// </summary>
 		public FloatSocket RowHeight { get; set; }
 
-		public BrickInputs(ShaderNode parentNode)
+		internal BrickInputs(ShaderNode parentNode)
 		{
 			Color1 = new Float4Socket(parentNode, "Color1");
 			AddSocket(Color1);
@@ -60,12 +90,21 @@ namespace ccl.ShaderNodes
 		}
 	}
 
+	/// <summary>
+	/// BrickTexture output sockets
+	/// </summary>
 	public class BrickOutputs : Outputs
 	{
+		/// <summary>
+		/// BrickTexture color output
+		/// </summary>
 		public Float4Socket Color { get; set; }
+		/// <summary>
+		/// BrickTexture mortar mask (1.0 = mortar)
+		/// </summary>
 		public FloatSocket Fac { get; set; }
 
-		public BrickOutputs(ShaderNode parentNode)
+		internal BrickOutputs(ShaderNode parentNode)
 		{
 			Color = new Float4Socket(parentNode, "Color");
 			AddSocket(Color);
@@ -74,15 +113,34 @@ namespace ccl.ShaderNodes
 		}
 	}
 
+	/// <summary>
+	/// BrickTexture node.
+	/// </summary>
 	public class BrickTexture : TextureNode
 	{
-		public BrickInputs ins { get { return (BrickInputs)inputs; } set { inputs = value; } }
-		public BrickOutputs outs { get { return (BrickOutputs)outputs; } set { outputs = value; }}
-		public BrickTexture() :
-			base(ShaderNodeType.BrickTexture)
+		/// <summary>
+		/// BrickTexture input sockets
+		/// </summary>
+		public BrickInputs ins { get { return (BrickInputs)inputs; } }
+		/// <summary>
+		/// BrickTexture output sockets
+		/// </summary>
+		public BrickOutputs outs { get { return (BrickOutputs)outputs; } }
+
+		/// <summary>
+		/// Create a brick texture
+		/// </summary>
+		public BrickTexture() : this("a brick texture") { }
+
+		/// <summary>
+		/// Create a brick texture with name
+		/// </summary>
+		/// <param name="name"></param>
+		public BrickTexture(string name) :
+			base(ShaderNodeType.BrickTexture, name)
 		{
-			ins = new BrickInputs(this);
-			outs = new BrickOutputs(this);
+			inputs = new BrickInputs(this);
+			outputs = new BrickOutputs(this);
 
 			Offset = 0.5f;
 			OffsetFrequency = 2;
@@ -101,9 +159,23 @@ namespace ccl.ShaderNodes
 		}
 
 #region direct member variables
+		/// <summary>
+		/// Offset of brick start on row per row. 0.5f means
+		/// regular brick pattern (with OffsetFrequency 2), 0.0f means bricks on top of
+		/// each other
+		/// </summary>
 		public float Offset { get; set; }
-		public float Squash { get; set; }
+		/// <summary>
+		/// Frequency to use offset by (row).
+		/// </summary>
 		public int OffsetFrequency { get; set; }
+		/// <summary>
+		/// Factor on brick width. Larger than 1.0f means longer bricks, lower than 1.0f shorter bricks.
+		/// </summary>
+		public float Squash { get; set; }
+		/// <summary>
+		/// Use squash factor every nth row
+		/// </summary>
 		public int SquashFrequency { get; set; }
 #endregion
 
