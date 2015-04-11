@@ -30,12 +30,21 @@ using ccl.ShaderNodes.Sockets;
 
 namespace ccl.ShaderNodes
 {
+	/// <summary>
+	/// AddClosure node input sockets
+	/// </summary>
 	public class AddClosureInputs : Inputs
 	{
+		/// <summary>
+		/// AddClosure input socket
+		/// </summary>
 		public ClosureSocket Closure1 { get; set; }
+		/// <summary>
+		/// AddClosure input socket
+		/// </summary>
 		public ClosureSocket Closure2 { get; set; }
 
-		public AddClosureInputs(ShaderNode parentNode)
+		internal AddClosureInputs(ShaderNode parentNode)
 		{
 			Closure1 = new ClosureSocket(parentNode, "Closure1");
 			AddSocket(Closure1);
@@ -44,16 +53,23 @@ namespace ccl.ShaderNodes
 		}
 	}
 
+	/// <summary>
+	/// AddClosure node output sockets
+	/// </summary>
 	public class AddClosureOutputs : Outputs
 	{
+		/// <summary>
+		/// AddClosure output socket
+		/// </summary>
 		public ClosureSocket Closure { get; set; }
 
-		public AddClosureOutputs(ShaderNode parentNode)
+		internal AddClosureOutputs(ShaderNode parentNode)
 		{
 			Closure = new ClosureSocket(parentNode, "Closure");
 			AddSocket(Closure);
 		}
 	}
+
 	/// <summary>
 	/// An Add closure.
 	/// This closure takes two inputs, <c>Closure1</c> and <c>Closure2</c>. These
@@ -63,13 +79,35 @@ namespace ccl.ShaderNodes
 	/// </summary>
 	public class AddClosureNode : ShaderNode
 	{
-		public AddClosureInputs ins { get { return (AddClosureInputs)inputs; } set { inputs = value; } }
-		public AddClosureOutputs outs { get { return (AddClosureOutputs)outputs; } set { outputs = value; }}
+		/// <summary>
+		/// AddClosure input sockets
+		/// </summary>
+		public AddClosureInputs ins
+		{
+			get { return (AddClosureInputs) inputs; }
+		}
+
+		/// <summary>
+		/// AddClosure output sockets
+		/// </summary>
+		public AddClosureOutputs outs
+		{
+			get { return (AddClosureOutputs) outputs; }
+		}
+
 		/// <summary>
 		/// Create a new Add closure.
 		/// </summary>
-		public AddClosureNode() :
-			base(ShaderNodeType.AddClosure)
+		public AddClosureNode() : this("An add closures node")
+		{
+		}
+
+		/// <summary>
+		/// Create a new Add closure with name
+		/// </summary>
+		/// <param name="name"></param>
+		public AddClosureNode(string name) :
+			base(ShaderNodeType.AddClosure, name)
 		{
 			inputs = new AddClosureInputs(this);
 			outputs = new AddClosureOutputs(this);
