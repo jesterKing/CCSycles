@@ -20,16 +20,13 @@ namespace ccl.ShaderNodes
 {
 	public class ValueInputs : Inputs
 	{
-		public ValueInputs(ShaderNode parentNode)
-		{
-			
-		}
 	}
+
 	public class ValueOutputs : Outputs
 	{
 		public FloatSocket Value { get; set; }
 
-		public ValueOutputs(ShaderNode parentNode)
+		internal ValueOutputs(ShaderNode parentNode)
 		{
 			Value = new FloatSocket(parentNode, "Value");
 			AddSocket(Value);
@@ -39,13 +36,14 @@ namespace ccl.ShaderNodes
 	public class ValueNode : ShaderNode
 	{
 
-		public ValueInputs ins { get { return (ValueInputs)inputs; } set { inputs = value; } }
-		public ValueOutputs outs { get { return (ValueOutputs)outputs; } set { outputs = value; } }
-		public ValueNode() :
-			base(ShaderNodeType.Value)
+		public ValueInputs ins { get { return (ValueInputs)inputs; } }
+		public ValueOutputs outs { get { return (ValueOutputs)outputs; } }
+		public ValueNode() : this("a value input node") { }
+		public ValueNode(string name) :
+			base(ShaderNodeType.Value, name)
 		{
-			ins = null;
-			outs = new ValueOutputs(this);
+			inputs = null;
+			outputs = new ValueOutputs(this);
 		}
 
 		/// <summary>
