@@ -23,7 +23,7 @@ namespace ccl.ShaderNodes
 		public Float4Socket Color { get; set; }
 		public FloatSocket Strength { get; set; }
 
-		public EmissionInputs(ShaderNode parentNode)
+		internal EmissionInputs(ShaderNode parentNode)
 		{
 			Color = new Float4Socket(parentNode, "Color");
 			AddSocket(Color);
@@ -36,7 +36,7 @@ namespace ccl.ShaderNodes
 	{
 		public ClosureSocket Emission { get; set; }
 
-		public EmissionOutputs(ShaderNode parentNode)
+		internal EmissionOutputs(ShaderNode parentNode)
 		{
 			Emission = new ClosureSocket(parentNode, "Emission");
 			AddSocket(Emission);
@@ -45,11 +45,12 @@ namespace ccl.ShaderNodes
 
 	public class EmissionNode : ShaderNode
 	{
-		public EmissionInputs ins { get { return (EmissionInputs)inputs; } set { inputs = value; } }
-		public EmissionOutputs outs { get { return (EmissionOutputs)outputs; } set { outputs = value; }}
+		public EmissionInputs ins { get { return (EmissionInputs)inputs; } }
+		public EmissionOutputs outs { get { return (EmissionOutputs)outputs; } }
 
-		public EmissionNode()
-			: base(ShaderNodeType.Emission)
+		public EmissionNode() : this("an emission node") { }
+		public EmissionNode(string name)
+			: base(ShaderNodeType.Emission, name)
 		{
 			inputs = new EmissionInputs(this);
 			outputs = new EmissionOutputs(this);
