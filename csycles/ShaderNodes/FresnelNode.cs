@@ -23,7 +23,7 @@ namespace ccl.ShaderNodes
 		public Float4Socket Normal { get; set; }
 		public FloatSocket IOR { get; set; }
 
-		public FresnelInputs(ShaderNode parentNode)
+		internal FresnelInputs(ShaderNode parentNode)
 		{
 			IOR = new FloatSocket(parentNode, "IOR");
 			AddSocket(IOR);
@@ -36,7 +36,7 @@ namespace ccl.ShaderNodes
 	{
 		public FloatSocket Fac { get; set; }
 
-		public FresnelOutputs(ShaderNode parentNode)
+		internal FresnelOutputs(ShaderNode parentNode)
 		{
 			Fac = new FloatSocket(parentNode, "Fac");
 			AddSocket(Fac);
@@ -45,10 +45,11 @@ namespace ccl.ShaderNodes
 
 	public class FresnelNode : ShaderNode
 	{
-		public FresnelInputs ins { get { return (FresnelInputs)inputs; } set { inputs = value; } }
-		public FresnelOutputs outs { get { return (FresnelOutputs)outputs; } set { outputs = value; }}
-		public FresnelNode() :
-			base(ShaderNodeType.Fresnel)
+		public FresnelInputs ins { get { return (FresnelInputs)inputs; } }
+		public FresnelOutputs outs { get { return (FresnelOutputs)outputs; } }
+		public FresnelNode() : this("a fresnel input node") { }
+		public FresnelNode(string name) :
+			base(ShaderNodeType.Fresnel, name)
 		{
 			inputs = new FresnelInputs(this);
 			outputs = new FresnelOutputs(this);
