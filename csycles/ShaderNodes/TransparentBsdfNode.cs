@@ -22,7 +22,7 @@ namespace ccl.ShaderNodes
 	{
 		public Float4Socket Color { get; set; }
 
-		public TransparentBsdfInputs(ShaderNode parentNode)
+		internal TransparentBsdfInputs(ShaderNode parentNode)
 		{
 			Color = new Float4Socket(parentNode, "Color");
 			AddSocket(Color);
@@ -33,7 +33,7 @@ namespace ccl.ShaderNodes
 	{
 		public ClosureSocket BSDF { get; set; }
 
-		public TransparentBsdfOutputs(ShaderNode parentNode)
+		internal TransparentBsdfOutputs(ShaderNode parentNode)
 		{
 			BSDF = new ClosureSocket(parentNode, "BSDF");
 			AddSocket(BSDF);
@@ -47,13 +47,14 @@ namespace ccl.ShaderNodes
 	/// </summary>
 	public class TransparentBsdfNode : ShaderNode
 	{
-		public TransparentBsdfInputs ins { get { return (TransparentBsdfInputs)inputs; } set { inputs = value; } }
-		public TransparentBsdfOutputs outs { get { return (TransparentBsdfOutputs)outputs; } set { outputs = value; }}
+		public TransparentBsdfInputs ins { get { return (TransparentBsdfInputs)inputs; } }
+		public TransparentBsdfOutputs outs { get { return (TransparentBsdfOutputs)outputs; } }
 		/// <summary>
 		/// Create a new Transparent BSDF closure.
 		/// </summary>
-		public TransparentBsdfNode() :
-			base(ShaderNodeType.Transparent)
+		public TransparentBsdfNode() : this("a transparent bsdf node") { }
+		public TransparentBsdfNode(string name) :
+			base(ShaderNodeType.Transparent, name)
 		{
 			inputs = new TransparentBsdfInputs(this);
 			outputs = new TransparentBsdfOutputs(this);
