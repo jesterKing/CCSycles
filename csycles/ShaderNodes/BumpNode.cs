@@ -18,14 +18,29 @@ using ccl.ShaderNodes.Sockets;
 
 namespace ccl.ShaderNodes
 {
+	/// <summary>
+	/// BumpNode input sockets
+	/// </summary>
 	public class BumpInputs : Inputs
 	{
+		/// <summary>
+		/// BumpNode height of the bump
+		/// </summary>
 		public FloatSocket Height { get; set; }
+		/// <summary>
+		/// BumpNode input normal. If not connected will use default shading normal
+		/// </summary>
 		public Float4Socket Normal { get; set; }
+		/// <summary>
+		/// BumpNode strength of the bump effect
+		/// </summary>
 		public FloatSocket Strength { get; set; }
+		/// <summary>
+		/// BumpNode distance
+		/// </summary>
 		public FloatSocket Distance { get; set; }
 
-		public BumpInputs(ShaderNode parentNode)
+		internal BumpInputs(ShaderNode parentNode)
 		{
 			Height = new FloatSocket(parentNode, "Height");
 			AddSocket(Height);
@@ -38,37 +53,60 @@ namespace ccl.ShaderNodes
 		}
 	}
 
+	/// <summary>
+	/// BumpNode output sockets
+	/// </summary>
 	public class BumpOutputs : Outputs
 	{
+		/// <summary>
+		/// BumpNode new Normal
+		/// </summary>
 		public Float4Socket Normal { get; set; }
 
-		public BumpOutputs(ShaderNode parentNode)
+		internal BumpOutputs(ShaderNode parentNode)
 		{
 			Normal = new Float4Socket(parentNode, "Normal");
 			AddSocket(Normal);
 		}
 	}
 
+	/// <summary>
+	/// BumpNode
+	/// </summary>
 	public class BumpNode : ShaderNode
 	{
-		public BumpInputs ins { get { return (BumpInputs)inputs; } set { inputs = value; } }
-		public BumpOutputs outs { get { return (BumpOutputs)outputs; } set { outputs = value; } }
+		/// <summary>
+		/// BumpNode input sockets
+		/// </summary>
+		public BumpInputs ins { get { return (BumpInputs)inputs; } }
+		/// <summary>
+		/// BumpNode output sockets
+		/// </summary>
+		public BumpOutputs outs { get { return (BumpOutputs)outputs; } }
 
 		/// <summary>
 		/// Create new BumpNode with blend type Bump.
 		/// </summary>
-		public BumpNode() :
-			base(ShaderNodeType.Bump)
+		public BumpNode() : this("a bump node") { }
+		public BumpNode(string name) :
+			base(ShaderNodeType.Bump, name)
 		{
-			ins = new BumpInputs(this);
-			outs = new BumpOutputs(this);
+			inputs = new BumpInputs(this);
+			outputs = new BumpOutputs(this);
 
 			Invert = false;
 			ins.Strength.Value = 1.0f;
 			ins.Distance.Value = 0.15f;
 		}
 
+		/// <summary>
+		/// BumpNode set to true to invert result
+		/// </summary>
 		public bool Invert { get; set; }
 
+		internal override void SetDirectMembers(uint clientId, uint shaderId)
+		{
+			CSycles.shadernode_set_member_bool(clientId, shaderId, Id, Type, "invert", Invert);
+		}
 	}
 }

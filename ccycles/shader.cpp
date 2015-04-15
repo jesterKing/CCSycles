@@ -644,6 +644,14 @@ void cycles_shadernode_set_member_bool(unsigned int client_id, unsigned int shad
 						}
 					}
 					break;
+				case shadernode_type::BUMP:
+					{
+						ccl::BumpNode* bump = dynamic_cast<ccl::BumpNode*>(*psh);
+						if (mname == "invert") {
+							bump->invert = value;
+						}
+					}
+					break;
 			}
 	SHADERNODE_FIND_END()
 }
