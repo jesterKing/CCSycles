@@ -18,41 +18,67 @@ using ccl.ShaderNodes.Sockets;
 
 namespace ccl.ShaderNodes
 {
+	/// <summary>
+	/// RgbToBw input sockets
+	/// </summary>
 	public class ConvertRgbInputs : Inputs
 	{
+		/// <summary>
+		/// RgbToBw input color
+		/// </summary>
 		public Float4Socket Color { get; set; }
 
-		public ConvertRgbInputs(ShaderNode parentNode)
+		internal ConvertRgbInputs(ShaderNode parentNode)
 		{
 			Color = new Float4Socket(parentNode, "Color");
 			AddSocket(Color);
 		}
 	}
 
+	/// <summary>
+	/// RgbToBw output sockets
+	/// </summary>
 	public class ConvertValOutputs : Outputs
 	{
+		/// <summary>
+		/// RgbToBw value calculated from input color
+		/// </summary>
 		public FloatSocket Val { get; set; }
 
-		public ConvertValOutputs(ShaderNode parentNode)
+		internal ConvertValOutputs(ShaderNode parentNode)
 		{
 			Val = new FloatSocket(parentNode, "Val");
 			AddSocket(Val);
 		}
 	}
 
+	/// <summary>
+	/// RgbToBw node to convert a color to a value
+	/// </summary>
 	public class RgbToBwNode : ShaderNode
 	{
-		public ConvertRgbInputs ins { get { return (ConvertRgbInputs)inputs; } set { inputs = value; } }
-		public ConvertValOutputs outs { get { return (ConvertValOutputs)outputs; } set { outputs = value; } }
+		/// <summary>
+		/// RgbToBw input sockets
+		/// </summary>
+		public ConvertRgbInputs ins { get { return (ConvertRgbInputs)inputs; } }
+		/// <summary>
+		/// RgbToBw output sockets
+		/// </summary>
+		public ConvertValOutputs outs { get { return (ConvertValOutputs)outputs; } }
 
 		/// <summary>
-		/// Create new ConvertNode with blend type RgbToBw.
+		/// Create new RgbToBw node
 		/// </summary>
-		public RgbToBwNode() :
-			base(ShaderNodeType.RgbToBw)
+		public RgbToBwNode() : this("An RgbToBw node") { }
+			
+		/// <summary>
+		/// Create new RgbToBw node with given name
+		/// </summary>
+		public RgbToBwNode(string name) :
+			base(ShaderNodeType.RgbToBw, name)
 		{
-			ins = new ConvertRgbInputs(this);
-			outs = new ConvertValOutputs(this);
+			inputs = new ConvertRgbInputs(this);
+			outputs = new ConvertValOutputs(this);
 		}
 	}
 }

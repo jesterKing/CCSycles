@@ -60,8 +60,9 @@ namespace ccl.ShaderNodes
 		/// <summary>
 		/// Create a new Diffuse BSDF closure.
 		/// </summary>
-		public DiffuseBsdfNode() :
-			base(ShaderNodeType.Diffuse)
+		public DiffuseBsdfNode() : this("a diffuse bsdf node") { }
+		public DiffuseBsdfNode(string name) :
+			base(ShaderNodeType.Diffuse, name)
 		{
 			inputs = new DiffuseBsdfInputs(this);
 			outputs = new DiffuseBsdfOutputs(this);

@@ -24,7 +24,7 @@ namespace ccl.ShaderNodes
 		public Float4Socket Color1 { get; set; }
 		public Float4Socket Color2 { get; set; }
 
-		public MixInputs(ShaderNode parentNode)
+		internal MixInputs(ShaderNode parentNode)
 		{
 			Fac = new FloatSocket(parentNode, "Fac");
 			AddSocket(Fac);
@@ -39,7 +39,7 @@ namespace ccl.ShaderNodes
 	{
 		public Float4Socket Color { get; set; }
 
-		public MixOutputs(ShaderNode parentNode)
+		internal MixOutputs(ShaderNode parentNode)
 		{
 			Color = new Float4Socket(parentNode, "Color");
 			AddSocket(Color);
@@ -48,17 +48,21 @@ namespace ccl.ShaderNodes
 
 	public class MixNode : ShaderNode
 	{
-		public MixInputs ins { get { return (MixInputs)inputs; } set { inputs = value; } }
-		public MixOutputs outs { get { return (MixOutputs)outputs; } set { outputs = value; } }
+		public MixInputs ins { get { return (MixInputs)inputs; } }
+		public MixOutputs outs { get { return (MixOutputs)outputs; } }
 
 		/// <summary>
 		/// Create new MixNode with blend type Mix.
 		/// </summary>
-		public MixNode() :
-			base(ShaderNodeType.Mix)
+		public MixNode() : this("a mix color node")
 		{
-			ins = new MixInputs(this);
-			outs = new MixOutputs(this);
+		}
+
+		public MixNode(string name) :
+			base(ShaderNodeType.Mix, name)
+		{
+			inputs = new MixInputs(this);
+			outputs = new MixOutputs(this);
 
 			BlendType = "Mix";
 			ins.Fac.Value = 0.5f;

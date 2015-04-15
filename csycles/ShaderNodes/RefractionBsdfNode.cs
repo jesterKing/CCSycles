@@ -25,7 +25,7 @@ namespace ccl.ShaderNodes
 		public Float4Socket Color { get; set; }
 		public Float4Socket Normal { get; set; }
 
-		public RefractionBsdfInputs(ShaderNode parentNode)
+		internal RefractionBsdfInputs(ShaderNode parentNode)
 		{
 			Color = new Float4Socket(parentNode, "Color");
 			AddSocket(Color);
@@ -42,7 +42,7 @@ namespace ccl.ShaderNodes
 	{
 		public ClosureSocket BSDF { get; set; }
 
-		public RefractionBsdfOutputs(ShaderNode parentNode)
+		internal RefractionBsdfOutputs(ShaderNode parentNode)
 		{
 			BSDF = new ClosureSocket(parentNode, "BSDF");
 			AddSocket(BSDF);
@@ -51,14 +51,15 @@ namespace ccl.ShaderNodes
 
 	public class RefractionBsdfNode : ShaderNode
 	{
-		public RefractionBsdfInputs ins { get { return (RefractionBsdfInputs)inputs; } set { inputs = value; } }
-		public RefractionBsdfOutputs outs { get { return (RefractionBsdfOutputs)outputs; } set { outputs = value; } }
+		public RefractionBsdfInputs ins { get { return (RefractionBsdfInputs)inputs; } }
+		public RefractionBsdfOutputs outs { get { return (RefractionBsdfOutputs)outputs; } }
 
-		public RefractionBsdfNode() :
-			base(ShaderNodeType.Refraction)
+		public RefractionBsdfNode() : this("a refraction bsdf node") { }
+		public RefractionBsdfNode(string name) :
+			base(ShaderNodeType.Refraction, name)
 		{
-			ins = new RefractionBsdfInputs(this);
-			outs = new RefractionBsdfOutputs(this);
+			inputs = new RefractionBsdfInputs(this);
+			outputs = new RefractionBsdfOutputs(this);
 
 			Distribution = "Beckmann";
 			ins.IOR.Value = 1.45f;

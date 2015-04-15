@@ -19,23 +19,38 @@ using ccl.ShaderNodes.Sockets;
 
 namespace ccl.ShaderNodes
 {
+	/// <summary>
+	/// ImageTexture input sockets
+	/// </summary>
 	public class ImageTextureInputs : Inputs
 	{
+		/// <summary>
+		/// ImageTexture space coordinate to sample texture at
+		/// </summary>
 		public Float4Socket Vector { get; set; }
 
-		public ImageTextureInputs(ShaderNode parentNode)
+		internal ImageTextureInputs(ShaderNode parentNode)
 		{
 			Vector = new Float4Socket(parentNode, "Vector");
 			AddSocket(Vector);
 		}
 	}
 
+	/// <summary>
+	/// ImageTexture output sockets
+	/// </summary>
 	public class ImageTextureOutputs : Outputs
 	{
+		/// <summary>
+		/// ImageTexture Color output
+		/// </summary>
 		public Float4Socket Color { get; set; }
+		/// <summary>
+		/// ImageTexture alpha output
+		/// </summary>
 		public FloatSocket Alpha { get; set; }
 
-		public ImageTextureOutputs(ShaderNode parentNode)
+		internal ImageTextureOutputs(ShaderNode parentNode)
 		{
 			Color = new Float4Socket(parentNode, "Color");
 			AddSocket(Color);
@@ -46,12 +61,21 @@ namespace ccl.ShaderNodes
 
 	public class ImageTextureNode : TextureNode
 	{
+		/// <summary>
+		/// Image texture input sockets
+		/// </summary>
+		public ImageTextureInputs ins { get { return (ImageTextureInputs)inputs; } }
+		/// <summary>
+		/// Image texture output sockets
+		/// </summary>
+		public ImageTextureOutputs outs { get { return (ImageTextureOutputs)outputs; } }
 
-		public ImageTextureInputs ins { get { return (ImageTextureInputs)inputs; } set { inputs = value; } }
-		public ImageTextureOutputs outs { get { return (ImageTextureOutputs)outputs; } set { outputs = value; } }
+		public ImageTextureNode() : this("an image texture node")
+		{
+		}
 
-		public ImageTextureNode() :
-			base(ShaderNodeType.ImageTexture)
+		public ImageTextureNode(string name) :
+			base(ShaderNodeType.ImageTexture, name)
 		{
 
 			inputs = new ImageTextureInputs(this);
@@ -63,21 +87,56 @@ namespace ccl.ShaderNodes
 			Projection = TextureProjection.Flat;
 		}
 
+		/// <summary>
+		/// ImageTexture color space
+		/// </summary>
 		public TextureColorSpace ColorSpace { get; set; }
+		/// <summary>
+		/// ImageTexture texture projection
+		/// </summary>
 		public TextureProjection Projection { get; set; }
+		/// <summary>
+		/// ImageTexture texture projection blend
+		/// </summary>
 		public float ProjectionBlend { get; set; }
+		/// <summary>
+		/// ImageTexture texture interpolation
+		/// </summary>
 		public InterpolationType Interpolation { get; set; }
+		/// <summary>
+		/// ImageTexture linear
+		/// </summary>
 		public bool IsLinear { get; set; }
+		/// <summary>
+		/// ImageTexture float image
+		/// </summary>
 		public bool IsFloat { get; set; }
+		/// <summary>
+		/// ImageTexture use alpha changel if true
+		/// </summary>
 		public bool UseAlpha { get; set; }
+		/// <summary>
+		/// ImageTexture image data name
+		/// </summary>
 		public string Filename { get; set; }
 
+		/// <summary>
+		/// ImageTexture float image data 
+		/// </summary>
 		public float[] FloatImage { set; get; }
 
+		/// <summary>
+		/// ImageTexture byte image data 
+		/// </summary>
 		public byte[] ByteImage { set; get; }
 
-		/* two helpers for image resolution */
+		/// <summary>
+		/// ImageTexture image width in pixels
+		/// </summary>
 		public uint Width { get; set; }
+		/// <summary>
+		/// ImageTexture image height in pixels
+		/// </summary>
 		public uint Height { get; set; }
 
 		internal override void SetEnums(uint clientId, uint shaderId)
@@ -90,6 +149,7 @@ namespace ccl.ShaderNodes
 		internal override void SetDirectMembers(uint clientId, uint shaderId)
 		{
 			CSycles.shadernode_set_member_float(clientId, shaderId, Id, Type, "projection_blend", ProjectionBlend);
+			CSycles.shadernode_set_member_bool(clientId, shaderId, Id, Type, "use_alpha", UseAlpha);
 			if (FloatImage != null)
 			{
 				var flimg = FloatImage;
