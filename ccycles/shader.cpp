@@ -652,6 +652,14 @@ void cycles_shadernode_set_member_bool(unsigned int client_id, unsigned int shad
 						}
 					}
 					break;
+				case shadernode_type::IMAGE_TEXTURE:
+					{
+						ccl::ImageTextureNode* imgtex= dynamic_cast<ccl::ImageTextureNode*>(*psh);
+						if (mname == "use_alpha") {
+							imgtex->use_alpha = value;
+						}
+					}
+					break;
 			}
 	SHADERNODE_FIND_END()
 }
