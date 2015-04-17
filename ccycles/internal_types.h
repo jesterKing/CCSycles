@@ -37,6 +37,7 @@ limitations under the License.
 #include "session.h"
 #include "shader.h"
 
+#include "util_function.h"
 #include "util_progress.h"
 #include "util_string.h"
 
