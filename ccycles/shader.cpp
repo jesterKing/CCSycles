@@ -501,6 +501,12 @@ void cycles_shadernode_set_enum(unsigned int client_id, unsigned int shader_id, 
 						_set_enum_val(client_id, &node->type, ccl::WaveTextureNode::type_enum, val);
 					}
 					break;
+				case shadernode_type::VORONOI_TEXTURE:
+					{
+						ccl::VoronoiTextureNode* node = dynamic_cast<ccl::VoronoiTextureNode*>(*psh);
+						_set_enum_val(client_id, &node->coloring, ccl::VoronoiTextureNode::coloring_enum, val);
+					}
+					break;
 				case shadernode_type::SKY_TEXTURE:
 					{
 						auto node = dynamic_cast<ccl::SkyTextureNode*>(*psh);
