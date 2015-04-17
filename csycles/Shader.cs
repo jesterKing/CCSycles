@@ -44,6 +44,11 @@ namespace ccl
 		private bool created_in_cycles { get; set; }
 
 		/// <summary>
+		/// Print out debug information if set to true. Default false.
+		/// </summary>
+		public bool Verbose { get; set; }
+
+		/// <summary>
 		/// Get the output node for this shader.
 		/// </summary>
 		public OutputNode Output { get; private set; }
@@ -61,6 +66,7 @@ namespace ccl
 			Output = new OutputNode();
 			AddNode(Output);
 			created_in_cycles = false;
+			Verbose = false;
 		}
 
 		/// <summary>
@@ -79,6 +85,7 @@ namespace ccl
 			Output = new OutputNode();
 			AddNode(Output);
 			created_in_cycles = true;
+			Verbose = false;
 		}
 
 		/// <summary>
@@ -204,7 +211,10 @@ namespace ccl
 		/// </summary>
 		public void FinalizeGraph()
 		{
-			System.Diagnostics.Debug.WriteLine(String.Format("Finalizing {0}", Name));
+			if (Verbose)
+			{
+				System.Diagnostics.Debug.WriteLine(String.Format("Finalizing {0}", Name));
+			}
 			foreach (var node in m_nodes)
 			{
 				/* set enumerations */
@@ -221,7 +231,10 @@ namespace ccl
 				{
 					var from = socket.ConnectionFrom;
 					if (from == null) continue;
-					System.Diagnostics.Debug.WriteLine("Shader {0}: Connecting {1} to {2}", Name, from.Path, socket.Path);
+					if (Verbose)
+					{
+						System.Diagnostics.Debug.WriteLine("Shader {0}: Connecting {1} to {2}", Name, from.Path, socket.Path);
+					}
 					Connect(from.Parent, from.Name, node, socket.Name);
 				}
 			}
