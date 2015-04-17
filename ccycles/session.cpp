@@ -165,8 +165,8 @@ unsigned int cycles_session_create(unsigned int client_id, unsigned int session_
 	session->session = new ccl::Session(params);
 	session->session->scene = sce.scene;
 
-	session->session->update_render_tile_cb = function_bind<void>(&CCSession::update_render_tile, session, _1);
-	session->session->write_render_tile_cb = function_bind<void>(&CCSession::write_render_tile, session, _1);
+	session->session->update_render_tile_cb = function_bind<void>(&CCSession::update_render_tile, session, std::placeholders::_1);
+	session->session->write_render_tile_cb = function_bind<void>(&CCSession::write_render_tile, session, std::placeholders::_1);
 
 	auto csessit = sessions.begin();
 	auto csessend = sessions.end();

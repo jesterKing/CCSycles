@@ -115,7 +115,7 @@ void cycles_mesh_set_verts(unsigned int client_id, unsigned int scene_id, unsign
 			logger.logit(client_id, "v: ", f3.x, ",", f3.y, ",", f3.z);
 			me->verts.push_back(f3);
 		}
-		me->geometry_synced = true;
+		me->geometry_flags = ccl::Mesh::GeometryFlags::GEOMETRY_TRIANGLES;
 	SCENE_FIND_END()
 }
 
@@ -130,7 +130,7 @@ void cycles_mesh_set_tris(unsigned int client_id, unsigned int scene_id, unsigne
 			logger.logit(client_id, "f: ", faces[i], ",", faces[i + 1], ",", faces[i + 2]);
 			me->add_triangle(faces[i], faces[i + 1], faces[i + 2], shader_id, smooth == 1);
 		}
-		me->geometry_synced = true;
+		me->geometry_flags = ccl::Mesh::GeometryFlags::GEOMETRY_TRIANGLES;
 		
 		// TODO: APIfy next call, right now keep here to be closer to PoC plugin
 		//me->attributes.remove(ccl::ATTR_STD_VERTEX_NORMAL);
@@ -161,7 +161,7 @@ void cycles_mesh_set_uvs(unsigned int client_id, unsigned int scene_id, unsigned
 			f3.z = 0.0f;
 			fdata[j] = f3;
 		}
-		me->geometry_synced = true;
+		me->geometry_flags = ccl::Mesh::GeometryFlags::GEOMETRY_TRIANGLES;
 	SCENE_FIND_END()
 }
 
@@ -181,6 +181,6 @@ void cycles_mesh_set_vertex_normals(unsigned int client_id, unsigned int scene_i
 			f3.z = vnormals[i + 2];
 			fdata[j] = f3;
 		}
-		me->geometry_synced = true;
+		me->geometry_flags = ccl::Mesh::GeometryFlags::GEOMETRY_TRIANGLES;
 	SCENE_FIND_END()
 }
