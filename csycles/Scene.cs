@@ -50,6 +50,11 @@ namespace ccl
 		public Background Background { get; private set; }
 
 		/// <summary>
+		/// Access to the Film for this Scene
+		/// </summary>
+		public Film Film { get; private set; }
+
+		/// <summary>
 		/// Create a new scene with the given SceneParameters and Device
 		/// </summary>
 		/// <param name="client">The client from C[CS]ycles API</param>
@@ -62,6 +67,7 @@ namespace ccl
 			Background = new Background(this);
 			Camera = new Camera(this);
 			Integrator = new Integrator(this);
+			Film = new Film(this);
 
 			/* add simple wrappers for shadermanager created default shaders */
 			var surface = Shader.WrapDefaultSurfaceShader(client);
