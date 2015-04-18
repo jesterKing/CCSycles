@@ -161,6 +161,12 @@ namespace ccl
 		FisheyeEquisolid
 	}
 
+	public enum FilterType : uint
+	{
+		Box = 0,
+		Gaussian
+	}
+
 	public enum LightType : uint
 	{
 		Point = 0,

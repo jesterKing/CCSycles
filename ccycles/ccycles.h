@@ -603,6 +603,11 @@ CCL_CAPI void __cdecl cycles_light_set_dir(unsigned int client_id, unsigned int 
 CCL_CAPI void __cdecl cycles_light_set_co(unsigned int client_id, unsigned int scene_id, unsigned int light_id, float cox, float coy, float coz);
 CCL_CAPI void __cdecl cycles_light_tag_update(unsigned int client_id, unsigned int scene_id, unsigned int light_id);
 
+CCL_CAPI void __cdecl cycles_film_set_exposure(unsigned int client_id, unsigned int scene_id, float exposure);
+CCL_CAPI void __cdecl cycles_film_set_filter(unsigned int client_id, unsigned int scene_id, unsigned int filter_type, float filter_width);
+CCL_CAPI void __cdecl cycles_film_set_use_sample_clamp(unsigned int client_id, unsigned int scene_id, bool use_sample_clamp);
+CCL_CAPI void __cdecl cycles_film_tag_update(unsigned int client_id, unsigned int scene_id);
+
 #ifdef __clplusplus
 }
 #endif

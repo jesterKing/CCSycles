@@ -27,6 +27,7 @@ limitations under the License.
 #include "background.h"
 #include "camera.h"
 #include "device.h"
+#include "film.h"
 #include "graph.h"
 #include "integrator.h"
 #include "light.h"

@@ -197,3 +197,8 @@ EXPORTS
   cycles_light_set_dir
   cycles_light_set_co
   cycles_light_tag_update
+
+  cycles_film_set_exposure
+  cycles_film_set_filter
+  cycles_film_set_use_sample_clamp
+  cycles_film_tag_update

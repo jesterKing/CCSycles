@@ -113,6 +113,7 @@
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="ccycles.cpp" />
     <ClCompile Include="device.cpp" />
+    <ClCompile Include="film.cpp" />
     <ClCompile Include="integrator.cpp" />
     <ClCompile Include="light.cpp" />
     <ClCompile Include="mesh.cpp" />
