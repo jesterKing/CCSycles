@@ -65,20 +65,20 @@ namespace ccl
 			cycles_initialise();
 		}
 
+		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_path_init", CharSet = CharSet.Ansi,
+			CallingConvention = CallingConvention.Cdecl)]
+		private static extern void cycles_path_init(string path, string userPath);
 		/// <summary>
-		/// Set the path location to look for CUDA kernels.
+		/// Set the paths for Cycles to look for pre-compiled or cached kernels, or kernel code
 		/// 
 		/// Note: to have any effect needs to be called before <c>initialise</c>.
 		/// </summary>
-		/// <param name="kernelPath"></param>
-		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_set_kernel_path", CharSet = CharSet.Ansi,
-			CallingConvention = CallingConvention.Cdecl)]
-		private static extern void cycles_set_kernel_path(string kernelPath);
-
-		public static void set_kernel_path([MarshalAsAttribute(UnmanagedType.LPStr)] string kernelPath)
+		/// <param name="path"></param>
+		/// <param name="userPath"></param>
+		public static void path_init([MarshalAsAttribute(UnmanagedType.LPStr)] string path, [MarshalAsAttribute(UnmanagedType.LPStr)] string userPath)
 		{
 			LoadCCycles();
-			cycles_set_kernel_path(kernelPath);
+			cycles_path_init(path, userPath);
 		}
 
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_shutdown", CallingConvention = CallingConvention.Cdecl)]

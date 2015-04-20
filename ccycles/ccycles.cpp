@@ -16,6 +16,7 @@ limitations under the License.
 
 #include "internal_types.h"
 
+#include "util_path.h"
 #include "ccycles.h"
 
 extern void _cleanup_scenes();
@@ -49,9 +50,9 @@ void _cleanup_loggers()
 	loggers.clear();
 }
 
-void cycles_set_kernel_path(const char* kernel_path)
+void cycles_path_init(const char* path, const char* user_path)
 {
-	ccl::libpath = string(kernel_path);
+	ccl::path_init(string(path), string(user_path));
 }
 
 void cycles_initialise()

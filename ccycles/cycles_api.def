@@ -1,12 +1,12 @@
 LIBRARY
 EXPORTS
-  cycles_set_kernel_path
+  cycles_path_init
   cycles_initialise
   cycles_shutdown
   cycles_set_logger
   cycles_new_client
   cycles_release_client
-	cycles_log_to_stdout
+  cycles_log_to_stdout
 
   cycles_device_capabilities
   cycles_number_devices
