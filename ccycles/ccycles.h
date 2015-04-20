@@ -113,10 +113,10 @@ typedef void(__cdecl *RENDER_TILE_CB)(unsigned int session_id, unsigned int x, u
 CCL_CAPI void __cdecl cycles_initialise();
 
 /**
- * Set the path to look for CUDA kernels in.
+ * Initialise paths for Cycles to look in (pre-compiled kernels, cached kernels, kernel code)
  * \ingroup ccycles
  */
-CCL_CAPI void __cdecl cycles_set_kernel_path(const char* kernel_path);
+CCL_CAPI void __cdecl cycles_path_init(const char* path, const char* user_path);
 
 /**
  * Clean up everything, we're done.
