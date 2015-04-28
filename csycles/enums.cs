@@ -170,7 +170,7 @@ namespace ccl
 	public enum LightType : uint
 	{
 		Point = 0,
-		Sun, /* also Hemi */
+		Distant,
 		Background,
 		Area,
 		Spot,

@@ -118,6 +118,10 @@ namespace ccl.ShaderNodes
 			}
 		}
 
-
+		public override string ToString()
+		{
+			var str = String.Format("{0} ({1})", Name, Type);
+			return str;
+		}
 	}
 }

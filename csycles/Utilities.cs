@@ -303,6 +303,12 @@ namespace ccl
 						nodes.Add(nodename, diffbsdf);
 						shader.AddNode(diffbsdf);
 						break;
+					case "translucent_bsdf":
+						var translucentbsdf = new TranslucentBsdfNode();
+						get_float4(translucentbsdf.ins.Color, node.GetAttribute("color"));
+						nodes.Add(nodename, translucentbsdf);
+						shader.AddNode(translucentbsdf);
+						break;
 					case "emission_bsdf":
 						var emisbsdf = new EmissionNode();
 						get_float4(emisbsdf.ins.Color, node.GetAttribute("color"));

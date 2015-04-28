@@ -253,6 +253,10 @@ namespace ccl
 			{
 				CSycles.shader_connect_nodes(Client.Id, Id, from.Id, fromout, to.Id, toin);
 			}
+			else
+			{
+				throw new ArgumentException(String.Format("Cannot connect {0} to {1}", from, to));
+			}
 		}
 
 		private string m_name;
