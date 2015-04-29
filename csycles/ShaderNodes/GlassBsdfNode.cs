@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 **/
 
+using System;
 using ccl.ShaderNodes.Sockets;
 
 namespace ccl.ShaderNodes
@@ -51,6 +52,14 @@ namespace ccl.ShaderNodes
 
 	public class GlassBsdfNode : ShaderNode
 	{
+
+		public enum GlassDistribution
+		{
+			Sharp,
+			Beckmann,
+			GGX
+		}
+
 		public GlassInputs ins { get { return (GlassInputs)inputs; } set { inputs = value; } }
 		public GlassOutputs outs { get { return (GlassOutputs)outputs; } set { outputs = value; } }
 		public GlassBsdfNode()
@@ -59,14 +68,19 @@ namespace ccl.ShaderNodes
 			ins = new GlassInputs(this);
 			outs = new GlassOutputs(this);
 
-			Distribution = "Beckmann";
+			Distribution = GlassDistribution.Beckmann;
 		}
 
-		public string Distribution { get; set; }
+		public GlassDistribution Distribution { get; set; }
+
+		public void SetDistribution(string dist)
+		{
+			Distribution = (GlassDistribution) Enum.Parse(typeof (GlassDistribution), dist, true);
+		}
 
 		internal override void SetEnums(uint clientId, uint shaderId)
 		{
-			CSycles.shadernode_set_enum(clientId, shaderId, Id, Type, Distribution);
+			CSycles.shadernode_set_enum(clientId, shaderId, Id, Type, Distribution.ToString());
 		}
 	}
 }

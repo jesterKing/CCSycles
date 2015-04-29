@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 **/
 
+using System;
 using ccl.ShaderNodes.Sockets;
 
 namespace ccl.ShaderNodes
@@ -51,6 +52,12 @@ namespace ccl.ShaderNodes
 
 	public class RefractionBsdfNode : ShaderNode
 	{
+		public enum RefractionDistribution
+		{
+			Sharp,
+			Beckmann,
+			GGX
+		}
 		public RefractionBsdfInputs ins { get { return (RefractionBsdfInputs)inputs; } }
 		public RefractionBsdfOutputs outs { get { return (RefractionBsdfOutputs)outputs; } }
 
@@ -61,17 +68,22 @@ namespace ccl.ShaderNodes
 			inputs = new RefractionBsdfInputs(this);
 			outputs = new RefractionBsdfOutputs(this);
 
-			Distribution = "Beckmann";
+			Distribution = RefractionDistribution.Beckmann;
 			ins.IOR.Value = 1.45f;
 			ins.Roughness.Value = 0.0f;
 			ins.Color.Value = new float4(0.8f);
 		}
 
-		public string Distribution { get; set; }
+		public RefractionDistribution Distribution { get; set; }
+
+		public void SetDistribution(string dist)
+		{
+			Distribution = (RefractionDistribution) Enum.Parse(typeof (RefractionDistribution), dist, true);
+		}
 
 		internal override void SetEnums(uint clientId, uint shaderId)
 		{
-			CSycles.shadernode_set_enum(clientId, shaderId, Id, Type, Distribution);
+			CSycles.shadernode_set_enum(clientId, shaderId, Id, Type, Distribution.ToString());
 		}
 	}
 }

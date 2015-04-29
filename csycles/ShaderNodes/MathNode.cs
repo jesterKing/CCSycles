@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 **/
 
+using System;
 using ccl.ShaderNodes.Sockets;
 
 namespace ccl.ShaderNodes
@@ -189,6 +190,12 @@ namespace ccl.ShaderNodes
 		/// The operation this node does on Value1 and Value2
 		/// </summary>
 		public Operations Operation { get; set; }
+
+		public void SetOperation(string op)
+		{
+			op = op.Replace(" ", "_");
+			Operation = (Operations)Enum.Parse(typeof(Operations), op, true);
+		}
 
 		/// <summary>
 		/// Set to true [IN] if math output in Value should be clamped 0.0..1.0
