@@ -333,7 +333,7 @@ namespace ccl
 						var glassdistribution = node.GetAttribute("distribution");
 						if (!string.IsNullOrEmpty(glassdistribution))
 						{
-							glassbsdf.Distribution = glassdistribution;
+							glassbsdf.SetDistribution(glassdistribution);
 						}
 						nodes.Add(nodename, glassbsdf);
 						shader.AddNode(glassbsdf);
@@ -346,7 +346,7 @@ namespace ccl
 						var glossydistribution = node.GetAttribute("distribution");
 						if (!string.IsNullOrEmpty(glossydistribution))
 						{
-							glossybsdf.Distribution = glossydistribution;
+							glossybsdf.SetDistribution(glossydistribution);
 						}
 						nodes.Add(nodename, glossybsdf);
 						shader.AddNode(glossybsdf);
@@ -372,16 +372,7 @@ namespace ccl
 						var operation = node.GetAttribute("type");
 						if (!string.IsNullOrEmpty(operation))
 						{
-							operation = operation.ToLowerInvariant();
-							try
-							{
-								var op = (MathNode.Operations)Enum.Parse(typeof(MathNode.Operations), operation, true);
-								math.Operation = op;
-							}
-							catch (ArgumentException)
-							{
-								math.Operation = MathNode.Operations.Add;
-							}
+							math.SetOperation(operation);
 						}
 						nodes.Add(nodename, math);
 						shader.AddNode(math);

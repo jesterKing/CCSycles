@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 **/
 
+using System;
 using ccl.ShaderNodes.Sockets;
 
 namespace ccl.ShaderNodes
@@ -49,6 +50,14 @@ namespace ccl.ShaderNodes
 	public class GlossyBsdfNode : ShaderNode
 	{
 
+		public enum GlossyDistribution
+		{
+			Sharp,
+			Beckmann,
+			GGX,
+			Asihkmin_Shirley
+		}
+
 		public GlossyInputs ins { get { return (GlossyInputs)inputs; } }
 		public GlossyOutputs outs { get { return (GlossyOutputs)outputs; } }
 
@@ -58,16 +67,29 @@ namespace ccl.ShaderNodes
 		{
 			inputs = new GlossyInputs(this);
 			outputs = new GlossyOutputs(this);
-			Distribution = "Beckmann";
+			Distribution = GlossyDistribution.Beckmann;
 			ins.Color.Value = new float4();
 			ins.Roughness.Value = 0.0f;
 		}
 
-		public string Distribution { get; set; }
+		public GlossyDistribution Distribution { get; set; }
+
+		public void SetDistribution(string dist)
+		{
+			dist = dist.Replace("-", "_");
+			Distribution = (GlossyDistribution)Enum.Parse(typeof(GlossyDistribution), dist, true);
+		}
+
+		private string GlossyToString(GlossyDistribution dist)
+		{
+			var str = dist.ToString();
+			str = str.Replace("_", "-");
+			return str;
+		}
 
 		internal override void SetEnums(uint clientId, uint shaderId)
 		{
-			CSycles.shadernode_set_enum(clientId, shaderId, Id, Type, Distribution);
+			CSycles.shadernode_set_enum(clientId, shaderId, Id, Type, GlossyToString(Distribution));
 		}
 	}
 }

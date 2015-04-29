@@ -183,7 +183,7 @@ namespace ccl
 		Closest = 1,
 		Cubic = 2,
 		Smart = 3,
-	};
+	}
 
 	[FlagsAttribute]
 	public enum PathRay : uint
@@ -205,7 +205,9 @@ namespace ccl
 		VolumeScatter = 1024,
 
 		/* note that these can use maximum 12 bits, the other are for layers */
-		AllVisibility = (Camera | Reflect | Transmit | Diffuse | Glossy | Singular | Transparent | Shadow | Curve | VolumeScatter ),
+
+		AllVisibility =
+			(Camera | Reflect | Transmit | Diffuse | Glossy | Singular | Transparent | Shadow | Curve | VolumeScatter),
 
 		MisSkip = 2048,
 		DiffuseAncestor = 4096,
