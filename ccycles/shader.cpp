@@ -299,6 +299,9 @@ unsigned int cycles_add_shader_node(unsigned int client_id, unsigned int shader_
 		case shadernode_type::COLOR_RAMP:
 			node = new ccl::RGBRampNode();
 			break;
+		case shadernode_type::VECT_MATH:
+			node = new ccl::VectorMathNode();
+			break;
 	}
 
 	if (node) {
@@ -472,6 +475,12 @@ void cycles_shadernode_set_enum(unsigned int client_id, unsigned int shader_id, 
 					{
 						auto node = dynamic_cast<ccl::MathNode*>(*psh);
 						_set_enum_val(client_id, &node->type, ccl::MathNode::type_enum, val);
+					}
+					break;
+				case shadernode_type::VECT_MATH:
+					{
+						ccl::VectorMathNode *node = dynamic_cast<ccl::VectorMathNode*>(*psh);
+						_set_enum_val(client_id, &node->type, ccl::VectorMathNode::type_enum, val);
 					}
 					break;
 				case shadernode_type::MIX:
