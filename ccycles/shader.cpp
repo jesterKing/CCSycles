@@ -249,7 +249,7 @@ unsigned int cycles_add_shader_node(unsigned int client_id, unsigned int shader_
 			node = new ccl::BumpNode();
 			break;
 		case shadernode_type::RGBTOBW:
-			node = new ccl::ConvertNode(ccl::SHADER_SOCKET_COLOR2, ccl::SHADER_SOCKET_FLOAT);
+			node = new ccl::ConvertNode(ccl::SHADER_SOCKET_COLOR, ccl::SHADER_SOCKET_FLOAT);
 			break;
 		case shadernode_type::RGBTOLUMINANCE:
 			node = new ccl::ConvertNode(ccl::SHADER_SOCKET_COLOR2, ccl::SHADER_SOCKET_FLOAT);
