@@ -510,6 +510,7 @@ enum class shadernode_type : unsigned int {
 	TEXTURE_COORDINATE,
 	BUMP,
 	RGBTOBW,
+	RGBTOLUMINANCE,
 	LIGHTPATH,
 	LIGHTFALLOFF,
 	LAYERWEIGHT,

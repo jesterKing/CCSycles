@@ -76,6 +76,7 @@
     <Compile Include="ShaderNodes\HueSaturationNode.cs" />
     <Compile Include="ShaderNodes\HoldoutNode.cs" />
     <Compile Include="ShaderNodes\GradientTextureNode.cs" />
+    <Compile Include="ShaderNodes\RgbToLuminance.cs" />
     <Compile Include="ShaderNodes\TranslucentBsdfNode.cs" />
     <Compile Include="ShaderNodes\VelvetBsdfNode.cs" />
     <Compile Include="ShaderNodes\MappingNode.cs" />

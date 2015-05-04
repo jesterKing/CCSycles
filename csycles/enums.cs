@@ -114,6 +114,7 @@ namespace ccl
 		TextureCoordinate,
 		Bump,
 		RgbToBw,
+		RgbToLuminance,
 		LightPath,
 		LightFalloff,
 		LayerWeight,
