@@ -527,6 +527,7 @@ enum class shadernode_type : unsigned int {
 	BRIGHT_CONTRAST,
 	GRADIENT_TEXTURE,
 	COLOR_RAMP,
+	VECT_MATH,
 };
 
 CCL_CAPI unsigned int __cdecl cycles_create_shader(unsigned int client_id);
