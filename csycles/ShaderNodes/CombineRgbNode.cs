@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 **/
 
+using System.Xml;
 using ccl.ShaderNodes.Sockets;
 
 namespace ccl.ShaderNodes
@@ -51,18 +52,26 @@ namespace ccl.ShaderNodes
 	/// </summary>
 	public class CombineRgbNode : ShaderNode
 	{
-		public CombineRgbInputs ins { get { return (CombineRgbInputs)inputs; } set { inputs = value; } }
-		public CombineRgbOutputs outs { get { return (CombineRgbOutputs)outputs; } set { outputs = value; } }
+		public CombineRgbInputs ins { get { return (CombineRgbInputs)inputs; } }
+		public CombineRgbOutputs outs { get { return (CombineRgbOutputs)outputs; } }
 
-		public CombineRgbNode() :
-			base(ShaderNodeType.CombineRgb)
+		public CombineRgbNode() : this("a combine rgb node") { }
+		public CombineRgbNode(string name) :
+			base(ShaderNodeType.CombineRgb, name)
 		{
-			inputs = new MappingInputs(this);
-			outputs = new MappingOutputs(this);
+			inputs = new CombineRgbInputs(this);
+			outputs = new CombineRgbOutputs(this);
 
 			ins.R.Value = 0.0f;
 			ins.G.Value = 0.0f;
 			ins.B.Value = 0.0f;
+		}
+
+		internal override void ParseXml(XmlReader xmlNode)
+		{
+			Utilities.Instance.get_float(ins.R, xmlNode.GetAttribute("R"));
+			Utilities.Instance.get_float(ins.G, xmlNode.GetAttribute("G"));
+			Utilities.Instance.get_float(ins.B, xmlNode.GetAttribute("B"));
 		}
 	}
 }

@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 **/
 
+using System.Xml;
 using ccl.ShaderNodes.Sockets;
 
 namespace ccl.ShaderNodes
@@ -45,17 +46,24 @@ namespace ccl.ShaderNodes
 
 	public class GammaNode : ShaderNode
 	{
-		public GammaInputs ins { get { return (GammaInputs)inputs; } set { inputs = value; } }
-		public GammaOutputs outs { get { return (GammaOutputs)outputs; } set { outputs = value; }}
+		public GammaInputs ins { get { return (GammaInputs)inputs; } }
+		public GammaOutputs outs { get { return (GammaOutputs)outputs; } }
 
-		public GammaNode()
-			: base(ShaderNodeType.Gamma)
+		public GammaNode() : this("a gamma node") {}
+		public GammaNode(string name)
+			: base(ShaderNodeType.Gamma, name)
 		{
 			inputs = new GammaInputs(this);
 			outputs = new GammaOutputs(this);
 
 			ins.Color.Value = new float4(0.8f);
 			ins.Gamma.Value = 1.0f;
+		}
+
+		internal override void ParseXml(XmlReader xmlNode)
+		{
+			Utilities.Instance.get_float4(ins.Color, xmlNode.GetAttribute("color"));
+			Utilities.Instance.get_float(ins.Gamma, xmlNode.GetAttribute("gamma"));
 		}
 	}
 }

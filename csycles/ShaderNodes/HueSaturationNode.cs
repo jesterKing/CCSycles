@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 **/
 
+using System.Xml;
 using ccl.ShaderNodes.Sockets;
 
 namespace ccl.ShaderNodes
@@ -54,11 +55,12 @@ namespace ccl.ShaderNodes
 
 	public class HueSaturationNode : ShaderNode
 	{
-		public HueSaturationInputs ins { get { return (HueSaturationInputs)inputs; } set { inputs = value; } }
-		public HueSaturationOutputs outs { get { return (HueSaturationOutputs)outputs; } set { outputs = value; }}
+		public HueSaturationInputs ins { get { return (HueSaturationInputs)inputs; } }
+		public HueSaturationOutputs outs { get { return (HueSaturationOutputs)outputs; } }
 
-		public HueSaturationNode()
-			: base(ShaderNodeType.HueSaturation)
+		public HueSaturationNode() : this("a HVS node") { }
+		public HueSaturationNode(string name)
+			: base(ShaderNodeType.HueSaturation, name)
 		{
 			inputs = new HueSaturationInputs(this);
 			outputs = new HueSaturationOutputs(this);
@@ -68,6 +70,15 @@ namespace ccl.ShaderNodes
 			ins.Value.Value = 1.0f;
 			ins.Fac.Value = 1.0f;
 			ins.Color.Value = new float4(0.8f);
+		}
+
+		internal override void ParseXml(XmlReader xmlNode)
+		{
+			Utilities.Instance.get_float(ins.Hue, xmlNode.GetAttribute("hue"));
+			Utilities.Instance.get_float(ins.Saturation, xmlNode.GetAttribute("saturation"));
+			Utilities.Instance.get_float(ins.Value, xmlNode.GetAttribute("value"));
+			Utilities.Instance.get_float(ins.Fac, xmlNode.GetAttribute("fac"));
+			Utilities.Instance.get_float4(ins.Color, xmlNode.GetAttribute("color"));
 		}
 	}
 }

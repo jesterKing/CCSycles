@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 **/
 
+using System.Xml;
 using ccl.ShaderNodes.Sockets;
 
 namespace ccl.ShaderNodes
@@ -48,17 +49,24 @@ namespace ccl.ShaderNodes
 
 	public class LayerWeightNode : ShaderNode
 	{
-		public LayerWeightInputs ins { get { return (LayerWeightInputs)inputs; } set { inputs = value; } }
-		public LayerWeightOutputs outs { get { return (LayerWeightOutputs)outputs; } set { outputs = value; }}
+		public LayerWeightInputs ins { get { return (LayerWeightInputs)inputs; } }
+		public LayerWeightOutputs outs { get { return (LayerWeightOutputs)outputs; } }
 
-		public LayerWeightNode()
-			: base(ShaderNodeType.LayerWeight)
+		public LayerWeightNode() : this("a layerweight node") { }
+		public LayerWeightNode(string name)
+			: base(ShaderNodeType.LayerWeight, name)
 		{
 			inputs = new LayerWeightInputs(this);
 			outputs = new LayerWeightOutputs(this);
 
 			ins.Normal.Value = new float4(0.0f);
 			ins.Blend.Value = 0.5f;
+		}
+
+		internal override void ParseXml(XmlReader xmlNode)
+		{
+			Utilities.Instance.get_float(ins.Blend, xmlNode.GetAttribute("blend"));
+			Utilities.Instance.get_float4(ins.Normal, xmlNode.GetAttribute("normal"));
 		}
 	}
 }

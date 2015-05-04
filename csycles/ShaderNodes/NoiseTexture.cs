@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 **/
 
+using System.Xml;
 using ccl.ShaderNodes.Sockets;
 
 namespace ccl.ShaderNodes
@@ -54,14 +55,23 @@ namespace ccl.ShaderNodes
 
 	public class NoiseTexture : TextureNode
 	{
-		public NoiseInputs ins { get { return (NoiseInputs)inputs; } set { inputs = value; } }
-		public NoiseOutputs outs { get { return (NoiseOutputs)outputs; } set { outputs = value; } }
+		public NoiseInputs ins { get { return (NoiseInputs)inputs; } }
+		public NoiseOutputs outs { get { return (NoiseOutputs)outputs; } }
 
-		public NoiseTexture()
-			: base(ShaderNodeType.NoiseTexture)
+		public NoiseTexture() : this("a noise texture") { }
+		public NoiseTexture(string name)
+			: base(ShaderNodeType.NoiseTexture, name)
 		{
-			ins = new NoiseInputs(this);
-			outs = new NoiseOutputs(this);
+			inputs = new NoiseInputs(this);
+			outputs = new NoiseOutputs(this);
+		}
+
+		internal override void ParseXml(XmlReader xmlNode)
+		{
+			Utilities.Instance.get_float4(ins.Vector, xmlNode.GetAttribute("vector"));
+			Utilities.Instance.get_float(ins.Detail, xmlNode.GetAttribute("detail"));
+			Utilities.Instance.get_float(ins.Distortion, xmlNode.GetAttribute("distortion"));
+			Utilities.Instance.get_float(ins.Scale, xmlNode.GetAttribute("scale"));
 		}
 	}
 }

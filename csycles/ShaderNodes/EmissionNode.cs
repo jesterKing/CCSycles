@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 **/
 
+using System.Xml;
 using ccl.ShaderNodes.Sockets;
 
 namespace ccl.ShaderNodes
@@ -57,6 +58,12 @@ namespace ccl.ShaderNodes
 
 			ins.Color.Value = new float4(0.8f);
 			ins.Strength.Value = 1.0f;
+		}
+
+		internal override void ParseXml(XmlReader xmlNode)
+		{
+			Utilities.Instance.get_float4(ins.Color, xmlNode.GetAttribute("color"));
+			Utilities.Instance.get_float(ins.Strength, xmlNode.GetAttribute("strength"));
 		}
 	}
 }

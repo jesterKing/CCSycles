@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 **/
 
+using System.Xml;
 using ccl.ShaderNodes.Sockets;
 
 namespace ccl.ShaderNodes
@@ -55,6 +56,12 @@ namespace ccl.ShaderNodes
 			outputs = new FresnelOutputs(this);
 			ins.IOR.Value = 1.45f;
 			ins.Normal.Value = new float4();
+		}
+
+		internal override void ParseXml(XmlReader xmlNode)
+		{
+			Utilities.Instance.get_float(ins.IOR, xmlNode.GetAttribute("ior"));
+			Utilities.Instance.get_float4(ins.Normal, xmlNode.GetAttribute("normal"));
 		}
 	}
 }

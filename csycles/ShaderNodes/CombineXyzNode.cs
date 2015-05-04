@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 **/
 
+using System.Xml;
 using ccl.ShaderNodes.Sockets;
 
 namespace ccl.ShaderNodes
@@ -51,18 +52,26 @@ namespace ccl.ShaderNodes
 	/// </summary>
 	public class CombineXyzNode : ShaderNode
 	{
-		public CombineXyzInputs ins { get { return (CombineXyzInputs)inputs; } set { inputs = value; } }
-		public CombineXyzOutputs outs { get { return (CombineXyzOutputs)outputs; } set { outputs = value; } }
+		public CombineXyzInputs ins { get { return (CombineXyzInputs)inputs; } }
+		public CombineXyzOutputs outs { get { return (CombineXyzOutputs)outputs; } }
 
-		public CombineXyzNode() :
-			base(ShaderNodeType.CombineXyz)
+		public CombineXyzNode() : this("a combine XYZ node") { }
+		public CombineXyzNode(string name) :
+			base(ShaderNodeType.CombineXyz, name)
 		{
-			inputs = new MappingInputs(this);
-			outputs = new MappingOutputs(this);
+			inputs = new CombineXyzInputs(this);
+			outputs = new CombineXyzOutputs(this);
 
 			ins.X.Value = 0.0f;
 			ins.Y.Value = 0.0f;
 			ins.Z.Value = 0.0f;
+		}
+
+		internal override void ParseXml(XmlReader xmlNode)
+		{
+			Utilities.Instance.get_float(ins.X, xmlNode.GetAttribute("X"));
+			Utilities.Instance.get_float(ins.Y, xmlNode.GetAttribute("Y"));
+			Utilities.Instance.get_float(ins.Z, xmlNode.GetAttribute("Z"));
 		}
 	}
 }

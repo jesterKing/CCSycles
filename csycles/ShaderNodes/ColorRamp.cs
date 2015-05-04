@@ -326,11 +326,11 @@ namespace ccl.ShaderNodes
 		/// <summary>
 		/// ColorRamp input sockets
 		/// </summary>
-		public ColorRampInputs ins { get { return (ColorRampInputs)inputs; } set { inputs = value; } }
+		public ColorRampInputs ins { get { return (ColorRampInputs)inputs; } }
 		/// <summary>
 		/// ColorRamp output sockets
 		/// </summary>
-		public ColorRampOutputs outs { get { return (ColorRampOutputs)outputs; } set { outputs = value; }}
+		public ColorRampOutputs outs { get { return (ColorRampOutputs)outputs; } }
 		/// <summary>
 		/// Create a ColorRampNode
 		/// </summary>

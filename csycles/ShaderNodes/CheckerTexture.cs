@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 **/
 
+using System.Xml;
 using ccl.ShaderNodes.Sockets;
 
 namespace ccl.ShaderNodes
@@ -54,16 +55,23 @@ namespace ccl.ShaderNodes
 
 	public class CheckerTexture : TextureNode
 	{
-		public CheckerInputs ins { get { return (CheckerInputs)inputs; } set { inputs = value; } }
-		public CheckerOutputs outs { get { return (CheckerOutputs)outputs; } set { outputs = value; } }
-		public CheckerTexture()
-			: base(ShaderNodeType.CheckerTexture)
+		public CheckerInputs ins { get { return (CheckerInputs)inputs; } }
+		public CheckerOutputs outs { get { return (CheckerOutputs)outputs; } }
+		public CheckerTexture() : this("a checker texture") { }
+		public CheckerTexture(string name)
+			: base(ShaderNodeType.CheckerTexture, name)
 		{
-			ins = new CheckerInputs(this);
-			outs = new CheckerOutputs(this);
+			inputs = new CheckerInputs(this);
+			outputs = new CheckerOutputs(this);
 			ins.Color1.Value = new float4(1.0f, 0.5f, 0.25f);
 			ins.Color2.Value = new float4(0.25f, 0.5f, 1.0f);
 			ins.Scale.Value = 5.0f;
+		}
+
+		internal override void ParseXml(XmlReader xmlNode)
+		{
+			Utilities.Instance.get_float4(ins.Color1, xmlNode.GetAttribute("Color1"));
+			Utilities.Instance.get_float4(ins.Color2, xmlNode.GetAttribute("Color2"));
 		}
 	}
 }

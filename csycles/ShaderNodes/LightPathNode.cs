@@ -125,11 +125,11 @@ namespace ccl.ShaderNodes
 		/// <summary>
 		/// LightPath node input sockets
 		/// </summary>
-		public LightPathInputs ins { get { return (LightPathInputs)inputs; } set { inputs = value; } }
+		public LightPathInputs ins { get { return (LightPathInputs)inputs; } }
 		/// <summary>
 		/// LightPath node output sockets
 		/// </summary>
-		public LightPathOutputs outs { get { return (LightPathOutputs)outputs; } set { outputs = value; } }
+		public LightPathOutputs outs { get { return (LightPathOutputs)outputs; } }
 
 		/// <summary>
 		/// Create a new LightPathNode
@@ -142,8 +142,8 @@ namespace ccl.ShaderNodes
 		public LightPathNode(string name)
 			: base(ShaderNodeType.LightPath, name)
 		{
-			ins = null;
-			outs = new LightPathOutputs(this);
+			inputs = null;
+			outputs = new LightPathOutputs(this);
 		}
 	}
 }

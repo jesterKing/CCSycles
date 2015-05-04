@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 **/
 
+using System.Xml;
 using ccl.ShaderNodes.Sockets;
 
 namespace ccl.ShaderNodes
@@ -57,14 +58,15 @@ namespace ccl.ShaderNodes
 
 	public class WaveTexture : TextureNode
 	{
-		public WaveInputs ins { get { return (WaveInputs)inputs; } set { inputs = value; } }
-		public WaveOutputs outs { get { return (WaveOutputs)outputs; } set { outputs = value; } }
+		public WaveInputs ins { get { return (WaveInputs)inputs; } }
+		public WaveOutputs outs { get { return (WaveOutputs)outputs; } }
 
-		public WaveTexture()
-			: base(ShaderNodeType.WaveTexture)
+		public WaveTexture() : this("a wave texture") { }
+		public WaveTexture(string name)
+			: base(ShaderNodeType.WaveTexture, name)
 		{
-			ins = new WaveInputs(this);
-			outs = new WaveOutputs(this);
+			inputs = new WaveInputs(this);
+			outputs = new WaveOutputs(this);
 
 			ins.Scale.Value = 1.0f;
 			ins.Distortion.Value = 0.0f;
@@ -82,6 +84,21 @@ namespace ccl.ShaderNodes
 		internal override void SetEnums(uint clientId, uint shaderId)
 		{
 			CSycles.shadernode_set_enum(clientId, shaderId, Id, Type, WaveType);
+		}
+
+		internal override void ParseXml(XmlReader xmlNode)
+		{
+			Utilities.Instance.get_float4(ins.Vector, xmlNode.GetAttribute("vector"));
+			Utilities.Instance.get_float(ins.Scale, xmlNode.GetAttribute("scale"));
+			Utilities.Instance.get_float(ins.Distortion, xmlNode.GetAttribute("distortion"));
+			Utilities.Instance.get_float(ins.Detail, xmlNode.GetAttribute("detail"));
+			Utilities.Instance.get_float(ins.DetailScale, xmlNode.GetAttribute("detail_scale"));
+
+			var wavetype = xmlNode.GetAttribute("wave_type");
+			if (!string.IsNullOrEmpty(wavetype))
+			{
+				WaveType = wavetype;
+			}
 		}
 	}
 }

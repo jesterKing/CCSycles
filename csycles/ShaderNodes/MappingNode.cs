@@ -14,6 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 **/
 
+using System;
+using System.Xml;
 using ccl.ShaderNodes.Sockets;
 
 namespace ccl.ShaderNodes
@@ -65,11 +67,11 @@ namespace ccl.ShaderNodes
 		/// <summary>
 		/// MappingNode input sockets
 		/// </summary>
-		public MappingInputs ins { get { return (MappingInputs)inputs; } set { inputs = value; } }
+		public MappingInputs ins { get { return (MappingInputs)inputs; } }
 		/// <summary>
 		/// MappingNode output sockets
 		/// </summary>
-		public MappingOutputs outs { get { return (MappingOutputs)outputs; } set { outputs = value; } }
+		public MappingOutputs outs { get { return (MappingOutputs)outputs; } }
 
 		/// <summary>
 		/// Mapping type to transform according
@@ -172,6 +174,33 @@ namespace ccl.ShaderNodes
 			CSycles.shadernode_texmapping_set_transformation(clientId, shaderId, Id, ShaderNodeType.Mapping, 2, sc.x, sc.y, sc.z);
 
 			CSycles.shadernode_texmapping_set_type(clientId, shaderId, Id, ShaderNodeType.Mapping, (uint)Mapping);
+		}
+
+		internal override void ParseXml(XmlReader xmlNode)
+		{
+			Utilities.Instance.get_float4(ins.Vector, xmlNode.GetAttribute("vector"));
+			var mapping_type = xmlNode.GetAttribute("mapping_type");
+			if (!string.IsNullOrEmpty(mapping_type))
+			{
+				try
+				{
+					var mt = (MappingType)Enum.Parse(typeof(MappingType), mapping_type, true);
+					Mapping = mt;
+				}
+				catch (ArgumentException)
+				{
+					Mapping = MappingType.Texture;
+				}
+			}
+			var f4 = new float4(0.0f);
+			Utilities.Instance.get_float4(f4, xmlNode.GetAttribute("rotation"));
+			Rotation = f4;
+			f4 = new float4(0.0f);
+			Utilities.Instance.get_float4(f4, xmlNode.GetAttribute("translation"));
+			Translation = f4;
+			f4 = new float4(0.0f);
+			Utilities.Instance.get_float4(f4, xmlNode.GetAttribute("scale"));
+			Scale = f4;
 		}
 	}
 }

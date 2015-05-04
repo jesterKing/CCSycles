@@ -15,6 +15,8 @@ limitations under the License.
 **/
 
 using System;
+using System.Drawing;
+using System.Xml;
 using ccl.ShaderNodes.Sockets;
 
 namespace ccl.ShaderNodes
@@ -159,6 +161,34 @@ namespace ccl.ShaderNodes
 			{
 				var bimg = ByteImage;
 				CSycles.shadernode_set_member_byte_img(clientId, shaderId, Id, Type, "builtin-data", Filename ?? String.Format("{0}-{0}-{0}", clientId, shaderId, Id), ref bimg, Width, Height, 1, 4);
+			}
+		}
+
+		internal override void ParseXml(XmlReader xmlNode)
+		{
+			var imgsrc = xmlNode.GetAttribute("src");
+			if (!string.IsNullOrEmpty(imgsrc))
+			{
+				using (var bmp = new Bitmap(imgsrc))
+				{
+					var l = bmp.Width * bmp.Height * 4;
+					var bmpdata = new byte[l];
+					for (var x = 0; x < bmp.Width; x++)
+					{
+						for (var y = 0; y < bmp.Height; y++)
+						{
+							var pos = y * bmp.Width * 4 + x * 4;
+							var pixel = bmp.GetPixel(x, y);
+							bmpdata[pos] = pixel.R;
+							bmpdata[pos + 1] = pixel.G;
+							bmpdata[pos + 2] = pixel.B;
+							bmpdata[pos + 3] = pixel.A;
+						}
+					}
+					ByteImage = bmpdata;
+					Width = (uint)bmp.Width;
+					Height = (uint)bmp.Height;
+				}
 			}
 		}
 	}

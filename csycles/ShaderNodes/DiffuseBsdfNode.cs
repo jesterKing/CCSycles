@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 **/
 
+using System.Xml;
 using ccl.ShaderNodes.Sockets;
 
 namespace ccl.ShaderNodes
@@ -55,8 +56,8 @@ namespace ccl.ShaderNodes
 	/// </summary>
 	public class DiffuseBsdfNode : ShaderNode
 	{
-		public DiffuseBsdfInputs ins { get { return (DiffuseBsdfInputs)inputs; } set { inputs = value; } }
-		public DiffuseBsdfOutputs outs { get { return (DiffuseBsdfOutputs)outputs; } set { outputs = value; }}
+		public DiffuseBsdfInputs ins { get { return (DiffuseBsdfInputs)inputs; } }
+		public DiffuseBsdfOutputs outs { get { return (DiffuseBsdfOutputs)outputs; } }
 		/// <summary>
 		/// Create a new Diffuse BSDF closure.
 		/// </summary>
@@ -68,6 +69,11 @@ namespace ccl.ShaderNodes
 			outputs = new DiffuseBsdfOutputs(this);
 			ins.Color.Value = new float4(0.0f, 0.0f, 0.0f, 1.0f);
 			ins.Roughness.Value = 0.0f;
+		}
+
+		internal override void ParseXml(XmlReader xmlNode)
+		{
+			Utilities.Instance.get_float4(ins.Color, xmlNode.GetAttribute("color"));
 		}
 	}
 }

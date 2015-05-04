@@ -57,16 +57,16 @@ namespace ccl.ShaderNodes
 
 	public class TextureCoordinateNode : ShaderNode
 	{
-		public TextureCoordinateInputs ins { get { return (TextureCoordinateInputs)inputs; } set { inputs = value; } }
-		public TextureCoordinateOutputs outs { get { return (TextureCoordinateOutputs)outputs; } set { outputs = value; } }
+		public TextureCoordinateInputs ins { get { return (TextureCoordinateInputs)inputs; } }
+		public TextureCoordinateOutputs outs { get { return (TextureCoordinateOutputs)outputs; } }
 
 		public TextureCoordinateNode()
 			: this("a texcoord") { }
 		public TextureCoordinateNode(string name)
 			: base(ShaderNodeType.TextureCoordinate, name)
 		{
-			ins = null;
-			outs = new TextureCoordinateOutputs(this);
+			inputs = null;
+			outputs = new TextureCoordinateOutputs(this);
 			//from_dupli = false;
 		}
 	}
