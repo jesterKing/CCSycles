@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 **/
 
+using System.Xml;
 using ccl.ShaderNodes.Sockets;
 
 namespace ccl.ShaderNodes
@@ -48,17 +49,23 @@ namespace ccl.ShaderNodes
 
 	public class SeparateRgbNode : ShaderNode
 	{
-		public SeparateRgbInputs ins { get { return (SeparateRgbInputs)inputs; } set { inputs = value; } }
-		public SeparateRgbOutputs outs { get { return (SeparateRgbOutputs)outputs; } set { outputs = value; } }
+		public SeparateRgbInputs ins { get { return (SeparateRgbInputs)inputs; } }
+		public SeparateRgbOutputs outs { get { return (SeparateRgbOutputs)outputs; } }
 
 		/// <summary>
 		/// Create new Separate HSV node.
 		/// </summary>
-		public SeparateRgbNode() :
-			base(ShaderNodeType.SeparateRgb)
+		public SeparateRgbNode() : this("a separate rgb node") { }
+		public SeparateRgbNode(string name) :
+			base(ShaderNodeType.SeparateRgb, name)
 		{
-			ins = new SeparateRgbInputs(this);
-			outs = new SeparateRgbOutputs(this);
+			inputs = new SeparateRgbInputs(this);
+			outputs = new SeparateRgbOutputs(this);
+		}
+
+		internal override void ParseXml(XmlReader xmlNode)
+		{
+			Utilities.Instance.get_float4(ins.Color, xmlNode.GetAttribute("color"));
 		}
 	}
 }

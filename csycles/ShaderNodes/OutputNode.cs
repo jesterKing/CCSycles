@@ -57,14 +57,14 @@ namespace ccl.ShaderNodes
 	/// </summary>
 	public class OutputNode : ShaderNode
 	{
-		public OutputInputs ins { get { return (OutputInputs) inputs; } set { inputs = value; } }
-		public OutputOutputs outs { get { return (OutputOutputs) outputs; } set { outputs = value; } }
+		public OutputInputs ins { get { return (OutputInputs) inputs; } }
+		public OutputOutputs outs { get { return (OutputOutputs) outputs; } }
 
 		public OutputNode() :
 			base(ShaderNodeType.Output)
 		{
-			ins = new OutputInputs(this);
-			outs = new OutputOutputs(this);
+			inputs = new OutputInputs(this);
+			outputs = new OutputOutputs(this);
 		}
 	}
 

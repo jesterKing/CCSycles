@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 **/
 
+using System.Xml;
 using ccl.ShaderNodes.Sockets;
 
 namespace ccl.ShaderNodes
@@ -47,14 +48,15 @@ namespace ccl.ShaderNodes
 	}
 	public class VoronoiTexture : TextureNode
 	{
-		public VoronoiInputs ins { get { return (VoronoiInputs)inputs; } set { inputs = value; } }
-		public VoronoiOutputs outs { get { return (VoronoiOutputs)outputs; } set { outputs = value; } }
+		public VoronoiInputs ins { get { return (VoronoiInputs)inputs; } }
+		public VoronoiOutputs outs { get { return (VoronoiOutputs)outputs; } }
 
-		public VoronoiTexture()
-			: base(ShaderNodeType.VoronoiTexture)
+		public VoronoiTexture() : this("a voronoi texture") { }
+		public VoronoiTexture(string name)
+			: base(ShaderNodeType.VoronoiTexture, name)
 		{
-			ins = new VoronoiInputs(this);
-			outs = new VoronoiOutputs(this);
+			inputs = new VoronoiInputs(this);
+			outputs = new VoronoiOutputs(this);
 
 			ins.Scale.Value = 1.0f;
 
@@ -71,6 +73,17 @@ namespace ccl.ShaderNodes
 		internal override void SetEnums(uint clientId, uint shaderId)
 		{
 			CSycles.shadernode_set_enum(clientId, shaderId, Id, Type, Coloring);
+		}
+
+		internal override void ParseXml(XmlReader xmlNode)
+		{
+			Utilities.Instance.get_float4(ins.Vector, xmlNode.GetAttribute("vector"));
+			Utilities.Instance.get_float(ins.Scale, xmlNode.GetAttribute("scale"));
+			var coloring = xmlNode.GetAttribute("coloring");
+			if (!string.IsNullOrEmpty(coloring))
+			{
+				Coloring = coloring;
+			}
 		}
 	}
 }

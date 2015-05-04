@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 **/
 
+using System.Xml;
 using ccl.ShaderNodes.Sockets;
 
 namespace ccl.ShaderNodes
@@ -55,18 +56,26 @@ namespace ccl.ShaderNodes
 	/// </summary>
 	public class VelvetBsdfNode : ShaderNode
 	{
-		public VelvetBsdfInputs ins { get { return (VelvetBsdfInputs)inputs; } set { inputs = value; } }
-		public VelvetBsdfOutputs outs { get { return (VelvetBsdfOutputs)outputs; } set { outputs = value; }}
+		public VelvetBsdfInputs ins { get { return (VelvetBsdfInputs)inputs; } }
+		public VelvetBsdfOutputs outs { get { return (VelvetBsdfOutputs)outputs; } }
 		/// <summary>
 		/// Create a new Velvet BSDF closure.
 		/// </summary>
-		public VelvetBsdfNode() :
-			base(ShaderNodeType.Velvet)
+		public VelvetBsdfNode() : this("a velvet bsdf node") { }
+		public VelvetBsdfNode(string name) :
+			base(ShaderNodeType.Velvet, name)
 		{
 			inputs = new VelvetBsdfInputs(this);
 			outputs = new VelvetBsdfOutputs(this);
 			ins.Color.Value = new float4(0.0f, 0.0f, 0.0f, 1.0f);
 			ins.Sigma.Value = 0.0f;
+		}
+
+		internal override void ParseXml(XmlReader xmlNode)
+		{
+			Utilities.Instance.get_float4(ins.Color, xmlNode.GetAttribute("color"));
+			Utilities.Instance.get_float(ins.Sigma, xmlNode.GetAttribute("sigma"));
+			Utilities.Instance.get_float4(ins.Normal, xmlNode.GetAttribute("normal"));
 		}
 	}
 }

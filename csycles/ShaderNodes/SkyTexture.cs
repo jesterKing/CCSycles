@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 **/
 
+using System.Xml;
 using ccl.ShaderNodes.Sockets;
 
 namespace ccl.ShaderNodes
@@ -41,14 +42,15 @@ namespace ccl.ShaderNodes
 	}
 	public class SkyTexture : TextureNode
 	{
-		public SkyInputs ins { get { return (SkyInputs)inputs; } set { inputs = value; } }
-		public SkyOutputs outs { get { return (SkyOutputs)outputs; } set { outputs = value; } }
+		public SkyInputs ins { get { return (SkyInputs)inputs; } }
+		public SkyOutputs outs { get { return (SkyOutputs)outputs; } }
 
-		public SkyTexture()
-			: base(ShaderNodeType.SkyTexture)
+		public SkyTexture() : this("a sky texture") { }
+		public SkyTexture(string name)
+			: base(ShaderNodeType.SkyTexture, name)
 		{
-			ins = new SkyInputs(this);
-			outs = new SkyOutputs(this);
+			inputs = new SkyInputs(this);
+			outputs = new SkyOutputs(this);
 
 			SunDirection = new float4(0.0f, 0.0f, 1.0f);
 			Turbidity = 2.2f;
@@ -78,6 +80,33 @@ namespace ccl.ShaderNodes
 			CSycles.shadernode_set_member_float(clientId, shaderId, Id, Type, "ground_albedo", GroundAlbedo);
 			var sd = SunDirection;
 			CSycles.shadernode_set_member_vec(clientId, shaderId, Id, Type, "sun_direction", sd.x, sd.y, sd.z);
+		}
+
+		internal override void ParseXml(XmlReader xmlNode)
+		{
+			Utilities.Instance.get_float4(ins.Vector, xmlNode.GetAttribute("vector"));
+
+			var sun_direction = xmlNode.GetAttribute("sun_direction");
+			var turbidity = xmlNode.GetAttribute("turbidity");
+			var ground_albedo = xmlNode.GetAttribute("ground_albedo");
+			var sky_type = xmlNode.GetAttribute("type");
+
+			if (!string.IsNullOrEmpty(sun_direction))
+			{
+				Utilities.Instance.get_float4(SunDirection, sun_direction);
+			}
+			if (!string.IsNullOrEmpty(turbidity))
+			{
+				Turbidity = float.Parse(turbidity, Utilities.Instance.NumberFormatInfo);
+			}
+			if (!string.IsNullOrEmpty(ground_albedo))
+			{
+				GroundAlbedo = float.Parse(ground_albedo, Utilities.Instance.NumberFormatInfo);
+			}
+			if (!string.IsNullOrEmpty(sky_type))
+			{
+				SkyType = sky_type;
+			}
 		}
 	}
 }

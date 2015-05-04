@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 **/
 
+using System.Xml;
 using ccl.ShaderNodes.Sockets;
 
 namespace ccl.ShaderNodes
@@ -50,14 +51,21 @@ namespace ccl.ShaderNodes
 
 	public class LightFalloffNode : ShaderNode
 	{
-		public LightFalloffInputs ins { get { return (LightFalloffInputs)inputs; } set { inputs = value; } }
-		public LightFalloffOutputs outs { get { return (LightFalloffOutputs)outputs; } set { outputs = value; }}
+		public LightFalloffInputs ins { get { return (LightFalloffInputs)inputs; } }
+		public LightFalloffOutputs outs { get { return (LightFalloffOutputs)outputs; } }
 
-		public LightFalloffNode() :
-			base(ShaderNodeType.LightFalloff)
+		public LightFalloffNode() : this("a light fall-off node") { }
+		public LightFalloffNode(string name) :
+			base(ShaderNodeType.LightFalloff, name)
 		{
 			inputs = new LightFalloffInputs(this);
 			outputs = new LightFalloffOutputs(this);
+		}
+
+		internal override void ParseXml(XmlReader xmlNode)
+		{
+			Utilities.Instance.get_float(ins.Smooth, xmlNode.GetAttribute("smooth"));
+			Utilities.Instance.get_float(ins.Strength, xmlNode.GetAttribute("strength"));
 		}
 	}
 }

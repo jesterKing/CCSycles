@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 **/
 
+using System.Xml;
 using ccl.ShaderNodes.Sockets;
 
 namespace ccl.ShaderNodes
@@ -75,6 +76,13 @@ namespace ccl.ShaderNodes
 		internal override void SetEnums(uint clientId, uint shaderId)
 		{
 			CSycles.shadernode_set_enum(clientId, shaderId, Id, Type, BlendType);
+		}
+
+		internal override void ParseXml(XmlReader xmlNode)
+		{
+			Utilities.Instance.get_float4(ins.Color1, xmlNode.GetAttribute("color1"));
+			Utilities.Instance.get_float4(ins.Color2, xmlNode.GetAttribute("color2"));
+			Utilities.Instance.get_float(ins.Fac, xmlNode.GetAttribute("fac"));
 		}
 	}
 }

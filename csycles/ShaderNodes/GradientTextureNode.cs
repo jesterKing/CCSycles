@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 **/
 
+using System.Xml;
 using ccl.ShaderNodes.Sockets;
 
 namespace ccl.ShaderNodes
@@ -103,20 +104,21 @@ namespace ccl.ShaderNodes
 		/// <summary>
 		/// GradientTextureNode input sockets
 		/// </summary>
-		public GradientInputs ins { get { return (GradientInputs)inputs; } set { inputs = value; } }
+		public GradientInputs ins { get { return (GradientInputs)inputs; } }
 		/// <summary>
 		/// GradientTextureNode output sockets
 		/// </summary>
-		public GradientOutputs outs { get { return (GradientOutputs)outputs; } set { outputs = value; } }
+		public GradientOutputs outs { get { return (GradientOutputs)outputs; } }
 
 		/// <summary>
 		/// Create GradientTextureNode
 		/// </summary>
-		public GradientTextureNode()
-			: base(ShaderNodeType.GradientTexture)
+		public GradientTextureNode() : this("a gradient texture") { }
+		public GradientTextureNode(string name)
+			: base(ShaderNodeType.GradientTexture, name)
 		{
-			ins = new GradientInputs(this);
-			outs = new GradientOutputs(this);
+			inputs = new GradientInputs(this);
+			outputs = new GradientOutputs(this);
 			Gradient = GradientType.Linear;
 		}
 
@@ -128,6 +130,11 @@ namespace ccl.ShaderNodes
 		internal override void SetEnums(uint clientId, uint shaderId)
 		{
 			CSycles.shadernode_set_enum(clientId, shaderId, Id, Type, Gradient.ToString().Replace('_', ' '));
+		}
+
+		internal override void ParseXml(XmlReader xmlNode)
+		{
+			Utilities.Instance.get_float4(ins.Vector, xmlNode.GetAttribute("vector"));
 		}
 	}
 }

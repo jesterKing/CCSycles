@@ -45,8 +45,8 @@ namespace ccl.ShaderNodes
 
 	public class HoldoutNode : ShaderNode
 	{
-		public HoldoutInputs ins { get { return (HoldoutInputs)inputs; } set { inputs = value; } }
-		public HoldoutOutputs outs { get { return (HoldoutOutputs)outputs; } set { outputs = value; }}
+		public HoldoutInputs ins { get { return (HoldoutInputs)inputs; } }
+		public HoldoutOutputs outs { get { return (HoldoutOutputs)outputs; } }
 
 		public HoldoutNode()
 			: base(ShaderNodeType.Holdout)

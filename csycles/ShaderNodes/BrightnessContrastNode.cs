@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 **/
 
+using System.Xml;
 using ccl.ShaderNodes.Sockets;
 
 namespace ccl.ShaderNodes
@@ -48,11 +49,12 @@ namespace ccl.ShaderNodes
 
 	public class BrightnessContrastNode : ShaderNode
 	{
-		public BrightnessContrastInputs ins { get { return (BrightnessContrastInputs)inputs; } set { inputs = value; } }
-		public BrightnessContrastOutputs outs { get { return (BrightnessContrastOutputs)outputs; } set { outputs = value; }}
+		public BrightnessContrastInputs ins { get { return (BrightnessContrastInputs)inputs; } }
+		public BrightnessContrastOutputs outs { get { return (BrightnessContrastOutputs)outputs; } }
 
-		public BrightnessContrastNode()
-			: base(ShaderNodeType.BrightnessContrast)
+		public BrightnessContrastNode() : this("a brightness contrast node") { }
+		public BrightnessContrastNode(string name)
+			: base(ShaderNodeType.BrightnessContrast, name)
 		{
 			inputs = new BrightnessContrastInputs(this);
 			outputs = new BrightnessContrastOutputs(this);
@@ -60,6 +62,13 @@ namespace ccl.ShaderNodes
 			ins.Color.Value = new float4(0.8f);
 			ins.Bright.Value = 0.0f;
 			ins.Contrast.Value = 0.0f;
+		}
+
+		internal override void ParseXml(XmlReader xmlNode)
+		{
+			Utilities.Instance.get_float4(ins.Color, xmlNode.GetAttribute("color"));
+			Utilities.Instance.get_float(ins.Bright, xmlNode.GetAttribute("bright"));
+			Utilities.Instance.get_float(ins.Contrast, xmlNode.GetAttribute("contrast"));
 		}
 	}
 }

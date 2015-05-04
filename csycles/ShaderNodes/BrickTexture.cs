@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 **/
 
+using System.Xml;
 using ccl.ShaderNodes.Sockets;
 
 namespace ccl.ShaderNodes
@@ -185,6 +186,29 @@ namespace ccl.ShaderNodes
 			CSycles.shadernode_set_member_int(clientId, shaderId, Id, Type, "offset_frequency", OffsetFrequency);
 			CSycles.shadernode_set_member_float(clientId, shaderId, Id, Type, "squash", Squash);
 			CSycles.shadernode_set_member_int(clientId, shaderId, Id, Type, "squash_frequency", SquashFrequency);
+		}
+
+		internal override void ParseXml(XmlReader xmlNode)
+		{
+			var offset = 0.0f;
+			var offset_frequency = 0;
+			var squash = 0.0f;
+			var squash_frequency = 0;
+			if (Utilities.Instance.read_float(ref offset, xmlNode.GetAttribute("offset")))
+				Offset = offset;
+			if (Utilities.Instance.read_int(ref offset_frequency, xmlNode.GetAttribute("offset_frequency")))
+				OffsetFrequency = offset_frequency;
+			if (Utilities.Instance.read_float(ref squash, xmlNode.GetAttribute("squash")))
+				Squash = squash;
+			if (Utilities.Instance.read_int(ref squash_frequency, xmlNode.GetAttribute("squash_frequency")))
+				SquashFrequency = squash_frequency;
+
+			Utilities.Instance.get_float4(ins.Color1, xmlNode.GetAttribute("color1"));
+			Utilities.Instance.get_float4(ins.Color2, xmlNode.GetAttribute("color2"));
+			Utilities.Instance.get_float4(ins.Mortar, xmlNode.GetAttribute("mortar"));
+			Utilities.Instance.get_float(ins.Bias, xmlNode.GetAttribute("bias"));
+			Utilities.Instance.get_float(ins.BrickWidth, xmlNode.GetAttribute("brick_width"));
+			Utilities.Instance.get_float(ins.RowHeight, xmlNode.GetAttribute("row_height"));
 		}
 	}
 }

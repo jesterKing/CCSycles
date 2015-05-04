@@ -15,6 +15,7 @@ limitations under the License.
 **/
 
 using System;
+using System.Xml;
 using ccl.ShaderNodes.Sockets;
 
 namespace ccl.ShaderNodes
@@ -160,11 +161,11 @@ namespace ccl.ShaderNodes
 		/// <summary>
 		/// MathNode input sockets
 		/// </summary>
-		public MathInputs ins { get { return (MathInputs)inputs; } set { inputs = value; } }
+		public MathInputs ins { get { return (MathInputs)inputs; } }
 		/// <summary>
 		/// MathNode output sockets
 		/// </summary>
-		public MathOutputs outs { get { return (MathOutputs)outputs; } set { outputs = value; } }
+		public MathOutputs outs { get { return (MathOutputs)outputs; } }
 
 		/// <summary>
 		/// Math node operates on float inputs (note, some operations use only Value1)
@@ -210,6 +211,17 @@ namespace ccl.ShaderNodes
 		internal override void SetDirectMembers(uint clientId, uint shaderId)
 		{
 			CSycles.shadernode_set_member_bool(clientId, shaderId, Id, Type, "use_clamp", UseClamp);
+		}
+
+		internal override void ParseXml(XmlReader xmlNode)
+		{
+			Utilities.Instance.get_float(ins.Value1, xmlNode.GetAttribute("value1"));
+			Utilities.Instance.get_float(ins.Value2, xmlNode.GetAttribute("value2"));
+			var operation = xmlNode.GetAttribute("type");
+			if (!string.IsNullOrEmpty(operation))
+			{
+				SetOperation(operation);
+			}
 		}
 	}
 }

@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 **/
 
+using System.Xml;
 using ccl.ShaderNodes.Sockets;
 
 namespace ccl.ShaderNodes
@@ -51,18 +52,26 @@ namespace ccl.ShaderNodes
 	/// </summary>
 	public class CombineHsvNode : ShaderNode
 	{
-		public CombineHsvInputs ins { get { return (CombineHsvInputs)inputs; } set { inputs = value; } }
-		public CombineHsvOutputs outs { get { return (CombineHsvOutputs)outputs; } set { outputs = value; } }
+		public CombineHsvInputs ins { get { return (CombineHsvInputs)inputs; } }
+		public CombineHsvOutputs outs { get { return (CombineHsvOutputs)outputs; } }
 
-		public CombineHsvNode() :
-			base(ShaderNodeType.CombineHsv)
+		public CombineHsvNode() : this("A combine HSV node") { }
+		public CombineHsvNode(string name) :
+			base(ShaderNodeType.CombineHsv, name)
 		{
-			inputs = new MappingInputs(this);
-			outputs = new MappingOutputs(this);
+			inputs = new CombineHsvInputs(this);
+			outputs = new CombineHsvOutputs(this);
 
 			ins.H.Value = 0.0f;
 			ins.S.Value = 0.0f;
 			ins.V.Value = 0.0f;
+		}
+
+		internal override void ParseXml(XmlReader xmlNode)
+		{
+			Utilities.Instance.get_float(ins.H, xmlNode.GetAttribute("H"));
+			Utilities.Instance.get_float(ins.S, xmlNode.GetAttribute("S"));
+			Utilities.Instance.get_float(ins.V, xmlNode.GetAttribute("V"));
 		}
 	}
 }

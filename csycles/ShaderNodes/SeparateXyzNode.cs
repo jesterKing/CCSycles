@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 **/
 
+using System.Xml;
 using ccl.ShaderNodes.Sockets;
 
 namespace ccl.ShaderNodes
@@ -51,16 +52,22 @@ namespace ccl.ShaderNodes
 	/// </summary>
 	public class SeparateXyzNode : ShaderNode
 	{
-		public SeparateXyzInputs ins { get { return (SeparateXyzInputs)inputs; } set { inputs = value; } }
-		public SeparateXyzOutputs outs { get { return (SeparateXyzOutputs)outputs; } set { outputs = value; } }
+		public SeparateXyzInputs ins { get { return (SeparateXyzInputs)inputs; } }
+		public SeparateXyzOutputs outs { get { return (SeparateXyzOutputs)outputs; } }
 
-		public SeparateXyzNode() :
-			base(ShaderNodeType.SeparateXyz)
+		public SeparateXyzNode() : this("a separate XYZ node") { }
+		public SeparateXyzNode(string name) :
+			base(ShaderNodeType.SeparateXyz, name)
 		{
-			inputs = new MappingInputs(this);
-			outputs = new MappingOutputs(this);
+			inputs = new SeparateXyzInputs(this);
+			outputs = new SeparateXyzOutputs(this);
 
 			ins.Vector.Value = new float4(0.0f);
+		}
+
+		internal override void ParseXml(XmlReader xmlNode)
+		{
+			Utilities.Instance.get_float4(ins.Vector, xmlNode.GetAttribute("vector"));
 		}
 	}
 }

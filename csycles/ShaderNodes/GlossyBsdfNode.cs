@@ -15,6 +15,7 @@ limitations under the License.
 **/
 
 using System;
+using System.Xml;
 using ccl.ShaderNodes.Sockets;
 
 namespace ccl.ShaderNodes
@@ -90,6 +91,18 @@ namespace ccl.ShaderNodes
 		internal override void SetEnums(uint clientId, uint shaderId)
 		{
 			CSycles.shadernode_set_enum(clientId, shaderId, Id, Type, GlossyToString(Distribution));
+		}
+
+		internal override void ParseXml(XmlReader xmlNode)
+		{
+			Utilities.Instance.get_float4(ins.Color, xmlNode.GetAttribute("color"));
+			Utilities.Instance.get_float4(ins.Normal, xmlNode.GetAttribute("normal"));
+			Utilities.Instance.get_float(ins.Roughness, xmlNode.GetAttribute("roughness"));
+			var glossydistribution = xmlNode.GetAttribute("distribution");
+			if (!string.IsNullOrEmpty(glossydistribution))
+			{
+				SetDistribution(glossydistribution);
+			}
 		}
 	}
 }

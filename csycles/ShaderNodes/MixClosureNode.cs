@@ -15,6 +15,7 @@ limitations under the License.
 **/
 
 using System;
+using System.Xml;
 using ccl.ShaderNodes.Sockets;
 
 namespace ccl.ShaderNodes
@@ -75,11 +76,11 @@ namespace ccl.ShaderNodes
 		/// <summary>
 		/// MixClosureNode input sockets
 		/// </summary>
-		public MixClosureInputs ins { get { return (MixClosureInputs)inputs; } set { inputs = value; } }
+		public MixClosureInputs ins { get { return (MixClosureInputs)inputs; } }
 		/// <summary>
 		/// MixClosureNode output sockets
 		/// </summary>
-		public MixClosureOutputs outs { get { return (MixClosureOutputs)outputs; } set { outputs = value; } }
+		public MixClosureOutputs outs { get { return (MixClosureOutputs)outputs; } }
 
 		/// <summary>
 		/// Create MixClosureNode. Fac input is by default 0.5f
@@ -93,9 +94,14 @@ namespace ccl.ShaderNodes
 		public MixClosureNode(string name) :
 			base(ShaderNodeType.MixClosure, name)
 		{
-			ins = new MixClosureInputs(this);
-			outs = new MixClosureOutputs(this);
+			inputs = new MixClosureInputs(this);
+			outputs = new MixClosureOutputs(this);
 			ins.Fac.Value = 0.5f;
+		}
+
+		internal override void ParseXml(XmlReader xmlNode)
+		{
+			Utilities.Instance.get_float(ins.Fac, xmlNode.GetAttribute("fac"));
 		}
 	}
 }

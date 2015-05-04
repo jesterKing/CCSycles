@@ -67,11 +67,11 @@ namespace ccl.ShaderNodes
 		/// <summary>
 		/// EnvironmentTextureNode input sockets
 		/// </summary>
-		public EnvironmentTextureInputs ins { get { return (EnvironmentTextureInputs)inputs; } set { inputs = value; } }
+		public EnvironmentTextureInputs ins { get { return (EnvironmentTextureInputs)inputs; } }
 		/// <summary>
 		/// EnvironmentTextureNode output sockets
 		/// </summary>
-		public EnvironmentTextureOutputs outs { get { return (EnvironmentTextureOutputs)outputs; } set { outputs = value; } }
+		public EnvironmentTextureOutputs outs { get { return (EnvironmentTextureOutputs)outputs; } }
 
 		/// <summary>
 		/// Create an EnvironmentTextureNode

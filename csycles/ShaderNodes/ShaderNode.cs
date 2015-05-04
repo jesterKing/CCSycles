@@ -15,6 +15,7 @@ limitations under the License.
 **/
 
 using System;
+using System.Xml;
 using ccl.ShaderNodes.Sockets;
 
 namespace ccl.ShaderNodes
@@ -122,6 +123,15 @@ namespace ccl.ShaderNodes
 		{
 			var str = String.Format("{0} ({1})", Name, Type);
 			return str;
+		}
+
+		/// <summary>
+		/// Implement ParseXml to support proper XMl support.
+		/// </summary>
+		/// <param name="xmlNode"></param>
+		virtual internal void ParseXml(XmlReader xmlNode)
+		{
+			
 		}
 	}
 }
