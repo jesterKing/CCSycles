@@ -20,7 +20,7 @@ BEGIN
     BEGIN
         BLOCK "080904e4"
         BEGIN
-            VALUE "CompanyName", "My Company Name"
+            VALUE "CompanyName", "Robert McNeel & Associates"
             VALUE "FileDescription", "CCycles - C-API for Cycles. Part of C[CS]?ycles"
             VALUE "FileVersion", VERSION_WITH_PERIODS
             VALUE "InternalName", "ccycles.dll"

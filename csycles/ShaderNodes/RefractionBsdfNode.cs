@@ -83,7 +83,7 @@ namespace ccl.ShaderNodes
 
 		internal override void SetEnums(uint clientId, uint shaderId)
 		{
-			CSycles.shadernode_set_enum(clientId, shaderId, Id, Type, Distribution.ToString());
+			CSycles.shadernode_set_enum(clientId, shaderId, Id, Type, "distribution", Distribution.ToString());
 		}
 	}
 }

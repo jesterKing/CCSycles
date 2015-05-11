@@ -24,19 +24,21 @@ namespace ccl.ShaderNodes
 		public enum TextureColorSpace
 		{
 			None,
-			Color
+			Color,
 		}
 
 		public enum TextureProjection
 		{
 			Flat,
-			Box
+			Box,
+			Sphere,
+			Tube,
 		}
 
 		public enum EnvironmentProjection
 		{
 			Equirectangular,
-			MirrorBall
+			MirrorBall,
 		}
 
 		internal TextureNode(ShaderNodeType type) :

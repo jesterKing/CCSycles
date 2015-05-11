@@ -550,7 +550,7 @@ CCL_CAPI void __cdecl cycles_shadernode_set_attribute_int(unsigned int client_id
 CCL_CAPI void __cdecl cycles_shadernode_set_attribute_float(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, const char* attribute_name, float value);
 CCL_CAPI void __cdecl cycles_shadernode_set_attribute_vec(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, const char* attribute_name, float x, float y, float z);
 CCL_CAPI void __cdecl cycles_shadernode_set_attribute_string(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, const char* attribute_name, const char* value);
-CCL_CAPI void __cdecl cycles_shadernode_set_enum(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, shadernode_type shn_type, const char* value);
+CCL_CAPI void __cdecl cycles_shadernode_set_enum(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, shadernode_type shn_type, const char* enum_name, const char* value);
 CCL_CAPI void __cdecl cycles_shadernode_texmapping_set_transformation(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, shadernode_type shn_type, int transform_type, float x, float y, float z);
 CCL_CAPI void __cdecl cycles_shadernode_texmapping_set_mapping(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, shadernode_type shn_type, ccl::TextureMapping::Mapping x, ccl::TextureMapping::Mapping y, ccl::TextureMapping::Mapping z);
 CCL_CAPI void __cdecl cycles_shadernode_texmapping_set_projection(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, shadernode_type shn_type, ccl::TextureMapping::Projection tm_projection);
