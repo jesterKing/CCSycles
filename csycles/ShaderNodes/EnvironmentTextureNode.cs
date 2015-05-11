@@ -125,8 +125,8 @@ namespace ccl.ShaderNodes
 				? "Equirectangular"
 				: "Mirror Ball";
 			var colspace = ColorSpace == TextureColorSpace.Color ? "Color" : "None";
-			CSycles.shadernode_set_enum(clientId, shaderId, Id, Type, projection);
-			CSycles.shadernode_set_enum(clientId, shaderId, Id, Type, colspace);
+			CSycles.shadernode_set_enum(clientId, shaderId, Id, Type, "projection", projection);
+			CSycles.shadernode_set_enum(clientId, shaderId, Id, Type, "color_space", colspace);
 		}
 
 		internal override void SetDirectMembers(uint clientId, uint shaderId)

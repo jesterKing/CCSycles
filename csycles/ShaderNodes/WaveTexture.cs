@@ -83,7 +83,7 @@ namespace ccl.ShaderNodes
 
 		internal override void SetEnums(uint clientId, uint shaderId)
 		{
-			CSycles.shadernode_set_enum(clientId, shaderId, Id, Type, WaveType);
+			CSycles.shadernode_set_enum(clientId, shaderId, Id, Type, "wave", WaveType);
 		}
 
 		internal override void ParseXml(XmlReader xmlNode)

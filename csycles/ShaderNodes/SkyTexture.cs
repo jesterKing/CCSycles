@@ -71,7 +71,7 @@ namespace ccl.ShaderNodes
 
 		internal override void SetEnums(uint clientId, uint shaderId)
 		{
-			CSycles.shadernode_set_enum(clientId, shaderId, Id, Type, SkyType);
+			CSycles.shadernode_set_enum(clientId, shaderId, Id, Type, "sky", SkyType);
 		}
 
 		internal override void SetDirectMembers(uint clientId, uint shaderId)

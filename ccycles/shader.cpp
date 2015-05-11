@@ -462,12 +462,11 @@ void cycles_shadernode_texmapping_set_type(unsigned int client_id, unsigned int 
 }
 
 /* TODO: add all enum possibilities.
- * Note that this particular API function won't deal yet very well with
- * nodes that have multiple enums.
  */
-void cycles_shadernode_set_enum(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, shadernode_type shn_type, const char* value)
+void cycles_shadernode_set_enum(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, shadernode_type shn_type, const char* enum_name, const char* value)
 {
 	auto val = OpenImageIO::v1_3::ustring(value);
+	auto ename = string(enum_name);
 
 	SHADERNODE_FIND(shader_id, shnode_id)
 			switch (shn_type) {
@@ -528,11 +527,22 @@ void cycles_shadernode_set_enum(unsigned int client_id, unsigned int shader_id, 
 				case shadernode_type::ENVIRONMENT_TEXTURE:
 					{
 						auto node = dynamic_cast<ccl::EnvironmentTextureNode*>(*psh);
-						if (val == "Color" || val == "None") {
+						if (ename=="color_space") {
 							_set_enum_val(client_id, &node->color_space, ccl::EnvironmentTextureNode::color_space_enum, val);
 						}
-						if (val == "Equirectangular" || val == "Mirror Ball") {
+						else if (ename=="projection") {
 							_set_enum_val(client_id, &node->projection, ccl::EnvironmentTextureNode::projection_enum, val);
+						}
+					}
+					break;
+				case shadernode_type::IMAGE_TEXTURE:
+					{
+						auto node = dynamic_cast<ccl::ImageTextureNode*>(*psh);
+						if (ename=="color_space") {
+							_set_enum_val(client_id, &node->color_space, ccl::ImageTextureNode::color_space_enum, val);
+						}
+						else if (ename=="projection") {
+							_set_enum_val(client_id, &node->projection, ccl::ImageTextureNode::projection_enum, val);
 						}
 					}
 					break;
@@ -694,6 +704,14 @@ void cycles_shadernode_set_member_int(unsigned int client_id, unsigned int shade
 							bricknode->offset_frequency = value;
 						else if (mname == "squash_frequency")
 							bricknode->squash_frequency = value;
+					}
+					break;
+				case shadernode_type::IMAGE_TEXTURE:
+					{
+						ccl::ImageTextureNode* imgnode = dynamic_cast<ccl::ImageTextureNode*>(*psh);
+						if (mname == "interpolation") {
+							imgnode->interpolation = (ccl::InterpolationType)value;
+						}
 					}
 					break;
 			}
