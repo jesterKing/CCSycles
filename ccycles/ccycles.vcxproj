@@ -72,11 +72,21 @@
       <ModuleDefinitionFile>cycles_api.def</ModuleDefinitionFile>
     </Link>
     <PostBuildEvent>
-      <Command>Copy "$(TargetPath)" "$(ProjectDir)..\..\..\..\..\bin\$(Configuration)\Plug-ins" &gt;NUL 2&gt;&amp;1
+      <Command>XCopy "$(TargetPath)" "$(ProjectDir)..\..\..\..\..\bin\$(Configuration)\Plug-ins" /Y /I /Q
 
-MkDir "$(ProjectDir)..\..\..\..\..\bin\$(Configuration)\Plug-ins\RhinoCycles\lib" &gt;NUL 2&gt;&amp;1
+XCopy "$(ProjectDir)..\..\..\..\..\..\big_libs\RhinoCycles\lib" "$(ProjectDir)..\..\..\..\..\bin\$(Configuration)\Plug-ins\RhinoCycles\lib" /Y /I /Q
 
-Copy "$(ProjectDir)..\..\..\..\..\..\big_libs\RhinoCycles\lib\*.cubin" "$(ProjectDir)..\..\..\..\..\bin\$(Configuration)\Plug-ins\RhinoCycles\lib" &gt;NUL 2&gt;&amp;1</Command>
+XCopy "$(ProjectDir)..\cycles\src\kernel\closure" "$(ProjectDir)..\..\..\..\..\bin\$(Configuration)\Plug-ins\RhinoCycles\kernel\closure" /Y /I /Q
+XCopy "$(ProjectDir)..\cycles\src\kernel\geom" "$(ProjectDir)..\..\..\..\..\bin\$(Configuration)\Plug-ins\RhinoCycles\kernel\geom" /Y /I /Q
+XCopy "$(ProjectDir)..\cycles\src\kernel\svm" "$(ProjectDir)..\..\..\..\..\bin\$(Configuration)\Plug-ins\RhinoCycles\kernel\svm" /Y /I /Q
+XCopy "$(ProjectDir)..\cycles\src\kernel\kernel*.*" "$(ProjectDir)..\..\..\..\..\bin\$(Configuration)\Plug-ins\RhinoCycles\kernel" /Y /I /Q
+
+XCopy "$(ProjectDir)..\cycles\src\util\util_color.h" "$(ProjectDir)..\..\..\..\..\bin\$(Configuration)\Plug-ins\RhinoCycles\kernel" /Y /I /Q
+XCopy "$(ProjectDir)..\cycles\src\util\util_half.h" "$(ProjectDir)..\..\..\..\..\bin\$(Configuration)\Plug-ins\RhinoCycles\kernel" /Y /I /Q
+XCopy "$(ProjectDir)..\cycles\src\util\util_math.h" "$(ProjectDir)..\..\..\..\..\bin\$(Configuration)\Plug-ins\RhinoCycles\kernel" /Y /I /Q
+XCopy "$(ProjectDir)..\cycles\src\util\util_math_fast.h" "$(ProjectDir)..\..\..\..\..\bin\$(Configuration)\Plug-ins\RhinoCycles\kernel" /Y /I /Q
+XCopy "$(ProjectDir)..\cycles\src\util\util_transform.h" "$(ProjectDir)..\..\..\..\..\bin\$(Configuration)\Plug-ins\RhinoCycles\kernel" /Y /I /Q
+XCopy "$(ProjectDir)..\cycles\src\util\util_types.h" "$(ProjectDir)..\..\..\..\..\bin\$(Configuration)\Plug-ins\RhinoCycles\kernel" /Y /I /Q</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -108,11 +118,21 @@ Copy "$(ProjectDir)..\..\..\..\..\..\big_libs\RhinoCycles\lib\*.cubin" "$(Projec
       <ModuleDefinitionFile>cycles_api.def</ModuleDefinitionFile>
     </Link>
     <PostBuildEvent>
-      <Command>Copy "$(TargetPath)" "$(ProjectDir)..\..\..\..\..\bin\$(Configuration)\Plug-ins" &gt;NUL 2&gt;&amp;1
+      <Command>XCopy "$(TargetPath)" "$(ProjectDir)..\..\..\..\..\bin\$(Configuration)\Plug-ins" /Y /I /Q
 
-MkDir "$(ProjectDir)..\..\..\..\..\bin\$(Configuration)\Plug-ins\RhinoCycles\lib" &gt;NUL 2&gt;&amp;1
+XCopy "$(ProjectDir)..\..\..\..\..\..\big_libs\RhinoCycles\lib" "$(ProjectDir)..\..\..\..\..\bin\$(Configuration)\Plug-ins\RhinoCycles\lib" /Y /I /Q
 
-Copy "$(ProjectDir)..\..\..\..\..\..\big_libs\RhinoCycles\lib\*.cubin" "$(ProjectDir)..\..\..\..\..\bin\$(Configuration)\Plug-ins\RhinoCycles\lib" &gt;NUL 2&gt;&amp;1</Command>
+XCopy "$(ProjectDir)..\cycles\src\kernel\closure" "$(ProjectDir)..\..\..\..\..\bin\$(Configuration)\Plug-ins\RhinoCycles\kernel\closure" /Y /I /Q
+XCopy "$(ProjectDir)..\cycles\src\kernel\geom" "$(ProjectDir)..\..\..\..\..\bin\$(Configuration)\Plug-ins\RhinoCycles\kernel\geom" /Y /I /Q
+XCopy "$(ProjectDir)..\cycles\src\kernel\svm" "$(ProjectDir)..\..\..\..\..\bin\$(Configuration)\Plug-ins\RhinoCycles\kernel\svm" /Y /I /Q
+XCopy "$(ProjectDir)..\cycles\src\kernel\kernel*.*" "$(ProjectDir)..\..\..\..\..\bin\$(Configuration)\Plug-ins\RhinoCycles\kernel" /Y /I /Q
+
+XCopy "$(ProjectDir)..\cycles\src\util\util_color.h" "$(ProjectDir)..\..\..\..\..\bin\$(Configuration)\Plug-ins\RhinoCycles\kernel" /Y /I /Q
+XCopy "$(ProjectDir)..\cycles\src\util\util_half.h" "$(ProjectDir)..\..\..\..\..\bin\$(Configuration)\Plug-ins\RhinoCycles\kernel" /Y /I /Q
+XCopy "$(ProjectDir)..\cycles\src\util\util_math.h" "$(ProjectDir)..\..\..\..\..\bin\$(Configuration)\Plug-ins\RhinoCycles\kernel" /Y /I /Q
+XCopy "$(ProjectDir)..\cycles\src\util\util_math_fast.h" "$(ProjectDir)..\..\..\..\..\bin\$(Configuration)\Plug-ins\RhinoCycles\kernel" /Y /I /Q
+XCopy "$(ProjectDir)..\cycles\src\util\util_transform.h" "$(ProjectDir)..\..\..\..\..\bin\$(Configuration)\Plug-ins\RhinoCycles\kernel" /Y /I /Q
+XCopy "$(ProjectDir)..\cycles\src\util\util_types.h" "$(ProjectDir)..\..\..\..\..\bin\$(Configuration)\Plug-ins\RhinoCycles\kernel" /Y /I /Q</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
