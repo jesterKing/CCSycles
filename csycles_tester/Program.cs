@@ -161,10 +161,7 @@ namespace csycles_tester
 			file = Path.GetFullPath(s);
 			Console.WriteLine("We get file path: {0}", file);
 
-			var path = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) ?? "";
-			var userpath = Path.Combine(path, "userpath");
-
-			CSycles.path_init(path, userpath);
+			CSycles.set_kernel_path("lib");
 			CSycles.initialise();
 
 			const uint samples = 50;
