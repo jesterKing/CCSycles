@@ -68,6 +68,11 @@ namespace ccl
 		public bool IsMultiCuda { get { return Type == DeviceType.Multi && Name.Contains("CUDA"); } }
 
 		/// <summary>
+		/// True if this is a Multi OpenCL device
+		/// </summary>
+		public bool IsMultiOpenCL { get { return Type == DeviceType.Multi && Name.Contains("OPENCL"); } }
+
+		/// <summary>
 		/// String representation of this device
 		/// </summary>
 		/// <returns>String representation of this device</returns>
@@ -141,7 +146,7 @@ namespace ccl
 
 		/// <summary>
 		/// Returns the first cuda device if it exists,
-		/// the default rendering device if not.
+		/// the default rendering device (CPU) if not.
 		/// </summary>
 		static public Device FirstCuda
 		{
@@ -149,6 +154,21 @@ namespace ccl
 			{
 				var d = (from device in Devices
 					where device.IsCuda || device.IsMultiCuda
+					select device).FirstOrDefault();
+				return d ?? Default;
+			}
+		}
+
+		/// <summary>
+		/// Returns the first Multi OpenCL device if it exists,
+		/// the default rendering device (CPU) if not.
+		/// </summary>
+		static public Device FirstMultiOpenCl
+		{
+			get
+			{
+				var d = (from device in Devices
+					where device.IsMultiOpenCL
 					select device).FirstOrDefault();
 				return d ?? Default;
 			}
