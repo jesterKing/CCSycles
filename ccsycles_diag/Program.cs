@@ -7,7 +7,6 @@ namespace ccsycles_diag
 	{
 		static void Main()
 		{
-			CSycles.set_kernel_path("lib");
 			CSycles.initialise();
 
 			var devices = Device.Devices;
@@ -18,6 +17,7 @@ namespace ccsycles_diag
 			}
 			
 			Console.WriteLine("FirstCuda gives us: {0}", Device.FirstCuda);
+			Console.WriteLine("FirstMultiOpenCL gives us: {0}", Device.FirstMultiOpenCl);
 
 			CSycles.shutdown();
 		}

@@ -161,7 +161,10 @@ namespace csycles_tester
 			file = Path.GetFullPath(s);
 			Console.WriteLine("We get file path: {0}", file);
 
-			CSycles.set_kernel_path("lib");
+			var path = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) ?? "";
+			var userpath = Path.Combine(path, "userpath");
+
+			CSycles.path_init(path, userpath);
 			CSycles.initialise();
 
 			const uint samples = 50;
@@ -184,7 +187,7 @@ namespace csycles_tester
 
 			Console.WriteLine("All device capabilities: {0}", Device.Capabilities);
 
-			var dev = Device.FirstCuda;
+			var dev = Device.FirstMultiOpenCl;
 			Console.WriteLine("Using device {0} {1}", dev.Name, dev.Description);
 
 			var scene_params = new SceneParameters(client, ShadingSystem.SVM, BvhType.Static, false, false, false, false);
