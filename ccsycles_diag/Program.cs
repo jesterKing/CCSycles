@@ -7,7 +7,6 @@ namespace ccsycles_diag
 	{
 		static void Main()
 		{
-			CSycles.set_kernel_path("lib");
 			CSycles.initialise();
 
 			var devices = Device.Devices;
