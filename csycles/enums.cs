@@ -131,7 +131,8 @@ namespace ccl
 		BrightnessContrast,
 		GradientTexture,
 		ColorRamp,
-		VectorMath
+		VectorMath,
+		MatrixMath
 	}
 
 	public enum BvhType : uint

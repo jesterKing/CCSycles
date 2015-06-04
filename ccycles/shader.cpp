@@ -302,6 +302,9 @@ unsigned int cycles_add_shader_node(unsigned int client_id, unsigned int shader_
 		case shadernode_type::VECT_MATH:
 			node = new ccl::VectorMathNode();
 			break;
+		case shadernode_type::MATRIX_MATH:
+			node = new ccl::MatrixMathNode();
+			break;
 	}
 
 	if (node) {
@@ -482,6 +485,12 @@ void cycles_shadernode_set_enum(unsigned int client_id, unsigned int shader_id, 
 						_set_enum_val(client_id, &node->type, ccl::VectorMathNode::type_enum, val);
 					}
 					break;
+				case shadernode_type::MATRIX_MATH:
+					{
+						ccl::MatrixMathNode *node = dynamic_cast<ccl::MatrixMathNode*>(*psh);
+						_set_enum_val(client_id, &node->type, ccl::MatrixMathNode::type_enum, val);
+					}
+					break;
 				case shadernode_type::MIX:
 					{
 						auto node = dynamic_cast<ccl::MixNode*>(*psh);
@@ -544,12 +553,14 @@ void cycles_shadernode_set_enum(unsigned int client_id, unsigned int shader_id, 
 						else if (ename=="projection") {
 							_set_enum_val(client_id, &node->projection, ccl::ImageTextureNode::projection_enum, val);
 						}
+						break;
 					}
-					break;
 				case shadernode_type::GRADIENT_TEXTURE:
-					auto node = dynamic_cast<ccl::GradientTextureNode*>(*psh);
-					_set_enum_val(client_id, &node->type, ccl::GradientTextureNode::type_enum, val);
-					break;
+					{
+						auto node = dynamic_cast<ccl::GradientTextureNode*>(*psh);
+						_set_enum_val(client_id, &node->type, ccl::GradientTextureNode::type_enum, val);
+						break;
+					}
 			}
 			break;
 	SHADERNODE_FIND_END()
@@ -688,6 +699,15 @@ void cycles_shadernode_set_member_bool(unsigned int client_id, unsigned int shad
 						}
 					}
 					break;
+				case shadernode_type::TEXTURE_COORDINATE:
+					{
+						ccl::TextureCoordinateNode* texco = dynamic_cast<ccl::TextureCoordinateNode*>(*psh);
+						if (mname == "use_transform") {
+							texco->use_transform = value;
+						}
+
+					}
+					break;
 			}
 	SHADERNODE_FIND_END()
 }
@@ -774,6 +794,64 @@ void cycles_shadernode_set_member_vec4_at_index(unsigned int client_id, unsigned
 					colorramp->ramp[index].y = y;
 					colorramp->ramp[index].z = z;
 					colorramp->ramp[index].w = w;
+				}
+				break;
+			case shadernode_type::TEXTURE_COORDINATE:
+				{
+					ccl::TextureCoordinateNode* texco = dynamic_cast<ccl::TextureCoordinateNode*>(*psh);
+					if (index == 0) {
+						texco->ob_tfm.x.x = x;
+						texco->ob_tfm.x.y = y;
+						texco->ob_tfm.x.z = z;
+						texco->ob_tfm.x.w = w;
+					}
+					if (index == 1) {
+						texco->ob_tfm.y.x = x;
+						texco->ob_tfm.y.y = y;
+						texco->ob_tfm.y.z = z;
+						texco->ob_tfm.y.w = w;
+					}
+					if (index == 2) {
+						texco->ob_tfm.z.x = x;
+						texco->ob_tfm.z.y = y;
+						texco->ob_tfm.z.z = z;
+						texco->ob_tfm.z.w = w;
+					}
+					if (index == 3) {
+						texco->ob_tfm.w.x = x;
+						texco->ob_tfm.w.y = y;
+						texco->ob_tfm.w.z = z;
+						texco->ob_tfm.w.w = w;
+					}
+				}
+				break;
+			case shadernode_type::MATRIX_MATH:
+				{
+					ccl::MatrixMathNode* matmath = dynamic_cast<ccl::MatrixMathNode*>(*psh);
+					if (index == 0) {
+						matmath->tfm.x.x = x;
+						matmath->tfm.x.y = y;
+						matmath->tfm.x.z = z;
+						matmath->tfm.x.w = w;
+					}
+					if (index == 1) {
+						matmath->tfm.y.x = x;
+						matmath->tfm.y.y = y;
+						matmath->tfm.y.z = z;
+						matmath->tfm.y.w = w;
+					}
+					if (index == 2) {
+						matmath->tfm.z.x = x;
+						matmath->tfm.z.y = y;
+						matmath->tfm.z.z = z;
+						matmath->tfm.z.w = w;
+					}
+					if (index == 3) {
+						matmath->tfm.w.x = x;
+						matmath->tfm.w.y = y;
+						matmath->tfm.w.z = z;
+						matmath->tfm.w.w = w;
+					}
 				}
 				break;
 		}
