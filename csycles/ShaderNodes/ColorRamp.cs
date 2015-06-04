@@ -335,6 +335,11 @@ namespace ccl.ShaderNodes
 		/// Create a ColorRampNode
 		/// </summary>
 		public ColorRampNode() :
+			this("a color ramp node")
+		{
+		}
+
+		public ColorRampNode(string name) :
 			base(ShaderNodeType.ColorRamp)
 		{
 			inputs = new ColorRampInputs(this);
@@ -368,6 +373,25 @@ namespace ccl.ShaderNodes
 			{
 				ColorBand.evaluate((float) i/(float) (RampTableSize - 1), color);
 				CSycles.shadernode_set_member_vec4_at_index(clientId, shaderId, Id, Type, "ramp", color.x, color.y, color.z, color.w, i);
+			}
+		}
+
+		internal override void ParseXml(System.Xml.XmlReader xmlNode)
+		{
+			bool interp = false;
+			Utilities.Instance.read_bool(ref interp, xmlNode.GetAttribute("interpolate"));
+			if (xmlNode.ReadToDescendant("stop"))
+			{
+				float pos = 0.0f;
+				do
+				{
+					var color = new float4(0.0f);
+					Utilities.Instance.read_float(ref pos, xmlNode.GetAttribute("position"));
+					Utilities.Instance.get_float4(color, xmlNode.GetAttribute("color"));
+
+					ColorBand.InsertColorStop(color, pos);
+				} while (xmlNode.ReadToNextSibling("stop"));
+
 			}
 		}
 	}

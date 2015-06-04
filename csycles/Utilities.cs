@@ -146,6 +146,12 @@ namespace ccl
 					case "background":
 						shader_node = new BackgroundNode(nodename);
 						break;
+					case "color_ramp":
+						shader_node = new ColorRampNode(nodename);
+						break;
+					case "color":
+						shader_node = new ColorNode(nodename);
+						break;
 					case "gamma":
 						shader_node = new GammaNode(nodename);
 						break;
@@ -244,6 +250,9 @@ namespace ccl
 						break;
 					case "light_falloff":
 						shader_node = new LightFalloffNode(nodename);
+						break;
+					case "rgb_to_luminance":
+						shader_node = new RgbToLuminanceNode(nodename);
 						break;
 					case "connect":
 						var fromstring = xmlNode.GetAttribute("from");

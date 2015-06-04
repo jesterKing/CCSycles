@@ -1,3 +1,4 @@
+<cycles>
 <!-- Camera -->
 <camera width="800" height="500" />
 
@@ -11,4 +12,4 @@
 	<include src="./objects/uv_cube.xml" />
 </state>
 </transform>
-
+</cycles>

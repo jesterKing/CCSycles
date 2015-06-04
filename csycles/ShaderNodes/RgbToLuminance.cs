@@ -45,5 +45,9 @@ namespace ccl.ShaderNodes
 			inputs = new ConvertRgbInputs(this);
 			outputs = new ConvertValOutputs(this);
 		}
+
+		internal override void ParseXml(System.Xml.XmlReader xmlNode)
+		{
+		}
 	}
 }
