@@ -187,7 +187,7 @@ namespace csycles_tester
 
 			Console.WriteLine("All device capabilities: {0}", Device.Capabilities);
 
-			var dev = Device.FirstMultiOpenCl;
+			var dev = Device.FirstCuda;
 			Console.WriteLine("Using device {0} {1}", dev.Name, dev.Description);
 
 			var scene_params = new SceneParameters(client, ShadingSystem.SVM, BvhType.Static, false, false, false, false);
