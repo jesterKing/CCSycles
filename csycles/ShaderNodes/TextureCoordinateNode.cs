@@ -27,6 +27,7 @@ namespace ccl.ShaderNodes
 		public Float4Socket Camera { get; set; }
 		public Float4Socket Window { get; set; }
 		public Float4Socket Reflection { get; set; }
+		public Float4Socket WcsBox { get; set; }
 
 		public TextureCoordinateOutputs(ShaderNode parentNode)
 		{
@@ -44,6 +45,8 @@ namespace ccl.ShaderNodes
 			AddSocket(Window);
 			Reflection = new Float4Socket(parentNode, "Reflection");
 			AddSocket(Reflection);
+			WcsBox = new Float4Socket(parentNode, "WcsBox");
+			AddSocket(WcsBox);
 		}
 	}
 
@@ -67,7 +70,29 @@ namespace ccl.ShaderNodes
 		{
 			inputs = null;
 			outputs = new TextureCoordinateOutputs(this);
-			//from_dupli = false;
+
+			UseTransform = false;
+			ObjectTransform = ccl.Transform.Identity();
+		}
+
+
+		public ccl.Transform ObjectTransform { get; set; }
+		public bool UseTransform { get; set; }
+
+		internal override void SetDirectMembers(uint clientId, uint shaderId)
+		{
+			CSycles.shadernode_set_member_bool(clientId, shaderId, Id, ShaderNodeType.TextureCoordinate, "use_transform", UseTransform);
+
+			if (UseTransform)
+			{
+				var obt = ObjectTransform;
+
+				CSycles.shadernode_set_member_vec4_at_index(clientId, shaderId, Id, ShaderNodeType.TextureCoordinate, "object_transform_x", obt.x.x, obt.x.y, obt.x.z, obt.x.w, 0);
+				CSycles.shadernode_set_member_vec4_at_index(clientId, shaderId, Id, ShaderNodeType.TextureCoordinate, "object_transform_y", obt.y.x, obt.y.y, obt.y.z, obt.y.w, 1);
+				CSycles.shadernode_set_member_vec4_at_index(clientId, shaderId, Id, ShaderNodeType.TextureCoordinate, "object_transform_z", obt.z.x, obt.z.y, obt.z.z, obt.z.w, 2);
+				CSycles.shadernode_set_member_vec4_at_index(clientId, shaderId, Id, ShaderNodeType.TextureCoordinate, "object_transform_w", obt.w.x, obt.w.y, obt.w.z, obt.w.w, 3);
+			}
 		}
 	}
+
 }
