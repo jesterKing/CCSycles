@@ -89,5 +89,12 @@ namespace ccl.ShaderNodes
 			var val = Value;
 			CSycles.shadernode_set_member_vec(clientId, shaderId, Id, Type, "value", val.x, val.y, val.z);
 		}
+
+		internal override void ParseXml(System.Xml.XmlReader xmlNode)
+		{
+			var f4 = new float4(0.0f);
+			Utilities.Instance.get_float4(f4, xmlNode.GetAttribute("value"));
+			Value = f4;
+		}
 	}
 }

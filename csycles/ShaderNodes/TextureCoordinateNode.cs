@@ -93,6 +93,10 @@ namespace ccl.ShaderNodes
 				CSycles.shadernode_set_member_vec4_at_index(clientId, shaderId, Id, ShaderNodeType.TextureCoordinate, "object_transform_w", obt.w.x, obt.w.y, obt.w.z, obt.w.w, 3);
 			}
 		}
+
+		internal override void ParseXml(System.Xml.XmlReader xmlNode)
+		{
+		}
 	}
 
 }
