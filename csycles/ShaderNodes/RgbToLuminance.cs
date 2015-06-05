@@ -14,12 +14,15 @@ See the License for the specific language governing permissions and
 limitations under the License.
 **/
 
+using ccl.Attributes;
+
 namespace ccl.ShaderNodes
 {
 
 	/// <summary>
 	/// RgbToBw node to convert a color to a value
 	/// </summary>
+	[ShaderNode("rgb_to_luminance")]
 	public class RgbToLuminanceNode : ShaderNode
 	{
 		/// <summary>

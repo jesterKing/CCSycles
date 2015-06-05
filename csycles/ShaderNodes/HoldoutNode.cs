@@ -15,6 +15,7 @@ limitations under the License.
 **/
 
 using ccl.ShaderNodes.Sockets;
+using ccl.Attributes;
 
 namespace ccl.ShaderNodes
 {
@@ -43,13 +44,16 @@ namespace ccl.ShaderNodes
 		}
 	}
 
+	[ShaderNode("holdout")]
 	public class HoldoutNode : ShaderNode
 	{
 		public HoldoutInputs ins { get { return (HoldoutInputs)inputs; } }
 		public HoldoutOutputs outs { get { return (HoldoutOutputs)outputs; } }
 
-		public HoldoutNode()
-			: base(ShaderNodeType.Holdout)
+		public HoldoutNode() : this("a holdout node") { }
+
+		public HoldoutNode(string name)
+			: base(ShaderNodeType.Holdout, name)
 		{
 			inputs = new HoldoutInputs(this);
 			outputs = new HoldoutOutputs(this);

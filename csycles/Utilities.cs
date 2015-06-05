@@ -143,117 +143,6 @@ namespace ccl
 
 				switch (xmlNode.Name)
 				{
-					case "background":
-						shader_node = new BackgroundNode(nodename);
-						break;
-					case "color_ramp":
-						shader_node = new ColorRampNode(nodename);
-						break;
-					case "color":
-						shader_node = new ColorNode(nodename);
-						break;
-					case "gamma":
-						shader_node = new GammaNode(nodename);
-						break;
-					case "voronoi_texture":
-						shader_node = new VoronoiTexture(nodename);
-						break;
-					case "checker_texture":
-						shader_node = new CheckerTexture(nodename);
-						break;
-					case "brick_texture":
-						shader_node = new BrickTexture(nodename);
-						break;
-					case "noise_texture":
-						shader_node = new NoiseTexture(nodename);
-						break;
-					case "gradient_texture":
-						shader_node = new GradientTextureNode(nodename);
-						break;
-					case "sky_texture":
-						shader_node = new SkyTexture(nodename);
-						break;
-					case "wave_texture":
-						shader_node = new WaveTexture(nodename);
-						break;
-					case "texture_coordinate":
-						shader_node = new TextureCoordinateNode(nodename);
-						break;
-					case "image_texture":
-						shader_node = new ImageTextureNode(nodename);
-						break;
-					case "diffuse_bsdf":
-						shader_node = new DiffuseBsdfNode(nodename);
-						break;
-					case "translucent_bsdf":
-						shader_node = new TranslucentBsdfNode(nodename);
-						break;
-					case "emission_bsdf":
-						shader_node = new EmissionNode(nodename);
-						break;
-					case "velvet_bsdf":
-						shader_node = new VelvetBsdfNode(nodename);
-						break;
-					case "glass_bsdf":
-						shader_node = new GlassBsdfNode(nodename);
-						break;
-					case "glossy_bsdf":
-						shader_node = new GlossyBsdfNode(nodename);
-						break;
-					case "layer_weight":
-						shader_node = new LayerWeightNode(nodename);
-						break;
-					case "fresnel":
-						shader_node = new FresnelNode(nodename);
-						break;
-					case "math":
-						shader_node = new MathNode(nodename);
-						break;
-					case "mapping":
-						shader_node = new MappingNode(nodename);
-						break;
-					case "combine_rgb":
-						shader_node = new CombineRgbNode(nodename);
-						break;
-					case "separate_rgb":
-						shader_node = new SeparateRgbNode(nodename);
-						break;
-					case "combine_hsv":
-						shader_node = new CombineHsvNode(nodename);
-						break;
-					case "separate_hsv":
-						shader_node = new SeparateHsvNode(nodename);
-						break;
-					case "combine_xyz":
-						shader_node = new CombineXyzNode(nodename);
-						break;
-					case "separate_xyz":
-						shader_node = new SeparateXyzNode(nodename);
-						break;
-					case "mixrgb":
-						shader_node = new MixNode(nodename);
-						break;
-					case "mixclosure":
-						shader_node = new MixClosureNode(nodename);
-						break;
-					case "addclosure":
-						shader_node = new AddClosureNode();
-						break;
-					case "holdout":
-						shader_node = new HoldoutNode();
-						break;
-					case "hue_saturation":
-						shader_node = new HueSaturationNode(nodename);
-						break;
-					case "brightness":
-						shader_node = new BrightnessContrastNode(nodename);
-						break;
-					case "light_falloff":
-						shader_node = new LightFalloffNode(nodename);
-						break;
-					case "rgb_to_luminance":
-						shader_node = new RgbToLuminanceNode(nodename);
-						break;
 					case "connect":
 						var fromstring = xmlNode.GetAttribute("from");
 						var tostring = xmlNode.GetAttribute("to");
@@ -270,6 +159,9 @@ namespace ccl
 
 							fromsocket.Connect(tosocket);
 						}
+						break;
+					default:
+						shader_node = CSycles.CreateShaderNode(xmlNode.Name, nodename);
 						break;
 				}
 				if (shader_node != null)

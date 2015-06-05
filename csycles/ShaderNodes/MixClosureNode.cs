@@ -17,6 +17,7 @@ limitations under the License.
 using System;
 using System.Xml;
 using ccl.ShaderNodes.Sockets;
+using ccl.Attributes;
 
 namespace ccl.ShaderNodes
 {
@@ -71,6 +72,7 @@ namespace ccl.ShaderNodes
 	/// <summary>
 	/// Mix shaders (closures). Mix ration is controlled by a Fac input
 	/// </summary>
+	[ShaderNode("mix_closure")]
 	public class MixClosureNode : ShaderNode
 	{
 		/// <summary>

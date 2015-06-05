@@ -17,6 +17,7 @@ limitations under the License.
 using System;
 using System.Xml;
 using ccl.ShaderNodes.Sockets;
+using ccl.Attributes;
 
 namespace ccl.ShaderNodes
 {
@@ -62,6 +63,7 @@ namespace ccl.ShaderNodes
 	/// - Vector: Transform a direction vector
 	/// - Normal: Transform a normal vector with unit length
 	/// </summary>
+	[ShaderNode("mapping")]
 	public class MappingNode : ShaderNode
 	{
 		/// <summary>

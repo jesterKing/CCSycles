@@ -16,6 +16,7 @@ limitations under the License.
 
 using System.Xml;
 using ccl.ShaderNodes.Sockets;
+using ccl.Attributes;
 
 namespace ccl.ShaderNodes
 {
@@ -50,6 +51,7 @@ namespace ccl.ShaderNodes
 	/// <summary>
 	/// Add a Combine RGB node, converting single R G B scalars to a vector output
 	/// </summary>
+	[ShaderNode("combine_rgb")]
 	public class CombineRgbNode : ShaderNode
 	{
 		public CombineRgbInputs ins { get { return (CombineRgbInputs)inputs; } }

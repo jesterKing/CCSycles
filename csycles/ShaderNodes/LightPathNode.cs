@@ -16,6 +16,7 @@ limitations under the License.
 
 using System;
 using ccl.ShaderNodes.Sockets;
+using ccl.Attributes;
 
 namespace ccl.ShaderNodes
 {
@@ -120,6 +121,7 @@ namespace ccl.ShaderNodes
 	/// <summary>
 	/// LightPath node gives information about rays Cycles is handling.
 	/// </summary>
+	[ShaderNode("light_path")]
 	public class LightPathNode : ShaderNode
 	{
 		/// <summary>

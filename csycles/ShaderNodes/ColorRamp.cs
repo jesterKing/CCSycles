@@ -17,6 +17,7 @@ limitations under the License.
 using System;
 using System.Collections.Generic;
 using ccl.ShaderNodes.Sockets;
+using ccl.Attributes;
 
 namespace ccl.ShaderNodes
 {
@@ -321,6 +322,7 @@ namespace ccl.ShaderNodes
 	/// 
 	/// Interpolate input factor (0.0f-1.0f) to a color on the ColorBand of the node.
 	/// </summary>
+	[ShaderNode("color_ramp")]
 	public class ColorRampNode : ShaderNode
 	{
 		/// <summary>

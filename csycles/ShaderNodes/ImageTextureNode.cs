@@ -18,6 +18,7 @@ using System;
 using System.Drawing;
 using System.Xml;
 using ccl.ShaderNodes.Sockets;
+using ccl.Attributes;
 
 namespace ccl.ShaderNodes
 {
@@ -61,6 +62,7 @@ namespace ccl.ShaderNodes
 		}
 	}
 
+	[ShaderNode("image_texture")]
 	public class ImageTextureNode : TextureNode
 	{
 		/// <summary>

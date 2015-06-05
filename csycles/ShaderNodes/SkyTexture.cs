@@ -16,6 +16,7 @@ limitations under the License.
 
 using System.Xml;
 using ccl.ShaderNodes.Sockets;
+using ccl.Attributes;
 
 namespace ccl.ShaderNodes
 {
@@ -40,6 +41,8 @@ namespace ccl.ShaderNodes
 			AddSocket(Color);
 		}
 	}
+
+	[ShaderNode("sky_texture")]
 	public class SkyTexture : TextureNode
 	{
 		public SkyInputs ins { get { return (SkyInputs)inputs; } }

@@ -16,6 +16,7 @@ limitations under the License.
 
 using System.Xml;
 using ccl.ShaderNodes.Sockets;
+using ccl.Attributes;
 
 namespace ccl.ShaderNodes
 {
@@ -62,6 +63,7 @@ namespace ccl.ShaderNodes
 	/// <summary>
 	/// Background shader node. Used in world/background shaders
 	/// </summary>
+	[ShaderNode("background")]
 	public class BackgroundNode : ShaderNode
 	{
 		/// <summary>

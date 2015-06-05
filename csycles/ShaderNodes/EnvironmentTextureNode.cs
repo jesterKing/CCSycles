@@ -16,6 +16,7 @@ limitations under the License.
 
 using System;
 using ccl.ShaderNodes.Sockets;
+using ccl.Attributes;
 
 namespace ccl.ShaderNodes
 {
@@ -62,6 +63,7 @@ namespace ccl.ShaderNodes
 	/// <summary>
 	/// EnvironmentTextureNode
 	/// </summary>
+	[ShaderNode("environment_texture")]
 	public class EnvironmentTextureNode : TextureNode
 	{
 		/// <summary>
@@ -73,11 +75,13 @@ namespace ccl.ShaderNodes
 		/// </summary>
 		public EnvironmentTextureOutputs outs { get { return (EnvironmentTextureOutputs)outputs; } }
 
+		public EnvironmentTextureNode() : this("an env texture node") { }
+
 		/// <summary>
 		/// Create an EnvironmentTextureNode
 		/// </summary>
-		public EnvironmentTextureNode() :
-			base(ShaderNodeType.EnvironmentTexture)
+		public EnvironmentTextureNode(string name) :
+			base(ShaderNodeType.EnvironmentTexture, name)
 		{
 
 			inputs = new EnvironmentTextureInputs(this);

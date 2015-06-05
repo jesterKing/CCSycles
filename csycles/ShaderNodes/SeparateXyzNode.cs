@@ -16,6 +16,7 @@ limitations under the License.
 
 using System.Xml;
 using ccl.ShaderNodes.Sockets;
+using ccl.Attributes;
 
 namespace ccl.ShaderNodes
 {
@@ -50,6 +51,7 @@ namespace ccl.ShaderNodes
 	/// <summary>
 	/// Add a Separate XYZ node, converting a vector input to single X Y Z scalar nodes
 	/// </summary>
+	[ShaderNode("separate_xyz")]
 	public class SeparateXyzNode : ShaderNode
 	{
 		public SeparateXyzInputs ins { get { return (SeparateXyzInputs)inputs; } }

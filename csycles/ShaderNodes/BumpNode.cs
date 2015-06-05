@@ -15,6 +15,7 @@ limitations under the License.
 **/
 
 using ccl.ShaderNodes.Sockets;
+using ccl.Attributes;
 
 namespace ccl.ShaderNodes
 {
@@ -73,6 +74,7 @@ namespace ccl.ShaderNodes
 	/// <summary>
 	/// BumpNode
 	/// </summary>
+	[ShaderNode("bump")]
 	public class BumpNode : ShaderNode
 	{
 		/// <summary>
@@ -107,6 +109,17 @@ namespace ccl.ShaderNodes
 		internal override void SetDirectMembers(uint clientId, uint shaderId)
 		{
 			CSycles.shadernode_set_member_bool(clientId, shaderId, Id, Type, "invert", Invert);
+		}
+
+		internal override void ParseXml(System.Xml.XmlReader xmlNode)
+		{
+			bool invert = false;
+			Utilities.Instance.read_bool(ref invert, xmlNode.GetAttribute("invert"));
+			Invert = invert;
+
+			Utilities.Instance.get_float(ins.Strength, xmlNode.GetAttribute("strength"));
+			Utilities.Instance.get_float(ins.Distance, xmlNode.GetAttribute("distance"));
+
 		}
 	}
 }

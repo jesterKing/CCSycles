@@ -15,6 +15,7 @@ limitations under the License.
 **/
 
 using ccl.ShaderNodes.Sockets;
+using ccl.Attributes;
 
 namespace ccl.ShaderNodes
 {
@@ -45,6 +46,7 @@ namespace ccl.ShaderNodes
 
 	/// There is one output <c>BSDF</c>
 	/// </summary>
+	[ShaderNode("transparent_bsdf")]
 	public class TransparentBsdfNode : ShaderNode
 	{
 		public TransparentBsdfInputs ins { get { return (TransparentBsdfInputs)inputs; } }

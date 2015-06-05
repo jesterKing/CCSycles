@@ -16,6 +16,7 @@ limitations under the License.
 
 using System.Xml;
 using ccl.ShaderNodes.Sockets;
+using ccl.Attributes;
 
 namespace ccl.ShaderNodes
 {
@@ -56,6 +57,7 @@ namespace ccl.ShaderNodes
 		}
 	}
 
+	[ShaderNode("wave_texture")]
 	public class WaveTexture : TextureNode
 	{
 		public WaveInputs ins { get { return (WaveInputs)inputs; } }

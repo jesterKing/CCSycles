@@ -16,6 +16,7 @@ limitations under the License.
 
 using System.Xml;
 using ccl.ShaderNodes.Sockets;
+using ccl.Attributes;
 
 namespace ccl.ShaderNodes
 {
@@ -44,6 +45,7 @@ namespace ccl.ShaderNodes
 		}
 	}
 
+	[ShaderNode("emission")]
 	public class EmissionNode : ShaderNode
 	{
 		public EmissionInputs ins { get { return (EmissionInputs)inputs; } }

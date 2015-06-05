@@ -16,6 +16,7 @@ limitations under the License.
 
 using System.Xml;
 using ccl.ShaderNodes.Sockets;
+using ccl.Attributes;
 
 namespace ccl.ShaderNodes
 {
@@ -47,6 +48,7 @@ namespace ccl.ShaderNodes
 		}
 	}
 
+	[ShaderNode("layer_weight")]
 	public class LayerWeightNode : ShaderNode
 	{
 		public LayerWeightInputs ins { get { return (LayerWeightInputs)inputs; } }

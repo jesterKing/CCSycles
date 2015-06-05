@@ -15,6 +15,7 @@ limitations under the License.
 **/
 
 using ccl.ShaderNodes.Sockets;
+using ccl.Attributes;
 
 namespace ccl.ShaderNodes
 {
@@ -49,6 +50,7 @@ namespace ccl.ShaderNodes
 	/// <summary>
 	/// ColorNode is a RGB input node.
 	/// </summary>
+	[ShaderNode("color")]
 	public class ColorNode : ShaderNode
 	{
 		/// <summary>

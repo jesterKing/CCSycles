@@ -16,6 +16,7 @@ limitations under the License.
 
 using System;
 using ccl.ShaderNodes.Sockets;
+using ccl.Attributes;
 
 namespace ccl.ShaderNodes
 {
@@ -50,6 +51,7 @@ namespace ccl.ShaderNodes
 		}
 	}
 
+	[ShaderNode("refraction_bsdf")]
 	public class RefractionBsdfNode : ShaderNode
 	{
 		public enum RefractionDistribution

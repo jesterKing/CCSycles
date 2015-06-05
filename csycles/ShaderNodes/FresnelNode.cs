@@ -16,6 +16,7 @@ limitations under the License.
 
 using System.Xml;
 using ccl.ShaderNodes.Sockets;
+using ccl.Attributes;
 
 namespace ccl.ShaderNodes
 {
@@ -44,6 +45,7 @@ namespace ccl.ShaderNodes
 		}
 	}
 
+	[ShaderNode("fresnel")]
 	public class FresnelNode : ShaderNode
 	{
 		public FresnelInputs ins { get { return (FresnelInputs)inputs; } }
