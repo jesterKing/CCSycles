@@ -17,6 +17,7 @@ limitations under the License.
 using System;
 using System.Xml;
 using ccl.ShaderNodes.Sockets;
+using ccl.Attributes;
 
 namespace ccl.ShaderNodes
 {
@@ -48,6 +49,7 @@ namespace ccl.ShaderNodes
 		}
 	}
 
+	[ShaderNode("glossy_bsdf")]
 	public class GlossyBsdfNode : ShaderNode
 	{
 

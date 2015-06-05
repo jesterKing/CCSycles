@@ -15,6 +15,7 @@ limitations under the License.
 **/
 
 using ccl.ShaderNodes.Sockets;
+using ccl.Attributes;
 
 namespace ccl.ShaderNodes
 {
@@ -55,13 +56,15 @@ namespace ccl.ShaderNodes
 	/// <summary>
 	/// The final output shader node for shaders.
 	/// </summary>
+	[ShaderNode("output")]
 	public class OutputNode : ShaderNode
 	{
 		public OutputInputs ins { get { return (OutputInputs) inputs; } }
 		public OutputOutputs outs { get { return (OutputOutputs) outputs; } }
 
-		public OutputNode() :
-			base(ShaderNodeType.Output)
+		public OutputNode() : this("an output node") { }
+		public OutputNode(string name) :
+			base(ShaderNodeType.Output, name)
 		{
 			inputs = new OutputInputs(this);
 			outputs = new OutputOutputs(this);

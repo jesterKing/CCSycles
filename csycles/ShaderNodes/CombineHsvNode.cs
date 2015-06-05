@@ -16,6 +16,7 @@ limitations under the License.
 
 using System.Xml;
 using ccl.ShaderNodes.Sockets;
+using ccl.Attributes;
 
 namespace ccl.ShaderNodes
 {
@@ -50,6 +51,7 @@ namespace ccl.ShaderNodes
 	/// <summary>
 	/// Add a Combine HSV node, converting single H S V scalars to a vector output
 	/// </summary>
+	[ShaderNode("combine_hsv")]
 	public class CombineHsvNode : ShaderNode
 	{
 		public CombineHsvInputs ins { get { return (CombineHsvInputs)inputs; } }

@@ -16,6 +16,7 @@ limitations under the License.
 
 using System.Xml;
 using ccl.ShaderNodes.Sockets;
+using ccl.Attributes;
 
 namespace ccl.ShaderNodes
 {
@@ -46,6 +47,8 @@ namespace ccl.ShaderNodes
 			AddSocket(Fac);
 		}
 	}
+
+	[ShaderNode("voronoi_texture")]
 	public class VoronoiTexture : TextureNode
 	{
 		public VoronoiInputs ins { get { return (VoronoiInputs)inputs; } }

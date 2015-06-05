@@ -16,6 +16,7 @@ limitations under the License.
 
 using System.Xml;
 using ccl.ShaderNodes.Sockets;
+using ccl.Attributes;
 
 namespace ccl.ShaderNodes
 {
@@ -49,6 +50,7 @@ namespace ccl.ShaderNodes
 		}
 	}
 
+	[ShaderNode("light_falloff")]
 	public class LightFalloffNode : ShaderNode
 	{
 		public LightFalloffInputs ins { get { return (LightFalloffInputs)inputs; } }

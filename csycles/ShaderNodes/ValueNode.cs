@@ -15,6 +15,7 @@ limitations under the License.
 **/
 
 using ccl.ShaderNodes.Sockets;
+using ccl.Attributes;
 
 namespace ccl.ShaderNodes
 {
@@ -33,6 +34,7 @@ namespace ccl.ShaderNodes
 		}
 	}
 
+	[ShaderNode("value")]
 	public class ValueNode : ShaderNode
 	{
 

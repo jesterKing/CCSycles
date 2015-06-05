@@ -16,6 +16,7 @@ limitations under the License.
 
 using System.Xml;
 using ccl.ShaderNodes.Sockets;
+using ccl.Attributes;
 
 namespace ccl.ShaderNodes
 {
@@ -53,6 +54,7 @@ namespace ccl.ShaderNodes
 		}
 	}
 
+	[ShaderNode("checker_texture")]
 	public class CheckerTexture : TextureNode
 	{
 		public CheckerInputs ins { get { return (CheckerInputs)inputs; } }

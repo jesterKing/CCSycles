@@ -15,6 +15,7 @@ limitations under the License.
 **/
 
 using ccl.ShaderNodes.Sockets;
+using ccl.Attributes;
 
 namespace ccl.ShaderNodes
 {
@@ -55,6 +56,7 @@ namespace ccl.ShaderNodes
 	/// <summary>
 	/// RgbToBw node to convert a color to a value
 	/// </summary>
+	[ShaderNode("rgb_to_bw")]
 	public class RgbToBwNode : ShaderNode
 	{
 		/// <summary>

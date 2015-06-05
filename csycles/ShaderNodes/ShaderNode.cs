@@ -17,12 +17,14 @@ limitations under the License.
 using System;
 using System.Xml;
 using ccl.ShaderNodes.Sockets;
+using ccl.Attributes;
 
 namespace ccl.ShaderNodes
 {
 	/// <summary>
 	/// Base class for shader nodes.
 	/// </summary>
+	[ShaderNode("shadernode base", true)]
 	public class ShaderNode
 	{
 		/// <summary>
@@ -131,7 +133,6 @@ namespace ccl.ShaderNodes
 		/// <param name="xmlNode"></param>
 		virtual internal void ParseXml(XmlReader xmlNode)
 		{
-			throw new NotImplementedException("xml parsing not implemented");
 		}
 	}
 }

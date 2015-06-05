@@ -16,6 +16,7 @@ limitations under the License.
 
 using System.Xml;
 using ccl.ShaderNodes.Sockets;
+using ccl.Attributes;
 
 /**
  * \defgroup cclshadernodes CSycles Shader Nodes
@@ -78,6 +79,7 @@ namespace ccl.ShaderNodes
 	/// 
 	/// There is one output <c>Closure</c>
 	/// </summary>
+	[ShaderNode("add_closure")]
 	public class AddClosureNode : ShaderNode
 	{
 		/// <summary>

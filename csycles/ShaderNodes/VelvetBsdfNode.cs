@@ -16,6 +16,7 @@ limitations under the License.
 
 using System.Xml;
 using ccl.ShaderNodes.Sockets;
+using ccl.Attributes;
 
 namespace ccl.ShaderNodes
 {
@@ -54,6 +55,7 @@ namespace ccl.ShaderNodes
 	/// 
 	/// There is one output <c>Closure</c>
 	/// </summary>
+	[ShaderNode("velvet_bsdf")]
 	public class VelvetBsdfNode : ShaderNode
 	{
 		public VelvetBsdfInputs ins { get { return (VelvetBsdfInputs)inputs; } }

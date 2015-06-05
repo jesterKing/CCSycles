@@ -17,6 +17,7 @@ limitations under the License.
 using System;
 using System.Xml;
 using ccl.ShaderNodes.Sockets;
+using ccl.Attributes;
 
 namespace ccl.ShaderNodes
 {
@@ -77,6 +78,7 @@ namespace ccl.ShaderNodes
 	///
 	/// Note that some operations use only Vector1
 	/// </summary>
+	[ShaderNode("vector_math")]
 	public class VectorMathNode : ShaderNode
 	{
 		/// <summary>

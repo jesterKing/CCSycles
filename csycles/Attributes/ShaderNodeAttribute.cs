@@ -1,4 +1,4 @@
-﻿/**
+/**
 Copyright 2014 Robert McNeel and Associates
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,40 +14,37 @@ See the License for the specific language governing permissions and
 limitations under the License.
 **/
 
-using ccl.Attributes;
-
-namespace ccl.ShaderNodes
+namespace ccl.Attributes
 {
-	/// <summary>
-	/// Base texture node
-	/// </summary>
-	[ShaderNode("texture_node_base", true)]
-	public class TextureNode : ShaderNode
+	public sealed class ShaderNodeAttribute : System.Attribute
 	{
-		public enum TextureColorSpace
+		private string nodeTypeName;
+		private bool nodeTypeIsBase;
+
+		public ShaderNodeAttribute(string name, bool base_class)
 		{
-			None,
-			Color,
+			nodeTypeName = name;
+			nodeTypeIsBase = base_class;
 		}
 
-		public enum TextureProjection
+		public ShaderNodeAttribute(string name)
 		{
-			Flat,
-			Box,
-			Sphere,
-			Tube,
+			nodeTypeName = name;
+			nodeTypeIsBase = false;
 		}
 
-		public enum EnvironmentProjection
+		public ShaderNodeAttribute() { }
+
+		public string Name
 		{
-			Equirectangular,
-			MirrorBall,
+			get { return nodeTypeName; }
+			set { nodeTypeName = value; }
 		}
 
-		internal TextureNode(ShaderNodeType type) :
-			base(type) { }
-
-		internal TextureNode(ShaderNodeType type, string name) :
-			base(type, name) { }
+		public bool IsBase
+		{
+			get { return nodeTypeIsBase; }
+			set { nodeTypeIsBase = value; }
+		}
 	}
 }

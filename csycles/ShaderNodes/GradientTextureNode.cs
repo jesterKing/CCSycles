@@ -16,6 +16,7 @@ limitations under the License.
 
 using System.Xml;
 using ccl.ShaderNodes.Sockets;
+using ccl.Attributes;
 
 namespace ccl.ShaderNodes
 {
@@ -62,6 +63,7 @@ namespace ccl.ShaderNodes
 	/// <summary>
 	/// GradientTextureNode gives different types of gradient
 	/// </summary>
+	[ShaderNode("gradient_texture")]
 	public class GradientTextureNode : TextureNode
 	{
 		/// <summary>

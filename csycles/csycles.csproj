@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\ShaderNodeAttribute.cs" />
     <Compile Include="Background.cs" />
     <Compile Include="Film.cs" />
     <Compile Include="Camera.cs" />

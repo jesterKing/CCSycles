@@ -16,6 +16,7 @@ limitations under the License.
 
 using System.Xml;
 using ccl.ShaderNodes.Sockets;
+using ccl.Attributes;
 
 namespace ccl.ShaderNodes
 {
@@ -53,6 +54,7 @@ namespace ccl.ShaderNodes
 		}
 	}
 
+	[ShaderNode("noise_texture")]
 	public class NoiseTexture : TextureNode
 	{
 		public NoiseInputs ins { get { return (NoiseInputs)inputs; } }

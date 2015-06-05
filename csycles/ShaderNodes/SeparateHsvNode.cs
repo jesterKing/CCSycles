@@ -16,6 +16,7 @@ limitations under the License.
 
 using System.Xml;
 using ccl.ShaderNodes.Sockets;
+using ccl.Attributes;
 
 namespace ccl.ShaderNodes
 {
@@ -47,6 +48,7 @@ namespace ccl.ShaderNodes
 		}
 	}
 
+	[ShaderNode("separate_hsv")]
 	public class SeparateHsvNode : ShaderNode
 	{
 		public SeparateHsvInputs ins { get { return (SeparateHsvInputs)inputs; } }

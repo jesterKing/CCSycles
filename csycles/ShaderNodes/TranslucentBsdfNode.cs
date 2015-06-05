@@ -16,6 +16,7 @@ limitations under the License.
 
 using System.Xml;
 using ccl.ShaderNodes.Sockets;
+using ccl.Attributes;
 
 namespace ccl.ShaderNodes
 {
@@ -50,6 +51,7 @@ namespace ccl.ShaderNodes
 
 	/// There is one output <c>BSDF</c>
 	/// </summary>
+	[ShaderNode("translucent_bsdf")]
 	public class TranslucentBsdfNode : ShaderNode
 	{
 		public TranslucentBsdfInputs ins { get { return (TranslucentBsdfInputs)inputs; } }

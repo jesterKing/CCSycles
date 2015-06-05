@@ -16,6 +16,7 @@ limitations under the License.
 
 using System.Xml;
 using ccl.ShaderNodes.Sockets;
+using ccl.Attributes;
 
 namespace ccl.ShaderNodes
 {
@@ -47,13 +48,14 @@ namespace ccl.ShaderNodes
 		}
 	}
 
+	[ShaderNode("separate_rgb")]
 	public class SeparateRgbNode : ShaderNode
 	{
 		public SeparateRgbInputs ins { get { return (SeparateRgbInputs)inputs; } }
 		public SeparateRgbOutputs outs { get { return (SeparateRgbOutputs)outputs; } }
 
 		/// <summary>
-		/// Create new Separate HSV node.
+		/// Create new Separate RGB node.
 		/// </summary>
 		public SeparateRgbNode() : this("a separate rgb node") { }
 		public SeparateRgbNode(string name) :

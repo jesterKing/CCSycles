@@ -16,6 +16,8 @@ limitations under the License.
 
 using System;
 using System.Runtime.InteropServices;
+using System.Reflection;
+using System.Collections.Generic;
 
 /** \namespace ccl
  * \brief Namespace containing the low-level wrapping API of ccycles.dll and a set of higher-level classes.
@@ -41,10 +43,75 @@ namespace ccl
 		{
 			if (g_ccycles_loaded) return;
 
-			var path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) ?? "";
+			var path = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? "";
 			var ccycles_dll = System.IO.Path.Combine(path, "ccycles.dll");
 			LoadLibrary(ccycles_dll);
+			LoadShaderNodes();
 			g_ccycles_loaded = true;
+		}
+
+		private static Dictionary<string, Type> g_registered_shadernodes = new Dictionary<string, Type>();
+
+		/// <summary>
+		/// Load all shader nodes from the assembly using reflection
+		/// </summary>
+		private static void LoadShaderNodes()
+		{
+			Assembly ccass = Assembly.GetExecutingAssembly();
+			var constructTypes = new Type[1];
+			constructTypes[0] = typeof(string);
+
+			var exported_types = ccass.GetExportedTypes();
+			var shadernode_type = typeof(ShaderNodes.ShaderNode);
+			for (int i = 0; i < exported_types.Length; i++)
+			{
+				var exported_type = exported_types[i];
+				if (!exported_type.IsSubclassOf(shadernode_type))
+					continue;
+				var attr = exported_type.GetCustomAttributes(typeof(Attributes.ShaderNodeAttribute), false);
+				if (attr.Length < 1)
+				{
+					throw new NotImplementedException(String.Format("Class {0} must include a ShaderNode attribute", exported_type));
+				}
+				var shnattr = attr[0] as Attributes.ShaderNodeAttribute;
+				if (shnattr == null || shnattr.IsBase)
+					continue;
+
+				var constructor = exported_type.GetConstructor(constructTypes);
+				if (constructor == null)
+				{
+					throw new NotImplementedException(String.Format("Class {0} must include a constructor that takes a name", exported_type));
+				}
+
+				if (!g_registered_shadernodes.ContainsKey(shnattr.Name))
+				{
+					g_registered_shadernodes.Add(shnattr.Name, exported_type);
+				}
+			}
+		}
+
+		/// <summary>
+		/// Create a ShaderNode based on XML name. This name has been registered
+		/// using the ShaderNodeAttribute on each ShaderNode derived class
+		/// </summary>
+		/// <param name="xmlName"></param>
+		/// <param name="nodeName"></param>
+		/// <returns>a new ShaderNode if xmlName is registered, null otherwise</returns>
+		public static ShaderNodes.ShaderNode CreateShaderNode(string xmlName, string nodeName)
+		{
+			if (g_registered_shadernodes.ContainsKey(xmlName))
+			{
+				var constructTypes = new Type[1];
+				constructTypes[0] = typeof(string);
+				var shnt = g_registered_shadernodes[xmlName];
+				var constructor = shnt.GetConstructor(constructTypes);
+				var param = new object[1];
+				param[0] = nodeName;
+
+				return constructor.Invoke(param) as ShaderNodes.ShaderNode;
+			}
+
+			return null;
 		}
 
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_initialise", CallingConvention = CallingConvention.Cdecl)]

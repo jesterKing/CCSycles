@@ -17,6 +17,7 @@ limitations under the License.
 using System;
 using System.Xml;
 using ccl.ShaderNodes.Sockets;
+using ccl.Attributes;
 
 namespace ccl.ShaderNodes
 {
@@ -51,6 +52,7 @@ namespace ccl.ShaderNodes
 		}
 	}
 
+	[ShaderNode("glass_bsdf")]
 	public class GlassBsdfNode : ShaderNode
 	{
 
