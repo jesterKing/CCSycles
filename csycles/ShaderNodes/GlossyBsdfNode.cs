@@ -58,7 +58,8 @@ namespace ccl.ShaderNodes
 			Sharp,
 			Beckmann,
 			GGX,
-			Asihkmin_Shirley
+			Asihkmin_Shirley,
+			Phong
 		}
 
 		public GlossyInputs ins { get { return (GlossyInputs)inputs; } }
