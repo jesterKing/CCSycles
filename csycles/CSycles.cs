@@ -97,7 +97,7 @@ namespace ccl
 		/// <param name="xmlName"></param>
 		/// <param name="nodeName"></param>
 		/// <returns>a new ShaderNode if xmlName is registered, null otherwise</returns>
-		public static ShaderNodes.ShaderNode CreateShaderNode(string xmlName, string nodeName)
+		internal static ShaderNodes.ShaderNode CreateShaderNode(string xmlName, string nodeName)
 		{
 			if (g_registered_shadernodes.ContainsKey(xmlName))
 			{

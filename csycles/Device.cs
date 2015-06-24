@@ -62,6 +62,8 @@ namespace ccl
 		/// </summary>
 		public bool IsCuda { get { return Type == DeviceType.CUDA;  } }
 
+		public bool IsCpu { get { return Type == DeviceType.CPU; } }
+
 		/// <summary>
 		/// True if this is a Multi CUDA device
 		/// </summary>
