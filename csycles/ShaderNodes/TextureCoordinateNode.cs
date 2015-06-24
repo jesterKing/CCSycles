@@ -29,6 +29,14 @@ namespace ccl.ShaderNodes
 		public Float4Socket Window { get; set; }
 		public Float4Socket Reflection { get; set; }
 		public Float4Socket WcsBox { get; set; }
+		public Float4Socket EnvSpherical { get; set; }
+		public Float4Socket EnvEmap { get; set; }
+		public Float4Socket EnvBox { get; set; }
+		public Float4Socket EnvLightProbe { get; set; }
+		public Float4Socket EnvCubemap { get; set; }
+		public Float4Socket EnvCubemapVerticalCross { get; set; }
+		public Float4Socket EnvCubemapHorizontalCross { get; set; }
+		public Float4Socket EnvHemispherical { get; set; }
 
 		public TextureCoordinateOutputs(ShaderNode parentNode)
 		{
@@ -48,6 +56,22 @@ namespace ccl.ShaderNodes
 			AddSocket(Reflection);
 			WcsBox = new Float4Socket(parentNode, "WcsBox");
 			AddSocket(WcsBox);
+			EnvSpherical = new Float4Socket(parentNode, "EnvSpherical");
+			AddSocket(EnvSpherical);
+			EnvEmap = new Float4Socket(parentNode, "EnvEmap");
+			AddSocket(EnvEmap);
+			EnvBox = new Float4Socket(parentNode, "EnvBox");
+			AddSocket(EnvBox);
+			EnvLightProbe = new Float4Socket(parentNode, "EnvLightProbe");
+			AddSocket(EnvLightProbe);
+			EnvCubemap = new Float4Socket(parentNode, "EnvCubemap");
+			AddSocket(EnvCubemap);
+			EnvCubemapVerticalCross = new Float4Socket(parentNode, "EnvCubemapVerticalCross");
+			AddSocket(EnvCubemapVerticalCross);
+			EnvCubemapHorizontalCross = new Float4Socket(parentNode, "EnvCubemapHorizontalCross");
+			AddSocket(EnvCubemapHorizontalCross);
+			EnvHemispherical = new Float4Socket(parentNode, "EnvHemi");
+			AddSocket(EnvHemispherical);
 		}
 	}
 
