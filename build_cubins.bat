@@ -1,9 +1,14 @@
-C:\CUDA\bin\nvcc.exe -arch=sm_20 -m64 --cubin D:/Dev/CCSycles/cycles/src/kernel/kernels/cuda/kernel.cu -o D:/Dev/CCSycles/lib/kernel_sm_20.cubin --ptxas-options="-v" -D__KERNEL_CUDA_VERSION__=65 --use_fast_math -ID:/Dev/CCSycles/cycles/src/kernel/../util -ID:/Dev/CCSycles/cycles/src/kernel/svm -DCCL_NAMESPACE_BEGIN= -DCCL_NAMESPACE_END= -DNVCC
+SET nvcc=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.0\bin\nvcc.exe
+SET cyclesroot=C:\Dev\Source\Rhino\WIP\src4\rhino4\Plug-ins\RDK\cycles
+SET cyclesout=C:\Dev\Source\Rhino\WIP\big_libs\RhinoCycles
+SET cudaversion=65
+SET shadermodelnum=%1
+SET shadermodel=sm_%shadermodelnum%
 
-C:\CUDA\bin\nvcc.exe -arch=sm_21 -m64 --cubin D:/Dev/CCSycles/cycles/src/kernel/kernels/cuda/kernel.cu -o D:/Dev/CCSycles/lib/kernel_sm_21.cubin --ptxas-options="-v" -D__KERNEL_CUDA_VERSION__=65 --use_fast_math -ID:/Dev/CCSycles/cycles/src/kernel/../util -ID:/Dev/CCSycles/cycles/src/kernel/svm -DCCL_NAMESPACE_BEGIN= -DCCL_NAMESPACE_END= -DNVCC
-
-C:\CUDA\bin\nvcc.exe -arch=sm_30 -m64 --cubin D:/Dev/CCSycles/cycles/src/kernel/kernels/cuda/kernel.cu -o D:/Dev/CCSycles/lib/kernel_sm_30.cubin --ptxas-options="-v" -D__KERNEL_CUDA_VERSION__=65 --use_fast_math -ID:/Dev/CCSycles/cycles/src/kernel/../util -ID:/Dev/CCSycles/cycles/src/kernel/svm -DCCL_NAMESPACE_BEGIN= -DCCL_NAMESPACE_END= -DNVCC
-
-C:\CUDA\bin\nvcc.exe -arch=sm_35 -m64 --cubin D:/Dev/CCSycles/cycles/src/kernel/kernels/cuda/kernel.cu -o D:/Dev/CCSycles/lib/kernel_sm_35.cubin --ptxas-options="-v" -D__KERNEL_CUDA_VERSION__=65 --use_fast_math -ID:/Dev/CCSycles/cycles/src/kernel/../util -ID:/Dev/CCSycles/cycles/src/kernel/svm -DCCL_NAMESPACE_BEGIN= -DCCL_NAMESPACE_END= -DNVCC
-
-C:\CUDA\bin\nvcc.exe -arch=sm_50 -m64 --cubin D:/Dev/CCSycles/cycles/src/kernel/kernels/cuda/kernel.cu -o D:/Dev/CCSycles/lib/kernel_sm_50.cubin --ptxas-options="-v" -D__KERNEL_CUDA_VERSION__=65 --use_fast_math -ID:/Dev/CCSycles/cycles/src/kernel/../util -ID:/Dev/CCSycles/cycles/src/kernel/svm -DCCL_NAMESPACE_BEGIN= -DCCL_NAMESPACE_END= -DNVCC
+IF [%shadermodelnum%]==[] (
+	FOR %%s IN ("sm_20", "sm_21", "sm_30", "sm_35", "sm_50") DO (
+		"%nvcc%" -arch=%%s -m64 --cubin %cyclesroot%/cycles/src/kernel/kernels/cuda/kernel.cu -o %cyclesout%/lib/kernel_%%s.cubin --ptxas-options="-v" -D__KERNEL_CUDA_VERSION__=%cudaversion% --use_fast_math -I%cyclesroot%/cycles/src/kernel/../util -I%cyclesroot%/cycles/src/kernel/svm -DCCL_NAMESPACE_BEGIN= -DCCL_NAMESPACE_END= -DNVCC
+	)
+) ELSE (
+	"%nvcc%" -arch=%shadermodel% -m64 --cubin %cyclesroot%/cycles/src/kernel/kernels/cuda/kernel.cu -o %cyclesout%/lib/kernel_%shadermodel%.cubin --ptxas-options="-v" -D__KERNEL_CUDA_VERSION__=%cudaversion% --use_fast_math -I%cyclesroot%/cycles/src/kernel/../util -I%cyclesroot%/cycles/src/kernel/svm -DCCL_NAMESPACE_BEGIN= -DCCL_NAMESPACE_END= -DNVCC
+)
