@@ -100,11 +100,13 @@ namespace ccl.ShaderNodes
 			}
 			if (!string.IsNullOrEmpty(turbidity))
 			{
-				Turbidity = float.Parse(turbidity, Utilities.Instance.NumberFormatInfo);
+				var turb = 0.0f;
+				if(Utilities.Instance.get_float(ref turb, turbidity)) Turbidity = turb;
 			}
 			if (!string.IsNullOrEmpty(ground_albedo))
 			{
-				GroundAlbedo = float.Parse(ground_albedo, Utilities.Instance.NumberFormatInfo);
+				var ground_alb = 0.0f;
+				if (Utilities.Instance.get_float(ref ground_alb, ground_albedo)) GroundAlbedo = ground_alb;
 			}
 			if (!string.IsNullOrEmpty(sky_type))
 			{
