@@ -14,10 +14,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 **/
 
-using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Globalization;
+using System.Xml;
 using ccl.ShaderNodes;
 using ccl.ShaderNodes.Sockets;
 
@@ -175,7 +174,7 @@ namespace ccl
 		}
 
 
-		public void ReadNodeGraph(ref Shader shader, System.Xml.XmlReader xmlNode)
+		public void ReadNodeGraph(ref Shader shader, XmlReader xmlNode)
 		{
 			var nodes = new Dictionary<string, ShaderNode> {{"output", shader.Output}};
 
