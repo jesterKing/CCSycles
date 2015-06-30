@@ -71,17 +71,24 @@ namespace ccl
 			socket.Value = float.Parse(nr, NumberFormatInfo);
 		}
 
+		/// <summary>
+		/// Get a float4 from given string. This function creates a new float4
+		/// </summary>
+		/// <param name="f4">Will be assigned a new float4 when </param>
+		/// <param name="floats">String with 3 or more floats. At most 4 will be used</param>
 		public void get_float4(float4 f4, string floats)
 		{
+			f4 = new float4(0.0f);
 			if (string.IsNullOrEmpty(floats)) return;
 
 			var vec = parse_floats(floats);
-			if (vec.Length < 3 || vec.Length > 4) return;
+			if (vec.Length < 3) return;
 
 			f4.x = vec[0];
 			f4.y = vec[1];
 			f4.z = vec[2];
-			if (vec.Length == 4)
+
+			if (vec.Length >= 4)
 				f4.w = vec[3];
 		}
 
