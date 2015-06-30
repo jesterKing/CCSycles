@@ -56,25 +56,10 @@ namespace ccl
 			return realfloats;
 		}
 
-		public void get_float4(Float4Socket socket, string floats)
-		{
-			if (string.IsNullOrEmpty(floats)) return;
-
-			var vec = parse_floats(floats);
-			socket.Value = new float4(vec[0], vec[1], vec[2]);
-		}
-
-		public void get_float(FloatSocket socket, string nr)
-		{
-			if (string.IsNullOrEmpty(nr)) return;
-
-			socket.Value = float.Parse(nr, NumberFormatInfo);
-		}
-
 		/// <summary>
 		/// Get a float4 from given string. This function creates a new float4
 		/// </summary>
-		/// <param name="f4">Will be assigned a new float4 when </param>
+		/// <param name="f4">Will be assigned a new float4 when at least 3 floats are found</param>
 		/// <param name="floats">String with 3 or more floats. At most 4 will be used</param>
 		public void get_float4(float4 f4, string floats)
 		{
@@ -92,6 +77,40 @@ namespace ccl
 				f4.w = vec[3];
 		}
 
+		/// <summary>
+		/// Set the Value float4 for a Float4Socket from given string. This function creates a new float4
+		/// </summary>
+		/// <param name="socket">Will be assigned a new float4 in Value when at least 3 floats are found</param>
+		/// <param name="floats">String with 3 or more floats. At most 4 will be used</param>
+		public void get_float4(Float4Socket socket, string floats)
+		{
+			if (string.IsNullOrEmpty(floats)) return;
+
+			var vec = parse_floats(floats);
+			if (vec.Length < 3) return;
+
+			socket.Value = new float4(vec[0], vec[1], vec[2]);
+			if (vec.Length >= 4)
+				socket.Value.w = vec[3];
+		}
+
+		/// <summary>
+		/// Set the Value float for a FloatSocket from given string.
+		/// </summary>
+		/// <param name="socket">socket for which the Value will be set</param>
+		/// <param name="nr">float string</param>
+		public void get_float(FloatSocket socket, string nr)
+		{
+			if (string.IsNullOrEmpty(nr)) return;
+
+			socket.Value = float.Parse(nr, NumberFormatInfo);
+		}
+
+		/// <summary>
+		/// Set the Value float for a FloatSocket from given string.
+		/// </summary>
+		/// <param name="val">float to set</param>
+		/// <param name="floatstring">float string</param>
 		public bool get_float(ref float val, string floatstring)
 		{
 			if (string.IsNullOrEmpty(floatstring)) return false;
@@ -100,6 +119,11 @@ namespace ccl
 			return true;
 		}
 
+		/// <summary>
+		/// Set the Value int for an IntSocket from given string
+		/// </summary>
+		/// <param name="socket">IntSocket for wich Value is set</param>
+		/// <param name="nr">int string</param>
 		public void get_int(IntSocket socket, string nr)
 		{
 			if (string.IsNullOrEmpty(nr)) return;
