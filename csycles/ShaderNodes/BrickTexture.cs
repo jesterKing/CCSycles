@@ -196,11 +196,11 @@ namespace ccl.ShaderNodes
 			var offset_frequency = 0;
 			var squash = 0.0f;
 			var squash_frequency = 0;
-			if (Utilities.Instance.read_float(ref offset, xmlNode.GetAttribute("offset")))
+			if (Utilities.Instance.get_float(ref offset, xmlNode.GetAttribute("offset")))
 				Offset = offset;
 			if (Utilities.Instance.read_int(ref offset_frequency, xmlNode.GetAttribute("offset_frequency")))
 				OffsetFrequency = offset_frequency;
-			if (Utilities.Instance.read_float(ref squash, xmlNode.GetAttribute("squash")))
+			if (Utilities.Instance.get_float(ref squash, xmlNode.GetAttribute("squash")))
 				Squash = squash;
 			if (Utilities.Instance.read_int(ref squash_frequency, xmlNode.GetAttribute("squash_frequency")))
 				SquashFrequency = squash_frequency;

@@ -154,7 +154,7 @@ namespace csycles_tester
 			if (Utilities.Instance.read_int(ref intvar, node.GetAttribute("transparent_max_bounce"))) state.Scene.Integrator.TransparentMaxBounce = intvar;
 			if (Utilities.Instance.read_bool(ref boolvar, node.GetAttribute("transparent_shadows"))) state.Scene.Integrator.TransparentShadows = boolvar;
 
-			if (Utilities.Instance.read_float(ref floatvar, node.GetAttribute("volume_step_size"))) state.Scene.Integrator.VolumeStepSize = floatvar;
+			if (Utilities.Instance.get_float(ref floatvar, node.GetAttribute("volume_step_size"))) state.Scene.Integrator.VolumeStepSize = floatvar;
 			if (Utilities.Instance.read_int(ref intvar, node.GetAttribute("volume_max_steps"))) state.Scene.Integrator.VolumeMaxSteps = intvar;
 
 			/* \todo wrap caustics form separation
@@ -163,11 +163,11 @@ namespace csycles_tester
 			if (Utilities.Instance.read_bool(ref boolvar, node.GetAttribute("caustics_refractive"))) state.Scene.Integrator.DoCausticsRefractive = boolvar;
 			 */
 			if (Utilities.Instance.read_bool(ref boolvar, node.GetAttribute("no_caustics"))) state.Scene.Integrator.NoCaustics = boolvar;
-			if (Utilities.Instance.read_float(ref floatvar, node.GetAttribute("filter_glossy"))) state.Scene.Integrator.FilterGlossy = floatvar;
+			if (Utilities.Instance.get_float(ref floatvar, node.GetAttribute("filter_glossy"))) state.Scene.Integrator.FilterGlossy = floatvar;
 
 			if (Utilities.Instance.read_int(ref intvar, node.GetAttribute("seed"))) state.Scene.Integrator.Seed = intvar;
-			if (Utilities.Instance.read_float(ref floatvar, node.GetAttribute("sample_clamp_direct"))) state.Scene.Integrator.SampleClampDirect = floatvar;
-			if (Utilities.Instance.read_float(ref floatvar, node.GetAttribute("sample_clamp_indirect"))) state.Scene.Integrator.SampleClampIndirect = floatvar;
+			if (Utilities.Instance.get_float(ref floatvar, node.GetAttribute("sample_clamp_direct"))) state.Scene.Integrator.SampleClampDirect = floatvar;
+			if (Utilities.Instance.get_float(ref floatvar, node.GetAttribute("sample_clamp_indirect"))) state.Scene.Integrator.SampleClampIndirect = floatvar;
 
 			if (Utilities.Instance.read_string(ref stringvar, node.GetAttribute("sampling_pattern")))
 				state.Scene.Integrator.SamplingPattern = stringvar.Equals("sobol") ? SamplingPattern.Sobol : SamplingPattern.CMJ;

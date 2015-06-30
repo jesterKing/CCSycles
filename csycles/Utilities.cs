@@ -85,7 +85,7 @@ namespace ccl
 				f4.w = vec[3];
 		}
 
-		public bool read_float(ref float val, string floatstring)
+		public bool get_float(ref float val, string floatstring)
 		{
 			if (string.IsNullOrEmpty(floatstring)) return false;
 

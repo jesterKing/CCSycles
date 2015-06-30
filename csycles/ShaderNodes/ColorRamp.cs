@@ -388,7 +388,7 @@ namespace ccl.ShaderNodes
 				do
 				{
 					var color = new float4(0.0f);
-					Utilities.Instance.read_float(ref pos, xmlNode.GetAttribute("position"));
+					Utilities.Instance.get_float(ref pos, xmlNode.GetAttribute("position"));
 					Utilities.Instance.get_float4(color, xmlNode.GetAttribute("color"));
 
 					ColorBand.InsertColorStop(color, pos);
