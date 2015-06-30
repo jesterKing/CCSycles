@@ -115,7 +115,7 @@ namespace ccl
 			return realints;
 		}
 
-		public bool read_bool(ref bool val, string booleanstring)
+		public bool get_bool(ref bool val, string booleanstring)
 		{
 			if (string.IsNullOrEmpty(booleanstring))
 			{

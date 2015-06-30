@@ -127,12 +127,12 @@ namespace csycles_tester
 			var floatvar = 0.0f;
 			var stringvar = "";
 
-			Utilities.Instance.read_bool(ref boolvar, node.GetAttribute("branched"));
+			Utilities.Instance.get_bool(ref boolvar, node.GetAttribute("branched"));
 			state.Scene.Integrator.IntegratorMethod = boolvar ? IntegratorMethod.BranchedPath : IntegratorMethod.Path;
 
-			if (Utilities.Instance.read_bool(ref boolvar, node.GetAttribute("sample_all_lights_direct")))
+			if (Utilities.Instance.get_bool(ref boolvar, node.GetAttribute("sample_all_lights_direct")))
 				state.Scene.Integrator.SampleAllLightsDirect = boolvar;
-			if (Utilities.Instance.read_bool(ref boolvar, node.GetAttribute("sample_all_lights_indirect")))
+			if (Utilities.Instance.get_bool(ref boolvar, node.GetAttribute("sample_all_lights_indirect")))
 				state.Scene.Integrator.SampleAllLightsIndirect = boolvar;
 			if (Utilities.Instance.read_int(ref intvar, node.GetAttribute("diffuse_samples"))) state.Scene.Integrator.DiffuseSamples = intvar;
 			if (Utilities.Instance.read_int(ref intvar, node.GetAttribute("glossy_samples"))) state.Scene.Integrator.GlossySamples = intvar;
@@ -152,17 +152,17 @@ namespace csycles_tester
 
 			if (Utilities.Instance.read_int(ref intvar, node.GetAttribute("transparent_min_bounce"))) state.Scene.Integrator.TransparentMinBounce = intvar;
 			if (Utilities.Instance.read_int(ref intvar, node.GetAttribute("transparent_max_bounce"))) state.Scene.Integrator.TransparentMaxBounce = intvar;
-			if (Utilities.Instance.read_bool(ref boolvar, node.GetAttribute("transparent_shadows"))) state.Scene.Integrator.TransparentShadows = boolvar;
+			if (Utilities.Instance.get_bool(ref boolvar, node.GetAttribute("transparent_shadows"))) state.Scene.Integrator.TransparentShadows = boolvar;
 
 			if (Utilities.Instance.get_float(ref floatvar, node.GetAttribute("volume_step_size"))) state.Scene.Integrator.VolumeStepSize = floatvar;
 			if (Utilities.Instance.read_int(ref intvar, node.GetAttribute("volume_max_steps"))) state.Scene.Integrator.VolumeMaxSteps = intvar;
 
 			/* \todo wrap caustics form separation
 			 * 
-			if (Utilities.Instance.read_bool(ref boolvar, node.GetAttribute("caustics_reflective"))) state.Scene.Integrator.DoCausticsReflective = boolvar;
-			if (Utilities.Instance.read_bool(ref boolvar, node.GetAttribute("caustics_refractive"))) state.Scene.Integrator.DoCausticsRefractive = boolvar;
+			if (Utilities.Instance.get_bool(ref boolvar, node.GetAttribute("caustics_reflective"))) state.Scene.Integrator.DoCausticsReflective = boolvar;
+			if (Utilities.Instance.get_bool(ref boolvar, node.GetAttribute("caustics_refractive"))) state.Scene.Integrator.DoCausticsRefractive = boolvar;
 			 */
-			if (Utilities.Instance.read_bool(ref boolvar, node.GetAttribute("no_caustics"))) state.Scene.Integrator.NoCaustics = boolvar;
+			if (Utilities.Instance.get_bool(ref boolvar, node.GetAttribute("no_caustics"))) state.Scene.Integrator.NoCaustics = boolvar;
 			if (Utilities.Instance.get_float(ref floatvar, node.GetAttribute("filter_glossy"))) state.Scene.Integrator.FilterGlossy = floatvar;
 
 			if (Utilities.Instance.read_int(ref intvar, node.GetAttribute("seed"))) state.Scene.Integrator.Seed = intvar;

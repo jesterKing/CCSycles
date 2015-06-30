@@ -204,7 +204,7 @@ namespace ccl.ShaderNodes
 			Utilities.Instance.get_float4(f4, xmlNode.GetAttribute("scale"));
 			Scale = f4;
 			bool b = false;
-			Utilities.Instance.read_bool(ref b, xmlNode.GetAttribute("useminmax"));
+			Utilities.Instance.get_bool(ref b, xmlNode.GetAttribute("useminmax"));
 			f4 = new float4(0.0f);
 			Utilities.Instance.get_float4(f4, xmlNode.GetAttribute("min"));
 			if (b && !f4.IsZero(false))

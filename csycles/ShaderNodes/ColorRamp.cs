@@ -381,7 +381,7 @@ namespace ccl.ShaderNodes
 		internal override void ParseXml(System.Xml.XmlReader xmlNode)
 		{
 			bool interp = false;
-			Utilities.Instance.read_bool(ref interp, xmlNode.GetAttribute("interpolate"));
+			Utilities.Instance.get_bool(ref interp, xmlNode.GetAttribute("interpolate"));
 			if (xmlNode.ReadToDescendant("stop"))
 			{
 				float pos = 0.0f;
