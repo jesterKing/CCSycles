@@ -127,7 +127,7 @@ namespace ccl
 			return true;
 		}
 
-		public bool read_int(ref int val, string intstring)
+		public bool get_int(ref int val, string intstring)
 		{
 			if (string.IsNullOrEmpty(intstring)) return false;
 

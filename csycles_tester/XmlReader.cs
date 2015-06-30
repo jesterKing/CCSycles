@@ -134,28 +134,28 @@ namespace csycles_tester
 				state.Scene.Integrator.SampleAllLightsDirect = boolvar;
 			if (Utilities.Instance.get_bool(ref boolvar, node.GetAttribute("sample_all_lights_indirect")))
 				state.Scene.Integrator.SampleAllLightsIndirect = boolvar;
-			if (Utilities.Instance.read_int(ref intvar, node.GetAttribute("diffuse_samples"))) state.Scene.Integrator.DiffuseSamples = intvar;
-			if (Utilities.Instance.read_int(ref intvar, node.GetAttribute("glossy_samples"))) state.Scene.Integrator.GlossySamples = intvar;
-			if (Utilities.Instance.read_int(ref intvar, node.GetAttribute("transmission_samples"))) state.Scene.Integrator.TransmissionSamples = intvar;
-			if (Utilities.Instance.read_int(ref intvar, node.GetAttribute("ao_samples"))) state.Scene.Integrator.AoSamples = intvar;
-			if (Utilities.Instance.read_int(ref intvar, node.GetAttribute("mesh_light_samples"))) state.Scene.Integrator.MeshLightSamples = intvar;
-			if (Utilities.Instance.read_int(ref intvar, node.GetAttribute("subsurface_samples"))) state.Scene.Integrator.SubsurfaceSamples = intvar;
-			if (Utilities.Instance.read_int(ref intvar, node.GetAttribute("volume_samples"))) state.Scene.Integrator.VolumeSamples = intvar;
+			if (Utilities.Instance.get_int(ref intvar, node.GetAttribute("diffuse_samples"))) state.Scene.Integrator.DiffuseSamples = intvar;
+			if (Utilities.Instance.get_int(ref intvar, node.GetAttribute("glossy_samples"))) state.Scene.Integrator.GlossySamples = intvar;
+			if (Utilities.Instance.get_int(ref intvar, node.GetAttribute("transmission_samples"))) state.Scene.Integrator.TransmissionSamples = intvar;
+			if (Utilities.Instance.get_int(ref intvar, node.GetAttribute("ao_samples"))) state.Scene.Integrator.AoSamples = intvar;
+			if (Utilities.Instance.get_int(ref intvar, node.GetAttribute("mesh_light_samples"))) state.Scene.Integrator.MeshLightSamples = intvar;
+			if (Utilities.Instance.get_int(ref intvar, node.GetAttribute("subsurface_samples"))) state.Scene.Integrator.SubsurfaceSamples = intvar;
+			if (Utilities.Instance.get_int(ref intvar, node.GetAttribute("volume_samples"))) state.Scene.Integrator.VolumeSamples = intvar;
 
-			if (Utilities.Instance.read_int(ref intvar, node.GetAttribute("min_bounce"))) state.Scene.Integrator.MinBounce = intvar;
-			if (Utilities.Instance.read_int(ref intvar, node.GetAttribute("max_bounce"))) state.Scene.Integrator.MaxBounce = intvar;
+			if (Utilities.Instance.get_int(ref intvar, node.GetAttribute("min_bounce"))) state.Scene.Integrator.MinBounce = intvar;
+			if (Utilities.Instance.get_int(ref intvar, node.GetAttribute("max_bounce"))) state.Scene.Integrator.MaxBounce = intvar;
 
-			if (Utilities.Instance.read_int(ref intvar, node.GetAttribute("max_diffuse_bounce"))) state.Scene.Integrator.MaxDiffuseBounce = intvar;
-			if (Utilities.Instance.read_int(ref intvar, node.GetAttribute("max_glossy_bounce"))) state.Scene.Integrator.MaxGlossyBounce = intvar;
-			if (Utilities.Instance.read_int(ref intvar, node.GetAttribute("max_transmission_bounce"))) state.Scene.Integrator.MaxTransmissionBounce = intvar;
-			if (Utilities.Instance.read_int(ref intvar, node.GetAttribute("max_volume_bounce"))) state.Scene.Integrator.MaxVolumeBounce = intvar;
+			if (Utilities.Instance.get_int(ref intvar, node.GetAttribute("max_diffuse_bounce"))) state.Scene.Integrator.MaxDiffuseBounce = intvar;
+			if (Utilities.Instance.get_int(ref intvar, node.GetAttribute("max_glossy_bounce"))) state.Scene.Integrator.MaxGlossyBounce = intvar;
+			if (Utilities.Instance.get_int(ref intvar, node.GetAttribute("max_transmission_bounce"))) state.Scene.Integrator.MaxTransmissionBounce = intvar;
+			if (Utilities.Instance.get_int(ref intvar, node.GetAttribute("max_volume_bounce"))) state.Scene.Integrator.MaxVolumeBounce = intvar;
 
-			if (Utilities.Instance.read_int(ref intvar, node.GetAttribute("transparent_min_bounce"))) state.Scene.Integrator.TransparentMinBounce = intvar;
-			if (Utilities.Instance.read_int(ref intvar, node.GetAttribute("transparent_max_bounce"))) state.Scene.Integrator.TransparentMaxBounce = intvar;
+			if (Utilities.Instance.get_int(ref intvar, node.GetAttribute("transparent_min_bounce"))) state.Scene.Integrator.TransparentMinBounce = intvar;
+			if (Utilities.Instance.get_int(ref intvar, node.GetAttribute("transparent_max_bounce"))) state.Scene.Integrator.TransparentMaxBounce = intvar;
 			if (Utilities.Instance.get_bool(ref boolvar, node.GetAttribute("transparent_shadows"))) state.Scene.Integrator.TransparentShadows = boolvar;
 
 			if (Utilities.Instance.get_float(ref floatvar, node.GetAttribute("volume_step_size"))) state.Scene.Integrator.VolumeStepSize = floatvar;
-			if (Utilities.Instance.read_int(ref intvar, node.GetAttribute("volume_max_steps"))) state.Scene.Integrator.VolumeMaxSteps = intvar;
+			if (Utilities.Instance.get_int(ref intvar, node.GetAttribute("volume_max_steps"))) state.Scene.Integrator.VolumeMaxSteps = intvar;
 
 			/* \todo wrap caustics form separation
 			 * 
@@ -165,7 +165,7 @@ namespace csycles_tester
 			if (Utilities.Instance.get_bool(ref boolvar, node.GetAttribute("no_caustics"))) state.Scene.Integrator.NoCaustics = boolvar;
 			if (Utilities.Instance.get_float(ref floatvar, node.GetAttribute("filter_glossy"))) state.Scene.Integrator.FilterGlossy = floatvar;
 
-			if (Utilities.Instance.read_int(ref intvar, node.GetAttribute("seed"))) state.Scene.Integrator.Seed = intvar;
+			if (Utilities.Instance.get_int(ref intvar, node.GetAttribute("seed"))) state.Scene.Integrator.Seed = intvar;
 			if (Utilities.Instance.get_float(ref floatvar, node.GetAttribute("sample_clamp_direct"))) state.Scene.Integrator.SampleClampDirect = floatvar;
 			if (Utilities.Instance.get_float(ref floatvar, node.GetAttribute("sample_clamp_indirect"))) state.Scene.Integrator.SampleClampIndirect = floatvar;
 
