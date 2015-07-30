@@ -115,6 +115,31 @@ namespace ccl
 		}
 
 		/// <summary>
+		/// Set all matrix cells with elements from the given float array.
+		/// </summary>
+		/// <param name="m">float array of at least 16 elements. If the array is larger only the first 16 elements will be used.</param>
+		public void SetMatrix(float[] m)
+		{
+			if(m.Length < 16) throw new ArgumentException("float array too short, must contain at least 16 float elements.");
+			x.x = m[0];
+			x.y = m[1];
+			x.z = m[2];
+			x.w = m[3];
+			y.x = m[4];
+			y.y = m[5];
+			y.z = m[6];
+			y.w = m[7];
+			z.x = m[8];
+			z.y = m[9];
+			z.z = m[10];
+			z.w = m[11];
+			w.x = m[12];
+			w.y = m[13];
+			w.z = m[14];
+			w.w = m[15];
+		}
+
+		/// <summary>
 		/// The identity matrix
 		/// </summary>
 		/// <returns></returns>
