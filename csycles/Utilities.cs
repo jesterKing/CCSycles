@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 **/
 
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Xml;
@@ -56,17 +57,36 @@ namespace ccl
 		}
 
 		/// <summary>
+		/// Get a transform from given float string
+		/// </summary>
+		/// <param name="transform">Transform to create new transform in</param>
+		/// <param name="mat">string with 16 floats</param>
+		/// <returns>true if a parsing was possible</returns>
+		public bool get_transform(Transform transform, string mat)
+		{
+			if (string.IsNullOrWhiteSpace(mat)) return false;
+			var matrix = parse_floats(mat);
+
+			if (matrix.Length != 16) return false;
+
+			transform.SetMatrix(matrix);
+
+			return true;
+		}
+
+		/// <summary>
 		/// Get a float4 from given string. This function creates a new float4
 		/// </summary>
 		/// <param name="f4">Will be assigned a new float4 when at least 3 floats are found</param>
 		/// <param name="floats">String with 3 or more floats. At most 4 will be used</param>
-		public void get_float4(float4 f4, string floats)
+		/// <returns>true if a parsing was possible</returns>
+		public bool get_float4(float4 f4, string floats)
 		{
-			f4 = new float4(0.0f);
-			if (string.IsNullOrEmpty(floats)) return;
+			//f4 = new float4(0.0f);
+			if (string.IsNullOrEmpty(floats)) return false;
 
 			var vec = parse_floats(floats);
-			if (vec.Length < 3) return;
+			if (vec.Length < 3) return false;
 
 			f4.x = vec[0];
 			f4.y = vec[1];
@@ -74,6 +94,7 @@ namespace ccl
 
 			if (vec.Length >= 4)
 				f4.w = vec[3];
+			return true;
 		}
 
 		/// <summary>

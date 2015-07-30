@@ -131,16 +131,9 @@ namespace ccl.ShaderNodes
 			Utilities.Instance.get_float4(ins.Vector, xmlNode.GetAttribute("vector"));
 
 			var mat = xmlNode.GetAttribute("matrix");
-			if (!string.IsNullOrWhiteSpace(mat))
-			{
-				var matrix = Utilities.Instance.parse_floats(mat);
+			var t = new Transform();
 
-				if (matrix.Length == 16)
-				{
-					var t = new Transform(matrix);
-					Transform = t;
-				}
-			}
+			if (Utilities.Instance.get_transform(t, mat)) Transform = t;
 		}
 	}
 }

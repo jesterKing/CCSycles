@@ -187,36 +187,21 @@ namespace csycles_tester
 		private void ReadTransform(System.Xml.XmlReader node, ref Transform transform)
 		{
 			var mat = node.GetAttribute("matrix");
-			if (!string.IsNullOrEmpty(mat))
-			{
-				var matrix = Utilities.Instance.parse_floats(mat);
-				if(matrix.Length==16)
-				{
-					var t = new Transform(matrix);
-					transform = t;
-				}
-			}
+
+			var f4 = new float4(0.0f);
+			var t = new Transform();
+
+			if (Utilities.Instance.get_transform(t, mat)) transform = t;
 
 			var trans = node.GetAttribute("translate");
-			if (!string.IsNullOrEmpty(trans))
-			{
-				var components = Utilities.Instance.parse_floats(trans);
-				if(components.Length==3)
-				{
-					transform = transform*ccl.Transform.Translate(components[0], components[1], components[2]);
-				}
-			}
+			if (Utilities.Instance.get_float4(f4, trans)) transform = transform*Transform.Translate(f4);
 
 			var rotate = node.GetAttribute("rotate");
-			if (!string.IsNullOrEmpty(rotate))
+			if (Utilities.Instance.get_float4(f4, rotate))
 			{
-				var components = Utilities.Instance.parse_floats(rotate);
-				if (components.Length == 4)
-				{
-					var a = DegToRad(components[0]);
-					var axis = new float4(components[1], components[2], components[3]);
+					var a = DegToRad(f4[0]);
+					var axis = new float4(f4[1], f4[2], f4[3]);
 					transform = transform*ccl.Transform.Rotate(a, axis);
-				}
 			}
 
 			var scale = node.GetAttribute("scale");
