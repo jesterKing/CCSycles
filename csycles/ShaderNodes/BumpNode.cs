@@ -114,7 +114,7 @@ namespace ccl.ShaderNodes
 		internal override void ParseXml(System.Xml.XmlReader xmlNode)
 		{
 			bool invert = false;
-			Utilities.Instance.read_bool(ref invert, xmlNode.GetAttribute("invert"));
+			Utilities.Instance.get_bool(ref invert, xmlNode.GetAttribute("invert"));
 			Invert = invert;
 
 			Utilities.Instance.get_float(ins.Strength, xmlNode.GetAttribute("strength"));

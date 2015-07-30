@@ -44,6 +44,47 @@ namespace ccl
 		/// <param name="old">float4 to copy</param>
 		public float4(float4 old) : this(old.x, old.y, old.z, old.w) { }
 
+		public float this[int index]
+		{
+			get
+			{
+				switch (index)
+				{
+					case 0:
+						return x;
+					case 1:
+						return y;
+					case 2:
+						return z;
+					case 3:
+						return w;
+					default:
+						throw new IndexOutOfRangeException("Only 0-3 are acceptable");
+				}
+			}
+			set
+			{
+				switch (index)
+				{
+					case 0:
+						x = value;
+						break;
+					case 1:
+						y = value;
+						break;
+					case 2:
+						z = value;
+						break;
+					case 3:
+						w = value;
+						break;
+					default:
+						throw new IndexOutOfRangeException("Only 0-3 are acceptable");
+				}
+				
+			}
+		}
+
 		/// <summary>
 		/// Copy values from given source float4
 		/// </summary>

@@ -381,14 +381,14 @@ namespace ccl.ShaderNodes
 		internal override void ParseXml(System.Xml.XmlReader xmlNode)
 		{
 			bool interp = false;
-			Utilities.Instance.read_bool(ref interp, xmlNode.GetAttribute("interpolate"));
+			Utilities.Instance.get_bool(ref interp, xmlNode.GetAttribute("interpolate"));
 			if (xmlNode.ReadToDescendant("stop"))
 			{
 				float pos = 0.0f;
 				do
 				{
 					var color = new float4(0.0f);
-					Utilities.Instance.read_float(ref pos, xmlNode.GetAttribute("position"));
+					Utilities.Instance.get_float(ref pos, xmlNode.GetAttribute("position"));
 					Utilities.Instance.get_float4(color, xmlNode.GetAttribute("color"));
 
 					ColorBand.InsertColorStop(color, pos);

@@ -12,19 +12,19 @@
 	<fresnel name="fresnel" ior="1.4" />
 
 	<!-- diffuse channel -->
-	<mixrgb name="diffuse_texture_amount_rgb" color1="0.0 0.0 0.0" fac="0.75" />
-	<mixrgb name="diffuse_color_amount_rgb" color1="0.0 0.0 0.0" color2="1.0 0.5 0.25" fac="0.25" />
-	<mixrgb name="diffuse_texture_or_color" />
+	<mix name="diffuse_texture_amount_rgb" color1="0.0 0.0 0.0" fac="0.75" />
+	<mix name="diffuse_color_amount_rgb" color1="0.0 0.0 0.0" color2="1.0 0.5 0.25" fac="0.25" />
+	<mix name="diffuse_texture_or_color" />
 	<diffuse_bsdf name="diffuse_bsdf" roughness="0.0" color="1.0, 0.5, 0.25" />
 
 	<!-- reflection channel -->
-	<mixrgb name="reflection_color_amount" color1="0.0 0.0 0.0" fac="0.5" />
+	<mix name="reflection_color_amount" color1="0.0 0.0 0.0" fac="0.5" />
 	<glossy_bsdf name="reflection_bsdf" color="1.0 1.0 1.0" />
 	<math name="reflection_fresnel_inv" type="subtract" value1="1.0" />
 	<math name="reflection_fresnel_inv_mult" type="multiply" value2="1.0" />
-	<mixclosure name="reflection_fresnel_mod" />
+	<mix_closure name="reflection_fresnel_mod" />
 
-	<addclosure name="add_diffuse_reflection" />
+	<add_closure name="add_diffuse_reflection" />
 
 
 	<!-- connections -->
@@ -61,7 +61,7 @@
 	<connect from="cube_closure bsdf" to="output surface" />
 </shader>
 <shader name="float2">
-	<emission_bsdf name="emis_closure" strength="15.0" color="1.0 1.0 1.0" />
+	<emission name="emis_closure" strength="15.0" color="1.0 1.0 1.0" />
 	<connect from="emis_closure emission" to="output surface" />
 </shader>
 
