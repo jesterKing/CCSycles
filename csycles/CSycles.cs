@@ -18,6 +18,7 @@ using System;
 using System.Runtime.InteropServices;
 using System.Reflection;
 using System.Collections.Generic;
+using System.IO;
 
 /** \namespace ccl
  * \brief Namespace containing the low-level wrapping API of ccycles.dll and a set of higher-level classes.
@@ -99,6 +100,7 @@ namespace ccl
 		/// <returns>a new ShaderNode if xmlName is registered, null otherwise</returns>
 		internal static ShaderNodes.ShaderNode CreateShaderNode(string xmlName, string nodeName)
 		{
+			if (xmlName.Equals("shader")) return null;
 			if (g_registered_shadernodes.ContainsKey(xmlName))
 			{
 				var constructTypes = new Type[1];
@@ -111,7 +113,7 @@ namespace ccl
 				return constructor.Invoke(param) as ShaderNodes.ShaderNode;
 			}
 
-			return null;
+			throw new InvalidDataException(string.Format("Node with xmlname '{0}' not found.", xmlName));
 		}
 
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_initialise", CallingConvention = CallingConvention.Cdecl)]
