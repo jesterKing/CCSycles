@@ -1,7 +1,23 @@
-﻿using System;
+﻿/**
+Copyright 2014 Robert McNeel and Associates
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+**/
+
+using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Globalization;
+using System.Xml;
 using ccl.ShaderNodes;
 using ccl.ShaderNodes.Sockets;
 
@@ -40,14 +56,69 @@ namespace ccl
 			return realfloats;
 		}
 
+		/// <summary>
+		/// Get a transform from given float string
+		/// </summary>
+		/// <param name="transform">Transform to create new transform in</param>
+		/// <param name="mat">string with 16 floats</param>
+		/// <returns>true if a parsing was possible</returns>
+		public bool get_transform(Transform transform, string mat)
+		{
+			if (string.IsNullOrWhiteSpace(mat)) return false;
+			var matrix = parse_floats(mat);
+
+			if (matrix.Length != 16) return false;
+
+			transform.SetMatrix(matrix);
+
+			return true;
+		}
+
+		/// <summary>
+		/// Get a float4 from given string. This function creates a new float4
+		/// </summary>
+		/// <param name="f4">Will be assigned a new float4 when at least 3 floats are found</param>
+		/// <param name="floats">String with 3 or more floats. At most 4 will be used</param>
+		/// <returns>true if a parsing was possible</returns>
+		public bool get_float4(float4 f4, string floats)
+		{
+			//f4 = new float4(0.0f);
+			if (string.IsNullOrEmpty(floats)) return false;
+
+			var vec = parse_floats(floats);
+			if (vec.Length < 3) return false;
+
+			f4.x = vec[0];
+			f4.y = vec[1];
+			f4.z = vec[2];
+
+			if (vec.Length >= 4)
+				f4.w = vec[3];
+			return true;
+		}
+
+		/// <summary>
+		/// Set the Value float4 for a Float4Socket from given string. This function creates a new float4
+		/// </summary>
+		/// <param name="socket">Will be assigned a new float4 in Value when at least 3 floats are found</param>
+		/// <param name="floats">String with 3 or more floats. At most 4 will be used</param>
 		public void get_float4(Float4Socket socket, string floats)
 		{
 			if (string.IsNullOrEmpty(floats)) return;
 
 			var vec = parse_floats(floats);
+			if (vec.Length < 3) return;
+
 			socket.Value = new float4(vec[0], vec[1], vec[2]);
+			if (vec.Length >= 4)
+				socket.Value.w = vec[3];
 		}
 
+		/// <summary>
+		/// Set the Value float for a FloatSocket from given string.
+		/// </summary>
+		/// <param name="socket">socket for which the Value will be set</param>
+		/// <param name="nr">float string</param>
 		public void get_float(FloatSocket socket, string nr)
 		{
 			if (string.IsNullOrEmpty(nr)) return;
@@ -55,21 +126,12 @@ namespace ccl
 			socket.Value = float.Parse(nr, NumberFormatInfo);
 		}
 
-		public void get_float4(float4 f4, string floats)
-		{
-			if (string.IsNullOrEmpty(floats)) return;
-
-			var vec = parse_floats(floats);
-			if (vec.Length < 3 || vec.Length > 4) return;
-
-			f4.x = vec[0];
-			f4.y = vec[1];
-			f4.z = vec[2];
-			if (vec.Length == 4)
-				f4.w = vec[3];
-		}
-
-		public bool read_float(ref float val, string floatstring)
+		/// <summary>
+		/// Set the Value float for a FloatSocket from given string.
+		/// </summary>
+		/// <param name="val">float to set</param>
+		/// <param name="floatstring">float string</param>
+		public bool get_float(ref float val, string floatstring)
 		{
 			if (string.IsNullOrEmpty(floatstring)) return false;
 
@@ -77,6 +139,11 @@ namespace ccl
 			return true;
 		}
 
+		/// <summary>
+		/// Set the Value int for an IntSocket from given string
+		/// </summary>
+		/// <param name="socket">IntSocket for wich Value is set</param>
+		/// <param name="nr">int string</param>
 		public void get_int(IntSocket socket, string nr)
 		{
 			if (string.IsNullOrEmpty(nr)) return;
@@ -99,7 +166,7 @@ namespace ccl
 			return realints;
 		}
 
-		public bool read_bool(ref bool val, string booleanstring)
+		public bool get_bool(ref bool val, string booleanstring)
 		{
 			if (string.IsNullOrEmpty(booleanstring))
 			{
@@ -111,7 +178,7 @@ namespace ccl
 			return true;
 		}
 
-		public bool read_int(ref int val, string intstring)
+		public bool get_int(ref int val, string intstring)
 		{
 			if (string.IsNullOrEmpty(intstring)) return false;
 
@@ -128,7 +195,7 @@ namespace ccl
 		}
 
 
-		public void ReadNodeGraph(ref Shader shader, System.Xml.XmlReader xmlNode)
+		public void ReadNodeGraph(ref Shader shader, XmlReader xmlNode)
 		{
 			var nodes = new Dictionary<string, ShaderNode> {{"output", shader.Output}};
 
@@ -151,9 +218,13 @@ namespace ccl
 							var from = fromstring.Split(' ');
 							var to = tostring.Split(' ');
 
+							if (!nodes.ContainsKey(from[0]))
+								throw new KeyNotFoundException(string.Format("'from' node [{0}] not defined prior to connection.", from[0]));
 							var fromnode = nodes[from[0]];
 							var fromsocket = fromnode.outputs.Socket(from[1]);
 
+							if (!nodes.ContainsKey(to[0]))
+								throw new KeyNotFoundException(string.Format("'to' node [{0}] not defined prior to connection.", to[0]));
 							var tonode = nodes[to[0]];
 							var tosocket = tonode.inputs.Socket(to[1]);
 
