@@ -218,9 +218,13 @@ namespace ccl
 							var from = fromstring.Split(' ');
 							var to = tostring.Split(' ');
 
+							if (!nodes.ContainsKey(from[0]))
+								throw new KeyNotFoundException(string.Format("'from' node [{0}] not defined prior to connection.", from[0]));
 							var fromnode = nodes[from[0]];
 							var fromsocket = fromnode.outputs.Socket(from[1]);
 
+							if (!nodes.ContainsKey(to[0]))
+								throw new KeyNotFoundException(string.Format("'to' node [{0}] not defined prior to connection.", to[0]));
 							var tonode = nodes[to[0]];
 							var tosocket = tonode.inputs.Socket(to[1]);
 
