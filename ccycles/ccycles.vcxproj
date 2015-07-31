@@ -129,8 +129,12 @@ XCopy "$(ProjectDir)..\..\..\..\..\..\big_libs\RhinoCycles\lib" "$(ProjectDir)..
 XCopy "$(ProjectDir)..\cycles\src\kernel\closure" "$(ProjectDir)..\..\..\..\..\bin\$(Configuration)\Plug-ins\RhinoCycles\kernel\closure" /Y /I /Q
 XCopy "$(ProjectDir)..\cycles\src\kernel\geom" "$(ProjectDir)..\..\..\..\..\bin\$(Configuration)\Plug-ins\RhinoCycles\kernel\geom" /Y /I /Q
 XCopy "$(ProjectDir)..\cycles\src\kernel\svm" "$(ProjectDir)..\..\..\..\..\bin\$(Configuration)\Plug-ins\RhinoCycles\kernel\svm" /Y /I /Q
+XCopy "$(ProjectDir)..\cycles\src\kernel\split" "$(ProjectDir)..\..\..\..\..\bin\$(Configuration)\Plug-ins\RhinoCycles\kernel\split" /Y /I /Q
+XCopy "$(ProjectDir)..\cycles\src\kernel\kernels\opencl" "$(ProjectDir)..\..\..\..\..\bin\$(Configuration)\Plug-ins\RhinoCycles\kernel\kernels\opencl" /Y /I /Q
 XCopy "$(ProjectDir)..\cycles\src\kernel\kernel*.*" "$(ProjectDir)..\..\..\..\..\bin\$(Configuration)\Plug-ins\RhinoCycles\kernel" /Y /I /Q
 
+
+XCopy "$(ProjectDir)..\cycles\src\util\util_atomic.h" "$(ProjectDir)..\..\..\..\..\bin\$(Configuration)\Plug-ins\RhinoCycles\kernel" /Y /I /Q
 XCopy "$(ProjectDir)..\cycles\src\util\util_color.h" "$(ProjectDir)..\..\..\..\..\bin\$(Configuration)\Plug-ins\RhinoCycles\kernel" /Y /I /Q
 XCopy "$(ProjectDir)..\cycles\src\util\util_half.h" "$(ProjectDir)..\..\..\..\..\bin\$(Configuration)\Plug-ins\RhinoCycles\kernel" /Y /I /Q
 XCopy "$(ProjectDir)..\cycles\src\util\util_math.h" "$(ProjectDir)..\..\..\..\..\bin\$(Configuration)\Plug-ins\RhinoCycles\kernel" /Y /I /Q
