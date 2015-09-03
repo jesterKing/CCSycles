@@ -97,6 +97,23 @@ namespace ccl
 			w = source.w;
 		}
 
+		/// <summary>
+		/// Assume this float4 is a color representation and
+		/// apply gamma to the x, y and z channels if
+		/// gamma != 1.0f;
+		/// 
+		/// pow(channel, gamma)
+		/// </summary>
+		/// <param name="gamma"></param>
+		public static float4 operator ^(float4 a, float gamma)
+		{
+			if (Math.Abs(1.0f - gamma) > float.Epsilon)
+			{
+				return new float4((float) Math.Pow(a.x, gamma), (float) Math.Pow(a.y, gamma), (float) Math.Pow(a.z, gamma), a.w);
+			}
+			return a;
+		}
+
 		public static float4 operator /(float4 a, float4 b)
 		{
 			return new float4(a.x/b.x, a.y/b.y, a.z/b.z, a.w/b.w);
