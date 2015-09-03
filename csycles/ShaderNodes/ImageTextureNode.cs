@@ -85,6 +85,7 @@ namespace ccl.ShaderNodes
 			inputs = new ImageTextureInputs(this);
 			outputs = new ImageTextureOutputs(this);
 
+			UseAlpha = true;
 			ProjectionBlend = 0.0f;
 			Interpolation = InterpolationType.Linear;
 			ColorSpace = TextureColorSpace.Color;

@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 **/
 
+using System.Xml;
 using ccl.ShaderNodes.Sockets;
 using ccl.Attributes;
 
@@ -64,6 +65,11 @@ namespace ccl.ShaderNodes
 			inputs = new TransparentBsdfInputs(this);
 			outputs = new TransparentBsdfOutputs(this);
 			ins.Color.Value = new float4(1.0f, 1.0f, 1.0f, 1.0f);
+		}
+
+		internal override void ParseXml(XmlReader xmlNode)
+		{
+			Utilities.Instance.get_float4(ins.Color, xmlNode.GetAttribute("color"));
 		}
 	}
 }
