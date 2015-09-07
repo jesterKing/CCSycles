@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 **/
 
+using System;
 using System.Xml;
 using ccl.ShaderNodes.Sockets;
 using ccl.Attributes;
@@ -48,36 +49,80 @@ namespace ccl.ShaderNodes
 		}
 	}
 
+	/// <summary>
+	/// Blending node for two colors. Default BlendType is BlendTypes.Mix
+	/// </summary>
 	[ShaderNode("mix")]
 	public class MixNode : ShaderNode
 	{
+		public enum BlendTypes
+		{
+			Mix,
+			Add,
+			Multiply,
+			Screen,
+			Overlay,
+			Subtract,
+			Divide,
+			Difference,
+			Darken,
+			Lighten,
+			Dodge,
+			Burn,
+			Hue,
+			Saturation,
+			Value,
+			Color,
+			Soft_Light,
+			Linear_Light,
+		}
+
+
 		public MixInputs ins { get { return (MixInputs)inputs; } }
 		public MixOutputs outs { get { return (MixOutputs)outputs; } }
 
 		/// <summary>
-		/// Create new MixNode with blend type Mix.
+		/// Create new MixNode with blend type Mix. By default Color inputs are black.
 		/// </summary>
 		public MixNode() : this("a mix color node")
 		{
 		}
 
+		/// <summary>
+		/// Create new MixNode with blend type Mix and name.
+		/// </summary>
+		/// <param name="name"></param>
 		public MixNode(string name) :
 			base(ShaderNodeType.Mix, name)
 		{
 			inputs = new MixInputs(this);
 			outputs = new MixOutputs(this);
 
-			BlendType = "Mix";
+			BlendType = BlendTypes.Mix;
+			UseClamp = false;
+
 			ins.Fac.Value = 0.5f;
 			ins.Color1.Value = new float4();
 			ins.Color2.Value = new float4();
 		}
 
-		public string BlendType { get; set; }
+		public BlendTypes BlendType { get; set; }
+		public bool UseClamp { get; set; }
 
 		internal override void SetEnums(uint clientId, uint shaderId)
 		{
-			CSycles.shadernode_set_enum(clientId, shaderId, Id, Type, "blend", BlendType);
+			CSycles.shadernode_set_enum(clientId, shaderId, Id, Type, "type", BlendType.ToString().Replace("_", " "));
+		}
+
+		internal override void SetDirectMembers(uint clientId, uint shaderId)
+		{
+			CSycles.shadernode_set_member_bool(clientId, shaderId, Id, Type, "use_clamp", UseClamp);
+		}
+
+		private void SetBlendType(string op)
+		{
+			op = op.Replace(" ", "_");
+			BlendType = (BlendTypes)Enum.Parse(typeof(BlendTypes), op, true);
 		}
 
 		internal override void ParseXml(XmlReader xmlNode)
@@ -85,6 +130,11 @@ namespace ccl.ShaderNodes
 			Utilities.Instance.get_float4(ins.Color1, xmlNode.GetAttribute("color1"));
 			Utilities.Instance.get_float4(ins.Color2, xmlNode.GetAttribute("color2"));
 			Utilities.Instance.get_float(ins.Fac, xmlNode.GetAttribute("fac"));
+			var blendtype = xmlNode.GetAttribute("type");
+			if (!string.IsNullOrEmpty(blendtype))
+			{
+				SetBlendType(blendtype);
+			}
 		}
 	}
 }

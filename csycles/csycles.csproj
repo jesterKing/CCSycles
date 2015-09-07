@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="Attributes\ShaderNodeAttribute.cs" />
     <Compile Include="Background.cs" />
+    <Compile Include="Colors.cs" />
     <Compile Include="Film.cs" />
     <Compile Include="Camera.cs" />
     <Compile Include="Client.cs" />
