@@ -705,7 +705,14 @@ void cycles_shadernode_set_member_bool(unsigned int client_id, unsigned int shad
 						if (mname == "use_transform") {
 							texco->use_transform = value;
 						}
-
+					}
+					break;
+				case shadernode_type::MIX:
+					{
+						ccl::MixNode* mix = dynamic_cast<ccl::MixNode*>(*psh);
+						if (mname == "use_clamp") {
+							mix->use_clamp = value;
+						}
 					}
 					break;
 			}
