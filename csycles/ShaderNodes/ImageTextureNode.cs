@@ -193,6 +193,7 @@ namespace ccl.ShaderNodes
 					ByteImage = bmpdata;
 					Width = (uint)bmp.Width;
 					Height = (uint)bmp.Height;
+					Filename = imgsrc;
 				}
 			}
 		}
