@@ -177,20 +177,20 @@ namespace ccl.ShaderNodes
 				using (var bmp = new Bitmap(imgsrc))
 				{
 					var l = bmp.Width * bmp.Height * 4;
-					var bmpdata = new byte[l];
+					var bmpdata = new float[l];
 					for (var x = 0; x < bmp.Width; x++)
 					{
 						for (var y = 0; y < bmp.Height; y++)
 						{
 							var pos = y * bmp.Width * 4 + x * 4;
 							var pixel = bmp.GetPixel(x, y);
-							bmpdata[pos] = pixel.R;
-							bmpdata[pos + 1] = pixel.G;
-							bmpdata[pos + 2] = pixel.B;
-							bmpdata[pos + 3] = pixel.A;
+							bmpdata[pos] = pixel.R / 255.0f;
+							bmpdata[pos + 1] = pixel.G / 255.0f;
+							bmpdata[pos + 2] = pixel.B / 255.0f;
+							bmpdata[pos + 3] = pixel.A / 255.0f;
 						}
 					}
-					ByteImage = bmpdata;
+					FloatImage = bmpdata;
 					Width = (uint)bmp.Width;
 					Height = (uint)bmp.Height;
 					Filename = imgsrc;
