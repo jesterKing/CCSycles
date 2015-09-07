@@ -194,7 +194,7 @@ namespace ccl.ShaderNodes
 		/// </summary>
 		public Operations Operation { get; set; }
 
-		public void SetOperation(string op)
+		private void SetOperation(string op)
 		{
 			op = op.Replace(" ", "_");
 			Operation = (Operations)Enum.Parse(typeof(Operations), op, true);
