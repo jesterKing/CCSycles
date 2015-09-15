@@ -32,7 +32,7 @@ void _init_shaders()
 
 void _cleanup_shaders()
 {
-	for (auto sh : shaders) {
+	for (CCShader* sh : shaders) {
 		// just setting to nullptr, as scene disposal frees this memory.
 		sh->graph = nullptr;
 		sh->shader = nullptr;
@@ -44,7 +44,7 @@ void _cleanup_shaders()
 
 void _cleanup_images()
 {
-	for (auto img : images) {
+	for (CCImage* img : images) {
 		if (img == nullptr) continue;
 
 		delete [] img->builtin_data;
@@ -71,10 +71,10 @@ unsigned int cycles_create_shader(unsigned int client_id)
 unsigned int cycles_scene_add_shader(unsigned int client_id, unsigned int scene_id, unsigned int shader_id)
 {
 	SCENE_FIND(scene_id)
-		auto sh = shaders[shader_id];
+		CCShader* sh = shaders[shader_id];
 		sce->shaders.push_back(sh->shader);
 		sh->shader->tag_update(sce);
-		auto shid = (unsigned int)(sce->shaders.size() - 1);
+		unsigned int shid = (unsigned int)(sce->shaders.size() - 1);
 		sh->scene_mapping.insert({ scene_id, shid });
 		return shid;
 	SCENE_FIND_END()
@@ -85,7 +85,7 @@ unsigned int cycles_scene_add_shader(unsigned int client_id, unsigned int scene_
 void cycles_scene_tag_shader(unsigned int client_id, unsigned int scene_id, unsigned int shader_id)
 {
 	SCENE_FIND(scene_id)
-		auto sh = shaders[shader_id];
+		CCShader* sh = shaders[shader_id];
 		sh->shader->tag_update(sce);
 	SCENE_FIND_END()
 }
@@ -93,7 +93,7 @@ void cycles_scene_tag_shader(unsigned int client_id, unsigned int scene_id, unsi
 /* Get Cycles shader ID in specific scene. */
 unsigned int cycles_scene_shader_id(unsigned int client_id, unsigned int scene_id, unsigned int shader_id)
 {
-	auto sh = shaders[shader_id];
+	CCShader* sh = shaders[shader_id];
 	if (sh->scene_mapping.find(scene_id) != sh->scene_mapping.end()) {
 		return sh->scene_mapping[scene_id];
 	}
@@ -103,7 +103,7 @@ unsigned int cycles_scene_shader_id(unsigned int client_id, unsigned int scene_i
 
 void cycles_shader_new_graph(unsigned int client_id, unsigned int shader_id)
 {
-		auto sh = shaders[shader_id];
+		CCShader* sh = shaders[shader_id];
 		sh->graph = new ccl::ShaderGraph();
 		sh->shader->set_graph(sh->graph);
 }
@@ -162,7 +162,7 @@ unsigned int cycles_add_shader_node(unsigned int client_id, unsigned int shader_
 			break;
 		case shadernode_type::REFRACTION:
 		{
-			auto refrnode = new ccl::RefractionBsdfNode();
+			ccl::RefractionBsdfNode* refrnode = new ccl::RefractionBsdfNode();
 			refrnode->distribution = OpenImageIO::v1_3::ustring("Beckmann");
 			node = dynamic_cast<ccl::ShaderNode *>(refrnode);
 		}
@@ -337,7 +337,7 @@ void shadernode_set_attribute(unsigned int client_id, unsigned int shader_id, un
 {
 	auto attr = string(attribute_name);
 	SHADERNODE_FIND(shader_id, shnode_id)
-			for (auto* inp : (*psh)->inputs) {
+			for (ccl::ShaderInput* inp : (*psh)->inputs) {
 				auto inpname = string(inp->name);
 				if (ccl::string_iequals(inpname, attribute_name)) {
 					switch (v.type) {
@@ -416,7 +416,7 @@ void cycles_shadernode_texmapping_set_transformation(unsigned int client_id, uns
 		logger.logit(client_id, "Setting texture map transformation (", tp, ") to ", x, ",", y, ",", z, " for shadernode type ", shn_type);
 			switch (shn_type) {
 				case shadernode_type::MAPPING:
-					auto node = dynamic_cast<ccl::MappingNode*>(*psh);
+					ccl::MappingNode* node = dynamic_cast<ccl::MappingNode*>(*psh);
 					_set_texture_mapping_transformation(node->tex_mapping, transform_type, x, y, z);
 					break;
 			}
@@ -429,7 +429,7 @@ void cycles_shadernode_texmapping_set_mapping(unsigned int client_id, unsigned i
 		logger.logit(client_id, "Setting texture map mapping to ", x, ",", y, ",", z, " for shadernode type ", shn_type);
 			switch (shn_type) {
 				case shadernode_type::MAPPING:
-					auto node = dynamic_cast<ccl::MappingNode*>(*psh);
+					ccl::MappingNode* node = dynamic_cast<ccl::MappingNode*>(*psh);
 					node->tex_mapping.x_mapping = x;
 					node->tex_mapping.y_mapping = y;
 					node->tex_mapping.z_mapping = z;
@@ -444,7 +444,7 @@ void cycles_shadernode_texmapping_set_projection(unsigned int client_id, unsigne
 		logger.logit(client_id, "Setting texture map projection type to ", tm_projection, " for shadernode type ", shn_type);
 			switch (shn_type) {
 				case shadernode_type::MAPPING:
-					auto node = dynamic_cast<ccl::MappingNode*>(*psh);
+					ccl::MappingNode* node = dynamic_cast<ccl::MappingNode*>(*psh);
 					node->tex_mapping.projection= tm_projection;
 					break;
 			}
@@ -457,7 +457,7 @@ void cycles_shadernode_texmapping_set_type(unsigned int client_id, unsigned int 
 		logger.logit(client_id, "Setting texture map type to ", tm_type, " for shadernode type ", shn_type);
 			switch (shn_type) {
 				case shadernode_type::MAPPING:
-					auto node = dynamic_cast<ccl::MappingNode*>(*psh);
+					ccl::MappingNode* node = dynamic_cast<ccl::MappingNode*>(*psh);
 					node->tex_mapping.type = tm_type;
 					break;
 			}
@@ -475,7 +475,7 @@ void cycles_shadernode_set_enum(unsigned int client_id, unsigned int shader_id, 
 			switch (shn_type) {
 				case shadernode_type::MATH:
 					{
-						auto node = dynamic_cast<ccl::MathNode*>(*psh);
+						ccl::MathNode* node = dynamic_cast<ccl::MathNode*>(*psh);
 						_set_enum_val(client_id, &node->type, ccl::MathNode::type_enum, val);
 					}
 					break;
@@ -493,31 +493,31 @@ void cycles_shadernode_set_enum(unsigned int client_id, unsigned int shader_id, 
 					break;
 				case shadernode_type::MIX:
 					{
-						auto node = dynamic_cast<ccl::MixNode*>(*psh);
+						ccl::MixNode* node = dynamic_cast<ccl::MixNode*>(*psh);
 						_set_enum_val(client_id, &node->type, ccl::MixNode::type_enum, val);
 					}
 					break;
 				case shadernode_type::REFRACTION:
 					{
-						auto node = dynamic_cast<ccl::RefractionBsdfNode*>(*psh);
+						ccl::RefractionBsdfNode* node = dynamic_cast<ccl::RefractionBsdfNode*>(*psh);
 						_set_enum_val(client_id, &node->distribution, ccl::RefractionBsdfNode::distribution_enum, val);
 					}
 					break;
 				case shadernode_type::GLOSSY:
 					{
-						auto node = dynamic_cast<ccl::GlossyBsdfNode*>(*psh);
+						ccl::GlossyBsdfNode* node = dynamic_cast<ccl::GlossyBsdfNode*>(*psh);
 						_set_enum_val(client_id, &node->distribution, ccl::GlossyBsdfNode::distribution_enum, val);
 					}
 					break;
 				case shadernode_type::GLASS:
 					{
-						auto node = dynamic_cast<ccl::GlassBsdfNode*>(*psh);
+						ccl::GlassBsdfNode* node = dynamic_cast<ccl::GlassBsdfNode*>(*psh);
 						_set_enum_val(client_id, &node->distribution, ccl::GlassBsdfNode::distribution_enum, val);
 					}
 					break;
 				case shadernode_type::WAVE_TEXTURE:
 					{
-						auto node = dynamic_cast<ccl::WaveTextureNode*>(*psh);
+						ccl::WaveTextureNode* node = dynamic_cast<ccl::WaveTextureNode*>(*psh);
 						_set_enum_val(client_id, &node->type, ccl::WaveTextureNode::type_enum, val);
 					}
 					break;
@@ -529,13 +529,13 @@ void cycles_shadernode_set_enum(unsigned int client_id, unsigned int shader_id, 
 					break;
 				case shadernode_type::SKY_TEXTURE:
 					{
-						auto node = dynamic_cast<ccl::SkyTextureNode*>(*psh);
+						ccl::SkyTextureNode* node = dynamic_cast<ccl::SkyTextureNode*>(*psh);
 						_set_enum_val(client_id, &node->type, ccl::SkyTextureNode::type_enum, val);
 					}
 					break;
 				case shadernode_type::ENVIRONMENT_TEXTURE:
 					{
-						auto node = dynamic_cast<ccl::EnvironmentTextureNode*>(*psh);
+						ccl::EnvironmentTextureNode* node = dynamic_cast<ccl::EnvironmentTextureNode*>(*psh);
 						if (ename=="color_space") {
 							_set_enum_val(client_id, &node->color_space, ccl::EnvironmentTextureNode::color_space_enum, val);
 						}
@@ -546,7 +546,7 @@ void cycles_shadernode_set_enum(unsigned int client_id, unsigned int shader_id, 
 					break;
 				case shadernode_type::IMAGE_TEXTURE:
 					{
-						auto node = dynamic_cast<ccl::ImageTextureNode*>(*psh);
+						ccl::ImageTextureNode* node = dynamic_cast<ccl::ImageTextureNode*>(*psh);
 						if (ename=="color_space") {
 							_set_enum_val(client_id, &node->color_space, ccl::ImageTextureNode::color_space_enum, val);
 						}
@@ -557,7 +557,7 @@ void cycles_shadernode_set_enum(unsigned int client_id, unsigned int shader_id, 
 					}
 				case shadernode_type::GRADIENT_TEXTURE:
 					{
-						auto node = dynamic_cast<ccl::GradientTextureNode*>(*psh);
+						ccl::GradientTextureNode* node = dynamic_cast<ccl::GradientTextureNode*>(*psh);
 						_set_enum_val(client_id, &node->type, ccl::GradientTextureNode::type_enum, val);
 						break;
 					}
@@ -568,9 +568,9 @@ void cycles_shadernode_set_enum(unsigned int client_id, unsigned int shader_id, 
 
 CCImage* find_existing_ccimage(string imgname)
 {
-	auto is_float = true;
+	bool is_float = true;
 	CCImage* existing_image = nullptr;
-	for (auto im : images) {
+	for (CCImage* im : images) {
 		if (im->filename == imgname) {
 			existing_image = im;
 			break;
@@ -582,10 +582,10 @@ CCImage* find_existing_ccimage(string imgname)
 template <class T>
 CCImage* get_ccimage(string imgname, T* img, unsigned int width, unsigned int height, unsigned int depth, unsigned int channels, bool is_float)
 {
-	auto existing_image = find_existing_ccimage(imgname);
-	auto nimg = existing_image ? existing_image : new CCImage();
+	CCImage* existing_image = find_existing_ccimage(imgname);
+	CCImage* nimg = existing_image ? existing_image : new CCImage();
 	if (!existing_image) {
-		auto imgdata = new T[width*height*channels*depth];
+		T* imgdata = new T[width*height*channels*depth];
 		memcpy(imgdata, img, sizeof(T)*width*height*channels*depth);
 		nimg->builtin_data = imgdata;
 		nimg->filename = imgname;
@@ -608,8 +608,8 @@ void cycles_shadernode_set_member_float_img(unsigned int client_id, unsigned int
 			switch (shn_type) {
 				case shadernode_type::IMAGE_TEXTURE:
 					{
-						auto nimg = get_ccimage<float>(imname, img, width, height, depth, channels, true);
-						auto imtex = dynamic_cast<ccl::ImageTextureNode*>(*psh);
+						CCImage* nimg = get_ccimage<float>(imname, img, width, height, depth, channels, true);
+						ccl::ImageTextureNode* imtex = dynamic_cast<ccl::ImageTextureNode*>(*psh);
 						imtex->builtin_data = nimg;
 						imtex->interpolation = ccl::InterpolationType::INTERPOLATION_LINEAR;
 						imtex->filename = nimg->filename;
@@ -617,8 +617,8 @@ void cycles_shadernode_set_member_float_img(unsigned int client_id, unsigned int
 					break;
 				case shadernode_type::ENVIRONMENT_TEXTURE:
 					{
-						auto nimg = get_ccimage<float>(imname, img, width, height, depth, channels, true);
-						auto envtex = dynamic_cast<ccl::EnvironmentTextureNode*>(*psh);
+						CCImage* nimg = get_ccimage<float>(imname, img, width, height, depth, channels, true);
+						ccl::EnvironmentTextureNode* envtex = dynamic_cast<ccl::EnvironmentTextureNode*>(*psh);
 						envtex->builtin_data = nimg;
 						envtex->filename = nimg->filename;
 					}	
@@ -635,8 +635,8 @@ void cycles_shadernode_set_member_byte_img(unsigned int client_id, unsigned int 
 			switch (shn_type) {
 				case shadernode_type::IMAGE_TEXTURE:
 					{
-						auto nimg = get_ccimage<unsigned char>(imname, img, width, height, depth, channels, false);
-						auto imtex = dynamic_cast<ccl::ImageTextureNode*>(*psh);
+						CCImage* nimg = get_ccimage<unsigned char>(imname, img, width, height, depth, channels, false);
+						ccl::ImageTextureNode* imtex = dynamic_cast<ccl::ImageTextureNode*>(*psh);
 						imtex->builtin_data = nimg;
 						imtex->interpolation = ccl::InterpolationType::INTERPOLATION_LINEAR;
 						imtex->filename = nimg->filename;
@@ -644,8 +644,8 @@ void cycles_shadernode_set_member_byte_img(unsigned int client_id, unsigned int 
 					break;
 				case shadernode_type::ENVIRONMENT_TEXTURE:
 					{
-						auto nimg = get_ccimage<unsigned char>(imname, img, width, height, depth, channels, false);
-						auto envtex = dynamic_cast<ccl::EnvironmentTextureNode*>(*psh);
+						CCImage* nimg = get_ccimage<unsigned char>(imname, img, width, height, depth, channels, false);
+						ccl::EnvironmentTextureNode* envtex = dynamic_cast<ccl::EnvironmentTextureNode*>(*psh);
 						envtex->builtin_data = nimg;
 						envtex->filename = nimg->filename;
 					}
@@ -662,7 +662,7 @@ void cycles_shadernode_set_member_bool(unsigned int client_id, unsigned int shad
 			switch (shn_type) {
 				case shadernode_type::MATH:
 					{
-						auto mnode = dynamic_cast<ccl::MathNode*>(*psh);
+						ccl::MathNode* mnode = dynamic_cast<ccl::MathNode*>(*psh);
 						mnode->use_clamp = value;
 					}
 					break;
@@ -726,7 +726,7 @@ void cycles_shadernode_set_member_int(unsigned int client_id, unsigned int shade
 			switch (shn_type) {
 				case shadernode_type::BRICK_TEXTURE:
 					{
-						auto bricknode = dynamic_cast<ccl::BrickTextureNode*>(*psh);
+						ccl::BrickTextureNode* bricknode = dynamic_cast<ccl::BrickTextureNode*>(*psh);
 						if (mname == "offset_frequency")
 							bricknode->offset_frequency = value;
 						else if (mname == "squash_frequency")
@@ -754,13 +754,13 @@ void cycles_shadernode_set_member_float(unsigned int client_id, unsigned int sha
 			switch (shn_type) {
 				case shadernode_type::VALUE:
 					{
-						auto valuenode = dynamic_cast<ccl::ValueNode*>(*psh);
+						ccl::ValueNode* valuenode = dynamic_cast<ccl::ValueNode*>(*psh);
 						valuenode->value = value;
 					}
 					break;
 				case shadernode_type::IMAGE_TEXTURE:
 					{
-						auto imtexnode = dynamic_cast<ccl::ImageTextureNode*>(*psh);
+						ccl::ImageTextureNode* imtexnode = dynamic_cast<ccl::ImageTextureNode*>(*psh);
 						if (mname == "projection_blend") {
 							imtexnode->projection_blend = value;
 						}
@@ -768,7 +768,7 @@ void cycles_shadernode_set_member_float(unsigned int client_id, unsigned int sha
 					break;
 				case shadernode_type::BRICK_TEXTURE:
 					{
-						auto bricknode = dynamic_cast<ccl::BrickTextureNode*>(*psh);
+						ccl::BrickTextureNode* bricknode = dynamic_cast<ccl::BrickTextureNode*>(*psh);
 						if (mname == "offset")
 							bricknode->offset = value;
 						else if (mname == "squash")
@@ -777,7 +777,7 @@ void cycles_shadernode_set_member_float(unsigned int client_id, unsigned int sha
 					break;
 				case shadernode_type::SKY_TEXTURE:
 					{
-						auto skynode = dynamic_cast<ccl::SkyTextureNode*>(*psh);
+						ccl::SkyTextureNode* skynode = dynamic_cast<ccl::SkyTextureNode*>(*psh);
 						if (mname == "turbidity")
 							skynode->turbidity = value;
 						else if (mname == "ground_albedo")
@@ -873,7 +873,7 @@ void cycles_shadernode_set_member_vec(unsigned int client_id, unsigned int shade
 			switch (shn_type) {
 			case shadernode_type::COLOR:
 					{
-						auto colnode = dynamic_cast<ccl::ColorNode*>(*psh);
+						ccl::ColorNode* colnode = dynamic_cast<ccl::ColorNode*>(*psh);
 						colnode->value.x = x;
 						colnode->value.y = y;
 						colnode->value.z = z;
@@ -881,7 +881,7 @@ void cycles_shadernode_set_member_vec(unsigned int client_id, unsigned int shade
 					break;
 			case shadernode_type::SKY_TEXTURE:
 					{
-						auto sunnode = dynamic_cast<ccl::SkyTextureNode*>(*psh);
+						ccl::SkyTextureNode* sunnode = dynamic_cast<ccl::SkyTextureNode*>(*psh);
 						sunnode->sun_direction.x = x;
 						sunnode->sun_direction.y = y;
 						sunnode->sun_direction.z = z;
@@ -954,7 +954,7 @@ void cycles_shadernode_set_attribute_string(unsigned int client_id, unsigned int
 
 void cycles_shader_connect_nodes(unsigned int client_id, unsigned int shader_id, unsigned int from_id, const char* from, unsigned int to_id, const char* to)
 {
-	auto& sh = shaders[shader_id];
+	CCShader* sh = shaders[shader_id];
 	auto shfrom = sh->graph->nodes.begin();
 	auto shfrom_end = sh->graph->nodes.end();
 	auto shto = sh->graph->nodes.begin();

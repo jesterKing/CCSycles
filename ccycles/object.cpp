@@ -21,7 +21,7 @@ extern std::vector<CCScene> scenes;
 unsigned int cycles_scene_add_object(unsigned int client_id, unsigned int scene_id)
 {
 	SCENE_FIND(scene_id)
-		auto ob = new ccl::Object();
+		ccl::Object* ob = new ccl::Object();
 		// TODO: APIfy object matrix setting, for now hard-code to be closer to PoC plugin
 		ob->tfm = ccl::transform_identity();
 		sce->objects.push_back(ob);
@@ -39,8 +39,8 @@ unsigned int cycles_scene_add_object(unsigned int client_id, unsigned int scene_
 void cycles_scene_object_set_mesh(unsigned int client_id, unsigned int scene_id, unsigned int object_id, unsigned int mesh_id)
 {
 	SCENE_FIND(scene_id)
-		auto ob = sce->objects[object_id];
-		auto me = sce->meshes[mesh_id];
+		ccl::Object* ob = sce->objects[object_id];
+		ccl::Mesh* me = sce->meshes[mesh_id];
 		ob->mesh = me;
 		ob->tag_update(sce);
 	SCENE_FIND_END()
@@ -49,7 +49,7 @@ void cycles_scene_object_set_mesh(unsigned int client_id, unsigned int scene_id,
 void cycles_object_tag_update(unsigned int client_id, unsigned int scene_id, unsigned int object_id)
 {
 	SCENE_FIND(scene_id)
-		auto ob = sce->objects[object_id];
+		ccl::Object* ob = sce->objects[object_id];
 		ob->tag_update(sce);
 	SCENE_FIND_END()
 }
@@ -57,7 +57,7 @@ void cycles_object_tag_update(unsigned int client_id, unsigned int scene_id, uns
 unsigned int cycles_scene_object_get_mesh(unsigned int client_id, unsigned int scene_id, unsigned int object_id)
 {
 	SCENE_FIND(scene_id)
-		auto ob = sce->objects[object_id];
+		ccl::Object* ob = sce->objects[object_id];
 		auto cmeshit = sce->meshes.begin();
 		auto cmeshend = sce->meshes.end();
 		unsigned int i = 0;
@@ -74,7 +74,7 @@ unsigned int cycles_scene_object_get_mesh(unsigned int client_id, unsigned int s
 void cycles_scene_object_set_visibility(unsigned int client, unsigned int scene_id, unsigned int object_id, unsigned int visibility)
 {
 	SCENE_FIND(scene_id)
-		auto ob = sce->objects[object_id];
+		ccl::Object* ob = sce->objects[object_id];
 		ob->visibility = visibility;
 		ob->tag_update(sce);
 	SCENE_FIND_END()
@@ -88,8 +88,8 @@ void cycles_scene_object_set_matrix(unsigned int client_id, unsigned int scene_i
 	)
 {
 	SCENE_FIND(scene_id)
-		auto ob = sce->objects[object_id];
-		auto mat = ccl::make_transform(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p);
+		ccl::Object* ob = sce->objects[object_id];
+		ccl::Transform mat = ccl::make_transform(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p);
 		ob->tfm = mat;
 		ob->tag_update(sce);
 	SCENE_FIND_END()

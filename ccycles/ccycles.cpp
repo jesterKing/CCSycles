@@ -36,14 +36,14 @@ std::vector<ccl::DeviceInfo> devices;
 LOGGER_FUNC_CB logger_func = nullptr;
 
 /* Need to initialise only once :) */
-auto initialised = false;
+bool initialised = false;
 Logger logger;
 
 std::vector<LOGGER_FUNC_CB> loggers;
 
 void _cleanup_loggers()
 {
-	for (auto i = 0; i < loggers.size(); i++) {
+	for (int i = 0; i < loggers.size(); i++) {
 		loggers[i] = nullptr;
 	}
 

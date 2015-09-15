@@ -26,7 +26,7 @@ std::vector<CCScene> scenes;
 
 void CCScene::builtin_image_info(const string& builtin_name, void* builtin_data, bool& is_float, int& width, int& height, int& depth, int& channels)
 {
-	auto img = static_cast<CCImage*>(builtin_data);
+	CCImage* img = static_cast<CCImage*>(builtin_data);
 	width = img->width;
 	height = img->height;
 	depth = img->depth;
@@ -36,14 +36,14 @@ void CCScene::builtin_image_info(const string& builtin_name, void* builtin_data,
 
 bool CCScene::builtin_image_pixels(const string& builtin_name, void* builtin_data, unsigned char* pixels)
 {
-	auto img = static_cast<CCImage*>(builtin_data);
+	CCImage* img = static_cast<CCImage*>(builtin_data);
 	memcpy(pixels, img->builtin_data, img->width*img->height*img->channels*sizeof(unsigned char));
 	return false;
 }
 
 bool CCScene::builtin_image_float_pixels(const string& builtin_name, void* builtin_data, float* pixels)
 {
-	auto img = static_cast<CCImage*>(builtin_data);
+	CCImage* img = static_cast<CCImage*>(builtin_data);
 	memcpy(pixels, img->builtin_data, img->width*img->height*img->channels*sizeof(float));
 	return false;
 }
@@ -56,7 +56,7 @@ void _cleanup_scenes()
 	scene_params.clear();
 
 	// loop over scenes, free the ccl::Scenes before clearing out vector
-	for (auto sce : scenes) {
+	for (CCScene sce : scenes) {
 		delete sce.scene;
 	}
 

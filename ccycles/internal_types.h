@@ -167,8 +167,8 @@ public:
 
 	/* Create a new CCSession, initialise all necessary memory. */
 	static CCSession* create(unsigned int img_size, unsigned int buffer_stride) {
-		auto pixels_ = new float[img_size*buffer_stride];
-		auto se = new CCSession(pixels_, img_size*buffer_stride, buffer_stride);
+		float* pixels_ = new float[img_size*buffer_stride];
+		CCSession* se = new CCSession(pixels_, img_size*buffer_stride, buffer_stride);
 		
 		return se;
 	}
@@ -230,13 +230,13 @@ struct CCShader {
 
 #define SCENE_FIND(scid) \
 	if (0 <= (scid) && (scid) < scenes.size()) { \
-		auto sce = scenes[(scid)].scene; 
+		ccl::Scene* sce = scenes[(scid)].scene; 
 
 #define SCENE_FIND_END() }
 
 #define SESSION_FIND(sid) \
 	if (0 <= (sid) && (sid) < sessions.size()) { \
-		auto session = sessions[sid]->session;
+		ccl::Session* session = sessions[sid]->session;
 #define SESSION_FIND_END() }
 
 /* Set boolean parameter varname of param_type. */
@@ -262,7 +262,7 @@ struct CCShader {
 
 #define LIGHT_FIND(scene_id, light_id) \
 	SCENE_FIND(scene_id) \
-	auto l = sce->lights[light_id]; \
+	ccl::Light* l = sce->lights[light_id]; \
 
 #define LIGHT_FIND_END() \
 	l->tag_update(sce); \
@@ -270,13 +270,13 @@ struct CCShader {
 
 /* Set a var of shader to val of type. */
 #define SHADER_SET(shid, type, var, val) \
-	auto sh = shaders[shid]; \
+	CCShader* sh = shaders[shid]; \
 	sh->shader->##var = (type)(val); \
 	logger.logit(client_id, "Set " #var " of shader ", shid, " to ", val, " casting to " #type);
 
 #define SHADERNODE_FIND(shader_id, shnode_id) \
-	auto& sh = shaders[shader_id]; \
-	auto psh = sh->graph->nodes.begin(); \
+	CCShader* sh = shaders[shader_id]; \
+	list<ccl::ShaderNode*>::iterator psh = sh->graph->nodes.begin(); \
 	while (psh != sh->graph->nodes.end()) \
 	{ \
 		if ((*psh)->id == shnode_id) {
