@@ -21,7 +21,7 @@ extern std::vector<CCScene> scenes;
 unsigned int cycles_create_light(unsigned int client_id, unsigned int scene_id, unsigned int light_shader_id)
 {
 	SCENE_FIND(scene_id)
-		auto l = new ccl::Light();
+		ccl::Light* l = new ccl::Light();
 		l->shader = (int)light_shader_id;
 		sce->lights.push_back(l);
 		logger.logit(client_id, "Adding light ", sce->lights.size() - 1, " to scene ", scene_id, " using light shader ", light_shader_id);

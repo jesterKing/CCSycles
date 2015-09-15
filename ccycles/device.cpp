@@ -23,8 +23,8 @@ unsigned int cycles_number_devices() {
 }
 
 unsigned int cycles_number_cuda_devices() {
-	auto i = 0;
-	for (auto di : devices) {
+	int i = 0;
+	for (ccl::DeviceInfo di : devices) {
 		if (di.type == ccl::DeviceType::DEVICE_CUDA) i++;
 	}
 

@@ -21,7 +21,7 @@ extern std::vector<CCScene> scenes;
 unsigned int cycles_scene_add_mesh(unsigned int client_id, unsigned int scene_id, unsigned int shader_id)
 {
 	SCENE_FIND(scene_id)
-		auto mesh = new ccl::Mesh();
+		ccl::Mesh* mesh = new ccl::Mesh();
 		
 		mesh->used_shaders.push_back(shader_id);
 		sce->meshes.push_back(mesh);
@@ -37,9 +37,9 @@ unsigned int cycles_scene_add_mesh(unsigned int client_id, unsigned int scene_id
 unsigned int cycles_scene_add_mesh_object(unsigned int client_id, unsigned int scene_id, unsigned int object_id, unsigned int shader_id)
 {
 	SCENE_FIND(scene_id)
-		auto mesh = new ccl::Mesh();
+		ccl::Mesh* mesh = new ccl::Mesh();
 		
-		auto ob = sce->objects[object_id];
+		ccl::Object* ob = sce->objects[object_id];
 		ob->mesh = mesh;
 
 		mesh->used_shaders.push_back(shader_id);
@@ -56,7 +56,7 @@ unsigned int cycles_scene_add_mesh_object(unsigned int client_id, unsigned int s
 void cycles_mesh_set_shader(unsigned int client_id, unsigned int scene_id, unsigned int mesh_id, unsigned int shader_id)
 {
 	SCENE_FIND(scene_id)
-		auto me = sce->meshes[mesh_id];
+		ccl::Mesh* me = sce->meshes[mesh_id];
 
 		auto it = me->used_shaders.begin();
 		auto end = me->used_shaders.end();
@@ -66,7 +66,7 @@ void cycles_mesh_set_shader(unsigned int client_id, unsigned int scene_id, unsig
 			++it;
 		}
 
-		for (auto i = 0; i < me->shader.size(); i++) {
+		for (int i = 0; i < me->shader.size(); i++) {
 			me->shader[i] = shader_id;
 		}
 
@@ -80,7 +80,7 @@ void cycles_mesh_set_shader(unsigned int client_id, unsigned int scene_id, unsig
 void cycles_mesh_clear(unsigned int client_id, unsigned int scene_id, unsigned int mesh_id)
 {
 	SCENE_FIND(scene_id)
-		auto me = sce->meshes[mesh_id];
+		ccl::Mesh* me = sce->meshes[mesh_id];
 		me->clear();
 	SCENE_FIND_END()
 }
@@ -88,7 +88,7 @@ void cycles_mesh_clear(unsigned int client_id, unsigned int scene_id, unsigned i
 void cycles_mesh_tag_rebuild(unsigned int client_id, unsigned int scene_id, unsigned int mesh_id)
 {
 	SCENE_FIND(scene_id)
-		auto me = sce->meshes[mesh_id];
+		ccl::Mesh* me = sce->meshes[mesh_id];
 		me->tag_update(sce, true);
 	SCENE_FIND_END()
 }
@@ -96,7 +96,7 @@ void cycles_mesh_tag_rebuild(unsigned int client_id, unsigned int scene_id, unsi
 void cycles_mesh_set_smooth(unsigned int client_id, unsigned int scene_id, unsigned int mesh_id, unsigned int smooth)
 {
 	SCENE_FIND(scene_id)
-		auto me = sce->meshes[mesh_id];
+		ccl::Mesh* me = sce->meshes[mesh_id];
 		me->smooth.resize(me->triangles.size(), smooth == 1);
 	SCENE_FIND_END()
 }
@@ -104,11 +104,11 @@ void cycles_mesh_set_smooth(unsigned int client_id, unsigned int scene_id, unsig
 void cycles_mesh_set_verts(unsigned int client_id, unsigned int scene_id, unsigned int mesh_id, float *verts, unsigned int vcount)
 {
 	SCENE_FIND(scene_id)
-		auto me = sce->meshes[mesh_id];
+		ccl::Mesh* me = sce->meshes[mesh_id];
 
 		ccl::float3 f3;
 
-		for (auto i = 0; i < (int)vcount*3; i+=3) {
+		for (int i = 0; i < (int)vcount*3; i+=3) {
 			f3.x = verts[i];
 			f3.y = verts[i+1];
 			f3.z = verts[i+2];
@@ -122,11 +122,11 @@ void cycles_mesh_set_verts(unsigned int client_id, unsigned int scene_id, unsign
 void cycles_mesh_set_tris(unsigned int client_id, unsigned int scene_id, unsigned int mesh_id, int *faces, unsigned int fcount, unsigned int shader_id, unsigned int smooth)
 {
 	SCENE_FIND(scene_id)
-		auto me = sce->meshes[mesh_id];
+		ccl::Mesh* me = sce->meshes[mesh_id];
 
 		//cycles_mesh_set_shader(client_id, scene_id, mesh_id, shader_id);
 
-		for (auto i = 0; i < (int)fcount*3; i += 3) {
+		for (int i = 0; i < (int)fcount*3; i += 3) {
 			logger.logit(client_id, "f: ", faces[i], ",", faces[i + 1], ",", faces[i + 2]);
 			me->add_triangle(faces[i], faces[i + 1], faces[i + 2], shader_id, smooth == 1);
 		}
@@ -140,7 +140,7 @@ void cycles_mesh_set_tris(unsigned int client_id, unsigned int scene_id, unsigne
 void cycles_mesh_add_triangle(unsigned int client_id, unsigned int scene_id, unsigned int mesh_id, unsigned int v0, unsigned int v1, unsigned int v2, unsigned int shader_id, unsigned int smooth)
 {
 	SCENE_FIND(scene_id)
-		auto me = sce->meshes[mesh_id];
+		ccl::Mesh* me = sce->meshes[mesh_id];
 		me->add_triangle((int)v0, (int)v1, (int)v2, shader_id, smooth == 1);
 	SCENE_FIND_END()
 }
@@ -148,14 +148,14 @@ void cycles_mesh_add_triangle(unsigned int client_id, unsigned int scene_id, uns
 void cycles_mesh_set_uvs(unsigned int client_id, unsigned int scene_id, unsigned int mesh_id, float *uvs, unsigned int uvcount)
 {
 	SCENE_FIND(scene_id)
-		auto me = sce->meshes[mesh_id];
+		ccl::Mesh* me = sce->meshes[mesh_id];
 
-		auto attr = me->attributes.add(ccl::ATTR_STD_UV, ccl::ustring("uvmap"));
-		auto fdata = attr->data_float3();
+		ccl::Attribute* attr = me->attributes.add(ccl::ATTR_STD_UV, ccl::ustring("uvmap"));
+		ccl::float3* fdata = attr->data_float3();
 
 		ccl::float3 f3;
 
-		for (auto i = 0, j = 0; i < (int)uvcount * 2; i += 2, j++) {
+		for (int i = 0, j = 0; i < (int)uvcount * 2; i += 2, j++) {
 			f3.x = uvs[i];
 			f3.y = uvs[i + 1];
 			f3.z = 0.0f;
@@ -168,14 +168,14 @@ void cycles_mesh_set_uvs(unsigned int client_id, unsigned int scene_id, unsigned
 void cycles_mesh_set_vertex_normals(unsigned int client_id, unsigned int scene_id, unsigned int mesh_id, float *vnormals, unsigned int vnormalcount)
 {
 	SCENE_FIND(scene_id)
-		auto me = sce->meshes[mesh_id];
+		ccl::Mesh* me = sce->meshes[mesh_id];
 
-		auto attr = me->attributes.add(ccl::ATTR_STD_VERTEX_NORMAL);
-		auto fdata = attr->data_float3();
+		ccl::Attribute* attr = me->attributes.add(ccl::ATTR_STD_VERTEX_NORMAL);
+		ccl::float3* fdata = attr->data_float3();
 
 		ccl::float3 f3;
 
-		for (auto i = 0, j = 0; i < (int)vnormalcount * 3; i += 3, j++) {
+		for (int i = 0, j = 0; i < (int)vnormalcount * 3; i += 3, j++) {
 			f3.x = vnormals[i];
 			f3.y = vnormals[i + 1];
 			f3.z = vnormals[i + 2];

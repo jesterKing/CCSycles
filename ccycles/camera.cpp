@@ -69,7 +69,7 @@ void cycles_camera_set_matrix(unsigned int client_id, unsigned int scene_id,
 	)
 {
 	SCENE_FIND(scene_id)
-		auto mat = ccl::make_transform(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p);
+		ccl::Transform mat = ccl::make_transform(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p);
 		logger.logit(client_id, "Setting camera matrix in scene ", scene_id, " to\n",
 			"\t[", a, ",", b, ",", c, ",", d, "\n",
 			"\t ", e, ",", f, ",", g, ",", h, "\n",

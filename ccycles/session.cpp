@@ -53,22 +53,22 @@ const int stride = 4;
 /* copy the pixel buffer from RenderTile to the final pixel buffer in CCSession. */
 void copy_pixels_to_ccsession(ccl::RenderTile &tile, unsigned int sid) {
 
-	auto buffers = tile.buffers;
+	ccl::RenderBuffers* buffers = tile.buffers;
 	/* always do copy_from_device(). This is necessary when rendering is done
 	 * on i.e. GPU or network node.
 	 */
 	buffers->copy_from_device();
-	auto& params = buffers->params;
+	ccl::BufferParams& params = buffers->params;
 
 	/* have a local float buffer to copy tile buffer to. */
 	std::vector<float> pixels(params.width*params.height * stride, 0.5f);
 
-	auto se = sessions[sid];
-	auto scewidth = params.full_width;
-	auto sceheight = params.full_height;
+	CCSession* se = sessions[sid];
+	int scewidth = params.full_width;
+	int sceheight = params.full_height;
 
-	auto tilex = params.full_x - se->session->tile_manager.params.full_x;
-	auto tiley = params.full_y - se->session->tile_manager.params.full_y;
+	int tilex = params.full_x - se->session->tile_manager.params.full_x;
+	int tiley = params.full_y - se->session->tile_manager.params.full_y;
 
 	/* Copy the tile buffer to pixels. */
 	if (!buffers->get_pass_rect(ccl::PassType::PASS_COMBINED, 1.0f, tile.sample, stride, &pixels[0])) {
@@ -76,13 +76,13 @@ void copy_pixels_to_ccsession(ccl::RenderTile &tile, unsigned int sid) {
 	}
 	
 	/* Copy pixels to final image buffer. */
-	auto firstpass = true;
-	for (auto y = 0; y < params.height; y++) {
-		for (auto x = 0; x < params.width; x++) {
+	bool firstpass = true;
+	for (int y = 0; y < params.height; y++) {
+		for (int x = 0; x < params.width; x++) {
 			/* from tile pixels coord. */
-			auto tileidx = y * params.width * stride + x * stride;
+			int tileidx = y * params.width * stride + x * stride;
 			/* to full image pixels coord. */
-			auto fullimgidx = (tiley + y) * scewidth * stride + (tilex + x) * stride;
+			int fullimgidx = (tiley + y) * scewidth * stride + (tilex + x) * stride;
 
 			/* copy the tile pixels from pixels into session final pixel buffer. */
 			se->pixels[fullimgidx + 0] = pixels[tileidx + 0];
@@ -98,13 +98,13 @@ void CCSession::update_render_tile(ccl::RenderTile &tile)
 {
 	copy_pixels_to_ccsession(tile, this->id);
 
-	auto buffers = tile.buffers;
-	auto& params = buffers->params;
+	ccl::RenderBuffers* buffers = tile.buffers;
+	ccl::BufferParams& params = buffers->params;
 
-	auto se = sessions[this->id];
+	CCSession* se = sessions[this->id];
 
-	auto tilex = params.full_x - se->session->tile_manager.params.full_x;
-	auto tiley = params.full_y - se->session->tile_manager.params.full_y;
+	int tilex = params.full_x - se->session->tile_manager.params.full_x;
+	int tiley = params.full_y - se->session->tile_manager.params.full_y;
 
 	if (update_cbs[this->id] != nullptr) {
 		update_cbs[this->id](this->id, tilex, tiley, params.width, params.height, 4);
@@ -116,8 +116,8 @@ void CCSession::write_render_tile(ccl::RenderTile &tile)
 {
 	copy_pixels_to_ccsession(tile, this->id);
 
-	auto buffers = tile.buffers;
-	auto& params = buffers->params;
+	ccl::RenderBuffers* buffers = tile.buffers;
+	ccl::BufferParams& params = buffers->params;
 
 	auto se = sessions[this->id];
 
@@ -133,7 +133,7 @@ void CCSession::write_render_tile(ccl::RenderTile &tile)
  */
 void _cleanup_sessions()
 {
-	for (auto se : sessions) {
+	for (CCSession* se : sessions) {
 		delete [] se->pixels;
 		delete se->session;
 		delete se;
@@ -155,7 +155,7 @@ unsigned int cycles_session_create(unsigned int client_id, unsigned int session_
 		params = session_params[session_params_id];
 	}
 
-	auto& sce = scenes[scene_id];
+	CCScene& sce = scenes[scene_id];
 
 	auto csesid = -1;
 	auto hid = 0;
@@ -205,9 +205,9 @@ void cycles_session_destroy(unsigned int client_id, unsigned int session_id)
 {
 	SESSION_FIND(session_id)
 
-	auto ccses = sessions[session_id];
+	CCSession* ccses = sessions[session_id];
 
-	for (auto csc : scenes) {
+	for (CCScene& csc : scenes) {
 		if (csc.scene == session->scene) {
 			csc.scene = nullptr; /* don't delete here, since session deconstructor takes care of it. */
 		}
@@ -224,7 +224,7 @@ void cycles_session_reset(unsigned int client_id, unsigned int session_id, unsig
 {
 	SESSION_FIND(session_id)
 		logger.logit(client_id, "Reset session ", session_id, ". width ", width, " height ", height, " samples ", samples);
-		auto se = sessions[session_id];
+		CCSession* se = sessions[session_id];
 		se->reset(width*height, 4);
 		ccl::BufferParams bufParams;
 		bufParams.width = bufParams.full_width = width;
@@ -236,7 +236,7 @@ void cycles_session_reset(unsigned int client_id, unsigned int session_id, unsig
 void cycles_session_set_update_callback(unsigned int client_id, unsigned int session_id, void(*update)(unsigned int sid))
 {
 	SESSION_FIND(session_id)
-		auto se = sessions[session_id];
+		CCSession* se = sessions[session_id];
 		status_cbs[session_id] = update;
 		session->progress.set_update_callback(function_bind<void>(&CCSession::status_update, se));
 		logger.logit(client_id, "Set status update callback for session ", session_id);
@@ -246,7 +246,7 @@ void cycles_session_set_update_callback(unsigned int client_id, unsigned int ses
 void cycles_session_set_cancel_callback(unsigned int client_id, unsigned int session_id, void(*cancel)(unsigned int sid))
 {
 	SESSION_FIND(session_id)
-		auto se = sessions[session_id];
+		CCSession* se = sessions[session_id];
 		cancel_cbs[session_id] = cancel;
 		session->progress.set_cancel_callback(function_bind<void>(&CCSession::test_cancel, se));
 		logger.logit(client_id, "Set status cancel callback for session ", session_id);
@@ -256,7 +256,7 @@ void cycles_session_set_cancel_callback(unsigned int client_id, unsigned int ses
 void cycles_session_set_update_tile_callback(unsigned int client_id, unsigned int session_id, RENDER_TILE_CB update_tile_cb)
 {
 	SESSION_FIND(session_id)
-		auto se = sessions[session_id];
+		CCSession* se = sessions[session_id];
 		update_cbs[session_id] = update_tile_cb;
 		logger.logit(client_id, "Set render tile update callback for session ", session_id);
 	SESSION_FIND_END()
@@ -265,7 +265,7 @@ void cycles_session_set_update_tile_callback(unsigned int client_id, unsigned in
 void cycles_session_set_write_tile_callback(unsigned int client_id, unsigned int session_id, RENDER_TILE_CB write_tile_cb)
 {
 	SESSION_FIND(session_id)
-		auto se = sessions[session_id];
+		CCSession* se = sessions[session_id];
 		write_cbs[session_id] = write_tile_cb;
 		logger.logit(client_id, "Set render tile write callback for session ", session_id);
 	SESSION_FIND_END()
@@ -298,7 +298,7 @@ void cycles_session_wait(unsigned int client_id, unsigned int session_id)
 void cycles_session_get_buffer_info(unsigned int client_id, unsigned int session_id, unsigned int* buffer_size, unsigned int* buffer_stride)
 {
 	SESSION_FIND(session_id)
-		auto se = sessions[session_id];
+		CCSession* se = sessions[session_id];
 		*buffer_size = se->buffer_size;
 		*buffer_stride = se->buffer_stride;
 		logger.logit(client_id, "Session ", session_id, " get_buffer_info. size ", *buffer_size, " stride ", *buffer_stride);
@@ -308,7 +308,7 @@ void cycles_session_get_buffer_info(unsigned int client_id, unsigned int session
 float* __cdecl cycles_session_get_buffer(unsigned int client_id, unsigned int session_id)
 {
 	SESSION_FIND(session_id);
-		auto se = sessions[session_id];
+		CCSession* se = sessions[session_id];
 		return se->pixels;
 	SESSION_FIND_END();
 
@@ -318,7 +318,7 @@ float* __cdecl cycles_session_get_buffer(unsigned int client_id, unsigned int se
 void cycles_session_copy_buffer(unsigned int client_id, unsigned int session_id, float* pixel_buffer)
 {
 	SESSION_FIND(session_id)
-		auto se = sessions[session_id];
+		CCSession* se = sessions[session_id];
 		memcpy(pixel_buffer, se->pixels, se->buffer_size*sizeof(float));
 		logger.logit(client_id, "Session ", session_id, " copy complete pixel buffer");
 	SESSION_FIND_END()
@@ -374,7 +374,7 @@ void cycles_progress_get_progress(unsigned int client_id, unsigned int session_i
 	SESSION_FIND(session_id)
 		double tile_time_, total_time_, render_time_;
 		int tile, sample, samples_per_tile;
-		auto tile_total = session->tile_manager.state.num_tiles;
+		int tile_total = session->tile_manager.state.num_tiles;
 
 		*progress = 0.0f;
 
