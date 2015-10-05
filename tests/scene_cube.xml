@@ -1,0 +1,94 @@
+<cycles>
+<!-- Camera -->
+<camera width="800" height="500" />
+
+<transform translate="0 0 -5" scale="1 1 1">
+	<camera type="perspective" />
+</transform>
+
+<shader name="diffuseshader">
+	<diffuse_bsdf name="m_diffuse_bsdf" color="0.25490 0.53725 0.23922" />
+
+	<connect from="m_diffuse_bsdf bsdf" to="output surface" />
+</shader>
+
+
+<shader name="texonly">
+	<texture_coordinate name="m_texture_uv" />
+	<image_texture name="m_diffuse_texture" src="solidcol.png" />
+	<diffuse_bsdf name="m_diffuse_bsdf"  />
+
+<!--
+	add_output("WcsBox", SHADER_SOCKET_POINT);
+	add_output("EnvSpherical", SHADER_SOCKET_POINT);
+	add_output("EnvEmap", SHADER_SOCKET_POINT);
+	add_output("EnvBox", SHADER_SOCKET_POINT);
+	add_output("EnvLightProbe", SHADER_SOCKET_POINT);
+	add_output("EnvCubemap", SHADER_SOCKET_POINT);
+	add_output("EnvCubemapVerticalCross", SHADER_SOCKET_POINT);
+	add_output("EnvCubemapHorizontalCross", SHADER_SOCKET_POINT);
+	add_output("EnvHemi", SHADER_SOCKET_POINT);
+-->
+
+	<connect from="m_texture_uv envhemi" to="m_diffuse_texture vector" />
+	<connect from="m_diffuse_texture color" to="m_diffuse_bsdf color" />
+	<connect from="m_diffuse_bsdf bsdf" to="output surface" />
+</shader>
+
+<shader name="texture_energy">
+	<texture_coordinate name="m_texture_uv" />
+	<image_texture name="m_diffuse_texture" src="solidcol.png" />
+	<diffuse_bsdf name="m_diffuse_bsdf"  />
+	<transparent_bsdf name="m_transparent" />
+	<mix_closure name="m_diffuse_texture_alpha" />
+
+	<connect from="m_texture_uv uv" to="m_diffuse_texture vector" />
+	<connect from="m_diffuse_texture alpha" to="m_diffuse_texture_alpha fac" />
+	<connect from="m_diffuse_texture color" to="m_diffuse_bsdf color" />
+	<connect from="m_transparent bsdf" to="m_diffuse_texture_alpha closure1" />
+	<connect from="m_diffuse_bsdf bsdf" to="m_diffuse_texture_alpha closure2" />
+	<connect from="m_diffuse_texture_alpha closure" to="output surface" />
+</shader>
+
+<shader name="alphatexture">
+	<texture_coordinate name="m_texture_uv" />
+	<image_texture name="m_diffuse_texture" src="alpha.png" />
+	<diffuse_bsdf name="m_diffuse_bsdf"  />
+	<transparent_bsdf name="m_transparent" />
+	<mix_closure name="m_diffuse_texture_alpha" />
+	<connect from="m_texture_uv uv" to="m_diffuse_texture vector" />
+	<connect from="m_diffuse_texture alpha" to="m_diffuse_texture_alpha fac" />
+	<connect from="m_diffuse_texture color" to="m_diffuse_bsdf color" />
+	<connect from="m_transparent bsdf" to="m_diffuse_texture_alpha closure1" />
+	<connect from="m_diffuse_bsdf bsdf" to="m_diffuse_texture_alpha closure2" />
+	<connect from="m_diffuse_texture_alpha closure" to="output surface" />
+</shader>
+
+<shader name="transptest">
+	<diffuse_bsdf name="m_diffuse_bsdf" color="0.1 0.2 0.8" />
+	<transparent_bsdf name="m_transparent" color="1.0 1.0 1.0" />
+	<mix_closure name="m_diffuse_texture_alpha" fac="0.1" />
+	<connect from="m_transparent bsdf" to="m_diffuse_texture_alpha closure1" />
+	<connect from="m_diffuse_bsdf bsdf" to="m_diffuse_texture_alpha closure2" />
+	<connect from="m_diffuse_texture_alpha closure" to="output surface" />
+</shader>
+
+<!-- Cube Object -->
+<transform rotate="75 1 1 1" scale="0.75 0.75 0.75">
+<state interpolation="smooth" shader="diffuseshader">
+	<include src="./objects/uv_cube.xml" />
+</state>
+</transform>
+
+<transform rotate="75 1 1 1" translate="1.8 0 0" scale="0.75 0.75 0.75">
+<state interpolation="smooth" shader="texonly">
+	<include src="./objects/suzanne.xml" />
+</state>
+</transform>
+
+<transform rotate="75 1 1 1" translate="-1.8 0 0" scale="0.75 0.75 0.75">
+<state interpolation="smooth" shader="alphatexture">
+	<include src="./objects/sphere.xml" />
+</state>
+</transform>
+</cycles>
