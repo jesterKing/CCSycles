@@ -16,6 +16,7 @@ limitations under the License.
 
 namespace ccl.Attributes
 {
+	[System.AttributeUsage(System.AttributeTargets.Class)]
 	public sealed class ShaderNodeAttribute : System.Attribute
 	{
 		private string nodeTypeName;
