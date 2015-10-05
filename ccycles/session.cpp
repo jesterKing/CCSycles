@@ -148,6 +148,24 @@ void _cleanup_sessions()
 	write_cbs.clear();
 }
 
+CCSession* CCSession::create(int width, int height, unsigned int buffer_stride) {
+	int img_size = width * height;
+	float* pixels_ = new float[img_size*buffer_stride];
+	CCSession* se = new CCSession(pixels_, img_size*buffer_stride, buffer_stride);
+
+	return se;
+}
+void CCSession::reset(int width, int height, unsigned int buffer_stride_) {
+	int img_size = width * height;
+	if (img_size*buffer_stride_ != buffer_size || buffer_stride_ != buffer_stride) {
+		delete[] pixels;
+
+		pixels = new float[img_size*buffer_stride_];
+		buffer_size = img_size*buffer_stride_;
+		buffer_stride = buffer_stride_;
+	}
+}
+
 unsigned int cycles_session_create(unsigned int client_id, unsigned int session_params_id, unsigned int scene_id)
 {
 	ccl::SessionParams params;
@@ -160,7 +178,7 @@ unsigned int cycles_session_create(unsigned int client_id, unsigned int session_
 	auto csesid = -1;
 	auto hid = 0;
 
-	auto session = CCSession::create((unsigned int)(sce.scene->camera->width*sce.scene->camera->height), 4);
+	CCSession* session = CCSession::create(sce.scene->camera->width, sce.scene->camera->height, 4);
 	// TODO: pass ccl::Session into CCSession::create
 	session->session = new ccl::Session(params);
 	session->session->scene = sce.scene;
@@ -225,7 +243,7 @@ void cycles_session_reset(unsigned int client_id, unsigned int session_id, unsig
 	SESSION_FIND(session_id)
 		logger.logit(client_id, "Reset session ", session_id, ". width ", width, " height ", height, " samples ", samples);
 		CCSession* se = sessions[session_id];
-		se->reset(width*height, 4);
+		se->reset(width, height, 4);
 		ccl::BufferParams bufParams;
 		bufParams.width = bufParams.full_width = width;
 		bufParams.height = bufParams.full_height = height;
@@ -332,7 +350,9 @@ void cycles_session_draw(unsigned int client_id, unsigned int session_id)
 		ccl::BufferParams session_buf_params;
 		session_buf_params.width = session_buf_params.full_width = session->scene->camera->width;
 		session_buf_params.height = session_buf_params.full_height = session->scene->camera->height;
+
 		session->draw(session_buf_params, draw_params);
+
 	SESSION_FIND_END()
 }
 
