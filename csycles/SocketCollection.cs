@@ -39,6 +39,11 @@ namespace ccl
 			m_socketlist.Add(sock);
 		}
 
+		static string XmlSocketName(string name)
+		{
+			return name.Replace(" ", "");
+		}
+
 		/// <summary>
 		/// Get socket based on name.
 		/// </summary>
@@ -48,7 +53,7 @@ namespace ccl
 		{
 			foreach (var socket in Sockets)
 			{
-				if (socket.Name.ToLowerInvariant().Equals(name.ToLowerInvariant())) return socket;
+				if (XmlSocketName(socket.Name).ToLowerInvariant().Equals(name.ToLowerInvariant())) return socket;
 			}
 
 			throw new ArgumentException(string.Format("Socket {0} doesn't exist", name), "name");
