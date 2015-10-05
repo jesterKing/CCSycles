@@ -166,24 +166,12 @@ public:
 	unsigned int buffer_stride = 0; // number of float values for one pixel
 
 	/* Create a new CCSession, initialise all necessary memory. */
-	static CCSession* create(unsigned int img_size, unsigned int buffer_stride) {
-		float* pixels_ = new float[img_size*buffer_stride];
-		CCSession* se = new CCSession(pixels_, img_size*buffer_stride, buffer_stride);
-		
-		return se;
-	}
+	static CCSession* create(int width, int height, unsigned int buffer_stride);
 
 	/* When a session is reset we need to recreate the pixel buffer based on new
 	 * info.
 	 */
-	void reset(unsigned int img_size, unsigned int buffer_stride_) {
-		if (img_size*buffer_stride_ != buffer_size || buffer_stride_ != buffer_stride) {
-			delete[] pixels;
-			pixels = new float[img_size*buffer_stride_];
-			buffer_size = img_size*buffer_stride_;
-			buffer_stride = buffer_stride_;
-		}
-	}
+	void reset(int width, int height, unsigned int buffer_stride_);
 
 	~CCSession() {
 		delete[] pixels;
@@ -236,6 +224,7 @@ struct CCShader {
 
 #define SESSION_FIND(sid) \
 	if (0 <= (sid) && (sid) < sessions.size()) { \
+		CCSession* ccsess = sessions[sid]; \
 		ccl::Session* session = sessions[sid]->session;
 #define SESSION_FIND_END() }
 
