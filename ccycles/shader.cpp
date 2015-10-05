@@ -596,6 +596,11 @@ CCImage* get_ccimage(string imgname, T* img, unsigned int width, unsigned int he
 		nimg->is_float = is_float;
 		images.push_back(nimg);
 	}
+	else {
+		memcpy(existing_image->builtin_data, img, sizeof(T)*width*height*channels*depth);
+	}
+
+
 	return nimg;
 }
 
