@@ -224,6 +224,11 @@ namespace ccl.ShaderNodes
 			{
 				SetOperation(operation);
 			}
+			var use_clamp = xmlNode.GetAttribute("use_clamp");
+			if (!string.IsNullOrEmpty(use_clamp))
+			{
+				UseClamp = use_clamp.ToLowerInvariant().Equals("true");
+			}
 		}
 	}
 }
