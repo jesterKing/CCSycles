@@ -122,8 +122,8 @@ namespace ccl
 		CombineXyz,
 		SeparateXyz,
 		SeparateHsv,
-		SeparateRgb,
 		CombineHsv,
+		SeparateRgb,
 		CombineRgb,
 		Mapping,
 		Holdout,
@@ -132,7 +132,7 @@ namespace ccl
 		GradientTexture,
 		ColorRamp,
 		VectorMath,
-		MatrixMath
+		MatrixMath,
 	}
 
 	public enum BvhType : uint
