@@ -129,7 +129,7 @@ struct CCImage {
 		bool is_float;
 };
 
-class CCSession {
+class CCSession final {
 public:
 	unsigned int id = 0;
 	ccl::SessionParams params;
@@ -189,7 +189,7 @@ protected:
 	{  }
 };
 
-class CCScene {
+class CCScene final {
 public:
 	/* Hold the Cycles scene. */
 	ccl::Scene* scene;
