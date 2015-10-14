@@ -152,17 +152,21 @@ CCSession* CCSession::create(int width, int height, unsigned int buffer_stride) 
 	int img_size = width * height;
 	float* pixels_ = new float[img_size*buffer_stride];
 	CCSession* se = new CCSession(pixels_, img_size*buffer_stride, buffer_stride);
+	se->width = width;
+	se->height = height;
 
 	return se;
 }
-void CCSession::reset(int width, int height, unsigned int buffer_stride_) {
-	int img_size = width * height;
+void CCSession::reset(int width_, int height_, unsigned int buffer_stride_) {
+	int img_size = width_ * height_;
 	if (img_size*buffer_stride_ != buffer_size || buffer_stride_ != buffer_stride) {
 		delete[] pixels;
 
 		pixels = new float[img_size*buffer_stride_];
 		buffer_size = img_size*buffer_stride_;
 		buffer_stride = buffer_stride_;
+		width = width_;
+		height = height_;
 	}
 }
 
@@ -175,16 +179,13 @@ unsigned int cycles_session_create(unsigned int client_id, unsigned int session_
 
 	CCScene& sce = scenes[scene_id];
 
-	auto csesid = -1;
-	auto hid = 0;
+	int csesid = -1;
+	int hid = 0;
 
 	CCSession* session = CCSession::create(sce.scene->camera->width, sce.scene->camera->height, 4);
 	// TODO: pass ccl::Session into CCSession::create
 	session->session = new ccl::Session(params);
 	session->session->scene = sce.scene;
-
-	session->session->update_render_tile_cb = function_bind<void>(&CCSession::update_render_tile, session, std::placeholders::_1);
-	session->session->write_render_tile_cb = function_bind<void>(&CCSession::write_render_tile, session, std::placeholders::_1);
 
 	auto csessit = sessions.begin();
 	auto csessend = sessions.end();
@@ -256,7 +257,12 @@ void cycles_session_set_update_callback(unsigned int client_id, unsigned int ses
 	SESSION_FIND(session_id)
 		CCSession* se = sessions[session_id];
 		status_cbs[session_id] = update;
-		session->progress.set_update_callback(function_bind<void>(&CCSession::status_update, se));
+		if (update != nullptr) {
+			session->progress.set_update_callback(function_bind<void>(&CCSession::status_update, se));
+		}
+		else {
+			session->progress.set_update_callback(nullptr);
+		}
 		logger.logit(client_id, "Set status update callback for session ", session_id);
 	SESSION_FIND_END()
 }
@@ -266,7 +272,12 @@ void cycles_session_set_cancel_callback(unsigned int client_id, unsigned int ses
 	SESSION_FIND(session_id)
 		CCSession* se = sessions[session_id];
 		cancel_cbs[session_id] = cancel;
-		session->progress.set_cancel_callback(function_bind<void>(&CCSession::test_cancel, se));
+		if (cancel != nullptr) {
+			session->progress.set_cancel_callback(function_bind<void>(&CCSession::test_cancel, se));
+		}
+		else {
+			session->progress.set_cancel_callback(nullptr);
+		}
 		logger.logit(client_id, "Set status cancel callback for session ", session_id);
 	SESSION_FIND_END()
 }
@@ -276,6 +287,12 @@ void cycles_session_set_update_tile_callback(unsigned int client_id, unsigned in
 	SESSION_FIND(session_id)
 		CCSession* se = sessions[session_id];
 		update_cbs[session_id] = update_tile_cb;
+		if (update_tile_cb != nullptr) {
+			session->update_render_tile_cb = function_bind<void>(&CCSession::update_render_tile, ccsess, std::placeholders::_1);
+		}
+		else {
+			session->update_render_tile_cb = nullptr;
+		}
 		logger.logit(client_id, "Set render tile update callback for session ", session_id);
 	SESSION_FIND_END()
 }
@@ -285,6 +302,12 @@ void cycles_session_set_write_tile_callback(unsigned int client_id, unsigned int
 	SESSION_FIND(session_id)
 		CCSession* se = sessions[session_id];
 		write_cbs[session_id] = write_tile_cb;
+		if (write_tile_cb != nullptr) {
+			session->write_render_tile_cb = function_bind<void>(&CCSession::write_render_tile, ccsess, std::placeholders::_1);
+		}
+		else {
+			session->write_render_tile_cb = nullptr;
+		}
 		logger.logit(client_id, "Set render tile write callback for session ", session_id);
 	SESSION_FIND_END()
 }
@@ -323,7 +346,7 @@ void cycles_session_get_buffer_info(unsigned int client_id, unsigned int session
 	SESSION_FIND_END()
 }
 
-float* __cdecl cycles_session_get_buffer(unsigned int client_id, unsigned int session_id)
+float* cycles_session_get_buffer(unsigned int client_id, unsigned int session_id)
 {
 	SESSION_FIND(session_id);
 		CCSession* se = sessions[session_id];
@@ -354,6 +377,14 @@ void cycles_session_draw(unsigned int client_id, unsigned int session_id)
 		session->draw(session_buf_params, draw_params);
 
 	SESSION_FIND_END()
+}
+
+void cycles_session_draw_nogl(unsigned int client_id, unsigned int session_id)
+{
+	SESSION_FIND(session_id)
+		//session->device->pixels_copy_from();
+	SESSION_FIND_END()
+
 }
 
 void cycles_progress_reset(unsigned int client_id, unsigned int session_id)
