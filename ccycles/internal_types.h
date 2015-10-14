@@ -129,7 +129,7 @@ struct CCImage {
 		bool is_float;
 };
 
-class CCSession {
+class CCSession final {
 public:
 	unsigned int id = 0;
 	ccl::SessionParams params;
@@ -165,6 +165,9 @@ public:
 	unsigned int buffer_size = 0;
 	unsigned int buffer_stride = 0; // number of float values for one pixel
 
+	int width = 0;
+	int height = 0;
+
 	/* Create a new CCSession, initialise all necessary memory. */
 	static CCSession* create(int width, int height, unsigned int buffer_stride);
 
@@ -189,7 +192,7 @@ protected:
 	{  }
 };
 
-class CCScene {
+class CCScene final {
 public:
 	/* Hold the Cycles scene. */
 	ccl::Scene* scene;
