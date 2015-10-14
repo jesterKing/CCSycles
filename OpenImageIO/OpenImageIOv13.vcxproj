@@ -33,7 +33,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{5BD48EC5-78D3-445E-B9CB-55A22E590EDE}</ProjectGuid>
-    <RootNamespace>cycles_bvh</RootNamespace>
+    <RootNamespace>OIIO</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
