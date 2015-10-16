@@ -72,7 +72,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(ProjectDir)include\OpenImageIO;$(ProjectDir)..\..\..\..\..\boost_1_55_0;$(ProjectDir)..\..\OpenEXR\Half</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include\OpenImageIO;$(ProjectDir)..\..\..\..\..\boost;$(ProjectDir)..\..\OpenEXR\Half</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>OpenImageIO_EXPORTS</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <FloatingPointModel>Fast</FloatingPointModel>
@@ -84,7 +84,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)..\..\..\..\..\boost_1_55_0\stage$(Configuration)\lib;$(ProjectDir)..\..\OpenEXR\Half\$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\..\..\..\..\boost\stage$(Configuration)\lib;$(ProjectDir)..\..\OpenEXR\Half\$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
       <AdditionalDependencies>Half_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Lib>
@@ -100,7 +100,7 @@
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>false</FunctionLevelLinking>
       <IntrinsicFunctions>false</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>$(ProjectDir)include\OpenImageIO;$(ProjectDir)..\..\..\..\..\boost_1_55_0;$(ProjectDir)..\..\OpenEXR\Half</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include\OpenImageIO;$(ProjectDir)..\..\..\..\..\boost;$(ProjectDir)..\..\OpenEXR\Half</AdditionalIncludeDirectories>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <WholeProgramOptimization>false</WholeProgramOptimization>
       <PreprocessorDefinitions>OpenImageIO_EXPORTS</PreprocessorDefinitions>
@@ -115,7 +115,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(ProjectDir)..\..\..\..\..\boost_1_55_0\stage$(Configuration)\lib;$(ProjectDir)..\..\OpenEXR\Half\$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\..\..\..\..\boost\stage$(Configuration)\lib;$(ProjectDir)..\..\OpenEXR\Half\$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
       <AdditionalDependencies>Half.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ShowProgress />
     </Link>
