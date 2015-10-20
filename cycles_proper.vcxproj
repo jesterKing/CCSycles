@@ -1,0 +1,242 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{17AAA942-8C82-4160-8D23-78EA580377DD}</ProjectGuid>
+    <RootNamespace>cycles_proper</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <TargetExt>.lib</TargetExt>
+    <OutDir>$(Platform)\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(Platform)\$(Configuration)\</OutDir>
+    <TargetName>$(ProjectName)</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\..\boost;$(ProjectDir)pthreads;$(ProjectDir)OpenImageIO\include;$(ProjectDir)glew\include;$(ProjectDir)cycles\third_party\atomic;$(ProjectDir)cycles\third_party\cuew\include;$(ProjectDir)cycles\third_party\clew\include;$(ProjectDir)cycles\src\render;$(ProjectDir)cycles\src\kernel;$(ProjectDir)cycles\src\kernel\svm;$(ProjectDir)cycles\src\kernel\osl;$(ProjectDir)cycles\src\util;$(ProjectDir)cycles\src\device;$(ProjectDir)cycles\src\bvh;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>GLEW_STATIC;_WINSOCK_DEPRECATED_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;DEBUG;_DEBUG;_CRT_SECURE_NO_WARNINGS;CCL_NAMESPACE_BEGIN=namespace ccl {;CCL_NAMESPACE_END=};WITH_NETWORK;WITH_OPENCL;WITH_CUDA;WITH_MULTI;CYCLES_STD_UNORDERED_MAP;NO_OIIO_LOADING;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DisableSpecificWarnings>4018;4065;4127;4181;4200;4244;4267;4305;4800</DisableSpecificWarnings>
+      <TreatSpecificWarningsAsErrors>4013;4431</TreatSpecificWarningsAsErrors>
+      <AdditionalOptions>/w34062 /J /Gs- %(AdditionalOptions)</AdditionalOptions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Lib>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\..\..\..\..\..\boost\stage$(Configuration)\lib</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\..\boost;$(ProjectDir)pthreads;$(ProjectDir)OpenImageIO\include;$(ProjectDir)glew\include;$(ProjectDir)cycles\third_party\atomic;$(ProjectDir)cycles\third_party\cuew\include;$(ProjectDir)cycles\third_party\clew\include;$(ProjectDir)cycles\src\render;$(ProjectDir)cycles\src\kernel;$(ProjectDir)cycles\src\kernel\svm;$(ProjectDir)cycles\src\kernel\osl;$(ProjectDir)cycles\src\util;$(ProjectDir)cycles\src\device;$(ProjectDir)cycles\src\bvh;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <PreprocessorDefinitions>GLEW_STATIC;_WINSOCK_DEPRECATED_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;NDEBUG;_CRT_SECURE_NO_WARNINGS;CCL_NAMESPACE_BEGIN=namespace ccl {;CCL_NAMESPACE_END=};WITH_NETWORK;WITH_OPENCL;WITH_CUDA;WITH_MULTI;CYCLES_STD_UNORDERED_MAP;NO_OIIO_LOADING;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DisableSpecificWarnings>4018;4065;4127;4181;4200;4244;4267;4305;4800</DisableSpecificWarnings>
+      <TreatSpecificWarningsAsErrors>4013;4431</TreatSpecificWarningsAsErrors>
+      <AdditionalOptions>/w34062 /J /Gs- %(AdditionalOptions)</AdditionalOptions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <Lib>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\..\..\..\..\boost\stage$(Configuration)\lib</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="cycles\src\bvh\bvh.cpp" />
+    <ClCompile Include="cycles\src\bvh\bvh_binning.cpp" />
+    <ClCompile Include="cycles\src\bvh\bvh_build.cpp" />
+    <ClCompile Include="cycles\src\bvh\bvh_node.cpp" />
+    <ClCompile Include="cycles\src\bvh\bvh_sort.cpp" />
+    <ClCompile Include="cycles\src\bvh\bvh_split.cpp" />
+    <ClCompile Include="cycles\src\device\device.cpp" />
+    <ClCompile Include="cycles\src\device\device_cpu.cpp" />
+    <ClCompile Include="cycles\src\device\device_cuda.cpp" />
+    <ClCompile Include="cycles\src\device\device_multi.cpp" />
+    <ClCompile Include="cycles\src\device\device_network.cpp" />
+    <ClCompile Include="cycles\src\device\device_opencl.cpp" />
+    <ClCompile Include="cycles\src\device\device_task.cpp" />
+    <ClCompile Include="cycles\src\render\attribute.cpp" />
+    <ClCompile Include="cycles\src\render\background.cpp" />
+    <ClCompile Include="cycles\src\render\bake.cpp" />
+    <ClCompile Include="cycles\src\render\buffers.cpp" />
+    <ClCompile Include="cycles\src\render\camera.cpp" />
+    <ClCompile Include="cycles\src\render\curves.cpp" />
+    <ClCompile Include="cycles\src\render\film.cpp" />
+    <ClCompile Include="cycles\src\render\graph.cpp" />
+    <ClCompile Include="cycles\src\render\image.cpp" />
+    <ClCompile Include="cycles\src\render\integrator.cpp" />
+    <ClCompile Include="cycles\src\render\light.cpp" />
+    <ClCompile Include="cycles\src\render\mesh.cpp" />
+    <ClCompile Include="cycles\src\render\mesh_displace.cpp" />
+    <ClCompile Include="cycles\src\render\nodes.cpp" />
+    <ClCompile Include="cycles\src\render\object.cpp" />
+    <ClCompile Include="cycles\src\render\osl.cpp" />
+    <ClCompile Include="cycles\src\render\particles.cpp" />
+    <ClCompile Include="cycles\src\render\scene.cpp" />
+    <ClCompile Include="cycles\src\render\session.cpp" />
+    <ClCompile Include="cycles\src\render\shader.cpp" />
+    <ClCompile Include="cycles\src\render\sky_model.cpp" />
+    <ClCompile Include="cycles\src\render\sobol.cpp" />
+    <ClCompile Include="cycles\src\render\svm.cpp" />
+    <ClCompile Include="cycles\src\render\tables.cpp" />
+    <ClCompile Include="cycles\src\render\tile.cpp" />
+    <ClCompile Include="cycles\src\subd\subd_dice.cpp" />
+    <ClCompile Include="cycles\src\subd\subd_mesh.cpp" />
+    <ClCompile Include="cycles\src\subd\subd_patch.cpp" />
+    <ClCompile Include="cycles\src\subd\subd_split.cpp" />
+    <ClCompile Include="cycles\src\util\util_aligned_malloc.cpp" />
+    <ClCompile Include="cycles\src\util\util_cache.cpp" />
+    <ClCompile Include="cycles\src\util\util_guarded_allocator.cpp" />
+    <ClCompile Include="cycles\src\util\util_logging.cpp" />
+    <ClCompile Include="cycles\src\util\util_md5.cpp" />
+    <ClCompile Include="cycles\src\util\util_path.cpp" />
+    <ClCompile Include="cycles\src\util\util_simd.cpp" />
+    <ClCompile Include="cycles\src\util\util_string.cpp" />
+    <ClCompile Include="cycles\src\util\util_system.cpp" />
+    <ClCompile Include="cycles\src\util\util_task.cpp" />
+    <ClCompile Include="cycles\src\util\util_time.cpp" />
+    <ClCompile Include="cycles\src\util\util_transform.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="cycles\src\bvh\bvh.h" />
+    <ClInclude Include="cycles\src\bvh\bvh_binning.h" />
+    <ClInclude Include="cycles\src\bvh\bvh_build.h" />
+    <ClInclude Include="cycles\src\bvh\bvh_node.h" />
+    <ClInclude Include="cycles\src\bvh\bvh_params.h" />
+    <ClInclude Include="cycles\src\bvh\bvh_sort.h" />
+    <ClInclude Include="cycles\src\bvh\bvh_split.h" />
+    <ClInclude Include="cycles\src\device\device.h" />
+    <ClInclude Include="cycles\src\device\device_intern.h" />
+    <ClInclude Include="cycles\src\device\device_memory.h" />
+    <ClInclude Include="cycles\src\device\device_network.h" />
+    <ClInclude Include="cycles\src\device\device_task.h" />
+    <ClInclude Include="cycles\src\render\attribute.h" />
+    <ClInclude Include="cycles\src\render\background.h" />
+    <ClInclude Include="cycles\src\render\bake.h" />
+    <ClInclude Include="cycles\src\render\buffers.h" />
+    <ClInclude Include="cycles\src\render\camera.h" />
+    <ClInclude Include="cycles\src\render\curves.h" />
+    <ClInclude Include="cycles\src\render\film.h" />
+    <ClInclude Include="cycles\src\render\graph.h" />
+    <ClInclude Include="cycles\src\render\image.h" />
+    <ClInclude Include="cycles\src\render\integrator.h" />
+    <ClInclude Include="cycles\src\render\light.h" />
+    <ClInclude Include="cycles\src\render\mesh.h" />
+    <ClInclude Include="cycles\src\render\nodes.h" />
+    <ClInclude Include="cycles\src\render\object.h" />
+    <ClInclude Include="cycles\src\render\osl.h" />
+    <ClInclude Include="cycles\src\render\particles.h" />
+    <ClInclude Include="cycles\src\render\scene.h" />
+    <ClInclude Include="cycles\src\render\session.h" />
+    <ClInclude Include="cycles\src\render\shader.h" />
+    <ClInclude Include="cycles\src\render\sky_model.h" />
+    <ClInclude Include="cycles\src\render\sky_model_data.h" />
+    <ClInclude Include="cycles\src\render\sobol.h" />
+    <ClInclude Include="cycles\src\render\svm.h" />
+    <ClInclude Include="cycles\src\render\tables.h" />
+    <ClInclude Include="cycles\src\render\tile.h" />
+    <ClInclude Include="cycles\src\subd\subd_dice.h" />
+    <ClInclude Include="cycles\src\subd\subd_mesh.h" />
+    <ClInclude Include="cycles\src\subd\subd_patch.h" />
+    <ClInclude Include="cycles\src\subd\subd_split.h" />
+    <ClInclude Include="cycles\src\util\util_algorithm.h" />
+    <ClInclude Include="cycles\src\util\util_aligned_malloc.h" />
+    <ClInclude Include="cycles\src\util\util_args.h" />
+    <ClInclude Include="cycles\src\util\util_boundbox.h" />
+    <ClInclude Include="cycles\src\util\util_cache.h" />
+    <ClInclude Include="cycles\src\util\util_debug.h" />
+    <ClInclude Include="cycles\src\util\util_foreach.h" />
+    <ClInclude Include="cycles\src\util\util_function.h" />
+    <ClInclude Include="cycles\src\util\util_guarded_allocator.h" />
+    <ClInclude Include="cycles\src\util\util_half.h" />
+    <ClInclude Include="cycles\src\util\util_hash.h" />
+    <ClInclude Include="cycles\src\util\util_image.h" />
+    <ClInclude Include="cycles\src\util\util_list.h" />
+    <ClInclude Include="cycles\src\util\util_logging.h" />
+    <ClInclude Include="cycles\src\util\util_map.h" />
+    <ClInclude Include="cycles\src\util\util_math.h" />
+    <ClInclude Include="cycles\src\util\util_math_fast.h" />
+    <ClInclude Include="cycles\src\util\util_md5.h" />
+    <ClInclude Include="cycles\src\util\util_opengl.h" />
+    <ClInclude Include="cycles\src\util\util_optimization.h" />
+    <ClInclude Include="cycles\src\util\util_param.h" />
+    <ClInclude Include="cycles\src\util\util_path.h" />
+    <ClInclude Include="cycles\src\util\util_progress.h" />
+    <ClInclude Include="cycles\src\util\util_set.h" />
+    <ClInclude Include="cycles\src\util\util_simd.h" />
+    <ClInclude Include="cycles\src\util\util_sseb.h" />
+    <ClInclude Include="cycles\src\util\util_ssef.h" />
+    <ClInclude Include="cycles\src\util\util_ssei.h" />
+    <ClInclude Include="cycles\src\util\util_stats.h" />
+    <ClInclude Include="cycles\src\util\util_string.h" />
+    <ClInclude Include="cycles\src\util\util_system.h" />
+    <ClInclude Include="cycles\src\util\util_task.h" />
+    <ClInclude Include="cycles\src\util\util_thread.h" />
+    <ClInclude Include="cycles\src\util\util_time.h" />
+    <ClInclude Include="cycles\src\util\util_transform.h" />
+    <ClInclude Include="cycles\src\util\util_types.h" />
+    <ClInclude Include="cycles\src\util\util_vector.h" />
+    <ClInclude Include="cycles\src\util\util_view.h" />
+    <ClInclude Include="cycles\src\util\util_xml.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
