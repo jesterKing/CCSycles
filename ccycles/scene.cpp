@@ -70,8 +70,8 @@ unsigned int cycles_scene_create(unsigned int client_id, unsigned int scene_para
 	ccl::SceneParams params;
 	ccl::DeviceInfo di;
 
-	bool found_params = false;
-	bool found_di = false;
+	bool found_params{ false };
+	bool found_di{ false };
 
 	if (0 <= scene_params_id && scene_params_id < scene_params.size()) {
 		params = scene_params[scene_params_id];
@@ -84,9 +84,9 @@ unsigned int cycles_scene_create(unsigned int client_id, unsigned int scene_para
 	}
 
 	if (found_di && found_params) {
-		int cscid = -1;
+		int cscid{ -1 };
 		if (scenes.size() > 0) {
-			int hid = 0;
+			int hid{ 0 };
 
 			auto scend = scenes.end();
 			auto scit = scenes.begin();

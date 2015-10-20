@@ -48,7 +48,7 @@ void CCSession::test_cancel(void) {
 }
 
 /* floats per pixel (rgba). */
-const int stride = 4;
+const int stride{ 4 };
 
 /* copy the pixel buffer from RenderTile to the final pixel buffer in CCSession. */
 void copy_pixels_to_ccsession(ccl::RenderTile &tile, unsigned int sid) {
@@ -149,7 +149,7 @@ void _cleanup_sessions()
 }
 
 CCSession* CCSession::create(int width, int height, unsigned int buffer_stride) {
-	int img_size = width * height;
+	int img_size{ width * height };
 	float* pixels_ = new float[img_size*buffer_stride];
 	CCSession* se = new CCSession(pixels_, img_size*buffer_stride, buffer_stride);
 	se->width = width;
@@ -179,8 +179,8 @@ unsigned int cycles_session_create(unsigned int client_id, unsigned int session_
 
 	CCScene& sce = scenes[scene_id];
 
-	int csesid = -1;
-	int hid = 0;
+	int csesid{ -1 };
+	int hid{ 0 };
 
 	CCSession* session = CCSession::create(sce.scene->camera->width, sce.scene->camera->height, 4);
 	// TODO: pass ccl::Session into CCSession::create

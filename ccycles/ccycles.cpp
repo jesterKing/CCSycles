@@ -36,7 +36,7 @@ std::vector<ccl::DeviceInfo> devices;
 LOGGER_FUNC_CB logger_func = nullptr;
 
 /* Need to initialise only once :) */
-bool initialised = false;
+bool initialised{ false };
 Logger logger;
 
 std::vector<LOGGER_FUNC_CB> loggers;
@@ -90,7 +90,7 @@ void cycles_set_logger(unsigned int client_id, LOGGER_FUNC_CB logger_func_)
 
 unsigned int cycles_new_client()
 {
-	unsigned int logfunc_count = 0;
+	unsigned int logfunc_count{ 0 };
 	for(auto logfunc : loggers) {
 		if (logfunc == nullptr)
 		{

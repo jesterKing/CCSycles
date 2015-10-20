@@ -54,7 +54,7 @@ extern std::ostream& operator<<(std::ostream& out, shadernode_type const &snt);
 /* Simple class to help with debug logging. */
 class Logger {
 public:
-	bool tostdout = false;
+	bool tostdout{ false };
 
 	/* Variadic template function so we can handle
 	 * any amount of arguments. Each subsequent call
@@ -72,7 +72,7 @@ public:
 		 */
 		auto t = std::chrono::system_clock::now();
 		std::time_t ts = std::chrono::system_clock::to_time_t(t);
-		auto tsstr = string(std::ctime(&ts));
+		auto tsstr = string{std::ctime(&ts)};
 		tsstr = tsstr.substr(0, tsstr.size() - 1);
 
 		/* start our new logger_msg with timestamp and head, then
@@ -131,7 +131,7 @@ struct CCImage {
 
 class CCSession final {
 public:
-	unsigned int id = 0;
+	unsigned int id{ 0 };
 	ccl::SessionParams params;
 	ccl::Session* session = nullptr;
 
@@ -152,21 +152,21 @@ public:
 	void write_render_tile(ccl::RenderTile &tile);
 
 	/* The status update callback as set by the client. */
-	STATUS_UPDATE_CB _status_cb = nullptr;
+	STATUS_UPDATE_CB _status_cb{ nullptr };
 	/* The rendertile update callback as set by the client. */
-	RENDER_TILE_CB _update_cb = nullptr;
+	RENDER_TILE_CB _update_cb{ nullptr };
 	/* The rendertile write callback as set by the client. */
-	RENDER_TILE_CB _write_cb = nullptr;
+	RENDER_TILE_CB _write_cb{ nullptr };
 
 	/* Hold the pixel buffer with the final result for the attached session.
 	 * Gets updated by update_render_tile and write_render_tile.
 	 */
 	float* pixels = nullptr;
-	unsigned int buffer_size = 0;
-	unsigned int buffer_stride = 0; // number of float values for one pixel
+	unsigned int buffer_size{ 0 };
+	unsigned int buffer_stride{ 0 }; // number of float values for one pixel
 
-	int width = 0;
-	int height = 0;
+	int width{ 0 };
+	int height{ 0 };
 
 	/* Create a new CCSession, initialise all necessary memory. */
 	static CCSession* create(int width, int height, unsigned int buffer_stride);

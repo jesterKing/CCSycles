@@ -401,7 +401,7 @@ void _set_texture_mapping_transformation(ccl::TextureMapping& mapping, int trans
 void cycles_shadernode_texmapping_set_transformation(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, shadernode_type shn_type, int transform_type, float x, float y, float z)
 {
 	SHADERNODE_FIND(shader_id, shnode_id)
-		string tp = "UNKNOWN";
+		string tp{ "UNKNOWN" };
 		switch (transform_type) {
 			case 0:
 				tp = "TRANSLATION";
@@ -469,7 +469,7 @@ void cycles_shadernode_texmapping_set_type(unsigned int client_id, unsigned int 
 void cycles_shadernode_set_enum(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, shadernode_type shn_type, const char* enum_name, const char* value)
 {
 	auto val = OpenImageIO::v1_3::ustring(value);
-	auto ename = string(enum_name);
+	auto ename = string{enum_name};
 
 	SHADERNODE_FIND(shader_id, shnode_id)
 			switch (shn_type) {
@@ -568,7 +568,7 @@ void cycles_shadernode_set_enum(unsigned int client_id, unsigned int shader_id, 
 
 CCImage* find_existing_ccimage(string imgname)
 {
-	bool is_float = true;
+	bool is_float{ true };
 	CCImage* existing_image = nullptr;
 	for (CCImage* im : images) {
 		if (im->filename == imgname) {
@@ -606,8 +606,8 @@ CCImage* get_ccimage(string imgname, T* img, unsigned int width, unsigned int he
 
 void cycles_shadernode_set_member_float_img(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, shadernode_type shn_type, const char* member_name, const char* img_name, float* img, unsigned int width, unsigned int height, unsigned int depth, unsigned int channels)
 {
-	auto mname = string(member_name);
-	auto imname = string(img_name);
+	auto mname = string{ member_name };
+	auto imname = string{ img_name };
 
 	SHADERNODE_FIND(shader_id, shnode_id)
 			switch (shn_type) {
@@ -634,8 +634,8 @@ void cycles_shadernode_set_member_float_img(unsigned int client_id, unsigned int
 
 void cycles_shadernode_set_member_byte_img(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, shadernode_type shn_type, const char* member_name, const char* img_name, unsigned char* img, unsigned int width, unsigned int height, unsigned int depth, unsigned int channels)
 {
-	auto mname = string(member_name);
-	auto imname = string(img_name);
+	auto mname = string{ member_name };
+	auto imname = string{ img_name };
 	SHADERNODE_FIND(shader_id, shnode_id)
 			switch (shn_type) {
 				case shadernode_type::IMAGE_TEXTURE:
@@ -661,7 +661,7 @@ void cycles_shadernode_set_member_byte_img(unsigned int client_id, unsigned int 
 
 void cycles_shadernode_set_member_bool(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, shadernode_type shn_type, const char* member_name, bool value)
 {
-	auto mname = string(member_name);
+	auto mname = string{ member_name };
 
 	SHADERNODE_FIND(shader_id, shnode_id)
 			switch (shn_type) {
@@ -726,7 +726,7 @@ void cycles_shadernode_set_member_bool(unsigned int client_id, unsigned int shad
 
 void cycles_shadernode_set_member_int(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, shadernode_type shn_type, const char* member_name, int value)
 {
-	auto mname = string(member_name);
+	auto mname = string{ member_name };
 	SHADERNODE_FIND(shader_id, shnode_id)
 			switch (shn_type) {
 				case shadernode_type::BRICK_TEXTURE:
@@ -753,7 +753,7 @@ void cycles_shadernode_set_member_int(unsigned int client_id, unsigned int shade
 
 void cycles_shadernode_set_member_float(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, shadernode_type shn_type, const char* member_name, float value)
 {
-	auto mname = string(member_name);
+	auto mname = string{ member_name };
 
 	SHADERNODE_FIND(shader_id, shnode_id)
 			switch (shn_type) {
@@ -795,7 +795,7 @@ void cycles_shadernode_set_member_float(unsigned int client_id, unsigned int sha
 
 void cycles_shadernode_set_member_vec4_at_index(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, shadernode_type shn_type, const char* member_name, float x, float y, float z, float w, int index)
 {
-	auto mname = string(member_name);
+	auto mname = string{ member_name };
 
 	SHADERNODE_FIND(shader_id, shnode_id)
 		switch (shn_type) {
@@ -872,7 +872,7 @@ void cycles_shadernode_set_member_vec4_at_index(unsigned int client_id, unsigned
 
 void cycles_shadernode_set_member_vec(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, shadernode_type shn_type, const char* member_name, float x, float y, float z)
 {
-	auto mname = string(member_name);
+	auto mname = string{ member_name };
 
 	SHADERNODE_FIND(shader_id, shnode_id)
 			switch (shn_type) {
@@ -916,8 +916,7 @@ Set an integer attribute with given name to value. shader_id is the global shade
 */
 void cycles_shadernode_set_attribute_int(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, const char* attribute_name, int value)
 {
-	attrunion v;
-	v.type = attr_type::INT;
+	attrunion v{ attr_type::INT };
 	v.i = value;
 	shadernode_set_attribute(client_id, shader_id, shnode_id, attribute_name, v);
 }
@@ -927,8 +926,7 @@ Set a float attribute with given name to value. shader_id is the global shader I
 */
 void cycles_shadernode_set_attribute_float(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, const char* attribute_name, float value)
 {
-	attrunion v;
-	v.type = attr_type::FLOAT;
+	attrunion v{ attr_type::FLOAT };
 	v.f = value;
 	shadernode_set_attribute(client_id, shader_id, shnode_id, attribute_name, v);
 }
@@ -938,8 +936,7 @@ Set a vector of floats attribute with given name to x, y and z. shader_id is the
 */
 void cycles_shadernode_set_attribute_vec(unsigned int client_id, unsigned int shader_id, unsigned int shnode_id, const char* attribute_name, float x, float y, float z)
 {
-	attrunion v;
-	v.type = attr_type::FLOAT4;
+	attrunion v{ attr_type::FLOAT4 };
 	v.f4.x = x;
 	v.f4.y = y;
 	v.f4.z = z;
