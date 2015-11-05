@@ -19,6 +19,8 @@ using System.Collections.Generic;
 using ccl.ShaderNodes.Sockets;
 using ccl.Attributes;
 
+using LeftRightFound = System.Tuple<ccl.ShaderNodes.ColorStop, ccl.ShaderNodes.ColorStop, bool>;
+
 namespace ccl.ShaderNodes
 {
 	/// <summary>
@@ -89,6 +91,7 @@ namespace ccl.ShaderNodes
 
 		public List<ColorStop> Stops = new List<ColorStop>();
 
+
 		/// <summary>
 		/// Get a ColorStop on the left of pos, and on the right of pos.
 		/// Third tuple member is true when no stop was found that actually
@@ -96,7 +99,7 @@ namespace ccl.ShaderNodes
 		/// </summary>
 		/// <param name="pos"></param>
 		/// <returns></returns>
-		public Tuple<ColorStop, ColorStop, bool> GetLeftRight(float pos)
+		public LeftRightFound GetLeftRight(float pos)
 		{
 			var needle = new ColorStop {Position = pos};
 			ColorStop l = null;
@@ -149,7 +152,7 @@ namespace ccl.ShaderNodes
 			}
 
 			// done, give it back.
-			return new Tuple<ColorStop, ColorStop, bool>(l, r, notfound);
+			return new LeftRightFound(l, r, notfound);
 		}
 
 		/// <summary>
@@ -247,7 +250,7 @@ namespace ccl.ShaderNodes
 						// get factor
 						if (Math.Abs(left.Position - right.Position) > 0.0001)
 						{
-							fac = (pos - right.Position)/(left.Position - right.Position);
+							fac = Math.Abs(pos - right.Position)/Math.Abs(left.Position - right.Position);
 						}
 						else
 						{
@@ -261,12 +264,12 @@ namespace ccl.ShaderNodes
 							fac = 3.0f*mfac - 2.0f*mfac*fac;
 						}
 
-						// left color fac
+						// right color fac
 						mfac = 1.0f - fac;
 
 						// factor colors
-						left.Color *= mfac;
-						right.Color *= fac;
+						left.Color *= fac;
+						right.Color *= mfac;
 						// add factored colors to get new interpolated color
 						var interpolated_color = left.Color + right.Color;
 						// copy, done
