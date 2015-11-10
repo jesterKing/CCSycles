@@ -179,10 +179,10 @@ namespace ccl
 		/// 
 		/// NOTE: this is currently not working
 		/// </summary>
-		public void Draw()
+		public void Draw(int width, int height)
 		{
 			if (Destroyed) return;
-			CSycles.session_draw(Client.Id, Id);
+			CSycles.session_draw(Client.Id, Id, width, height);
 		}
 
 		/// <summary>

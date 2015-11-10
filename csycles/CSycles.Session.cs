@@ -109,10 +109,10 @@ namespace ccl
 		}
 
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_session_draw", CallingConvention = CallingConvention.Cdecl)]
-		private static extern void cycles_session_draw(uint clientId, uint sessionId);
-		public static void session_draw(uint clientId, uint sessionId)
+		private static extern void cycles_session_draw(uint clientId, uint sessionId, int width, int height);
+		public static void session_draw(uint clientId, uint sessionId, int width, int height)
 		{
-			cycles_session_draw(clientId, sessionId);
+			cycles_session_draw(clientId, sessionId, width, height);
 		}
 #endregion
 

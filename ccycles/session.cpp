@@ -15,6 +15,7 @@ limitations under the License.
 **/
 
 #include "internal_types.h"
+#include "util_opengl.h"
 
 extern std::vector<CCScene> scenes;
 extern std::vector<ccl::DeviceInfo> devices;
@@ -249,6 +250,7 @@ void cycles_session_reset(unsigned int client_id, unsigned int session_id, unsig
 		bufParams.width = bufParams.full_width = width;
 		bufParams.height = bufParams.full_height = height;
 		session->reset(bufParams, (int)samples);
+		session->set_pause(false);
 	SESSION_FIND_END()
 }
 
@@ -365,16 +367,67 @@ void cycles_session_copy_buffer(unsigned int client_id, unsigned int session_id,
 	SESSION_FIND_END()
 }
 
-void cycles_session_draw(unsigned int client_id, unsigned int session_id)
+void cycles_session_draw(unsigned int client_id, unsigned int session_id, int width, int height)
 {
 	static ccl::DeviceDrawParams draw_params = ccl::DeviceDrawParams();
 
 	SESSION_FIND(session_id)
 		ccl::BufferParams session_buf_params;
-		session_buf_params.width = session_buf_params.full_width = session->scene->camera->width;
-		session_buf_params.height = session_buf_params.full_height = session->scene->camera->height;
+		session_buf_params.width = session_buf_params.full_width = width;
+		session_buf_params.height = session_buf_params.full_height = height;
 
+		// push attribs
+		glPushAttrib(GL_ENABLE_BIT | GL_DEPTH_BUFFER_BIT);
+
+		// reset and disable about everything
+		glDisable(GL_ALPHA_TEST);
+		glDisable(GL_BLEND);
+		glDisable(GL_DITHER);
+		glDisable(GL_FOG);
+		glDisable(GL_LIGHTING);
+		glDisable(GL_LOGIC_OP);
+		glDisable(GL_STENCIL_TEST);
+		glDisable(GL_TEXTURE_1D);
+		glDisable(GL_TEXTURE_2D);
+		glPixelTransferi(GL_MAP_COLOR, GL_FALSE);
+		glPixelTransferi(GL_RED_SCALE, 1);
+		glPixelTransferi(GL_RED_BIAS, 0);
+		glPixelTransferi(GL_GREEN_SCALE, 1);
+		glPixelTransferi(GL_GREEN_BIAS, 0);
+		glPixelTransferi(GL_BLUE_SCALE, 1);
+		glPixelTransferi(GL_BLUE_BIAS, 0);
+		glPixelTransferi(GL_ALPHA_SCALE, 1);
+		glPixelTransferi(GL_ALPHA_BIAS, 0);
+		glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
+
+		glDisable(GL_DEPTH_TEST);
+		glDepthMask(GL_FALSE);
+
+		// reset project/modelview
+		glMatrixMode(GL_PROJECTION);
+		glPushMatrix();
+		glLoadIdentity();
+		glMatrixMode(GL_MODELVIEW);
+		glPushMatrix();
+		glLoadIdentity();
+
+		// set viewport
+		glViewport((-width/2), height/2, width, height);
+		// let Cycles draw
 		session->draw(session_buf_params, draw_params);
+
+		// reset viewport
+		glViewport(0, 0, width, height);
+
+		//------------------------
+
+		// revert to matrices before our drawing
+		glMatrixMode(GL_PROJECTION);
+		glPopMatrix();
+		glMatrixMode(GL_MODELVIEW);
+		glPopMatrix();
+		// revert to old attributes
+		glPopAttrib();
 
 	SESSION_FIND_END()
 }
