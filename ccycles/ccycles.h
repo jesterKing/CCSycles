@@ -408,6 +408,8 @@ CCL_CAPI void __cdecl cycles_session_cancel(unsigned int client_id, unsigned int
 CCL_CAPI void __cdecl cycles_session_start(unsigned int client_id, unsigned int session_id);
 /** Wait for session render process to finish or cancel. */
 CCL_CAPI void __cdecl cycles_session_wait(unsigned int client_id, unsigned int session_id);
+/** Set session samples to render. */
+CCL_CAPI void __cdecl cycles_session_set_samples(unsigned int client_id, unsigned int session_id, int samples);
 /** Clear resources for session. */
 CCL_CAPI void __cdecl cycles_session_destroy(unsigned int client_id, unsigned int session_id);
 /** Copy pixel data of session. */

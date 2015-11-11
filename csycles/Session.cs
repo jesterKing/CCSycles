@@ -235,5 +235,16 @@ namespace ccl
 			if (Destroyed) return;
 			CSycles.session_reset(Client.Id, Id, width, height, samples);
 		}
+
+		/// <summary>
+		/// Set sample count for session to render. This can be used to increase the sample
+		/// count for an interactive render session.
+		/// </summary>
+		/// <param name="samples"></param>
+		public void SetSamples(int samples)
+		{
+			if (Destroyed) return;
+			CSycles.session_set_samples(Client.Id, Id, samples);
+		}
 	}
 }

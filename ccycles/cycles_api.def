@@ -147,6 +147,7 @@ EXPORTS
   cycles_session_cancel
   cycles_session_start
   cycles_session_wait
+  cycles_session_set_samples
   cycles_session_draw
   cycles_session_rhinodraw
 

@@ -101,6 +101,13 @@ namespace ccl
 			cycles_session_wait(clientId, sessionId);
 		}
 
+		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_session_set_samples", CallingConvention = CallingConvention.Cdecl)]
+		private static extern void cycles_session_set_samples(uint clientId, uint sessionId, int samples);
+		public static void session_set_samples(uint clientId, uint sessionId, int samples)
+		{
+			cycles_session_set_samples(clientId, sessionId, samples);
+		}
+
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_session_cancel", CallingConvention = CallingConvention.Cdecl)]
 		private static extern void cycles_session_cancel(uint clientId, uint sessionId, [MarshalAs(UnmanagedType.LPStr)] string cancelMessage);
 		public static void session_cancel(uint clientId, uint sessionId, string cancelMessage)
