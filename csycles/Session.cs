@@ -237,6 +237,16 @@ namespace ccl
 		}
 
 		/// <summary>
+		/// Pause or un-pause a render session.
+		/// </summary>
+		/// <param name="pause"></param>
+		public void SetPause(bool pause)
+		{
+			if (Destroyed) return;
+			CSycles.session_set_pause(Client.Id, Id, pause);
+		}
+
+		/// <summary>
 		/// Set sample count for session to render. This can be used to increase the sample
 		/// count for an interactive render session.
 		/// </summary>

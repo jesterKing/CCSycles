@@ -338,6 +338,13 @@ void cycles_session_wait(unsigned int client_id, unsigned int session_id)
 	SESSION_FIND_END()
 }
 
+void cycles_session_set_pause(unsigned int client_id, unsigned int session_id, bool pause)
+{
+	SESSION_FIND(session_id)
+		session->set_pause(pause);
+	SESSION_FIND_END()
+}
+
 void cycles_session_set_samples(unsigned int client_id, unsigned int session_id, int samples)
 {
 	SESSION_FIND(session_id)

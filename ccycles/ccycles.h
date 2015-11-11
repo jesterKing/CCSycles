@@ -408,6 +408,8 @@ CCL_CAPI void __cdecl cycles_session_cancel(unsigned int client_id, unsigned int
 CCL_CAPI void __cdecl cycles_session_start(unsigned int client_id, unsigned int session_id);
 /** Wait for session render process to finish or cancel. */
 CCL_CAPI void __cdecl cycles_session_wait(unsigned int client_id, unsigned int session_id);
+/** Pause (true) or un-pause (false) a render session. */
+CCL_CAPI void __cdecl cycles_session_set_pause(unsigned int client_id, unsigned int session_id, bool pause);
 /** Set session samples to render. */
 CCL_CAPI void __cdecl cycles_session_set_samples(unsigned int client_id, unsigned int session_id, int samples);
 /** Clear resources for session. */
