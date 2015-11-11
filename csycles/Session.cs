@@ -233,6 +233,7 @@ namespace ccl
 		public void Reset(uint width, uint height, uint samples)
 		{
 			if (Destroyed) return;
+			CSycles.progress_reset(Client.Id, Id);
 			CSycles.session_reset(Client.Id, Id, width, height, samples);
 		}
 
