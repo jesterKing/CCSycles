@@ -185,6 +185,12 @@ namespace ccl
 			CSycles.session_draw(Client.Id, Id, width, height);
 		}
 
+		public void RhinoDraw(int width, int height)
+		{
+			if (Destroyed) return;
+			CSycles.session_rhinodraw(Client.Id, Id, width, height);
+		}
+
 		/// <summary>
 		/// Copy the ccycles API level session buffer through CSycles into this Session.
 		/// 

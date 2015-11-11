@@ -415,6 +415,8 @@ CCL_CAPI void __cdecl cycles_session_copy_buffer(unsigned int client_id, unsigne
 /** Get pixel data buffer information of session. */
 CCL_CAPI void __cdecl cycles_session_get_buffer_info(unsigned int client_id, unsigned int session_id, unsigned int* buffer_size, unsigned int* buffer_stride);
 CCL_CAPI void __cdecl cycles_session_draw(unsigned int client_id, unsigned int session_id, int width, int height);
+/** A (temporary) function to ensure we can draw into a Rhino viewport. */
+CCL_CAPI void __cdecl cycles_session_rhinodraw(unsigned int client_id, unsigned int session_id, int width, int height);
 /** Get pixel data buffer pointer. */
 CCL_CAPI float* __cdecl cycles_session_get_buffer(unsigned int client_id, unsigned int session_id);
 

@@ -114,6 +114,13 @@ namespace ccl
 		{
 			cycles_session_draw(clientId, sessionId, width, height);
 		}
+
+		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_session_rhinodraw", CallingConvention = CallingConvention.Cdecl)]
+		private static extern void cycles_session_rhinodraw(uint clientId, uint sessionId, int width, int height);
+		public static void session_rhinodraw(uint clientId, uint sessionId, int width, int height)
+		{
+			cycles_session_rhinodraw(clientId, sessionId, width, height);
+		}
 #endregion
 
 #region session parameters

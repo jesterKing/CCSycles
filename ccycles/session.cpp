@@ -367,7 +367,7 @@ void cycles_session_copy_buffer(unsigned int client_id, unsigned int session_id,
 	SESSION_FIND_END()
 }
 
-void cycles_session_draw(unsigned int client_id, unsigned int session_id, int width, int height)
+void cycles_session_rhinodraw(unsigned int client_id, unsigned int session_id, int width, int height)
 {
 	static ccl::DeviceDrawParams draw_params = ccl::DeviceDrawParams();
 
@@ -428,6 +428,20 @@ void cycles_session_draw(unsigned int client_id, unsigned int session_id, int wi
 		glPopMatrix();
 		// revert to old attributes
 		glPopAttrib();
+
+	SESSION_FIND_END()
+}
+
+void cycles_session_draw(unsigned int client_id, unsigned int session_id, int width, int height)
+{
+	static ccl::DeviceDrawParams draw_params = ccl::DeviceDrawParams();
+
+	SESSION_FIND(session_id)
+		ccl::BufferParams session_buf_params;
+		session_buf_params.width = session_buf_params.full_width = width;
+		session_buf_params.height = session_buf_params.full_height = height;
+
+		session->draw(session_buf_params, draw_params);
 
 	SESSION_FIND_END()
 }
