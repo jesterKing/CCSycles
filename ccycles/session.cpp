@@ -83,7 +83,7 @@ void copy_pixels_to_ccsession(ccl::RenderTile &tile, unsigned int sid) {
 			/* from tile pixels coord. */
 			int tileidx = y * params.width * stride + x * stride;
 			/* to full image pixels coord. */
-			int fullimgidx = (tiley + y) * scewidth * stride + (tilex + x) * stride;
+			int fullimgidx = (sceheight - (tiley + y) - 1) * scewidth * stride + (tilex + x) * stride;
 
 			/* copy the tile pixels from pixels into session final pixel buffer. */
 			se->pixels[fullimgidx + 0] = pixels[tileidx + 0];
