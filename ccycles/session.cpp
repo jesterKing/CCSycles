@@ -426,7 +426,7 @@ void cycles_session_rhinodraw(unsigned int client_id, unsigned int session_id, i
 		glLoadIdentity();
 
 		// set viewport
-		glViewport((-width/2), height/2, width, height);
+		glViewport(-(width/2), -height/2, width, height);
 		// let Cycles draw
 		session->draw(session_buf_params, draw_params);
 
