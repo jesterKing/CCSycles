@@ -185,5 +185,30 @@ namespace ccl
 		{
 			CSycles.scene_reset(Client.Id, Id);
 		}
+
+		/// <summary>
+		/// Try aqcuire lock on scene mutex non-blocking.
+		/// </summary>
+		/// <returns>True if lock was acquired, false otherwise</returns>
+		public bool TryLock()
+		{
+			return CSycles.scene_try_lock(Client.Id, Id);
+		}
+
+		/// <summary>
+		/// Aqcuire lock on scene mutex blocking.
+		/// </summary>
+		public void Lock()
+		{
+			CSycles.scene_lock(Client.Id, Id);
+		}
+
+		/// <summary>
+		/// Release lock.
+		/// </summary>
+		public void Unlock()
+		{
+			CSycles.scene_unlock(Client.Id, Id);
+		}
 	}
 }

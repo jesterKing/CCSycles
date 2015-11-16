@@ -19,6 +19,27 @@ namespace ccl
 			cycles_scene_reset(clientId, sceneId);
 		}
 
+		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_scene_try_lock", CallingConvention = CallingConvention.Cdecl)]
+		private static extern bool cycles_scene_try_lock(uint clientId, uint sceneId);
+		public static bool scene_try_lock(uint clientId, uint sceneId)
+		{
+			return cycles_scene_try_lock(clientId, sceneId);
+		}
+
+		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_scene_lock", CallingConvention = CallingConvention.Cdecl)]
+		private static extern void cycles_scene_lock(uint clientId, uint sceneId);
+		public static void scene_lock(uint clientId, uint sceneId)
+		{
+			cycles_scene_lock(clientId, sceneId);
+		}
+
+		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_scene_unlock", CallingConvention = CallingConvention.Cdecl)]
+		private static extern void cycles_scene_unlock(uint clientId, uint sceneId);
+		public static void scene_unlock(uint clientId, uint sceneId)
+		{
+			cycles_scene_unlock(clientId, sceneId);
+		}
+
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_scene_add_object", CallingConvention = CallingConvention.Cdecl)]
 		private static extern uint cycles_scene_add_object(uint clientId, uint sceneId);
 		public static uint scene_add_object(uint clientId, uint sceneId)

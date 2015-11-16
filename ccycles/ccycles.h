@@ -461,6 +461,9 @@ CCL_CAPI void __cdecl cycles_scene_set_background_ao_factor(unsigned int client_
 CCL_CAPI void __cdecl cycles_scene_set_background_ao_distance(unsigned int client_id, unsigned int scene_id, float ao_distance);
 CCL_CAPI void __cdecl cycles_scene_set_background_visibility(unsigned int client_id, unsigned int scene_id, unsigned int path_ray_flag);
 CCL_CAPI void __cdecl cycles_scene_reset(unsigned int client_id, unsigned int scene_id);
+CCL_CAPI bool __cdecl cycles_scene_try_lock(unsigned int client_id, unsigned int scene_id);
+CCL_CAPI void __cdecl cycles_scene_lock(unsigned int client_id, unsigned int scene_id);
+CCL_CAPI void __cdecl cycles_scene_unlock(unsigned int client_id, unsigned int scene_id);
 
 /* Mesh geometry API */
 CCL_CAPI void __cdecl cycles_mesh_set_verts(unsigned int client_id, unsigned int scene_id, unsigned int mesh_id, float *verts, unsigned int vcount);

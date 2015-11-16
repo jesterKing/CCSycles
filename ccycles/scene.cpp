@@ -144,3 +144,25 @@ void cycles_scene_reset(unsigned int client_id, unsigned int scene_id)
 	SCENE_FIND_END()
 }
 
+bool cycles_scene_try_lock(unsigned int client_id, unsigned int scene_id)
+{
+	SCENE_FIND(scene_id)
+		return sce->mutex.try_lock();
+	SCENE_FIND_END()
+	return false;
+}
+
+void cycles_scene_lock(unsigned int client_id, unsigned int scene_id)
+{
+	SCENE_FIND(scene_id)
+		sce->mutex.lock();
+	SCENE_FIND_END()
+}
+
+void cycles_scene_unlock(unsigned int client_id, unsigned int scene_id)
+{
+	SCENE_FIND(scene_id)
+		sce->mutex.unlock();
+	SCENE_FIND_END()
+}
+
