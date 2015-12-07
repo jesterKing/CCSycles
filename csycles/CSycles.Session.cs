@@ -73,7 +73,7 @@ namespace ccl
 		}
 
 		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-		public delegate void RenderTileCallback(uint sessionId, uint x, uint y, uint w, uint h, uint depth);
+		public delegate void RenderTileCallback(uint sessionId, uint x, uint y, uint w, uint h, uint depth, int startSample, int numSamples, int sample, int resolution);
 		[DllImport("ccycles.dll", SetLastError = false, CallingConvention = CallingConvention.Cdecl, EntryPoint = "cycles_session_set_update_tile_callback")]
 		private static extern void cycles_session_set_update_tile_callback(uint clientId, uint sessionId, RenderTileCallback renderTileCb);
 		public static void session_set_update_tile_callback(uint clientId, uint sessionId, RenderTileCallback renderTileCb)

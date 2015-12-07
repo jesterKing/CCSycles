@@ -103,7 +103,7 @@ typedef void(__cdecl *TEST_CANCEL_CB)(unsigned int session_id);
  * update callback function with CCycles using cycles_session_set_update_callback
  * \ingroup ccycles ccycles_session
  */
-typedef void(__cdecl *RENDER_TILE_CB)(unsigned int session_id, unsigned int x, unsigned int y, unsigned int w, unsigned int h, unsigned int depth);
+typedef void(__cdecl *RENDER_TILE_CB)(unsigned int session_id, unsigned int x, unsigned int y, unsigned int w, unsigned int h, unsigned int depth, int start_sample, int num_samples, int sample, int resolution);
 
 
 /**

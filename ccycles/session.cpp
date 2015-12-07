@@ -108,7 +108,7 @@ void CCSession::update_render_tile(ccl::RenderTile &tile)
 	int tiley = params.full_y - se->session->tile_manager.params.full_y;
 
 	if (update_cbs[this->id] != nullptr) {
-		update_cbs[this->id](this->id, tilex, tiley, params.width, params.height, 4);
+		update_cbs[this->id](this->id, tilex, tiley, params.width, params.height, 4, tile.start_sample, tile.num_samples, tile.sample, tile.resolution);
 	}
 }
 
@@ -125,7 +125,7 @@ void CCSession::write_render_tile(ccl::RenderTile &tile)
 	auto tilex = params.full_x - se->session->tile_manager.params.full_x;
 	auto tiley = params.full_y - se->session->tile_manager.params.full_y;
 	if (write_cbs[this->id] != nullptr) {
-		write_cbs[this->id](this->id, tilex, tiley, params.width, params.height, 4);
+		write_cbs[this->id](this->id, tilex, tiley, params.width, params.height, 4, tile.start_sample, tile.num_samples, tile.sample, tile.resolution);
 	}
 }
 
