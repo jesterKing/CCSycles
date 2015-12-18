@@ -229,6 +229,13 @@ namespace ccl
 			cycles_session_params_set_display_buffer_linear(clientId, sessionParamsId, (uint)(displayBufferLinear ? 1 : 0));
 		}
 
+		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_session_params_set_skip_linear_to_srgb_conversion", CallingConvention = CallingConvention.Cdecl)]
+		private static extern void cycles_session_params_set_skip_linear_to_srgb_conversion(uint clientId, uint sessionParamsId, uint skipLinearToSrgbConversion);
+		public static void session_params_set_skip_linear_to_srgb_conversion(uint clientId, uint sessionParamsId, bool skipLinearToSrgbConversion)
+		{
+			cycles_session_params_set_skip_linear_to_srgb_conversion(clientId, sessionParamsId, (uint)(skipLinearToSrgbConversion ? 1 : 0));
+		}
+
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_session_params_set_cancel_timeout", CallingConvention = CallingConvention.Cdecl)]
 		private static extern void cycles_session_params_set_cancel_timeout(uint clientId, uint sessionParamsId, double cancelTimeout);
 		public static void session_params_set_cancel_timeout(uint clientId, uint sessionParamsId, double cancelTimeout)

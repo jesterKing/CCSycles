@@ -448,6 +448,7 @@ CCL_CAPI void __cdecl cycles_session_params_set_tile_order(unsigned int client_i
 CCL_CAPI void __cdecl cycles_session_params_set_start_resolution(unsigned int client_id, unsigned int session_params_id, int start_resolution);
 CCL_CAPI void __cdecl cycles_session_params_set_threads(unsigned int client_id, unsigned int session_params_id, unsigned int threads);
 CCL_CAPI void __cdecl cycles_session_params_set_display_buffer_linear(unsigned int client_id, unsigned int session_params_id, unsigned int display_buffer_linear);
+CCL_CAPI void __cdecl cycles_session_params_set_skip_linear_to_srgb_conversion(unsigned int client_id, unsigned int session_params_id, unsigned int skip_linear_to_srgb_conversion);
 CCL_CAPI void __cdecl cycles_session_params_set_cancel_timeout(unsigned int client_id, unsigned int session_params_id, double cancel_timeout);
 CCL_CAPI void __cdecl cycles_session_params_set_reset_timeout(unsigned int client_id, unsigned int session_params_id, double reset_timeout);
 CCL_CAPI void __cdecl cycles_session_params_set_text_timeout(unsigned int client_id, unsigned int session_params_id, double text_timeout);

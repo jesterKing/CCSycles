@@ -181,6 +181,7 @@ EXPORTS
   cycles_session_params_set_start_resolution
   cycles_session_params_set_threads
   cycles_session_params_set_display_buffer_linear
+  cycles_session_params_set_skip_linear_to_srgb_conversion
   cycles_session_params_set_cancel_timeout
   cycles_session_params_set_reset_timeout
   cycles_session_params_set_text_timeout

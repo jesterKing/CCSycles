@@ -105,6 +105,10 @@ void cycles_session_params_set_display_buffer_linear(unsigned int client_id, uns
 {
 	SESSION_PARAM_BOOL(session_params_id, display_buffer_linear)
 }
+void cycles_session_params_set_skip_linear_to_srgb_conversion(unsigned int client_id, unsigned int session_params_id, unsigned int skip_linear_to_srgb_conversion)
+{
+	SESSION_PARAM_BOOL(session_params_id, skip_linear_to_srgb_conversion)
+}
 void cycles_session_params_set_cancel_timeout(unsigned int client_id, unsigned int session_params_id, double cancel_timeout)
 {
 	SESSION_PARAM(session_params_id, cancel_timeout);
