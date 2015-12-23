@@ -702,6 +702,17 @@ void cycles_shadernode_set_member_bool(unsigned int client_id, unsigned int shad
 						if (mname == "use_alpha") {
 							imgtex->use_alpha = value;
 						}
+						else if (mname == "is_linear") {
+							imgtex->is_linear = value;
+						}
+					}
+					break;
+				case shadernode_type::ENVIRONMENT_TEXTURE:
+					{
+						ccl::EnvironmentTextureNode* envtex= dynamic_cast<ccl::EnvironmentTextureNode*>(*psh);
+						if (mname == "is_linear") {
+							envtex->is_linear = value;
+						}
 					}
 					break;
 				case shadernode_type::TEXTURE_COORDINATE:

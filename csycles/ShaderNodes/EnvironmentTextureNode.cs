@@ -92,6 +92,10 @@ namespace ccl.ShaderNodes
 		}
 
 		/// <summary>
+		/// Set to true if image data is to be interpreted as linear.
+		/// </summary>
+		public bool IsLinear { get; set; }
+		/// <summary>
 		/// Color space to operate in
 		/// </summary>
 		public TextureColorSpace ColorSpace { get; set; }
@@ -135,6 +139,7 @@ namespace ccl.ShaderNodes
 
 		internal override void SetDirectMembers(uint clientId, uint shaderId)
 		{
+			CSycles.shadernode_set_member_bool(clientId, shaderId, Id, Type, "is_linear", IsLinear);
 			if (FloatImage != null)
 			{
 				var flimg = FloatImage;
