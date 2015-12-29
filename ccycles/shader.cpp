@@ -566,12 +566,17 @@ void cycles_shadernode_set_enum(unsigned int client_id, unsigned int shader_id, 
 	SHADERNODE_FIND_END()
 }
 
-CCImage* find_existing_ccimage(string imgname)
+CCImage* find_existing_ccimage(string imgname, unsigned int width, unsigned int height, unsigned int depth, unsigned int channels, bool is_float)
 {
-	bool is_float{ true };
 	CCImage* existing_image = nullptr;
 	for (CCImage* im : images) {
-		if (im->filename == imgname) {
+		if (im->filename == imgname
+			&& im->width == (int)width
+			&& im->height== (int)height
+			&& im->depth == (int)depth
+			&& im->channels == (int)channels
+			&& im->is_float == is_float
+			) {
 			existing_image = im;
 			break;
 		}
@@ -582,7 +587,7 @@ CCImage* find_existing_ccimage(string imgname)
 template <class T>
 CCImage* get_ccimage(string imgname, T* img, unsigned int width, unsigned int height, unsigned int depth, unsigned int channels, bool is_float)
 {
-	CCImage* existing_image = find_existing_ccimage(imgname);
+	CCImage* existing_image = find_existing_ccimage(imgname, width, height, depth, channels, is_float);
 	CCImage* nimg = existing_image ? existing_image : new CCImage();
 	if (!existing_image) {
 		T* imgdata = new T[width*height*channels*depth];
