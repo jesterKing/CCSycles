@@ -761,6 +761,14 @@ void cycles_shadernode_set_member_int(unsigned int client_id, unsigned int shade
 						}
 					}
 					break;
+				case shadernode_type::ENVIRONMENT_TEXTURE:
+					{
+						ccl::EnvironmentTextureNode* envnode = dynamic_cast<ccl::EnvironmentTextureNode*>(*psh);
+						if (mname == "interpolation") {
+							envnode->interpolation = (ccl::InterpolationType)value;
+						}
+					}
+					break;
 			}
 	SHADERNODE_FIND_END()
 }

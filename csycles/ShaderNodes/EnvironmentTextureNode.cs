@@ -87,6 +87,7 @@ namespace ccl.ShaderNodes
 			inputs = new EnvironmentTextureInputs(this);
 			outputs = new EnvironmentTextureOutputs(this);
 
+			Interpolation = InterpolationType.Linear;
 			ColorSpace = TextureColorSpace.Color;
 			Projection = EnvironmentProjection.Equirectangular;
 		}
@@ -103,6 +104,10 @@ namespace ccl.ShaderNodes
 		/// Get or set environment projection
 		/// </summary>
 		public EnvironmentProjection Projection { get; set; }
+		/// <summary>
+		/// EnvironmentTexture texture interpolation
+		/// </summary>
+		public InterpolationType Interpolation { get; set; }
 		/// <summary>
 		/// Get or set image name
 		/// </summary>
@@ -154,6 +159,7 @@ namespace ccl.ShaderNodes
 		internal override void SetDirectMembers(uint clientId, uint shaderId)
 		{
 			CSycles.shadernode_set_member_bool(clientId, shaderId, Id, Type, "is_linear", IsLinear);
+			CSycles.shadernode_set_member_int(clientId, shaderId, Id, Type, "interpolation", (int)Interpolation);
 			if (FloatImage != null)
 			{
 				var flimg = FloatImage;
