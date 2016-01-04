@@ -152,6 +152,7 @@ void _cleanup_sessions()
 CCSession* CCSession::create(int width, int height, unsigned int buffer_stride) {
 	int img_size{ width * height };
 	float* pixels_ = new float[img_size*buffer_stride]{0};
+	memset(pixels_, 0, sizeof(float)*img_size*buffer_stride);
 	CCSession* se = new CCSession(pixels_, img_size*buffer_stride, buffer_stride);
 	se->width = width;
 	se->height = height;
@@ -163,7 +164,8 @@ void CCSession::reset(int width_, int height_, unsigned int buffer_stride_) {
 	if (img_size*buffer_stride_ != buffer_size || buffer_stride_ != buffer_stride) {
 		delete[] pixels;
 
-		pixels = new float[img_size*buffer_stride_];
+		pixels = new float[img_size*buffer_stride_] {0};
+		memset(pixels, 0, sizeof(float)*img_size*buffer_stride);
 		buffer_size = img_size*buffer_stride_;
 		buffer_stride = buffer_stride_;
 		width = width_;
