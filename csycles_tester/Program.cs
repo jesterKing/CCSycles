@@ -104,12 +104,12 @@ namespace csycles_tester
 			Console.WriteLine("C# status update: {0} {1} {2} {3} <|> {4:N}s {5:P}", CSycles.progress_get_sample(Client.Id, sessionId), status, samples, num_samples, total_time, progress);
 		}
 
-		static public void WriteRenderTileCallback(uint sessionId, uint x, uint y, uint w, uint h, uint depth)
+		static public void WriteRenderTileCallback(uint sessionId, uint x, uint y, uint w, uint h, uint depth, int startSample, int numSamples, int sample, int resolution)
 		{
 			Console.WriteLine("C# Write Render Tile for session {0} at ({1},{2}) [{3}]", sessionId, x, y, depth);
 		}
 
-		public static void UpdateRenderTileCallback(uint sessionId, uint x, uint y, uint w, uint h, uint depth)
+		public static void UpdateRenderTileCallback(uint sessionId, uint x, uint y, uint w, uint h, uint depth, int startSample, int numSamples, int sample, int resolution)
 		{
 			Console.WriteLine("C# Update Render Tile for session {0} at ({1},{2}) [{3}]", sessionId, x, y, depth);
 		}
@@ -190,7 +190,7 @@ namespace csycles_tester
 			var dev = Device.FirstCuda;
 			Console.WriteLine("Using device {0} {1}", dev.Name, dev.Description);
 
-			var scene_params = new SceneParameters(client, ShadingSystem.SVM, BvhType.Static, false, false, false, false);
+			var scene_params = new SceneParameters(client, ShadingSystem.SVM, BvhType.Static, false, false, false);
 			var scene = new Scene(client, scene_params, dev);
 
 			Console.WriteLine("Default surface shader {0}", scene.DefaultSurface.Name);

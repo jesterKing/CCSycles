@@ -50,7 +50,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\..\boost;$(ProjectDir)pthreads;$(ProjectDir)OpenImageIO\include;$(ProjectDir)glew\include;$(ProjectDir)cycles\third_party\atomic;$(ProjectDir)cycles\third_party\cuew\include;$(ProjectDir)cycles\third_party\clew\include;$(ProjectDir)cycles\src\render;$(ProjectDir)cycles\src\kernel;$(ProjectDir)cycles\src\kernel\svm;$(ProjectDir)cycles\src\kernel\osl;$(ProjectDir)cycles\src\util;$(ProjectDir)cycles\src\device;$(ProjectDir)cycles\src\bvh;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)bindeps\boost;$(ProjectDir)pthreads;$(ProjectDir)OpenImageIO\include;$(ProjectDir)glew\include;$(ProjectDir)cycles\third_party\atomic;$(ProjectDir)cycles\third_party\cuew\include;$(ProjectDir)cycles\third_party\clew\include;$(ProjectDir)cycles\src\render;$(ProjectDir)cycles\src\kernel;$(ProjectDir)cycles\src\kernel\svm;$(ProjectDir)cycles\src\kernel\osl;$(ProjectDir)cycles\src\util;$(ProjectDir)cycles\src\device;$(ProjectDir)cycles\src\bvh;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>GLEW_STATIC;_WINSOCK_DEPRECATED_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;DEBUG;_DEBUG;CCL_NAMESPACE_BEGIN=namespace ccl {;CCL_NAMESPACE_END=};WITH_NETWORK;WITH_OPENCL;WITH_CUDA;WITH_MULTI;CYCLES_STD_UNORDERED_MAP;NO_OIIO_LOADING;WITH_CYCLES_OPTIMIZED_KERNEL_SSE2;WITH_CYCLES_OPTIMIZED_KERNEL_SSE3;WITH_CYCLES_OPTIMIZED_KERNEL_SSE41;WITH_CYCLES_OPTIMIZED_KERNEL_AVX;WITH_CYCLES_OPTIMIZED_KERNEL_AVX2;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <FloatingPointModel>Fast</FloatingPointModel>
@@ -67,7 +67,7 @@
     </Link>
     <Lib>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
-      <AdditionalLibraryDirectories>$(ProjectDir)..\..\..\..\..\..\boostbuild\stage$(Configuration)\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)bindeps\boost\stage$(Configuration)\lib</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -76,7 +76,7 @@
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>false</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\..\boost;$(ProjectDir)pthreads;$(ProjectDir)OpenImageIO\include;$(ProjectDir)glew\include;$(ProjectDir)cycles\third_party\atomic;$(ProjectDir)cycles\third_party\cuew\include;$(ProjectDir)cycles\third_party\clew\include;$(ProjectDir)cycles\src\render;$(ProjectDir)cycles\src\kernel;$(ProjectDir)cycles\src\kernel\svm;$(ProjectDir)cycles\src\kernel\osl;$(ProjectDir)cycles\src\util;$(ProjectDir)cycles\src\device;$(ProjectDir)cycles\src\bvh;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)bindeps\boost;$(ProjectDir)pthreads;$(ProjectDir)OpenImageIO\include;$(ProjectDir)glew\include;$(ProjectDir)cycles\third_party\atomic;$(ProjectDir)cycles\third_party\cuew\include;$(ProjectDir)cycles\third_party\clew\include;$(ProjectDir)cycles\src\render;$(ProjectDir)cycles\src\kernel;$(ProjectDir)cycles\src\kernel\svm;$(ProjectDir)cycles\src\kernel\osl;$(ProjectDir)cycles\src\util;$(ProjectDir)cycles\src\device;$(ProjectDir)cycles\src\bvh;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <WholeProgramOptimization>false</WholeProgramOptimization>
       <PreprocessorDefinitions>GLEW_STATIC;_WINSOCK_DEPRECATED_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;NDEBUG;CCL_NAMESPACE_BEGIN=namespace ccl {;CCL_NAMESPACE_END=};WITH_NETWORK;WITH_OPENCL;WITH_CUDA;WITH_MULTI;CYCLES_STD_UNORDERED_MAP;NO_OIIO_LOADING;WITH_CYCLES_OPTIMIZED_KERNEL_SSE2;WITH_CYCLES_OPTIMIZED_KERNEL_SSE3;WITH_CYCLES_OPTIMIZED_KERNEL_SSE41;WITH_CYCLES_OPTIMIZED_KERNEL_AVX;WITH_CYCLES_OPTIMIZED_KERNEL_AVX2;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -95,7 +95,7 @@
     </Link>
     <Lib>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
-      <AdditionalLibraryDirectories>$(ProjectDir)..\..\..\..\..\boostbuild\stage$(Configuration)\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)bindeps\boost\stage$(Configuration)\lib</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>

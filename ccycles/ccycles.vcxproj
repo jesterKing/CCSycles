@@ -53,7 +53,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>
       </SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\bindeps\boost_1_55_0;$(ProjectDir)..\OpenImageIO\include;$(ProjectDir)..\pthreads;$(ProjectDir)..\cycles\third_party\atomic;$(ProjectDir)..\cycles\src\bvh;$(ProjectDir)..\cycles\src\device;$(ProjectDir)..\cycles\src\kernel;$(ProjectDir)..\cycles\src\render;$(ProjectDir)..\cycles\src\subd;$(ProjectDir)..\cycles\src\util</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\bindeps\boost;$(ProjectDir)..\OpenImageIO\include;$(ProjectDir)..\glew\include;$(ProjectDir)..\pthreads;$(ProjectDir)..\cycles\third_party\atomic;$(ProjectDir)..\cycles\src\bvh;$(ProjectDir)..\cycles\src\device;$(ProjectDir)..\cycles\src\kernel;$(ProjectDir)..\cycles\src\render;$(ProjectDir)..\cycles\src\subd;$(ProjectDir)..\cycles\src\util</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>DEBUG;CCL_CAPI_DLL;GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;CYCLES_STD_UNORDERED_MAP;CCL_NAMESPACE_BEGIN=namespace ccl {;CCL_NAMESPACE_END=};WITH_CYCLES_OPTIMIZED_KERNEL_SSE2;WITH_CYCLES_OPTIMIZED_KERNEL_SSE3;WITH_CYCLES_OPTIMIZED_KERNEL_SSE41;WITH_CYCLES_OPTIMIZED_KERNEL_AVX;WITH_CYCLES_OPTIMIZED_KERNEL_AVX2;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BufferSecurityCheck>false</BufferSecurityCheck>
@@ -63,7 +63,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)..\bindeps\boost_1_55_0\$(Configuration)\lib;$(ProjectDir)..\OpenImageIO\$(Platform)\$(Configuration)\;$(ProjectDir)..\pthreads\$(Platform)\$(Configuration)\;$(ProjectDir)..\glew\$(Platform)\$(Configuration)\;$(ProjectDir)..\cycles\src\bvh\$(Platform)\$(Configuration)\;$(ProjectDir)..\cycles\src\device\$(Platform)\$(Configuration)\;$(ProjectDir)..\cycles\src\kernel\$(Platform)\$(Configuration)\;$(ProjectDir)..\cycles\src\render\$(Platform)\$(Configuration)\;$(ProjectDir)..\cycles\src\subd\$(Platform)\$(Configuration)\;$(ProjectDir)..\cycles\src\util\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\bindeps\boost\stage$(Configuration)\lib;$(ProjectDir)..\OpenImageIO\$(Platform)\$(Configuration)\;$(ProjectDir)..\pthreads\$(Platform)\$(Configuration)\;$(ProjectDir)..\glew\$(Platform)\$(Configuration)\;$(ProjectDir)..\cuew\$(Platform)\$(Configuration)\;$(ProjectDir)..\clew\$(Platform)\$(Configuration)\;$(ProjectDir)..\cycles\src\kernel\$(Platform)\$(Configuration)\;$(ProjectDir)..\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>libboost_serialization-vc120-mt-gd-1_59.lib;libboost_filesystem-vc120-mt-gd-1_59.lib;libboost_chrono-vc120-mt-gd-1_59.lib;libboost_date_time-vc120-mt-gd-1_59.lib;libboost_locale-vc120-mt-gd-1_59.lib;libboost_regex-vc120-mt-gd-1_59.lib;libboost_system-vc120-mt-gd-1_59.lib;libboost_thread-vc120-mt-gd-1_59.lib;cuew.lib;clew.lib;glew.lib;pthreads.lib;OpenImageIOv13.lib;opengl32.lib;cycles_kernel.lib;cycles_kernel_avx.lib;cycles_kernel_avx2.lib;cycles_kernel_sse2.lib;cycles_kernel_sse3.lib;cycles_kernel_sse41.lib;cycles_proper.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ShowProgress>
       </ShowProgress>
@@ -80,7 +80,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>
       </SDLCheck>
-			<AdditionalIncludeDirectories>$(ProjectDir)..\bindeps\boost_1_55_0;$(ProjectDir)..\OpenImageIO\include;$(ProjectDir)..\pthreads;$(ProjectDir)..\cycles\third_party\atomic;$(ProjectDir)..\cycles\src\bvh;$(ProjectDir)..\cycles\src\device;$(ProjectDir)..\cycles\src\kernel;$(ProjectDir)..\cycles\src\render;$(ProjectDir)..\cycles\src\subd;$(ProjectDir)..\cycles\src\util</AdditionalIncludeDirectories>
+			<AdditionalIncludeDirectories>$(ProjectDir)..\bindeps\boost;$(ProjectDir)..\OpenImageIO\include;$(ProjectDir)..\glew\include;$(ProjectDir)..\pthreads;$(ProjectDir)..\cycles\third_party\atomic;$(ProjectDir)..\cycles\src\bvh;$(ProjectDir)..\cycles\src\device;$(ProjectDir)..\cycles\src\kernel;$(ProjectDir)..\cycles\src\render;$(ProjectDir)..\cycles\src\subd;$(ProjectDir)..\cycles\src\util</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>CCL_CAPI_DLL;GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;CYCLES_STD_UNORDERED_MAP;CCL_NAMESPACE_BEGIN=namespace ccl {;CCL_NAMESPACE_END=};WITH_CYCLES_OPTIMIZED_KERNEL_SSE2;WITH_CYCLES_OPTIMIZED_KERNEL_SSE3;WITH_CYCLES_OPTIMIZED_KERNEL_SSE41;WITH_CYCLES_OPTIMIZED_KERNEL_AVX;WITH_CYCLES_OPTIMIZED_KERNEL_AVX2;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <FloatingPointModel>Fast</FloatingPointModel>
@@ -93,7 +93,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(ProjectDir)..\bindeps\boost_1_55_0\$(Configuration)\lib;$(ProjectDir)..\OpenImageIO\$(Platform)\$(Configuration)\;$(ProjectDir)..\pthreads\$(Platform)\$(Configuration)\;$(ProjectDir)..\glew\$(Platform)\$(Configuration)\;$(ProjectDir)..\cycles\src\bvh\$(Platform)\$(Configuration)\;$(ProjectDir)..\cycles\src\device\$(Platform)\$(Configuration)\;$(ProjectDir)..\cycles\src\kernel\$(Platform)\$(Configuration)\;$(ProjectDir)..\cycles\src\render\$(Platform)\$(Configuration)\;$(ProjectDir)..\cycles\src\subd\$(Platform)\$(Configuration)\;$(ProjectDir)..\cycles\src\util\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\bindeps\boost\stage$(Configuration)\lib;$(ProjectDir)..\OpenImageIO\$(Platform)\$(Configuration)\;$(ProjectDir)..\pthreads\$(Platform)\$(Configuration)\;$(ProjectDir)..\glew\$(Platform)\$(Configuration)\;$(ProjectDir)..\cuew\$(Platform)\$(Configuration)\;$(ProjectDir)..\clew\$(Platform)\$(Configuration)\;$(ProjectDir)..\cycles\src\kernel\$(Platform)\$(Configuration)\;$(ProjectDir)..\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>libboost_serialization-vc120-mt-1_59.lib;libboost_filesystem-vc120-mt-1_59.lib;libboost_chrono-vc120-mt-1_59.lib;libboost_date_time-vc120-mt-1_59.lib;libboost_locale-vc120-mt-1_59.lib;libboost_regex-vc120-mt-1_59.lib;libboost_system-vc120-mt-1_59.lib;libboost_thread-vc120-mt-1_59.lib;cuew.lib;clew.lib;glew.lib;pthreads.lib;OpenImageIOv13.lib;opengl32.lib;cycles_kernel.lib;cycles_kernel_avx.lib;cycles_kernel_avx2.lib;cycles_kernel_sse2.lib;cycles_kernel_sse3.lib;cycles_kernel_sse41.lib;cycles_proper.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ShowProgress />
       <RandomizedBaseAddress>true</RandomizedBaseAddress>
