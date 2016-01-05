@@ -145,6 +145,7 @@
     <ClCompile Include="cycles\src\util\util_cache.cpp" />
     <ClCompile Include="cycles\src\util\util_guarded_allocator.cpp" />
     <ClCompile Include="cycles\src\util\util_logging.cpp" />
+    <ClCompile Include="cycles\src\util\util_math_cdf.cpp" />
     <ClCompile Include="cycles\src\util\util_md5.cpp" />
     <ClCompile Include="cycles\src\util\util_path.cpp" />
     <ClCompile Include="cycles\src\util\util_simd.cpp" />
@@ -212,6 +213,7 @@
     <ClInclude Include="cycles\src\util\util_logging.h" />
     <ClInclude Include="cycles\src\util\util_map.h" />
     <ClInclude Include="cycles\src\util\util_math.h" />
+    <ClInclude Include="cycles\src\util\util_math_cdf.h" />
     <ClInclude Include="cycles\src\util\util_math_fast.h" />
     <ClInclude Include="cycles\src\util\util_md5.h" />
     <ClInclude Include="cycles\src\util\util_opengl.h" />

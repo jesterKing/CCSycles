@@ -163,6 +163,9 @@
     <ClCompile Include="cycles\src\subd\subd_split.cpp">
       <Filter>subd</Filter>
     </ClCompile>
+    <ClCompile Include="cycles\src\util\util_math_cdf.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cycles\src\bvh\bvh.h">
@@ -404,6 +407,9 @@
     </ClInclude>
     <ClInclude Include="cycles\src\subd\subd_split.h">
       <Filter>subd</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\util\util_math_cdf.h">
+      <Filter>util</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
