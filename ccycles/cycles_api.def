@@ -21,7 +21,6 @@ EXPORTS
 
   cycles_scene_params_create
   cycles_scene_params_set_bvh_type
-  cycles_scene_params_set_bvh_cache
   cycles_scene_params_set_bvh_spatial_split
   cycles_scene_params_set_qbvh
   cycles_scene_params_set_shadingsystem

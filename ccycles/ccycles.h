@@ -195,14 +195,12 @@ CCL_CAPI unsigned int __cdecl cycles_device_pack_images(int i);
 CCL_CAPI unsigned int __cdecl cycles_device_type(int i);
 
 /* Create scene parameters, to be used when creating a new scene. */
-CCL_CAPI unsigned int __cdecl cycles_scene_params_create(unsigned int client_id, unsigned int shadingsystem, unsigned int bvh_type, unsigned int use_bvh_cache, unsigned int use_bvh_spatial_split, unsigned int use_qbvh, unsigned int persistent_data);
+CCL_CAPI unsigned int __cdecl cycles_scene_params_create(unsigned int client_id, unsigned int shadingsystem, unsigned int bvh_type, unsigned int use_bvh_spatial_split, unsigned int use_qbvh, unsigned int persistent_data);
 
 /* Set scene parameters*/
 
 /** Set scene parameter: BVH type. */
 CCL_CAPI void __cdecl cycles_scene_params_set_bvh_type(unsigned int client_id, unsigned int scene_params_id, unsigned int type);
-/** Set scene parameter: use BVH cache. */
-CCL_CAPI void __cdecl cycles_scene_params_set_bvh_cache(unsigned int client_id, unsigned int scene_params_id, unsigned int use);
 /** Set scene parameter: use BVH spatial split. */
 CCL_CAPI void __cdecl cycles_scene_params_set_bvh_spatial_split(unsigned int client_id, unsigned int scene_params_id, unsigned int use);
 /** Set scene parameter: use qBVH. */
