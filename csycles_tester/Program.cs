@@ -259,12 +259,12 @@ namespace csycles_tester
 			Session = new Session(client, session_params, scene);
 			Session.Reset(width, height, samples);
 
-			/*if (!silent)
+			if (!silent)
 			{
 				Session.UpdateCallback = g_update_callback;
 				Session.UpdateTileCallback = g_update_render_tile_callback;
 				Session.WriteTileCallback = g_write_render_tile_callback;
-			}*/
+			}
 
 			Session.Start();
 			Session.Wait();
