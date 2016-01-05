@@ -1,0 +1,432 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="cycles\src\bvh\bvh_binning.cpp">
+      <Filter>bvh</Filter>
+    </ClCompile>
+    <ClCompile Include="cycles\src\bvh\bvh_build.cpp">
+      <Filter>bvh</Filter>
+    </ClCompile>
+    <ClCompile Include="cycles\src\bvh\bvh_node.cpp">
+      <Filter>bvh</Filter>
+    </ClCompile>
+    <ClCompile Include="cycles\src\bvh\bvh_sort.cpp">
+      <Filter>bvh</Filter>
+    </ClCompile>
+    <ClCompile Include="cycles\src\bvh\bvh_split.cpp">
+      <Filter>bvh</Filter>
+    </ClCompile>
+    <ClCompile Include="cycles\src\bvh\bvh.cpp">
+      <Filter>bvh</Filter>
+    </ClCompile>
+    <ClCompile Include="cycles\src\util\util_aligned_malloc.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="cycles\src\util\util_cache.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="cycles\src\util\util_guarded_allocator.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="cycles\src\util\util_logging.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="cycles\src\util\util_md5.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="cycles\src\util\util_path.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="cycles\src\util\util_simd.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="cycles\src\util\util_string.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="cycles\src\util\util_system.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="cycles\src\util\util_task.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="cycles\src\util\util_time.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="cycles\src\util\util_transform.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="cycles\src\device\device.cpp">
+      <Filter>device</Filter>
+    </ClCompile>
+    <ClCompile Include="cycles\src\device\device_cpu.cpp">
+      <Filter>device</Filter>
+    </ClCompile>
+    <ClCompile Include="cycles\src\device\device_cuda.cpp">
+      <Filter>device</Filter>
+    </ClCompile>
+    <ClCompile Include="cycles\src\device\device_multi.cpp">
+      <Filter>device</Filter>
+    </ClCompile>
+    <ClCompile Include="cycles\src\device\device_network.cpp">
+      <Filter>device</Filter>
+    </ClCompile>
+    <ClCompile Include="cycles\src\device\device_opencl.cpp">
+      <Filter>device</Filter>
+    </ClCompile>
+    <ClCompile Include="cycles\src\device\device_task.cpp">
+      <Filter>device</Filter>
+    </ClCompile>
+    <ClCompile Include="cycles\src\render\attribute.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="cycles\src\render\background.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="cycles\src\render\bake.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="cycles\src\render\buffers.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="cycles\src\render\camera.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="cycles\src\render\curves.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="cycles\src\render\film.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="cycles\src\render\graph.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="cycles\src\render\image.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="cycles\src\render\integrator.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="cycles\src\render\light.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="cycles\src\render\mesh.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="cycles\src\render\mesh_displace.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="cycles\src\render\nodes.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="cycles\src\render\object.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="cycles\src\render\osl.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="cycles\src\render\particles.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="cycles\src\render\scene.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="cycles\src\render\session.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="cycles\src\render\shader.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="cycles\src\render\sky_model.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="cycles\src\render\sobol.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="cycles\src\render\svm.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="cycles\src\render\tables.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="cycles\src\render\tile.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="cycles\src\subd\subd_dice.cpp">
+      <Filter>subd</Filter>
+    </ClCompile>
+    <ClCompile Include="cycles\src\subd\subd_mesh.cpp">
+      <Filter>subd</Filter>
+    </ClCompile>
+    <ClCompile Include="cycles\src\subd\subd_patch.cpp">
+      <Filter>subd</Filter>
+    </ClCompile>
+    <ClCompile Include="cycles\src\subd\subd_split.cpp">
+      <Filter>subd</Filter>
+    </ClCompile>
+    <ClCompile Include="cycles\src\util\util_math_cdf.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="cycles\src\bvh\bvh.h">
+      <Filter>bvh</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\bvh\bvh_binning.h">
+      <Filter>bvh</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\bvh\bvh_build.h">
+      <Filter>bvh</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\bvh\bvh_node.h">
+      <Filter>bvh</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\bvh\bvh_params.h">
+      <Filter>bvh</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\bvh\bvh_sort.h">
+      <Filter>bvh</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\bvh\bvh_split.h">
+      <Filter>bvh</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\util\util_algorithm.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\util\util_aligned_malloc.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\util\util_args.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\util\util_boundbox.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\util\util_cache.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\util\util_debug.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\util\util_foreach.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\util\util_function.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\util\util_guarded_allocator.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\util\util_half.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\util\util_hash.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\util\util_image.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\util\util_list.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\util\util_logging.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\util\util_map.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\util\util_math.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\util\util_math_fast.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\util\util_md5.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\util\util_opengl.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\util\util_optimization.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\util\util_param.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\util\util_path.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\util\util_progress.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\util\util_set.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\util\util_simd.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\util\util_sseb.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\util\util_ssef.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\util\util_ssei.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\util\util_stats.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\util\util_string.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\util\util_system.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\util\util_task.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\util\util_thread.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\util\util_time.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\util\util_transform.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\util\util_types.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\util\util_vector.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\util\util_view.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\util\util_xml.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\device\device.h">
+      <Filter>device</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\device\device_intern.h">
+      <Filter>device</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\device\device_memory.h">
+      <Filter>device</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\device\device_network.h">
+      <Filter>device</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\device\device_task.h">
+      <Filter>device</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\render\attribute.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\render\background.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\render\bake.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\render\buffers.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\render\camera.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\render\curves.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\render\film.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\render\graph.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\render\image.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\render\integrator.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\render\light.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\render\mesh.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\render\nodes.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\render\object.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\render\osl.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\render\particles.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\render\scene.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\render\session.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\render\shader.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\render\sky_model.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\render\sky_model_data.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\render\sobol.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\render\svm.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\render\tables.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\render\tile.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\subd\subd_dice.h">
+      <Filter>subd</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\subd\subd_mesh.h">
+      <Filter>subd</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\subd\subd_patch.h">
+      <Filter>subd</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\subd\subd_split.h">
+      <Filter>subd</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\util\util_math_cdf.h">
+      <Filter>util</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="util">
+      <UniqueIdentifier>{a3c9e2ce-3b7e-43a4-bd53-fceb830a2eb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="device">
+      <UniqueIdentifier>{ee660968-f550-4ac9-a607-0fd603e741b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="render">
+      <UniqueIdentifier>{d1f838d0-de6f-45ec-8cf9-997a274df0f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="bvh">
+      <UniqueIdentifier>{12bc6c85-ce3d-426f-bdf0-4972af4a9c6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="subd">
+      <UniqueIdentifier>{c052acf9-1852-4578-8f5e-c8da6d4c8303}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

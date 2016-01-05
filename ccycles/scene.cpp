@@ -1,5 +1,5 @@
 /**
-Copyright 2014 Robert McNeel and Associates
+Copyright 2014-2015 Robert McNeel and Associates
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -70,8 +70,8 @@ unsigned int cycles_scene_create(unsigned int client_id, unsigned int scene_para
 	ccl::SceneParams params;
 	ccl::DeviceInfo di;
 
-	bool found_params = false;
-	bool found_di = false;
+	bool found_params{ false };
+	bool found_di{ false };
 
 	if (0 <= scene_params_id && scene_params_id < scene_params.size()) {
 		params = scene_params[scene_params_id];
@@ -84,9 +84,9 @@ unsigned int cycles_scene_create(unsigned int client_id, unsigned int scene_para
 	}
 
 	if (found_di && found_params) {
-		int cscid = -1;
+		int cscid{ -1 };
 		if (scenes.size() > 0) {
-			int hid = 0;
+			int hid{ 0 };
 
 			auto scend = scenes.end();
 			auto scit = scenes.begin();
@@ -141,6 +141,28 @@ void cycles_scene_reset(unsigned int client_id, unsigned int scene_id)
 {
 	SCENE_FIND(scene_id)
 		sce->reset();
+	SCENE_FIND_END()
+}
+
+bool cycles_scene_try_lock(unsigned int client_id, unsigned int scene_id)
+{
+	SCENE_FIND(scene_id)
+		return sce->mutex.try_lock();
+	SCENE_FIND_END()
+	return false;
+}
+
+void cycles_scene_lock(unsigned int client_id, unsigned int scene_id)
+{
+	SCENE_FIND(scene_id)
+		sce->mutex.lock();
+	SCENE_FIND_END()
+}
+
+void cycles_scene_unlock(unsigned int client_id, unsigned int scene_id)
+{
+	SCENE_FIND(scene_id)
+		sce->mutex.unlock();
 	SCENE_FIND_END()
 }
 

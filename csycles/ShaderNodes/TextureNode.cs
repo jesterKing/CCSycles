@@ -42,6 +42,7 @@ namespace ccl.ShaderNodes
 		{
 			Equirectangular,
 			MirrorBall,
+			Wallpaper
 		}
 
 		internal TextureNode(ShaderNodeType type) :

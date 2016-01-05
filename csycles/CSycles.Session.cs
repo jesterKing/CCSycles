@@ -73,7 +73,7 @@ namespace ccl
 		}
 
 		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-		public delegate void RenderTileCallback(uint sessionId, uint x, uint y, uint w, uint h, uint depth);
+		public delegate void RenderTileCallback(uint sessionId, uint x, uint y, uint w, uint h, uint depth, int startSample, int numSamples, int sample, int resolution);
 		[DllImport("ccycles.dll", SetLastError = false, CallingConvention = CallingConvention.Cdecl, EntryPoint = "cycles_session_set_update_tile_callback")]
 		private static extern void cycles_session_set_update_tile_callback(uint clientId, uint sessionId, RenderTileCallback renderTileCb);
 		public static void session_set_update_tile_callback(uint clientId, uint sessionId, RenderTileCallback renderTileCb)
@@ -101,6 +101,20 @@ namespace ccl
 			cycles_session_wait(clientId, sessionId);
 		}
 
+		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_session_set_pause", CallingConvention = CallingConvention.Cdecl)]
+		private static extern void cycles_session_set_pause(uint clientId, uint sessionId, bool pause);
+		public static void session_set_pause(uint clientId, uint sessionId, bool pause)
+		{
+			cycles_session_set_pause(clientId, sessionId, pause);
+		}
+
+		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_session_set_samples", CallingConvention = CallingConvention.Cdecl)]
+		private static extern void cycles_session_set_samples(uint clientId, uint sessionId, int samples);
+		public static void session_set_samples(uint clientId, uint sessionId, int samples)
+		{
+			cycles_session_set_samples(clientId, sessionId, samples);
+		}
+
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_session_cancel", CallingConvention = CallingConvention.Cdecl)]
 		private static extern void cycles_session_cancel(uint clientId, uint sessionId, [MarshalAs(UnmanagedType.LPStr)] string cancelMessage);
 		public static void session_cancel(uint clientId, uint sessionId, string cancelMessage)
@@ -109,10 +123,17 @@ namespace ccl
 		}
 
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_session_draw", CallingConvention = CallingConvention.Cdecl)]
-		private static extern void cycles_session_draw(uint clientId, uint sessionId);
-		public static void session_draw(uint clientId, uint sessionId)
+		private static extern void cycles_session_draw(uint clientId, uint sessionId, int width, int height);
+		public static void session_draw(uint clientId, uint sessionId, int width, int height)
 		{
-			cycles_session_draw(clientId, sessionId);
+			cycles_session_draw(clientId, sessionId, width, height);
+		}
+
+		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_session_rhinodraw", CallingConvention = CallingConvention.Cdecl)]
+		private static extern void cycles_session_rhinodraw(uint clientId, uint sessionId, int width, int height);
+		public static void session_rhinodraw(uint clientId, uint sessionId, int width, int height)
+		{
+			cycles_session_rhinodraw(clientId, sessionId, width, height);
 		}
 #endregion
 
@@ -206,6 +227,13 @@ namespace ccl
 		public static void session_params_set_display_buffer_linear(uint clientId, uint sessionParamsId, bool displayBufferLinear)
 		{
 			cycles_session_params_set_display_buffer_linear(clientId, sessionParamsId, (uint)(displayBufferLinear ? 1 : 0));
+		}
+
+		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_session_params_set_skip_linear_to_srgb_conversion", CallingConvention = CallingConvention.Cdecl)]
+		private static extern void cycles_session_params_set_skip_linear_to_srgb_conversion(uint clientId, uint sessionParamsId, uint skipLinearToSrgbConversion);
+		public static void session_params_set_skip_linear_to_srgb_conversion(uint clientId, uint sessionParamsId, bool skipLinearToSrgbConversion)
+		{
+			cycles_session_params_set_skip_linear_to_srgb_conversion(clientId, sessionParamsId, (uint)(skipLinearToSrgbConversion ? 1 : 0));
 		}
 
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_session_params_set_cancel_timeout", CallingConvention = CallingConvention.Cdecl)]

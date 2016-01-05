@@ -157,6 +157,7 @@ namespace ccl.ShaderNodes
 			CSycles.shadernode_set_member_float(clientId, shaderId, Id, Type, "projection_blend", ProjectionBlend);
 			CSycles.shadernode_set_member_int(clientId, shaderId, Id, Type, "interpolation", (int)Interpolation);
 			CSycles.shadernode_set_member_bool(clientId, shaderId, Id, Type, "use_alpha", UseAlpha);
+			CSycles.shadernode_set_member_bool(clientId, shaderId, Id, Type, "is_linear", IsLinear);
 			if (FloatImage != null)
 			{
 				var flimg = FloatImage;

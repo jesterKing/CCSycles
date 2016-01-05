@@ -87,10 +87,15 @@ namespace ccl.ShaderNodes
 			inputs = new EnvironmentTextureInputs(this);
 			outputs = new EnvironmentTextureOutputs(this);
 
+			Interpolation = InterpolationType.Linear;
 			ColorSpace = TextureColorSpace.Color;
 			Projection = EnvironmentProjection.Equirectangular;
 		}
 
+		/// <summary>
+		/// Set to true if image data is to be interpreted as linear.
+		/// </summary>
+		public bool IsLinear { get; set; }
 		/// <summary>
 		/// Color space to operate in
 		/// </summary>
@@ -99,6 +104,10 @@ namespace ccl.ShaderNodes
 		/// Get or set environment projection
 		/// </summary>
 		public EnvironmentProjection Projection { get; set; }
+		/// <summary>
+		/// EnvironmentTexture texture interpolation
+		/// </summary>
+		public InterpolationType Interpolation { get; set; }
 		/// <summary>
 		/// Get or set image name
 		/// </summary>
@@ -123,11 +132,25 @@ namespace ccl.ShaderNodes
 		/// </summary>
 		public uint Height { get; set; }
 
+		private string GetProjectionString(EnvironmentProjection projection)
+		{
+
+			switch (projection)
+			{
+				case EnvironmentProjection.Equirectangular:
+					return "Equirectangular";
+				case EnvironmentProjection.MirrorBall:
+					return "Mirror Ball";
+				case EnvironmentProjection.Wallpaper:
+					return "Wallpaper";
+			}
+
+			return "Equirectangular";
+		}
+
 		internal override void SetEnums(uint clientId, uint shaderId)
 		{
-			var projection = Projection == EnvironmentProjection.Equirectangular
-				? "Equirectangular"
-				: "Mirror Ball";
+			var projection = GetProjectionString(Projection);
 			var colspace = ColorSpace == TextureColorSpace.Color ? "Color" : "None";
 			CSycles.shadernode_set_enum(clientId, shaderId, Id, Type, "projection", projection);
 			CSycles.shadernode_set_enum(clientId, shaderId, Id, Type, "color_space", colspace);
@@ -135,6 +158,8 @@ namespace ccl.ShaderNodes
 
 		internal override void SetDirectMembers(uint clientId, uint shaderId)
 		{
+			CSycles.shadernode_set_member_bool(clientId, shaderId, Id, Type, "is_linear", IsLinear);
+			CSycles.shadernode_set_member_int(clientId, shaderId, Id, Type, "interpolation", (int)Interpolation);
 			if (FloatImage != null)
 			{
 				var flimg = FloatImage;

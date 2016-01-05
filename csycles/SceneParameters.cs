@@ -42,10 +42,10 @@ namespace ccl
 		/// <param name="bvhSpatialSplit">True if BVH spatial splits should be used</param>
 		/// <param name="qbvh">True if QBVH should be used</param>
 		/// <param name="persistentData">True if data should be persisted</param>
-		public SceneParameters(Client client, ShadingSystem shadingSystem, BvhType bvhType, bool bvhCache, bool bvhSpatialSplit, bool qbvh, bool persistentData)
+		public SceneParameters(Client client, ShadingSystem shadingSystem, BvhType bvhType, bool bvhSpatialSplit, bool qbvh, bool persistentData)
 		{
 			Client = client;
-			Id = CSycles.scene_params_create(Client.Id, shadingSystem, bvhType, bvhCache, bvhSpatialSplit, qbvh, persistentData);
+			Id = CSycles.scene_params_create(Client.Id, shadingSystem, bvhType, bvhSpatialSplit, qbvh, persistentData);
 		}
 
 		/// <summary>
@@ -56,17 +56,6 @@ namespace ccl
 			set
 			{
 				CSycles.scene_params_set_bvh_type(Client.Id, Id, value);
-			}
-		}
-
-		/// <summary>
-		/// Set to true if BVH cache should be used.
-		/// </summary>
-		public bool BvhCache
-		{
-			set
-			{
-				CSycles.scene_params_set_bvh_cache(Client.Id, Id, value);
 			}
 		}
 

@@ -1,5 +1,5 @@
 /**
-Copyright 2014 Robert McNeel and Associates
+Copyright 2014-2015 Robert McNeel and Associates
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ unsigned int cycles_number_devices() {
 }
 
 unsigned int cycles_number_cuda_devices() {
-	int i = 0;
+	int i{ 0 };
 	for (ccl::DeviceInfo di : devices) {
 		if (di.type == ccl::DeviceType::DEVICE_CUDA) i++;
 	}

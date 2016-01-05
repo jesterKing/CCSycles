@@ -179,10 +179,16 @@ namespace ccl
 		/// 
 		/// NOTE: this is currently not working
 		/// </summary>
-		public void Draw()
+		public void Draw(int width, int height)
 		{
 			if (Destroyed) return;
-			CSycles.session_draw(Client.Id, Id);
+			CSycles.session_draw(Client.Id, Id, width, height);
+		}
+
+		public void RhinoDraw(int width, int height)
+		{
+			if (Destroyed) return;
+			CSycles.session_rhinodraw(Client.Id, Id, width, height);
 		}
 
 		/// <summary>
@@ -227,7 +233,29 @@ namespace ccl
 		public void Reset(uint width, uint height, uint samples)
 		{
 			if (Destroyed) return;
+			CSycles.progress_reset(Client.Id, Id);
 			CSycles.session_reset(Client.Id, Id, width, height, samples);
+		}
+
+		/// <summary>
+		/// Pause or un-pause a render session.
+		/// </summary>
+		/// <param name="pause"></param>
+		public void SetPause(bool pause)
+		{
+			if (Destroyed) return;
+			CSycles.session_set_pause(Client.Id, Id, pause);
+		}
+
+		/// <summary>
+		/// Set sample count for session to render. This can be used to increase the sample
+		/// count for an interactive render session.
+		/// </summary>
+		/// <param name="samples"></param>
+		public void SetSamples(int samples)
+		{
+			if (Destroyed) return;
+			CSycles.session_set_samples(Client.Id, Id, samples);
 		}
 	}
 }

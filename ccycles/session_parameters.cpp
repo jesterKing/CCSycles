@@ -1,5 +1,5 @@
 /**
-Copyright 2014 Robert McNeel and Associates
+Copyright 2014-2015 Robert McNeel and Associates
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -104,6 +104,10 @@ void cycles_session_params_set_threads(unsigned int client_id, unsigned int sess
 void cycles_session_params_set_display_buffer_linear(unsigned int client_id, unsigned int session_params_id, unsigned int display_buffer_linear)
 {
 	SESSION_PARAM_BOOL(session_params_id, display_buffer_linear)
+}
+void cycles_session_params_set_skip_linear_to_srgb_conversion(unsigned int client_id, unsigned int session_params_id, unsigned int skip_linear_to_srgb_conversion)
+{
+	SESSION_PARAM_BOOL(session_params_id, skip_linear_to_srgb_conversion)
 }
 void cycles_session_params_set_cancel_timeout(unsigned int client_id, unsigned int session_params_id, double cancel_timeout)
 {

@@ -21,7 +21,6 @@ EXPORTS
 
   cycles_scene_params_create
   cycles_scene_params_set_bvh_type
-  cycles_scene_params_set_bvh_cache
   cycles_scene_params_set_bvh_spatial_split
   cycles_scene_params_set_qbvh
   cycles_scene_params_set_shadingsystem
@@ -34,6 +33,9 @@ EXPORTS
   cycles_scene_set_background_ao_distance
   cycles_scene_set_background_visibility
   cycles_scene_reset
+  cycles_scene_try_lock
+  cycles_scene_lock
+  cycles_scene_unlock
   
   cycles_scene_add_mesh
   cycles_scene_add_mesh_object
@@ -147,7 +149,10 @@ EXPORTS
   cycles_session_cancel
   cycles_session_start
   cycles_session_wait
+  cycles_session_set_pause
+  cycles_session_set_samples
   cycles_session_draw
+  cycles_session_rhinodraw
 
   cycles_session_get_buffer
   cycles_session_copy_buffer
@@ -175,6 +180,7 @@ EXPORTS
   cycles_session_params_set_start_resolution
   cycles_session_params_set_threads
   cycles_session_params_set_display_buffer_linear
+  cycles_session_params_set_skip_linear_to_srgb_conversion
   cycles_session_params_set_cancel_timeout
   cycles_session_params_set_reset_timeout
   cycles_session_params_set_text_timeout

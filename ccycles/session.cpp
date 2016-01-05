@@ -1,5 +1,5 @@
 /**
-Copyright 2014 Robert McNeel and Associates
+Copyright 2014-2015 Robert McNeel and Associates
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@ limitations under the License.
 **/
 
 #include "internal_types.h"
+#include "util_opengl.h"
 
 extern std::vector<CCScene> scenes;
 extern std::vector<ccl::DeviceInfo> devices;
@@ -48,7 +49,7 @@ void CCSession::test_cancel(void) {
 }
 
 /* floats per pixel (rgba). */
-const int stride = 4;
+const int stride{ 4 };
 
 /* copy the pixel buffer from RenderTile to the final pixel buffer in CCSession. */
 void copy_pixels_to_ccsession(ccl::RenderTile &tile, unsigned int sid) {
@@ -82,7 +83,7 @@ void copy_pixels_to_ccsession(ccl::RenderTile &tile, unsigned int sid) {
 			/* from tile pixels coord. */
 			int tileidx = y * params.width * stride + x * stride;
 			/* to full image pixels coord. */
-			int fullimgidx = (tiley + y) * scewidth * stride + (tilex + x) * stride;
+			int fullimgidx = (sceheight - (tiley + y) - 1) * scewidth * stride + (tilex + x) * stride;
 
 			/* copy the tile pixels from pixels into session final pixel buffer. */
 			se->pixels[fullimgidx + 0] = pixels[tileidx + 0];
@@ -107,7 +108,7 @@ void CCSession::update_render_tile(ccl::RenderTile &tile)
 	int tiley = params.full_y - se->session->tile_manager.params.full_y;
 
 	if (update_cbs[this->id] != nullptr) {
-		update_cbs[this->id](this->id, tilex, tiley, params.width, params.height, 4);
+		update_cbs[this->id](this->id, tilex, tiley, params.width, params.height, 4, tile.start_sample, tile.num_samples, tile.sample, tile.resolution);
 	}
 }
 
@@ -124,7 +125,7 @@ void CCSession::write_render_tile(ccl::RenderTile &tile)
 	auto tilex = params.full_x - se->session->tile_manager.params.full_x;
 	auto tiley = params.full_y - se->session->tile_manager.params.full_y;
 	if (write_cbs[this->id] != nullptr) {
-		write_cbs[this->id](this->id, tilex, tiley, params.width, params.height, 4);
+		write_cbs[this->id](this->id, tilex, tiley, params.width, params.height, 4, tile.start_sample, tile.num_samples, tile.sample, tile.resolution);
 	}
 }
 
@@ -149,8 +150,9 @@ void _cleanup_sessions()
 }
 
 CCSession* CCSession::create(int width, int height, unsigned int buffer_stride) {
-	int img_size = width * height;
-	float* pixels_ = new float[img_size*buffer_stride];
+	int img_size{ width * height };
+	float* pixels_ = new float[img_size*buffer_stride]{0};
+	memset(pixels_, 0, sizeof(float)*img_size*buffer_stride);
 	CCSession* se = new CCSession(pixels_, img_size*buffer_stride, buffer_stride);
 	se->width = width;
 	se->height = height;
@@ -162,7 +164,8 @@ void CCSession::reset(int width_, int height_, unsigned int buffer_stride_) {
 	if (img_size*buffer_stride_ != buffer_size || buffer_stride_ != buffer_stride) {
 		delete[] pixels;
 
-		pixels = new float[img_size*buffer_stride_];
+		pixels = new float[img_size*buffer_stride_] {0};
+		memset(pixels, 0, sizeof(float)*img_size*buffer_stride);
 		buffer_size = img_size*buffer_stride_;
 		buffer_stride = buffer_stride_;
 		width = width_;
@@ -179,8 +182,8 @@ unsigned int cycles_session_create(unsigned int client_id, unsigned int session_
 
 	CCScene& sce = scenes[scene_id];
 
-	int csesid = -1;
-	int hid = 0;
+	int csesid{ -1 };
+	int hid{ 0 };
 
 	CCSession* session = CCSession::create(sce.scene->camera->width, sce.scene->camera->height, 4);
 	// TODO: pass ccl::Session into CCSession::create
@@ -249,6 +252,7 @@ void cycles_session_reset(unsigned int client_id, unsigned int session_id, unsig
 		bufParams.width = bufParams.full_width = width;
 		bufParams.height = bufParams.full_height = height;
 		session->reset(bufParams, (int)samples);
+		session->set_pause(false);
 	SESSION_FIND_END()
 }
 
@@ -336,6 +340,20 @@ void cycles_session_wait(unsigned int client_id, unsigned int session_id)
 	SESSION_FIND_END()
 }
 
+void cycles_session_set_pause(unsigned int client_id, unsigned int session_id, bool pause)
+{
+	SESSION_FIND(session_id)
+		session->set_pause(pause);
+	SESSION_FIND_END()
+}
+
+void cycles_session_set_samples(unsigned int client_id, unsigned int session_id, int samples)
+{
+	SESSION_FIND(session_id)
+		session->set_samples(samples);
+	SESSION_FIND_END()
+}
+
 void cycles_session_get_buffer_info(unsigned int client_id, unsigned int session_id, unsigned int* buffer_size, unsigned int* buffer_stride)
 {
 	SESSION_FIND(session_id)
@@ -365,14 +383,79 @@ void cycles_session_copy_buffer(unsigned int client_id, unsigned int session_id,
 	SESSION_FIND_END()
 }
 
-void cycles_session_draw(unsigned int client_id, unsigned int session_id)
+void cycles_session_rhinodraw(unsigned int client_id, unsigned int session_id, int width, int height)
 {
 	static ccl::DeviceDrawParams draw_params = ccl::DeviceDrawParams();
 
 	SESSION_FIND(session_id)
 		ccl::BufferParams session_buf_params;
-		session_buf_params.width = session_buf_params.full_width = session->scene->camera->width;
-		session_buf_params.height = session_buf_params.full_height = session->scene->camera->height;
+		session_buf_params.width = session_buf_params.full_width = width;
+		session_buf_params.height = session_buf_params.full_height = height;
+
+		// push attribs
+		glPushAttrib(GL_ENABLE_BIT | GL_DEPTH_BUFFER_BIT);
+
+		// reset and disable about everything
+		glDisable(GL_ALPHA_TEST);
+		glDisable(GL_BLEND);
+		glDisable(GL_DITHER);
+		glDisable(GL_FOG);
+		glDisable(GL_LIGHTING);
+		glDisable(GL_LOGIC_OP);
+		glDisable(GL_STENCIL_TEST);
+		glDisable(GL_TEXTURE_1D);
+		glDisable(GL_TEXTURE_2D);
+		glPixelTransferi(GL_MAP_COLOR, GL_FALSE);
+		glPixelTransferi(GL_RED_SCALE, 1);
+		glPixelTransferi(GL_RED_BIAS, 0);
+		glPixelTransferi(GL_GREEN_SCALE, 1);
+		glPixelTransferi(GL_GREEN_BIAS, 0);
+		glPixelTransferi(GL_BLUE_SCALE, 1);
+		glPixelTransferi(GL_BLUE_BIAS, 0);
+		glPixelTransferi(GL_ALPHA_SCALE, 1);
+		glPixelTransferi(GL_ALPHA_BIAS, 0);
+		glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
+
+		glDisable(GL_DEPTH_TEST);
+		glDepthMask(GL_FALSE);
+
+		// reset project/modelview
+		glMatrixMode(GL_PROJECTION);
+		glPushMatrix();
+		glLoadIdentity();
+		glMatrixMode(GL_MODELVIEW);
+		glPushMatrix();
+		glLoadIdentity();
+
+		// set viewport
+		glViewport(-(width/2), -height/2, width, height);
+		// let Cycles draw
+		session->draw(session_buf_params, draw_params);
+
+		// reset viewport
+		glViewport(0, 0, width, height);
+
+		//------------------------
+
+		// revert to matrices before our drawing
+		glMatrixMode(GL_PROJECTION);
+		glPopMatrix();
+		glMatrixMode(GL_MODELVIEW);
+		glPopMatrix();
+		// revert to old attributes
+		glPopAttrib();
+
+	SESSION_FIND_END()
+}
+
+void cycles_session_draw(unsigned int client_id, unsigned int session_id, int width, int height)
+{
+	static ccl::DeviceDrawParams draw_params = ccl::DeviceDrawParams();
+
+	SESSION_FIND(session_id)
+		ccl::BufferParams session_buf_params;
+		session_buf_params.width = session_buf_params.full_width = width;
+		session_buf_params.height = session_buf_params.full_height = height;
 
 		session->draw(session_buf_params, draw_params);
 

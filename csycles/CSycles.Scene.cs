@@ -19,6 +19,27 @@ namespace ccl
 			cycles_scene_reset(clientId, sceneId);
 		}
 
+		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_scene_try_lock", CallingConvention = CallingConvention.Cdecl)]
+		private static extern bool cycles_scene_try_lock(uint clientId, uint sceneId);
+		public static bool scene_try_lock(uint clientId, uint sceneId)
+		{
+			return cycles_scene_try_lock(clientId, sceneId);
+		}
+
+		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_scene_lock", CallingConvention = CallingConvention.Cdecl)]
+		private static extern void cycles_scene_lock(uint clientId, uint sceneId);
+		public static void scene_lock(uint clientId, uint sceneId)
+		{
+			cycles_scene_lock(clientId, sceneId);
+		}
+
+		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_scene_unlock", CallingConvention = CallingConvention.Cdecl)]
+		private static extern void cycles_scene_unlock(uint clientId, uint sceneId);
+		public static void scene_unlock(uint clientId, uint sceneId)
+		{
+			cycles_scene_unlock(clientId, sceneId);
+		}
+
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_scene_add_object", CallingConvention = CallingConvention.Cdecl)]
 		private static extern uint cycles_scene_add_object(uint clientId, uint sceneId);
 		public static uint scene_add_object(uint clientId, uint sceneId)
@@ -113,10 +134,10 @@ namespace ccl
 
 #region scene parameters
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_scene_params_create", CallingConvention = CallingConvention.Cdecl)]
-		private static extern uint cycles_scene_params_create(uint clientId, uint shadingsystem, uint bvhtype, uint bvhcache, uint bvhspatialsplit, uint qbvh, uint persistentdata);
-		public static uint scene_params_create(uint clientId, ShadingSystem shadingSystem, BvhType bvhType, bool bvhCache, bool bvhSpatialSplit, bool qbvh, bool persistentData)
+		private static extern uint cycles_scene_params_create(uint clientId, uint shadingsystem, uint bvhtype, uint bvhspatialsplit, uint qbvh, uint persistentdata);
+		public static uint scene_params_create(uint clientId, ShadingSystem shadingSystem, BvhType bvhType, bool bvhSpatialSplit, bool qbvh, bool persistentData)
 		{
-			return cycles_scene_params_create(clientId, (uint)shadingSystem, (uint)bvhType, (uint)(bvhCache?1:0), (uint)(bvhSpatialSplit?1:0), (uint)(qbvh?1:0), (uint)(persistentData?1:0));
+			return cycles_scene_params_create(clientId, (uint)shadingSystem, (uint)bvhType, (uint)(bvhSpatialSplit?1:0), (uint)(qbvh?1:0), (uint)(persistentData?1:0));
 		}
 		  
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_scene_params_set_bvh_type", CallingConvention = CallingConvention.Cdecl)]
@@ -124,13 +145,6 @@ namespace ccl
 		public static void scene_params_set_bvh_type(uint clientId, uint sceneParamsId, BvhType type)
 		{
 			cycles_scene_params_set_bvh_type(clientId, sceneParamsId, (uint)type);
-		}
-  
-		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_scene_params_set_bvh_cache", CallingConvention = CallingConvention.Cdecl)]
-		private static extern void cycles_scene_params_set_bvh_cache(uint clientId, uint sceneParamsId, uint cache);
-		public static void scene_params_set_bvh_cache(uint clientId, uint sceneParamsId, bool type)
-		{
-			cycles_scene_params_set_bvh_cache(clientId, sceneParamsId, (uint)(type?1:0));
 		}
   
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_scene_params_set_bvh_spatial_split", CallingConvention = CallingConvention.Cdecl)]

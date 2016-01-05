@@ -1,5 +1,5 @@
 /**
-Copyright 2014 Robert McNeel and Associates
+Copyright 2014-2015 Robert McNeel and Associates
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -103,7 +103,7 @@ typedef void(__cdecl *TEST_CANCEL_CB)(unsigned int session_id);
  * update callback function with CCycles using cycles_session_set_update_callback
  * \ingroup ccycles ccycles_session
  */
-typedef void(__cdecl *RENDER_TILE_CB)(unsigned int session_id, unsigned int x, unsigned int y, unsigned int w, unsigned int h, unsigned int depth);
+typedef void(__cdecl *RENDER_TILE_CB)(unsigned int session_id, unsigned int x, unsigned int y, unsigned int w, unsigned int h, unsigned int depth, int start_sample, int num_samples, int sample, int resolution);
 
 
 /**
@@ -195,14 +195,12 @@ CCL_CAPI unsigned int __cdecl cycles_device_pack_images(int i);
 CCL_CAPI unsigned int __cdecl cycles_device_type(int i);
 
 /* Create scene parameters, to be used when creating a new scene. */
-CCL_CAPI unsigned int __cdecl cycles_scene_params_create(unsigned int client_id, unsigned int shadingsystem, unsigned int bvh_type, unsigned int use_bvh_cache, unsigned int use_bvh_spatial_split, unsigned int use_qbvh, unsigned int persistent_data);
+CCL_CAPI unsigned int __cdecl cycles_scene_params_create(unsigned int client_id, unsigned int shadingsystem, unsigned int bvh_type, unsigned int use_bvh_spatial_split, unsigned int use_qbvh, unsigned int persistent_data);
 
 /* Set scene parameters*/
 
 /** Set scene parameter: BVH type. */
 CCL_CAPI void __cdecl cycles_scene_params_set_bvh_type(unsigned int client_id, unsigned int scene_params_id, unsigned int type);
-/** Set scene parameter: use BVH cache. */
-CCL_CAPI void __cdecl cycles_scene_params_set_bvh_cache(unsigned int client_id, unsigned int scene_params_id, unsigned int use);
 /** Set scene parameter: use BVH spatial split. */
 CCL_CAPI void __cdecl cycles_scene_params_set_bvh_spatial_split(unsigned int client_id, unsigned int scene_params_id, unsigned int use);
 /** Set scene parameter: use qBVH. */
@@ -408,13 +406,19 @@ CCL_CAPI void __cdecl cycles_session_cancel(unsigned int client_id, unsigned int
 CCL_CAPI void __cdecl cycles_session_start(unsigned int client_id, unsigned int session_id);
 /** Wait for session render process to finish or cancel. */
 CCL_CAPI void __cdecl cycles_session_wait(unsigned int client_id, unsigned int session_id);
+/** Pause (true) or un-pause (false) a render session. */
+CCL_CAPI void __cdecl cycles_session_set_pause(unsigned int client_id, unsigned int session_id, bool pause);
+/** Set session samples to render. */
+CCL_CAPI void __cdecl cycles_session_set_samples(unsigned int client_id, unsigned int session_id, int samples);
 /** Clear resources for session. */
 CCL_CAPI void __cdecl cycles_session_destroy(unsigned int client_id, unsigned int session_id);
 /** Copy pixel data of session. */
 CCL_CAPI void __cdecl cycles_session_copy_buffer(unsigned int client_id, unsigned int session_id, float* pixel_buffer);
 /** Get pixel data buffer information of session. */
 CCL_CAPI void __cdecl cycles_session_get_buffer_info(unsigned int client_id, unsigned int session_id, unsigned int* buffer_size, unsigned int* buffer_stride);
-CCL_CAPI void __cdecl cycles_session_draw(unsigned int client_id, unsigned int session_id);
+CCL_CAPI void __cdecl cycles_session_draw(unsigned int client_id, unsigned int session_id, int width, int height);
+/** A (temporary) function to ensure we can draw into a Rhino viewport. */
+CCL_CAPI void __cdecl cycles_session_rhinodraw(unsigned int client_id, unsigned int session_id, int width, int height);
 /** Get pixel data buffer pointer. */
 CCL_CAPI float* __cdecl cycles_session_get_buffer(unsigned int client_id, unsigned int session_id);
 
@@ -442,6 +446,7 @@ CCL_CAPI void __cdecl cycles_session_params_set_tile_order(unsigned int client_i
 CCL_CAPI void __cdecl cycles_session_params_set_start_resolution(unsigned int client_id, unsigned int session_params_id, int start_resolution);
 CCL_CAPI void __cdecl cycles_session_params_set_threads(unsigned int client_id, unsigned int session_params_id, unsigned int threads);
 CCL_CAPI void __cdecl cycles_session_params_set_display_buffer_linear(unsigned int client_id, unsigned int session_params_id, unsigned int display_buffer_linear);
+CCL_CAPI void __cdecl cycles_session_params_set_skip_linear_to_srgb_conversion(unsigned int client_id, unsigned int session_params_id, unsigned int skip_linear_to_srgb_conversion);
 CCL_CAPI void __cdecl cycles_session_params_set_cancel_timeout(unsigned int client_id, unsigned int session_params_id, double cancel_timeout);
 CCL_CAPI void __cdecl cycles_session_params_set_reset_timeout(unsigned int client_id, unsigned int session_params_id, double reset_timeout);
 CCL_CAPI void __cdecl cycles_session_params_set_text_timeout(unsigned int client_id, unsigned int session_params_id, double text_timeout);
@@ -455,6 +460,9 @@ CCL_CAPI void __cdecl cycles_scene_set_background_ao_factor(unsigned int client_
 CCL_CAPI void __cdecl cycles_scene_set_background_ao_distance(unsigned int client_id, unsigned int scene_id, float ao_distance);
 CCL_CAPI void __cdecl cycles_scene_set_background_visibility(unsigned int client_id, unsigned int scene_id, unsigned int path_ray_flag);
 CCL_CAPI void __cdecl cycles_scene_reset(unsigned int client_id, unsigned int scene_id);
+CCL_CAPI bool __cdecl cycles_scene_try_lock(unsigned int client_id, unsigned int scene_id);
+CCL_CAPI void __cdecl cycles_scene_lock(unsigned int client_id, unsigned int scene_id);
+CCL_CAPI void __cdecl cycles_scene_unlock(unsigned int client_id, unsigned int scene_id);
 
 /* Mesh geometry API */
 CCL_CAPI void __cdecl cycles_mesh_set_verts(unsigned int client_id, unsigned int scene_id, unsigned int mesh_id, float *verts, unsigned int vcount);

@@ -170,13 +170,23 @@ namespace ccl
 		}
 
 		/// <summary>
-		/// Set to true if the display buffer should be handled linearly
+		/// Set to true if the display buffer should be handled linearly. This will
+		/// use internally a half-float buffer if set to true, otherwise a byte buffer
+		/// for the rendered result.
 		/// </summary>
 		public bool DisplayBufferLinear
 		{
 			set
 			{
 				CSycles.session_params_set_display_buffer_linear(Client.Id, Id, value);
+			}
+		}
+
+		public bool SkipLinearToSrgbConversion
+		{
+			set
+			{
+				CSycles.session_params_set_skip_linear_to_srgb_conversion(Client.Id, Id, value);
 			}
 		}
 
