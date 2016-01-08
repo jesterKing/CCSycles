@@ -480,7 +480,7 @@ void cycles_progress_reset(unsigned int client_id, unsigned int session_id)
 int cycles_progress_get_sample(unsigned int client_id, unsigned int session_id)
 {
 	SESSION_FIND(session_id)
-		ccl::TileManager tm = session->tile_manager;
+		ccl::TileManager &tm = session->tile_manager;
 		return tm.state.sample;
 	SESSION_FIND_END()
 
