@@ -87,6 +87,15 @@ namespace ccl
 			cycles_session_set_write_tile_callback(clientId, sessionId, renderTileCb);
 		}
 
+		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+		public delegate void DisplayUpdateCallback(uint sessionId, int sample);
+		[DllImport("ccycles.dll", SetLastError = false, CallingConvention = CallingConvention.Cdecl, EntryPoint = "cycles_session_set_display_update_callback")]
+		private static extern void cycles_session_set_display_update_callback(uint clientId, uint sessionId, DisplayUpdateCallback displayUpdateCallback);
+		public static void session_set_display_update_callback(uint clientId, uint sessionId, DisplayUpdateCallback displayUpdateCallback)
+		{
+			cycles_session_set_display_update_callback(clientId, sessionId, displayUpdateCallback);
+		}
+
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_session_start", CallingConvention = CallingConvention.Cdecl)]
 		private static extern void cycles_session_start(uint clientId, uint sessionId);
 		public static void session_start(uint clientId, uint sessionId)
@@ -127,6 +136,13 @@ namespace ccl
 		public static void session_draw(uint clientId, uint sessionId, int width, int height)
 		{
 			cycles_session_draw(clientId, sessionId, width, height);
+		}
+
+		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_session_draw_nogl", CallingConvention = CallingConvention.Cdecl)]
+		private static extern void cycles_session_draw_nogl(uint clientId, uint sessionId, int width, int height, bool isgpu);
+		public static void session_draw_nogl(uint clientId, uint sessionId, int width, int height, bool isgpu)
+		{
+			cycles_session_draw_nogl(clientId, sessionId, width, height, isgpu);
 		}
 
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_session_rhinodraw", CallingConvention = CallingConvention.Cdecl)]

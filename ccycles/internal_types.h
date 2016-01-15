@@ -41,6 +41,7 @@ limitations under the License.
 #include "util_function.h"
 #include "util_progress.h"
 #include "util_string.h"
+#include "util_thread.h"
 
 #pragma warning ( pop )
 
@@ -136,27 +137,21 @@ public:
 	ccl::Session* session = nullptr;
 
 	/* The status update handler for ccl::Session update callback.
-	 * This wraps _status_cb.
 	 */
 	void status_update(void);
 	/* The test cancel handler for ccl::Session cancellation test
 	 */
 	void test_cancel(void);
 	/* The update render tile handler for ccl::Session rendertile update callback.
-	 * This wraps _update_cb.
 	 */
 	void update_render_tile(ccl::RenderTile &tile);
 	/* The write render tile handler for ccl::Session rendertile write callback.
-	 * This wraps _write_cb.
 	 */
 	void write_render_tile(ccl::RenderTile &tile);
-
-	/* The status update callback as set by the client. */
-	STATUS_UPDATE_CB _status_cb{ nullptr };
-	/* The rendertile update callback as set by the client. */
-	RENDER_TILE_CB _update_cb{ nullptr };
-	/* The rendertile write callback as set by the client. */
-	RENDER_TILE_CB _write_cb{ nullptr };
+	/* The display update handler for ccl::Session.
+	 *
+	 */
+	void CCSession::display_update(int sample);
 
 	/* Hold the pixel buffer with the final result for the attached session.
 	 * Gets updated by update_render_tile and write_render_tile.
@@ -176,12 +171,11 @@ public:
 	 */
 	void reset(int width, int height, unsigned int buffer_stride_);
 
+	ccl::thread_mutex pixels_mutex;
+
 	~CCSession() {
 		delete[] pixels;
 		delete session;
-		_status_cb = nullptr;
-		_update_cb = nullptr;
-		_write_cb = nullptr;
 	}
 
 protected:

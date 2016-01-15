@@ -134,6 +134,21 @@ namespace ccl
 			}
 		}
 
+		private CSycles.DisplayUpdateCallback displayUpdateCallback;
+		/// <summary>
+		/// Set the CSycles.DisplayUpdateCallback to use for signalling rendered
+		/// sample pass
+		/// </summary>
+		public CSycles.DisplayUpdateCallback DisplayUpdateCallback
+		{
+			set
+			{
+				if (Destroyed) return;
+				displayUpdateCallback = value;
+				CSycles.session_set_display_update_callback(Client.Id, Id, value);
+			}
+		}
+
 		/// <summary>
 		/// Start the rendering session. After this one should Wait() for
 		/// the session to complete.
@@ -189,6 +204,12 @@ namespace ccl
 		{
 			if (Destroyed) return;
 			CSycles.session_rhinodraw(Client.Id, Id, width, height);
+		}
+
+		public void DrawNogl(int width, int height)
+		{
+			if (Destroyed) return;
+			CSycles.session_draw_nogl(Client.Id, Id, width, height, Scene.Device.IsGpu);
 		}
 
 		/// <summary>
