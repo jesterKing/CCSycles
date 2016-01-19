@@ -73,7 +73,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>$(ProjectDir)include\OpenImageIO;$(ProjectDir)..\..\..\..\..\boost;$(ProjectDir)..\..\OpenEXR\Half</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>OpenImageIO_EXPORTS</PreprocessorDefinitions>
+      <PreprocessorDefinitions>OpenImageIO_EXPORTS;BOOST_ALL_NO_LIB;BOOST_LIB_BUILDID=$(PlatformToolset)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <FloatingPointModel>Fast</FloatingPointModel>
       <CompileAs>CompileAsCpp</CompileAs>
@@ -85,7 +85,7 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(ProjectDir)..\..\..\..\..\boostbuild\stage$(Configuration)\lib;$(ProjectDir)..\..\OpenEXR\Half\$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Half_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Half_d.lib;libboost_thread-mt-gd-$(PlatformToolset).lib;libboost_system-mt-gd-$(PlatformToolset).lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Lib>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
@@ -103,7 +103,7 @@
       <AdditionalIncludeDirectories>$(ProjectDir)include\OpenImageIO;$(ProjectDir)..\..\..\..\..\boost;$(ProjectDir)..\..\OpenEXR\Half</AdditionalIncludeDirectories>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <WholeProgramOptimization>false</WholeProgramOptimization>
-      <PreprocessorDefinitions>OpenImageIO_EXPORTS</PreprocessorDefinitions>
+      <PreprocessorDefinitions>OpenImageIO_EXPORTS;BOOST_ALL_NO_LIB;BOOST_LIB_BUILDID=$(PlatformToolset)</PreprocessorDefinitions>
       <FloatingPointModel>Fast</FloatingPointModel>
       <CompileAs>CompileAsCpp</CompileAs>
       <DisableSpecificWarnings>4018;4065;4127;4181;4200;4244;4267;4305;4800</DisableSpecificWarnings>
@@ -116,7 +116,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(ProjectDir)..\..\..\..\..\boostbuild\stage$(Configuration)\lib;$(ProjectDir)..\..\OpenEXR\Half\$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Half.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Half.lib;libboost_thread-mt-$(PlatformToolset).lib;libboost_system-mt-$(PlatformToolset).lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ShowProgress />
     </Link>
     <Lib>
