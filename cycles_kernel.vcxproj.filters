@@ -140,154 +140,154 @@
     <ClInclude Include="cycles\src\kernel\svm\svm_voronoi.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="closure\bsdf.h">
+    <ClInclude Include="cycles\src\closure\bsdf.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="closure\bsdf_ashikhmin_shirley.h">
+    <ClInclude Include="cycles\src\closure\bsdf_ashikhmin_shirley.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="closure\bsdf_ashikhmin_velvet.h">
+    <ClInclude Include="cycles\src\closure\bsdf_ashikhmin_velvet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="closure\bsdf_diffuse.h">
+    <ClInclude Include="cycles\src\closure\bsdf_diffuse.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="closure\bsdf_diffuse_ramp.h">
+    <ClInclude Include="cycles\src\closure\bsdf_diffuse_ramp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="closure\bsdf_hair.h">
+    <ClInclude Include="cycles\src\closure\bsdf_hair.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="closure\bsdf_microfacet.h">
+    <ClInclude Include="cycles\src\closure\bsdf_microfacet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="closure\bsdf_oren_nayar.h">
+    <ClInclude Include="cycles\src\closure\bsdf_oren_nayar.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="closure\bsdf_phong_ramp.h">
+    <ClInclude Include="cycles\src\closure\bsdf_phong_ramp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="closure\bsdf_reflection.h">
+    <ClInclude Include="cycles\src\closure\bsdf_reflection.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="closure\bsdf_refraction.h">
+    <ClInclude Include="cycles\src\closure\bsdf_refraction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="closure\bsdf_toon.h">
+    <ClInclude Include="cycles\src\closure\bsdf_toon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="closure\bsdf_transparent.h">
+    <ClInclude Include="cycles\src\closure\bsdf_transparent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="closure\bsdf_util.h">
+    <ClInclude Include="cycles\src\closure\bsdf_util.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="closure\bssrdf.h">
+    <ClInclude Include="cycles\src\closure\bssrdf.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="closure\emissive.h">
+    <ClInclude Include="cycles\src\closure\emissive.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="closure\volume.h">
+    <ClInclude Include="cycles\src\closure\volume.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="kernel.h">
+    <ClInclude Include="cycles\src\kernel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="kernel_accumulate.h">
+    <ClInclude Include="cycles\src\kernel_accumulate.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="kernel_bake.h">
+    <ClInclude Include="cycles\src\kernel_bake.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="kernel_camera.h">
+    <ClInclude Include="cycles\src\kernel_camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="kernel_compat_cpu.h">
+    <ClInclude Include="cycles\src\kernel_compat_cpu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="kernel_compat_cuda.h">
+    <ClInclude Include="cycles\src\kernel_compat_cuda.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="kernel_compat_opencl.h">
+    <ClInclude Include="cycles\src\kernel_compat_opencl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="kernel_debug.h">
+    <ClInclude Include="cycles\src\kernel_debug.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="kernel_differential.h">
+    <ClInclude Include="cycles\src\kernel_differential.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="kernel_emission.h">
+    <ClInclude Include="cycles\src\kernel_emission.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="kernel_film.h">
+    <ClInclude Include="cycles\src\kernel_film.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="kernel_globals.h">
+    <ClInclude Include="cycles\src\kernel_globals.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="kernel_jitter.h">
+    <ClInclude Include="cycles\src\kernel_jitter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="kernel_light.h">
+    <ClInclude Include="cycles\src\kernel_light.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="kernel_math.h">
+    <ClInclude Include="cycles\src\kernel_math.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="kernel_montecarlo.h">
+    <ClInclude Include="cycles\src\kernel_montecarlo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="kernel_passes.h">
+    <ClInclude Include="cycles\src\kernel_passes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="kernel_path.h">
+    <ClInclude Include="cycles\src\kernel_path.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="kernel_path_common.h">
+    <ClInclude Include="cycles\src\kernel_path_common.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="kernel_path_state.h">
+    <ClInclude Include="cycles\src\kernel_path_state.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="kernel_path_surface.h">
+    <ClInclude Include="cycles\src\kernel_path_surface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="kernel_path_volume.h">
+    <ClInclude Include="cycles\src\kernel_path_volume.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="kernel_projection.h">
+    <ClInclude Include="cycles\src\kernel_projection.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="kernel_queues.h">
+    <ClInclude Include="cycles\src\kernel_queues.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="kernel_random.h">
+    <ClInclude Include="cycles\src\kernel_random.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="kernel_shader.h">
+    <ClInclude Include="cycles\src\kernel_shader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="kernel_shaderdata_vars.h">
+    <ClInclude Include="cycles\src\kernel_shaderdata_vars.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="kernel_shadow.h">
+    <ClInclude Include="cycles\src\kernel_shadow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="kernel_subsurface.h">
+    <ClInclude Include="cycles\src\kernel_subsurface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="kernel_textures.h">
+    <ClInclude Include="cycles\src\kernel_textures.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="kernel_types.h">
+    <ClInclude Include="cycles\src\kernel_types.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="kernel_volume.h">
+    <ClInclude Include="cycles\src\kernel_volume.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="kernel_work_stealing.h">
+    <ClInclude Include="cycles\src\kernel_work_stealing.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
