@@ -1,0 +1,258 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DFD4BEF21B43605700A70A91 /* IlmThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BEE61B43605700A70A91 /* IlmThread.cpp */; };
+		DFD4BEF31B43605700A70A91 /* IlmThread.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BEE71B43605700A70A91 /* IlmThread.h */; };
+		DFD4BEF41B43605700A70A91 /* IlmThreadMutex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BEE81B43605700A70A91 /* IlmThreadMutex.cpp */; };
+		DFD4BEF51B43605700A70A91 /* IlmThreadMutex.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BEE91B43605700A70A91 /* IlmThreadMutex.h */; };
+		DFD4BEF61B43605700A70A91 /* IlmThreadMutexPosix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BEEA1B43605700A70A91 /* IlmThreadMutexPosix.cpp */; };
+		DFD4BEF71B43605700A70A91 /* IlmThreadPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BEEB1B43605700A70A91 /* IlmThreadPool.cpp */; };
+		DFD4BEF81B43605700A70A91 /* IlmThreadPool.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BEEC1B43605700A70A91 /* IlmThreadPool.h */; };
+		DFD4BEF91B43605700A70A91 /* IlmThreadPosix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BEED1B43605700A70A91 /* IlmThreadPosix.cpp */; };
+		DFD4BEFA1B43605700A70A91 /* IlmThreadSemaphore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BEEE1B43605700A70A91 /* IlmThreadSemaphore.cpp */; };
+		DFD4BEFB1B43605700A70A91 /* IlmThreadSemaphore.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BEEF1B43605700A70A91 /* IlmThreadSemaphore.h */; };
+		DFD4BEFC1B43605700A70A91 /* IlmThreadSemaphorePosix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BEF01B43605700A70A91 /* IlmThreadSemaphorePosix.cpp */; };
+		DFD4BEFD1B43605700A70A91 /* IlmThreadSemaphorePosixCompat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BEF11B43605700A70A91 /* IlmThreadSemaphorePosixCompat.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		DF28AD331B44BB6F00A4A407 /* LibDebug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = LibDebug.xcconfig; path = ../../../../../Mac/XCConfig/LibDebug.xcconfig; sourceTree = "<group>"; };
+		DF28AD341B44BB6F00A4A407 /* LibRelease.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = LibRelease.xcconfig; path = ../../../../../Mac/XCConfig/LibRelease.xcconfig; sourceTree = "<group>"; };
+		DFD4BEDD1B435FEB00A70A91 /* libIlmThread.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIlmThread.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		DFD4BEE61B43605700A70A91 /* IlmThread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IlmThread.cpp; sourceTree = "<group>"; };
+		DFD4BEE71B43605700A70A91 /* IlmThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IlmThread.h; sourceTree = "<group>"; };
+		DFD4BEE81B43605700A70A91 /* IlmThreadMutex.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IlmThreadMutex.cpp; sourceTree = "<group>"; };
+		DFD4BEE91B43605700A70A91 /* IlmThreadMutex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IlmThreadMutex.h; sourceTree = "<group>"; };
+		DFD4BEEA1B43605700A70A91 /* IlmThreadMutexPosix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IlmThreadMutexPosix.cpp; sourceTree = "<group>"; };
+		DFD4BEEB1B43605700A70A91 /* IlmThreadPool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IlmThreadPool.cpp; sourceTree = "<group>"; };
+		DFD4BEEC1B43605700A70A91 /* IlmThreadPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IlmThreadPool.h; sourceTree = "<group>"; };
+		DFD4BEED1B43605700A70A91 /* IlmThreadPosix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IlmThreadPosix.cpp; sourceTree = "<group>"; };
+		DFD4BEEE1B43605700A70A91 /* IlmThreadSemaphore.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IlmThreadSemaphore.cpp; sourceTree = "<group>"; };
+		DFD4BEEF1B43605700A70A91 /* IlmThreadSemaphore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IlmThreadSemaphore.h; sourceTree = "<group>"; };
+		DFD4BEF01B43605700A70A91 /* IlmThreadSemaphorePosix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IlmThreadSemaphorePosix.cpp; sourceTree = "<group>"; };
+		DFD4BEF11B43605700A70A91 /* IlmThreadSemaphorePosixCompat.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IlmThreadSemaphorePosixCompat.cpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DFD4BEDA1B435FEB00A70A91 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DF28AD321B44BB5800A4A407 /* Supporting files */ = {
+			isa = PBXGroup;
+			children = (
+				DF28AD331B44BB6F00A4A407 /* LibDebug.xcconfig */,
+				DF28AD341B44BB6F00A4A407 /* LibRelease.xcconfig */,
+			);
+			name = "Supporting files";
+			sourceTree = "<group>";
+		};
+		DFD4BED41B435FEB00A70A91 = {
+			isa = PBXGroup;
+			children = (
+				DFD4BEE51B43602F00A70A91 /* Header files */,
+				DFD4BEE41B43602400A70A91 /* Source files */,
+				DF28AD321B44BB5800A4A407 /* Supporting files */,
+				DFD4BEDE1B435FEB00A70A91 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DFD4BEDE1B435FEB00A70A91 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DFD4BEDD1B435FEB00A70A91 /* libIlmThread.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DFD4BEE41B43602400A70A91 /* Source files */ = {
+			isa = PBXGroup;
+			children = (
+				DFD4BEE61B43605700A70A91 /* IlmThread.cpp */,
+				DFD4BEE81B43605700A70A91 /* IlmThreadMutex.cpp */,
+				DFD4BEEA1B43605700A70A91 /* IlmThreadMutexPosix.cpp */,
+				DFD4BEEB1B43605700A70A91 /* IlmThreadPool.cpp */,
+				DFD4BEED1B43605700A70A91 /* IlmThreadPosix.cpp */,
+				DFD4BEEE1B43605700A70A91 /* IlmThreadSemaphore.cpp */,
+				DFD4BEF01B43605700A70A91 /* IlmThreadSemaphorePosix.cpp */,
+				DFD4BEF11B43605700A70A91 /* IlmThreadSemaphorePosixCompat.cpp */,
+			);
+			name = "Source files";
+			sourceTree = "<group>";
+		};
+		DFD4BEE51B43602F00A70A91 /* Header files */ = {
+			isa = PBXGroup;
+			children = (
+				DFD4BEE71B43605700A70A91 /* IlmThread.h */,
+				DFD4BEE91B43605700A70A91 /* IlmThreadMutex.h */,
+				DFD4BEEC1B43605700A70A91 /* IlmThreadPool.h */,
+				DFD4BEEF1B43605700A70A91 /* IlmThreadSemaphore.h */,
+			);
+			name = "Header files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		DFD4BEDB1B435FEB00A70A91 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DFD4BEFB1B43605700A70A91 /* IlmThreadSemaphore.h in Headers */,
+				DFD4BEF31B43605700A70A91 /* IlmThread.h in Headers */,
+				DFD4BEF51B43605700A70A91 /* IlmThreadMutex.h in Headers */,
+				DFD4BEF81B43605700A70A91 /* IlmThreadPool.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		DFD4BEDC1B435FEB00A70A91 /* IlmThread */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DFD4BEE11B435FEB00A70A91 /* Build configuration list for PBXNativeTarget "IlmThread" */;
+			buildPhases = (
+				DFD4BED91B435FEB00A70A91 /* Sources */,
+				DFD4BEDA1B435FEB00A70A91 /* Frameworks */,
+				DFD4BEDB1B435FEB00A70A91 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = IlmThread;
+			productName = IlmThread;
+			productReference = DFD4BEDD1B435FEB00A70A91 /* libIlmThread.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DFD4BED51B435FEB00A70A91 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0620;
+				ORGANIZATIONNAME = McNeel;
+				TargetAttributes = {
+					DFD4BEDC1B435FEB00A70A91 = {
+						CreatedOnToolsVersion = 6.2;
+					};
+				};
+			};
+			buildConfigurationList = DFD4BED81B435FEB00A70A91 /* Build configuration list for PBXProject "IlmThread" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = DFD4BED41B435FEB00A70A91;
+			productRefGroup = DFD4BEDE1B435FEB00A70A91 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DFD4BEDC1B435FEB00A70A91 /* IlmThread */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DFD4BED91B435FEB00A70A91 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DFD4BEFC1B43605700A70A91 /* IlmThreadSemaphorePosix.cpp in Sources */,
+				DFD4BEF41B43605700A70A91 /* IlmThreadMutex.cpp in Sources */,
+				DFD4BEF21B43605700A70A91 /* IlmThread.cpp in Sources */,
+				DFD4BEF91B43605700A70A91 /* IlmThreadPosix.cpp in Sources */,
+				DFD4BEFA1B43605700A70A91 /* IlmThreadSemaphore.cpp in Sources */,
+				DFD4BEFD1B43605700A70A91 /* IlmThreadSemaphorePosixCompat.cpp in Sources */,
+				DFD4BEF71B43605700A70A91 /* IlmThreadPool.cpp in Sources */,
+				DFD4BEF61B43605700A70A91 /* IlmThreadMutexPosix.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		DFD4BEDF1B435FEB00A70A91 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DF28AD331B44BB6F00A4A407 /* LibDebug.xcconfig */;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					../config.mac,
+					../Iex,
+				);
+				MTL_ENABLE_DEBUG_INFO = YES;
+			};
+			name = Debug;
+		};
+		DFD4BEE01B435FEB00A70A91 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DF28AD341B44BB6F00A4A407 /* LibRelease.xcconfig */;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					../config.mac,
+					../Iex,
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+			};
+			name = Release;
+		};
+		DFD4BEE21B435FEB00A70A91 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		DFD4BEE31B435FEB00A70A91 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DFD4BED81B435FEB00A70A91 /* Build configuration list for PBXProject "IlmThread" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DFD4BEDF1B435FEB00A70A91 /* Debug */,
+				DFD4BEE01B435FEB00A70A91 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DFD4BEE11B435FEB00A70A91 /* Build configuration list for PBXNativeTarget "IlmThread" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DFD4BEE21B435FEB00A70A91 /* Debug */,
+				DFD4BEE31B435FEB00A70A91 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DFD4BED51B435FEB00A70A91 /* Project object */;
+}

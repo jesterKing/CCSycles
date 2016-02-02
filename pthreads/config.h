@@ -55,7 +55,11 @@
 #undef HAVE_GCC_ATOMIC_BUILTINS
 
 /* Define if you have the timespec struct */
+#if(_MSC_VER>=1900L)
+#define HAVE_STRUCT_TIMESPEC
+#else
 #undef HAVE_STRUCT_TIMESPEC
+#endif
 
 /* Define if you don't have the GetProcessAffinityMask() */
 #undef NEED_PROCESS_AFFINITY_MASK

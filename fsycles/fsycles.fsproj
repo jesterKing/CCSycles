@@ -11,8 +11,9 @@
     <AssemblyName>fsycles</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <TargetFSharpCoreVersion>4.3.1.0</TargetFSharpCoreVersion>
+    <TargetFSharpCoreVersion>4.4.0.0</TargetFSharpCoreVersion>
     <Name>fsycles</Name>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -22,7 +23,7 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
-    <PlatformTarget>x64</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DocumentationFile>bin\Debug\fsycles.XML</DocumentationFile>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
@@ -35,7 +36,7 @@
     <WarningLevel>3</WarningLevel>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DocumentationFile>bin\Release\fsycles.XML</DocumentationFile>
-    <Prefer32Bit>true</Prefer32Bit>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />
@@ -79,7 +80,7 @@ copy /Y "$(ProjectDir)..\ccycles\x64\$(ConfigurationName)\ccycles.dll" "$(Target
 copy /Y "$(ProjectDir)..\ccycles\x64\$(ConfigurationName)\ccycles.pdb" "$(TargetDir)"
 copy /Y "$(ProjectDir)..\OpenImageIO\x64\$(ConfigurationName)\OpenImageIO.dll" "$(TargetDir)"
 copy /Y "$(ProjectDir)..\pthreads\x64\$(ConfigurationName)\pthreads.dll" "$(TargetDir)"
-copy /Y "$(ProjectDir)..\..\..\..\..\bin\$(ConfigurationName)\boost_*" "$(TargetDir)"
+copy /Y "$(ProjectDir)..\boostbuild\stage$(ConfigurationName)\lib\boost_*" "$(TargetDir)"
 
 MkDir "$(TargetDir)lib"
 

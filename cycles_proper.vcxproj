@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|x64">
       <Configuration>Debug</Configuration>
@@ -19,14 +19,14 @@
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>false</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -50,8 +50,8 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(ProjectDir)bindeps\boost;$(ProjectDir)pthreads;$(ProjectDir)OpenImageIO\include;$(ProjectDir)glew\include;$(ProjectDir)cycles\third_party\atomic;$(ProjectDir)cycles\third_party\cuew\include;$(ProjectDir)cycles\third_party\clew\include;$(ProjectDir)cycles\src\render;$(ProjectDir)cycles\src\kernel;$(ProjectDir)cycles\src\kernel\svm;$(ProjectDir)cycles\src\kernel\osl;$(ProjectDir)cycles\src\util;$(ProjectDir)cycles\src\device;$(ProjectDir)cycles\src\bvh;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>GLEW_STATIC;_WINSOCK_DEPRECATED_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;DEBUG;_DEBUG;CCL_NAMESPACE_BEGIN=namespace ccl {;CCL_NAMESPACE_END=};WITH_NETWORK;WITH_OPENCL;WITH_CUDA;WITH_MULTI;CYCLES_STD_UNORDERED_MAP;NO_OIIO_LOADING;WITH_CYCLES_OPTIMIZED_KERNEL_SSE2;WITH_CYCLES_OPTIMIZED_KERNEL_SSE3;WITH_CYCLES_OPTIMIZED_KERNEL_SSE41;WITH_CYCLES_OPTIMIZED_KERNEL_AVX;WITH_CYCLES_OPTIMIZED_KERNEL_AVX2;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir)boost;$(ProjectDir)pthreads;$(ProjectDir)OpenImageIO\include;$(ProjectDir)glew\include;$(ProjectDir)cycles\third_party\atomic;$(ProjectDir)cycles\third_party\cuew\include;$(ProjectDir)cycles\third_party\clew\include;$(ProjectDir)cycles\src\render;$(ProjectDir)cycles\src\kernel;$(ProjectDir)cycles\src\kernel\svm;$(ProjectDir)cycles\src\kernel\osl;$(ProjectDir)cycles\src\util;$(ProjectDir)cycles\src\device;$(ProjectDir)cycles\src\bvh;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>GLEW_STATIC;BOOST_ALL_NO_LIB;_WINSOCK_DEPRECATED_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;DEBUG;_DEBUG;CCL_NAMESPACE_BEGIN=namespace ccl {;CCL_NAMESPACE_END=};WITH_NETWORK;WITH_OPENCL;WITH_CUDA;WITH_MULTI;CYCLES_STD_UNORDERED_MAP;NO_OIIO_LOADING;WITH_CYCLES_OPTIMIZED_KERNEL_SSE2;WITH_CYCLES_OPTIMIZED_KERNEL_SSE3;WITH_CYCLES_OPTIMIZED_KERNEL_SSE41;WITH_CYCLES_OPTIMIZED_KERNEL_AVX;WITH_CYCLES_OPTIMIZED_KERNEL_AVX2;HAVE_PTW32_CONFIG_H;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <FloatingPointModel>Fast</FloatingPointModel>
       <CompileAs>CompileAsCpp</CompileAs>
@@ -60,14 +60,14 @@
       <AdditionalOptions>/w34062 /J /Gs- %(AdditionalOptions)</AdditionalOptions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <BufferSecurityCheck>false</BufferSecurityCheck>
-      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
-      <AdditionalLibraryDirectories>$(ProjectDir)bindeps\boost\stage$(Configuration)\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)boostbuild\stage$(Configuration)\lib</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -76,10 +76,10 @@
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>false</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>$(ProjectDir)bindeps\boost;$(ProjectDir)pthreads;$(ProjectDir)OpenImageIO\include;$(ProjectDir)glew\include;$(ProjectDir)cycles\third_party\atomic;$(ProjectDir)cycles\third_party\cuew\include;$(ProjectDir)cycles\third_party\clew\include;$(ProjectDir)cycles\src\render;$(ProjectDir)cycles\src\kernel;$(ProjectDir)cycles\src\kernel\svm;$(ProjectDir)cycles\src\kernel\osl;$(ProjectDir)cycles\src\util;$(ProjectDir)cycles\src\device;$(ProjectDir)cycles\src\bvh;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)boost;$(ProjectDir)pthreads;$(ProjectDir)OpenImageIO\include;$(ProjectDir)glew\include;$(ProjectDir)cycles\third_party\atomic;$(ProjectDir)cycles\third_party\cuew\include;$(ProjectDir)cycles\third_party\clew\include;$(ProjectDir)cycles\src\render;$(ProjectDir)cycles\src\kernel;$(ProjectDir)cycles\src\kernel\svm;$(ProjectDir)cycles\src\kernel\osl;$(ProjectDir)cycles\src\util;$(ProjectDir)cycles\src\device;$(ProjectDir)cycles\src\bvh;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <WholeProgramOptimization>false</WholeProgramOptimization>
-      <PreprocessorDefinitions>GLEW_STATIC;_WINSOCK_DEPRECATED_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;NDEBUG;CCL_NAMESPACE_BEGIN=namespace ccl {;CCL_NAMESPACE_END=};WITH_NETWORK;WITH_OPENCL;WITH_CUDA;WITH_MULTI;CYCLES_STD_UNORDERED_MAP;NO_OIIO_LOADING;WITH_CYCLES_OPTIMIZED_KERNEL_SSE2;WITH_CYCLES_OPTIMIZED_KERNEL_SSE3;WITH_CYCLES_OPTIMIZED_KERNEL_SSE41;WITH_CYCLES_OPTIMIZED_KERNEL_AVX;WITH_CYCLES_OPTIMIZED_KERNEL_AVX2;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>GLEW_STATIC;BOOST_ALL_NO_LIB;_WINSOCK_DEPRECATED_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;NDEBUG;CCL_NAMESPACE_BEGIN=namespace ccl {;CCL_NAMESPACE_END=};WITH_NETWORK;WITH_OPENCL;WITH_CUDA;WITH_MULTI;CYCLES_STD_UNORDERED_MAP;NO_OIIO_LOADING;WITH_CYCLES_OPTIMIZED_KERNEL_SSE2;WITH_CYCLES_OPTIMIZED_KERNEL_SSE3;WITH_CYCLES_OPTIMIZED_KERNEL_SSE41;WITH_CYCLES_OPTIMIZED_KERNEL_AVX;WITH_CYCLES_OPTIMIZED_KERNEL_AVX2;HAVE_PTW32_CONFIG_H;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <FloatingPointModel>Fast</FloatingPointModel>
       <CompileAs>CompileAsCpp</CompileAs>
       <DisableSpecificWarnings>4018;4065;4127;4181;4200;4244;4267;4305;4800</DisableSpecificWarnings>
@@ -95,7 +95,7 @@
     </Link>
     <Lib>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
-      <AdditionalLibraryDirectories>$(ProjectDir)bindeps\boost\stage$(Configuration)\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)boostbuild\stage$(Configuration)\lib</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>

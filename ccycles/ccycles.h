@@ -99,11 +99,19 @@ typedef void(__cdecl *STATUS_UPDATE_CB)(unsigned int session_id);
 typedef void(__cdecl *TEST_CANCEL_CB)(unsigned int session_id);
 
 /**
- * Status update function signature. Used to register a status
- * update callback function with CCycles using cycles_session_set_update_callback
+ * Render tile update or write function signature. Used to register a render tile 
+ * update callback function with CCycles using cycles_session_set_write_tile_callback or
+ * cycles_session_set_update_tile_callback
  * \ingroup ccycles ccycles_session
  */
 typedef void(__cdecl *RENDER_TILE_CB)(unsigned int session_id, unsigned int x, unsigned int y, unsigned int w, unsigned int h, unsigned int depth, int start_sample, int num_samples, int sample, int resolution);
+
+/**
+ * Pixel buffer from DisplayBuffer update function signature.
+ * Set update function to CCycles using cycles_session_set_display_update_callback
+ * \ingroup ccycles ccycles_session
+ */
+typedef void(__cdecl *DISPLAY_UPDATE_CB)(unsigned int session_id, unsigned int sample);
 
 
 /**
@@ -400,6 +408,8 @@ CCL_CAPI void __cdecl cycles_session_set_cancel_callback(unsigned int client_id,
 CCL_CAPI void __cdecl cycles_session_set_update_tile_callback(unsigned int client_id, unsigned int session_id, RENDER_TILE_CB update_tile_cb);
 /** Set the render tile write callback for session. */
 CCL_CAPI void __cdecl cycles_session_set_write_tile_callback(unsigned int client_id, unsigned int session_id, RENDER_TILE_CB write_tile_cb);
+/** Set the display update callback for session. */
+CCL_CAPI void __cdecl cycles_session_set_display_update_callback(unsigned int client_id, unsigned int session_id, DISPLAY_UPDATE_CB display_update_cb);
 /** Cancel session with cancel_message for log. */
 CCL_CAPI void __cdecl cycles_session_cancel(unsigned int client_id, unsigned int session_id, const char *cancel_message);
 /** Start given session render process. */
@@ -417,6 +427,7 @@ CCL_CAPI void __cdecl cycles_session_copy_buffer(unsigned int client_id, unsigne
 /** Get pixel data buffer information of session. */
 CCL_CAPI void __cdecl cycles_session_get_buffer_info(unsigned int client_id, unsigned int session_id, unsigned int* buffer_size, unsigned int* buffer_stride);
 CCL_CAPI void __cdecl cycles_session_draw(unsigned int client_id, unsigned int session_id, int width, int height);
+CCL_CAPI void __cdecl cycles_session_draw_nogl(unsigned int client_id, unsigned int session_id, int width, int height, bool isgpu);
 /** A (temporary) function to ensure we can draw into a Rhino viewport. */
 CCL_CAPI void __cdecl cycles_session_rhinodraw(unsigned int client_id, unsigned int session_id, int width, int height);
 /** Get pixel data buffer pointer. */

@@ -1,0 +1,350 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DF28807D1B4361BA00C76E5D /* ImathBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF28805A1B4361BA00C76E5D /* ImathBox.cpp */; };
+		DF28807E1B4361BA00C76E5D /* ImathBox.h in Headers */ = {isa = PBXBuildFile; fileRef = DF28805B1B4361BA00C76E5D /* ImathBox.h */; };
+		DF28807F1B4361BA00C76E5D /* ImathBoxAlgo.h in Headers */ = {isa = PBXBuildFile; fileRef = DF28805C1B4361BA00C76E5D /* ImathBoxAlgo.h */; };
+		DF2880801B4361BA00C76E5D /* ImathColor.h in Headers */ = {isa = PBXBuildFile; fileRef = DF28805D1B4361BA00C76E5D /* ImathColor.h */; };
+		DF2880811B4361BA00C76E5D /* ImathColorAlgo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF28805E1B4361BA00C76E5D /* ImathColorAlgo.cpp */; };
+		DF2880821B4361BA00C76E5D /* ImathColorAlgo.h in Headers */ = {isa = PBXBuildFile; fileRef = DF28805F1B4361BA00C76E5D /* ImathColorAlgo.h */; };
+		DF2880831B4361BA00C76E5D /* ImathEuler.h in Headers */ = {isa = PBXBuildFile; fileRef = DF2880601B4361BA00C76E5D /* ImathEuler.h */; };
+		DF2880841B4361BA00C76E5D /* ImathExc.h in Headers */ = {isa = PBXBuildFile; fileRef = DF2880611B4361BA00C76E5D /* ImathExc.h */; };
+		DF2880851B4361BA00C76E5D /* ImathFrame.h in Headers */ = {isa = PBXBuildFile; fileRef = DF2880621B4361BA00C76E5D /* ImathFrame.h */; };
+		DF2880861B4361BA00C76E5D /* ImathFrustum.h in Headers */ = {isa = PBXBuildFile; fileRef = DF2880631B4361BA00C76E5D /* ImathFrustum.h */; };
+		DF2880871B4361BA00C76E5D /* ImathFun.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF2880641B4361BA00C76E5D /* ImathFun.cpp */; };
+		DF2880881B4361BA00C76E5D /* ImathFun.h in Headers */ = {isa = PBXBuildFile; fileRef = DF2880651B4361BA00C76E5D /* ImathFun.h */; };
+		DF2880891B4361BA00C76E5D /* ImathGL.h in Headers */ = {isa = PBXBuildFile; fileRef = DF2880661B4361BA00C76E5D /* ImathGL.h */; };
+		DF28808A1B4361BA00C76E5D /* ImathGLU.h in Headers */ = {isa = PBXBuildFile; fileRef = DF2880671B4361BA00C76E5D /* ImathGLU.h */; };
+		DF28808B1B4361BA00C76E5D /* ImathHalfLimits.h in Headers */ = {isa = PBXBuildFile; fileRef = DF2880681B4361BA00C76E5D /* ImathHalfLimits.h */; };
+		DF28808C1B4361BA00C76E5D /* ImathInterval.h in Headers */ = {isa = PBXBuildFile; fileRef = DF2880691B4361BA00C76E5D /* ImathInterval.h */; };
+		DF28808D1B4361BA00C76E5D /* ImathLimits.h in Headers */ = {isa = PBXBuildFile; fileRef = DF28806A1B4361BA00C76E5D /* ImathLimits.h */; };
+		DF28808E1B4361BA00C76E5D /* ImathLine.h in Headers */ = {isa = PBXBuildFile; fileRef = DF28806B1B4361BA00C76E5D /* ImathLine.h */; };
+		DF28808F1B4361BA00C76E5D /* ImathLineAlgo.h in Headers */ = {isa = PBXBuildFile; fileRef = DF28806C1B4361BA00C76E5D /* ImathLineAlgo.h */; };
+		DF2880901B4361BA00C76E5D /* ImathMath.h in Headers */ = {isa = PBXBuildFile; fileRef = DF28806D1B4361BA00C76E5D /* ImathMath.h */; };
+		DF2880911B4361BA00C76E5D /* ImathMatrix.h in Headers */ = {isa = PBXBuildFile; fileRef = DF28806E1B4361BA00C76E5D /* ImathMatrix.h */; };
+		DF2880921B4361BA00C76E5D /* ImathMatrixAlgo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF28806F1B4361BA00C76E5D /* ImathMatrixAlgo.cpp */; };
+		DF2880931B4361BA00C76E5D /* ImathMatrixAlgo.h in Headers */ = {isa = PBXBuildFile; fileRef = DF2880701B4361BA00C76E5D /* ImathMatrixAlgo.h */; };
+		DF2880941B4361BA00C76E5D /* ImathPlane.h in Headers */ = {isa = PBXBuildFile; fileRef = DF2880711B4361BA00C76E5D /* ImathPlane.h */; };
+		DF2880951B4361BA00C76E5D /* ImathPlatform.h in Headers */ = {isa = PBXBuildFile; fileRef = DF2880721B4361BA00C76E5D /* ImathPlatform.h */; };
+		DF2880961B4361BA00C76E5D /* ImathQuat.h in Headers */ = {isa = PBXBuildFile; fileRef = DF2880731B4361BA00C76E5D /* ImathQuat.h */; };
+		DF2880971B4361BA00C76E5D /* ImathRandom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF2880741B4361BA00C76E5D /* ImathRandom.cpp */; };
+		DF2880981B4361BA00C76E5D /* ImathRandom.h in Headers */ = {isa = PBXBuildFile; fileRef = DF2880751B4361BA00C76E5D /* ImathRandom.h */; };
+		DF2880991B4361BA00C76E5D /* ImathRoots.h in Headers */ = {isa = PBXBuildFile; fileRef = DF2880761B4361BA00C76E5D /* ImathRoots.h */; };
+		DF28809A1B4361BA00C76E5D /* ImathShear.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF2880771B4361BA00C76E5D /* ImathShear.cpp */; };
+		DF28809B1B4361BA00C76E5D /* ImathShear.h in Headers */ = {isa = PBXBuildFile; fileRef = DF2880781B4361BA00C76E5D /* ImathShear.h */; };
+		DF28809C1B4361BA00C76E5D /* ImathSphere.h in Headers */ = {isa = PBXBuildFile; fileRef = DF2880791B4361BA00C76E5D /* ImathSphere.h */; };
+		DF28809D1B4361BA00C76E5D /* ImathVec.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF28807A1B4361BA00C76E5D /* ImathVec.cpp */; };
+		DF28809E1B4361BA00C76E5D /* ImathVec.h in Headers */ = {isa = PBXBuildFile; fileRef = DF28807B1B4361BA00C76E5D /* ImathVec.h */; };
+		DF28809F1B4361BA00C76E5D /* ImathVecAlgo.h in Headers */ = {isa = PBXBuildFile; fileRef = DF28807C1B4361BA00C76E5D /* ImathVecAlgo.h */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		DF2880511B43615300C76E5D /* libImath.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libImath.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		DF28805A1B4361BA00C76E5D /* ImathBox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImathBox.cpp; sourceTree = "<group>"; };
+		DF28805B1B4361BA00C76E5D /* ImathBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImathBox.h; sourceTree = "<group>"; };
+		DF28805C1B4361BA00C76E5D /* ImathBoxAlgo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImathBoxAlgo.h; sourceTree = "<group>"; };
+		DF28805D1B4361BA00C76E5D /* ImathColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImathColor.h; sourceTree = "<group>"; };
+		DF28805E1B4361BA00C76E5D /* ImathColorAlgo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImathColorAlgo.cpp; sourceTree = "<group>"; };
+		DF28805F1B4361BA00C76E5D /* ImathColorAlgo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImathColorAlgo.h; sourceTree = "<group>"; };
+		DF2880601B4361BA00C76E5D /* ImathEuler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImathEuler.h; sourceTree = "<group>"; };
+		DF2880611B4361BA00C76E5D /* ImathExc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImathExc.h; sourceTree = "<group>"; };
+		DF2880621B4361BA00C76E5D /* ImathFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImathFrame.h; sourceTree = "<group>"; };
+		DF2880631B4361BA00C76E5D /* ImathFrustum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImathFrustum.h; sourceTree = "<group>"; };
+		DF2880641B4361BA00C76E5D /* ImathFun.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImathFun.cpp; sourceTree = "<group>"; };
+		DF2880651B4361BA00C76E5D /* ImathFun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImathFun.h; sourceTree = "<group>"; };
+		DF2880661B4361BA00C76E5D /* ImathGL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImathGL.h; sourceTree = "<group>"; };
+		DF2880671B4361BA00C76E5D /* ImathGLU.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImathGLU.h; sourceTree = "<group>"; };
+		DF2880681B4361BA00C76E5D /* ImathHalfLimits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImathHalfLimits.h; sourceTree = "<group>"; };
+		DF2880691B4361BA00C76E5D /* ImathInterval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImathInterval.h; sourceTree = "<group>"; };
+		DF28806A1B4361BA00C76E5D /* ImathLimits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImathLimits.h; sourceTree = "<group>"; };
+		DF28806B1B4361BA00C76E5D /* ImathLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImathLine.h; sourceTree = "<group>"; };
+		DF28806C1B4361BA00C76E5D /* ImathLineAlgo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImathLineAlgo.h; sourceTree = "<group>"; };
+		DF28806D1B4361BA00C76E5D /* ImathMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImathMath.h; sourceTree = "<group>"; };
+		DF28806E1B4361BA00C76E5D /* ImathMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImathMatrix.h; sourceTree = "<group>"; };
+		DF28806F1B4361BA00C76E5D /* ImathMatrixAlgo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImathMatrixAlgo.cpp; sourceTree = "<group>"; };
+		DF2880701B4361BA00C76E5D /* ImathMatrixAlgo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImathMatrixAlgo.h; sourceTree = "<group>"; };
+		DF2880711B4361BA00C76E5D /* ImathPlane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImathPlane.h; sourceTree = "<group>"; };
+		DF2880721B4361BA00C76E5D /* ImathPlatform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImathPlatform.h; sourceTree = "<group>"; };
+		DF2880731B4361BA00C76E5D /* ImathQuat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImathQuat.h; sourceTree = "<group>"; };
+		DF2880741B4361BA00C76E5D /* ImathRandom.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImathRandom.cpp; sourceTree = "<group>"; };
+		DF2880751B4361BA00C76E5D /* ImathRandom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImathRandom.h; sourceTree = "<group>"; };
+		DF2880761B4361BA00C76E5D /* ImathRoots.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImathRoots.h; sourceTree = "<group>"; };
+		DF2880771B4361BA00C76E5D /* ImathShear.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImathShear.cpp; sourceTree = "<group>"; };
+		DF2880781B4361BA00C76E5D /* ImathShear.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImathShear.h; sourceTree = "<group>"; };
+		DF2880791B4361BA00C76E5D /* ImathSphere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImathSphere.h; sourceTree = "<group>"; };
+		DF28807A1B4361BA00C76E5D /* ImathVec.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImathVec.cpp; sourceTree = "<group>"; };
+		DF28807B1B4361BA00C76E5D /* ImathVec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImathVec.h; sourceTree = "<group>"; };
+		DF28807C1B4361BA00C76E5D /* ImathVecAlgo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImathVecAlgo.h; sourceTree = "<group>"; };
+		DF28AD361B44BC7400A4A407 /* LibDebug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = LibDebug.xcconfig; path = ../../../../../Mac/XCConfig/LibDebug.xcconfig; sourceTree = "<group>"; };
+		DF28AD371B44BC7400A4A407 /* LibRelease.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = LibRelease.xcconfig; path = ../../../../../Mac/XCConfig/LibRelease.xcconfig; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DF28804E1B43615300C76E5D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DF2880481B43615300C76E5D = {
+			isa = PBXGroup;
+			children = (
+				DF2880591B43619D00C76E5D /* Header files */,
+				DF2880581B43619500C76E5D /* Source files */,
+				DF28AD351B44BC6100A4A407 /* Supporting files */,
+				DF2880521B43615300C76E5D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DF2880521B43615300C76E5D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DF2880511B43615300C76E5D /* libImath.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DF2880581B43619500C76E5D /* Source files */ = {
+			isa = PBXGroup;
+			children = (
+				DF28805A1B4361BA00C76E5D /* ImathBox.cpp */,
+				DF28805E1B4361BA00C76E5D /* ImathColorAlgo.cpp */,
+				DF2880641B4361BA00C76E5D /* ImathFun.cpp */,
+				DF28806F1B4361BA00C76E5D /* ImathMatrixAlgo.cpp */,
+				DF2880741B4361BA00C76E5D /* ImathRandom.cpp */,
+				DF2880771B4361BA00C76E5D /* ImathShear.cpp */,
+				DF28807A1B4361BA00C76E5D /* ImathVec.cpp */,
+			);
+			name = "Source files";
+			sourceTree = "<group>";
+		};
+		DF2880591B43619D00C76E5D /* Header files */ = {
+			isa = PBXGroup;
+			children = (
+				DF28805B1B4361BA00C76E5D /* ImathBox.h */,
+				DF28805C1B4361BA00C76E5D /* ImathBoxAlgo.h */,
+				DF28805D1B4361BA00C76E5D /* ImathColor.h */,
+				DF28805F1B4361BA00C76E5D /* ImathColorAlgo.h */,
+				DF2880601B4361BA00C76E5D /* ImathEuler.h */,
+				DF2880611B4361BA00C76E5D /* ImathExc.h */,
+				DF2880621B4361BA00C76E5D /* ImathFrame.h */,
+				DF2880631B4361BA00C76E5D /* ImathFrustum.h */,
+				DF2880651B4361BA00C76E5D /* ImathFun.h */,
+				DF2880661B4361BA00C76E5D /* ImathGL.h */,
+				DF2880671B4361BA00C76E5D /* ImathGLU.h */,
+				DF2880681B4361BA00C76E5D /* ImathHalfLimits.h */,
+				DF2880691B4361BA00C76E5D /* ImathInterval.h */,
+				DF28806A1B4361BA00C76E5D /* ImathLimits.h */,
+				DF28806B1B4361BA00C76E5D /* ImathLine.h */,
+				DF28806C1B4361BA00C76E5D /* ImathLineAlgo.h */,
+				DF28806D1B4361BA00C76E5D /* ImathMath.h */,
+				DF28806E1B4361BA00C76E5D /* ImathMatrix.h */,
+				DF2880701B4361BA00C76E5D /* ImathMatrixAlgo.h */,
+				DF2880711B4361BA00C76E5D /* ImathPlane.h */,
+				DF2880721B4361BA00C76E5D /* ImathPlatform.h */,
+				DF2880731B4361BA00C76E5D /* ImathQuat.h */,
+				DF2880751B4361BA00C76E5D /* ImathRandom.h */,
+				DF2880761B4361BA00C76E5D /* ImathRoots.h */,
+				DF2880781B4361BA00C76E5D /* ImathShear.h */,
+				DF2880791B4361BA00C76E5D /* ImathSphere.h */,
+				DF28807B1B4361BA00C76E5D /* ImathVec.h */,
+				DF28807C1B4361BA00C76E5D /* ImathVecAlgo.h */,
+			);
+			name = "Header files";
+			sourceTree = "<group>";
+		};
+		DF28AD351B44BC6100A4A407 /* Supporting files */ = {
+			isa = PBXGroup;
+			children = (
+				DF28AD361B44BC7400A4A407 /* LibDebug.xcconfig */,
+				DF28AD371B44BC7400A4A407 /* LibRelease.xcconfig */,
+			);
+			name = "Supporting files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		DF28804F1B43615300C76E5D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DF2880981B4361BA00C76E5D /* ImathRandom.h in Headers */,
+				DF2880881B4361BA00C76E5D /* ImathFun.h in Headers */,
+				DF28807E1B4361BA00C76E5D /* ImathBox.h in Headers */,
+				DF2880931B4361BA00C76E5D /* ImathMatrixAlgo.h in Headers */,
+				DF2880801B4361BA00C76E5D /* ImathColor.h in Headers */,
+				DF28809B1B4361BA00C76E5D /* ImathShear.h in Headers */,
+				DF28809E1B4361BA00C76E5D /* ImathVec.h in Headers */,
+				DF28808F1B4361BA00C76E5D /* ImathLineAlgo.h in Headers */,
+				DF28809F1B4361BA00C76E5D /* ImathVecAlgo.h in Headers */,
+				DF28808E1B4361BA00C76E5D /* ImathLine.h in Headers */,
+				DF2880951B4361BA00C76E5D /* ImathPlatform.h in Headers */,
+				DF2880911B4361BA00C76E5D /* ImathMatrix.h in Headers */,
+				DF2880851B4361BA00C76E5D /* ImathFrame.h in Headers */,
+				DF2880901B4361BA00C76E5D /* ImathMath.h in Headers */,
+				DF2880941B4361BA00C76E5D /* ImathPlane.h in Headers */,
+				DF28807F1B4361BA00C76E5D /* ImathBoxAlgo.h in Headers */,
+				DF2880841B4361BA00C76E5D /* ImathExc.h in Headers */,
+				DF28808D1B4361BA00C76E5D /* ImathLimits.h in Headers */,
+				DF2880861B4361BA00C76E5D /* ImathFrustum.h in Headers */,
+				DF28808B1B4361BA00C76E5D /* ImathHalfLimits.h in Headers */,
+				DF2880891B4361BA00C76E5D /* ImathGL.h in Headers */,
+				DF28809C1B4361BA00C76E5D /* ImathSphere.h in Headers */,
+				DF2880961B4361BA00C76E5D /* ImathQuat.h in Headers */,
+				DF2880821B4361BA00C76E5D /* ImathColorAlgo.h in Headers */,
+				DF2880991B4361BA00C76E5D /* ImathRoots.h in Headers */,
+				DF2880831B4361BA00C76E5D /* ImathEuler.h in Headers */,
+				DF28808C1B4361BA00C76E5D /* ImathInterval.h in Headers */,
+				DF28808A1B4361BA00C76E5D /* ImathGLU.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		DF2880501B43615300C76E5D /* Imath */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DF2880551B43615300C76E5D /* Build configuration list for PBXNativeTarget "Imath" */;
+			buildPhases = (
+				DF28804D1B43615300C76E5D /* Sources */,
+				DF28804E1B43615300C76E5D /* Frameworks */,
+				DF28804F1B43615300C76E5D /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Imath;
+			productName = Imath;
+			productReference = DF2880511B43615300C76E5D /* libImath.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DF2880491B43615300C76E5D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0620;
+				ORGANIZATIONNAME = McNeel;
+				TargetAttributes = {
+					DF2880501B43615300C76E5D = {
+						CreatedOnToolsVersion = 6.2;
+					};
+				};
+			};
+			buildConfigurationList = DF28804C1B43615300C76E5D /* Build configuration list for PBXProject "Imath" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = DF2880481B43615300C76E5D;
+			productRefGroup = DF2880521B43615300C76E5D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DF2880501B43615300C76E5D /* Imath */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DF28804D1B43615300C76E5D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DF28809D1B4361BA00C76E5D /* ImathVec.cpp in Sources */,
+				DF2880871B4361BA00C76E5D /* ImathFun.cpp in Sources */,
+				DF2880811B4361BA00C76E5D /* ImathColorAlgo.cpp in Sources */,
+				DF28807D1B4361BA00C76E5D /* ImathBox.cpp in Sources */,
+				DF28809A1B4361BA00C76E5D /* ImathShear.cpp in Sources */,
+				DF2880921B4361BA00C76E5D /* ImathMatrixAlgo.cpp in Sources */,
+				DF2880971B4361BA00C76E5D /* ImathRandom.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		DF2880531B43615300C76E5D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DF28AD361B44BC7400A4A407 /* LibDebug.xcconfig */;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					../Iex,
+					../Half,
+				);
+				MTL_ENABLE_DEBUG_INFO = YES;
+			};
+			name = Debug;
+		};
+		DF2880541B43615300C76E5D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DF28AD371B44BC7400A4A407 /* LibRelease.xcconfig */;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					../Iex,
+					../Half,
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+			};
+			name = Release;
+		};
+		DF2880561B43615300C76E5D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		DF2880571B43615300C76E5D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DF28804C1B43615300C76E5D /* Build configuration list for PBXProject "Imath" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DF2880531B43615300C76E5D /* Debug */,
+				DF2880541B43615300C76E5D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DF2880551B43615300C76E5D /* Build configuration list for PBXNativeTarget "Imath" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DF2880561B43615300C76E5D /* Debug */,
+				DF2880571B43615300C76E5D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DF2880491B43615300C76E5D /* Project object */;
+}

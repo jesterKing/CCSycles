@@ -146,12 +146,14 @@ EXPORTS
   cycles_session_set_cancel_callback
   cycles_session_set_update_tile_callback
   cycles_session_set_write_tile_callback
+  cycles_session_set_display_update_callback
   cycles_session_cancel
   cycles_session_start
   cycles_session_wait
   cycles_session_set_pause
   cycles_session_set_samples
   cycles_session_draw
+  cycles_session_draw_nogl
   cycles_session_rhinodraw
 
   cycles_session_get_buffer

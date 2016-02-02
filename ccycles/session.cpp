@@ -33,6 +33,7 @@ std::vector<STATUS_UPDATE_CB> status_cbs;
 std::vector<TEST_CANCEL_CB> cancel_cbs;
 std::vector<RENDER_TILE_CB> update_cbs;
 std::vector<RENDER_TILE_CB> write_cbs;
+std::vector<DISPLAY_UPDATE_CB> display_update_cbs;
 
 /* Wrap status update callback. */
 void CCSession::status_update(void) {
@@ -75,7 +76,9 @@ void copy_pixels_to_ccsession(ccl::RenderTile &tile, unsigned int sid) {
 	if (!buffers->get_pass_rect(ccl::PassType::PASS_COMBINED, 1.0f, tile.sample, stride, &pixels[0])) {
 		return;
 	}
-	
+
+	ccl::thread_scoped_lock pixels_lock(se->pixels_mutex);
+
 	/* Copy pixels to final image buffer. */
 	bool firstpass = true;
 	for (int y = 0; y < params.height; y++) {
@@ -129,13 +132,24 @@ void CCSession::write_render_tile(ccl::RenderTile &tile)
 	}
 }
 
+/* Wrapper callback for display update stuff. When this is called one pass has been conducted. */
+void CCSession::display_update(int sample)
+{
+	if (display_update_cbs[this->id] != nullptr) {
+		display_update_cbs[this->id](this->id, sample);
+	}
+}
+
 /**
  * Clean up resources acquired during this run of Cycles.
  */
 void _cleanup_sessions()
 {
 	for (CCSession* se : sessions) {
-		delete [] se->pixels;
+		{
+			ccl::thread_scoped_lock pixels_lock(se->pixels_mutex);
+			delete[] se->pixels;
+		}
 		delete se->session;
 		delete se;
 	}
@@ -147,6 +161,7 @@ void _cleanup_sessions()
 	cancel_cbs.clear();
 	update_cbs.clear();
 	write_cbs.clear();
+	update_cbs.clear();
 }
 
 CCSession* CCSession::create(int width, int height, unsigned int buffer_stride) {
@@ -160,6 +175,7 @@ CCSession* CCSession::create(int width, int height, unsigned int buffer_stride) 
 	return se;
 }
 void CCSession::reset(int width_, int height_, unsigned int buffer_stride_) {
+	ccl::thread_scoped_lock pixels_lock(pixels_mutex);
 	int img_size = width_ * height_;
 	if (img_size*buffer_stride_ != buffer_size || buffer_stride_ != buffer_stride) {
 		delete[] pixels;
@@ -207,12 +223,14 @@ unsigned int cycles_session_create(unsigned int client_id, unsigned int session_
 		cancel_cbs.push_back(nullptr);
 		update_cbs.push_back(nullptr);
 		write_cbs.push_back(nullptr);
+		display_update_cbs.push_back(nullptr);
 	}
 	else {
 		sessions[csesid] = session;
 		status_cbs[csesid] = nullptr;
 		update_cbs[csesid] = nullptr;
 		write_cbs[csesid] = nullptr;
+		display_update_cbs[csesid] = nullptr;
 	}
 
 
@@ -316,6 +334,21 @@ void cycles_session_set_write_tile_callback(unsigned int client_id, unsigned int
 	SESSION_FIND_END()
 }
 
+void cycles_session_set_display_update_callback(unsigned int client_id, unsigned int session_id, DISPLAY_UPDATE_CB display_update_cb)
+{
+	SESSION_FIND(session_id)
+		CCSession* se = sessions[session_id];
+		display_update_cbs[session_id] = display_update_cb;
+		if (display_update_cb != nullptr) {
+			session->display_update_cb = function_bind<void>(&CCSession::display_update, ccsess, std::placeholders::_1);
+		}
+		else {
+			session->display_update_cb = nullptr;
+		}
+		logger.logit(client_id, "Set display update callback for session ", session_id);
+	SESSION_FIND_END()
+}
+
 void cycles_session_cancel(unsigned int client_id, unsigned int session_id, const char *cancel_message)
 {
 	SESSION_FIND(session_id)
@@ -378,6 +411,7 @@ void cycles_session_copy_buffer(unsigned int client_id, unsigned int session_id,
 {
 	SESSION_FIND(session_id)
 		CCSession* se = sessions[session_id];
+		ccl::thread_scoped_lock pixels_lock(se->pixels_mutex);
 		memcpy(pixel_buffer, se->pixels, se->buffer_size*sizeof(float));
 		logger.logit(client_id, "Session ", session_id, " copy complete pixel buffer");
 	SESSION_FIND_END()
@@ -458,14 +492,21 @@ void cycles_session_draw(unsigned int client_id, unsigned int session_id, int wi
 		session_buf_params.height = session_buf_params.full_height = height;
 
 		session->draw(session_buf_params, draw_params);
-
 	SESSION_FIND_END()
 }
 
-void cycles_session_draw_nogl(unsigned int client_id, unsigned int session_id)
+void cycles_session_draw_nogl(unsigned int client_id, unsigned int session_id, int width, int height, bool isgpu)
 {
 	SESSION_FIND(session_id)
-		//session->device->pixels_copy_from();
+		if (!ccsess->pixels) return;
+		ccl::thread_scoped_lock pixels_lock(ccsess->pixels_mutex);
+		ccl::BufferParams session_buf_params;
+		ccl::DeviceDrawParams draw_params;
+		session_buf_params.width = session_buf_params.full_width = width;
+		session_buf_params.height = session_buf_params.full_height = height;
+		if (isgpu)
+			session->draw(session_buf_params, draw_params);
+		session->display->get_pixels(session->device, ccsess->pixels);
 	SESSION_FIND_END()
 
 }
@@ -480,7 +521,7 @@ void cycles_progress_reset(unsigned int client_id, unsigned int session_id)
 int cycles_progress_get_sample(unsigned int client_id, unsigned int session_id)
 {
 	SESSION_FIND(session_id)
-		ccl::TileManager tm = session->tile_manager;
+		ccl::TileManager &tm = session->tile_manager;
 		return tm.state.sample;
 	SESSION_FIND_END()
 
