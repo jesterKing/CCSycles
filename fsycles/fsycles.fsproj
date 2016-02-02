@@ -26,6 +26,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DocumentationFile>bin\Debug\fsycles.XML</DocumentationFile>
     <Prefer32Bit>false</Prefer32Bit>
+    <EnableUnmanagedDebugging>true</EnableUnmanagedDebugging>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -76,17 +77,23 @@
   <Import Project="$(FSharpTargetsPath)" />
   <PropertyGroup>
     <PostBuildEvent>copy /Y "$(ProjectDir)..\csycles\bin\$(ConfigurationName)\csycles.*" "$(TargetDir)"
+
 copy /Y "$(ProjectDir)..\ccycles\x64\$(ConfigurationName)\ccycles.dll" "$(TargetDir)"
 copy /Y "$(ProjectDir)..\ccycles\x64\$(ConfigurationName)\ccycles.pdb" "$(TargetDir)"
-copy /Y "$(ProjectDir)..\OpenImageIO\x64\$(ConfigurationName)\OpenImageIO.dll" "$(TargetDir)"
+
+copy /Y "$(ProjectDir)..\OpenImageIO\x64\$(ConfigurationName)\OpenImageIOv13.dll" "$(TargetDir)"
+
 copy /Y "$(ProjectDir)..\pthreads\x64\$(ConfigurationName)\pthreads.dll" "$(TargetDir)"
 copy /Y "$(ProjectDir)..\boostbuild\stage$(ConfigurationName)\lib\boost_*" "$(TargetDir)"
 
 MkDir "$(TargetDir)lib"
 
+
 Copy "$(ProjectDir)..\lib\*.cubin" "$(TargetDir)lib"
 
+
 MkDir "$(TargetDir)objects"
+
 
 Copy /Y "$(ProjectDir)..\tests\*" "$(TargetDir)"
 Copy /Y "$(ProjectDir)..\tests\objects\*" "$(TargetDir)\objects"</PostBuildEvent>

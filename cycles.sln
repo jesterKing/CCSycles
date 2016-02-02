@@ -92,6 +92,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ccsycles_diag", "ccsycles_diag\ccsycles_diag.csproj", "{177432DF-9AE2-4410-B9AE-16AB28A78A5A}"
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "fsycles", "fsycles\fsycles.fsproj", "{02C8A014-E7BC-47C1-8653-68200D75A248}"
+	ProjectSection(ProjectDependencies) = postProject
+		{060A4659-C327-4867-AAD8-E80C94DD1427} = {060A4659-C327-4867-AAD8-E80C94DD1427}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cycles_proper", "cycles_proper.vcxproj", "{17AAA942-8C82-4160-8D23-78EA580377DD}"
 	ProjectSection(ProjectDependencies) = postProject
