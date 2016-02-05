@@ -242,6 +242,12 @@ unsigned int cycles_add_shader_node(unsigned int client_id, unsigned int shader_
 		case shadernode_type::WAVE_TEXTURE:
 			node = new ccl::WaveTextureNode();
 			break;
+		case shadernode_type::MAGIC_TEXTURE:
+			node = new ccl::MagicTextureNode();
+			break;
+		case shadernode_type::MUSGRAVE_TEXTURE:
+			node = new ccl::MusgraveTextureNode();
+			break;
 		case shadernode_type::TEXTURE_COORDINATE:
 			node = new ccl::TextureCoordinateNode();
 			break;
@@ -772,6 +778,14 @@ void cycles_shadernode_set_member_int(unsigned int client_id, unsigned int shade
 						ccl::EnvironmentTextureNode* envnode = dynamic_cast<ccl::EnvironmentTextureNode*>(*psh);
 						if (mname == "interpolation") {
 							envnode->interpolation = (ccl::InterpolationType)value;
+						}
+					}
+					break;
+				case shadernode_type::MAGIC_TEXTURE:
+					{
+						ccl::MagicTextureNode* envnode = dynamic_cast<ccl::MagicTextureNode*>(*psh);
+						if (mname == "depth") {
+							envnode->depth = value;
 						}
 					}
 					break;

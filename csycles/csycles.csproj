@@ -76,6 +76,8 @@
     <Compile Include="ShaderNodes\CombineXyzNode.cs" />
     <Compile Include="ShaderNodes\BrightnessContrastNode.cs" />
     <Compile Include="ShaderNodes\AnisotropicBsdfNode.cs" />
+    <Compile Include="ShaderNodes\AbsorptionVolumeNode.cs" />
+    <Compile Include="ShaderNodes\ScatterVolumeNode.cs" />
     <Compile Include="ShaderNodes\HueSaturationNode.cs" />
     <Compile Include="ShaderNodes\HoldoutNode.cs" />
     <Compile Include="ShaderNodes\GradientTextureNode.cs" />
@@ -134,6 +136,8 @@
     <Compile Include="ShaderNodes\TextureNode.cs" />
     <Compile Include="ShaderNodes\ValueNode.cs" />
     <Compile Include="ShaderNodes\Sockets\SocketBase.cs" />
+    <Compile Include="ShaderNodes\MagicTexture.cs" />
+    <Compile Include="ShaderNodes\MusgraveTexture.cs" />
     <Compile Include="ShaderNodes\WaveTexture.cs" />
     <Compile Include="SocketCollection.cs" />
     <Compile Include="Transform.cs" />

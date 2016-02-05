@@ -12,6 +12,18 @@
 	<connect from="m_diffuse_bsdf bsdf" to="output surface" />
 </shader>
 
+<shader name="volumescatter">
+	<scatter_volume name="volscatter" color="1 1 1" density="40.0" anisotropy="0"/>
+
+	<connect from="volscatter volume" to="output volume" />
+</shader>
+
+<shader name="volumeabsorption">
+	<absorption_volume name="volabsorp" color="1 1 1" density="40.0"/>
+
+	<connect from="volabsorp volume" to="output volume" />
+</shader>
+
 <shader name="emissionshader">
 	<emission name="m_emission_bsdf" color="1 1 1" strength="50" />
 
@@ -22,6 +34,22 @@
 	<anisotropic_bsdf name="m_anisotropic_bsdf" color="0.7 0.7 0.9" roughness="0.4" anisotropy="0.85" rotation="0.05" />
 
 	<connect from="m_anisotropic_bsdf bsdf" to="output surface" />
+</shader>
+
+<shader name="magictexture">
+	<magic_texture name="magic" depth="4" />
+	<diffuse_bsdf name="m_diffuse_bsdf" color="0.25490 0.53725 0.23922" />
+
+	<connect from="magic color" to="m_diffuse_bsdf color" />
+	<connect from="m_diffuse_bsdf bsdf" to="output surface" />
+</shader>
+
+<shader name="musgravetexture">
+	<musgrave_texture name="musgrave" scale="10" />
+	<diffuse_bsdf name="m_diffuse_bsdf" color="0.25490 0.53725 0.23922" />
+
+	<connect from="musgrave color" to="m_diffuse_bsdf color" />
+	<connect from="m_diffuse_bsdf bsdf" to="output surface" />
 </shader>
 
 
@@ -86,20 +114,20 @@
 </shader>
 
 <!-- Cube Object -->
-<transform rotate="75 1 1 1" translate="0 0 -2" scale="0.05 0.05 0.05">
+<!--<transform rotate="75 1 1 1" translate="0 0 -2" scale="0.05 0.05 0.05">
 <state interpolation="smooth" shader="emissionshader">
 	<include src="./objects/uv_cube.xml" />
 </state>
-</transform>
+</transform>-->
 
 <transform rotate="90 1 1 1" translate="1.8 0 0" scale="0.75 0.75 0.75">
-<state interpolation="smooth" shader="anisotropicshader">
+<state interpolation="smooth" shader="volumeabsorption">
 	<include src="./objects/suzanne.xml" />
 </state>
 </transform>
 
 <transform rotate="75 1 1 1" translate="-1.8 0 0" scale="0.75 0.75 0.75">
-<state interpolation="smooth" shader="anisotropicshader">
+<state interpolation="smooth" shader="volumescatter">
 	<include src="./objects/sphere.xml" />
 </state>
 </transform>
