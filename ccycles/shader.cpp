@@ -515,6 +515,12 @@ void cycles_shadernode_set_enum(unsigned int client_id, unsigned int shader_id, 
 						_set_enum_val(client_id, &node->distribution, ccl::GlassBsdfNode::distribution_enum, val);
 					}
 					break;
+				case shadernode_type::ANISOTROPIC:
+					{
+						ccl::AnisotropicBsdfNode* node = dynamic_cast<ccl::AnisotropicBsdfNode*>(*psh);
+						_set_enum_val(client_id, &node->distribution, ccl::AnisotropicBsdfNode::distribution_enum, val);
+					}
+					break;
 				case shadernode_type::WAVE_TEXTURE:
 					{
 						ccl::WaveTextureNode* node = dynamic_cast<ccl::WaveTextureNode*>(*psh);

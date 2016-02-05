@@ -75,6 +75,7 @@
     <Compile Include="ShaderNodes\CombineRgbNode.cs" />
     <Compile Include="ShaderNodes\CombineXyzNode.cs" />
     <Compile Include="ShaderNodes\BrightnessContrastNode.cs" />
+    <Compile Include="ShaderNodes\AnisotropicBsdfNode.cs" />
     <Compile Include="ShaderNodes\HueSaturationNode.cs" />
     <Compile Include="ShaderNodes\HoldoutNode.cs" />
     <Compile Include="ShaderNodes\GradientTextureNode.cs" />

@@ -12,6 +12,18 @@
 	<connect from="m_diffuse_bsdf bsdf" to="output surface" />
 </shader>
 
+<shader name="emissionshader">
+	<emission name="m_emission_bsdf" color="1 1 1" strength="50" />
+
+	<connect from="m_emission_bsdf emission" to="output surface" />
+</shader>
+
+<shader name="anisotropicshader">
+	<anisotropic_bsdf name="m_anisotropic_bsdf" color="0.7 0.7 0.9" roughness="0.4" anisotropy="0.85" rotation="0.05" />
+
+	<connect from="m_anisotropic_bsdf bsdf" to="output surface" />
+</shader>
+
 
 <shader name="texonly">
 	<texture_coordinate name="m_texture_uv" />
@@ -74,20 +86,20 @@
 </shader>
 
 <!-- Cube Object -->
-<transform rotate="75 1 1 1" scale="0.75 0.75 0.75">
-<state interpolation="smooth" shader="diffuseshader">
+<transform rotate="75 1 1 1" translate="0 0 -2" scale="0.05 0.05 0.05">
+<state interpolation="smooth" shader="emissionshader">
 	<include src="./objects/uv_cube.xml" />
 </state>
 </transform>
 
-<transform rotate="75 1 1 1" translate="1.8 0 0" scale="0.75 0.75 0.75">
-<state interpolation="smooth" shader="texonly">
+<transform rotate="90 1 1 1" translate="1.8 0 0" scale="0.75 0.75 0.75">
+<state interpolation="smooth" shader="anisotropicshader">
 	<include src="./objects/suzanne.xml" />
 </state>
 </transform>
 
 <transform rotate="75 1 1 1" translate="-1.8 0 0" scale="0.75 0.75 0.75">
-<state interpolation="smooth" shader="alphatexture">
+<state interpolation="smooth" shader="anisotropicshader">
 	<include src="./objects/sphere.xml" />
 </state>
 </transform>
