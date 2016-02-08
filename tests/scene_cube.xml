@@ -1,9 +1,13 @@
 <cycles>
-<!-- Camera -->
+
+	<integrator min_bounce="3" max_bounce="8" max_diffuse_bounce="0" max_glossy_bounce="4"/>
+
 	<background>
 		<background name="bg" strength="1.0" color="0.0, 0.0, 0.0" />
 		<connect from="bg background" to="output surface" />
 	</background>
+
+<!-- Camera -->
 	<camera width="800" height="500" />
 
 	<transform translate="0 0 -5" scale="1 1 1">
@@ -30,7 +34,7 @@
 	</shader>
 
 	<shader name="emissionshader">
-		<emission name="m_emission_bsdf" color="1 0 0" strength="50" />
+		<emission name="m_emission_bsdf" color="0.99 0.99 0.99" strength="1" />
 
 		<connect from="m_emission_bsdf emission" to="output surface" />
 	</shader>
@@ -118,15 +122,21 @@
 		<connect from="m_diffuse_texture_alpha closure" to="output surface" />
 	</shader>
 
-	<!-- Cube Object -->
-	<!--<transform rotate="75 1 1 1" translate="0 0 -2" scale="0.05 0.05 0.05">
-	<state interpolation="smooth" shader="emissionshader">
+	<!-- ground object -->
+	<transform translate="0 0 1" scale="30 7 0.05">
+	<state interpolation="smooth" shader="diffuseshader">
 		<include src="./objects/uv_cube.xml" />
 	</state>
-	</transform>-->
+	</transform>
+	<!-- Cube Object -->
+	<transform rotate="45 1 1 1" scale="0.25 0.5 0.25">
+	<state interpolation="smooth" shader="magictexture">
+		<include src="./objects/uv_cube.xml" />
+	</state>
+	</transform>
 
 	<state shader="emissionshader">
-		<light type="0" size="10" cast_shadow="true" P="10 10 10" />
+		<light type="1" size="0.001" dir="0 1 1" cast_shadow="true" P="-5 0 -150" />
 	</state>
 
 	<transform rotate="90 1 1 1" translate="1.8 0 0" scale="0.75 0.75 0.75">
