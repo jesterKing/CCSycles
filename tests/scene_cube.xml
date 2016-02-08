@@ -1,134 +1,143 @@
 <cycles>
 <!-- Camera -->
-<camera width="800" height="500" />
+	<background>
+		<background name="bg" strength="1.0" color="0.0, 0.0, 0.0" />
+		<connect from="bg background" to="output surface" />
+	</background>
+	<camera width="800" height="500" />
 
-<transform translate="0 0 -5" scale="1 1 1">
-	<camera type="perspective" />
-</transform>
+	<transform translate="0 0 -5" scale="1 1 1">
+		<camera type="perspective" />
+	</transform>
 
-<shader name="diffuseshader">
-	<diffuse_bsdf name="m_diffuse_bsdf" color="0.25490 0.53725 0.23922" />
+	<shader name="diffuseshader">
+		<!-- <diffuse_bsdf name="m_diffuse_bsdf" color="0.25490 0.53725 0.23922" /> -->
+		<diffuse_bsdf name="m_diffuse_bsdf" color="1 1 1" />
 
-	<connect from="m_diffuse_bsdf bsdf" to="output surface" />
-</shader>
+		<connect from="m_diffuse_bsdf bsdf" to="output surface" />
+	</shader>
 
-<shader name="volumescatter">
-	<scatter_volume name="volscatter" color="1 1 1" density="40.0" anisotropy="0"/>
+	<shader name="volumescatter">
+		<scatter_volume name="volscatter" color="1 1 1" density="40.0" anisotropy="0"/>
 
-	<connect from="volscatter volume" to="output volume" />
-</shader>
+		<connect from="volscatter volume" to="output volume" />
+	</shader>
 
-<shader name="volumeabsorption">
-	<absorption_volume name="volabsorp" color="1 1 1" density="40.0"/>
+	<shader name="volumeabsorption">
+		<absorption_volume name="volabsorp" color="1 1 1" density="40.0"/>
 
-	<connect from="volabsorp volume" to="output volume" />
-</shader>
+		<connect from="volabsorp volume" to="output volume" />
+	</shader>
 
-<shader name="emissionshader">
-	<emission name="m_emission_bsdf" color="1 1 1" strength="50" />
+	<shader name="emissionshader">
+		<emission name="m_emission_bsdf" color="1 0 0" strength="50" />
 
-	<connect from="m_emission_bsdf emission" to="output surface" />
-</shader>
+		<connect from="m_emission_bsdf emission" to="output surface" />
+	</shader>
 
-<shader name="anisotropicshader">
-	<anisotropic_bsdf name="m_anisotropic_bsdf" color="0.7 0.7 0.9" roughness="0.4" anisotropy="0.85" rotation="0.05" />
+	<shader name="anisotropicshader">
+		<anisotropic_bsdf name="m_anisotropic_bsdf" color="0.7 0.7 0.9" roughness="0.4" anisotropy="0.85" rotation="0.05" />
 
-	<connect from="m_anisotropic_bsdf bsdf" to="output surface" />
-</shader>
+		<connect from="m_anisotropic_bsdf bsdf" to="output surface" />
+	</shader>
 
-<shader name="magictexture">
-	<magic_texture name="magic" depth="4" />
-	<diffuse_bsdf name="m_diffuse_bsdf" color="0.25490 0.53725 0.23922" />
+	<shader name="magictexture">
+		<magic_texture name="magic" depth="4" />
+		<diffuse_bsdf name="m_diffuse_bsdf" color="0.25490 0.53725 0.23922" />
 
-	<connect from="magic color" to="m_diffuse_bsdf color" />
-	<connect from="m_diffuse_bsdf bsdf" to="output surface" />
-</shader>
+		<connect from="magic color" to="m_diffuse_bsdf color" />
+		<connect from="m_diffuse_bsdf bsdf" to="output surface" />
+	</shader>
 
-<shader name="musgravetexture">
-	<musgrave_texture name="musgrave" scale="10" />
-	<diffuse_bsdf name="m_diffuse_bsdf" color="0.25490 0.53725 0.23922" />
+	<shader name="musgravetexture">
+		<musgrave_texture name="musgrave" scale="10" />
+		<diffuse_bsdf name="m_diffuse_bsdf" color="0.25490 0.53725 0.23922" />
 
-	<connect from="musgrave color" to="m_diffuse_bsdf color" />
-	<connect from="m_diffuse_bsdf bsdf" to="output surface" />
-</shader>
+		<connect from="musgrave color" to="m_diffuse_bsdf color" />
+		<connect from="m_diffuse_bsdf bsdf" to="output surface" />
+	</shader>
 
 
-<shader name="texonly">
-	<texture_coordinate name="m_texture_uv" />
-	<image_texture name="m_diffuse_texture" src="solidcol.png" />
-	<diffuse_bsdf name="m_diffuse_bsdf"  />
+	<shader name="texonly">
+		<texture_coordinate name="m_texture_uv" />
+		<image_texture name="m_diffuse_texture" src="solidcol.png" />
+		<diffuse_bsdf name="m_diffuse_bsdf"  />
 
-<!--
-	add_output("WcsBox", SHADER_SOCKET_POINT);
-	add_output("EnvSpherical", SHADER_SOCKET_POINT);
-	add_output("EnvEmap", SHADER_SOCKET_POINT);
-	add_output("EnvBox", SHADER_SOCKET_POINT);
-	add_output("EnvLightProbe", SHADER_SOCKET_POINT);
-	add_output("EnvCubemap", SHADER_SOCKET_POINT);
-	add_output("EnvCubemapVerticalCross", SHADER_SOCKET_POINT);
-	add_output("EnvCubemapHorizontalCross", SHADER_SOCKET_POINT);
-	add_output("EnvHemi", SHADER_SOCKET_POINT);
--->
+	<!--
+		add_output("WcsBox", SHADER_SOCKET_POINT);
+		add_output("EnvSpherical", SHADER_SOCKET_POINT);
+		add_output("EnvEmap", SHADER_SOCKET_POINT);
+		add_output("EnvBox", SHADER_SOCKET_POINT);
+		add_output("EnvLightProbe", SHADER_SOCKET_POINT);
+		add_output("EnvCubemap", SHADER_SOCKET_POINT);
+		add_output("EnvCubemapVerticalCross", SHADER_SOCKET_POINT);
+		add_output("EnvCubemapHorizontalCross", SHADER_SOCKET_POINT);
+		add_output("EnvHemi", SHADER_SOCKET_POINT);
+	-->
 
-	<connect from="m_texture_uv envhemi" to="m_diffuse_texture vector" />
-	<connect from="m_diffuse_texture color" to="m_diffuse_bsdf color" />
-	<connect from="m_diffuse_bsdf bsdf" to="output surface" />
-</shader>
+		<connect from="m_texture_uv envhemi" to="m_diffuse_texture vector" />
+		<connect from="m_diffuse_texture color" to="m_diffuse_bsdf color" />
+		<connect from="m_diffuse_bsdf bsdf" to="output surface" />
+	</shader>
 
-<shader name="texture_energy">
-	<texture_coordinate name="m_texture_uv" />
-	<image_texture name="m_diffuse_texture" src="solidcol.png" />
-	<diffuse_bsdf name="m_diffuse_bsdf"  />
-	<transparent_bsdf name="m_transparent" />
-	<mix_closure name="m_diffuse_texture_alpha" />
+	<shader name="texture_energy">
+		<texture_coordinate name="m_texture_uv" />
+		<image_texture name="m_diffuse_texture" src="solidcol.png" />
+		<diffuse_bsdf name="m_diffuse_bsdf"  />
+		<transparent_bsdf name="m_transparent" />
+		<mix_closure name="m_diffuse_texture_alpha" />
 
-	<connect from="m_texture_uv uv" to="m_diffuse_texture vector" />
-	<connect from="m_diffuse_texture alpha" to="m_diffuse_texture_alpha fac" />
-	<connect from="m_diffuse_texture color" to="m_diffuse_bsdf color" />
-	<connect from="m_transparent bsdf" to="m_diffuse_texture_alpha closure1" />
-	<connect from="m_diffuse_bsdf bsdf" to="m_diffuse_texture_alpha closure2" />
-	<connect from="m_diffuse_texture_alpha closure" to="output surface" />
-</shader>
+		<connect from="m_texture_uv uv" to="m_diffuse_texture vector" />
+		<connect from="m_diffuse_texture alpha" to="m_diffuse_texture_alpha fac" />
+		<connect from="m_diffuse_texture color" to="m_diffuse_bsdf color" />
+		<connect from="m_transparent bsdf" to="m_diffuse_texture_alpha closure1" />
+		<connect from="m_diffuse_bsdf bsdf" to="m_diffuse_texture_alpha closure2" />
+		<connect from="m_diffuse_texture_alpha closure" to="output surface" />
+	</shader>
 
-<shader name="alphatexture">
-	<texture_coordinate name="m_texture_uv" />
-	<image_texture name="m_diffuse_texture" src="alpha.png" />
-	<diffuse_bsdf name="m_diffuse_bsdf"  />
-	<transparent_bsdf name="m_transparent" />
-	<mix_closure name="m_diffuse_texture_alpha" />
-	<connect from="m_texture_uv uv" to="m_diffuse_texture vector" />
-	<connect from="m_diffuse_texture alpha" to="m_diffuse_texture_alpha fac" />
-	<connect from="m_diffuse_texture color" to="m_diffuse_bsdf color" />
-	<connect from="m_transparent bsdf" to="m_diffuse_texture_alpha closure1" />
-	<connect from="m_diffuse_bsdf bsdf" to="m_diffuse_texture_alpha closure2" />
-	<connect from="m_diffuse_texture_alpha closure" to="output surface" />
-</shader>
+	<shader name="alphatexture">
+		<texture_coordinate name="m_texture_uv" />
+		<image_texture name="m_diffuse_texture" src="alpha.png" />
+		<diffuse_bsdf name="m_diffuse_bsdf"  />
+		<transparent_bsdf name="m_transparent" />
+		<mix_closure name="m_diffuse_texture_alpha" />
+		<connect from="m_texture_uv uv" to="m_diffuse_texture vector" />
+		<connect from="m_diffuse_texture alpha" to="m_diffuse_texture_alpha fac" />
+		<connect from="m_diffuse_texture color" to="m_diffuse_bsdf color" />
+		<connect from="m_transparent bsdf" to="m_diffuse_texture_alpha closure1" />
+		<connect from="m_diffuse_bsdf bsdf" to="m_diffuse_texture_alpha closure2" />
+		<connect from="m_diffuse_texture_alpha closure" to="output surface" />
+	</shader>
 
-<shader name="transptest">
-	<diffuse_bsdf name="m_diffuse_bsdf" color="0.1 0.2 0.8" />
-	<transparent_bsdf name="m_transparent" color="1.0 1.0 1.0" />
-	<mix_closure name="m_diffuse_texture_alpha" fac="0.1" />
-	<connect from="m_transparent bsdf" to="m_diffuse_texture_alpha closure1" />
-	<connect from="m_diffuse_bsdf bsdf" to="m_diffuse_texture_alpha closure2" />
-	<connect from="m_diffuse_texture_alpha closure" to="output surface" />
-</shader>
+	<shader name="transptest">
+		<diffuse_bsdf name="m_diffuse_bsdf" color="0.1 0.2 0.8" />
+		<transparent_bsdf name="m_transparent" color="1.0 1.0 1.0" />
+		<mix_closure name="m_diffuse_texture_alpha" fac="0.1" />
+		<connect from="m_transparent bsdf" to="m_diffuse_texture_alpha closure1" />
+		<connect from="m_diffuse_bsdf bsdf" to="m_diffuse_texture_alpha closure2" />
+		<connect from="m_diffuse_texture_alpha closure" to="output surface" />
+	</shader>
 
-<!-- Cube Object -->
-<!--<transform rotate="75 1 1 1" translate="0 0 -2" scale="0.05 0.05 0.05">
-<state interpolation="smooth" shader="emissionshader">
-	<include src="./objects/uv_cube.xml" />
-</state>
-</transform>-->
+	<!-- Cube Object -->
+	<!--<transform rotate="75 1 1 1" translate="0 0 -2" scale="0.05 0.05 0.05">
+	<state interpolation="smooth" shader="emissionshader">
+		<include src="./objects/uv_cube.xml" />
+	</state>
+	</transform>-->
 
-<transform rotate="90 1 1 1" translate="1.8 0 0" scale="0.75 0.75 0.75">
-<state interpolation="smooth" shader="volumeabsorption">
-	<include src="./objects/suzanne.xml" />
-</state>
-</transform>
+	<state shader="emissionshader">
+		<light type="0" size="10" cast_shadow="true" P="10 10 10" />
+	</state>
 
-<transform rotate="75 1 1 1" translate="-1.8 0 0" scale="0.75 0.75 0.75">
-<state interpolation="smooth" shader="volumescatter">
-	<include src="./objects/sphere.xml" />
-</state>
-</transform>
+	<transform rotate="90 1 1 1" translate="1.8 0 0" scale="0.75 0.75 0.75">
+	<state interpolation="smooth" shader="diffuseshader">
+		<include src="./objects/suzanne.xml" />
+	</state>
+	</transform>
+
+	<transform rotate="75 1 1 1" translate="-1.8 0 0" scale="0.75 0.75 0.75">
+	<state interpolation="smooth" shader="diffuseshader">
+		<include src="./objects/sphere.xml" />
+	</state>
+	</transform>
 </cycles>
