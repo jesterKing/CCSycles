@@ -308,6 +308,8 @@ namespace csycles_tester
 
 		private void ReadLight(ref XmlReadState state, System.Xml.XmlReader node)
 		{
+			node.Read();
+
 			Light light = new Light(Client, state.Scene, state.Shader);
 
 			int intval = 0;
@@ -319,7 +321,6 @@ namespace csycles_tester
 			{
 				light.Type = (LightType)intval;
 			}
-
 			if(Utilities.Instance.get_float(ref floatval, node.GetAttribute("spot_angle")))
 			{
 				light.SpotAngle = floatval;
