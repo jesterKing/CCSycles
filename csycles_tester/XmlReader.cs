@@ -306,6 +306,105 @@ namespace csycles_tester
 			}
 		}
 
+		private void ReadLight(ref XmlReadState state, System.Xml.XmlReader node)
+		{
+			Light light = new Light(Client, state.Scene, state.Shader);
+
+			int intval = 0;
+			float floatval = 0.0f;
+			float4 float4val = new float4(0.0f);
+			bool boolval = false;
+
+			if (Utilities.Instance.get_int(ref intval, node.GetAttribute("type")))
+			{
+				light.Type = (LightType)intval;
+			}
+
+			if(Utilities.Instance.get_float(ref floatval, node.GetAttribute("spot_angle")))
+			{
+				light.SpotAngle = floatval;
+			}
+			if(Utilities.Instance.get_float(ref floatval, node.GetAttribute("spot_smooth")))
+			{
+				light.SpotSmooth = floatval;
+			}
+
+			if(Utilities.Instance.get_float(ref floatval, node.GetAttribute("sizeu")))
+			{
+				light.SizeU= floatval;
+			}
+			if(Utilities.Instance.get_float(ref floatval, node.GetAttribute("sizev")))
+			{
+				light.SizeV= floatval;
+			}
+			if(Utilities.Instance.get_float4(float4val, node.GetAttribute("axisu")))
+			{
+				light.AxisU= float4val;
+			}
+			if(Utilities.Instance.get_float4(float4val, node.GetAttribute("axisv")))
+			{
+				light.AxisV= float4val;
+			}
+
+			/* @todo
+			if(Utilities.Instance.get_bool(ref boolval, node.GetAttribute("is_portal")))
+			{
+			}
+			*/
+
+			if(Utilities.Instance.get_float(ref floatval, node.GetAttribute("size")))
+			{
+				light.Size = floatval;
+			}
+			if(Utilities.Instance.get_float4(float4val, node.GetAttribute("dir")))
+			{
+				light.Direction = float4val;
+			}
+			if(Utilities.Instance.get_float4(float4val, node.GetAttribute("P")))
+			{
+				light.Location = state.Transform * float4val;
+			}
+
+			if(Utilities.Instance.get_bool(ref boolval, node.GetAttribute("cast_shadow")))
+			{
+				light.CastShadow = boolval;
+			}
+			if(Utilities.Instance.get_bool(ref boolval, node.GetAttribute("use_mis")))
+			{
+				light.UseMis = boolval;
+			}
+			if(Utilities.Instance.get_int(ref intval, node.GetAttribute("samples")))
+			{
+				light.Samples = (uint)intval;
+			}
+			if(Utilities.Instance.get_int(ref intval, node.GetAttribute("max_bounces")))
+			{
+				light.MaxBounces = (uint)intval;
+			}
+
+			/* @todo add ray visibility to light API
+			if(Utilities.Instance.get_bool(ref boolval, node.GetAttribute("use_diffuse")))
+			{
+				light.UseDiffuse = boolval;
+			}
+			if(Utilities.Instance.get_bool(ref boolval, node.GetAttribute("use_glossy")))
+			{
+				light.UseGlossy = boolval;
+			}
+			if(Utilities.Instance.get_bool(ref boolval, node.GetAttribute("use_transmission")))
+			{
+				light.UseTransmission = boolval;
+			}
+			if(Utilities.Instance.get_bool(ref boolval, node.GetAttribute("use_scatter")))
+			{
+				light.UseScatter = boolval;
+			}
+			*/
+
+			light.TagUpdate();
+
+		}
+
 		private void ReadScene(ref XmlReadState state, System.Xml.XmlReader node)
 		{
 			
@@ -345,6 +444,9 @@ namespace csycles_tester
 						break;
 					case "mesh":
 						ReadMesh(ref state, node.ReadSubtree());
+						break;
+					case "light":
+						ReadLight(ref state, node.ReadSubtree());
 						break;
 					case "include":
 						var src = node.GetAttribute("src");
