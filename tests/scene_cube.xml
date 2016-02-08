@@ -3,7 +3,7 @@
 	<integrator min_bounce="3" max_bounce="8" max_diffuse_bounce="0" max_glossy_bounce="4"/>
 
 	<background>
-		<background name="bg" strength="1.0" color="0.0, 0.0, 0.0" />
+		<background name="bg" strength="1.0" color="0.99, 0.5, 0.25" />
 		<connect from="bg background" to="output surface" />
 	</background>
 
@@ -123,7 +123,7 @@
 	</shader>
 
 	<!-- ground object -->
-	<transform translate="0 0 1" scale="30 7 0.05">
+	<transform translate="0 0 1" scale="30 2 0.05">
 	<state interpolation="smooth" shader="diffuseshader">
 		<include src="./objects/uv_cube.xml" />
 	</state>
