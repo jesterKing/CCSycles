@@ -150,6 +150,23 @@ namespace ccl
 			return new float4(a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w);
 		}
 
+		/// <summary>
+		/// Transform point a with Transform t
+		/// </summary>
+		/// <param name="t"></param>
+		/// <param name="a"></param>
+		/// <returns></returns>
+		public static float4 operator *(Transform t, float4 a)
+		{
+
+			float4 c = new float4(
+				a.x*t.x.x + a.y*t.x.y + a.z*t.x.z + t.x.w,
+				a.x*t.y.x + a.y*t.y.y + a.z*t.y.z + t.y.w,
+				a.x*t.z.x + a.y*t.z.y + a.z*t.z.z + t.z.w);
+
+			return c;
+		}
+
 		public float Length()
 		{
 			return (float)Math.Sqrt(Dot(this, this));
