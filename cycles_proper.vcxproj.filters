@@ -22,9 +22,6 @@
     <ClCompile Include="cycles\src\util\util_aligned_malloc.cpp">
       <Filter>util</Filter>
     </ClCompile>
-    <ClCompile Include="cycles\src\util\util_cache.cpp">
-      <Filter>util</Filter>
-    </ClCompile>
     <ClCompile Include="cycles\src\util\util_guarded_allocator.cpp">
       <Filter>util</Filter>
     </ClCompile>
@@ -166,6 +163,9 @@
     <ClCompile Include="cycles\src\util\util_math_cdf.cpp">
       <Filter>util</Filter>
     </ClCompile>
+    <ClCompile Include="cycles\src\util\util_debug.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cycles\src\bvh\bvh.h">
@@ -199,9 +199,6 @@
       <Filter>util</Filter>
     </ClInclude>
     <ClInclude Include="cycles\src\util\util_boundbox.h">
-      <Filter>util</Filter>
-    </ClInclude>
-    <ClInclude Include="cycles\src\util\util_cache.h">
       <Filter>util</Filter>
     </ClInclude>
     <ClInclude Include="cycles\src\util\util_debug.h">
@@ -411,6 +408,111 @@
     <ClInclude Include="cycles\src\util\util_math_cdf.h">
       <Filter>util</Filter>
     </ClInclude>
+    <ClInclude Include="cycles\src\kernel\kernel.h">
+      <Filter>kernel_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\kernel\kernel_accumulate.h">
+      <Filter>kernel_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\kernel\kernel_bake.h">
+      <Filter>kernel_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\kernel\kernel_camera.h">
+      <Filter>kernel_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\kernel\kernel_compat_cpu.h">
+      <Filter>kernel_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\kernel\kernel_compat_cuda.h">
+      <Filter>kernel_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\kernel\kernel_compat_opencl.h">
+      <Filter>kernel_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\kernel\kernel_debug.h">
+      <Filter>kernel_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\kernel\kernel_differential.h">
+      <Filter>kernel_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\kernel\kernel_emission.h">
+      <Filter>kernel_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\kernel\kernel_film.h">
+      <Filter>kernel_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\kernel\kernel_globals.h">
+      <Filter>kernel_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\kernel\kernel_jitter.h">
+      <Filter>kernel_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\kernel\kernel_light.h">
+      <Filter>kernel_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\kernel\kernel_math.h">
+      <Filter>kernel_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\kernel\kernel_montecarlo.h">
+      <Filter>kernel_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\kernel\kernel_passes.h">
+      <Filter>kernel_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\kernel\kernel_path.h">
+      <Filter>kernel_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\kernel\kernel_path_branched.h">
+      <Filter>kernel_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\kernel\kernel_path_common.h">
+      <Filter>kernel_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\kernel\kernel_path_state.h">
+      <Filter>kernel_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\kernel\kernel_path_surface.h">
+      <Filter>kernel_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\kernel\kernel_path_volume.h">
+      <Filter>kernel_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\kernel\kernel_projection.h">
+      <Filter>kernel_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\kernel\kernel_queues.h">
+      <Filter>kernel_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\kernel\kernel_random.h">
+      <Filter>kernel_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\kernel\kernel_shader.h">
+      <Filter>kernel_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\kernel\kernel_shadow.h">
+      <Filter>kernel_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\kernel\kernel_subsurface.h">
+      <Filter>kernel_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\kernel\kernel_textures.h">
+      <Filter>kernel_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\kernel\kernel_types.h">
+      <Filter>kernel_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\kernel\kernel_volume.h">
+      <Filter>kernel_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\kernel\kernel_work_stealing.h">
+      <Filter>kernel_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\kernel\kernels\cpu\kernel_cpu.h">
+      <Filter>kernel_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\kernel\kernels\cpu\kernel_cpu_impl.h">
+      <Filter>kernel_headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="util">
@@ -427,6 +529,9 @@
     </Filter>
     <Filter Include="subd">
       <UniqueIdentifier>{c052acf9-1852-4578-8f5e-c8da6d4c8303}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kernel_headers">
+      <UniqueIdentifier>{b61e4075-a0f7-41bd-a86b-7bff792ab1ba}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -50,8 +50,8 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(ProjectDir)boost;$(ProjectDir)pthreads;$(ProjectDir)OpenImageIO\include;$(ProjectDir)glew\include;$(ProjectDir)cycles\third_party\atomic;$(ProjectDir)cycles\third_party\cuew\include;$(ProjectDir)cycles\third_party\clew\include;$(ProjectDir)cycles\src\render;$(ProjectDir)cycles\src\kernel;$(ProjectDir)cycles\src\kernel\svm;$(ProjectDir)cycles\src\kernel\osl;$(ProjectDir)cycles\src\util;$(ProjectDir)cycles\src\device;$(ProjectDir)cycles\src\bvh;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>GLEW_STATIC;BOOST_ALL_NO_LIB;_WINSOCK_DEPRECATED_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;DEBUG;_DEBUG;CCL_NAMESPACE_BEGIN=namespace ccl {;CCL_NAMESPACE_END=};WITH_NETWORK;WITH_OPENCL;WITH_CUDA;WITH_MULTI;CYCLES_STD_UNORDERED_MAP;NO_OIIO_LOADING;WITH_CYCLES_OPTIMIZED_KERNEL_SSE2;WITH_CYCLES_OPTIMIZED_KERNEL_SSE3;WITH_CYCLES_OPTIMIZED_KERNEL_SSE41;WITH_CYCLES_OPTIMIZED_KERNEL_AVX;WITH_CYCLES_OPTIMIZED_KERNEL_AVX2;HAVE_PTW32_CONFIG_H;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir)boost;$(ProjectDir)pthreads;$(ProjectDir)OpenImageIO\include;$(ProjectDir)glew\include;$(ProjectDir)cycles\third_party\atomic;$(ProjectDir)cycles\third_party\cuew\include;$(ProjectDir)cycles\third_party\clew\include;$(ProjectDir)cycles\src\render;$(ProjectDir)cycles\src\kernel\kernels\cpu;$(ProjectDir)cycles\src\kernel;$(ProjectDir)cycles\src\kernel\svm;$(ProjectDir)cycles\src\kernel\osl;$(ProjectDir)cycles\src\util;$(ProjectDir)cycles\src\device;$(ProjectDir)cycles\src\bvh;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WITH_CUDA_DYNLOAD;GLEW_STATIC;BOOST_ALL_NO_LIB;_WINSOCK_DEPRECATED_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;DEBUG;_DEBUG;CCL_NAMESPACE_BEGIN=namespace ccl {;CCL_NAMESPACE_END=};WITH_NETWORK;WITH_OPENCL;WITH_CUDA;WITH_MULTI;CYCLES_STD_UNORDERED_MAP;NO_OIIO_LOADING;WITH_CYCLES_OPTIMIZED_KERNEL_SSE2;WITH_CYCLES_OPTIMIZED_KERNEL_SSE3;WITH_CYCLES_OPTIMIZED_KERNEL_SSE41;WITH_CYCLES_OPTIMIZED_KERNEL_AVX;WITH_CYCLES_OPTIMIZED_KERNEL_AVX2;HAVE_PTW32_CONFIG_H;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <FloatingPointModel>Fast</FloatingPointModel>
       <CompileAs>CompileAsCpp</CompileAs>
@@ -76,10 +76,10 @@
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>false</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>$(ProjectDir)boost;$(ProjectDir)pthreads;$(ProjectDir)OpenImageIO\include;$(ProjectDir)glew\include;$(ProjectDir)cycles\third_party\atomic;$(ProjectDir)cycles\third_party\cuew\include;$(ProjectDir)cycles\third_party\clew\include;$(ProjectDir)cycles\src\render;$(ProjectDir)cycles\src\kernel;$(ProjectDir)cycles\src\kernel\svm;$(ProjectDir)cycles\src\kernel\osl;$(ProjectDir)cycles\src\util;$(ProjectDir)cycles\src\device;$(ProjectDir)cycles\src\bvh;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)boost;$(ProjectDir)pthreads;$(ProjectDir)OpenImageIO\include;$(ProjectDir)glew\include;$(ProjectDir)cycles\third_party\atomic;$(ProjectDir)cycles\third_party\cuew\include;$(ProjectDir)cycles\third_party\clew\include;$(ProjectDir)cycles\src\render;$(ProjectDir)cycles\src\kernel\kernels\cpu;$(ProjectDir)cycles\src\kernel;$(ProjectDir)cycles\src\kernel\svm;$(ProjectDir)cycles\src\kernel\osl;$(ProjectDir)cycles\src\util;$(ProjectDir)cycles\src\device;$(ProjectDir)cycles\src\bvh;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <WholeProgramOptimization>false</WholeProgramOptimization>
-      <PreprocessorDefinitions>GLEW_STATIC;BOOST_ALL_NO_LIB;_WINSOCK_DEPRECATED_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;NDEBUG;CCL_NAMESPACE_BEGIN=namespace ccl {;CCL_NAMESPACE_END=};WITH_NETWORK;WITH_OPENCL;WITH_CUDA;WITH_MULTI;CYCLES_STD_UNORDERED_MAP;NO_OIIO_LOADING;WITH_CYCLES_OPTIMIZED_KERNEL_SSE2;WITH_CYCLES_OPTIMIZED_KERNEL_SSE3;WITH_CYCLES_OPTIMIZED_KERNEL_SSE41;WITH_CYCLES_OPTIMIZED_KERNEL_AVX;WITH_CYCLES_OPTIMIZED_KERNEL_AVX2;HAVE_PTW32_CONFIG_H;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WITH_CUDA_DYNLOAD;GLEW_STATIC;BOOST_ALL_NO_LIB;_WINSOCK_DEPRECATED_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;NDEBUG;CCL_NAMESPACE_BEGIN=namespace ccl {;CCL_NAMESPACE_END=};WITH_NETWORK;WITH_OPENCL;WITH_CUDA;WITH_MULTI;CYCLES_STD_UNORDERED_MAP;NO_OIIO_LOADING;WITH_CYCLES_OPTIMIZED_KERNEL_SSE2;WITH_CYCLES_OPTIMIZED_KERNEL_SSE3;WITH_CYCLES_OPTIMIZED_KERNEL_SSE41;WITH_CYCLES_OPTIMIZED_KERNEL_AVX;WITH_CYCLES_OPTIMIZED_KERNEL_AVX2;HAVE_PTW32_CONFIG_H;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <FloatingPointModel>Fast</FloatingPointModel>
       <CompileAs>CompileAsCpp</CompileAs>
       <DisableSpecificWarnings>4018;4065;4127;4181;4200;4244;4267;4305;4800</DisableSpecificWarnings>
@@ -142,7 +142,7 @@
     <ClCompile Include="cycles\src\subd\subd_patch.cpp" />
     <ClCompile Include="cycles\src\subd\subd_split.cpp" />
     <ClCompile Include="cycles\src\util\util_aligned_malloc.cpp" />
-    <ClCompile Include="cycles\src\util\util_cache.cpp" />
+    <ClCompile Include="cycles\src\util\util_debug.cpp" />
     <ClCompile Include="cycles\src\util\util_guarded_allocator.cpp" />
     <ClCompile Include="cycles\src\util\util_logging.cpp" />
     <ClCompile Include="cycles\src\util\util_math_cdf.cpp" />
@@ -168,6 +168,41 @@
     <ClInclude Include="cycles\src\device\device_memory.h" />
     <ClInclude Include="cycles\src\device\device_network.h" />
     <ClInclude Include="cycles\src\device\device_task.h" />
+    <ClInclude Include="cycles\src\kernel\kernel.h" />
+    <ClInclude Include="cycles\src\kernel\kernels\cpu\kernel_cpu.h" />
+    <ClInclude Include="cycles\src\kernel\kernels\cpu\kernel_cpu_impl.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_accumulate.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_bake.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_camera.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_compat_cpu.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_compat_cuda.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_compat_opencl.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_debug.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_differential.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_emission.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_film.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_globals.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_jitter.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_light.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_math.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_montecarlo.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_passes.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_path.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_path_branched.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_path_common.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_path_state.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_path_surface.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_path_volume.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_projection.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_queues.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_random.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_shader.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_shadow.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_subsurface.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_textures.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_types.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_volume.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_work_stealing.h" />
     <ClInclude Include="cycles\src\render\attribute.h" />
     <ClInclude Include="cycles\src\render\background.h" />
     <ClInclude Include="cycles\src\render\bake.h" />
@@ -201,7 +236,6 @@
     <ClInclude Include="cycles\src\util\util_aligned_malloc.h" />
     <ClInclude Include="cycles\src\util\util_args.h" />
     <ClInclude Include="cycles\src\util\util_boundbox.h" />
-    <ClInclude Include="cycles\src\util\util_cache.h" />
     <ClInclude Include="cycles\src\util\util_debug.h" />
     <ClInclude Include="cycles\src\util\util_foreach.h" />
     <ClInclude Include="cycles\src\util\util_function.h" />

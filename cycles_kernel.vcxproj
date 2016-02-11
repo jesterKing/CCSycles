@@ -122,6 +122,8 @@
     <ClInclude Include="cycles\src\kernel\closure\emissive.h" />
     <ClInclude Include="cycles\src\kernel\closure\volume.h" />
     <ClInclude Include="cycles\src\kernel\kernel.h" />
+    <ClInclude Include="cycles\src\kernel\kernels\cpu\kernel_cpu.h" />
+    <ClInclude Include="cycles\src\kernel\kernels\cpu\kernel_cpu_impl.h" />
     <ClInclude Include="cycles\src\kernel\kernel_accumulate.h" />
     <ClInclude Include="cycles\src\kernel\kernel_bake.h" />
     <ClInclude Include="cycles\src\kernel\kernel_camera.h" />
@@ -147,7 +149,6 @@
     <ClInclude Include="cycles\src\kernel\kernel_queues.h" />
     <ClInclude Include="cycles\src\kernel\kernel_random.h" />
     <ClInclude Include="cycles\src\kernel\kernel_shader.h" />
-    <ClInclude Include="cycles\src\kernel\kernel_shaderdata_vars.h" />
     <ClInclude Include="cycles\src\kernel\kernel_shadow.h" />
     <ClInclude Include="cycles\src\kernel\kernel_subsurface.h" />
     <ClInclude Include="cycles\src\kernel\kernel_textures.h" />
