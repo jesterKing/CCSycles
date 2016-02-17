@@ -215,7 +215,7 @@ namespace csycles_tester
 			}
 		}
 
-		private void ReadState(ref XmlReadState state, System.Xml.XmlReader node)
+		private void ReadState(XmlReadState state, System.Xml.XmlReader node)
 		{
 			node.Read();
 
@@ -231,6 +231,13 @@ namespace csycles_tester
 
 			if (!string.IsNullOrEmpty(dicing_rate)) state.DicingRate = float.Parse(dicing_rate, NumberFormatInfo);
 			if (!string.IsNullOrEmpty(interpolation)) state.Smooth = interpolation.Equals("smooth", StringComparison.OrdinalIgnoreCase);
+
+			bool boolval = false;
+
+			if(Utilities.Instance.get_bool(ref boolval, node.GetAttribute("is_shadow_catcher")))
+			{
+				state.IsShadowCatcher = boolval;
+			}
 
 			if (!string.IsNullOrEmpty(displacement_method))
 			{
@@ -259,7 +266,7 @@ namespace csycles_tester
 			var nvertsints = Utilities.Instance.parse_ints(nverts);
 			var vertsints = Utilities.Instance.parse_ints(verts);
 
-			var ob = new ccl.Object(Client) { Transform = state.Transform };
+			var ob = new ccl.Object(Client) { Transform = state.Transform, IsShadowCatcher = state.IsShadowCatcher };
 			var me = new Mesh(Client, state.Shader);
 
 			ob.Mesh = me;
@@ -432,7 +439,7 @@ namespace csycles_tester
 						break;
 					case "state":
 						var state_substate = new XmlReadState(state);
-						ReadState(ref state_substate, node.ReadSubtree());
+						ReadState(state_substate, node.ReadSubtree());
 						node.Read(); /* advance one forward */
 						ReadScene(ref state_substate, node.ReadSubtree());
 						break;

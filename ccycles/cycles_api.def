@@ -54,6 +54,7 @@ EXPORTS
   cycles_scene_object_set_mesh
   cycles_scene_object_get_mesh
   cycles_scene_object_set_visibility
+  cycles_scene_object_set_is_shadowcatcher
   cycles_object_tag_update
 
   cycles_integrator_tag_update

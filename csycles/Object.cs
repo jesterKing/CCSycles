@@ -90,5 +90,13 @@ namespace ccl
 				CSycles.object_set_visibility(Client.Id, Client.Scene.Id, Id, value);
 			}
 		}
+
+		public bool IsShadowCatcher
+		{
+			set
+			{
+				CSycles.object_set_is_shadowcatcher(Client.Id, Client.Scene.Id, Id, value);
+			}
+		}
 	}
 }
