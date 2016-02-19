@@ -15,9 +15,69 @@ limitations under the License.
 **/
 
 using System;
+using System.Runtime.InteropServices;
 
 namespace ccl
 {
+	internal struct _f4Api
+	{
+		[DllImport("ccycles.dll", SetLastError = false,  CallingConvention = CallingConvention.Cdecl)]
+		[return: MarshalAs(UnmanagedType.LPStruct)]
+		static public extern void cycles_f4_add([MarshalAs(UnmanagedType.Struct)] _float4 a, [MarshalAs(UnmanagedType.Struct)] _float4 b, [In, Out, MarshalAs(UnmanagedType.Struct)]ref _float4 res);
+
+		[DllImport("ccycles.dll", SetLastError = false,  CallingConvention = CallingConvention.Cdecl)]
+		[return: MarshalAs(UnmanagedType.LPStruct)]
+		static public extern void cycles_f4_sub([MarshalAs(UnmanagedType.Struct)] _float4 a, [MarshalAs(UnmanagedType.Struct)] _float4 b, [In, Out, MarshalAs(UnmanagedType.Struct)]ref _float4 res);
+		[DllImport("ccycles.dll", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[return: MarshalAs(UnmanagedType.LPStruct)]
+		static public extern void cycles_f4_mul([MarshalAs(UnmanagedType.Struct)] _float4 a, [MarshalAs(UnmanagedType.Struct)] _float4 b, [In, Out, MarshalAs(UnmanagedType.Struct)]ref _float4 res);
+		[DllImport("ccycles.dll", SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
+		[return: MarshalAs(UnmanagedType.LPStruct)]
+		static public extern void cycles_f4_div([MarshalAs(UnmanagedType.Struct)] _float4 a, [MarshalAs(UnmanagedType.Struct)] _float4 b, [In, Out, MarshalAs(UnmanagedType.Struct)]ref _float4 res);
+
+	}
+	[StructLayout(LayoutKind.Sequential, Pack = 8)]
+	public struct _float4
+	{
+		public float x;
+		public float y;
+		public float z;
+		public float w;
+
+		public _float4(float a, float b, float c, float d)
+		{
+			x = a;
+			y = b;
+			z = c;
+			w = d;
+		}
+
+		public static _float4 operator+(_float4 a, _float4 b)
+		{
+			_float4 res = new _float4();
+			_f4Api.cycles_f4_add(a, b, ref res);
+			return res;
+		}
+
+		public static _float4 operator-(_float4 a, _float4 b)
+		{
+			_float4 res = new _float4();
+			_f4Api.cycles_f4_sub(a, b, ref res);
+			return res;
+		}
+		public static _float4 operator*(_float4 a, _float4 b)
+		{
+			_float4 res = new _float4();
+			_f4Api.cycles_f4_mul(a, b, ref res);
+			return res;
+		}
+		public static _float4 operator/(_float4 a, _float4 b)
+		{
+			_float4 res = new _float4();
+			_f4Api.cycles_f4_div(a, b, ref res);
+			return res;
+		}
+	}
 	public class float4
 	{
 		public float x;

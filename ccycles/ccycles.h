@@ -632,6 +632,13 @@ CCL_CAPI void __cdecl cycles_film_set_filter(unsigned int client_id, unsigned in
 CCL_CAPI void __cdecl cycles_film_set_use_sample_clamp(unsigned int client_id, unsigned int scene_id, bool use_sample_clamp);
 CCL_CAPI void __cdecl cycles_film_tag_update(unsigned int client_id, unsigned int scene_id);
 
+CCL_CAPI void __cdecl cycles_f4_add(ccl::float4 a, ccl::float4 b, ccl::float4& res);
+CCL_CAPI void __cdecl cycles_f4_sub(ccl::float4 a, ccl::float4 b, ccl::float4& res);
+CCL_CAPI void __cdecl cycles_f4_mul(ccl::float4 a, ccl::float4 b, ccl::float4& res);
+CCL_CAPI void __cdecl cycles_f4_div(ccl::float4 a, ccl::float4 b, ccl::float4& res);
+
+CCL_CAPI void __cdecl cycles_tfm_inverse(const ccl::Transform& t, ccl::Transform& res);
+
 #ifdef __clplusplus
 }
 #endif

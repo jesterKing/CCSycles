@@ -210,3 +210,10 @@ EXPORTS
   cycles_film_set_filter
   cycles_film_set_use_sample_clamp
   cycles_film_tag_update
+
+  cycles_f4_add
+  cycles_f4_sub
+  cycles_f4_mul
+  cycles_f4_div
+
+  cycles_tfm_inverse

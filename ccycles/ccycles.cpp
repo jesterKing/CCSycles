@@ -107,3 +107,58 @@ void cycles_release_client(unsigned int client_id)
 {
 	loggers[client_id] = nullptr;
 }
+
+void cycles_f4_add(ccl::float4 a, ccl::float4 b, ccl::float4& res) {
+	ccl::float4 r = a + b;
+	res.x = r.x;
+	res.y = r.y;
+	res.z = r.z;
+	res.w = r.w;
+}
+
+void cycles_f4_sub(ccl::float4 a, ccl::float4 b, ccl::float4& res) {
+	ccl::float4 r = a - b;
+	res.x = r.x;
+	res.y = r.y;
+	res.z = r.z;
+	res.w = r.w;
+}
+
+void cycles_f4_mul(ccl::float4 a, ccl::float4 b, ccl::float4& res) {
+	ccl::float4 r = a * b;
+	res.x = r.x;
+	res.y = r.y;
+	res.z = r.z;
+	res.w = r.w;
+}
+
+void cycles_f4_div(ccl::float4 a, ccl::float4 b, ccl::float4& res) {
+	ccl::float4 r = a / b;
+	res.x = r.x;
+	res.y = r.y;
+	res.z = r.z;
+	res.w = r.w;
+}
+
+void cycles_tfm_inverse(const ccl::Transform& t, ccl::Transform& res) {
+	ccl::Transform r = ccl::transform_inverse(t);
+	res.x.x = r.x.x;
+	res.x.y = r.x.y;
+	res.x.z = r.x.z;
+	res.x.w = r.x.w;
+
+	res.y.x = r.y.x;
+	res.y.y = r.y.y;
+	res.y.z = r.y.z;
+	res.y.w = r.y.w;
+
+	res.z.x = r.z.x;
+	res.z.y = r.z.y;
+	res.z.z = r.z.z;
+	res.z.w = r.z.w;
+
+	res.w.x = r.w.x;
+	res.w.y = r.w.y;
+	res.w.z = r.w.z;
+	res.w.w = r.w.w;
+}

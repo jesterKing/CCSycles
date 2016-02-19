@@ -15,9 +15,46 @@ limitations under the License.
 **/
 
 using System;
+using System.Runtime.InteropServices;
 
 namespace ccl
 {
+
+	internal struct _tfmApi
+	{
+		[DllImport("ccycles.dll", SetLastError = false,  CallingConvention = CallingConvention.Cdecl)]
+		static public extern void cycles_tfm_inverse([In, MarshalAs(UnmanagedType.Struct)] _Transform t, [In, Out, MarshalAs(UnmanagedType.Struct)]ref _Transform res);
+
+	}
+
+	[StructLayout(LayoutKind.Sequential, Pack = 8)]
+	public struct _Transform
+	{
+		public _float4 x;
+		public _float4 y;
+		public _float4 z;
+		public _float4 w;
+		public _Transform(
+			float a, float b, float c, float d,
+			float e, float f, float g, float h,
+			float i, float j, float k, float l,
+			float m, float n, float o, float p
+		)
+		{
+			x = new _float4(a, b, c, d);
+			y = new _float4(e, f, g, h);
+			z = new _float4(i, j, k, l);
+			w = new _float4(m, n, o, p);
+		}
+
+		public static _Transform Inverse(_Transform t)
+		{
+			_Transform res = new _Transform();
+			_tfmApi.cycles_tfm_inverse(t, ref res);
+
+			return res;
+		}
+	}
 	/// <summary>
 	/// Transformation matrix.
 	/// </summary>
