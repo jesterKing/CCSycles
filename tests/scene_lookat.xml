@@ -12,7 +12,7 @@
 
 
 	<!--<lookat pos="0 0 5" look="0 0 0" up="0 1 0">-->
-	<lookat pos="10 0 0" look="0.1 0.0 0.1" up="0 1 0">
+	<lookat pos="5 10 -5" look="0.1 0.0 0.1" up="0 1 0">
 		<camera width="800" height="500" type="perspective" />
 	</lookat>
 	<!--<transform translate="0 0 -1">
