@@ -140,25 +140,60 @@ void cycles_f4_div(ccl::float4 a, ccl::float4 b, ccl::float4& res) {
 	res.w = r.w;
 }
 
+static void _tfm_copy(const ccl::Transform& source, ccl::Transform& target) {
+	target.x.x = source.x.x;
+	target.x.y = source.x.y;
+	target.x.z = source.x.z;
+	target.x.w = source.x.w;
+
+	target.y.x = source.y.x;
+	target.y.y = source.y.y;
+	target.y.z = source.y.z;
+	target.y.w = source.y.w;
+
+	target.z.x = source.z.x;
+	target.z.y = source.z.y;
+	target.z.z = source.z.z;
+	target.z.w = source.z.w;
+
+	target.w.x = source.w.x;
+	target.w.y = source.w.y;
+	target.w.z = source.w.z;
+	target.w.w = source.w.w;
+}
+
 void cycles_tfm_inverse(const ccl::Transform& t, ccl::Transform& res) {
 	ccl::Transform r = ccl::transform_inverse(t);
-	res.x.x = r.x.x;
-	res.x.y = r.x.y;
-	res.x.z = r.x.z;
-	res.x.w = r.x.w;
 
-	res.y.x = r.y.x;
-	res.y.y = r.y.y;
-	res.y.z = r.y.z;
-	res.y.w = r.y.w;
+	_tfm_copy(t, res);
+}
 
-	res.z.x = r.z.x;
-	res.z.y = r.z.y;
-	res.z.z = r.z.z;
-	res.z.w = r.z.w;
+void cycles_tfm_lookat(const ccl::float3& position, const ccl::float3& look, const ccl::float3& up, ccl::Transform &res)
+{
+	ccl::Transform r = ccl::transform_identity();
+	r[0][3] = position.x;
+	r[1][3] = position.y;
+	r[2][3] = position.z;
+	r[3][3] = 1.0f;
 
-	res.w.x = r.w.x;
-	res.w.y = r.w.y;
-	res.w.z = r.w.z;
-	res.w.w = r.w.w;
+	ccl::float3 dir = ccl::normalize(look - position);
+	ccl::float3 right = ccl::cross(dir, ccl::normalize(up));
+	ccl::float3 new_up = ccl::cross(right, dir);
+
+	r[0][0] = right.x;
+	r[1][0] = right.y;
+	r[2][0] = right.z;
+	r[3][0] = 0.0f;
+	r[0][1] = new_up.x;
+	r[1][1] = new_up.y;
+	r[2][1] = new_up.z;
+	r[3][1] = 0.0f;
+	r[0][2] = dir.x;
+	r[1][2] = dir.y;
+	r[2][2] = dir.z;
+	r[3][2] = 0.0f;
+
+	r = ccl::transform_inverse(r);
+
+	_tfm_copy(r, res);
 }

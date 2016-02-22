@@ -25,6 +25,9 @@ namespace ccl
 		[DllImport("ccycles.dll", SetLastError = false,  CallingConvention = CallingConvention.Cdecl)]
 		static public extern void cycles_tfm_inverse([In, MarshalAs(UnmanagedType.Struct)] _Transform t, [In, Out, MarshalAs(UnmanagedType.Struct)]ref _Transform res);
 
+		[DllImport("ccycles.dll", SetLastError = false,  CallingConvention = CallingConvention.Cdecl)]
+		static public extern void cycles_tfm_lookat([In, MarshalAs(UnmanagedType.Struct)] _float4 position, [In, MarshalAs(UnmanagedType.Struct)] _float4 look, [In, MarshalAs(UnmanagedType.Struct)] _float4 up, [In, Out, MarshalAs(UnmanagedType.Struct)]ref _Transform res);
+
 	}
 
 	[StructLayout(LayoutKind.Sequential, Pack = 8)]
@@ -91,6 +94,14 @@ namespace ccl
 		{
 			_Transform res = new _Transform();
 			_tfmApi.cycles_tfm_inverse(t, ref res);
+
+			return res;
+		}
+
+		public static _Transform LookAt(_float4 position, _float4 look, _float4 up)
+		{
+			_Transform res = new _Transform();
+			_tfmApi.cycles_tfm_lookat(position, look, up, ref res);
 
 			return res;
 		}

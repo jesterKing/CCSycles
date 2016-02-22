@@ -217,3 +217,4 @@ EXPORTS
   cycles_f4_div
 
   cycles_tfm_inverse
+  cycles_tfm_lookat
