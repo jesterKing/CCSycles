@@ -77,6 +77,48 @@ namespace ccl
 			_f4Api.cycles_f4_div(a, b, ref res);
 			return res;
 		}
+		public float this[int index]
+		{
+			get
+			{
+				switch (index)
+				{
+					case 0:
+						return x;
+					case 1:
+						return y;
+					case 2:
+						return z;
+					case 3:
+						return w;
+					default:
+						throw new IndexOutOfRangeException("Only 0-3 are acceptable");
+				}
+			}
+			set
+			{
+				switch (index)
+				{
+					case 0:
+						x = value;
+						break;
+					case 1:
+						y = value;
+						break;
+					case 2:
+						z = value;
+						break;
+					case 3:
+						w = value;
+						break;
+					default:
+						throw new IndexOutOfRangeException("Only 0-3 are acceptable");
+				}
+				
+			}
+		}
+
+
 	}
 	public class float4
 	{

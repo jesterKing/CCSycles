@@ -46,6 +46,46 @@ namespace ccl
 			z = new _float4(i, j, k, l);
 			w = new _float4(m, n, o, p);
 		}
+		public _float4 this[int index]
+		{
+			get
+			{
+				switch (index)
+				{
+					case 0:
+						return x;
+					case 1:
+						return y;
+					case 2:
+						return z;
+					case 3:
+						return w;
+					default:
+						throw new IndexOutOfRangeException("Only 0-3 are acceptable");
+				}
+			}
+			set
+			{
+				switch (index)
+				{
+					case 0:
+						x = value;
+						break;
+					case 1:
+						y = value;
+						break;
+					case 2:
+						z = value;
+						break;
+					case 3:
+						w = value;
+						break;
+					default:
+						throw new IndexOutOfRangeException("Only 0-3 are acceptable");
+				}
+				
+			}
+		}
 
 		public static _Transform Inverse(_Transform t)
 		{
