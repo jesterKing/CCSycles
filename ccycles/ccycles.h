@@ -639,6 +639,7 @@ CCL_CAPI void __cdecl cycles_f4_div(ccl::float4 a, ccl::float4 b, ccl::float4& r
 
 CCL_CAPI void __cdecl cycles_tfm_inverse(const ccl::Transform& t, ccl::Transform& res);
 CCL_CAPI void __cdecl cycles_tfm_lookat(const ccl::float3& position, const ccl::float3& look, const ccl::float3& up, ccl::Transform& res);
+CCL_CAPI void __cdecl cycles_tfm_rotate_around_axis(float angle, const ccl::float3& axis, ccl::Transform& res);
 
 #ifdef __clplusplus
 }

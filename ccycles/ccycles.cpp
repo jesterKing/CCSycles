@@ -168,6 +168,13 @@ void cycles_tfm_inverse(const ccl::Transform& t, ccl::Transform& res) {
 	_tfm_copy(t, res);
 }
 
+void cycles_tfm_rotate_around_axis(float angle, const ccl::float3& axis, ccl::Transform& res)
+{
+	ccl::Transform r = ccl::transform_rotate(angle, axis);
+
+	_tfm_copy(r, res);
+}
+
 void cycles_tfm_lookat(const ccl::float3& position, const ccl::float3& look, const ccl::float3& up, ccl::Transform &res)
 {
 	ccl::Transform r = ccl::transform_identity();
@@ -177,8 +184,10 @@ void cycles_tfm_lookat(const ccl::float3& position, const ccl::float3& look, con
 	r[3][3] = 1.0f;
 
 	ccl::float3 dir = ccl::normalize(look - position);
-	ccl::float3 right = ccl::cross(dir, ccl::normalize(up));
-	ccl::float3 new_up = ccl::cross(right, dir);
+
+	
+	ccl::float3 right = ccl::cross(ccl::normalize(up), dir); //, ccl::normalize(up));
+	ccl::float3 new_up = ccl::cross(dir, right); //right, dir);
 
 	r[0][0] = right.x;
 	r[1][0] = right.y;
@@ -193,7 +202,7 @@ void cycles_tfm_lookat(const ccl::float3& position, const ccl::float3& look, con
 	r[2][2] = dir.z;
 	r[3][2] = 0.0f;
 
-	r = ccl::transform_inverse(r);
+	//r = ccl::transform_inverse(r);
 
 	_tfm_copy(r, res);
 }

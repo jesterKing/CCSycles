@@ -52,6 +52,20 @@ namespace ccl
 			w = d;
 		}
 
+		public static explicit operator float4(_float4 _f4)
+		{
+			float4 f4 = new float4(_f4.x, _f4.y, _f4.z, _f4.w);
+
+			return f4;
+		}
+
+		public static explicit operator _float4(float4 f4)
+		{
+			_float4 _f4 = new _float4(f4.x, f4.y, f4.z, f4.w);
+
+			return _f4;
+		}
+
 		public static _float4 operator+(_float4 a, _float4 b)
 		{
 			_float4 res = new _float4();

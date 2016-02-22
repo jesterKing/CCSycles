@@ -74,6 +74,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		tests\scene_cube.xml = tests\scene_cube.xml
 		tests\scene_cube_default_surface.xml = tests\scene_cube_default_surface.xml
 		tests\scene_cube_surface.xml = tests\scene_cube_surface.xml
+		tests\scene_lookat.xml = tests\scene_lookat.xml
 		tests\scene_many_cubes.xml = tests\scene_many_cubes.xml
 		tests\scene_node_tests.xml = tests\scene_node_tests.xml
 		tests\shadertests.xml = tests\shadertests.xml

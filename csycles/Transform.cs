@@ -28,6 +28,9 @@ namespace ccl
 		[DllImport("ccycles.dll", SetLastError = false,  CallingConvention = CallingConvention.Cdecl)]
 		static public extern void cycles_tfm_lookat([In, MarshalAs(UnmanagedType.Struct)] _float4 position, [In, MarshalAs(UnmanagedType.Struct)] _float4 look, [In, MarshalAs(UnmanagedType.Struct)] _float4 up, [In, Out, MarshalAs(UnmanagedType.Struct)]ref _Transform res);
 
+		[DllImport("ccycles.dll", SetLastError = false,  CallingConvention = CallingConvention.Cdecl)]
+		static public extern void cycles_tfm_rotate_around_axis(float angle, [In, MarshalAs(UnmanagedType.Struct)] _float4 axis, [In, Out, MarshalAs(UnmanagedType.Struct)]ref _Transform res);
+
 	}
 
 	[StructLayout(LayoutKind.Sequential, Pack = 8)]
@@ -90,6 +93,75 @@ namespace ccl
 			}
 		}
 
+		public void CopyTo(Transform target)
+		{
+			target.x.x = x.x;
+			target.x.y = x.y;
+			target.x.z = x.z;
+			target.x.w = x.w;
+
+			target.y.x = y.x;
+			target.y.y = y.y;
+			target.y.z = y.z;
+			target.y.w = y.w;
+
+			target.z.x = z.x;
+			target.z.y = z.y;
+			target.z.z = z.z;
+			target.z.w = z.w;
+
+			target.w.x = w.x;
+			target.w.y = w.y;
+			target.w.z = w.z;
+			target.w.w = w.w;
+		}
+
+		public void CopyFrom(Transform source)
+		{
+			x.x = source.x.x;
+			x.y = source.x.y;
+			x.z = source.x.z;
+			x.w = source.x.w;
+
+			y.x = source.y.x;
+			y.y = source.y.y;
+			y.z = source.y.z;
+			y.w = source.y.w;
+
+			z.x = source.z.x;
+			z.y = source.z.y;
+			z.z = source.z.z;
+			z.w = source.z.w;
+
+			w.x = source.w.x;
+			w.y = source.w.y;
+			w.z = source.w.z;
+			w.w = source.w.w;
+		}
+
+		public static explicit operator Transform(_Transform t)
+		{
+			Transform conv = new Transform();
+
+			conv.x = (float4)t.x;
+			conv.y = (float4)t.y;
+			conv.z = (float4)t.z;
+			conv.w = (float4)t.w;
+
+			return conv;
+		}
+
+		public static explicit operator _Transform(Transform t)
+		{
+			_Transform conv = new _Transform();
+
+			conv.x = (_float4)t.x;
+			conv.y = (_float4)t.y;
+			conv.z = (_float4)t.z;
+			conv.w = (_float4)t.w;
+			return conv;
+		}
+
 		public static _Transform Inverse(_Transform t)
 		{
 			_Transform res = new _Transform();
@@ -102,6 +174,14 @@ namespace ccl
 		{
 			_Transform res = new _Transform();
 			_tfmApi.cycles_tfm_lookat(position, look, up, ref res);
+
+			return res;
+		}
+
+		public static _Transform RotateAroundAxis(float angle, _float4 axis)
+		{
+			_Transform res = new _Transform();
+			_tfmApi.cycles_tfm_rotate_around_axis(angle, axis, ref res);
 
 			return res;
 		}
@@ -225,6 +305,46 @@ namespace ccl
 			w.y = m[13];
 			w.z = m[14];
 			w.w = m[15];
+		}
+		public float4 this[int index]
+		{
+			get
+			{
+				switch (index)
+				{
+					case 0:
+						return x;
+					case 1:
+						return y;
+					case 2:
+						return z;
+					case 3:
+						return w;
+					default:
+						throw new IndexOutOfRangeException("Only 0-3 are acceptable");
+				}
+			}
+			set
+			{
+				switch (index)
+				{
+					case 0:
+						x = value;
+						break;
+					case 1:
+						y = value;
+						break;
+					case 2:
+						z = value;
+						break;
+					case 3:
+						w = value;
+						break;
+					default:
+						throw new IndexOutOfRangeException("Only 0-3 are acceptable");
+				}
+				
+			}
 		}
 
 		/// <summary>
@@ -364,6 +484,19 @@ namespace ccl
 				0.0f, 0.0f, z, 0.0f,
 				0.0f, 0.0f, 0.0f, 1.0f
 				);
+		}
+
+		/// <summary>
+		/// Compute a transform given the position, point to look at and
+		/// an up vector.
+		/// </summary>
+		/// <param name="pos"></param>
+		/// <param name="look"></param>
+		/// <param name="up"></param>
+		/// <returns></returns>
+		static public Transform LookAt(float4 pos, float4 look, float4 up)
+		{
+			return (Transform)(_Transform.LookAt((_float4)pos, (_float4)look, (_float4)up));
 		}
 
 		/// <summary>

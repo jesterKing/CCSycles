@@ -215,6 +215,35 @@ namespace csycles_tester
 			}
 		}
 
+		/// <summary>
+		/// Read a transform from the XML, using a look-at mechanism.
+		/// </summary>
+		/// <param name="node"></param>
+		/// <param name="transform"></param>
+		private void ReadLookAt(System.Xml.XmlReader node, ref Transform transform)
+		{
+
+			var pos = new float4(0.0f);
+			var look = new float4(0.0f);
+			var up = new float4(0.0f);
+
+			var posxml= node.GetAttribute("pos");
+			var lookxml= node.GetAttribute("look");
+			var upxml = node.GetAttribute("up");
+			if(!Utilities.Instance.get_float4(pos, posxml) ||
+
+				!Utilities.Instance.get_float4(look, lookxml) ||
+				!Utilities.Instance.get_float4(up, upxml))
+			{
+				throw new MissingFieldException("lookat incomplete");
+			}
+			Transform res = Transform.LookAt(pos, look, up);
+			transform.x = res.x;
+			transform.y = res.y;
+			transform.z = res.z;
+			transform.w = res.w;
+		}
+
 		private void ReadState(ref XmlReadState state, System.Xml.XmlReader node)
 		{
 			node.Read();
@@ -429,6 +458,14 @@ namespace csycles_tester
 						transform_substate.Transform = t;
 						node.Read(); /* advance forward one, otherwise we'll end up in internal loop */
 						ReadScene(ref transform_substate, node.ReadSubtree());
+						break;
+					case "lookat":
+						var lookat_substate= new XmlReadState(state);
+						var lat = lookat_substate.Transform;
+						ReadLookAt(node, ref lat);
+						lookat_substate.Transform = lat;
+						node.Read(); /* advance forward one, otherwise we'll end up in internal loop */
+						ReadScene(ref lookat_substate, node.ReadSubtree());
 						break;
 					case "state":
 						var state_substate = new XmlReadState(state);
