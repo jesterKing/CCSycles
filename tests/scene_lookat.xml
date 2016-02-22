@@ -34,42 +34,37 @@
 	</shader>
 
 	<!--<transform rotate="90 1 0 0" scale="0.75 0.75 0.75">-->
+
+	<state interpolation="smooth" shader="magictexture">
+		<include src="./objects/suzanne.xml" />
+	</state>
+
 	<transform rotate="90 0 1 0">
 		<transform rotate="-90 1 0 0">
 			<transform scale="0.75 0.75 0.75">
-				<state interpolation="smooth" shader="magictexture">
-					<include src="./objects/suzanne.xml" />
-				</state>
+				<object mesh="suzanne" />
 			</transform>
 		</transform>
 	</transform>
 
 	<lookat pos="0 2 0" look="10 0 0" up="0 1 0" >
 		<transform rotate="90 -1 0 0" scale="0.75 0.75 0.75">
-			<state interpolation="smooth" shader="magictexture">
-				<include src="./objects/suzanne.xml" />
-			</state>
+			<object mesh="suzanne" />
 		</transform>
 	</lookat>
 	<lookat pos="0 -2 0" look="10 0 0" up="0 1 0" >
 		<transform rotate="90 -1 0 0" scale="0.75 0.75 0.75">
-			<state interpolation="smooth" shader="magictexture">
-				<include src="./objects/suzanne.xml" />
-			</state>
+			<object mesh="suzanne" />
 		</transform>
 	</lookat>
 	<lookat pos="0 0 2" look="0 0 0" up="0 1 0" >
 		<transform rotate="90 -1 0 0" scale="0.75 0.75 0.75">
-			<state interpolation="smooth" shader="magictexture">
-				<include src="./objects/suzanne.xml" />
-			</state>
+			<object mesh="suzanne" />
 		</transform>
 	</lookat>
 	<lookat pos="0 0 -2" look="0 0 0" up="0 1 0" >
 		<transform rotate="90 -1 0 0" scale="0.75 0.75 0.75">
-			<state interpolation="smooth" shader="magictexture">
-				<include src="./objects/suzanne.xml" />
-			</state>
+			<object mesh="suzanne" />
 		</transform>
 	</lookat>
 </cycles>

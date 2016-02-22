@@ -84,25 +84,29 @@
 	<camera type="perspective" />
 </transform>
 
+<state interpolation="smooth" shader="test">
+	<include src="./objects/suzanne.xml" />
+</state>
+<state interpolation="smooth" shader="test_cube">
+	<include src="./objects/uv_cube.xml" />
+</state>
+
+<state interpolation="smooth" shader="cube">
+	<mesh name="groundplane" P="1.0 1.0 0.0 -1.0 1.0 0.0 -1.0 -1.0 0.0 1.0 -1.0 0.0" nverts="4" verts="0 1 2 3" />
+</state>
+
 <!-- TEST OBJECTS -->
 <transform translate="5.0 0.0 4.0" rotate="50.0 -1.0 -1.0 0.0" scale="2.5 2.5 2.5">
-	<state interpolation="smooth" shader="test">
-		<include src="./objects/suzanne.xml" />
-	</state>
+	<object mesh="suzanne" />
 </transform>
 
 <transform translate="-5.0 0.0 3.0" rotate="50.0 -1.0 -1.0 0.0" scale="2.0 2.0 2.0">
-	<state interpolation="smooth" shader="test_cube">
-		<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
-
 
 <!-- ground plane -->
 <transform translate="0 0 0" scale="1000 1000 1">
-	<state interpolation="smooth" shader="cube">
-		<mesh P="1.0 1.0 0.0 -1.0 1.0 0.0 -1.0 -1.0 0.0 1.0 -1.0 0.0" nverts="4" verts="0 1 2 3" />
-	</state>
+	<object mesh="groundplane" />
 </transform>
 
 <!-- <transform translate="5 0 30" scale="5 5 1">
@@ -111,569 +115,385 @@
 	</state>
 </transform> -->
 
-<transform translate="-16 0 30" scale="6 6 1">
 	<state interpolation="smooth" shader="float2">
-		<mesh P="1.0 1.0 0.0 -1.0 1.0 0.0 -1.0 -1.0 0.0 1.0 -1.0 0.0" nverts="4" verts="0 1 2 3" />
+		<mesh name="plane2" P="1.0 1.0 0.0 -1.0 1.0 0.0 -1.0 -1.0 0.0 1.0 -1.0 0.0" nverts="4" verts="0 1 2 3" />
 	</state>
+
+<transform translate="-16 0 30" scale="6 6 1">
+	<object mesh="plane2" />
 </transform>
 
 <transform translate="26 0 30" rotate="45.0 1.0 0.0 0.0" scale="6 6 1">
-	<state interpolation="smooth" shader="float2">
-		<mesh P="1.0 1.0 0.0 -1.0 1.0 0.0 -1.0 -1.0 0.0 1.0 -1.0 0.0" nverts="4" verts="0 1 2 3" />
-	</state>
+	<object mesh="plane2" />
 </transform>
 
 <!-- Cube Objects -->
 
 <transform translate="0.000 -2.302 0.617" scale="1.000 1.000 0.614">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="2.348 -2.302 0.617" scale="1.000 1.000 0.614">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="4.598 -2.302 0.617" scale="1.000 1.000 0.614">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="-2.156 0.517 0.617" scale="1.000 1.000 0.614">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="2.675 0.517 0.617" scale="1.000 1.000 0.614">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="4.934 0.897 0.617" scale="1.000 1.000 0.614">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="2.276 4.146 0.617" scale="1.000 1.000 0.614">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="-0.689 3.766 0.617" scale="1.000 1.000 0.614">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="-10.102 6.533 0.623" scale="1.000 1.000 0.614">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="-7.137 6.913 0.623" scale="1.000 1.000 0.614">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="-4.479 3.664 0.623" scale="1.000 1.000 0.614">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="-6.738 3.284 0.623" scale="1.000 1.000 0.614">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="-11.568 3.284 0.623" scale="1.000 1.000 0.614">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="-4.814 0.465 0.623" scale="1.000 1.000 0.614">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="-7.065 0.465 0.623" scale="1.000 1.000 0.614">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="-9.413 0.465 0.623" scale="1.000 1.000 0.614">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="-0.343 7.905 0.623" scale="1.000 1.000 0.614">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="2.004 7.905 0.623" scale="1.000 1.000 0.614">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="4.255 7.905 0.623" scale="1.000 1.000 0.614">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="-2.499 10.724 0.623" scale="1.000 1.000 0.614">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="2.331 10.724 0.623" scale="1.000 1.000 0.614">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="4.590 11.104 0.623" scale="1.000 1.000 0.614">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="1.933 14.353 0.623" scale="1.000 1.000 0.614">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="-1.032 13.973 0.623" scale="1.000 1.000 0.614">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="-10.025 15.469 0.623" scale="1.000 1.000 0.614">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="-7.061 15.849 0.623" scale="1.000 1.000 0.614">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="-4.403 12.600 0.623" scale="1.000 1.000 0.614">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="-6.662 12.220 0.623" scale="1.000 1.000 0.614">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="-11.492 12.220 0.623" scale="1.000 1.000 0.614">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="-4.738 9.400 0.623" scale="1.000 1.000 0.614">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="-6.989 9.400 0.623" scale="1.000 1.000 0.614">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="-9.337 9.400 0.623" scale="1.000 1.000 0.614">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="-0.384 -4.274 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="-0.855 -4.353 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="-0.454 -4.941 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="-0.923 -4.941 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="-1.412 -4.941 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="0.233 -4.941 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="0.722 -4.941 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="1.192 -4.941 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="0.791 -4.353 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="1.262 -4.274 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="2.892 -4.274 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="2.421 -4.353 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="2.822 -4.941 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="2.353 -4.941 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="1.863 -4.941 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="3.368 -4.941 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="3.857 -4.941 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="4.327 -4.941 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="3.926 -4.353 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="4.397 -4.274 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="5.872 -4.274 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="5.402 -4.353 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="5.803 -4.941 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="5.333 -4.941 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="4.844 -4.941 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="6.352 -4.698 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="6.842 -4.698 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="7.311 -4.698 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="6.910 -4.110 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="7.381 -4.031 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="7.381 -2.778 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="6.910 -2.857 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="7.311 -3.445 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="6.842 -3.445 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="6.352 -3.445 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="6.352 -2.133 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="6.842 -2.133 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="7.311 -2.133 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="6.910 -1.545 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="7.381 -1.466 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="7.381 -0.166 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="6.910 -0.245 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="7.311 -0.833 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="6.842 -0.833 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="6.352 -0.833 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="6.352 0.584 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="6.842 0.584 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="7.311 0.584 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="6.910 1.171 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="7.381 1.251 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="7.381 2.737 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="6.910 2.657 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="7.311 2.070 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="6.842 2.070 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="6.352 2.070 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="5.296 3.226 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="5.786 3.226 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="6.255 3.226 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="5.854 3.813 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 
 <transform translate="6.325 3.893 0.617" scale="0.208 0.208 0.128">
-	<state interpolation="smooth" shader="cube">
-	<include src="./objects/uv_cube.xml" />
-	</state>
+	<object mesh="uv_cube" />
 </transform>
 </cycles>

@@ -20,6 +20,7 @@ using ccl;
 using System;
 using System.Drawing;
 using System.Xml;
+using System.Collections.Generic;
 
 namespace csycles_tester
 {
@@ -107,9 +108,9 @@ namespace csycles_tester
 		private void ReadBackground(ref XmlReadState state, System.Xml.XmlReader node)
 		{
 			node.Read();
-			if(!state.Silent) Console.WriteLine("Background shader");
+			if (!state.Silent) Console.WriteLine("Background shader");
 
-			var shader = new Shader(Client, Shader.ShaderType.World) {Name = Guid.NewGuid().ToString()};
+			var shader = new Shader(Client, Shader.ShaderType.World) { Name = Guid.NewGuid().ToString() };
 
 			Utilities.Instance.ReadNodeGraph(ref shader, node.ReadSubtree());
 
@@ -194,23 +195,23 @@ namespace csycles_tester
 			if (Utilities.Instance.get_transform(t, mat)) transform = t;
 
 			var trans = node.GetAttribute("translate");
-			if (Utilities.Instance.get_float4(f4, trans)) transform = transform*Transform.Translate(f4);
+			if (Utilities.Instance.get_float4(f4, trans)) transform = transform * Transform.Translate(f4);
 
 			var rotate = node.GetAttribute("rotate");
 			if (Utilities.Instance.get_float4(f4, rotate))
 			{
-					var a = DegToRad(f4[0]);
-					var axis = new float4(f4[1], f4[2], f4[3]);
-					transform = transform*ccl.Transform.Rotate(a, axis);
+				var a = DegToRad(f4[0]);
+				var axis = new float4(f4[1], f4[2], f4[3]);
+				transform = transform * ccl.Transform.Rotate(a, axis);
 			}
 
 			var scale = node.GetAttribute("scale");
 			if (!string.IsNullOrEmpty(scale))
 			{
 				var components = Utilities.Instance.parse_floats(scale);
-				if(components.Length == 3)
+				if (components.Length == 3)
 				{
-					transform = transform*ccl.Transform.Scale(components[0], components[1], components[2]);
+					transform = transform * ccl.Transform.Scale(components[0], components[1], components[2]);
 				}
 			}
 		}
@@ -227,10 +228,10 @@ namespace csycles_tester
 			var look = new float4(0.0f);
 			var up = new float4(0.0f);
 
-			var posxml= node.GetAttribute("pos");
-			var lookxml= node.GetAttribute("look");
+			var posxml = node.GetAttribute("pos");
+			var lookxml = node.GetAttribute("look");
 			var upxml = node.GetAttribute("up");
-			if(!Utilities.Instance.get_float4(pos, posxml) ||
+			if (!Utilities.Instance.get_float4(pos, posxml) ||
 
 				!Utilities.Instance.get_float4(look, lookxml) ||
 				!Utilities.Instance.get_float4(up, upxml))
@@ -267,9 +268,18 @@ namespace csycles_tester
 			}
 		}
 
+		Dictionary<string, Mesh> meshes = new Dictionary<string, Mesh>();
+
 		private void ReadMesh(ref XmlReadState state, System.Xml.XmlReader node)
 		{
 			node.Read();
+
+			var name = node.GetAttribute("name");
+			if(!state.Silent) Console.WriteLine("Shader: {0}", node.GetAttribute("name"));
+			if (string.IsNullOrEmpty(name))
+			{
+				throw new MissingFieldException("<mesh> is missing 'name'");
+			}
 
 			var P = node.GetAttribute("P");
 			var UV = node.GetAttribute("UV");
@@ -288,10 +298,12 @@ namespace csycles_tester
 			var nvertsints = Utilities.Instance.parse_ints(nverts);
 			var vertsints = Utilities.Instance.parse_ints(verts);
 
-			var ob = new ccl.Object(Client) { Transform = state.Transform };
+			//var ob = new ccl.Object(Client) { Transform = state.Transform };
 			var me = new Mesh(Client, state.Shader);
 
-			ob.Mesh = me;
+			//ob.Mesh = me;
+
+			meshes.Add(name, me);
 
 			me.SetVerts(ref pfloats);
 
@@ -333,6 +345,15 @@ namespace csycles_tester
 			{
 				me.SetUvs(ref uvs);
 			}
+		}
+		private void ReadObject(ref XmlReadState state, System.Xml.XmlReader node)
+		{
+			node.Read();
+
+			var meshname = node.GetAttribute("mesh");
+			var me = meshes[meshname];
+			var ob = new ccl.Object(Client) { Transform = state.Transform };
+			ob.Mesh = me;
 		}
 
 		private void ReadLight(ref XmlReadState state, System.Xml.XmlReader node)
@@ -482,6 +503,9 @@ namespace csycles_tester
 						break;
 					case "mesh":
 						ReadMesh(ref state, node.ReadSubtree());
+						break;
+					case "object":
+						ReadObject(ref state, node.ReadSubtree());
 						break;
 					case "light":
 						ReadLight(ref state, node.ReadSubtree());

@@ -123,31 +123,34 @@
 	</shader>
 
 	<!-- ground object -->
-	<transform translate="0 0 1" scale="30 2 0.05">
 	<state interpolation="smooth" shader="diffuseshader">
 		<include src="./objects/uv_cube.xml" />
 	</state>
+	<transform translate="0 0 1" scale="30 2 0.05">
+		<object mesh="uv_cube" />
 	</transform>
 	<!-- Cube Object -->
 	<transform rotate="45 1 1 1" scale="0.25 0.5 0.25">
-	<state interpolation="smooth" shader="magictexture">
-		<include src="./objects/uv_cube.xml" />
-	</state>
+		<object mesh="uv_cube" />
 	</transform>
 
 	<state shader="emissionshader">
 		<light type="1" size="0.001" dir="0 1 1" cast_shadow="true" P="-5 0 -150" />
 	</state>
 
-	<transform rotate="90 1 1 1" translate="1.8 0 0" scale="0.75 0.75 0.75">
 	<state interpolation="smooth" shader="diffuseshader">
 		<include src="./objects/suzanne.xml" />
 	</state>
-	</transform>
 
-	<transform rotate="75 1 1 1" translate="-1.8 0 0" scale="0.75 0.75 0.75">
 	<state interpolation="smooth" shader="diffuseshader">
 		<include src="./objects/sphere.xml" />
 	</state>
+
+	<transform rotate="90 1 1 1" translate="1.8 0 0" scale="0.75 0.75 0.75">
+		<object mesh="suzanne" />
+	</transform>
+
+	<transform rotate="75 1 1 1" translate="-1.8 0 0" scale="0.75 0.75 0.75">
+		<object mesh="sphere" />
 	</transform>
 </cycles>
