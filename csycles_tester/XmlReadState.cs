@@ -30,13 +30,15 @@ namespace csycles_tester
 		public bool Silent { get; set; }
 		// public DisplacementMethod DisplacementMethod {get; set; }
 
+		public bool IsShadowCatcher { get; set; }
+
 		public XmlReadState()
-			: this(null, null, false, null, "", 0.0f, false)
+			: this(null, null, false, null, "", 0.0f, false, false)
 		{
 			
 		}
 
-		public XmlReadState(Scene scene, Transform transform, bool smooth, Shader shader, string basePath, float dicingRate, bool silent)
+		public XmlReadState(Scene scene, Transform transform, bool smooth, Shader shader, string basePath, float dicingRate, bool silent, bool is_shadowcatcher)
 		{
 			Scene = scene;
 			Transform = transform;
@@ -45,10 +47,11 @@ namespace csycles_tester
 			BasePath = basePath;
 			DicingRate = dicingRate;
 			Silent = silent;
+			IsShadowCatcher = is_shadowcatcher;
 		}
 
 		public XmlReadState(XmlReadState old)
-			:this(old.Scene, new Transform(old.Transform), old.Smooth, old.Shader, old.BasePath, old.DicingRate, old.Silent)
+			:this(old.Scene, new Transform(old.Transform), old.Smooth, old.Shader, old.BasePath, old.DicingRate, old.Silent, old.IsShadowCatcher)
 		{
 		}
 

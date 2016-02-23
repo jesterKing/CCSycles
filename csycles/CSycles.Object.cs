@@ -41,6 +41,13 @@ namespace ccl
 			cycles_scene_object_set_visibility(clientId, sceneId, objectId, (uint)visibility);
 		}
 
+		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_scene_object_set_is_shadowcatcher", CallingConvention = CallingConvention.Cdecl)]
+		private static extern void cycles_scene_object_set_is_shadowcatcher(uint clientId, uint sceneId, uint objectId, bool is_shadowcatcher);
+		public static void object_set_is_shadowcatcher(uint clientId, uint sceneId, uint objectId, bool is_shadowcatcher)
+		{
+			cycles_scene_object_set_is_shadowcatcher(clientId, sceneId, objectId, is_shadowcatcher);
+		}
+
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_object_tag_update", CallingConvention = CallingConvention.Cdecl)]
 		private static extern void cycles_object_tag_update(uint clientId, uint sceneId, uint objectId);
 		public static void object_tag_update(uint clientId, uint sceneId, uint objectId)

@@ -175,10 +175,10 @@ namespace csycles_tester
 
 			var client = new Client();
 			Client = client;
-			if (!silent)
+			/*if (!silent)
 			{
 				CSycles.set_logger(client.Id, g_logger_callback);
-			}
+			}*/
 
 			foreach (var adev in Device.Devices)
 			{
@@ -251,7 +251,7 @@ namespace csycles_tester
 				Samples = (int) samples,
 				TileSize = new Size(64, 64),
 				StartResolution = 64,
-				Threads = 0,
+				Threads = (uint)(dev.IsCpu ? 0 : 0),
 				ShadingSystem = ShadingSystem.SVM,
 				Background = true,
 				ProgressiveRefine = false
@@ -265,6 +265,7 @@ namespace csycles_tester
 				Session.UpdateTileCallback = g_update_render_tile_callback;
 				Session.WriteTileCallback = g_write_render_tile_callback;
 			}
+			CSycles.set_logger(client.Id, g_logger_callback);
 
 			Session.Start();
 			Session.Wait();
