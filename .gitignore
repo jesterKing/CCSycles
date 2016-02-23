@@ -17,3 +17,7 @@ boost/
 boostbuild/build.log
 *.rej
 *.orig
+*.opendb
+packages/
+*.patch
+*.diff

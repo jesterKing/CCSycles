@@ -74,6 +74,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		tests\scene_cube.xml = tests\scene_cube.xml
 		tests\scene_cube_default_surface.xml = tests\scene_cube_default_surface.xml
 		tests\scene_cube_surface.xml = tests\scene_cube_surface.xml
+		tests\scene_lookat.xml = tests\scene_lookat.xml
 		tests\scene_many_cubes.xml = tests\scene_many_cubes.xml
 		tests\scene_node_tests.xml = tests\scene_node_tests.xml
 		tests\shadertests.xml = tests\shadertests.xml
@@ -105,6 +106,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cycles_proper", "cycles_pro
 		{5BD48EC5-78D3-445E-B9CB-55A22E590EDE} = {5BD48EC5-78D3-445E-B9CB-55A22E590EDE}
 		{B8C1A4CB-6207-49F7-BA7D-D8B5AF75F965} = {B8C1A4CB-6207-49F7-BA7D-D8B5AF75F965}
 		{1298F8E0-803D-4C1E-8D33-404138EAFE35} = {1298F8E0-803D-4C1E-8D33-404138EAFE35}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "csycles_unittests", "csycles_unittests\csycles_unittests.csproj", "{0AC99723-77A8-4DB5-A411-185764442A07}"
+	ProjectSection(ProjectDependencies) = postProject
+		{060A4659-C327-4867-AAD8-E80C94DD1427} = {060A4659-C327-4867-AAD8-E80C94DD1427}
 	EndProjectSection
 EndProject
 Global
@@ -313,6 +319,18 @@ Global
 		{17AAA942-8C82-4160-8D23-78EA580377DD}.Release|Mixed Platforms.Build.0 = Release|x64
 		{17AAA942-8C82-4160-8D23-78EA580377DD}.Release|x64.ActiveCfg = Release|x64
 		{17AAA942-8C82-4160-8D23-78EA580377DD}.Release|x64.Build.0 = Release|x64
+		{0AC99723-77A8-4DB5-A411-185764442A07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AC99723-77A8-4DB5-A411-185764442A07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AC99723-77A8-4DB5-A411-185764442A07}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{0AC99723-77A8-4DB5-A411-185764442A07}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{0AC99723-77A8-4DB5-A411-185764442A07}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{0AC99723-77A8-4DB5-A411-185764442A07}.Debug|x64.Build.0 = Debug|Any CPU
+		{0AC99723-77A8-4DB5-A411-185764442A07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AC99723-77A8-4DB5-A411-185764442A07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AC99723-77A8-4DB5-A411-185764442A07}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{0AC99723-77A8-4DB5-A411-185764442A07}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{0AC99723-77A8-4DB5-A411-185764442A07}.Release|x64.ActiveCfg = Release|Any CPU
+		{0AC99723-77A8-4DB5-A411-185764442A07}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

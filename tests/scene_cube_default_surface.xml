@@ -6,10 +6,12 @@
 	<camera type="perspective" />
 </transform>
 
-<!-- Cube Object -->
-<transform rotate="35 0 1 1">
 <state interpolation="smooth">
 	<include src="./objects/uv_cube.xml" />
 </state>
+
+<!-- Cube Object -->
+<transform rotate="35 0 1 1">
+	<object mesh="uv_cube" />
 </transform>
 </cycles>

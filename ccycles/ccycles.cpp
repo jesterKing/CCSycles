@@ -107,3 +107,102 @@ void cycles_release_client(unsigned int client_id)
 {
 	loggers[client_id] = nullptr;
 }
+
+void cycles_f4_add(ccl::float4 a, ccl::float4 b, ccl::float4& res) {
+	ccl::float4 r = a + b;
+	res.x = r.x;
+	res.y = r.y;
+	res.z = r.z;
+	res.w = r.w;
+}
+
+void cycles_f4_sub(ccl::float4 a, ccl::float4 b, ccl::float4& res) {
+	ccl::float4 r = a - b;
+	res.x = r.x;
+	res.y = r.y;
+	res.z = r.z;
+	res.w = r.w;
+}
+
+void cycles_f4_mul(ccl::float4 a, ccl::float4 b, ccl::float4& res) {
+	ccl::float4 r = a * b;
+	res.x = r.x;
+	res.y = r.y;
+	res.z = r.z;
+	res.w = r.w;
+}
+
+void cycles_f4_div(ccl::float4 a, ccl::float4 b, ccl::float4& res) {
+	ccl::float4 r = a / b;
+	res.x = r.x;
+	res.y = r.y;
+	res.z = r.z;
+	res.w = r.w;
+}
+
+static void _tfm_copy(const ccl::Transform& source, ccl::Transform& target) {
+	target.x.x = source.x.x;
+	target.x.y = source.x.y;
+	target.x.z = source.x.z;
+	target.x.w = source.x.w;
+
+	target.y.x = source.y.x;
+	target.y.y = source.y.y;
+	target.y.z = source.y.z;
+	target.y.w = source.y.w;
+
+	target.z.x = source.z.x;
+	target.z.y = source.z.y;
+	target.z.z = source.z.z;
+	target.z.w = source.z.w;
+
+	target.w.x = source.w.x;
+	target.w.y = source.w.y;
+	target.w.z = source.w.z;
+	target.w.w = source.w.w;
+}
+
+void cycles_tfm_inverse(const ccl::Transform& t, ccl::Transform& res) {
+	ccl::Transform r = ccl::transform_inverse(t);
+
+	_tfm_copy(t, res);
+}
+
+void cycles_tfm_rotate_around_axis(float angle, const ccl::float3& axis, ccl::Transform& res)
+{
+	ccl::Transform r = ccl::transform_rotate(angle, axis);
+
+	_tfm_copy(r, res);
+}
+
+void cycles_tfm_lookat(const ccl::float3& position, const ccl::float3& look, const ccl::float3& up, ccl::Transform &res)
+{
+	ccl::Transform r = ccl::transform_identity();
+	r[0][3] = position.x;
+	r[1][3] = position.y;
+	r[2][3] = position.z;
+	r[3][3] = 1.0f;
+
+	ccl::float3 dir = ccl::normalize(look - position);
+
+	
+	ccl::float3 right = ccl::cross(ccl::normalize(up), dir); //, ccl::normalize(up));
+	ccl::float3 new_up = ccl::cross(dir, right); //right, dir);
+
+	r[0][0] = right.x;
+	r[1][0] = right.y;
+	r[2][0] = right.z;
+	r[3][0] = 0.0f;
+	r[0][1] = new_up.x;
+	r[1][1] = new_up.y;
+	r[2][1] = new_up.z;
+	r[3][1] = 0.0f;
+	r[0][2] = dir.x;
+	r[1][2] = dir.y;
+	r[2][2] = dir.z;
+	r[3][2] = 0.0f;
+
+	//r = ccl::transform_inverse(r);
+
+	_tfm_copy(r, res);
+}

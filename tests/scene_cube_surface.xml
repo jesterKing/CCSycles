@@ -29,10 +29,11 @@
 	<connect from="cube_closure bsdf" to="output surface" />
 </shader>
 
-<!-- Cube Object -->
-<transform rotate="75 1 1 1">
 <state interpolation="smooth" shader="cube">
 	<include src="./objects/uv_cube.xml" />
 </state>
+<!-- Cube Object -->
+<transform rotate="75 1 1 1">
+	<object mesh="uv_cube"/>
 </transform>
 </cycles>
