@@ -149,8 +149,28 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PostBuildEvent>Copy /Y "$(TargetDir)$(ProjectName).*" "$(ProjectDir)..\..\..\..\..\$(OutDir)Plug-ins"
+
+copy /Y "$(ProjectDir)..\ccycles\x64\$(ConfigurationName)\ccycles.dll" "$(SolutionDir)..\$(OutDir)Plug-ins"
+copy /Y "$(ProjectDir)..\ccycles\x64\$(ConfigurationName)\ccycles.pdb" "$(SolutionDir)..\$(OutDir)Plug-ins"
+copy /Y "$(ProjectDir)..\OpenImageIO\x64\$(ConfigurationName)\OpenImageIOv13.dll" "$(SolutionDir)..\$(OutDir)Plug-ins"
+copy /Y "$(ProjectDir)..\pthreads\x64\$(ConfigurationName)\pthreads.dll" "$(SolutionDir)..\$(OutDir)Plug-ins"
+copy /Y "$(ProjectDir)..\..\..\..\..\boostbuild\stage$(ConfigurationName)\lib\boost_*" "$(SolutionDir)..\$(OutDir)Plug-ins"
+
+XCopy "$(SolutionDir)..\..\big_libs\RhinoCycles\lib" "$(SolutionDir)..\$(OutDir)Plug-ins\RhinoCycles\lib" /Y /I /Q
+
+
+XCopy "$(ProjectDir)..\cycles\src\kernel\closure" "$(SolutionDir)..\$(OutDir)Plug-ins\RhinoCycles\kernel\closure" /Y /I /Q
+XCopy "$(ProjectDir)..\cycles\src\kernel\geom" "$(SolutionDir)..\$(OutDir)Plug-ins\RhinoCycles\kernel\geom" /Y /I /Q
+XCopy "$(ProjectDir)..\cycles\src\kernel\svm" "$(SolutionDir)..\$(OutDir)Plug-ins\RhinoCycles\kernel\svm" /Y /I /Q
+XCopy "$(ProjectDir)..\cycles\src\kernel\kernel*.*" "$(SolutionDir)..\$(OutDir)Plug-ins\RhinoCycles\kernel" /Y /I /Q
+
+XCopy "$(ProjectDir)..\cycles\src\util\util_color.h" "$(SolutionDir)..\$(OutDir)Plug-ins\RhinoCycles\kernel" /Y /I /Q
+XCopy "$(ProjectDir)..\cycles\src\util\util_half.h" "$(SolutionDir)..\$(OutDir)Plug-ins\RhinoCycles\kernel" /Y /I /Q
+XCopy "$(ProjectDir)..\cycles\src\util\util_math.h" "$(SolutionDir)..\$(OutDir)Plug-ins\RhinoCycles\kernel" /Y /I /Q
+XCopy "$(ProjectDir)..\cycles\src\util\util_math_fast.h" "$(SolutionDir)..\$(OutDir)Plug-ins\RhinoCycles\kernel" /Y /I /Q
+XCopy "$(ProjectDir)..\cycles\src\util\util_transform.h" "$(SolutionDir)..\$(OutDir)Plug-ins\RhinoCycles\kernel" /Y /I /Q
+XCopy "$(ProjectDir)..\cycles\src\util\util_types.h" "$(SolutionDir)..\$(OutDir)Plug-ins\RhinoCycles\kernel" /Y /I /Q</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>
