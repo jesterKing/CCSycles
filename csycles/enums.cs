@@ -111,6 +111,8 @@ namespace ccl
 		CheckerTexture,
 		NoiseTexture,
 		WaveTexture,
+		MagicTexture,
+		MusgraveTexture,
 		TextureCoordinate,
 		Bump,
 		RgbToBw,

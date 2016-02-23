@@ -104,6 +104,43 @@
   <ItemGroup>
     <ClCompile Include="cycles\src\kernel\kernels\cpu\kernel_avx.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="cycles\src\kernel\kernel.h" />
+    <ClInclude Include="cycles\src\kernel\kernels\cpu\kernel_cpu.h" />
+    <ClInclude Include="cycles\src\kernel\kernels\cpu\kernel_cpu_impl.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_accumulate.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_bake.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_camera.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_compat_cpu.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_compat_cuda.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_compat_opencl.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_debug.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_differential.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_emission.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_film.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_globals.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_jitter.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_light.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_math.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_montecarlo.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_passes.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_path.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_path_branched.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_path_common.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_path_state.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_path_surface.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_path_volume.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_projection.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_queues.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_random.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_shader.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_shadow.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_subsurface.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_textures.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_types.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_volume.h" />
+    <ClInclude Include="cycles\src\kernel\kernel_work_stealing.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

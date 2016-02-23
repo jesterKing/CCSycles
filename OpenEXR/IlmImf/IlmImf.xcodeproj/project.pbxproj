@@ -1,0 +1,680 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DFD4BE601B435CC200A70A91 /* ImfArray.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BDEC1B435CC200A70A91 /* ImfArray.h */; };
+		DFD4BE611B435CC200A70A91 /* ImfAttribute.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BDED1B435CC200A70A91 /* ImfAttribute.cpp */; };
+		DFD4BE621B435CC200A70A91 /* ImfAttribute.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BDEE1B435CC200A70A91 /* ImfAttribute.h */; };
+		DFD4BE631B435CC200A70A91 /* ImfAutoArray.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BDEF1B435CC200A70A91 /* ImfAutoArray.h */; };
+		DFD4BE641B435CC200A70A91 /* ImfBoxAttribute.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BDF01B435CC200A70A91 /* ImfBoxAttribute.cpp */; };
+		DFD4BE651B435CC200A70A91 /* ImfBoxAttribute.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BDF11B435CC200A70A91 /* ImfBoxAttribute.h */; };
+		DFD4BE661B435CC200A70A91 /* ImfChannelList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BDF21B435CC200A70A91 /* ImfChannelList.cpp */; };
+		DFD4BE671B435CC200A70A91 /* ImfChannelList.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BDF31B435CC200A70A91 /* ImfChannelList.h */; };
+		DFD4BE681B435CC200A70A91 /* ImfChannelListAttribute.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BDF41B435CC200A70A91 /* ImfChannelListAttribute.cpp */; };
+		DFD4BE691B435CC200A70A91 /* ImfChannelListAttribute.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BDF51B435CC200A70A91 /* ImfChannelListAttribute.h */; };
+		DFD4BE6A1B435CC200A70A91 /* ImfChromaticities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BDF61B435CC200A70A91 /* ImfChromaticities.cpp */; };
+		DFD4BE6B1B435CC200A70A91 /* ImfChromaticities.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BDF71B435CC200A70A91 /* ImfChromaticities.h */; };
+		DFD4BE6C1B435CC200A70A91 /* ImfChromaticitiesAttribute.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BDF81B435CC200A70A91 /* ImfChromaticitiesAttribute.cpp */; };
+		DFD4BE6D1B435CC200A70A91 /* ImfChromaticitiesAttribute.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BDF91B435CC200A70A91 /* ImfChromaticitiesAttribute.h */; };
+		DFD4BE6E1B435CC200A70A91 /* ImfCompression.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BDFA1B435CC200A70A91 /* ImfCompression.h */; };
+		DFD4BE6F1B435CC200A70A91 /* ImfCompressionAttribute.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BDFB1B435CC200A70A91 /* ImfCompressionAttribute.cpp */; };
+		DFD4BE701B435CC200A70A91 /* ImfCompressionAttribute.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BDFC1B435CC200A70A91 /* ImfCompressionAttribute.h */; };
+		DFD4BE711B435CC200A70A91 /* ImfCompressor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BDFD1B435CC200A70A91 /* ImfCompressor.cpp */; };
+		DFD4BE721B435CC200A70A91 /* ImfCompressor.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BDFE1B435CC200A70A91 /* ImfCompressor.h */; };
+		DFD4BE731B435CC200A70A91 /* ImfConvert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BDFF1B435CC200A70A91 /* ImfConvert.cpp */; };
+		DFD4BE741B435CC200A70A91 /* ImfConvert.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BE001B435CC200A70A91 /* ImfConvert.h */; };
+		DFD4BE751B435CC200A70A91 /* ImfCRgbaFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BE011B435CC200A70A91 /* ImfCRgbaFile.cpp */; };
+		DFD4BE761B435CC200A70A91 /* ImfCRgbaFile.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BE021B435CC200A70A91 /* ImfCRgbaFile.h */; };
+		DFD4BE771B435CC200A70A91 /* ImfDoubleAttribute.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BE031B435CC200A70A91 /* ImfDoubleAttribute.cpp */; };
+		DFD4BE781B435CC200A70A91 /* ImfDoubleAttribute.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BE041B435CC200A70A91 /* ImfDoubleAttribute.h */; };
+		DFD4BE791B435CC200A70A91 /* ImfEnvmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BE051B435CC200A70A91 /* ImfEnvmap.cpp */; };
+		DFD4BE7A1B435CC200A70A91 /* ImfEnvmap.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BE061B435CC200A70A91 /* ImfEnvmap.h */; };
+		DFD4BE7B1B435CC200A70A91 /* ImfEnvmapAttribute.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BE071B435CC200A70A91 /* ImfEnvmapAttribute.cpp */; };
+		DFD4BE7C1B435CC200A70A91 /* ImfEnvmapAttribute.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BE081B435CC200A70A91 /* ImfEnvmapAttribute.h */; };
+		DFD4BE7D1B435CC200A70A91 /* ImfFloatAttribute.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BE091B435CC200A70A91 /* ImfFloatAttribute.cpp */; };
+		DFD4BE7E1B435CC200A70A91 /* ImfFloatAttribute.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BE0A1B435CC200A70A91 /* ImfFloatAttribute.h */; };
+		DFD4BE7F1B435CC200A70A91 /* ImfFrameBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BE0B1B435CC200A70A91 /* ImfFrameBuffer.cpp */; };
+		DFD4BE801B435CC200A70A91 /* ImfFrameBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BE0C1B435CC200A70A91 /* ImfFrameBuffer.h */; };
+		DFD4BE811B435CC200A70A91 /* ImfHeader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BE0D1B435CC200A70A91 /* ImfHeader.cpp */; };
+		DFD4BE821B435CC200A70A91 /* ImfHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BE0E1B435CC200A70A91 /* ImfHeader.h */; };
+		DFD4BE831B435CC200A70A91 /* ImfHuf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BE0F1B435CC200A70A91 /* ImfHuf.cpp */; };
+		DFD4BE841B435CC200A70A91 /* ImfHuf.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BE101B435CC200A70A91 /* ImfHuf.h */; };
+		DFD4BE851B435CC200A70A91 /* ImfInputFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BE111B435CC200A70A91 /* ImfInputFile.cpp */; };
+		DFD4BE861B435CC200A70A91 /* ImfInputFile.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BE121B435CC200A70A91 /* ImfInputFile.h */; };
+		DFD4BE871B435CC200A70A91 /* ImfInt64.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BE131B435CC200A70A91 /* ImfInt64.h */; };
+		DFD4BE881B435CC200A70A91 /* ImfIntAttribute.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BE141B435CC200A70A91 /* ImfIntAttribute.cpp */; };
+		DFD4BE891B435CC200A70A91 /* ImfIntAttribute.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BE151B435CC200A70A91 /* ImfIntAttribute.h */; };
+		DFD4BE8A1B435CC200A70A91 /* ImfIO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BE161B435CC200A70A91 /* ImfIO.cpp */; };
+		DFD4BE8B1B435CC200A70A91 /* ImfIO.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BE171B435CC200A70A91 /* ImfIO.h */; };
+		DFD4BE8C1B435CC200A70A91 /* ImfKeyCode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BE181B435CC200A70A91 /* ImfKeyCode.cpp */; };
+		DFD4BE8D1B435CC200A70A91 /* ImfKeyCode.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BE191B435CC200A70A91 /* ImfKeyCode.h */; };
+		DFD4BE8E1B435CC200A70A91 /* ImfKeyCodeAttribute.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BE1A1B435CC200A70A91 /* ImfKeyCodeAttribute.cpp */; };
+		DFD4BE8F1B435CC200A70A91 /* ImfKeyCodeAttribute.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BE1B1B435CC200A70A91 /* ImfKeyCodeAttribute.h */; };
+		DFD4BE901B435CC200A70A91 /* ImfLineOrder.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BE1C1B435CC200A70A91 /* ImfLineOrder.h */; };
+		DFD4BE911B435CC200A70A91 /* ImfLineOrderAttribute.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BE1D1B435CC200A70A91 /* ImfLineOrderAttribute.cpp */; };
+		DFD4BE921B435CC200A70A91 /* ImfLineOrderAttribute.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BE1E1B435CC200A70A91 /* ImfLineOrderAttribute.h */; };
+		DFD4BE931B435CC200A70A91 /* ImfLut.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BE1F1B435CC200A70A91 /* ImfLut.cpp */; };
+		DFD4BE941B435CC200A70A91 /* ImfLut.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BE201B435CC200A70A91 /* ImfLut.h */; };
+		DFD4BE951B435CC200A70A91 /* ImfMatrixAttribute.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BE211B435CC200A70A91 /* ImfMatrixAttribute.cpp */; };
+		DFD4BE961B435CC200A70A91 /* ImfMatrixAttribute.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BE221B435CC200A70A91 /* ImfMatrixAttribute.h */; };
+		DFD4BE971B435CC200A70A91 /* ImfMisc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BE231B435CC200A70A91 /* ImfMisc.cpp */; };
+		DFD4BE981B435CC200A70A91 /* ImfMisc.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BE241B435CC200A70A91 /* ImfMisc.h */; };
+		DFD4BE991B435CC200A70A91 /* ImfName.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BE251B435CC200A70A91 /* ImfName.h */; };
+		DFD4BE9A1B435CC200A70A91 /* ImfOpaqueAttribute.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BE261B435CC200A70A91 /* ImfOpaqueAttribute.cpp */; };
+		DFD4BE9B1B435CC200A70A91 /* ImfOpaqueAttribute.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BE271B435CC200A70A91 /* ImfOpaqueAttribute.h */; };
+		DFD4BE9C1B435CC200A70A91 /* ImfOutputFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BE281B435CC200A70A91 /* ImfOutputFile.cpp */; };
+		DFD4BE9D1B435CC200A70A91 /* ImfOutputFile.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BE291B435CC200A70A91 /* ImfOutputFile.h */; };
+		DFD4BE9E1B435CC200A70A91 /* ImfPixelType.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BE2A1B435CC200A70A91 /* ImfPixelType.h */; };
+		DFD4BE9F1B435CC200A70A91 /* ImfPizCompressor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BE2B1B435CC200A70A91 /* ImfPizCompressor.cpp */; };
+		DFD4BEA01B435CC200A70A91 /* ImfPizCompressor.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BE2C1B435CC200A70A91 /* ImfPizCompressor.h */; };
+		DFD4BEA11B435CC200A70A91 /* ImfPreviewImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BE2D1B435CC200A70A91 /* ImfPreviewImage.cpp */; };
+		DFD4BEA21B435CC200A70A91 /* ImfPreviewImage.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BE2E1B435CC200A70A91 /* ImfPreviewImage.h */; };
+		DFD4BEA31B435CC200A70A91 /* ImfPreviewImageAttribute.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BE2F1B435CC200A70A91 /* ImfPreviewImageAttribute.cpp */; };
+		DFD4BEA41B435CC200A70A91 /* ImfPreviewImageAttribute.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BE301B435CC200A70A91 /* ImfPreviewImageAttribute.h */; };
+		DFD4BEA51B435CC200A70A91 /* ImfPxr24Compressor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BE311B435CC200A70A91 /* ImfPxr24Compressor.cpp */; };
+		DFD4BEA61B435CC200A70A91 /* ImfPxr24Compressor.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BE321B435CC200A70A91 /* ImfPxr24Compressor.h */; };
+		DFD4BEA71B435CC200A70A91 /* ImfRgba.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BE331B435CC200A70A91 /* ImfRgba.h */; };
+		DFD4BEA81B435CC200A70A91 /* ImfRgbaFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BE341B435CC200A70A91 /* ImfRgbaFile.cpp */; };
+		DFD4BEA91B435CC200A70A91 /* ImfRgbaFile.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BE351B435CC200A70A91 /* ImfRgbaFile.h */; };
+		DFD4BEAA1B435CC200A70A91 /* ImfRgbaYca.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BE361B435CC200A70A91 /* ImfRgbaYca.cpp */; };
+		DFD4BEAB1B435CC200A70A91 /* ImfRgbaYca.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BE371B435CC200A70A91 /* ImfRgbaYca.h */; };
+		DFD4BEAC1B435CC200A70A91 /* ImfRleCompressor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BE381B435CC200A70A91 /* ImfRleCompressor.cpp */; };
+		DFD4BEAD1B435CC200A70A91 /* ImfRleCompressor.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BE391B435CC200A70A91 /* ImfRleCompressor.h */; };
+		DFD4BEAE1B435CC200A70A91 /* ImfScanLineInputFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BE3A1B435CC200A70A91 /* ImfScanLineInputFile.cpp */; };
+		DFD4BEAF1B435CC200A70A91 /* ImfScanLineInputFile.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BE3B1B435CC200A70A91 /* ImfScanLineInputFile.h */; };
+		DFD4BEB01B435CC200A70A91 /* ImfStandardAttributes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BE3C1B435CC200A70A91 /* ImfStandardAttributes.cpp */; };
+		DFD4BEB11B435CC200A70A91 /* ImfStandardAttributes.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BE3D1B435CC200A70A91 /* ImfStandardAttributes.h */; };
+		DFD4BEB21B435CC200A70A91 /* ImfStdIO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BE3E1B435CC200A70A91 /* ImfStdIO.cpp */; };
+		DFD4BEB31B435CC200A70A91 /* ImfStdIO.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BE3F1B435CC200A70A91 /* ImfStdIO.h */; };
+		DFD4BEB41B435CC200A70A91 /* ImfStringAttribute.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BE401B435CC200A70A91 /* ImfStringAttribute.cpp */; };
+		DFD4BEB51B435CC200A70A91 /* ImfStringAttribute.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BE411B435CC200A70A91 /* ImfStringAttribute.h */; };
+		DFD4BEB61B435CC200A70A91 /* ImfTestFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BE421B435CC200A70A91 /* ImfTestFile.cpp */; };
+		DFD4BEB71B435CC200A70A91 /* ImfTestFile.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BE431B435CC200A70A91 /* ImfTestFile.h */; };
+		DFD4BEB81B435CC200A70A91 /* ImfThreading.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BE441B435CC200A70A91 /* ImfThreading.cpp */; };
+		DFD4BEB91B435CC200A70A91 /* ImfThreading.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BE451B435CC200A70A91 /* ImfThreading.h */; };
+		DFD4BEBA1B435CC200A70A91 /* ImfTileDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BE461B435CC200A70A91 /* ImfTileDescription.h */; };
+		DFD4BEBB1B435CC200A70A91 /* ImfTileDescriptionAttribute.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BE471B435CC200A70A91 /* ImfTileDescriptionAttribute.cpp */; };
+		DFD4BEBC1B435CC200A70A91 /* ImfTileDescriptionAttribute.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BE481B435CC200A70A91 /* ImfTileDescriptionAttribute.h */; };
+		DFD4BEBD1B435CC200A70A91 /* ImfTiledInputFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BE491B435CC200A70A91 /* ImfTiledInputFile.cpp */; };
+		DFD4BEBE1B435CC200A70A91 /* ImfTiledInputFile.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BE4A1B435CC200A70A91 /* ImfTiledInputFile.h */; };
+		DFD4BEBF1B435CC200A70A91 /* ImfTiledMisc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BE4B1B435CC200A70A91 /* ImfTiledMisc.cpp */; };
+		DFD4BEC01B435CC200A70A91 /* ImfTiledMisc.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BE4C1B435CC200A70A91 /* ImfTiledMisc.h */; };
+		DFD4BEC11B435CC200A70A91 /* ImfTiledOutputFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BE4D1B435CC200A70A91 /* ImfTiledOutputFile.cpp */; };
+		DFD4BEC21B435CC200A70A91 /* ImfTiledOutputFile.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BE4E1B435CC200A70A91 /* ImfTiledOutputFile.h */; };
+		DFD4BEC31B435CC200A70A91 /* ImfTiledRgbaFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BE4F1B435CC200A70A91 /* ImfTiledRgbaFile.cpp */; };
+		DFD4BEC41B435CC200A70A91 /* ImfTiledRgbaFile.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BE501B435CC200A70A91 /* ImfTiledRgbaFile.h */; };
+		DFD4BEC51B435CC200A70A91 /* ImfTileOffsets.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BE511B435CC200A70A91 /* ImfTileOffsets.cpp */; };
+		DFD4BEC61B435CC200A70A91 /* ImfTileOffsets.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BE521B435CC200A70A91 /* ImfTileOffsets.h */; };
+		DFD4BEC71B435CC200A70A91 /* ImfTimeCode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BE531B435CC200A70A91 /* ImfTimeCode.cpp */; };
+		DFD4BEC81B435CC200A70A91 /* ImfTimeCode.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BE541B435CC200A70A91 /* ImfTimeCode.h */; };
+		DFD4BEC91B435CC200A70A91 /* ImfTimeCodeAttribute.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BE551B435CC200A70A91 /* ImfTimeCodeAttribute.cpp */; };
+		DFD4BECA1B435CC200A70A91 /* ImfTimeCodeAttribute.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BE561B435CC200A70A91 /* ImfTimeCodeAttribute.h */; };
+		DFD4BECB1B435CC200A70A91 /* ImfVecAttribute.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BE571B435CC200A70A91 /* ImfVecAttribute.cpp */; };
+		DFD4BECC1B435CC200A70A91 /* ImfVecAttribute.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BE581B435CC200A70A91 /* ImfVecAttribute.h */; };
+		DFD4BECD1B435CC200A70A91 /* ImfVersion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BE591B435CC200A70A91 /* ImfVersion.cpp */; };
+		DFD4BECE1B435CC200A70A91 /* ImfVersion.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BE5A1B435CC200A70A91 /* ImfVersion.h */; };
+		DFD4BECF1B435CC200A70A91 /* ImfWav.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BE5B1B435CC200A70A91 /* ImfWav.cpp */; };
+		DFD4BED01B435CC200A70A91 /* ImfWav.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BE5C1B435CC200A70A91 /* ImfWav.h */; };
+		DFD4BED11B435CC200A70A91 /* ImfXdr.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BE5D1B435CC200A70A91 /* ImfXdr.h */; };
+		DFD4BED21B435CC200A70A91 /* ImfZipCompressor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BE5E1B435CC200A70A91 /* ImfZipCompressor.cpp */; };
+		DFD4BED31B435CC200A70A91 /* ImfZipCompressor.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD4BE5F1B435CC200A70A91 /* ImfZipCompressor.h */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		DF28AD301B44BA8400A4A407 /* LibDebug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = LibDebug.xcconfig; path = ../../../../../Mac/XCConfig/LibDebug.xcconfig; sourceTree = "<group>"; };
+		DF28AD311B44BA8400A4A407 /* LibRelease.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = LibRelease.xcconfig; path = ../../../../../Mac/XCConfig/LibRelease.xcconfig; sourceTree = "<group>"; };
+		DFD4BDE31B435C5500A70A91 /* libIlmImf.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIlmImf.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		DFD4BDEC1B435CC200A70A91 /* ImfArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfArray.h; sourceTree = "<group>"; };
+		DFD4BDED1B435CC200A70A91 /* ImfAttribute.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImfAttribute.cpp; sourceTree = "<group>"; };
+		DFD4BDEE1B435CC200A70A91 /* ImfAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfAttribute.h; sourceTree = "<group>"; };
+		DFD4BDEF1B435CC200A70A91 /* ImfAutoArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfAutoArray.h; sourceTree = "<group>"; };
+		DFD4BDF01B435CC200A70A91 /* ImfBoxAttribute.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImfBoxAttribute.cpp; sourceTree = "<group>"; };
+		DFD4BDF11B435CC200A70A91 /* ImfBoxAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfBoxAttribute.h; sourceTree = "<group>"; };
+		DFD4BDF21B435CC200A70A91 /* ImfChannelList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImfChannelList.cpp; sourceTree = "<group>"; };
+		DFD4BDF31B435CC200A70A91 /* ImfChannelList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfChannelList.h; sourceTree = "<group>"; };
+		DFD4BDF41B435CC200A70A91 /* ImfChannelListAttribute.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImfChannelListAttribute.cpp; sourceTree = "<group>"; };
+		DFD4BDF51B435CC200A70A91 /* ImfChannelListAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfChannelListAttribute.h; sourceTree = "<group>"; };
+		DFD4BDF61B435CC200A70A91 /* ImfChromaticities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImfChromaticities.cpp; sourceTree = "<group>"; };
+		DFD4BDF71B435CC200A70A91 /* ImfChromaticities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfChromaticities.h; sourceTree = "<group>"; };
+		DFD4BDF81B435CC200A70A91 /* ImfChromaticitiesAttribute.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImfChromaticitiesAttribute.cpp; sourceTree = "<group>"; };
+		DFD4BDF91B435CC200A70A91 /* ImfChromaticitiesAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfChromaticitiesAttribute.h; sourceTree = "<group>"; };
+		DFD4BDFA1B435CC200A70A91 /* ImfCompression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfCompression.h; sourceTree = "<group>"; };
+		DFD4BDFB1B435CC200A70A91 /* ImfCompressionAttribute.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImfCompressionAttribute.cpp; sourceTree = "<group>"; };
+		DFD4BDFC1B435CC200A70A91 /* ImfCompressionAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfCompressionAttribute.h; sourceTree = "<group>"; };
+		DFD4BDFD1B435CC200A70A91 /* ImfCompressor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImfCompressor.cpp; sourceTree = "<group>"; };
+		DFD4BDFE1B435CC200A70A91 /* ImfCompressor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfCompressor.h; sourceTree = "<group>"; };
+		DFD4BDFF1B435CC200A70A91 /* ImfConvert.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImfConvert.cpp; sourceTree = "<group>"; };
+		DFD4BE001B435CC200A70A91 /* ImfConvert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfConvert.h; sourceTree = "<group>"; };
+		DFD4BE011B435CC200A70A91 /* ImfCRgbaFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImfCRgbaFile.cpp; sourceTree = "<group>"; };
+		DFD4BE021B435CC200A70A91 /* ImfCRgbaFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfCRgbaFile.h; sourceTree = "<group>"; };
+		DFD4BE031B435CC200A70A91 /* ImfDoubleAttribute.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImfDoubleAttribute.cpp; sourceTree = "<group>"; };
+		DFD4BE041B435CC200A70A91 /* ImfDoubleAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfDoubleAttribute.h; sourceTree = "<group>"; };
+		DFD4BE051B435CC200A70A91 /* ImfEnvmap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImfEnvmap.cpp; sourceTree = "<group>"; };
+		DFD4BE061B435CC200A70A91 /* ImfEnvmap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfEnvmap.h; sourceTree = "<group>"; };
+		DFD4BE071B435CC200A70A91 /* ImfEnvmapAttribute.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImfEnvmapAttribute.cpp; sourceTree = "<group>"; };
+		DFD4BE081B435CC200A70A91 /* ImfEnvmapAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfEnvmapAttribute.h; sourceTree = "<group>"; };
+		DFD4BE091B435CC200A70A91 /* ImfFloatAttribute.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImfFloatAttribute.cpp; sourceTree = "<group>"; };
+		DFD4BE0A1B435CC200A70A91 /* ImfFloatAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfFloatAttribute.h; sourceTree = "<group>"; };
+		DFD4BE0B1B435CC200A70A91 /* ImfFrameBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImfFrameBuffer.cpp; sourceTree = "<group>"; };
+		DFD4BE0C1B435CC200A70A91 /* ImfFrameBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfFrameBuffer.h; sourceTree = "<group>"; };
+		DFD4BE0D1B435CC200A70A91 /* ImfHeader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImfHeader.cpp; sourceTree = "<group>"; };
+		DFD4BE0E1B435CC200A70A91 /* ImfHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfHeader.h; sourceTree = "<group>"; };
+		DFD4BE0F1B435CC200A70A91 /* ImfHuf.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImfHuf.cpp; sourceTree = "<group>"; };
+		DFD4BE101B435CC200A70A91 /* ImfHuf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfHuf.h; sourceTree = "<group>"; };
+		DFD4BE111B435CC200A70A91 /* ImfInputFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImfInputFile.cpp; sourceTree = "<group>"; };
+		DFD4BE121B435CC200A70A91 /* ImfInputFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfInputFile.h; sourceTree = "<group>"; };
+		DFD4BE131B435CC200A70A91 /* ImfInt64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfInt64.h; sourceTree = "<group>"; };
+		DFD4BE141B435CC200A70A91 /* ImfIntAttribute.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImfIntAttribute.cpp; sourceTree = "<group>"; };
+		DFD4BE151B435CC200A70A91 /* ImfIntAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfIntAttribute.h; sourceTree = "<group>"; };
+		DFD4BE161B435CC200A70A91 /* ImfIO.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImfIO.cpp; sourceTree = "<group>"; };
+		DFD4BE171B435CC200A70A91 /* ImfIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfIO.h; sourceTree = "<group>"; };
+		DFD4BE181B435CC200A70A91 /* ImfKeyCode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImfKeyCode.cpp; sourceTree = "<group>"; };
+		DFD4BE191B435CC200A70A91 /* ImfKeyCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfKeyCode.h; sourceTree = "<group>"; };
+		DFD4BE1A1B435CC200A70A91 /* ImfKeyCodeAttribute.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImfKeyCodeAttribute.cpp; sourceTree = "<group>"; };
+		DFD4BE1B1B435CC200A70A91 /* ImfKeyCodeAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfKeyCodeAttribute.h; sourceTree = "<group>"; };
+		DFD4BE1C1B435CC200A70A91 /* ImfLineOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfLineOrder.h; sourceTree = "<group>"; };
+		DFD4BE1D1B435CC200A70A91 /* ImfLineOrderAttribute.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImfLineOrderAttribute.cpp; sourceTree = "<group>"; };
+		DFD4BE1E1B435CC200A70A91 /* ImfLineOrderAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfLineOrderAttribute.h; sourceTree = "<group>"; };
+		DFD4BE1F1B435CC200A70A91 /* ImfLut.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImfLut.cpp; sourceTree = "<group>"; };
+		DFD4BE201B435CC200A70A91 /* ImfLut.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfLut.h; sourceTree = "<group>"; };
+		DFD4BE211B435CC200A70A91 /* ImfMatrixAttribute.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImfMatrixAttribute.cpp; sourceTree = "<group>"; };
+		DFD4BE221B435CC200A70A91 /* ImfMatrixAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfMatrixAttribute.h; sourceTree = "<group>"; };
+		DFD4BE231B435CC200A70A91 /* ImfMisc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImfMisc.cpp; sourceTree = "<group>"; };
+		DFD4BE241B435CC200A70A91 /* ImfMisc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfMisc.h; sourceTree = "<group>"; };
+		DFD4BE251B435CC200A70A91 /* ImfName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfName.h; sourceTree = "<group>"; };
+		DFD4BE261B435CC200A70A91 /* ImfOpaqueAttribute.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImfOpaqueAttribute.cpp; sourceTree = "<group>"; };
+		DFD4BE271B435CC200A70A91 /* ImfOpaqueAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfOpaqueAttribute.h; sourceTree = "<group>"; };
+		DFD4BE281B435CC200A70A91 /* ImfOutputFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImfOutputFile.cpp; sourceTree = "<group>"; };
+		DFD4BE291B435CC200A70A91 /* ImfOutputFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfOutputFile.h; sourceTree = "<group>"; };
+		DFD4BE2A1B435CC200A70A91 /* ImfPixelType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfPixelType.h; sourceTree = "<group>"; };
+		DFD4BE2B1B435CC200A70A91 /* ImfPizCompressor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImfPizCompressor.cpp; sourceTree = "<group>"; };
+		DFD4BE2C1B435CC200A70A91 /* ImfPizCompressor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfPizCompressor.h; sourceTree = "<group>"; };
+		DFD4BE2D1B435CC200A70A91 /* ImfPreviewImage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImfPreviewImage.cpp; sourceTree = "<group>"; };
+		DFD4BE2E1B435CC200A70A91 /* ImfPreviewImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfPreviewImage.h; sourceTree = "<group>"; };
+		DFD4BE2F1B435CC200A70A91 /* ImfPreviewImageAttribute.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImfPreviewImageAttribute.cpp; sourceTree = "<group>"; };
+		DFD4BE301B435CC200A70A91 /* ImfPreviewImageAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfPreviewImageAttribute.h; sourceTree = "<group>"; };
+		DFD4BE311B435CC200A70A91 /* ImfPxr24Compressor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImfPxr24Compressor.cpp; sourceTree = "<group>"; };
+		DFD4BE321B435CC200A70A91 /* ImfPxr24Compressor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfPxr24Compressor.h; sourceTree = "<group>"; };
+		DFD4BE331B435CC200A70A91 /* ImfRgba.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfRgba.h; sourceTree = "<group>"; };
+		DFD4BE341B435CC200A70A91 /* ImfRgbaFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImfRgbaFile.cpp; sourceTree = "<group>"; };
+		DFD4BE351B435CC200A70A91 /* ImfRgbaFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfRgbaFile.h; sourceTree = "<group>"; };
+		DFD4BE361B435CC200A70A91 /* ImfRgbaYca.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImfRgbaYca.cpp; sourceTree = "<group>"; };
+		DFD4BE371B435CC200A70A91 /* ImfRgbaYca.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfRgbaYca.h; sourceTree = "<group>"; };
+		DFD4BE381B435CC200A70A91 /* ImfRleCompressor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImfRleCompressor.cpp; sourceTree = "<group>"; };
+		DFD4BE391B435CC200A70A91 /* ImfRleCompressor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfRleCompressor.h; sourceTree = "<group>"; };
+		DFD4BE3A1B435CC200A70A91 /* ImfScanLineInputFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImfScanLineInputFile.cpp; sourceTree = "<group>"; };
+		DFD4BE3B1B435CC200A70A91 /* ImfScanLineInputFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfScanLineInputFile.h; sourceTree = "<group>"; };
+		DFD4BE3C1B435CC200A70A91 /* ImfStandardAttributes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImfStandardAttributes.cpp; sourceTree = "<group>"; };
+		DFD4BE3D1B435CC200A70A91 /* ImfStandardAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfStandardAttributes.h; sourceTree = "<group>"; };
+		DFD4BE3E1B435CC200A70A91 /* ImfStdIO.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImfStdIO.cpp; sourceTree = "<group>"; };
+		DFD4BE3F1B435CC200A70A91 /* ImfStdIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfStdIO.h; sourceTree = "<group>"; };
+		DFD4BE401B435CC200A70A91 /* ImfStringAttribute.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImfStringAttribute.cpp; sourceTree = "<group>"; };
+		DFD4BE411B435CC200A70A91 /* ImfStringAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfStringAttribute.h; sourceTree = "<group>"; };
+		DFD4BE421B435CC200A70A91 /* ImfTestFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImfTestFile.cpp; sourceTree = "<group>"; };
+		DFD4BE431B435CC200A70A91 /* ImfTestFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfTestFile.h; sourceTree = "<group>"; };
+		DFD4BE441B435CC200A70A91 /* ImfThreading.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImfThreading.cpp; sourceTree = "<group>"; };
+		DFD4BE451B435CC200A70A91 /* ImfThreading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfThreading.h; sourceTree = "<group>"; };
+		DFD4BE461B435CC200A70A91 /* ImfTileDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfTileDescription.h; sourceTree = "<group>"; };
+		DFD4BE471B435CC200A70A91 /* ImfTileDescriptionAttribute.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImfTileDescriptionAttribute.cpp; sourceTree = "<group>"; };
+		DFD4BE481B435CC200A70A91 /* ImfTileDescriptionAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfTileDescriptionAttribute.h; sourceTree = "<group>"; };
+		DFD4BE491B435CC200A70A91 /* ImfTiledInputFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImfTiledInputFile.cpp; sourceTree = "<group>"; };
+		DFD4BE4A1B435CC200A70A91 /* ImfTiledInputFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfTiledInputFile.h; sourceTree = "<group>"; };
+		DFD4BE4B1B435CC200A70A91 /* ImfTiledMisc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImfTiledMisc.cpp; sourceTree = "<group>"; };
+		DFD4BE4C1B435CC200A70A91 /* ImfTiledMisc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfTiledMisc.h; sourceTree = "<group>"; };
+		DFD4BE4D1B435CC200A70A91 /* ImfTiledOutputFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImfTiledOutputFile.cpp; sourceTree = "<group>"; };
+		DFD4BE4E1B435CC200A70A91 /* ImfTiledOutputFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfTiledOutputFile.h; sourceTree = "<group>"; };
+		DFD4BE4F1B435CC200A70A91 /* ImfTiledRgbaFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImfTiledRgbaFile.cpp; sourceTree = "<group>"; };
+		DFD4BE501B435CC200A70A91 /* ImfTiledRgbaFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfTiledRgbaFile.h; sourceTree = "<group>"; };
+		DFD4BE511B435CC200A70A91 /* ImfTileOffsets.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImfTileOffsets.cpp; sourceTree = "<group>"; };
+		DFD4BE521B435CC200A70A91 /* ImfTileOffsets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfTileOffsets.h; sourceTree = "<group>"; };
+		DFD4BE531B435CC200A70A91 /* ImfTimeCode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImfTimeCode.cpp; sourceTree = "<group>"; };
+		DFD4BE541B435CC200A70A91 /* ImfTimeCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfTimeCode.h; sourceTree = "<group>"; };
+		DFD4BE551B435CC200A70A91 /* ImfTimeCodeAttribute.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImfTimeCodeAttribute.cpp; sourceTree = "<group>"; };
+		DFD4BE561B435CC200A70A91 /* ImfTimeCodeAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfTimeCodeAttribute.h; sourceTree = "<group>"; };
+		DFD4BE571B435CC200A70A91 /* ImfVecAttribute.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImfVecAttribute.cpp; sourceTree = "<group>"; };
+		DFD4BE581B435CC200A70A91 /* ImfVecAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfVecAttribute.h; sourceTree = "<group>"; };
+		DFD4BE591B435CC200A70A91 /* ImfVersion.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImfVersion.cpp; sourceTree = "<group>"; };
+		DFD4BE5A1B435CC200A70A91 /* ImfVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfVersion.h; sourceTree = "<group>"; };
+		DFD4BE5B1B435CC200A70A91 /* ImfWav.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImfWav.cpp; sourceTree = "<group>"; };
+		DFD4BE5C1B435CC200A70A91 /* ImfWav.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfWav.h; sourceTree = "<group>"; };
+		DFD4BE5D1B435CC200A70A91 /* ImfXdr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfXdr.h; sourceTree = "<group>"; };
+		DFD4BE5E1B435CC200A70A91 /* ImfZipCompressor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImfZipCompressor.cpp; sourceTree = "<group>"; };
+		DFD4BE5F1B435CC200A70A91 /* ImfZipCompressor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImfZipCompressor.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DFD4BDE01B435C5500A70A91 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DF28AD2F1B44BA3A00A4A407 /* Supporting files */ = {
+			isa = PBXGroup;
+			children = (
+				DF28AD301B44BA8400A4A407 /* LibDebug.xcconfig */,
+				DF28AD311B44BA8400A4A407 /* LibRelease.xcconfig */,
+			);
+			name = "Supporting files";
+			sourceTree = "<group>";
+		};
+		DFD4BDDA1B435C5500A70A91 = {
+			isa = PBXGroup;
+			children = (
+				DFD4BDEB1B435C9500A70A91 /* Header files */,
+				DFD4BDEA1B435C8B00A70A91 /* Source files */,
+				DF28AD2F1B44BA3A00A4A407 /* Supporting files */,
+				DFD4BDE41B435C5500A70A91 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DFD4BDE41B435C5500A70A91 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DFD4BDE31B435C5500A70A91 /* libIlmImf.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DFD4BDEA1B435C8B00A70A91 /* Source files */ = {
+			isa = PBXGroup;
+			children = (
+				DFD4BDED1B435CC200A70A91 /* ImfAttribute.cpp */,
+				DFD4BDF01B435CC200A70A91 /* ImfBoxAttribute.cpp */,
+				DFD4BDF21B435CC200A70A91 /* ImfChannelList.cpp */,
+				DFD4BDF41B435CC200A70A91 /* ImfChannelListAttribute.cpp */,
+				DFD4BDF61B435CC200A70A91 /* ImfChromaticities.cpp */,
+				DFD4BDF81B435CC200A70A91 /* ImfChromaticitiesAttribute.cpp */,
+				DFD4BDFB1B435CC200A70A91 /* ImfCompressionAttribute.cpp */,
+				DFD4BDFD1B435CC200A70A91 /* ImfCompressor.cpp */,
+				DFD4BDFF1B435CC200A70A91 /* ImfConvert.cpp */,
+				DFD4BE011B435CC200A70A91 /* ImfCRgbaFile.cpp */,
+				DFD4BE031B435CC200A70A91 /* ImfDoubleAttribute.cpp */,
+				DFD4BE051B435CC200A70A91 /* ImfEnvmap.cpp */,
+				DFD4BE071B435CC200A70A91 /* ImfEnvmapAttribute.cpp */,
+				DFD4BE091B435CC200A70A91 /* ImfFloatAttribute.cpp */,
+				DFD4BE0B1B435CC200A70A91 /* ImfFrameBuffer.cpp */,
+				DFD4BE0D1B435CC200A70A91 /* ImfHeader.cpp */,
+				DFD4BE0F1B435CC200A70A91 /* ImfHuf.cpp */,
+				DFD4BE111B435CC200A70A91 /* ImfInputFile.cpp */,
+				DFD4BE141B435CC200A70A91 /* ImfIntAttribute.cpp */,
+				DFD4BE161B435CC200A70A91 /* ImfIO.cpp */,
+				DFD4BE181B435CC200A70A91 /* ImfKeyCode.cpp */,
+				DFD4BE1A1B435CC200A70A91 /* ImfKeyCodeAttribute.cpp */,
+				DFD4BE1D1B435CC200A70A91 /* ImfLineOrderAttribute.cpp */,
+				DFD4BE1F1B435CC200A70A91 /* ImfLut.cpp */,
+				DFD4BE211B435CC200A70A91 /* ImfMatrixAttribute.cpp */,
+				DFD4BE231B435CC200A70A91 /* ImfMisc.cpp */,
+				DFD4BE261B435CC200A70A91 /* ImfOpaqueAttribute.cpp */,
+				DFD4BE281B435CC200A70A91 /* ImfOutputFile.cpp */,
+				DFD4BE2B1B435CC200A70A91 /* ImfPizCompressor.cpp */,
+				DFD4BE2D1B435CC200A70A91 /* ImfPreviewImage.cpp */,
+				DFD4BE2F1B435CC200A70A91 /* ImfPreviewImageAttribute.cpp */,
+				DFD4BE311B435CC200A70A91 /* ImfPxr24Compressor.cpp */,
+				DFD4BE341B435CC200A70A91 /* ImfRgbaFile.cpp */,
+				DFD4BE361B435CC200A70A91 /* ImfRgbaYca.cpp */,
+				DFD4BE381B435CC200A70A91 /* ImfRleCompressor.cpp */,
+				DFD4BE3A1B435CC200A70A91 /* ImfScanLineInputFile.cpp */,
+				DFD4BE3C1B435CC200A70A91 /* ImfStandardAttributes.cpp */,
+				DFD4BE3E1B435CC200A70A91 /* ImfStdIO.cpp */,
+				DFD4BE401B435CC200A70A91 /* ImfStringAttribute.cpp */,
+				DFD4BE421B435CC200A70A91 /* ImfTestFile.cpp */,
+				DFD4BE441B435CC200A70A91 /* ImfThreading.cpp */,
+				DFD4BE471B435CC200A70A91 /* ImfTileDescriptionAttribute.cpp */,
+				DFD4BE491B435CC200A70A91 /* ImfTiledInputFile.cpp */,
+				DFD4BE4B1B435CC200A70A91 /* ImfTiledMisc.cpp */,
+				DFD4BE4D1B435CC200A70A91 /* ImfTiledOutputFile.cpp */,
+				DFD4BE4F1B435CC200A70A91 /* ImfTiledRgbaFile.cpp */,
+				DFD4BE511B435CC200A70A91 /* ImfTileOffsets.cpp */,
+				DFD4BE531B435CC200A70A91 /* ImfTimeCode.cpp */,
+				DFD4BE551B435CC200A70A91 /* ImfTimeCodeAttribute.cpp */,
+				DFD4BE571B435CC200A70A91 /* ImfVecAttribute.cpp */,
+				DFD4BE591B435CC200A70A91 /* ImfVersion.cpp */,
+				DFD4BE5B1B435CC200A70A91 /* ImfWav.cpp */,
+				DFD4BE5E1B435CC200A70A91 /* ImfZipCompressor.cpp */,
+			);
+			name = "Source files";
+			sourceTree = "<group>";
+		};
+		DFD4BDEB1B435C9500A70A91 /* Header files */ = {
+			isa = PBXGroup;
+			children = (
+				DFD4BDEC1B435CC200A70A91 /* ImfArray.h */,
+				DFD4BDEE1B435CC200A70A91 /* ImfAttribute.h */,
+				DFD4BDEF1B435CC200A70A91 /* ImfAutoArray.h */,
+				DFD4BDF11B435CC200A70A91 /* ImfBoxAttribute.h */,
+				DFD4BDF31B435CC200A70A91 /* ImfChannelList.h */,
+				DFD4BDF51B435CC200A70A91 /* ImfChannelListAttribute.h */,
+				DFD4BDF71B435CC200A70A91 /* ImfChromaticities.h */,
+				DFD4BDF91B435CC200A70A91 /* ImfChromaticitiesAttribute.h */,
+				DFD4BDFA1B435CC200A70A91 /* ImfCompression.h */,
+				DFD4BDFC1B435CC200A70A91 /* ImfCompressionAttribute.h */,
+				DFD4BDFE1B435CC200A70A91 /* ImfCompressor.h */,
+				DFD4BE001B435CC200A70A91 /* ImfConvert.h */,
+				DFD4BE021B435CC200A70A91 /* ImfCRgbaFile.h */,
+				DFD4BE041B435CC200A70A91 /* ImfDoubleAttribute.h */,
+				DFD4BE061B435CC200A70A91 /* ImfEnvmap.h */,
+				DFD4BE081B435CC200A70A91 /* ImfEnvmapAttribute.h */,
+				DFD4BE0A1B435CC200A70A91 /* ImfFloatAttribute.h */,
+				DFD4BE0C1B435CC200A70A91 /* ImfFrameBuffer.h */,
+				DFD4BE0E1B435CC200A70A91 /* ImfHeader.h */,
+				DFD4BE101B435CC200A70A91 /* ImfHuf.h */,
+				DFD4BE121B435CC200A70A91 /* ImfInputFile.h */,
+				DFD4BE131B435CC200A70A91 /* ImfInt64.h */,
+				DFD4BE151B435CC200A70A91 /* ImfIntAttribute.h */,
+				DFD4BE171B435CC200A70A91 /* ImfIO.h */,
+				DFD4BE191B435CC200A70A91 /* ImfKeyCode.h */,
+				DFD4BE1B1B435CC200A70A91 /* ImfKeyCodeAttribute.h */,
+				DFD4BE1C1B435CC200A70A91 /* ImfLineOrder.h */,
+				DFD4BE1E1B435CC200A70A91 /* ImfLineOrderAttribute.h */,
+				DFD4BE201B435CC200A70A91 /* ImfLut.h */,
+				DFD4BE221B435CC200A70A91 /* ImfMatrixAttribute.h */,
+				DFD4BE241B435CC200A70A91 /* ImfMisc.h */,
+				DFD4BE251B435CC200A70A91 /* ImfName.h */,
+				DFD4BE271B435CC200A70A91 /* ImfOpaqueAttribute.h */,
+				DFD4BE291B435CC200A70A91 /* ImfOutputFile.h */,
+				DFD4BE2A1B435CC200A70A91 /* ImfPixelType.h */,
+				DFD4BE2C1B435CC200A70A91 /* ImfPizCompressor.h */,
+				DFD4BE2E1B435CC200A70A91 /* ImfPreviewImage.h */,
+				DFD4BE301B435CC200A70A91 /* ImfPreviewImageAttribute.h */,
+				DFD4BE321B435CC200A70A91 /* ImfPxr24Compressor.h */,
+				DFD4BE331B435CC200A70A91 /* ImfRgba.h */,
+				DFD4BE351B435CC200A70A91 /* ImfRgbaFile.h */,
+				DFD4BE371B435CC200A70A91 /* ImfRgbaYca.h */,
+				DFD4BE391B435CC200A70A91 /* ImfRleCompressor.h */,
+				DFD4BE3B1B435CC200A70A91 /* ImfScanLineInputFile.h */,
+				DFD4BE3D1B435CC200A70A91 /* ImfStandardAttributes.h */,
+				DFD4BE3F1B435CC200A70A91 /* ImfStdIO.h */,
+				DFD4BE411B435CC200A70A91 /* ImfStringAttribute.h */,
+				DFD4BE431B435CC200A70A91 /* ImfTestFile.h */,
+				DFD4BE451B435CC200A70A91 /* ImfThreading.h */,
+				DFD4BE461B435CC200A70A91 /* ImfTileDescription.h */,
+				DFD4BE481B435CC200A70A91 /* ImfTileDescriptionAttribute.h */,
+				DFD4BE4A1B435CC200A70A91 /* ImfTiledInputFile.h */,
+				DFD4BE4C1B435CC200A70A91 /* ImfTiledMisc.h */,
+				DFD4BE4E1B435CC200A70A91 /* ImfTiledOutputFile.h */,
+				DFD4BE501B435CC200A70A91 /* ImfTiledRgbaFile.h */,
+				DFD4BE521B435CC200A70A91 /* ImfTileOffsets.h */,
+				DFD4BE541B435CC200A70A91 /* ImfTimeCode.h */,
+				DFD4BE561B435CC200A70A91 /* ImfTimeCodeAttribute.h */,
+				DFD4BE581B435CC200A70A91 /* ImfVecAttribute.h */,
+				DFD4BE5A1B435CC200A70A91 /* ImfVersion.h */,
+				DFD4BE5C1B435CC200A70A91 /* ImfWav.h */,
+				DFD4BE5D1B435CC200A70A91 /* ImfXdr.h */,
+				DFD4BE5F1B435CC200A70A91 /* ImfZipCompressor.h */,
+			);
+			name = "Header files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		DFD4BDE11B435C5500A70A91 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DFD4BE651B435CC200A70A91 /* ImfBoxAttribute.h in Headers */,
+				DFD4BEA91B435CC200A70A91 /* ImfRgbaFile.h in Headers */,
+				DFD4BED31B435CC200A70A91 /* ImfZipCompressor.h in Headers */,
+				DFD4BE8F1B435CC200A70A91 /* ImfKeyCodeAttribute.h in Headers */,
+				DFD4BE7C1B435CC200A70A91 /* ImfEnvmapAttribute.h in Headers */,
+				DFD4BEA41B435CC200A70A91 /* ImfPreviewImageAttribute.h in Headers */,
+				DFD4BE671B435CC200A70A91 /* ImfChannelList.h in Headers */,
+				DFD4BEA01B435CC200A70A91 /* ImfPizCompressor.h in Headers */,
+				DFD4BE6D1B435CC200A70A91 /* ImfChromaticitiesAttribute.h in Headers */,
+				DFD4BECE1B435CC200A70A91 /* ImfVersion.h in Headers */,
+				DFD4BE761B435CC200A70A91 /* ImfCRgbaFile.h in Headers */,
+				DFD4BE871B435CC200A70A91 /* ImfInt64.h in Headers */,
+				DFD4BE861B435CC200A70A91 /* ImfInputFile.h in Headers */,
+				DFD4BE741B435CC200A70A91 /* ImfConvert.h in Headers */,
+				DFD4BE891B435CC200A70A91 /* ImfIntAttribute.h in Headers */,
+				DFD4BE8B1B435CC200A70A91 /* ImfIO.h in Headers */,
+				DFD4BEC41B435CC200A70A91 /* ImfTiledRgbaFile.h in Headers */,
+				DFD4BED11B435CC200A70A91 /* ImfXdr.h in Headers */,
+				DFD4BE721B435CC200A70A91 /* ImfCompressor.h in Headers */,
+				DFD4BEB71B435CC200A70A91 /* ImfTestFile.h in Headers */,
+				DFD4BEBC1B435CC200A70A91 /* ImfTileDescriptionAttribute.h in Headers */,
+				DFD4BEAB1B435CC200A70A91 /* ImfRgbaYca.h in Headers */,
+				DFD4BE621B435CC200A70A91 /* ImfAttribute.h in Headers */,
+				DFD4BE961B435CC200A70A91 /* ImfMatrixAttribute.h in Headers */,
+				DFD4BE6B1B435CC200A70A91 /* ImfChromaticities.h in Headers */,
+				DFD4BEBA1B435CC200A70A91 /* ImfTileDescription.h in Headers */,
+				DFD4BE9E1B435CC200A70A91 /* ImfPixelType.h in Headers */,
+				DFD4BE841B435CC200A70A91 /* ImfHuf.h in Headers */,
+				DFD4BE9D1B435CC200A70A91 /* ImfOutputFile.h in Headers */,
+				DFD4BEC61B435CC200A70A91 /* ImfTileOffsets.h in Headers */,
+				DFD4BE631B435CC200A70A91 /* ImfAutoArray.h in Headers */,
+				DFD4BE691B435CC200A70A91 /* ImfChannelListAttribute.h in Headers */,
+				DFD4BE981B435CC200A70A91 /* ImfMisc.h in Headers */,
+				DFD4BE921B435CC200A70A91 /* ImfLineOrderAttribute.h in Headers */,
+				DFD4BE8D1B435CC200A70A91 /* ImfKeyCode.h in Headers */,
+				DFD4BEC81B435CC200A70A91 /* ImfTimeCode.h in Headers */,
+				DFD4BE941B435CC200A70A91 /* ImfLut.h in Headers */,
+				DFD4BE701B435CC200A70A91 /* ImfCompressionAttribute.h in Headers */,
+				DFD4BEAF1B435CC200A70A91 /* ImfScanLineInputFile.h in Headers */,
+				DFD4BE9B1B435CC200A70A91 /* ImfOpaqueAttribute.h in Headers */,
+				DFD4BEA61B435CC200A70A91 /* ImfPxr24Compressor.h in Headers */,
+				DFD4BEB91B435CC200A70A91 /* ImfThreading.h in Headers */,
+				DFD4BE901B435CC200A70A91 /* ImfLineOrder.h in Headers */,
+				DFD4BE7E1B435CC200A70A91 /* ImfFloatAttribute.h in Headers */,
+				DFD4BE781B435CC200A70A91 /* ImfDoubleAttribute.h in Headers */,
+				DFD4BEC21B435CC200A70A91 /* ImfTiledOutputFile.h in Headers */,
+				DFD4BEB31B435CC200A70A91 /* ImfStdIO.h in Headers */,
+				DFD4BEB51B435CC200A70A91 /* ImfStringAttribute.h in Headers */,
+				DFD4BED01B435CC200A70A91 /* ImfWav.h in Headers */,
+				DFD4BE6E1B435CC200A70A91 /* ImfCompression.h in Headers */,
+				DFD4BEA21B435CC200A70A91 /* ImfPreviewImage.h in Headers */,
+				DFD4BECC1B435CC200A70A91 /* ImfVecAttribute.h in Headers */,
+				DFD4BEC01B435CC200A70A91 /* ImfTiledMisc.h in Headers */,
+				DFD4BE821B435CC200A70A91 /* ImfHeader.h in Headers */,
+				DFD4BE991B435CC200A70A91 /* ImfName.h in Headers */,
+				DFD4BE7A1B435CC200A70A91 /* ImfEnvmap.h in Headers */,
+				DFD4BEAD1B435CC200A70A91 /* ImfRleCompressor.h in Headers */,
+				DFD4BEBE1B435CC200A70A91 /* ImfTiledInputFile.h in Headers */,
+				DFD4BE601B435CC200A70A91 /* ImfArray.h in Headers */,
+				DFD4BE801B435CC200A70A91 /* ImfFrameBuffer.h in Headers */,
+				DFD4BEB11B435CC200A70A91 /* ImfStandardAttributes.h in Headers */,
+				DFD4BECA1B435CC200A70A91 /* ImfTimeCodeAttribute.h in Headers */,
+				DFD4BEA71B435CC200A70A91 /* ImfRgba.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		DFD4BDE21B435C5500A70A91 /* IlmImf */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DFD4BDE71B435C5500A70A91 /* Build configuration list for PBXNativeTarget "IlmImf" */;
+			buildPhases = (
+				DFD4BDDF1B435C5500A70A91 /* Sources */,
+				DFD4BDE01B435C5500A70A91 /* Frameworks */,
+				DFD4BDE11B435C5500A70A91 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = IlmImf;
+			productName = IlmImf;
+			productReference = DFD4BDE31B435C5500A70A91 /* libIlmImf.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DFD4BDDB1B435C5500A70A91 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0620;
+				ORGANIZATIONNAME = McNeel;
+				TargetAttributes = {
+					DFD4BDE21B435C5500A70A91 = {
+						CreatedOnToolsVersion = 6.2;
+					};
+				};
+			};
+			buildConfigurationList = DFD4BDDE1B435C5500A70A91 /* Build configuration list for PBXProject "IlmImf" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = DFD4BDDA1B435C5500A70A91;
+			productRefGroup = DFD4BDE41B435C5500A70A91 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DFD4BDE21B435C5500A70A91 /* IlmImf */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DFD4BDDF1B435C5500A70A91 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DFD4BE8E1B435CC200A70A91 /* ImfKeyCodeAttribute.cpp in Sources */,
+				DFD4BEBD1B435CC200A70A91 /* ImfTiledInputFile.cpp in Sources */,
+				DFD4BE611B435CC200A70A91 /* ImfAttribute.cpp in Sources */,
+				DFD4BEBB1B435CC200A70A91 /* ImfTileDescriptionAttribute.cpp in Sources */,
+				DFD4BEB01B435CC200A70A91 /* ImfStandardAttributes.cpp in Sources */,
+				DFD4BE831B435CC200A70A91 /* ImfHuf.cpp in Sources */,
+				DFD4BE7B1B435CC200A70A91 /* ImfEnvmapAttribute.cpp in Sources */,
+				DFD4BE931B435CC200A70A91 /* ImfLut.cpp in Sources */,
+				DFD4BE851B435CC200A70A91 /* ImfInputFile.cpp in Sources */,
+				DFD4BE911B435CC200A70A91 /* ImfLineOrderAttribute.cpp in Sources */,
+				DFD4BE681B435CC200A70A91 /* ImfChannelListAttribute.cpp in Sources */,
+				DFD4BE9A1B435CC200A70A91 /* ImfOpaqueAttribute.cpp in Sources */,
+				DFD4BED21B435CC200A70A91 /* ImfZipCompressor.cpp in Sources */,
+				DFD4BEAC1B435CC200A70A91 /* ImfRleCompressor.cpp in Sources */,
+				DFD4BE811B435CC200A70A91 /* ImfHeader.cpp in Sources */,
+				DFD4BEB61B435CC200A70A91 /* ImfTestFile.cpp in Sources */,
+				DFD4BEC31B435CC200A70A91 /* ImfTiledRgbaFile.cpp in Sources */,
+				DFD4BE661B435CC200A70A91 /* ImfChannelList.cpp in Sources */,
+				DFD4BEA81B435CC200A70A91 /* ImfRgbaFile.cpp in Sources */,
+				DFD4BE7F1B435CC200A70A91 /* ImfFrameBuffer.cpp in Sources */,
+				DFD4BE711B435CC200A70A91 /* ImfCompressor.cpp in Sources */,
+				DFD4BE751B435CC200A70A91 /* ImfCRgbaFile.cpp in Sources */,
+				DFD4BE791B435CC200A70A91 /* ImfEnvmap.cpp in Sources */,
+				DFD4BEAA1B435CC200A70A91 /* ImfRgbaYca.cpp in Sources */,
+				DFD4BEA11B435CC200A70A91 /* ImfPreviewImage.cpp in Sources */,
+				DFD4BEC51B435CC200A70A91 /* ImfTileOffsets.cpp in Sources */,
+				DFD4BEC91B435CC200A70A91 /* ImfTimeCodeAttribute.cpp in Sources */,
+				DFD4BECD1B435CC200A70A91 /* ImfVersion.cpp in Sources */,
+				DFD4BEA51B435CC200A70A91 /* ImfPxr24Compressor.cpp in Sources */,
+				DFD4BE9C1B435CC200A70A91 /* ImfOutputFile.cpp in Sources */,
+				DFD4BEB21B435CC200A70A91 /* ImfStdIO.cpp in Sources */,
+				DFD4BE771B435CC200A70A91 /* ImfDoubleAttribute.cpp in Sources */,
+				DFD4BE641B435CC200A70A91 /* ImfBoxAttribute.cpp in Sources */,
+				DFD4BE951B435CC200A70A91 /* ImfMatrixAttribute.cpp in Sources */,
+				DFD4BECF1B435CC200A70A91 /* ImfWav.cpp in Sources */,
+				DFD4BE881B435CC200A70A91 /* ImfIntAttribute.cpp in Sources */,
+				DFD4BE8C1B435CC200A70A91 /* ImfKeyCode.cpp in Sources */,
+				DFD4BE9F1B435CC200A70A91 /* ImfPizCompressor.cpp in Sources */,
+				DFD4BEA31B435CC200A70A91 /* ImfPreviewImageAttribute.cpp in Sources */,
+				DFD4BE6A1B435CC200A70A91 /* ImfChromaticities.cpp in Sources */,
+				DFD4BE7D1B435CC200A70A91 /* ImfFloatAttribute.cpp in Sources */,
+				DFD4BECB1B435CC200A70A91 /* ImfVecAttribute.cpp in Sources */,
+				DFD4BEBF1B435CC200A70A91 /* ImfTiledMisc.cpp in Sources */,
+				DFD4BEC71B435CC200A70A91 /* ImfTimeCode.cpp in Sources */,
+				DFD4BE6C1B435CC200A70A91 /* ImfChromaticitiesAttribute.cpp in Sources */,
+				DFD4BEB41B435CC200A70A91 /* ImfStringAttribute.cpp in Sources */,
+				DFD4BE971B435CC200A70A91 /* ImfMisc.cpp in Sources */,
+				DFD4BE731B435CC200A70A91 /* ImfConvert.cpp in Sources */,
+				DFD4BE8A1B435CC200A70A91 /* ImfIO.cpp in Sources */,
+				DFD4BEAE1B435CC200A70A91 /* ImfScanLineInputFile.cpp in Sources */,
+				DFD4BEB81B435CC200A70A91 /* ImfThreading.cpp in Sources */,
+				DFD4BEC11B435CC200A70A91 /* ImfTiledOutputFile.cpp in Sources */,
+				DFD4BE6F1B435CC200A70A91 /* ImfCompressionAttribute.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		DFD4BDE51B435C5500A70A91 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DF28AD301B44BA8400A4A407 /* LibDebug.xcconfig */;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					../config.mac,
+					../Iex,
+					../IMath,
+					../Half,
+					../IlmThread,
+				);
+				MTL_ENABLE_DEBUG_INFO = YES;
+			};
+			name = Debug;
+		};
+		DFD4BDE61B435C5500A70A91 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DF28AD311B44BA8400A4A407 /* LibRelease.xcconfig */;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					../config.mac,
+					../Iex,
+					../IMath,
+					../Half,
+					../IlmThread,
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+			};
+			name = Release;
+		};
+		DFD4BDE81B435C5500A70A91 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		DFD4BDE91B435C5500A70A91 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DFD4BDDE1B435C5500A70A91 /* Build configuration list for PBXProject "IlmImf" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DFD4BDE51B435C5500A70A91 /* Debug */,
+				DFD4BDE61B435C5500A70A91 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DFD4BDE71B435C5500A70A91 /* Build configuration list for PBXNativeTarget "IlmImf" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DFD4BDE81B435C5500A70A91 /* Debug */,
+				DFD4BDE91B435C5500A70A91 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DFD4BDDB1B435C5500A70A91 /* Project object */;
+}

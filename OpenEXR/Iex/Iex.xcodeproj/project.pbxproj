@@ -1,0 +1,218 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DFD4BDD61B435BC900A70A91 /* IexBaseExc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BDD41B435BC900A70A91 /* IexBaseExc.cpp */; };
+		DFD4BDD71B435BC900A70A91 /* IexThrowErrnoExc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFD4BDD51B435BC900A70A91 /* IexThrowErrnoExc.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		DF28AD2D1B44B96400A4A407 /* LibDebug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = LibDebug.xcconfig; path = ../../../../../Mac/XCConfig/LibDebug.xcconfig; sourceTree = "<group>"; };
+		DF28AD2E1B44B96400A4A407 /* LibRelease.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = LibRelease.xcconfig; path = ../../../../../Mac/XCConfig/LibRelease.xcconfig; sourceTree = "<group>"; };
+		DFD4BDC51B435B6600A70A91 /* libIex.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIex.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		DFD4BDCE1B435BB800A70A91 /* Iex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Iex.h; sourceTree = "<group>"; };
+		DFD4BDCF1B435BB800A70A91 /* IexBaseExc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IexBaseExc.h; sourceTree = "<group>"; };
+		DFD4BDD01B435BB800A70A91 /* IexErrnoExc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IexErrnoExc.h; sourceTree = "<group>"; };
+		DFD4BDD11B435BB800A70A91 /* IexMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IexMacros.h; sourceTree = "<group>"; };
+		DFD4BDD21B435BB800A70A91 /* IexMathExc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IexMathExc.h; sourceTree = "<group>"; };
+		DFD4BDD31B435BB800A70A91 /* IexThrowErrnoExc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IexThrowErrnoExc.h; sourceTree = "<group>"; };
+		DFD4BDD41B435BC900A70A91 /* IexBaseExc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IexBaseExc.cpp; sourceTree = "<group>"; };
+		DFD4BDD51B435BC900A70A91 /* IexThrowErrnoExc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IexThrowErrnoExc.cpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DFD4BDC21B435B6600A70A91 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DF28AD2C1B44B94D00A4A407 /* Supporting files */ = {
+			isa = PBXGroup;
+			children = (
+				DF28AD2D1B44B96400A4A407 /* LibDebug.xcconfig */,
+				DF28AD2E1B44B96400A4A407 /* LibRelease.xcconfig */,
+			);
+			name = "Supporting files";
+			sourceTree = "<group>";
+		};
+		DFD4BDBC1B435B6600A70A91 = {
+			isa = PBXGroup;
+			children = (
+				DFD4BDCD1B435B9E00A70A91 /* Header files */,
+				DFD4BDCC1B435B9400A70A91 /* Source files */,
+				DF28AD2C1B44B94D00A4A407 /* Supporting files */,
+				DFD4BDC61B435B6600A70A91 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DFD4BDC61B435B6600A70A91 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DFD4BDC51B435B6600A70A91 /* libIex.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DFD4BDCC1B435B9400A70A91 /* Source files */ = {
+			isa = PBXGroup;
+			children = (
+				DFD4BDD41B435BC900A70A91 /* IexBaseExc.cpp */,
+				DFD4BDD51B435BC900A70A91 /* IexThrowErrnoExc.cpp */,
+			);
+			name = "Source files";
+			sourceTree = "<group>";
+		};
+		DFD4BDCD1B435B9E00A70A91 /* Header files */ = {
+			isa = PBXGroup;
+			children = (
+				DFD4BDCE1B435BB800A70A91 /* Iex.h */,
+				DFD4BDCF1B435BB800A70A91 /* IexBaseExc.h */,
+				DFD4BDD01B435BB800A70A91 /* IexErrnoExc.h */,
+				DFD4BDD11B435BB800A70A91 /* IexMacros.h */,
+				DFD4BDD21B435BB800A70A91 /* IexMathExc.h */,
+				DFD4BDD31B435BB800A70A91 /* IexThrowErrnoExc.h */,
+			);
+			name = "Header files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		DFD4BDC31B435B6600A70A91 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		DFD4BDC41B435B6600A70A91 /* Iex */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DFD4BDC91B435B6600A70A91 /* Build configuration list for PBXNativeTarget "Iex" */;
+			buildPhases = (
+				DFD4BDC11B435B6600A70A91 /* Sources */,
+				DFD4BDC21B435B6600A70A91 /* Frameworks */,
+				DFD4BDC31B435B6600A70A91 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Iex;
+			productName = Iex;
+			productReference = DFD4BDC51B435B6600A70A91 /* libIex.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DFD4BDBD1B435B6600A70A91 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0620;
+				ORGANIZATIONNAME = McNeel;
+				TargetAttributes = {
+					DFD4BDC41B435B6600A70A91 = {
+						CreatedOnToolsVersion = 6.2;
+					};
+				};
+			};
+			buildConfigurationList = DFD4BDC01B435B6600A70A91 /* Build configuration list for PBXProject "Iex" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = DFD4BDBC1B435B6600A70A91;
+			productRefGroup = DFD4BDC61B435B6600A70A91 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DFD4BDC41B435B6600A70A91 /* Iex */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DFD4BDC11B435B6600A70A91 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DFD4BDD61B435BC900A70A91 /* IexBaseExc.cpp in Sources */,
+				DFD4BDD71B435BC900A70A91 /* IexThrowErrnoExc.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		DFD4BDC71B435B6600A70A91 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DF28AD2D1B44B96400A4A407 /* LibDebug.xcconfig */;
+			buildSettings = {
+				MTL_ENABLE_DEBUG_INFO = YES;
+			};
+			name = Debug;
+		};
+		DFD4BDC81B435B6600A70A91 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DF28AD2E1B44B96400A4A407 /* LibRelease.xcconfig */;
+			buildSettings = {
+				MTL_ENABLE_DEBUG_INFO = NO;
+			};
+			name = Release;
+		};
+		DFD4BDCA1B435B6600A70A91 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		DFD4BDCB1B435B6600A70A91 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DFD4BDC01B435B6600A70A91 /* Build configuration list for PBXProject "Iex" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DFD4BDC71B435B6600A70A91 /* Debug */,
+				DFD4BDC81B435B6600A70A91 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DFD4BDC91B435B6600A70A91 /* Build configuration list for PBXNativeTarget "Iex" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DFD4BDCA1B435B6600A70A91 /* Debug */,
+				DFD4BDCB1B435B6600A70A91 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DFD4BDBD1B435B6600A70A91 /* Project object */;
+}

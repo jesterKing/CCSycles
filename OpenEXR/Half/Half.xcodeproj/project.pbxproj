@@ -1,0 +1,230 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DFBC4D8D1B43595200616237 /* eLut.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFBC4D851B43595200616237 /* eLut.cpp */; };
+		DFBC4D8E1B43595200616237 /* eLut.h in Headers */ = {isa = PBXBuildFile; fileRef = DFBC4D861B43595200616237 /* eLut.h */; };
+		DFBC4D8F1B43595200616237 /* half.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFBC4D871B43595200616237 /* half.cpp */; };
+		DFBC4D901B43595200616237 /* half.h in Headers */ = {isa = PBXBuildFile; fileRef = DFBC4D881B43595200616237 /* half.h */; };
+		DFBC4D911B43595200616237 /* halfFunction.h in Headers */ = {isa = PBXBuildFile; fileRef = DFBC4D891B43595200616237 /* halfFunction.h */; };
+		DFBC4D921B43595200616237 /* halfLimits.h in Headers */ = {isa = PBXBuildFile; fileRef = DFBC4D8A1B43595200616237 /* halfLimits.h */; };
+		DFBC4D931B43595200616237 /* toFloat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DFBC4D8B1B43595200616237 /* toFloat.cpp */; };
+		DFBC4D941B43595200616237 /* toFloat.h in Headers */ = {isa = PBXBuildFile; fileRef = DFBC4D8C1B43595200616237 /* toFloat.h */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		DF28AD2A1B44B82000A4A407 /* LibDebug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = LibDebug.xcconfig; path = ../../../../../Mac/XCConfig/LibDebug.xcconfig; sourceTree = "<group>"; };
+		DF28AD2B1B44B82000A4A407 /* LibRelease.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = LibRelease.xcconfig; path = ../../../../../Mac/XCConfig/LibRelease.xcconfig; sourceTree = "<group>"; };
+		DFBC4D7E1B4358FC00616237 /* libHalf.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libHalf.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		DFBC4D851B43595200616237 /* eLut.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = eLut.cpp; sourceTree = "<group>"; };
+		DFBC4D861B43595200616237 /* eLut.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = eLut.h; sourceTree = "<group>"; };
+		DFBC4D871B43595200616237 /* half.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = half.cpp; sourceTree = "<group>"; };
+		DFBC4D881B43595200616237 /* half.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = half.h; sourceTree = "<group>"; };
+		DFBC4D891B43595200616237 /* halfFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = halfFunction.h; sourceTree = "<group>"; };
+		DFBC4D8A1B43595200616237 /* halfLimits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = halfLimits.h; sourceTree = "<group>"; };
+		DFBC4D8B1B43595200616237 /* toFloat.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = toFloat.cpp; sourceTree = "<group>"; };
+		DFBC4D8C1B43595200616237 /* toFloat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = toFloat.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DFBC4D7B1B4358FC00616237 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DF28AD291B44B7C900A4A407 /* Supporting files */ = {
+			isa = PBXGroup;
+			children = (
+				DF28AD2A1B44B82000A4A407 /* LibDebug.xcconfig */,
+				DF28AD2B1B44B82000A4A407 /* LibRelease.xcconfig */,
+			);
+			name = "Supporting files";
+			sourceTree = "<group>";
+		};
+		DFBC4D751B4358FC00616237 = {
+			isa = PBXGroup;
+			children = (
+				DFD4BDD91B435BE900A70A91 /* Header files */,
+				DFD4BDD81B435BDF00A70A91 /* Source files */,
+				DF28AD291B44B7C900A4A407 /* Supporting files */,
+				DFBC4D7F1B4358FC00616237 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DFBC4D7F1B4358FC00616237 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DFBC4D7E1B4358FC00616237 /* libHalf.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DFD4BDD81B435BDF00A70A91 /* Source files */ = {
+			isa = PBXGroup;
+			children = (
+				DFBC4D851B43595200616237 /* eLut.cpp */,
+				DFBC4D871B43595200616237 /* half.cpp */,
+				DFBC4D8B1B43595200616237 /* toFloat.cpp */,
+			);
+			name = "Source files";
+			sourceTree = "<group>";
+		};
+		DFD4BDD91B435BE900A70A91 /* Header files */ = {
+			isa = PBXGroup;
+			children = (
+				DFBC4D861B43595200616237 /* eLut.h */,
+				DFBC4D881B43595200616237 /* half.h */,
+				DFBC4D891B43595200616237 /* halfFunction.h */,
+				DFBC4D8A1B43595200616237 /* halfLimits.h */,
+				DFBC4D8C1B43595200616237 /* toFloat.h */,
+			);
+			name = "Header files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		DFBC4D7C1B4358FC00616237 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DFBC4D941B43595200616237 /* toFloat.h in Headers */,
+				DFBC4D8E1B43595200616237 /* eLut.h in Headers */,
+				DFBC4D901B43595200616237 /* half.h in Headers */,
+				DFBC4D911B43595200616237 /* halfFunction.h in Headers */,
+				DFBC4D921B43595200616237 /* halfLimits.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		DFBC4D7D1B4358FC00616237 /* Half */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DFBC4D821B4358FC00616237 /* Build configuration list for PBXNativeTarget "Half" */;
+			buildPhases = (
+				DFBC4D7A1B4358FC00616237 /* Sources */,
+				DFBC4D7B1B4358FC00616237 /* Frameworks */,
+				DFBC4D7C1B4358FC00616237 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Half;
+			productName = Half;
+			productReference = DFBC4D7E1B4358FC00616237 /* libHalf.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DFBC4D761B4358FC00616237 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0620;
+				ORGANIZATIONNAME = McNeel;
+				TargetAttributes = {
+					DFBC4D7D1B4358FC00616237 = {
+						CreatedOnToolsVersion = 6.2;
+					};
+				};
+			};
+			buildConfigurationList = DFBC4D791B4358FC00616237 /* Build configuration list for PBXProject "Half" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = DFBC4D751B4358FC00616237;
+			productRefGroup = DFBC4D7F1B4358FC00616237 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DFBC4D7D1B4358FC00616237 /* Half */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DFBC4D7A1B4358FC00616237 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DFBC4D8F1B43595200616237 /* half.cpp in Sources */,
+				DFBC4D931B43595200616237 /* toFloat.cpp in Sources */,
+				DFBC4D8D1B43595200616237 /* eLut.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		DFBC4D801B4358FC00616237 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DF28AD2A1B44B82000A4A407 /* LibDebug.xcconfig */;
+			buildSettings = {
+				MTL_ENABLE_DEBUG_INFO = YES;
+			};
+			name = Debug;
+		};
+		DFBC4D811B4358FC00616237 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DF28AD2B1B44B82000A4A407 /* LibRelease.xcconfig */;
+			buildSettings = {
+				MTL_ENABLE_DEBUG_INFO = NO;
+			};
+			name = Release;
+		};
+		DFBC4D831B4358FC00616237 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		DFBC4D841B4358FC00616237 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DFBC4D791B4358FC00616237 /* Build configuration list for PBXProject "Half" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DFBC4D801B4358FC00616237 /* Debug */,
+				DFBC4D811B4358FC00616237 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DFBC4D821B4358FC00616237 /* Build configuration list for PBXNativeTarget "Half" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DFBC4D831B4358FC00616237 /* Debug */,
+				DFBC4D841B4358FC00616237 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DFBC4D761B4358FC00616237 /* Project object */;
+}

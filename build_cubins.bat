@@ -1,7 +1,7 @@
 SET nvcc=C:\CUDA75\bin\nvcc.exe
 SET cyclesroot=D:\Dev\Rhino\rhino\src4\rhino4\Plug-ins\RDK\cycles
 SET cyclesout=D:\Dev\Rhino\rhino\big_libs\RhinoCycles
-SET cudaversion=65
+SET cudaversion=75
 SET shadermodelnum=%1
 SET shadermodel=sm_%shadermodelnum%
 

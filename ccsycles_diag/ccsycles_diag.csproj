@@ -62,7 +62,7 @@ copy /Y "$(ProjectDir)..\ccycles\x64\$(ConfigurationName)\ccycles.dll" "$(Target
 copy /Y "$(ProjectDir)..\ccycles\x64\$(ConfigurationName)\ccycles.pdb" "$(TargetDir)"
 copy /Y "$(ProjectDir)..\OpenImageIO\x64\$(ConfigurationName)\OpenImageIO.dll" "$(TargetDir)"
 copy /Y "$(ProjectDir)..\pthreads\x64\$(ConfigurationName)\pthreads.dll" "$(TargetDir)"
-copy /Y "$(ProjectDir)..\..\..\..\..\bin\$(ConfigurationName)\boost_*" "$(TargetDir)"
+copy /Y "$(ProjectDir)..\boostbuild\stage$(ConfigurationName)\boost_*" "$(TargetDir)"
 
 XCopy "$(ProjectDir)..\lib" "$(TargetDir)\lib" /Y /I /Q
 

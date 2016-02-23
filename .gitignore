@@ -13,3 +13,7 @@ RhinoCycles/
 *blend2
 bindeps/
 *.aps
+boost/
+boostbuild/build.log
+*.rej
+*.orig
