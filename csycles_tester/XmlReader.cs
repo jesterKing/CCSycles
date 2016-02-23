@@ -262,6 +262,13 @@ namespace csycles_tester
 			if (!string.IsNullOrEmpty(dicing_rate)) state.DicingRate = float.Parse(dicing_rate, NumberFormatInfo);
 			if (!string.IsNullOrEmpty(interpolation)) state.Smooth = interpolation.Equals("smooth", StringComparison.OrdinalIgnoreCase);
 
+			bool boolval = false;
+
+			if(Utilities.Instance.get_bool(ref boolval, node.GetAttribute("is_shadow_catcher")))
+			{
+				state.IsShadowCatcher = boolval;
+			}
+
 			if (!string.IsNullOrEmpty(displacement_method))
 			{
 				/* \todo wrap displacement method stuff */
@@ -352,7 +359,7 @@ namespace csycles_tester
 
 			var meshname = node.GetAttribute("mesh");
 			var me = meshes[meshname];
-			var ob = new ccl.Object(Client) { Transform = state.Transform };
+			var ob = new ccl.Object(Client) { Transform = state.Transform, IsShadowCatcher = state.IsShadowCatcher };
 			ob.Mesh = me;
 		}
 
