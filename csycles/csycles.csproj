@@ -153,9 +153,9 @@
 
 copy /Y "$(ProjectDir)..\ccycles\x64\$(ConfigurationName)\ccycles.dll" "$(SolutionDir)..\$(OutDir)Plug-ins"
 copy /Y "$(ProjectDir)..\ccycles\x64\$(ConfigurationName)\ccycles.pdb" "$(SolutionDir)..\$(OutDir)Plug-ins"
-copy /Y "$(ProjectDir)..\OpenImageIO\x64\$(ConfigurationName)\OpenImageIOv13.dll" "$(SolutionDir)..\$(OutDir)Plug-ins"
-copy /Y "$(ProjectDir)..\pthreads\x64\$(ConfigurationName)\pthreads.dll" "$(SolutionDir)..\$(OutDir)Plug-ins"
-copy /Y "$(ProjectDir)..\..\..\..\..\boostbuild\stage$(ConfigurationName)\lib\boost_*" "$(SolutionDir)..\$(OutDir)Plug-ins"
+copy /Y "$(ProjectDir)..\OpenImageIO\x64\$(ConfigurationName)\OpenImageIOv13.dll" "$(SolutionDir)..\$(OutDir)"
+copy /Y "$(ProjectDir)..\pthreads\x64\$(ConfigurationName)\pthreads.dll" "$(SolutionDir)..\$(OutDir)"
+copy /Y "$(ProjectDir)..\..\..\..\..\boostbuild\stage$(ConfigurationName)\lib\boost_*" "$(SolutionDir)..\$(OutDir)"
 
 XCopy "$(SolutionDir)..\..\big_libs\RhinoCycles\lib" "$(SolutionDir)..\$(OutDir)Plug-ins\RhinoCycles\lib" /Y /I /Q
 
@@ -163,6 +163,9 @@ XCopy "$(SolutionDir)..\..\big_libs\RhinoCycles\lib" "$(SolutionDir)..\$(OutDir)
 XCopy "$(ProjectDir)..\cycles\src\kernel\closure" "$(SolutionDir)..\$(OutDir)Plug-ins\RhinoCycles\kernel\closure" /Y /I /Q
 XCopy "$(ProjectDir)..\cycles\src\kernel\geom" "$(SolutionDir)..\$(OutDir)Plug-ins\RhinoCycles\kernel\geom" /Y /I /Q
 XCopy "$(ProjectDir)..\cycles\src\kernel\svm" "$(SolutionDir)..\$(OutDir)Plug-ins\RhinoCycles\kernel\svm" /Y /I /Q
+XCopy "$(ProjectDir)..\cycles\src\kernel\split" "$(SolutionDir)..\$(OutDir)Plug-ins\RhinoCycles\kernel\split" /Y /I /Q
+XCopy "$(ProjectDir)..\cycles\src\kernel\kernels\opencl" "$(SolutionDir)..\$(OutDir)Plug-ins\RhinoCycles\kernel\kernels\opencl" /Y /I /Q
+XCopy "$(ProjectDir)..\cycles\src\kernel\kernels\cuda" "$(SolutionDir)..\$(OutDir)Plug-ins\RhinoCycles\kernel\kernels\cuda" /Y /I /Q
 XCopy "$(ProjectDir)..\cycles\src\kernel\kernel*.*" "$(SolutionDir)..\$(OutDir)Plug-ins\RhinoCycles\kernel" /Y /I /Q
 
 XCopy "$(ProjectDir)..\cycles\src\util\util_color.h" "$(SolutionDir)..\$(OutDir)Plug-ins\RhinoCycles\kernel" /Y /I /Q
@@ -170,7 +173,8 @@ XCopy "$(ProjectDir)..\cycles\src\util\util_half.h" "$(SolutionDir)..\$(OutDir)P
 XCopy "$(ProjectDir)..\cycles\src\util\util_math.h" "$(SolutionDir)..\$(OutDir)Plug-ins\RhinoCycles\kernel" /Y /I /Q
 XCopy "$(ProjectDir)..\cycles\src\util\util_math_fast.h" "$(SolutionDir)..\$(OutDir)Plug-ins\RhinoCycles\kernel" /Y /I /Q
 XCopy "$(ProjectDir)..\cycles\src\util\util_transform.h" "$(SolutionDir)..\$(OutDir)Plug-ins\RhinoCycles\kernel" /Y /I /Q
-XCopy "$(ProjectDir)..\cycles\src\util\util_types.h" "$(SolutionDir)..\$(OutDir)Plug-ins\RhinoCycles\kernel" /Y /I /Q</PostBuildEvent>
+XCopy "$(ProjectDir)..\cycles\src\util\util_types.h" "$(SolutionDir)..\$(OutDir)Plug-ins\RhinoCycles\kernel" /Y /I /Q
+XCopy "$(ProjectDir)..\cycles\src\util\util_atomic.h" "$(SolutionDir)..\$(OutDir)Plug-ins\RhinoCycles\kernel" /Y /I /Q</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>
