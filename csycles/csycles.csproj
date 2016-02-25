@@ -48,6 +48,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\..\..\..\version.cs">
+      <Link>Properties\version.cs</Link>
+    </Compile>
     <Compile Include="Attributes\ShaderNodeAttribute.cs" />
     <Compile Include="Background.cs" />
     <Compile Include="Colors.cs" />

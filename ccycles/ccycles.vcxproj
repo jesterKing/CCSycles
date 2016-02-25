@@ -129,6 +129,9 @@
   <ItemGroup>
     <Text Include="license.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ccycles_version.rc" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
