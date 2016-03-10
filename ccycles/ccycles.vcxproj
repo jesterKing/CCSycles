@@ -72,6 +72,10 @@
       <NoEntryPoint>false</NoEntryPoint>
       <ModuleDefinitionFile>cycles_api.def</ModuleDefinitionFile>
     </Link>
+    <PostBuildEvent>
+      <Command>copy /Y "$(ProjectDir)x64\$(ConfigurationName)\ccycles.dll" "$(SolutionDir)..\bin\$(ConfigurationName)\Plug-ins"
+copy /Y "$(ProjectDir)x64\$(ConfigurationName)\ccycles.pdb" "$(SolutionDir)..\bin\$(ConfigurationName)\Plug-ins"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -102,6 +106,10 @@
       <NoEntryPoint>false</NoEntryPoint>
       <ModuleDefinitionFile>cycles_api.def</ModuleDefinitionFile>
     </Link>
+    <PostBuildEvent>
+      <Command>copy /Y "$(ProjectDir)x64\$(ConfigurationName)\ccycles.dll" "$(SolutionDir)..\bin\$(ConfigurationName)\Plug-ins"
+copy /Y "$(ProjectDir)x64\$(ConfigurationName)\ccycles.pdb" "$(SolutionDir)..\bin\$(ConfigurationName)\Plug-ins"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="ccycles.h" />
