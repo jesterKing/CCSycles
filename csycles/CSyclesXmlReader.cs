@@ -16,20 +16,19 @@ limitations under the License.
 
 using System.Globalization;
 using System.Linq;
-using ccl;
 using System;
 using System.Drawing;
 using System.Xml;
 using System.Collections.Generic;
 
-namespace csycles_tester
+namespace ccl
 {
-	public class XmlReader
+	public class CSyclesXmlReader
 	{
 		private Client Client { get; set; }
 		private string Path { get; set; }
 		private NumberFormatInfo NumberFormatInfo { get; set; }
-		public XmlReader(Client client, string path)
+		public CSyclesXmlReader(Client client, string path)
 		{
 			Client = client;
 			Path = path;

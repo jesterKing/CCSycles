@@ -146,6 +146,8 @@
     <Compile Include="Transform.cs" />
     <Compile Include="SessionParameters.cs" />
     <Compile Include="Utilities.cs" />
+    <Compile Include="CSyclesXmlReader.cs" />
+    <Compile Include="XmlReadState.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="license.txt" />
