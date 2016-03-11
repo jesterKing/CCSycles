@@ -240,7 +240,7 @@ namespace csycles_tester
 			scene.AddShader(light_shader);
 			#endregion
 
-			var xml = new XmlReader(client, file);
+			var xml = new CSyclesXmlReader(client, file);
 			xml.Parse(silent);
 			var width = (uint)scene.Camera.Size.Width;
 			var height = (uint)scene.Camera.Size.Height;

@@ -15,9 +15,8 @@ limitations under the License.
 **/
 
 using System;
-using ccl;
 
-namespace csycles_tester
+namespace ccl
 {
 	public class XmlReadState : IDisposable
 	{
