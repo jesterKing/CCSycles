@@ -60,8 +60,16 @@ namespace ccl
 		/// <summary>
 		/// True if this is a CUDA device
 		/// </summary>
-		public bool IsCuda { get { return Type == DeviceType.CUDA;  } }
+		public bool IsCuda { get { return Type == DeviceType.CUDA; } }
 
+		/// <summary>
+		/// True if this device is an OpenCL device
+		/// </summary>
+		public bool IsOpenCl { get { return Type == DeviceType.OpenCL; } }
+
+		/// <summary>
+		/// True if this device is a CPU
+		/// </summary>
 		public bool IsCpu { get { return Type == DeviceType.CPU; } }
 
 		public bool IsGpu { get { return !IsCpu; } }
@@ -164,10 +172,25 @@ namespace ccl
 		}
 
 		/// <summary>
+		/// Returns the first openCL device if it exists,
+		/// the default rendering device (CPU) if not.
+		/// </summary>
+		static public Device FirstOpenCL
+		{
+			get
+			{
+				var d = (from device in Devices
+					where device.IsOpenCl|| device.IsMultiOpenCL
+					select device).FirstOrDefault();
+				return d ?? Default;
+			}
+		}
+
+		/// <summary>
 		/// Returns the first Multi OpenCL device if it exists,
 		/// the default rendering device (CPU) if not.
 		/// </summary>
-		static public Device FirstMultiOpenCl
+		static public Device FirstMultiOpenCL
 		{
 			get
 			{

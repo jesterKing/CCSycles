@@ -17,7 +17,7 @@ namespace ccsycles_diag
 			}
 			
 			Console.WriteLine("FirstCuda gives us: {0}", Device.FirstCuda);
-			Console.WriteLine("FirstMultiOpenCL gives us: {0}", Device.FirstMultiOpenCl);
+			Console.WriteLine("FirstMultiOpenCL gives us: {0}", Device.FirstMultiOpenCL);
 
 			CSycles.shutdown();
 		}
