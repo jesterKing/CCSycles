@@ -113,16 +113,19 @@ XCopy "$(ProjectDir)..\tests\objects" "$(TargetDir)\objects" /Y /I /Q
 XCopy "$(ProjectDir)..\cycles\src\kernel\closure" "$(TargetDir)\kernel\closure" /Y /I /Q
 XCopy "$(ProjectDir)..\cycles\src\kernel\geom" "$(TargetDir)\kernel\geom" /Y /I /Q
 XCopy "$(ProjectDir)..\cycles\src\kernel\svm" "$(TargetDir)\kernel\svm" /Y /I /Q
+XCopy "$(ProjectDir)..\cycles\src\kernel\kernels" "$(TargetDir)\kernel\kernels" /Y /I /S /Q
+XCopy "$(ProjectDir)..\cycles\src\kernel\split" "$(TargetDir)\kernel\split" /Y /I /Q
+XCopy "$(ProjectDir)..\cycles\src\kernel\svm" "$(TargetDir)\kernel\svm" /Y /I /Q
+
 XCopy "$(ProjectDir)..\cycles\src\kernel\kernel*.*" "$(TargetDir)\kernel" /Y /I /Q
 
+XCopy "$(ProjectDir)..\cycles\src\util\util_atomic.h" "$(TargetDir)\kernel" /Y /I /Q
 XCopy "$(ProjectDir)..\cycles\src\util\util_color.h" "$(TargetDir)\kernel" /Y /I /Q
 XCopy "$(ProjectDir)..\cycles\src\util\util_half.h" "$(TargetDir)\kernel" /Y /I /Q
 XCopy "$(ProjectDir)..\cycles\src\util\util_math.h" "$(TargetDir)\kernel" /Y /I /Q
 XCopy "$(ProjectDir)..\cycles\src\util\util_math_fast.h" "$(TargetDir)\kernel" /Y /I /Q
 XCopy "$(ProjectDir)..\cycles\src\util\util_transform.h" "$(TargetDir)\kernel" /Y /I /Q
-XCopy "$(ProjectDir)..\cycles\src\util\util_types.h" "$(TargetDir)\kernel" /Y /I /Q
-
-Del "$(TargetDir)\*.pdb"</PostBuildEvent>
+XCopy "$(ProjectDir)..\cycles\src\util\util_types.h" "$(TargetDir)\kernel" /Y /I /Q</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>
