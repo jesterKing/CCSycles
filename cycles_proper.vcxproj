@@ -132,7 +132,6 @@
     <ClCompile Include="cycles\src\render\scene.cpp" />
     <ClCompile Include="cycles\src\render\session.cpp" />
     <ClCompile Include="cycles\src\render\shader.cpp" />
-    <ClCompile Include="cycles\src\render\sky_model.cpp" />
     <ClCompile Include="cycles\src\render\sobol.cpp" />
     <ClCompile Include="cycles\src\render\svm.cpp" />
     <ClCompile Include="cycles\src\render\tables.cpp" />
@@ -149,6 +148,7 @@
     <ClCompile Include="cycles\src\util\util_md5.cpp" />
     <ClCompile Include="cycles\src\util\util_path.cpp" />
     <ClCompile Include="cycles\src\util\util_simd.cpp" />
+    <ClCompile Include="cycles\src\util\util_sky_model.cpp" />
     <ClCompile Include="cycles\src\util\util_string.cpp" />
     <ClCompile Include="cycles\src\util\util_system.cpp" />
     <ClCompile Include="cycles\src\util\util_task.cpp" />
@@ -222,8 +222,6 @@
     <ClInclude Include="cycles\src\render\scene.h" />
     <ClInclude Include="cycles\src\render\session.h" />
     <ClInclude Include="cycles\src\render\shader.h" />
-    <ClInclude Include="cycles\src\render\sky_model.h" />
-    <ClInclude Include="cycles\src\render\sky_model_data.h" />
     <ClInclude Include="cycles\src\render\sobol.h" />
     <ClInclude Include="cycles\src\render\svm.h" />
     <ClInclude Include="cycles\src\render\tables.h" />
@@ -257,6 +255,8 @@
     <ClInclude Include="cycles\src\util\util_progress.h" />
     <ClInclude Include="cycles\src\util\util_set.h" />
     <ClInclude Include="cycles\src\util\util_simd.h" />
+    <ClInclude Include="cycles\src\util\util_sky_model.h" />
+    <ClInclude Include="cycles\src\util\util_sky_model_data.h" />
     <ClInclude Include="cycles\src\util\util_sseb.h" />
     <ClInclude Include="cycles\src\util\util_ssef.h" />
     <ClInclude Include="cycles\src\util\util_ssei.h" />
