@@ -254,7 +254,8 @@ namespace csycles_tester
 				Threads = (uint)(dev.IsCpu ? 0 : 0),
 				ShadingSystem = ShadingSystem.SVM,
 				Background = true,
-				ProgressiveRefine = false
+				ProgressiveRefine = false,
+				TileOrder = TileOrder.HilbertSpiral
 			};
 			Session = new Session(client, session_params, scene);
 			Session.Reset(width, height, samples);
