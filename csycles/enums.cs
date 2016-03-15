@@ -149,7 +149,8 @@ namespace ccl
 		RightToLeft,
 		LeftToRight,
 		TopToBottom,
-		BottomToTop
+		BottomToTop,
+		HilbertSpiral
 	}
 
 	public enum CameraType : uint
