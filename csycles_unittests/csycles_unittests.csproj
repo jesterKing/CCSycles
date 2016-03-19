@@ -26,6 +26,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -40,8 +41,8 @@
     <RunPostBuildEvent>Always</RunPostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework, Version=3.0.5813.39031, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\NUnit.3.0.1\lib\net45\nunit.framework.dll</HintPath>
+    <Reference Include="nunit.framework, Version=3.2.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.3.2.0\lib\net45\nunit.framework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -61,13 +62,13 @@
     <Compile Include="TestFloat4.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\csycles\csycles.csproj">
       <Project>{36396655-e087-4c00-990b-ce44f08e4fb2}</Project>
       <Name>csycles</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
@@ -105,8 +106,13 @@ XCopy "$(ProjectDir)..\tests\objects" "$(TargetDir)\objects" /Y /I /Q
 XCopy "$(ProjectDir)..\cycles\src\kernel\closure" "$(TargetDir)\kernel\closure" /Y /I /Q
 XCopy "$(ProjectDir)..\cycles\src\kernel\geom" "$(TargetDir)\kernel\geom" /Y /I /Q
 XCopy "$(ProjectDir)..\cycles\src\kernel\svm" "$(TargetDir)\kernel\svm" /Y /I /Q
+XCopy "$(ProjectDir)..\cycles\src\kernel\kernels" "$(TargetDir)\kernel\kernels" /Y /I /S /Q
+XCopy "$(ProjectDir)..\cycles\src\kernel\split" "$(TargetDir)\kernel\split" /Y /I /Q
+XCopy "$(ProjectDir)..\cycles\src\kernel\svm" "$(TargetDir)\kernel\svm" /Y /I /Q
+
 XCopy "$(ProjectDir)..\cycles\src\kernel\kernel*.*" "$(TargetDir)\kernel" /Y /I /Q
 
+XCopy "$(ProjectDir)..\cycles\src\util\util_atomic.h" "$(TargetDir)\kernel" /Y /I /Q
 XCopy "$(ProjectDir)..\cycles\src\util\util_color.h" "$(TargetDir)\kernel" /Y /I /Q
 XCopy "$(ProjectDir)..\cycles\src\util\util_half.h" "$(TargetDir)\kernel" /Y /I /Q
 XCopy "$(ProjectDir)..\cycles\src\util\util_math.h" "$(TargetDir)\kernel" /Y /I /Q
