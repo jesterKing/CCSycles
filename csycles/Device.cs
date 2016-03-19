@@ -205,6 +205,22 @@ namespace ccl
 		}
 
 		/// <summary>
+		/// Get the first GPU.
+		/// </summary>
+		static public Device FirstGpu
+		{
+			get
+			{
+				var d = (from device in Devices
+					where device.IsGpu
+					select device).FirstOrDefault();
+				return d ?? Default;
+
+			}
+		}
+
+
+		/// <summary>
 		/// Get the device with specified index
 		/// </summary>
 		/// <param name="idx"></param>
