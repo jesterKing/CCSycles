@@ -52,25 +52,25 @@ int cycles_device_num(int i) {
 		return INT_MIN;
 }
 
-unsigned int cycles_device_advanced_shading(int i) {
+bool cycles_device_advanced_shading(int i) {
 	if (i >= 0 && i < devices.size())
 		return devices[i].advanced_shading;
 	else
-		return 0;
+		return false;
 }
 
-unsigned int cycles_device_display_device(int i) {
+bool cycles_device_display_device(int i) {
 	if (i >= 0 && i < devices.size())
 		return devices[i].display_device;
 	else
-		return 0;
+		return false;
 }
 
-unsigned int cycles_device_pack_images(int i) {
+bool cycles_device_pack_images(int i) {
 	if (i >= 0 && i < devices.size())
 		return devices[i].pack_images;
 	else
-		return 0;
+		return false;
 }
 
 unsigned int cycles_device_type(int i) {
