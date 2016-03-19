@@ -182,13 +182,13 @@ CCL_CAPI const char* __cdecl cycles_device_id(int i);
 CCL_CAPI int __cdecl cycles_device_num(int i);
 
 /* Query if device supports advanced shading. */
-CCL_CAPI unsigned int __cdecl cycles_device_advanced_shading(int i);
+CCL_CAPI bool __cdecl cycles_device_advanced_shading(int i);
 
 /* Query if device is used as display device. */
-CCL_CAPI unsigned int __cdecl cycles_device_display_device(int i);
+CCL_CAPI bool __cdecl cycles_device_display_device(int i);
 
 /* Query if device supports packing images. */
-CCL_CAPI unsigned int __cdecl cycles_device_pack_images(int i);
+CCL_CAPI bool __cdecl cycles_device_pack_images(int i);
 
 /** Query device type.
  * \param i device ID.
