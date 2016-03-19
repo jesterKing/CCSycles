@@ -72,6 +72,9 @@ namespace ccl
 		/// </summary>
 		public bool IsCpu { get { return Type == DeviceType.CPU; } }
 
+		/// <summary>
+		/// True if this device is a GPU
+		/// </summary>
 		public bool IsGpu { get { return !IsCpu; } }
 
 		/// <summary>
