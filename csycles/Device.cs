@@ -85,7 +85,7 @@ namespace ccl
 		/// <summary>
 		/// True if this is a Multi OpenCL device
 		/// </summary>
-		public bool IsMultiOpenCL { get { return Type == DeviceType.Multi && Name.Contains("OPENCL"); } }
+		public bool IsMultiOpenCl { get { return Type == DeviceType.Multi && Name.Contains("OPENCL"); } }
 
 		/// <summary>
 		/// String representation of this device
@@ -183,12 +183,12 @@ namespace ccl
 			get
 			{
 				var d = (from device in Devices
-					where device.IsOpenCl|| device.IsMultiOpenCL
+					where device.IsOpenCl|| device.IsMultiOpenCl
 					select device).FirstOrDefault();
 				return d ?? Default;
 			}
 		}
-
+		
 		/// <summary>
 		/// Returns the first Multi OpenCL device if it exists,
 		/// the default rendering device (CPU) if not.
@@ -198,7 +198,7 @@ namespace ccl
 			get
 			{
 				var d = (from device in Devices
-					where device.IsMultiOpenCL
+					where device.IsMultiOpenCl
 					select device).FirstOrDefault();
 				return d ?? Default;
 			}
