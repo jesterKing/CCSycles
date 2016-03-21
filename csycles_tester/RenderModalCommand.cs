@@ -24,6 +24,7 @@ namespace csycles_tester
 			base.OnExecuted(e);
 			(m_parent.DataContext as RendererModel).RenderScene(MenuText);
 			m_parent.Image.Image = (m_parent.DataContext as RendererModel).Result;
+			m_parent.Invalidate();
 		}
 	}
 }

@@ -43,6 +43,12 @@ namespace csycles_tester
 		public event PropertyChangedEventHandler PropertyChanged;
 
 		const uint samples = 50;
+		Random r = new Random();
+		private static CSycles.RenderTileCallback g_write_render_tile_callback;
+		public void WriteRenderTileCallback(uint sessionId, uint x, uint y, uint w, uint h, uint depth, int startSample, int numSamples, int sample, int resolution)
+		{
+			Console.WriteLine("C# Write Render Tile for session {0} at ({1},{2}) [{3}]", sessionId, x, y, depth);
+		}
 
 		public void RenderScene(string scenename)
 		{
@@ -53,7 +59,7 @@ namespace csycles_tester
 			var scene = new Scene(Client, scene_params, dev);
 
 			var xml = new CSyclesXmlReader(Client, scenename);
-			xml.Parse(true);
+			xml.Parse(false);
 			var width = (uint)scene.Camera.Size.Width;
 			var height = (uint)scene.Camera.Size.Height;
 
@@ -72,6 +78,9 @@ namespace csycles_tester
 			};
 			var Session = new Session(Client, session_params, scene);
 			Session.Reset(width, height, samples);
+
+			g_write_render_tile_callback = WriteRenderTileCallback;
+			Session.WriteTileCallback = g_write_render_tile_callback;
 
 			/*if (!silent)
 			{
@@ -96,11 +105,7 @@ namespace csycles_tester
 				for (var y = 0; y < height; y++)
 				{
 					var i = y * (int)width * 4 + x * 4;
-					/*var r = ColorClamp((int)(pixels[i] * 255.0f));
-					var g = ColorClamp((int)(pixels[i + 1] * 255.0f));
-					var b = ColorClamp((int)(pixels[i + 2] * 255.0f));
-					var a = ColorClamp((int)(pixels[i + 3] * 255.0f));*/
-					bmp.SetPixel(x, y, new ed.Color(pixels[i], pixels[i + 1], pixels[i + 2], pixels[i + 3]));
+					bmp.SetPixel(x, y, new ed.Color(Math.Min(pixels[i], 1.0f), Math.Min(pixels[i + 1], 1.0f), Math.Min(pixels[i + 2], 1.0f), Math.Min(pixels[i + 3], 1.0f)));
 				}
 			}
 			bmp.Save("test.png", Eto.Drawing.ImageFormat.Png);
