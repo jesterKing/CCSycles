@@ -54,6 +54,14 @@
     <RunPostBuildEvent>Always</RunPostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Eto, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Eto.Forms.2.2.0\lib\net45\Eto.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Eto.Wpf, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Eto.Platform.Wpf.2.2.0\lib\net45\Eto.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -64,11 +72,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CSyclesForm.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RenderModalCommand.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\csycles\csycles.csproj">
