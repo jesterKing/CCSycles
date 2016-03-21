@@ -21,6 +21,10 @@ using System;
 using System.Drawing;
 using System.IO;
 
+using ed = Eto.Drawing;
+using ef = Eto.Forms;
+using System.Collections.Generic;
+
 namespace csycles_tester
 {
 	class Program
@@ -140,8 +144,10 @@ namespace csycles_tester
 
 		private static CSycles.LoggerCallback g_logger_callback;
 
+		[STAThread]
 		static void Main(string[] args)
 		{
+			var app = new Eto.Forms.Application();
 			var file = "";
 			if (args.Length < 1 || args.Length > 2)
 			{
@@ -167,35 +173,31 @@ namespace csycles_tester
 			CSycles.path_init(path, userpath);
 			CSycles.initialise();
 
-			const uint samples = 50;
+
 			g_update_callback = StatusUpdateCallback;
 			g_update_render_tile_callback = UpdateRenderTileCallback;
 			g_write_render_tile_callback = WriteRenderTileCallback;
 			g_logger_callback = LoggerCallback;
 
-			var client = new Client();
-			Client = client;
 			/*if (!silent)
 			{
 				CSycles.set_logger(client.Id, g_logger_callback);
 			}*/
 
-			foreach (var adev in Device.Devices)
+			/*foreach (var adev in Device.Devices)
 			{
 				Console.WriteLine("{0}", adev);
 			}
 
 			Console.WriteLine("All device capabilities: {0}", Device.Capabilities);
+			*/
 
-			var dev = Device.FirstGpu;
-			Console.WriteLine("Using device {0} {1}", dev.Name, dev.Description);
 
-			var scene_params = new SceneParameters(client, ShadingSystem.SVM, BvhType.Static, false, false, false);
-			var scene = new Scene(client, scene_params, dev);
+			//Console.WriteLine("Default surface shader {0}", scene.DefaultSurface.Name);
 
-			Console.WriteLine("Default surface shader {0}", scene.DefaultSurface.Name);
+#if oho
 
-			#region background shader
+#region background shader
 			var background_shader = new Shader(client, Shader.ShaderType.World)
 			{
 				Name = "Background shader"
@@ -215,15 +217,15 @@ namespace csycles_tester
 			scene.Background.AoDistance = 0.0f;
 			scene.Background.AoFactor = 0.0f;
 			scene.Background.Visibility = PathRay.AllVisibility;
-			#endregion
-			#region diffuse shader
+#endregion
+#region diffuse shader
 
 			var diffuse_shader = create_some_setup_shader();
 			scene.AddShader(diffuse_shader);
 			scene.DefaultSurface = diffuse_shader;
-			#endregion
+#endregion
 
-			#region point light shader
+#region point light shader
 
 			var light_shader = new Shader(client, Shader.ShaderType.Material)
 			{
@@ -238,64 +240,19 @@ namespace csycles_tester
 			emission_node.outs.Emission.Connect(light_shader.Output.ins.Surface);
 			light_shader.FinalizeGraph();
 			scene.AddShader(light_shader);
-			#endregion
+#endregion
 
-			var xml = new CSyclesXmlReader(client, file);
-			xml.Parse(silent);
-			var width = (uint)scene.Camera.Size.Width;
-			var height = (uint)scene.Camera.Size.Height;
-
-			var session_params = new SessionParameters(client, dev)
-			{
-				Experimental = false,
-				Samples = (int) samples,
-				TileSize = new Size(64, 64),
-				StartResolution = 64,
-				Threads = (uint)(dev.IsCpu ? 0 : 0),
-				ShadingSystem = ShadingSystem.SVM,
-				Background = true,
-				ProgressiveRefine = false,
-				TileOrder = TileOrder.HilbertSpiral
-			};
-			Session = new Session(client, session_params, scene);
-			Session.Reset(width, height, samples);
-
-			if (!silent)
-			{
-				Session.UpdateCallback = g_update_callback;
-				Session.UpdateTileCallback = g_update_render_tile_callback;
-				Session.WriteTileCallback = g_write_render_tile_callback;
-			}
-			CSycles.set_logger(client.Id, g_logger_callback);
-
-			Session.Start();
-			Session.Wait();
-
-			uint bufsize;
-			uint bufstride;
-			CSycles.session_get_buffer_info(client.Id, Session.Id, out bufsize, out bufstride);
-			var pixels = CSycles.session_copy_buffer(client.Id, Session.Id, bufsize);
-
-			var bmp = new Bitmap((int)width, (int)height);
-			for (var x = 0; x < width; x++)
-			{
-				for (var y = 0; y < height; y++)
-				{
-					var i = y * (int)width * 4 + x * 4;
-					var r = ColorClamp((int)(pixels[i] * 255.0f));
-					var g = ColorClamp((int)(pixels[i + 1] * 255.0f));
-					var b = ColorClamp((int)(pixels[i + 2] * 255.0f));
-					var a = ColorClamp((int)(pixels[i + 3] * 255.0f));
-					bmp.SetPixel(x, y, Color.FromArgb(a, r, g, b));
-				}
-			}
-			bmp.Save("test.png", ImageFormat.Png);
-
-			Console.WriteLine("Cleaning up :)");
+#endif
 
 			CSycles.shutdown();
 
 			Console.WriteLine("Done");
+			var csf = new CSyclesForm(path)
+			{
+				ClientSize = new Eto.Drawing.Size((int)1024, (int)768),
+			};
+
+			app.Run(csf);
 		}
 	}
 }
