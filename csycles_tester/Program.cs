@@ -249,7 +249,7 @@ namespace csycles_tester
 			Console.WriteLine("Done");
 			var csf = new CSyclesForm(path)
 			{
-				ClientSize = new Eto.Drawing.Size((int)1024, (int)768),
+				ClientSize = new ed.Size((int)1024, (int)768),
 			};
 
 			app.Run(csf);
