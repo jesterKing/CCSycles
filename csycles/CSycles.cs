@@ -144,7 +144,7 @@ namespace ccl
 		/// </summary>
 		/// <param name="path"></param>
 		/// <param name="userPath"></param>
-		public static void path_init([MarshalAsAttribute(UnmanagedType.LPStr)] string path, [MarshalAsAttribute(UnmanagedType.LPStr)] string userPath)
+		public static void path_init([MarshalAs(UnmanagedType.LPStr)] string path, [MarshalAs(UnmanagedType.LPStr)] string userPath)
 		{
 			LoadCCycles();
 			cycles_path_init(path, userPath);
