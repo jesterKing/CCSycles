@@ -148,24 +148,6 @@ namespace csycles_tester
 		static void Main(string[] args)
 		{
 			var app = new Eto.Forms.Application();
-			var file = "";
-			if (args.Length < 1 || args.Length > 2)
-			{
-				Console.WriteLine("Wrong count parameter: csycles_tester [--quiet] file.xml");
-				return;
-			}
-			
-			var s = args[args.Length-1];
-			if (!File.Exists(s))
-			{
-				Console.WriteLine("File {0} doesn't exist.", s);
-				return;
-			}
-
-			var silent = args.Length == 2 && "--quiet".Equals(args[0]);
-
-			file = Path.GetFullPath(s);
-			Console.WriteLine("We get file path: {0}", file);
 
 			var path = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) ?? "";
 			var userpath = Path.Combine(path, "userpath");
@@ -173,86 +155,14 @@ namespace csycles_tester
 			CSycles.path_init(path, userpath);
 			CSycles.initialise();
 
-
-			g_update_callback = StatusUpdateCallback;
-			g_update_render_tile_callback = UpdateRenderTileCallback;
-			g_write_render_tile_callback = WriteRenderTileCallback;
-			g_logger_callback = LoggerCallback;
-
-			/*if (!silent)
-			{
-				CSycles.set_logger(client.Id, g_logger_callback);
-			}*/
-
-			/*foreach (var adev in Device.Devices)
-			{
-				Console.WriteLine("{0}", adev);
-			}
-
-			Console.WriteLine("All device capabilities: {0}", Device.Capabilities);
-			*/
-
-
-			//Console.WriteLine("Default surface shader {0}", scene.DefaultSurface.Name);
-
-#if oho
-
-#region background shader
-			var background_shader = new Shader(client, Shader.ShaderType.World)
-			{
-				Name = "Background shader"
-			};
-
-			var bgnode = new BackgroundNode();
-			bgnode.ins.Color.Value = new float4(0.7f);
-			bgnode.ins.Strength.Value = 1.0f;
-
-			background_shader.AddNode(bgnode);
-			bgnode.outs.Background.Connect(background_shader.Output.ins.Surface);
-			background_shader.FinalizeGraph();
-
-			scene.AddShader(background_shader);
-
-			scene.Background.Shader = background_shader;
-			scene.Background.AoDistance = 0.0f;
-			scene.Background.AoFactor = 0.0f;
-			scene.Background.Visibility = PathRay.AllVisibility;
-#endregion
-#region diffuse shader
-
-			var diffuse_shader = create_some_setup_shader();
-			scene.AddShader(diffuse_shader);
-			scene.DefaultSurface = diffuse_shader;
-#endregion
-
-#region point light shader
-
-			var light_shader = new Shader(client, Shader.ShaderType.Material)
-			{
-				Name = "Tester light shader"
-			};
-
-			var emission_node = new EmissionNode();
-			emission_node.ins.Color.Value = new float4(0.8f);
-			emission_node.ins.Strength.Value = 10.0f;
-
-			light_shader.AddNode(emission_node);
-			emission_node.outs.Emission.Connect(light_shader.Output.ins.Surface);
-			light_shader.FinalizeGraph();
-			scene.AddShader(light_shader);
-#endregion
-
-#endif
-
-			CSycles.shutdown();
-
-			Console.WriteLine("Done");
 			var csf = new CSyclesForm(path)
 			{
 				ClientSize = new ed.Size((int)1024, (int)768),
 			};
 
 			app.Run(csf);
+
+			CSycles.shutdown();
 		}
 	}
 }
