@@ -20,6 +20,7 @@ namespace ccl
 		}
 
 		[DllImport("ccycles.dll", SetLastError = false, EntryPoint = "cycles_scene_try_lock", CallingConvention = CallingConvention.Cdecl)]
+		[return: MarshalAs(UnmanagedType.U1)]
 		private static extern bool cycles_scene_try_lock(uint clientId, uint sceneId);
 		public static bool scene_try_lock(uint clientId, uint sceneId)
 		{
