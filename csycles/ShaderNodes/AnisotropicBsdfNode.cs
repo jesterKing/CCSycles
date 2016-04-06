@@ -24,6 +24,7 @@ namespace ccl.ShaderNodes
 	{
 		public Float4Socket Color { get; set; }
 		public Float4Socket Tangent { get; set; }
+		public Float4Socket Normal { get; set; }
 		public FloatSocket Roughness { get; set; }
 		public FloatSocket Anisotropy { get; set; }
 		public FloatSocket Rotation { get; set; }
@@ -34,6 +35,8 @@ namespace ccl.ShaderNodes
 			AddSocket(Color);
 			Tangent = new Float4Socket(parentNode, "Tangent");
 			AddSocket(Tangent);
+			Normal = new Float4Socket(parentNode, "Normal");
+			AddSocket(Normal);
 			Roughness = new FloatSocket(parentNode, "Roughness");
 			AddSocket(Roughness);
 			Anisotropy = new FloatSocket(parentNode, "Anisotropy");
@@ -109,6 +112,8 @@ namespace ccl.ShaderNodes
 		internal override void ParseXml(XmlReader xmlNode)
 		{
 			Utilities.Instance.get_float4(ins.Color, xmlNode.GetAttribute("color"));
+			Utilities.Instance.get_float4(ins.Normal, xmlNode.GetAttribute("normal"));
+			Utilities.Instance.get_float4(ins.Tangent, xmlNode.GetAttribute("tangent"));
 			Utilities.Instance.get_float(ins.Roughness, xmlNode.GetAttribute("roughness"));
 			Utilities.Instance.get_float(ins.Anisotropy, xmlNode.GetAttribute("anisotropy"));
 			Utilities.Instance.get_float(ins.Rotation, xmlNode.GetAttribute("rotation"));
