@@ -57,5 +57,11 @@ namespace ccl.ShaderNodes
 		{
 			CSycles.shadernode_set_member_float(clientId, shaderId, Id, Type, "value", Value);
 		}
+		internal override void ParseXml(System.Xml.XmlReader xmlNode)
+		{
+			var f4 = 0.0f;
+			Utilities.Instance.get_float(ref f4, xmlNode.GetAttribute("value"));
+			Value = f4;
+		}
 	}
 }
