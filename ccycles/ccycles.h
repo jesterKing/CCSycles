@@ -540,6 +540,7 @@ enum class shadernode_type : unsigned int {
 	LIGHTPATH,
 	LIGHTFALLOFF,
 	LAYERWEIGHT,
+	GEOMETRYINFO,
 	VORONOI_TEXTURE,
 	COMBINE_XYZ,
 	SEPARATE_XYZ,

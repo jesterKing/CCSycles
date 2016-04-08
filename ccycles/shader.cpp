@@ -272,6 +272,9 @@ unsigned int cycles_add_shader_node(unsigned int client_id, unsigned int shader_
 		case shadernode_type::LAYERWEIGHT:
 			node = new ccl::LayerWeightNode();
 			break;
+		case shadernode_type::GEOMETRYINFO:
+			node = new ccl::GeometryNode();
+			break;
 		case shadernode_type::COMBINE_XYZ:
 			node = new ccl::CombineXYZNode();
 			break;

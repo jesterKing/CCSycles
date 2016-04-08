@@ -120,6 +120,7 @@ namespace ccl
 		LightPath,
 		LightFalloff,
 		LayerWeight,
+		GeometryInfo,
 		VoronoiTexture,
 		CombineXyz,
 		SeparateXyz,
