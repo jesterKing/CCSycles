@@ -261,6 +261,9 @@
     <ClInclude Include="cycles\src\util\util_simd.h">
       <Filter>util</Filter>
     </ClInclude>
+    <ClInclude Include="cycles\src\util\util_stack_allocator.h">
+      <Filter>util</Filter>
+    </ClInclude>
     <ClInclude Include="cycles\src\util\util_sseb.h">
       <Filter>util</Filter>
     </ClInclude>
@@ -295,6 +298,9 @@
       <Filter>util</Filter>
     </ClInclude>
     <ClInclude Include="cycles\src\util\util_vector.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\util\util_version.h">
       <Filter>util</Filter>
     </ClInclude>
     <ClInclude Include="cycles\src\util\util_view.h">
@@ -513,6 +519,72 @@
     <ClInclude Include="cycles\src\kernel\kernels\cpu\kernel_cpu_impl.h">
       <Filter>kernel_headers</Filter>
     </ClInclude>
+    <ClInclude Include="cycles\src\kernel\geom\geom.h">
+      <Filter>kernel_geom_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\kernel\geom\geom_attribute.h">
+      <Filter>kernel_geom_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\kernel\geom\geom_bvh.h">
+      <Filter>kernel_geom_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\kernel\geom\geom_bvh_shadow.h">
+      <Filter>kernel_geom_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\kernel\geom\geom_bvh_subsurface.h">
+      <Filter>kernel_geom_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\kernel\geom\geom_bvh_traversal.h">
+      <Filter>kernel_geom_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\kernel\geom\geom_bvh_volume.h">
+      <Filter>kernel_geom_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\kernel\geom\geom_bvh_volume_all.h">
+      <Filter>kernel_geom_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\kernel\geom\geom_curve.h">
+      <Filter>kernel_geom_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\kernel\geom\geom_motion_curve.h">
+      <Filter>kernel_geom_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\kernel\geom\geom_motion_triangle.h">
+      <Filter>kernel_geom_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\kernel\geom\geom_object.h">
+      <Filter>kernel_geom_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\kernel\geom\geom_primitive.h">
+      <Filter>kernel_geom_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\kernel\geom\geom_qbvh.h">
+      <Filter>kernel_geom_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\kernel\geom\geom_qbvh_shadow.h">
+      <Filter>kernel_geom_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\kernel\geom\geom_qbvh_subsurface.h">
+      <Filter>kernel_geom_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\kernel\geom\geom_qbvh_traversal.h">
+      <Filter>kernel_geom_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\kernel\geom\geom_qbvh_volume.h">
+      <Filter>kernel_geom_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\kernel\geom\geom_qbvh_volume_all.h">
+      <Filter>kernel_geom_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\kernel\geom\geom_triangle.h">
+      <Filter>kernel_geom_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\kernel\geom\geom_triangle_intersect.h">
+      <Filter>kernel_geom_headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cycles\src\kernel\geom\geom_volume.h">
+      <Filter>kernel_geom_headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="util">
@@ -532,6 +604,9 @@
     </Filter>
     <Filter Include="kernel_headers">
       <UniqueIdentifier>{b61e4075-a0f7-41bd-a86b-7bff792ab1ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kernel_geom_headers">
+      <UniqueIdentifier>{F4243D13-A063-419A-A7BB-A621E7A5AD11}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
