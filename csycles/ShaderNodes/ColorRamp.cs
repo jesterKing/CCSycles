@@ -385,6 +385,15 @@ namespace ccl.ShaderNodes
 		{
 			bool interp = false;
 			Utilities.Instance.get_bool(ref interp, xmlNode.GetAttribute("interpolate"));
+			var interpolation = xmlNode.GetAttribute("interpolation");
+			if (string.IsNullOrEmpty(interpolation))
+			{
+				var i = ColorBand.Interpolations.Linear;
+				if(Enum.TryParse<ColorBand.Interpolations>(interpolation, out i))
+				{
+					ColorBand.Interpolation = i;
+				}
+			}
 			if (xmlNode.ReadToDescendant("stop"))
 			{
 				float pos = 0.0f;
