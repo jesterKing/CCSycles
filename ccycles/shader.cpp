@@ -576,6 +576,12 @@ void cycles_shadernode_set_enum(unsigned int client_id, unsigned int shader_id, 
 						_set_enum_val(client_id, &node->type, ccl::GradientTextureNode::type_enum, val);
 						break;
 					}
+				case shadernode_type::SUBSURFACE_SCATTERING:
+					{
+						ccl::SubsurfaceScatteringNode* node = dynamic_cast<ccl::SubsurfaceScatteringNode*>(*psh);
+						_set_enum_val(client_id, &node->falloff, ccl::SubsurfaceScatteringNode::falloff_enum, val);
+						break;
+					}
 			}
 			break;
 	SHADERNODE_FIND_END()
