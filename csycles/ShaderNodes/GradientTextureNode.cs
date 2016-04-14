@@ -17,6 +17,7 @@ limitations under the License.
 using System.Xml;
 using ccl.ShaderNodes.Sockets;
 using ccl.Attributes;
+using System;
 
 namespace ccl.ShaderNodes
 {
@@ -137,6 +138,16 @@ namespace ccl.ShaderNodes
 		internal override void ParseXml(XmlReader xmlNode)
 		{
 			Utilities.Instance.get_float4(ins.Vector, xmlNode.GetAttribute("vector"));
+			var t = xmlNode.GetAttribute("type");
+			if(!string.IsNullOrEmpty(t))
+			{
+				GradientType gt = GradientType.Diagonal;
+				if(Enum.TryParse(t, out gt))
+				{
+					Gradient = gt;
+				}
+
+			}
 		}
 	}
 }
