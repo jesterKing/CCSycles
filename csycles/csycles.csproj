@@ -81,6 +81,7 @@
     <Compile Include="ShaderNodes\AnisotropicBsdfNode.cs" />
     <Compile Include="ShaderNodes\AbsorptionVolumeNode.cs" />
     <Compile Include="ShaderNodes\GeometryInfoNode.cs" />
+    <Compile Include="ShaderNodes\SubsurfaceScatteringNode.cs" />
     <Compile Include="ShaderNodes\ScatterVolumeNode.cs" />
     <Compile Include="ShaderNodes\HueSaturationNode.cs" />
     <Compile Include="ShaderNodes\HoldoutNode.cs" />
