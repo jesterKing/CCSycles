@@ -88,7 +88,7 @@ namespace ccl.ShaderNodes
 			UseAlpha = true;
 			ProjectionBlend = 0.0f;
 			Interpolation = InterpolationType.Linear;
-			ColorSpace = TextureColorSpace.Color;
+			ColorSpace = TextureColorSpace.None;
 			Projection = TextureProjection.Flat;
 		}
 
