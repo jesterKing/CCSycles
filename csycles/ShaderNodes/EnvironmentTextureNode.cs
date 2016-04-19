@@ -88,7 +88,7 @@ namespace ccl.ShaderNodes
 			outputs = new EnvironmentTextureOutputs(this);
 
 			Interpolation = InterpolationType.Linear;
-			ColorSpace = TextureColorSpace.Color;
+			ColorSpace = TextureColorSpace.None;
 			Projection = EnvironmentProjection.Equirectangular;
 		}
 
