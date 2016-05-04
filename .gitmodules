@@ -1,4 +1,4 @@
 [submodule "cycles"]
 	path = cycles
-	url = git://git.blender.org/cycles.git
+	url = https://github.com/mcneel/cycles
 	branch = ccsycles_rhino
